@@ -16,8 +16,8 @@ There is no hash-addressed content store; runs pin content the same way bookmark
 
 | Activity | Schema | Body |
 |---|---|---|
-| Spot & sort | `SubmitSpotSortAnswerRequest` | `{ expectedRevision, itemId, categoryId }` |
-| Story | `SubmitStoryChoiceRequest` | `{ expectedRevision, nodeId, choiceId }` |
+| Spot & sort | `SpotSortAnswerRequest` | `{ expectedRevision, itemId, categoryId }` |
+| Story | `StoryAnswerRequest` | `{ expectedRevision, nodeId, choiceId }` |
 
 ## Response
 
