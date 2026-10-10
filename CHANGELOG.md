@@ -7,7 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Feature branches add entries under **[Unreleased]** only; the version bump happens on `main`.
 
 ## [Unreleased]
-- R2 visual preview route for reviewing adaptive learning UI components, with import repairs so the preview renders.
+
+## [0.1.0] - 2026-10-11
+
+### Added
+- Adaptive learning and practice UI in `@gullak/ui` (R2): lesson renderer for the 8-step learning loop, spot & sort, branching story choices, money-term decoder, paper portfolio, Practice simulation and the counterfactual "rewind" comparison, with a companion character and brand tokens.
+- Localization label contracts for the learning components: every component takes optional `labels` with English defaults, so the app can pass Hindi and Telugu copy.
+- `/r2-preview` route for reviewing the learning components on fixtures.
+
+### Known issues
+- 35 of the 49 component tests in `packages/ui/src/ui.test.tsx` fail, and the components are not yet wired to the backend. Both are fixed in the next 0.1.x.
 
 ## [0.0.18] - 2026-10-11
 
