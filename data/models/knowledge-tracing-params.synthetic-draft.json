@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "model": "bkt",
+  "label": "SYNTHETIC — NOT REAL STUDENT DATA",
+  "synthetic": true,
+  "productionApproved": false,
+  "notForAppUse": "Fitted on synthetic learners; app priors and unlock rules are unchanged.",
+  "source": {
+    "seed": 7,
+    "learners": 400,
+    "attempts": 6,
+    "contentVersion": "aa1be93200be55b21e52dd61948c35207d8f6fbbf41d242c0e6485aa28d7283c"
+  },
+  "masteryThreshold": 0.95,
+  "concepts": {
+    "money-in": {
+      "pInit": 0.232,
+      "pLearn": 0.1754,
+      "pSlip": 0.0772,
+      "pGuess": 0.261
+    },
+    "money-out": {
+      "pInit": 0.1713,
+      "pLearn": 0.1153,
+      "pSlip": 0.0842,
+      "pGuess": 0.2221
+    }
+  },
+  "heldOutEvaluation": {
+    "money-in": {
+      "answers": 510,
+      "bkt_log_loss": 0.5516,
+      "baseline_log_loss": 0.6582,
+      "bkt_auc": 0.7563,
+      "bkt_accuracy": 0.698,
+      "baseline_accuracy": 0.6412,
+      "share_mastered_at_end": 0.5765
+    },
+    "money-out": {
+      "answers": 510,
+      "bkt_log_loss": 0.599,
+      "baseline_log_loss": 0.6921,
+      "bkt_auc": 0.709,
+      "bkt_accuracy": 0.6902,
+      "baseline_accuracy": 0.5235,
+      "share_mastered_at_end": 0.3412
+    }
+  }
+}
