@@ -8,6 +8,19 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Grade-group onboarding with optional mixed-format defaults, existing default virtual capital, a non-destructive legacy-profile migration, and database types generated from local PostgreSQL schema introspection.
+- Read-only shared-schema inventory and backend review checklist covering migration approval, Ubuntu browser verification and two-learner hosted acceptance tests.
+- Verified-session backend API for config-driven onboarding, lesson progress, server-graded quizzes, virtual FD investment and persistent portfolio valuation, with strict Zod request contracts and server-only privileged access.
+- Follow-up Supabase migration restricting direct learner writes and providing atomic, idempotent transactions plus assigned-cohort facilitator aggregates; preserves the original schema.
+- Goal-planning and observed-history Time Machine endpoints, cached AMFI quotes with snapshot fallback, a dated published FD-rate snapshot and regeneration source.
+- English savings and FD transcript/quiz drafts for content review, local PostgreSQL concurrency/isolation tests, and a beginner setup guide with an importable Postman collection.
+
+### Changed
+- The data-access entry point requires a verified Request and fails explicitly when persistence is unconfigured; no module-memory session fallback.
+- Authenticated API responses bypass service-worker caches so learner data is not reused after an account change.
+- Market snapshot ranges compare timestamps rather than ISO string ordering, and AMFI parsing supports both column layouts with calendar-date validation.
+
 ## [0.0.7] - 2026-10-10
 
 ### Changed

@@ -1,28 +1,10 @@
-import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { type LearnerRepository, memoryLearners, supabaseLearners } from "./learners";
-import { memoryPortfolios, type PortfolioRepository, supabasePortfolios } from "./portfolios";
-import { memoryProgress, type ProgressRepository, supabaseProgress } from "./progress";
+import "server-only";
+import { privilegedClient, verifiedIdentity } from "../backend/auth";
+import { createDataAccess } from "./transactions";
 
-/**
- * The one data-access layer. Route handlers and server components call
- * `getDataAccess()`; nothing else imports a database client.
- */
-export interface DataAccess {
-  learners: LearnerRepository;
-  progress: ProgressRepository;
-  portfolios: PortfolioRepository;
+/** The one app data-access entry point. Identity is verified before any database access. */
+export async function getDataAccess(request: Request) {
+  const { client, learnerId } = await verifiedIdentity(request);
+  return { db: createDataAccess(client, privilegedClient(), learnerId), learnerId };
 }
-
-// Local dev without Supabase only: module state is not shared between server
-// instances, so production always has Supabase configured.
-let memory: DataAccess | undefined;
-
-/** Per-request repositories backed by Supabase, or in-memory ones when Supabase isn't configured. */
-export async function getDataAccess(): Promise<DataAccess> {
-  const db = await createSupabaseServerClient();
-  if (db) return { learners: supabaseLearners(db), progress: supabaseProgress(db), portfolios: supabasePortfolios(db) };
-  memory ??= { learners: memoryLearners(), progress: memoryProgress(), portfolios: memoryPortfolios() };
-  return memory;
-}
-
-export type { LearnerRepository, PortfolioRepository, ProgressRepository };
+export type { DataAccess, LearnerState } from "./transactions";

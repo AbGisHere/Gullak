@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { AgeBand, type LearningFormat, Locale, Slug } from "./common";
+import { GradeGroup, type LearningFormat, Locale, Slug } from "./common";
 import { InstrumentKind } from "./instrument";
 
 /**
@@ -30,7 +30,7 @@ export type TopicMeta = z.infer<typeof TopicMeta>;
 const VariantBase = z.object({
   id: Slug,
   /** Age bands this variant is written for; omitted means all. */
-  audience: z.array(AgeBand).optional(),
+  audience: z.array(GradeGroup).optional(),
   /** Concepts this variant covers, for knowledge tracing. */
   conceptIds: z.array(Slug).default([]),
 });

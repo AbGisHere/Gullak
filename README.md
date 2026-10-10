@@ -42,7 +42,9 @@ pnpm dev                          # http://localhost:3000
 
 ## Environment variables
 
-See [`.env.example`](.env.example). All are optional: without Supabase the app runs on local state, and without AI keys the tutor answers from topic content. AI keys are free: Gemini from [Google AI Studio](https://aistudio.google.com/apikey) and Groq from [console.groq.com](https://console.groq.com/keys).
+See [`.env.example`](.env.example). The UI skeleton starts without keys; persistent backend routes require the Supabase URL, public publishable key and server-only secret key. They return an explicit configuration error when unavailable. Without AI keys the tutor answers from topic content. AI keys are free: Gemini from [Google AI Studio](https://aistudio.google.com/apikey) and Groq from [console.groq.com](https://console.groq.com/keys).
+
+For R3 setup, migration order and a Postman core-loop walkthrough, see [the backend guide](docs/backend-setup.md) and [Postman collection](docs/gullak-backend.postman.json). Never share or commit real secrets.
 
 ## Working on it (team)
 

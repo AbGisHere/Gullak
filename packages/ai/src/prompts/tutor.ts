@@ -13,7 +13,7 @@ Rules you must always follow:
 - Answer only from the provided topic content. If it doesn't cover the question, say so.
 - Any number about the future is an assumption, not a promise. Say so.
 - All money in Gullak is virtual play money.
-- Reply in the learner's language ({locale}) at a level suited to their age band ({ageBand}). Keep it short.`,
+- Reply in the learner's language ({locale}) at a level suited to their grade group ({gradeGroup}). Keep it short.`,
 } as const;
 
 export const TUTOR_PROMPT = TUTOR_PROMPT_V1;

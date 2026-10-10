@@ -1,0 +1,16 @@
+{
+  "id": "savings-account",
+  "track": "ladder",
+  "instrument": "savings",
+  "concepts": [
+    {
+      "id": "virtual-money",
+      "label": "virtual-money"
+    },
+    {
+      "id": "saving-purpose",
+      "label": "saving-purpose"
+    }
+  ],
+  "estimatedMinutes": 3
+}

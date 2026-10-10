@@ -1,0 +1,16 @@
+{
+  "id": "fixed-deposit",
+  "track": "ladder",
+  "instrument": "fixed-deposit",
+  "concepts": [
+    {
+      "id": "fd-rate",
+      "label": "fd-rate"
+    },
+    {
+      "id": "fd-assumptions",
+      "label": "fd-assumptions"
+    }
+  ],
+  "estimatedMinutes": 3
+}

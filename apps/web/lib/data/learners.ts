@@ -18,7 +18,7 @@ export function learnerFromRow(row: Tables<"learners">): LearnerProfile {
   return LearnerProfile.parse({
     id: row.id,
     displayName: row.display_name ?? undefined,
-    ageBand: row.age_band,
+    gradeGroup: row.grade_group,
     experience: row.experience,
     locale: row.locale,
     preferredFormats: row.preferred_formats,
@@ -33,7 +33,7 @@ export function learnerToRow(profile: LearnerProfile): TablesInsert<"learners"> 
   return {
     id: p.id,
     display_name: p.displayName ?? null,
-    age_band: p.ageBand,
+    grade_group: p.gradeGroup,
     experience: p.experience,
     locale: p.locale,
     preferred_formats: p.preferredFormats,
@@ -68,6 +68,8 @@ export function memoryLearners(rows = new Map<string, Tables<"learners">>()): Le
     async save(profile) {
       const row = learnerToRow(profile);
       const stored: Tables<"learners"> = {
+        age_band: null,
+        grade_group: null,
         display_name: null,
         goal: null,
         cohort_id: null,

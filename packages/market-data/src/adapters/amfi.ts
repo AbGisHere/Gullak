@@ -1,4 +1,4 @@
-import type { MarketQuote } from "@gullak/types";
+import { IsoDateTime, type MarketQuote } from "@gullak/types";
 import { z } from "zod";
 import { type MarketDataAdapter, MarketDataError } from "../adapter";
 
@@ -39,7 +39,8 @@ const AmfiDate = z
       return z.NEVER;
     }
     return `${year}-${month}-${day}T00:00:00+05:30`;
-  });
+  })
+  .pipe(IsoDateTime);
 
 /** One data row: code;ISIN growth;ISIN reinvest;name;plan;option;NAV;date */
 const AmfiRow = z
@@ -54,6 +55,17 @@ const AmfiRow = z
     AmfiDate,
   ])
   .transform(([schemeCode, , , name, , , nav, asOf]) => ({ schemeCode, name, nav, asOf }));
+// NAVAll also serves the standard six-column layout (plan/option are part of the name).
+const StandardAmfiRow = z
+  .tuple([
+    z.string().regex(/^\d+$/),
+    z.string(),
+    z.string(),
+    z.string().min(1),
+    z.coerce.number().finite().positive(),
+    AmfiDate,
+  ])
+  .transform(([schemeCode, , , name, nav, asOf]) => ({ schemeCode, name, nav, asOf }));
 export type AmfiNav = z.output<typeof AmfiRow>;
 
 /**
@@ -63,7 +75,7 @@ export type AmfiNav = z.output<typeof AmfiRow>;
 export function parseAmfiNavAll(text: string): Map<string, AmfiNav> {
   const navs = new Map<string, AmfiNav>();
   for (const line of text.split(/\r?\n/)) {
-    const row = AmfiRow.safeParse(line.trim().split(";"));
+    const row = z.union([StandardAmfiRow, AmfiRow]).safeParse(line.trim().split(";"));
     if (row.success) navs.set(row.data.schemeCode, row.data);
   }
   return navs;

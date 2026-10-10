@@ -8,7 +8,7 @@ const id = "8f14e45f-ceea-467f-a0e6-1c2f1a3b4d5e";
 const profile: LearnerProfile = {
   id,
   displayName: "Asha",
-  ageBand: "college",
+  gradeGroup: "grade-8-10",
   experience: "none",
   locale: "hi",
   preferredFormats: ["story", "quiz"],
@@ -26,7 +26,8 @@ const profile: LearnerProfile = {
 const row: Tables<"learners"> = {
   id,
   display_name: null,
-  age_band: "teen",
+  grade_group: "grade-6-7",
+  age_band: null,
   experience: "some",
   locale: "te",
   preferred_formats: ["video"],
@@ -44,7 +45,7 @@ describe("learner mappers", () => {
   it("maps snake_case columns and nulls to the schema", () => {
     expect(learnerFromRow(row)).toEqual({
       id,
-      ageBand: "teen",
+      gradeGroup: "grade-6-7",
       experience: "some",
       locale: "te",
       preferredFormats: ["video"],
@@ -53,7 +54,7 @@ describe("learner mappers", () => {
   });
 
   it("rejects rows that break the schema", () => {
-    expect(() => learnerFromRow({ ...row, age_band: "retired" })).toThrow();
+    expect(() => learnerFromRow({ ...row, grade_group: "retired" })).toThrow();
     expect(() => learnerFromRow({ ...row, preferred_formats: [] })).toThrow();
     expect(() => learnerFromRow({ ...row, goal: { label: "no id or target" } })).toThrow();
   });

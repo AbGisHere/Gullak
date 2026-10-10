@@ -20,6 +20,12 @@ const fixture = [
 const ok = (body: string) => vi.fn(async () => new Response(body, { status: 200 })) as unknown as typeof fetch;
 
 describe("parseAmfiNavAll", () => {
+  it("also accepts six-column NAV files and rejects impossible calendar dates", () => {
+    expect(parseAmfiNavAll("120716;-;-;Recorded schema fixture;158.5759;09-Oct-2026").get("120716")?.nav).toBe(
+      158.5759,
+    );
+    expect(parseAmfiNavAll("120716;-;-;Invalid date fixture;;;158.5759;31-Feb-2026").size).toBe(0);
+  });
   it("reads data rows and skips headers, fund houses and blanks", () => {
     const navs = parseAmfiNavAll(fixture);
     expect([...navs.keys()]).toEqual(["120716", "120717"]);

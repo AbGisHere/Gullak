@@ -5,6 +5,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: { "/api/**": ["../../packages/content/topics/**/*.json"] },
   transpilePackages: [
     "@gullak/ui",
     "@gullak/types",

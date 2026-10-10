@@ -8,7 +8,7 @@ import { getTranslations } from "next-intl/server";
 // Skeleton page: proves the packages are wired end to end (content → engine → ui → i18n).
 export default async function Home() {
   const t = await getTranslations("app");
-  const cash = startingCash(startingCapital, "college", "none");
+  const cash = startingCash(startingCapital, "grade-8-10", "none");
 
   return (
     <main className="mx-auto flex min-h-svh w-full max-w-5xl flex-col justify-center gap-8 px-4 py-10 md:px-10">

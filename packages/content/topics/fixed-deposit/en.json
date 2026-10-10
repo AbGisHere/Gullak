@@ -1,0 +1,53 @@
+{
+  "topicId": "fixed-deposit",
+  "locale": "en",
+  "title": "Fixed deposits",
+  "summary": "Explore a fixed-rate deposit with virtual money.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "markdown": "**English draft for R5 review.**\n\nA fixed deposit holds a lump sum for a chosen period at a stated rate. Compounding adds interest to the amount that earns future interest. Gullak's one-year simulation assumes quarterly compounding and excludes tax, fees and early withdrawal penalties. A dated published rate is an educational example, not a recommendation or a promise."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "fd-rate",
+          "conceptId": "fd-rate",
+          "prompt": "Which input determines interest in this FD simulation?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The stated annual rate and period"
+            },
+            {
+              "id": "1",
+              "text": "A guaranteed stock-market return"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "The simulation uses the stated rate, period and compounding frequency."
+        },
+        {
+          "id": "fd-assumptions",
+          "conceptId": "fd-assumptions",
+          "prompt": "What does Gullak's displayed FD maturity represent?",
+          "options": [
+            {
+              "id": "0",
+              "text": "A projection based on labelled assumptions"
+            },
+            {
+              "id": "1",
+              "text": "A promise of real money"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "All money is virtual and projected maturity depends on the labelled assumptions."
+        }
+      ]
+    }
+  ]
+}

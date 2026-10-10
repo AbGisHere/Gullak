@@ -1,18 +1,5 @@
 {
-  "$comment": "Virtual (play-money) starting cash in whole rupees, by age band × investing experience. Edit here, never in UI code.",
+  "$comment": "Virtual cash in whole rupees. Grade-specific overrides are not yet agreed; use the existing default for every grade and experience.",
   "defaultInr": 10000,
-  "rows": [
-    { "ageBand": "teen", "experience": "none", "inr": 5000 },
-    { "ageBand": "teen", "experience": "some", "inr": 7500 },
-    { "ageBand": "teen", "experience": "regular", "inr": 10000 },
-    { "ageBand": "college", "experience": "none", "inr": 10000 },
-    { "ageBand": "college", "experience": "some", "inr": 15000 },
-    { "ageBand": "college", "experience": "regular", "inr": 20000 },
-    { "ageBand": "first-job", "experience": "none", "inr": 50000 },
-    { "ageBand": "first-job", "experience": "some", "inr": 75000 },
-    { "ageBand": "first-job", "experience": "regular", "inr": 100000 },
-    { "ageBand": "parent", "experience": "none", "inr": 100000 },
-    { "ageBand": "parent", "experience": "some", "inr": 150000 },
-    { "ageBand": "parent", "experience": "regular", "inr": 200000 }
-  ]
+  "rows": []
 }

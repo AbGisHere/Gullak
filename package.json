@@ -23,6 +23,8 @@
     "check:release": "node scripts/check-release.mjs",
     "check:attribution": "node scripts/check-attribution.mjs",
     "snapshots:mf": "node scripts/snapshots/mf-nav.mjs",
+    "snapshots:fd": "node scripts/snapshots/fd-rates.mjs",
+    "test:db": "node scripts/test-database.mjs",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -35,6 +37,7 @@
     "husky": "9.1.7",
     "lint-staged": "17.6.0",
     "turbo": "2.11.7",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "zod": "catalog:"
   }
 }

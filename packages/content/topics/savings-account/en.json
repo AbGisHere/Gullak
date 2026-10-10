@@ -1,0 +1,53 @@
+{
+  "topicId": "savings-account",
+  "locale": "en",
+  "title": "Savings",
+  "summary": "Learn how saving differs from spending.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "markdown": "**English draft for R5 review.**\n\nSaving means keeping some money for a future need. Gullak uses virtual money only. A savings balance is not a promise of future returns."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "virtual-money",
+          "conceptId": "virtual-money",
+          "prompt": "What kind of money does Gullak use?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Virtual play money"
+            },
+            {
+              "id": "1",
+              "text": "Real deposited money"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Every Gullak portfolio uses virtual money."
+        },
+        {
+          "id": "saving-purpose",
+          "conceptId": "saving-purpose",
+          "prompt": "Why might someone save money?",
+          "options": [
+            {
+              "id": "0",
+              "text": "To prepare for a future need"
+            },
+            {
+              "id": "1",
+              "text": "To guarantee unlimited returns"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Saving can help prepare for a future need; it cannot guarantee unlimited returns."
+        }
+      ]
+    }
+  ]
+}

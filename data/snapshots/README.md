@@ -46,3 +46,5 @@ Committed so far: `amfi-120716.json` (UTI Nifty 50 Index Fund, Direct, Growth), 
 4. For a live source, add an adapter beside `packages/market-data/src/adapters/amfi.ts` (with recorded-fixture tests) and wrap it with `withSnapshotFallback`.
 
 Sample funds are only examples for practising with play money. Content never calls a fund "good", "best" or "recommended" (AGENTS.md › Hard guardrail).
+
+`sbi-published-card-rate-fd-1y.json` is an educational snapshot, regenerated from `scripts/snapshots/fd-rates.csv`. Its one-year simulation assumes quarterly compounding and excludes taxes/penalties. It is never labelled live. Real NIFTY, stock, gold and CPI snapshots remain pending; the first Time Machine uses the existing mutual-fund NAV history and identifies that dataset explicitly.

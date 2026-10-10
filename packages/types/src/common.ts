@@ -27,8 +27,8 @@ export const IsoDateTime = z.iso.datetime({ offset: true });
 /** Annual rate as a percentage, e.g. `7.1` for 7.1% p.a. */
 export const RatePercent = z.number().min(0).max(100);
 
-export const AgeBand = z.enum(["teen", "college", "first-job", "parent"]);
-export type AgeBand = z.infer<typeof AgeBand>;
+export const GradeGroup = z.enum(["grade-6-7", "grade-8-10", "grade-11-12"]);
+export type GradeGroup = z.infer<typeof GradeGroup>;
 
 export const Experience = z.enum(["none", "some", "regular"]);
 export type Experience = z.infer<typeof Experience>;

@@ -3,6 +3,16 @@
 24-hour plan. Owners: **R1** lead/frontend core (@AbGisHere) · **R2** frontend/game (@mayankSuman404, @Parthvi1707) · **R3** backend/data (@ishitaanmol975) · **R4** AI/adaptive (@VanshGoel-01) · **R5** product/content/QA (shared, led by R1).
 Tick items as they land on `main`. Finishing a phase = minor version bump.
 
+### R3 feature branch status (not yet merged)
+
+Rebased onto team main v0.0.7 (`13ffcbb`). The expanded P1/P2 data inventory and Practice/Live persistence gaps are recorded in `docs/backend-review.md`; these are plans, not completed backend capabilities.
+
+`feat/ishita-backend` adds a follow-up migration on the v0.0.3 scaffold, verified-session data access, onboarding, lesson/quiz gates, atomic/idempotent virtual FD investment, portfolio valuation, goal/replay endpoints and assigned-cohort aggregates. English savings/FD drafts and a dated FD snapshot supplement the existing real MF history. See `docs/backend-setup.md` for setup, validation and Postman steps.
+
+Hosted Supabase setup, shared-schema type comparison and real-session testing remain pending account access. NIFTY/stock/gold/CPI snapshots, other lesson formats/translations, UI integration and weakest-concept analytics remain incomplete. Phase checkboxes below stay unticked until work lands on main.
+
+Grade-group onboarding, optional mixed-format defaults and a non-destructive third migration are implemented locally. Types are generated from the migrated local database; broader four-pillar content and shared-project verification remain pending. Shared-project schema review and hosted acceptance steps are documented in `docs/backend-review.md`; no shared database writes have been applied by the agent.
+
 ## Phase 0 · Setup (h0–h2) → v0.0.1
 - [x] Monorepo: pnpm workspaces + catalog, Turborepo, strict TS (R1)
 - [x] Biome, Husky (pre-commit / commit-msg / pre-push), commitlint, attribution + changelog checks (R1)

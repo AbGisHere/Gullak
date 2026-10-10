@@ -30,7 +30,9 @@ export function createSnapshotAdapter(files: readonly unknown[]): MarketDataAdap
       return { ...file.quote, symbol, isSnapshot: true };
     },
     async getSeries(symbol, from, to) {
-      return find(symbol).series.filter((p) => p.t >= from && p.t <= to);
+      return find(symbol).series.filter(
+        (p) => Date.parse(p.t) >= Date.parse(from) && Date.parse(p.t) <= Date.parse(to),
+      );
     },
   };
 }

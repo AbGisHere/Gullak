@@ -276,6 +276,9 @@ catalogs:
     react-dom:
       specifier: 19.3.0
       version: 19.3.0
+    server-only:
+      specifier: 0.0.1
+      version: 0.0.1
     serwist:
       specifier: 9.5.13
       version: 9.5.13
@@ -326,6 +329,9 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
+      zod:
+        specifier: 'catalog:'
+        version: 4.6.5
 
   apps/web:
     dependencies:
@@ -383,6 +389,9 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 19.3.0(react@19.3.0)
+      server-only:
+        specifier: 'catalog:'
+        version: 0.0.1
       zod:
         specifier: 'catalog:'
         version: 4.6.5
@@ -3473,6 +3482,9 @@ packages:
     resolution: {integrity: sha512-xRXBn0pPqQTVQiC8wyQrKs2MOlX24zQ0POGaj0kultvoOCstBQM5yvOhAVSUwOMjQtTvsPWoNCHfPGwaaQJhTw==}
     engines: {node: '>= 18'}
 
+  server-only@0.0.1:
+    resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
+
   serwist@9.5.13:
     resolution: {integrity: sha512-ZpskCei2d5Zcljeb6QvYP94pV5xY3GCdbOk0hOzMSEPFOqJDwJvMpQq7i1r/psuR1WQCsKX6p7UpLle6sTPYjw==}
     peerDependencies:
@@ -6488,6 +6500,8 @@ snapshots:
       send: 1.2.1
     transitivePeerDependencies:
       - supports-color
+
+  server-only@0.0.1: {}
 
   serwist@9.5.13(browserslist@4.29.3)(typescript@6.0.3):
     dependencies:

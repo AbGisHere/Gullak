@@ -1,4 +1,4 @@
-import { AgeBand, Experience, Locale, UnlockRule } from "@gullak/types";
+import { Experience, GradeGroup, Locale, UnlockRule } from "@gullak/types";
 import { z } from "zod";
 import localesJson from "../config/locales.json";
 import startingCapitalJson from "../config/starting-capital.json";
@@ -6,7 +6,7 @@ import topicLadderJson from "../config/topic-ladder.json";
 
 export const StartingCapitalConfig = z.object({
   defaultInr: z.number().int().positive(),
-  rows: z.array(z.object({ ageBand: AgeBand, experience: Experience, inr: z.number().int().positive() })),
+  rows: z.array(z.object({ gradeGroup: GradeGroup, experience: Experience, inr: z.number().int().positive() })),
 });
 
 export const TopicLadderConfig = z.object({

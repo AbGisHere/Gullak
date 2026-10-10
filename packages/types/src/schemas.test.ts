@@ -8,7 +8,7 @@ describe("schemas", () => {
   it("accepts a valid learner profile", () => {
     const profile = LearnerProfile.parse({
       id: uuid,
-      ageBand: "college",
+      gradeGroup: "grade-8-10",
       experience: "none",
       locale: "hi",
       preferredFormats: ["story", "quiz"],

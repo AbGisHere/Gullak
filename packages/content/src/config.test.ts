@@ -1,14 +1,15 @@
-import { AgeBand, Experience } from "@gullak/types";
+import { Experience, GradeGroup } from "@gullak/types";
 import { describe, expect, it } from "vitest";
 import { allUnlockRules, locales, startingCapital, topicLadder } from "./config";
 
 describe("content config", () => {
   it("defines starting capital for every age band × experience", () => {
-    for (const ageBand of AgeBand.options) {
+    for (const gradeGroup of GradeGroup.options) {
       for (const experience of Experience.options) {
         expect(
-          startingCapital.rows.some((r) => r.ageBand === ageBand && r.experience === experience),
-          `${ageBand} × ${experience}`,
+          startingCapital.rows.some((r) => r.gradeGroup === gradeGroup && r.experience === experience) ||
+            startingCapital.defaultInr > 0,
+          `${gradeGroup} × ${experience}`,
         ).toBe(true);
       }
     }

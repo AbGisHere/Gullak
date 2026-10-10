@@ -47,15 +47,15 @@ describe("interest maths", () => {
 describe("starting capital", () => {
   const table = {
     defaultInr: 10_000,
-    rows: [{ ageBand: "teen", experience: "none", inr: 5000 }] as const,
+    rows: [{ gradeGroup: "grade-6-7", experience: "none", inr: 5000 }] as const,
   };
 
   it("looks up the age × experience row", () => {
-    expect(startingCash(table, "teen", "none")).toBe(inrToPaise(5000));
+    expect(startingCash(table, "grade-6-7", "none")).toBe(inrToPaise(5000));
   });
 
   it("falls back to the default", () => {
-    expect(startingCash(table, "parent", "regular")).toBe(inrToPaise(10_000));
+    expect(startingCash(table, "grade-11-12", "regular")).toBe(inrToPaise(10_000));
   });
 });
 
