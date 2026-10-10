@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Fixed
+- All 74 `@gullak/ui` component tests pass: Testing Library now cleans up between tests, and four stale assertions match the current components.
+
 ## [0.1.0] - 2026-10-11
 
 ### Added

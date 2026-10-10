@@ -22,8 +22,8 @@ describe("PracticeSimulation", () => {
   it("renders current portfolio and play-money indicator", () => {
     render(<PracticeSimulation episode={march2020EpisodeMetadata} state={initialPracticeSimulationState} />);
 
-    expect(screen.getByTestId("play-money-badge")).toBeDefined();
-    expect(screen.getByTestId("portfolio-summary-card")).toBeDefined();
+    expect(document.querySelector('[data-slot="play-money-badge"]')).not.toBeNull();
+    expect(screen.getByTestId("portfolio-summary")).toBeDefined();
   });
 
   // 3. renders life event
@@ -139,7 +139,7 @@ describe("PracticeSimulation", () => {
     render(<PracticeSimulation episode={march2020EpisodeMetadata} state={consequenceState} />);
 
     // Summary card should render the updated portfolio
-    expect(screen.getByTestId("portfolio-summary-card")).toBeDefined();
+    expect(screen.getByTestId("portfolio-summary")).toBeDefined();
   });
 
   // 9. MoneyDecoder terms work

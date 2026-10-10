@@ -589,8 +589,8 @@ describe("ui", () => {
       expect(liquidityBtn).toBeDefined();
 
       fireEvent.click(liquidityBtn);
-      expect(screen.getByTestId("money-decoder-dialog")).toBeDefined();
-      expect(screen.getByText("What this means")).toBeDefined();
+      expect(screen.getByTestId("money-decoder-sheet")).toBeDefined();
+      expect(screen.getByText("Plain Meaning")).toBeDefined();
     });
 
     it("does not render MoneyDecoder triggers if terms data is omitted", () => {
@@ -736,7 +736,8 @@ describe("ui", () => {
       expect(screen.getByText("योजना और बजट")).toBeDefined();
       expect(screen.getByText("मुख्य प्रसंग")).toBeDefined();
       expect(screen.getByText(hindiLesson.steps[0]!.title)).toBeDefined();
-      expect(screen.getByText("आगे बढ़ें")).toBeDefined();
+      // A one-step lesson shows the finish label instead of continue.
+      expect(screen.getByText("पाठ समाप्त करें")).toBeDefined();
       expect(screen.getByText("अनुमानित समय: ~5 मिनट")).toBeDefined();
     });
 
