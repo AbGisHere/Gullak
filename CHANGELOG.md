@@ -10,6 +10,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ### Added
 - Live deployment on Vercel at https://gullak.abgupta.me: production from `main`, a preview URL for every branch. Linked from a README badge.
+- README names the team, **Claude2Create**, and its members; the LICENSE holder is now Team Claude2Create.
 - Roadmap plan for Account Aggregator access: sandbox requests, synthetic-data fallback and deterministic learning nudges.
 
 ## [0.0.3] - 2026-10-10

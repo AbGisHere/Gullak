@@ -11,7 +11,7 @@
 
 **Learn money. Practise with play money on real markets.** Try it at **[gullak.abgupta.me](https://gullak.abgupta.me)** (installable on phone and desktop).
 
-Gullak (गुल्लक, "piggy bank") is an adaptive financial-literacy platform built for Megathon X (Vanguard problem statement). Learners climb a topic ladder from savings accounts to stocks. Each topic is taught in the format that suits them (story, video, visual, formula, simulation, quiz, audio), in English, Hindi or Telugu. Passing a topic unlocks that instrument in a **paper portfolio** valued on **real market data**, with a Time Machine that replays real history.
+Gullak (गुल्लक, "piggy bank") is an adaptive financial-literacy platform built by team **Claude2Create** for Megathon X (Vanguard problem statement). Learners climb a topic ladder from savings accounts to stocks. Each topic is taught in the format that suits them (story, video, visual, formula, simulation, quiz, audio), in English, Hindi or Telugu. Passing a topic unlocks that instrument in a **paper portfolio** valued on **real market data**, with a Time Machine that replays real history.
 
 > **Guardrail:** Gullak educates; it never recommends real products or tells anyone to buy or sell. All projections are assumptions, not promises. **All money is virtual.**
 
@@ -84,14 +84,14 @@ Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS 4 · shadcn/ui · Motion 
 
 ## Team
 
-Megathon X, team of 5. Ownership details are in [AGENTS.md › Ownership map](AGENTS.md#ownership-map).
+**Claude2Create** · Megathon X: Abhinav Gupta, Ishita Anmol, Parthvi Mishra, Mayank Suman and Vansh Goel. Ownership details are in [AGENTS.md › Ownership map](AGENTS.md#ownership-map).
 
 | Role | Who | Focus |
 |---|---|---|
-| **R1** Lead · frontend core | [@AbGisHere](https://github.com/AbGisHere) | App shell, routing, onboarding, releases. Also helps across frontend, backend and ML. |
-| **R2** Frontend · game | [@mayankSuman404](https://github.com/mayankSuman404), [@Parthvi1707](https://github.com/Parthvi1707) | Website flow (with R1), design direction, lessons, paper portfolio, Time Machine, charts |
-| **R3** Backend · data | [@ishitaanmol975](https://github.com/ishitaanmol975) | Supabase, data-access layer, market data and snapshots, route handlers |
-| **R4** AI · adaptive engine (ML) | [@VanshGoel-01](https://github.com/VanshGoel-01) | AI tutor, guardrails, knowledge tracing on Colab, format bandit |
+| **R1** Lead · frontend core | Abhinav Gupta ([@AbGisHere](https://github.com/AbGisHere)) | App shell, routing, onboarding, releases. Also helps across frontend, backend and ML. |
+| **R2** Frontend · game | Mayank Suman ([@mayankSuman404](https://github.com/mayankSuman404)), Parthvi Mishra ([@Parthvi1707](https://github.com/Parthvi1707)) | Website flow (with R1), design direction, lessons, paper portfolio, Time Machine, charts |
+| **R3** Backend · data | Ishita Anmol ([@ishitaanmol975](https://github.com/ishitaanmol975)) | Supabase, data-access layer, market data and snapshots, route handlers |
+| **R4** AI · adaptive engine (ML) | Vansh Goel ([@VanshGoel-01](https://github.com/VanshGoel-01)) | AI tutor, guardrails, knowledge tracing on Colab, format bandit |
 | **R5** Product · content · QA | Shared, led by R1 | Topic content and translations, quiz quality, guardrail review, e2e, demo script |
 
 ## License
