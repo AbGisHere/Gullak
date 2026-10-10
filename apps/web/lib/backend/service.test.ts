@@ -1,3 +1,5 @@
+import { startingCapital } from "@gullak/content";
+import { startingCash } from "@gullak/engine";
 import { LearnerProfile, Portfolio, type Topic } from "@gullak/types";
 import { describe, expect, it, vi } from "vitest";
 import type { DataAccess, LearnerState } from "../data/transactions";
@@ -89,7 +91,10 @@ describe("backend orchestration", () => {
       locale: "en",
       preferredFormats: ["transcript"],
     });
-    expect(db.onboard).toHaveBeenCalledWith(expect.objectContaining({ id, gradeGroup: "grade-6-7" }), 1000000);
+    expect(db.onboard).toHaveBeenCalledWith(
+      expect.objectContaining({ id, gradeGroup: "grade-6-7" }),
+      startingCash(startingCapital, "grade-6-7", "none"),
+    );
   });
   it("rejects unsupported locales", async () => {
     const db = database();
