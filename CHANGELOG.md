@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.7] - 2026-10-10
+
 ### Changed
 
 - Life sim and market sim are one engine with two play-money modes: Practice replays real history with life events and a reveal (the Time Machine becomes Practice episodes; the flagship is March 2020 + a hospital bill), and Live is paper trading on current prices, scored on habits rather than returns.
