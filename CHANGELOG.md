@@ -10,6 +10,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ### Added
 - Knowledge-tracing notebook, increment 3: benchmarks BKT, BKT with forgetting, PFA and DKT (an LSTM on the Colab GPU) on real student answers from ASSISTments 2009–10 with 5-fold learner-separated cross-validation, and exports aggregate results and realistic BKT parameter ranges. The dataset is downloaded at run time and never committed; the app does not use the results yet.
+- Benchmark results from the Colab run in `data/models/knowledge-tracing-benchmark.assistments-2009.json`: AUC 0.739 for DKT, 0.727 for BKT with forgetting, 0.722 for BKT and 0.710 for PFA over 283,105 real answers.
 
 ## [0.1.3] - 2026-10-11
 

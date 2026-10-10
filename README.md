@@ -35,7 +35,7 @@ Open `/` for onboarding and `/r2-preview` for the learning components (lesson, s
 - **Learning components** in `@gullak/ui`, shown on sample data at `/r2-preview`. They are not yet connected to the backend or the content files.
 - **Backend API** (Supabase, sign-in required): profile, onboarding, lessons, quiz grading and unlocks, progress, portfolio and fixed deposits, goal planning, market quotes, activity and episode runs with resumable bookmarks, a Time Machine replay and a facilitator cohort view. See [the backend guide](docs/backend-setup.md).
 - **Content as data:** 8 topics, each with a reading lesson and a quiz (English), the topic prerequisite graph, one spot & sort round, one branching story and the March 2020 Practice episode.
-- **Knowledge tracing (Colab notebook):** BKT fitted on synthetic learners, plus a benchmark of BKT, BKT with forgetting, PFA and DKT on real student answers from ASSISTments 2009–10. See [notebooks](notebooks/README.md). Not yet used in the app.
+- **Knowledge tracing (Colab notebook):** BKT fitted on synthetic learners, plus a benchmark of BKT, BKT with forgetting, PFA and DKT on 283,105 real student answers from ASSISTments 2009–10 (AUC: DKT 0.739, BKT with forgetting 0.727, BKT 0.722, PFA 0.710). See [notebooks](notebooks/README.md#results-colab-t4-run-2026-10-11). Not yet used in the app.
 - **Engine:** interest (FD, RD, SIP, compounding), valuation, quiz grading, unlock rules, starting capital and the lesson format picker, all unit-tested.
 
 Not built yet: the app screens after onboarding, the AI tutor, translated topic content, Live mode and the facilitator dashboard UI. The plan is in [ROADMAP.md](ROADMAP.md).

@@ -57,6 +57,32 @@ answers (each held-out learner's answers after their first). It downloads
 spread of fitted BKT parameters, which become starting ranges for Gullak
 concepts. Maths skills are not money concepts, so no parameter is used directly.
 
+### Results (Colab T4 run, 2026-10-11)
+
+283,105 answers from 4,163 learners on 149 skills (63,755 rows without a skill
+dropped). Mean ± standard deviation over 5 folds; full output in
+[`data/models/knowledge-tracing-benchmark.assistments-2009.json`](../data/models/knowledge-tracing-benchmark.assistments-2009.json).
+
+| Model | AUC | Accuracy | Log loss |
+|---|---|---|---|
+| DKT (LSTM) | 0.739 ± 0.010 | 0.724 | 0.554 |
+| BKT + forgetting | 0.727 ± 0.008 | 0.717 | 0.563 |
+| BKT | 0.722 ± 0.008 | 0.715 | 0.566 |
+| PFA | 0.710 ± 0.008 | 0.703 | 0.583 |
+| Per-skill correct rate | 0.629 ± 0.004 | 0.671 | 0.616 |
+| Overall correct rate | 0.500 | 0.660 | 0.642 |
+
+- Every sequence model clearly beats the per-skill baseline: a learner's own answer history matters.
+- DKT leads BKT with forgetting by about 0.012 AUC. BKT with forgetting is the
+  on-device choice: five readable numbers per concept, runs offline on cheap
+  phones, explainable to teachers. DKT is the path once Gullak has data at scale.
+- Fitted BKT parameters on real students (medians over well-supported skills):
+  P(learn) 0.13, P(slip) 0.19, P(guess) 0.20, P(init) 0.68. Slip often reaches
+  its 0.3 bound. P(init) is high because these students were taught in class
+  first; Gullak keeps its lower onboarding priors.
+- DKT figures on the original (uncorrected) file in older papers are higher;
+  this run uses the corrected file, where duplicated rows were removed.
+
 Run it on Colab with a **T4 GPU** runtime (Runtime → Change runtime type), then
 Runtime → Run all: about 10 minutes.
 
