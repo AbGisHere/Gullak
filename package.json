@@ -1,6 +1,6 @@
 {
   "name": "gullak",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "Gullak: adaptive financial literacy with play money on real market data.",
   "license": "MIT",
@@ -22,6 +22,7 @@
     "release": "node scripts/release.mjs",
     "check:release": "node scripts/check-release.mjs",
     "check:attribution": "node scripts/check-attribution.mjs",
+    "snapshots:mf": "node scripts/snapshots/mf-nav.mjs",
     "prepare": "husky"
   },
   "lint-staged": {

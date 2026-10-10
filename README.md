@@ -1,5 +1,13 @@
 # Gullak
 
+[![Version](https://img.shields.io/badge/version-0.0.3-0f766e)](CHANGELOG.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Node](https://img.shields.io/badge/node-24_LTS-339933?logo=nodedotjs&logoColor=white)](.nvmrc)
+[![pnpm](https://img.shields.io/badge/pnpm-12.10.1-F69220?logo=pnpm&logoColor=white)](package.json)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](apps/web)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](packages/typescript-config)
+[![PWA](https://img.shields.io/badge/PWA-phone_%2B_desktop-5A0FC8?logo=pwa&logoColor=white)](apps/web)
+
 **Learn money. Practise with play money on real markets.**
 
 Gullak (गुल्लक, "piggy bank") is an adaptive financial-literacy platform built for Megathon X (Vanguard problem statement). Learners climb a topic ladder from savings accounts to stocks. Each topic is taught in the format that suits them (story, video, visual, formula, simulation, quiz, audio), in English, Hindi or Telugu. Passing a topic unlocks that instrument in a **paper portfolio** valued on **real market data**, with a Time Machine that replays real history.
@@ -37,6 +45,8 @@ See [`.env.example`](.env.example). All are optional: without Supabase the app r
 
 ## Working on it (team)
 
+R1 works on branches in this repo. Everyone else:
+
 1. **Fork** this repo, then enable Actions in your fork once (Actions tab → *I understand my workflows, go ahead and enable them*), so CI runs on your pushes.
 2. `git remote add upstream https://github.com/AbGisHere/Claude2Create_MegathonX.git`
 3. Branch `feat/<area>`, commit with [Conventional Commits](https://www.conventionalcommits.org/), and add a `CHANGELOG.md` entry under `[Unreleased]` for every `feat`/`fix`.
@@ -60,9 +70,9 @@ notebooks              Colab notebooks (knowledge-tracing model)
 
 ## Data sources
 
-Planned (see ROADMAP Phase 1). Every value shows its source and as-of date, and committed snapshots back every live source:
+In progress (see ROADMAP Phase 1 and [data/snapshots](data/snapshots/README.md)). Every value shows its source and as-of date, and committed snapshots back every live source:
 - **FD rates:** published bank card rates (snapshot, dated)
-- **Mutual fund NAVs:** AMFI daily NAV data
+- **Mutual fund NAVs:** AMFI daily NAV data (live adapter + committed history since 2019)
 - **Index and stock prices:** NSE index history, including March 2020 for the Time Machine
 - **Gold:** published INR gold prices
 - **Inflation:** MoSPI CPI
@@ -73,7 +83,15 @@ Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS 4 · shadcn/ui · Motion 
 
 ## Team
 
-Megathon X, team of 5. Roles: R1 lead/frontend core · R2 frontend/game · R3 backend/data · R4 AI/adaptive engine · R5 product/content/QA.
+Megathon X, team of 5. Ownership details are in [AGENTS.md › Ownership map](AGENTS.md#ownership-map).
+
+| Role | Who | Focus |
+|---|---|---|
+| **R1** Lead · frontend core | [@AbGisHere](https://github.com/AbGisHere) | App shell, routing, onboarding, releases. Also helps across frontend, backend and ML. |
+| **R2** Frontend · game | [@mayankSuman404](https://github.com/mayankSuman404), [@Parthvi1707](https://github.com/Parthvi1707) | Website flow (with R1), design direction, lessons, paper portfolio, Time Machine, charts |
+| **R3** Backend · data | [@ishitaanmol975](https://github.com/ishitaanmol975) | Supabase, data-access layer, market data and snapshots, route handlers |
+| **R4** AI · adaptive engine (ML) | [@VanshGoel-01](https://github.com/VanshGoel-01) | AI tutor, guardrails, knowledge tracing on Colab, format bandit |
+| **R5** Product · content · QA | Shared, led by R1 | Topic content and translations, quiz quality, guardrail review, e2e, demo script |
 
 ## License
 

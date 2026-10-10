@@ -35,7 +35,8 @@ packages/market-data   One adapter interface per data source, with caching + sna
 packages/ai            Provider-agnostic LLM client (AI SDK: Gemini → Groq), versioned prompts, guardrails, cache.
 packages/ui            Design system: shadcn/ui (Base UI) components, tokens (globals.css), formatting.
 packages/typescript-config  Shared strict tsconfigs.
-data/snapshots         Committed real-data snapshots so the demo never depends on live APIs.
+data/snapshots         Committed real-data snapshots so the demo never depends on live APIs. Written by scripts/snapshots/*.
+supabase/migrations    Postgres schema (RLS on every per-learner table). Accessed only via apps/web/lib/data.
 notebooks              Colab-ready notebooks (model training, heavy data prep). Never run heavy jobs locally.
 docs                   Architecture notes and ADRs.
 ```
@@ -46,13 +47,13 @@ Dependency direction: `web → (ui, ai, market-data, content, engine, types)`; `
 
 ### Ownership map
 
-| Role | Owns |
-|---|---|
-| **R1** Lead / frontend core | `apps/web` shell, routing, layouts (phone + desktop), onboarding, design system (`packages/ui`), release management |
-| **R2** Frontend / game | Lesson renderers (all formats), paper portfolio UI, Time Machine, charts, animations |
-| **R3** Backend / data | `packages/market-data`, `data/snapshots`, Supabase schema + migrations, data-access layer, route handlers |
-| **R4** AI / adaptive engine | `packages/ai`, `packages/engine` (adaptive parts), `notebooks/` (knowledge tracing on Colab), format bandit, tutor, lesson pre-generation |
-| **R5** Product / content / QA | `packages/content` (topics, translations), quiz quality, guardrail review, Playwright e2e, demo script |
+| Role | Who | Owns |
+|---|---|---|
+| **R1** Lead / frontend core | @AbGisHere | `apps/web` shell, routing, layouts (phone + desktop), onboarding, design system (`packages/ui`), release management. Also helps on R2–R4 work. |
+| **R2** Frontend / game | @mayankSuman404, @Parthvi1707 | Website flow (with R1), design direction + tokens (Impeccable init), lesson renderers (all formats), paper portfolio UI, Time Machine, charts, animations |
+| **R3** Backend / data | @ishitaanmol975 | `packages/market-data`, `data/snapshots`, Supabase schema + migrations, data-access layer, route handlers |
+| **R4** AI / adaptive engine | @VanshGoel-01 | `packages/ai`, `packages/engine` (adaptive parts), `notebooks/` (knowledge tracing on Colab), format bandit, tutor, lesson pre-generation |
+| **R5** Product / content / QA | shared, led by R1 | `packages/content` (topics, translations), quiz quality, guardrail review, Playwright e2e, demo script |
 
 ## Scalability rules
 
@@ -78,6 +79,7 @@ We don't fine-tune LLMs. Small adaptive models (e.g. knowledge tracing) are trai
 - **i18n:** never hard-code user-facing strings; use `next-intl` (`useTranslations` / `getTranslations`). Messages in `apps/web/messages/<locale>.json`; every locale file must have the same keys (tested).
 - **UI work goes through the Impeccable skill** (`/impeccable` in Claude Code; `.agents/skills/impeccable` for other agents): designing, polishing, critiquing or auditing any screen or component. Add shadcn components with `pnpm dlx shadcn@4.21.4 add <name> -c apps/web` (they land in `packages/ui`).
 - **Tests:** every package has Vitest unit tests beside the code (`*.test.ts`). Engine functions need tests for normal, edge and invalid input. E2E in `apps/web/e2e` (Playwright, phone + desktop).
+- **Scratch files:** agents put temporary work (throwaway scripts, intermediate output, downloads, test commit messages) in their own scratchpad or temp directory, never in the repo. Clear it whenever it's no longer needed: when the task that used it is done, before a push, and before `/compact`. Look before deleting, and move anything worth keeping into the repo first.
 
 ### How to add a topic
 
@@ -117,10 +119,11 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
    4. Bump the version following SemVer, starting at `0.0.1`: patch for fixes and small changes, minor for a finished feature or roadmap phase. Keep all package.json versions in sync. (`pnpm release patch|minor` does this.)
    5. Update `CHANGELOG.md` (move items from Unreleased into the new version with today's date), tick completed items in `ROADMAP.md`, and update `AGENTS.md` if any convention, structure or decision changed. These three files must be fully accurate before the push.
    6. Commit, tag `vX.Y.Z` on main, push.
-   *Enforced on main:* `scripts/check-release.mjs` (versions in sync, dated changelog section, tag present) in `pre-push` and CI.
+   7. **Submission repo: only when R1 says so.** The submission repo ([IIIT-ECell/megathon26-claude2create](https://github.com/IIIT-ECell/megathon26-claude2create), remote `submission`) is what gets graded. R1 decides which releases go there and when. When told to, push a released, CI-green `main` and its tag: `git push submission main vX.Y.Z`. Never push feature branches there, and agents never push there on their own, not even right after a release. Only R1 has access; set it up once with `git remote add submission https://github.com/IIIT-ECell/megathon26-claude2create.git`.
+   *Enforced on main:* `scripts/check-release.mjs` (versions in sync, dated changelog section, README version badge, tag present) in `pre-push` and CI.
 4. **Team workflow:** 5 people push to this repo. Work on feature branches (`feat/<area>`), keep PRs small. To avoid version-file conflicts between teammates, feature branches only add entries under `[Unreleased]`; the version bump and changelog release happen on the push/merge to `main`.
-   *In practice:* **R1 (team lead)** works on branches in this repo and merges them to `main` when ready. **R2–R5 fork** the repo, work on `feat/<area>` in their fork, and open PRs into `AbGisHere/Claude2Create_MegathonX:main`. Enable Actions once in your fork (Actions tab → "I understand my workflows, go ahead and enable them") so CI runs on your pushes.
-5. **Never** force-push to main, commit secrets, or commit generated build output.
+   *In practice:* **R1 (team lead)** works on branches in this repo and merges them to `main` when ready. **R2–R5 fork** the repo, work on `feat/<area>` in their fork, and open PRs into `AbGisHere/Claude2Create_MegathonX:main`. Enable Actions once in your fork (Actions tab → "I understand my workflows, go ahead and enable them") so CI runs on your pushes. Once a branch is merged into `main`, delete it locally and on the remote.
+5. **Never** force-push to main (on either remote), commit secrets, or commit generated build output.
 6. **After every successful push:** stop and tell me: "Pushed vX.Y.Z — good time to run /compact." Wait for me before continuing.
 7. **AI agents ask before every commit and every push.** Show the human the message and what's staged, and wait for an explicit yes. Approval for one commit or push doesn't carry over to the next. *Enforced:* `.claude/settings.json` sets `git commit`, `git push`, `git tag` and PR create/merge to "ask", and denies `--no-verify` and force-push.
 
@@ -143,5 +146,6 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
 | 2026-10-10 | **Node 24 LTS** in CI and `engines` | Node 25 is not LTS. |
 | 2026-10-10 | **CI runs every check; `pre-push` only runs the release check on main** | No double effort: the full suite runs automatically on every push and PR, including forks. A red CI is fixed, never merged. |
 | 2026-10-10 | **No branch protection on main**; fork + PR workflow | Team lead's call. Merger must confirm CI is green. |
+| 2026-10-10 | **Graded submission repo `IIIT-ECell/megathon26-claude2create`** (remote `submission`), pushed only when R1 says so | It's what gets graded and teammates have no access. R1 picks which released, green versions graders see. |
 | 2026-10-10 | **MIT licence** | Standard for hackathon projects; team lead approved. |
 | 2026-10-10 | **Impeccable skill committed** for all agents; hooks in shared settings | UI quality is how we win; every teammate's agent gets the same design checks. |

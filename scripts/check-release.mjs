@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Verifies release metadata is consistent: every package.json shares one SemVer
-// version, CHANGELOG.md has a dated section for it, and (with --tag) HEAD is tagged vX.Y.Z.
+// version, CHANGELOG.md has a dated section for it, the README badge matches, and (with --tag) HEAD is tagged vX.Y.Z.
 import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
 
@@ -20,6 +20,10 @@ const changelog = readFileSync("CHANGELOG.md", "utf8");
 if (!changelog.includes("## [Unreleased]")) errors.push("CHANGELOG.md is missing the [Unreleased] section");
 if (!new RegExp(`^## \\[${version.replaceAll(".", "\\.")}\\] - \\d{4}-\\d{2}-\\d{2}$`, "m").test(changelog)) {
   errors.push(`CHANGELOG.md has no dated "## [${version}] - YYYY-MM-DD" section`);
+}
+
+if (!readFileSync("README.md", "utf8").includes(`badge/version-${version}-`)) {
+  errors.push(`README.md version badge is not ${version} (pnpm release updates it)`);
 }
 
 if (process.argv.includes("--tag")) {

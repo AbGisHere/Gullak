@@ -4,5 +4,6 @@ export * from "./instrument";
 export * from "./market";
 export * from "./portfolio";
 export * from "./profile";
+export * from "./progress";
 export * from "./topic";
 export * from "./unlock";
