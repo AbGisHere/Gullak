@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.3] - 2026-10-10
+
 ### Added
 - Data-access layer in `apps/web/lib/data`: typed Supabase client, a `learners` repository as the worked example (Zod-validated row ↔ schema mappers, Supabase and in-memory stores, tests), and interfaces for progress and portfolios.
 - First Supabase migration: learners, topic progress, paper portfolios and holdings, with row-level security, paise money columns and `check (is_virtual)`.
@@ -20,6 +22,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - Documented the graded submission repo (`IIIT-ECell/megathon26-claude2create`, remote `submission`), which only gets pushed when R1 says so.
 - R2 owns the design direction and tokens (Impeccable init). R5 work is shared, led by R1.
 - Agents keep temporary files in their scratchpad and clear it when it's no longer needed.
+- Merged branches are deleted locally and on the remote.
 - `pnpm release` updates the README version badge, and the release check verifies it.
 
 ### Fixed
