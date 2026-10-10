@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.18] - 2026-10-11
+
 ### Added
 - M2 mid-submission progress report PDF in `deliverables/`.
 
