@@ -8,6 +8,17 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.2] - 2026-10-10
+
+### Changed
+- CI is the single place checks run (lint, typecheck, unit tests, build, phone + desktop e2e); the `pre-push` hook now only runs the release check on `main`.
+- Team workflow: R1 works on branches in this repo; R2–R5 fork and open PRs.
+- Turborepo agent guidance turned off so it no longer rewrites `AGENTS.md`.
+
+### Fixed
+- Home e2e test matched two "Play money" elements; it now targets the badge exactly.
+- Turborepo "no output files" warning for the test task.
+
 ## [0.0.1] - 2026-10-10
 
 ### Added
