@@ -4,6 +4,7 @@ import {
   gradeQuiz,
   isTopicOpen,
   monthlyForTarget,
+  pickLessonVariant,
   startingCash,
   unlockedInstruments,
   valuePortfolio,
@@ -37,6 +38,11 @@ export function publicLesson(topic: Topic, state: LearnerState) {
   requireTopicOpen(state, topic.meta.id);
   return {
     ...topic,
+    formatSelection: pickLessonVariant({
+      gradeGroup: state.profile.gradeGroup,
+      preferredFormats: state.profile.preferredFormats,
+      variants: topic.content.variants,
+    }),
     content: {
       ...topic.content,
       variants: topic.content.variants

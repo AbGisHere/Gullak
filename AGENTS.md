@@ -96,6 +96,10 @@ We don't fine-tune LLMs. Small adaptive models (e.g. knowledge tracing) are trai
 3. Add `topics/*/<code>.json` content files (or generate them with the pre-generation script).
 4. Run `pnpm test`. No code changes needed.
 
+### Lesson presentation selection
+
+`pickLessonVariant` in `@gullak/engine` selects an eligible non-quiz variant from an already-open topic in one resolved locale. Explicit preferences are ordered; onboarding's full-format list means Mix it up, with deterministic caller-owned rotation. Authored content order breaks ties and defines fallback. It never changes mastery or unlocks; quizzes remain separate assessments. The lesson API adds `formatSelection` metadata, selecting at index 0 until per-learner rotation is integrated. Translate reason codes in the lesson UI, never display them as raw strings. Contract and teammate handoff: [`docs/format-picker.md`](docs/format-picker.md).
+
 ### How to add a market-data adapter
 
 1. In `packages/market-data/src/adapters/<source>.ts`, implement `MarketDataAdapter` (`getQuote`, `getSeries`). Validate the source's raw response with Zod and map it to `MarketQuote` / `SeriesPoint`, setting `asOf` from the source.

@@ -2,6 +2,7 @@ export * from "./activity";
 export * from "./api";
 export * from "./common";
 export * from "./episode";
+export * from "./format-picker";
 export * from "./goal";
 export * from "./instrument";
 export * from "./market";

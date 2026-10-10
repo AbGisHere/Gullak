@@ -1,6 +1,8 @@
+import { resolve } from "node:path";
 import { startingCapital } from "@gullak/content";
+import { loadTopic } from "@gullak/content/server";
 import { startingCash } from "@gullak/engine";
-import { LearnerProfile, Portfolio, type Topic } from "@gullak/types";
+import { LearnerProfile, OnboardingRequest, Portfolio, type Topic } from "@gullak/types";
 import { describe, expect, it, vi } from "vitest";
 import type { DataAccess, LearnerState } from "../data/transactions";
 import { createBackendService, publicLesson } from "./service";
@@ -82,6 +84,62 @@ const topic: Topic = {
   },
 };
 describe("backend orchestration", () => {
+  it("recognises the actual onboarding default as mixed mode", () => {
+    const input = OnboardingRequest.parse({ gradeGroup: "grade-8-10", experience: "none", locale: "en" });
+    expect(
+      publicLesson(topic, { ...state, profile: { ...state.profile, preferredFormats: input.preferredFormats } }),
+    ).toMatchObject({
+      formatSelection: { status: "selected", variantId: "read", reason: "mixed-format" },
+    });
+  });
+  it.each(["money-basics", "saving-habit", "bank-accounts-upi", "fixed-deposit"])(
+    "selects a real loaded draft and keeps its quiz private: %s",
+    async (topicId) => {
+      const loaded = await loadTopic(resolve(process.cwd(), "../../packages/content/topics"), topicId, "en");
+      const ready = {
+        ...state,
+        profile: { ...state.profile, preferredFormats: ["audio" as const] },
+        progress: [
+          ...state.progress,
+          { topicId: "bank-accounts-upi", bestQuizScore: 1, passed: true, lessonViewedAt: at, updatedAt: at },
+        ],
+      };
+      const response = publicLesson(loaded, ready);
+      expect(response.formatSelection).toEqual({
+        status: "selected",
+        variantId: "read",
+        format: "transcript",
+        reason: "fallback-format",
+      });
+      for (const variant of response.content.variants) {
+        if (variant.format === "quiz") {
+          for (const question of variant.questions) {
+            expect(question).not.toHaveProperty("correctOptionId");
+            expect(question).not.toHaveProperty("explanation");
+          }
+        }
+      }
+    },
+  );
+  it("includes a preference-based recommendation without exposing assessment answers", () => {
+    expect(publicLesson(topic, state)).toMatchObject({
+      formatSelection: { status: "selected", variantId: "read", format: "transcript", reason: "preferred-format" },
+    });
+  });
+  it("never recommends a restricted variant or an assessment as the initial lesson", () => {
+    const restricted: Topic = {
+      ...topic,
+      content: {
+        ...topic.content,
+        variants: topic.content.variants.map((v) =>
+          v.format === "transcript" ? { ...v, audience: ["grade-11-12"] } : v,
+        ),
+      },
+    };
+    expect(publicLesson(restricted, state)).toMatchObject({
+      formatSelection: { status: "unavailable", reason: "no-eligible-variant" },
+    });
+  });
   it("uses config starting cash and verified identity", async () => {
     const db = database();
     const service = createBackendService(db, id, () => at);
