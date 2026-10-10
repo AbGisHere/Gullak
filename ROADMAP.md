@@ -67,7 +67,7 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [ ] Collections and class play: historical notes and coins, Scam Hunter deck, class goals, duels, streak-saver gifts; no money leaderboards (R2, R3)
 - [ ] Shared phones: several profiles per device with quick switching and sign-out; lesson packs shared over WhatsApp/Bluetooth (R1, R3)
 - [ ] AI tutor: grounded in topic content, learner's language, guardrails, rate limit, cache, content-search fallback (R4)
-- [ ] Knowledge-tracing notebook on Colab → parameters in `/data`; format bandit in engine (R4)
+- [ ] Knowledge-tracing notebook on Colab → parameters in `/data`; format bandit in engine (R4) — synthetic input preparation and validation on `feat/bkt-notebook`, pending merge; fitting, parameter export and app integration remain unimplemented.
 - [ ] AA data adapter: Zod-validated synthetic deposit-account fixtures and, if access is provisioned, hosted FIU sandbox authentication, consent flow, data fetch and webhooks behind the same interface (R3)
 - [ ] AA transaction summaries → deterministic learning nudges (income variability, spending categories, savings consistency); pass only validated summaries to R4, never raw statements to an LLM; never product advice (R3, R4)
 - [ ] AA demo consent flow and explicit synthetic-data label; review nudge copy and demo claims (R1, R2, R5)

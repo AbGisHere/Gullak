@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Synthetic-only BKT input-preparation notebook with the nine-field version-pinned quiz-answer contract, deterministic fixtures, content-derived answer ordering and local/CI validation tests. No training, production mastery changes or unlock changes.
+
 ## [0.0.15] - 2026-10-10
 
 ### Changed

@@ -71,6 +71,8 @@ Dependency direction: `web → (ui, ai, market-data, content, engine, types)`; `
 
 We don't fine-tune LLMs. Small adaptive models (e.g. knowledge tracing) are trained in self-contained **Colab notebooks** in `/notebooks`, which output an artifact (JSON parameters) committed to `/data`. The app runs the exported model in plain TypeScript in `packages/engine`. Never run heavy jobs on a laptop. Tell the team lead when a notebook needs to be run.
 
+`notebooks/gullak-knowledge-tracing-bkt.ipynb` currently implements only synthetic input preparation, not training or app integration. Its nine-field quiz-answer contract and local/CI validation checks are documented in `notebooks/README.md`. Use exact-byte SHA-256 content versions and pinned question positions; the latest contract has no `question_index` column. All outputs are labelled synthetic; story verdicts are excluded. Quiz graph pass marks remain the only unlock rule. Never activate parameters fitted on synthetic data as a production mastery model.
+
 ## Conventions
 
 - **TypeScript strict** (`noUncheckedIndexedAccess`, `verbatimModuleSyntax`). No `any`; use Zod at every external boundary (API inputs, market data, LLM output, JSON files).
