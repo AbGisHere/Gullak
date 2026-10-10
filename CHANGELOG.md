@@ -8,8 +8,10 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.17] - 2026-10-11
+
 ### Added
-- Add approved strict activity-answer request/response schemas and completed-run contract.
+- Activity answer schemas in `@gullak/types`: strict spot & sort and story request bodies, graded results, and a `completed` run status with `completedAt`.
 
 ## [0.0.16] - 2026-10-11
 

@@ -36,7 +36,7 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [ ] Life + market sim engine (Practice): monthly needs/wants/savings split, personas, event deck, unlocked instruments on real prices, FD/RD early-exit rules, selling units at the day's price (R4)
 - [ ] Practice renderer + flagship episode: March 2020 + hospital bill, with speed control and the side-by-side reveal (R2, R5)
 - [x] Activity and episode runs: start, resumable bookmarks, pinned content hashes, idempotent writes (R3)
-- [ ] Activity answers: server-graded spot & sort and story choices, run completion ([contract](docs/activity-answers.md)) (R3)
+- [ ] Activity answers: server-graded spot & sort and story choices, run completion ([contract](docs/activity-answers.md)) (R3); request/response schemas done, route and storage not yet
 - [ ] Spot & sort engine + renderer (need or want, scam or real) (R4, R2)
 - [ ] Shared portfolio: cash, piggy bank, RD, FD, gold, funds; valuation with as-of prices (R2, R3)
 - [ ] Demo topics translated to hi + te (R5)
