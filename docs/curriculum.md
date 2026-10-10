@@ -95,6 +95,31 @@ Plus a **what-if sandbox**: sliders over engine formulas (start an SIP at 15 vs 
 
 Every activity reports results to knowledge tracing, so the adaptive engine learns from play as well as quizzes. Facilitators can assign any activity to a class.
 
+## Real data behind every topic
+
+Learners play with real Indian numbers, not made-up ones. Every value carries its source and as-of date, comes from a script in `scripts/snapshots/` (or a hand-checked CSV with source URLs), and is committed so the demo works offline. Nothing is typed into code. Detail and status: [data/snapshots](../data/snapshots/README.md).
+
+| Data | Source | Used by |
+|---|---|---|
+| CPI, headline and by group (food, fuel, education, health) | MoSPI CPI (Combined) | `prices-and-inflation`, `future-goals`, "real" returns, what-if (₹100 then vs now), life-sim prices |
+| Household spending by category | MoSPI Household Consumption Expenditure Survey 2022–23 | `making-a-budget`, `tracking-spending`, life-sim personas |
+| Savings account, FD and RD rates | Banks' published rate pages (hand-checked CSV, dated) | `bank-accounts-upi`, `fixed-deposit`, `recurring-deposit`, paper portfolio |
+| Small-savings rates (PPF, SSY, NSC, post office) and their history | Ministry of Finance quarterly notifications | `ppf-small-savings`, goal engine |
+| RBI repo rate history | RBI | `borrowing-and-credit`, `bonds`, why rates move |
+| Loan and credit-card interest rates | Banks' published rate pages, RBI | `borrowing-and-credit`, story choices (easy loans) |
+| UPI volumes | NPCI monthly statistics | `bank-accounts-upi` |
+| Mutual fund NAVs by category: liquid, overnight, money market, debt, index, equity, ETFs | AMFI (same script, one scheme code per example) | `money-market`, `debt-funds`, `mutual-funds-sip`, `index-funds-etfs`, `diversification`, market sim |
+| Index history: NIFTY 50 (and TRI), Next 50, Midcap 150, a few sectors | NSE Indices | `stocks`, `index-funds-etfs`, `diversification`, Time Machine |
+| A few example stock prices | NSE end-of-day data | `stocks`, `risk-and-return` |
+| Gold price (₹/gram) | IBJA, RBI DBIE | `gold`, `diversification`, market sim |
+| T-bill and 10-year G-sec yields | RBI DBIE | `money-market`, `bonds`, `risk-and-return` |
+| NPS scheme NAVs | NPS Trust | `retirement-nps` |
+| Real scam patterns and advice | RBI (Sachet, "BE(A)WARE"), I4C / cybercrime.gov.in, NPCI safety guidance | all of Stay financially safe, spot & sort, story choices |
+
+**Time Machine episodes** are data, each a date range on real series with a narrative: the 2008 crash, demonetisation (2016), the March 2020 crash and recovery, gold's 2020 jump, and the 2022 rate rises (debt fund NAVs vs FD rates). Life-sim event costs and odds also cite their source (CPI groups, HCES) rather than invented numbers.
+
+Example funds and stocks are only there to practise with play money. Content never calls them good, best or recommended.
+
 ## How content gets made
 
 1. **By hand (R5, led by R1):** a curriculum entry per topic: learning goals, key ideas, common misconceptions, a real-life scenario, quiz goals and grade tags.

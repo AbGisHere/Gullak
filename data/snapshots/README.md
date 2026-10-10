@@ -15,13 +15,26 @@ Rules (owner: R3):
 
 ## Pipeline
 
-| Data | Status | Script | Source | Symbol |
-|---|---|---|---|---|
-| Mutual fund NAV history | ✅ worked example | `pnpm snapshots:mf <code>... [--from YYYY-MM-DD]` | AMFI, via mfapi.in | AMFI scheme code, e.g. `120716` |
-| NIFTY 50 history (incl. Feb–Apr 2020) | TODO(R3) | `scripts/snapshots/nifty.mjs` | niftyindices.com historical data (NSE Indices) | `NIFTY50` |
-| Gold price (₹/gram, 24K) | TODO(R3) | `scripts/snapshots/gold.mjs` | IBJA published rates, or RBI DBIE | `XAU-INR` |
-| CPI inflation (for "real" returns) | TODO(R3) | `scripts/snapshots/cpi.mjs` | MOSPI CPI (Combined), base 2012=100 | `CPI-IN` |
-| FD rates | TODO(R3) | `scripts/snapshots/fd-rates.mjs` (from a hand-checked CSV with source URLs) | Banks' published FD rate pages, with the date checked | e.g. `FD-SBI-1Y` |
+Priority: **P1** is needed for the demo topics and the market sim (Phase 1–2); **P2** covers the rest of the curriculum (Phase 4). Every row maps to topics in [docs/curriculum.md](../../docs/curriculum.md#real-data-behind-every-topic).
+
+| Data | Priority | Status | Script | Source | Symbol |
+|---|---|---|---|---|---|
+| Mutual fund NAV history, every category (liquid, overnight, money market, debt, index, equity, ETF) | P1 | ✅ script; one example committed | `pnpm snapshots:mf <code>... [--from YYYY-MM-DD]` | AMFI, via mfapi.in | AMFI scheme code, e.g. `120716` |
+| NIFTY 50 and NIFTY 50 TRI history (incl. 2008, 2016, Feb–Apr 2020) | P1 | TODO(R3) | `scripts/snapshots/nse-index.mjs` | niftyindices.com historical data (NSE Indices) | `NIFTY50`, `NIFTY50-TRI` |
+| CPI inflation, headline and by group (food, fuel, education, health) | P1 | TODO(R3) | `scripts/snapshots/cpi.mjs` | MOSPI CPI (Combined), base 2012=100 | `CPI-IN`, `CPI-IN-FOOD`, … |
+| Gold price (₹/gram, 24K) | P1 | TODO(R3) | `scripts/snapshots/gold.mjs` | IBJA published rates, or RBI DBIE | `XAU-INR` |
+| Savings account, FD and RD rates | P1 | TODO(R3) | `scripts/snapshots/bank-rates.mjs` (from a hand-checked CSV with source URLs) | Banks' published rate pages, with the date checked | e.g. `FD-SBI-1Y`, `RD-SBI-1Y`, `SB-SBI` |
+| Small-savings rates (PPF, SSY, NSC, post office) and history | P1 | TODO(R3) | `scripts/snapshots/small-savings.mjs` (hand-checked CSV) | Ministry of Finance quarterly notifications | `PPF`, `SSY`, `NSC` |
+| Household spending by category | P1 | TODO(R3) | `scripts/snapshots/hces.mjs` (hand-checked CSV) | MoSPI HCES 2022–23 fact sheet | `HCES-RURAL`, `HCES-URBAN` |
+| Other indices: Next 50, Midcap 150, a few sectors | P2 | TODO(R3) | `scripts/snapshots/nse-index.mjs` | NSE Indices | `NIFTYNEXT50`, … |
+| Example stock prices (a few large caps) | P2 | TODO(R3) | `scripts/snapshots/nse-eod.mjs` | NSE end-of-day data | NSE symbol |
+| T-bill (91-day) and 10-year G-sec yields | P2 | TODO(R3) | `scripts/snapshots/rbi-yields.mjs` | RBI DBIE | `TBILL-91D`, `GSEC-10Y` |
+| RBI repo rate history | P2 | TODO(R3) | `scripts/snapshots/repo-rate.mjs` (hand-checked CSV) | RBI monetary policy statements | `REPO-IN` |
+| Loan and credit-card interest rates | P2 | TODO(R3) | `scripts/snapshots/bank-rates.mjs` | Banks' published rate pages | e.g. `LOAN-PERSONAL-SBI` |
+| UPI monthly volumes and value | P2 | TODO(R3) | `scripts/snapshots/npci-upi.mjs` | NPCI UPI product statistics | `UPI-VOLUME`, `UPI-VALUE` |
+| NPS scheme NAVs | P2 | TODO(R3) | `scripts/snapshots/nps.mjs` | NPS Trust | scheme id |
+
+Scam patterns (RBI Sachet and "BE(A)WARE", I4C / cybercrime.gov.in, NPCI) are not time series. They live in `packages/content` as activity data, each item citing its source.
 
 Committed so far: `amfi-120716.json` (UTI Nifty 50 Index Fund, Direct, Growth), daily since 2019-01-01. It tracks NIFTY 50, so it already shows the March 2020 crash (77.52 on 3 Feb → 50.40 on 23 Mar 2020) for the Time Machine.
 

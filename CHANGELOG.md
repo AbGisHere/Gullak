@@ -8,6 +8,10 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Changed
+
+- Data sources now cover the whole curriculum, not just the first instruments: every topic and engine maps to a real Indian source (CPI by group, household spending, bank and small-savings rates, every fund category, indices, gold, yields, repo rate, UPI, NPS, scam patterns), and the snapshot pipeline is split into P1 and P2.
+
 ## [0.0.5] - 2026-10-10
 
 ### Changed

@@ -71,12 +71,13 @@ notebooks              Colab notebooks (knowledge-tracing model)
 
 ## Data sources
 
-In progress (see ROADMAP Phase 1 and [data/snapshots](data/snapshots/README.md)). Every value shows its source and as-of date, and committed snapshots back every live source:
-- **FD rates:** published bank card rates (snapshot, dated)
-- **Mutual fund NAVs:** AMFI daily NAV data (live adapter + committed history since 2019)
-- **Index and stock prices:** NSE index history, including March 2020 for the Time Machine
-- **Gold:** published INR gold prices
-- **Inflation:** MoSPI CPI
+Every topic and simulation runs on real Indian data. Each value shows its source and as-of date, and committed snapshots back every source, so the demo works offline. The full map from data to topic is in [docs/curriculum.md](docs/curriculum.md#real-data-behind-every-topic), and pipeline status is in [data/snapshots](data/snapshots/README.md).
+
+- **Prices and spending:** MoSPI CPI (headline and by group) and the Household Consumption Expenditure Survey
+- **Saving and borrowing:** bank savings, FD, RD and loan rates (dated); small-savings rates (PPF, SSY, NSC) from the Ministry of Finance; RBI repo rate; NPCI UPI statistics
+- **Investing:** AMFI NAVs for every fund category (liquid, money market, debt, index, equity, ETFs); NSE index history (NIFTY 50, Next 50, Midcap, sectors) and example stock prices; IBJA gold prices; RBI T-bill and G-sec yields; NPS Trust NAVs
+- **Staying safe:** real scam patterns from RBI, I4C/cybercrime.gov.in and NPCI
+- **Time Machine episodes:** 2008, demonetisation (2016), March 2020, gold in 2020 and the 2022 rate rises, each replayed on real series
 
 ## Stack
 
