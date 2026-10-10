@@ -1,14 +1,3 @@
-import * as React from "react";
-import { cn } from "../lib/utils";
-import { formatInr } from "../lib/format";
-import { PlayMoneyBadge } from "./play-money-badge";
-import { Character, type CharacterVariant, type CharacterPose, type CharacterExpression, type CharacterAccent } from "./character";
-import { MoneyDecoder, type MoneyTermData } from "./money-decoder";
-import {
-  PortfolioSummary,
-  LiquidityBreakdown,
-  HoldingsList,
-  type PortfolioViewModel,
 import {
   AlertTriangle,
   ArrowRight,
@@ -21,13 +10,24 @@ import {
   Lightbulb,
   RefreshCw,
   RotateCcw,
-  ShieldCheck,
   Sparkles,
   Target,
-  X,
 } from "lucide-react";
+import * as React from "react";
+import { formatInr } from "../lib/format";
+import { defaultPracticeSimulationLabels, type PracticeSimulationLabels } from "../lib/labels";
+import { cn } from "../lib/utils";
+import {
+  Character,
+  type CharacterAccent,
+  type CharacterExpression,
+  type CharacterPose,
+  type CharacterVariant,
+} from "./character";
 import { FinancialRewind } from "./financial-rewind";
-import { type PracticeSimulationLabels, defaultPracticeSimulationLabels } from "../lib/labels";
+import { MoneyDecoder, type MoneyTermData } from "./money-decoder";
+import { PortfolioSummary, type PortfolioViewModel } from "./paper-portfolio";
+import { PlayMoneyBadge } from "./play-money-badge";
 
 export type { PracticeSimulationLabels };
 
@@ -228,17 +228,11 @@ function BriefingPhase({
             label={state.protagonist.label ?? l.protagonistLabel}
           />
           <div className="flex-1">
-            <h2 className="text-lg font-bold text-foreground leading-snug">
-              {episode.title}
-            </h2>
-            {episode.subtitle && (
-              <p className="mt-1 text-sm text-muted-foreground">{episode.subtitle}</p>
-            )}
+            <h2 className="text-lg font-bold text-foreground leading-snug">{episode.title}</h2>
+            {episode.subtitle && <p className="mt-1 text-sm text-muted-foreground">{episode.subtitle}</p>}
             {state.protagonist.dialogue && (
               <div className="mt-3 rounded-xl bg-muted/50 border border-border/50 px-3 py-2.5">
-                <p className="text-sm text-foreground leading-relaxed italic">
-                  "{state.protagonist.dialogue}"
-                </p>
+                <p className="text-sm text-foreground leading-relaxed italic">"{state.protagonist.dialogue}"</p>
               </div>
             )}
           </div>
@@ -251,8 +245,8 @@ function BriefingPhase({
               {l.whatYouWillExplore}
             </span>
             <ul className="mt-2 space-y-1.5">
-              {episode.learningGoals.map((goal, idx) => (
-                <li key={idx} className="flex items-start gap-2 text-sm text-foreground">
+              {episode.learningGoals.map((goal) => (
+                <li key={goal} className="flex items-start gap-2 text-sm text-foreground">
                   <Target className="h-3.5 w-3.5 mt-0.5 text-brand-coral shrink-0" aria-hidden="true" />
                   <span>{goal}</span>
                 </li>
@@ -349,9 +343,7 @@ function ActiveEventPhase({
                   {event.urgencyLabel}
                 </span>
               )}
-              <p className="mt-2 text-sm text-foreground leading-relaxed">
-                {event.description}
-              </p>
+              <p className="mt-2 text-sm text-foreground leading-relaxed">{event.description}</p>
               {event.amountPaise !== undefined && (
                 <div className="mt-2.5 rounded-lg bg-card border border-border/60 px-3 py-2 inline-flex items-baseline gap-2">
                   <span className="text-xs text-muted-foreground">{l.amountNeeded}</span>
@@ -362,9 +354,7 @@ function ActiveEventPhase({
               )}
               {event.supportingCharacter?.dialogue && (
                 <div className="mt-3 rounded-xl bg-card/80 border border-border/40 px-3 py-2">
-                  <p className="text-sm text-foreground italic">
-                    "{event.supportingCharacter.dialogue}"
-                  </p>
+                  <p className="text-sm text-foreground italic">"{event.supportingCharacter.dialogue}"</p>
                 </div>
               )}
             </div>
@@ -415,9 +405,7 @@ function DecisionPhase({
           <div className="flex-1 text-sm">
             <span className="font-bold text-foreground">{event.title}</span>
             {event.amountPaise !== undefined && (
-              <span className="ml-2 font-mono font-semibold text-foreground">
-                {formatInr(event.amountPaise)}
-              </span>
+              <span className="ml-2 font-mono font-semibold text-foreground">{formatInr(event.amountPaise)}</span>
             )}
           </div>
         </div>
@@ -434,14 +422,12 @@ function DecisionPhase({
           label={state.protagonist.label ?? l.protagonistLabel}
         />
         <div className="rounded-xl bg-muted/50 border border-border/50 px-3 py-2.5 flex-1">
-          <p className="text-sm text-foreground">
-            {state.protagonist.dialogue ?? l.defaultProtagonistPrompt}
-          </p>
+          <p className="text-sm text-foreground">{state.protagonist.dialogue ?? l.defaultProtagonistPrompt}</p>
         </div>
       </div>
 
       {/* Decision cards */}
-      <div className="space-y-3" role="group" aria-label={l.whatAreMyOptions}>
+      <fieldset className="space-y-3" aria-label={l.whatAreMyOptions}>
         {decisions.map((decision) => {
           // Inline term decoders for required terms
           const termDecoders = (decision.requiredTermIds ?? [])
@@ -449,45 +435,40 @@ function DecisionPhase({
             .filter(Boolean) as MoneyTermData[];
 
           return (
-            <button
-              key={decision.id}
-              type="button"
-              disabled={decision.disabled}
-              onClick={() => onDecision(decision.id)}
-              data-testid={`sim-decision-${decision.id}`}
-              className={cn(
-                "w-full min-h-[44px] rounded-2xl border-2 p-4 text-left transition-all duration-150 focus:outline-hidden focus:ring-2 focus:ring-ring",
-                decision.disabled
-                  ? "border-border/40 bg-muted/30 opacity-60 cursor-not-allowed"
-                  : "border-border/70 bg-card hover:border-foreground/40 hover:shadow-sm active:scale-[0.99] cursor-pointer"
-              )}
-            >
-              <div className="flex items-start justify-between gap-2">
-                <h4 className="text-sm font-bold text-foreground">{decision.label}</h4>
-                {!decision.disabled && (
-                  <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" aria-hidden="true" />
+            <div key={decision.id}>
+              <button
+                type="button"
+                disabled={decision.disabled}
+                onClick={() => onDecision(decision.id)}
+                data-testid={`sim-decision-${decision.id}`}
+                className={cn(
+                  "w-full min-h-[44px] rounded-2xl border-2 p-4 text-left transition-all duration-150 focus:outline-hidden focus:ring-2 focus:ring-ring",
+                  decision.disabled
+                    ? "border-border/40 bg-muted/30 opacity-60 cursor-not-allowed"
+                    : "border-border/70 bg-card hover:border-foreground/40 hover:shadow-sm active:scale-[0.99] cursor-pointer",
                 )}
-              </div>
-              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                {decision.description}
-              </p>
-              {decision.financialDetail && (
-                <div className="mt-2 rounded-lg bg-muted/50 px-2.5 py-1.5 text-xs font-mono text-foreground">
-                  {decision.financialDetail}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <h4 className="text-sm font-bold text-foreground">{decision.label}</h4>
+                  {!decision.disabled && (
+                    <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" aria-hidden="true" />
+                  )}
                 </div>
-              )}
-              {decision.consequencePreview && (
-                <p className="mt-1.5 text-[11px] text-muted-foreground">
-                  {decision.consequencePreview}
-                </p>
-              )}
-              {decision.disabled && decision.disabledReason && (
-                <p className="mt-1.5 text-[11px] text-muted-foreground italic">
-                  {decision.disabledReason}
-                </p>
-              )}
+                <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{decision.description}</p>
+                {decision.financialDetail && (
+                  <div className="mt-2 rounded-lg bg-muted/50 px-2.5 py-1.5 text-xs font-mono text-foreground">
+                    {decision.financialDetail}
+                  </div>
+                )}
+                {decision.consequencePreview && (
+                  <p className="mt-1.5 text-[11px] text-muted-foreground">{decision.consequencePreview}</p>
+                )}
+                {decision.disabled && decision.disabledReason && (
+                  <p className="mt-1.5 text-[11px] text-muted-foreground italic">{decision.disabledReason}</p>
+                )}
+              </button>
               {termDecoders.length > 0 && (
-                <div className="mt-2 flex flex-wrap gap-1.5" onClick={(e) => e.stopPropagation()}>
+                <div className="mt-2 flex flex-wrap gap-1.5">
                   {termDecoders.map((td) => (
                     <MoneyDecoder
                       key={td.term}
@@ -498,10 +479,10 @@ function DecisionPhase({
                   ))}
                 </div>
               )}
-            </button>
+            </div>
           );
         })}
-      </div>
+      </fieldset>
     </div>
   );
 }
@@ -509,13 +490,7 @@ function DecisionPhase({
 /**
  * Resolving Phase: Loading/thinking state while engine processes.
  */
-function ResolvingPhase({
-  state,
-  labels: l,
-}: {
-  state: SimulationState;
-  labels: PracticeSimulationLabels;
-}) {
+function ResolvingPhase({ state, labels: l }: { state: SimulationState; labels: PracticeSimulationLabels }) {
   return (
     <div data-testid="sim-phase-resolving" className="flex flex-col items-center justify-center gap-4 py-12">
       <Character
@@ -528,9 +503,7 @@ function ResolvingPhase({
       />
       <div className="text-center">
         <p className="text-sm font-bold text-foreground">{l.processingDecision}</p>
-        <p className="mt-1 text-xs text-muted-foreground">
-          {l.calculatingOutcome}
-        </p>
+        <p className="mt-1 text-xs text-muted-foreground">{l.calculatingOutcome}</p>
       </div>
     </div>
   );
@@ -592,7 +565,10 @@ function ConsequencePhase({
           <p className="mt-1.5 text-sm text-foreground leading-relaxed" data-testid="sim-consequence-narrative">
             {outcome.narrativeConsequence}
           </p>
-          <div className="mt-2 rounded-lg bg-muted/40 border border-border/50 px-3 py-2 text-xs font-mono text-foreground" data-testid="sim-consequence-delta">
+          <div
+            className="mt-2 rounded-lg bg-muted/40 border border-border/50 px-3 py-2 text-xs font-mono text-foreground"
+            data-testid="sim-consequence-delta"
+          >
             {outcome.stateDelta}
           </div>
         </div>
@@ -601,9 +577,7 @@ function ConsequencePhase({
         <div className="pt-3 border-t border-border/50">
           <div className="flex items-center gap-2">
             <Lightbulb className="h-4 w-4 text-brand-yellow" aria-hidden="true" />
-            <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-              {l.whyItMatters}
-            </h4>
+            <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{l.whyItMatters}</h4>
           </div>
           <p className="mt-1.5 text-sm text-foreground leading-relaxed" data-testid="sim-consequence-explanation">
             {outcome.learningExplanation}
@@ -614,9 +588,7 @@ function ConsequencePhase({
         <div className="pt-3 border-t border-border/50">
           <div className="flex items-center gap-2">
             <RefreshCw className="h-4 w-4 text-brand-lilac" aria-hidden="true" />
-            <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-              {l.whatTradeoff}
-            </h4>
+            <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{l.whatTradeoff}</h4>
           </div>
           <p className="mt-1.5 text-sm text-foreground leading-relaxed" data-testid="sim-consequence-tradeoff">
             {outcome.tradeoff}
@@ -628,9 +600,7 @@ function ConsequencePhase({
           <div className="pt-3 border-t border-border/50">
             <div className="flex items-center gap-2">
               <HelpCircle className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
-              <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                {l.whatWasUnknown}
-              </h4>
+              <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">{l.whatWasUnknown}</h4>
             </div>
             <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed" data-testid="sim-consequence-unknown">
               {outcome.whatWasUnknown}
@@ -646,9 +616,7 @@ function ConsequencePhase({
                 <RotateCcw className="h-4 w-4 text-brand-lilac" aria-hidden="true" />
                 <span>{l.exploreAlternatives}</span>
               </h4>
-              <p className="text-xs text-muted-foreground mt-0.5">
-                {l.exploreAlternativesSubtitle}
-              </p>
+              <p className="text-xs text-muted-foreground mt-0.5">{l.exploreAlternativesSubtitle}</p>
             </div>
             <button
               type="button"
@@ -686,7 +654,6 @@ function ConsequencePhase({
  * Reflection Phase: Data-driven reflective prompt with selectable options.
  */
 function ReflectionPhase({
-  episode,
   state,
   labels: l,
   onReflection,
@@ -711,13 +678,11 @@ function ReflectionPhase({
           label={l.protagonistLabel}
         />
         <div className="rounded-xl bg-muted/50 border border-border/50 px-3 py-2.5 flex-1">
-          <p className="text-sm font-semibold text-foreground">
-            {reflection.prompt}
-          </p>
+          <p className="text-sm font-semibold text-foreground">{reflection.prompt}</p>
         </div>
       </div>
 
-      <div className="space-y-2.5" role="group" aria-label={l.yourReflection}>
+      <fieldset className="space-y-2.5" aria-label={l.yourReflection}>
         {reflection.options.map((opt) => (
           <button
             key={opt.id}
@@ -729,7 +694,7 @@ function ReflectionPhase({
             {opt.label}
           </button>
         ))}
-      </div>
+      </fieldset>
     </div>
   );
 }
@@ -738,7 +703,6 @@ function ReflectionPhase({
  * Complete Phase: Episode conclusion summary.
  */
 function CompletePhase({
-  episode,
   state,
   labels: l,
   onComplete,
@@ -760,12 +724,8 @@ function CompletePhase({
           label={l.episodeComplete}
         />
         <h3 className="mt-4 text-lg font-bold text-foreground">{l.episodeComplete}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {l.episodeCompleteSubtitle}
-        </p>
-        <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-          {l.episodeCompleteNote}
-        </p>
+        <p className="mt-1 text-sm text-muted-foreground">{l.episodeCompleteSubtitle}</p>
+        <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{l.episodeCompleteNote}</p>
 
         <div className="mt-4 pt-3 border-t border-border/50">
           <PlayMoneyBadge label={l.playMoney} />
@@ -881,18 +841,10 @@ export function PracticeSimulation({
   };
 
   return (
-    <div
-      data-testid="practice-simulation-container"
-      className={cn("w-full space-y-4 text-foreground", className)}
-    >
+    <div data-testid="practice-simulation-container" className={cn("w-full space-y-4 text-foreground", className)}>
       {/* Phase Router */}
       {state.phase === "briefing" && (
-        <BriefingPhase
-          episode={episode}
-          state={state}
-          labels={l}
-          onContinue={handleBriefingContinue}
-        />
+        <BriefingPhase episode={episode} state={state} labels={l} onContinue={handleBriefingContinue} />
       )}
 
       {state.phase === "active" && (
@@ -905,21 +857,13 @@ export function PracticeSimulation({
       )}
 
       {state.phase === "decision" && (
-        <DecisionPhase
-          episode={episode}
-          state={state}
-          labels={l}
-          onDecision={handleDecision}
-          onTermOpen={onTermOpen}
-        />
+        <DecisionPhase episode={episode} state={state} labels={l} onDecision={handleDecision} onTermOpen={onTermOpen} />
       )}
 
-      {state.phase === "resolving" && (
-        <ResolvingPhase state={state} labels={l} />
-      )}
+      {state.phase === "resolving" && <ResolvingPhase state={state} labels={l} />}
 
-      {state.phase === "consequence" && (
-        isRewinding && state.resolvedOutcome?.alternativeOutcomes ? (
+      {state.phase === "consequence" &&
+        (isRewinding && state.resolvedOutcome?.alternativeOutcomes ? (
           <FinancialRewind
             episodeId={episode.episodeId}
             chosenPath={{
@@ -950,25 +894,14 @@ export function PracticeSimulation({
             onOpenRewind={handleOpenRewind}
             onTermOpen={onTermOpen}
           />
-        )
-      )}
+        ))}
 
       {state.phase === "reflection" && (
-        <ReflectionPhase
-          episode={episode}
-          state={state}
-          labels={l}
-          onReflection={handleReflection}
-        />
+        <ReflectionPhase episode={episode} state={state} labels={l} onReflection={handleReflection} />
       )}
 
       {state.phase === "complete" && (
-        <CompletePhase
-          episode={episode}
-          state={state}
-          labels={l}
-          onComplete={handleComplete}
-        />
+        <CompletePhase episode={episode} state={state} labels={l} onComplete={handleComplete} />
       )}
     </div>
   );

@@ -8,6 +8,10 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+
+- R2 visual preview route for reviewing adaptive learning UI components, with import repairs so the preview renders.
+
 ## [0.0.7] - 2026-10-10
 
 ### Changed
