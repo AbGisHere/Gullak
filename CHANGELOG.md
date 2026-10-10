@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.14] - 2026-10-10
+
 ### Added
 - Session-scoped activity/episode run creation and resumable navigation bookmarks with content hashes, revision checks and idempotent writes; no client-supplied completion, money or mastery.
 - Repeatable synthetic local demo seeds and regression coverage for grade-specific cash, transitive prerequisites, shared-device identity switching and cross-profile progress isolation.
