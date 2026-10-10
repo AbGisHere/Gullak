@@ -4,6 +4,7 @@ export * from "./common";
 export * from "./curriculum-brief";
 export * from "./episode";
 export * from "./format-picker";
+export * from "./fund-category";
 export * from "./goal";
 export * from "./instrument";
 export * from "./market";

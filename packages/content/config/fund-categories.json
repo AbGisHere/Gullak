@@ -1,0 +1,432 @@
+{
+  "$comment": "SEBI mutual fund categories (Oct 2017 circular, as updated) plus SIFs, for teaching only: never a recommendation. riskBand is a coarse typical band; every real scheme's riskometer is what counts. Learner-facing text is in fund-categories/<locale>.json.",
+  "categories": [
+    {
+      "id": "overnight",
+      "group": "debt",
+      "instrumentKind": "liquid-fund",
+      "riskBand": "lower",
+      "topicId": "money-market"
+    },
+    {
+      "id": "liquid",
+      "group": "debt",
+      "instrumentKind": "liquid-fund",
+      "riskBand": "lower",
+      "topicId": "money-market"
+    },
+    {
+      "id": "ultra-short-duration",
+      "group": "debt",
+      "instrumentKind": "liquid-fund",
+      "riskBand": "moderate",
+      "topicId": "money-market"
+    },
+    {
+      "id": "low-duration",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "money-market",
+      "group": "debt",
+      "instrumentKind": "liquid-fund",
+      "riskBand": "moderate",
+      "topicId": "money-market"
+    },
+    {
+      "id": "short-duration",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "short-and-mid-term",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "medium-duration",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "medium-to-long-duration",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "long-duration",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "dynamic-bond",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "corporate-bond",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "credit-risk",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "higher",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "banking-and-psu",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "gilt",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "bonds"
+    },
+    {
+      "id": "gilt-10-year-constant-maturity",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "bonds"
+    },
+    {
+      "id": "floater",
+      "group": "debt",
+      "instrumentKind": "debt-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "index-debt",
+      "group": "debt",
+      "instrumentKind": "index-fund",
+      "riskBand": "moderate",
+      "topicId": "debt-funds"
+    },
+    {
+      "id": "arbitrage",
+      "group": "hybrid",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "moderate",
+      "topicId": "risk-and-return"
+    },
+    {
+      "id": "equity-savings",
+      "group": "hybrid",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "moderate",
+      "topicId": "diversification"
+    },
+    {
+      "id": "conservative-hybrid",
+      "group": "hybrid",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "moderate",
+      "topicId": "diversification"
+    },
+    {
+      "id": "balanced-advantage",
+      "group": "hybrid",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "dynamic-asset-allocation",
+      "group": "hybrid",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "aggressive-hybrid",
+      "group": "hybrid",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "balanced-hybrid",
+      "group": "hybrid",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "multi-asset-allocation",
+      "group": "hybrid",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "sif",
+      "group": "specialised",
+      "instrumentKind": null,
+      "riskBand": "higher",
+      "topicId": "risk-and-return"
+    },
+    {
+      "id": "large-cap",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "stocks"
+    },
+    {
+      "id": "large-and-mid-cap",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "stocks"
+    },
+    {
+      "id": "elss",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "mutual-funds-sip"
+    },
+    {
+      "id": "multi-cap",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "flexi-cap",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "focused",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "value",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "stocks"
+    },
+    {
+      "id": "contra",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "stocks"
+    },
+    {
+      "id": "mid-cap",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "stocks"
+    },
+    {
+      "id": "small-cap",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "stocks"
+    },
+    {
+      "id": "dividend-yield",
+      "group": "equity",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "stocks"
+    },
+    {
+      "id": "index-nifty-50",
+      "group": "index-and-etf",
+      "instrumentKind": "index-fund",
+      "riskBand": "higher",
+      "topicId": "index-funds-etfs"
+    },
+    {
+      "id": "index-nifty-next-50",
+      "group": "index-and-etf",
+      "instrumentKind": "index-fund",
+      "riskBand": "higher",
+      "topicId": "index-funds-etfs"
+    },
+    {
+      "id": "index-sensex",
+      "group": "index-and-etf",
+      "instrumentKind": "index-fund",
+      "riskBand": "higher",
+      "topicId": "index-funds-etfs"
+    },
+    {
+      "id": "index-others",
+      "group": "index-and-etf",
+      "instrumentKind": "index-fund",
+      "riskBand": "higher",
+      "topicId": "index-funds-etfs"
+    },
+    {
+      "id": "etf-index",
+      "group": "index-and-etf",
+      "instrumentKind": "etf",
+      "riskBand": "higher",
+      "topicId": "index-funds-etfs"
+    },
+    {
+      "id": "gold-etf",
+      "group": "index-and-etf",
+      "instrumentKind": "etf",
+      "riskBand": "higher",
+      "topicId": "gold"
+    },
+    {
+      "id": "etf-others",
+      "group": "index-and-etf",
+      "instrumentKind": "etf",
+      "riskBand": "higher",
+      "topicId": "index-funds-etfs"
+    },
+    {
+      "id": "sector-banking-financial-services",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "sector-infrastructure",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "sector-auto",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "sector-energy-and-power",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "sector-pharma",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "sector-consumption",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "sector-services",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "sector-technology",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "thematic-global",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "thematic-mnc",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "thematic-others",
+      "group": "sector-and-thematic",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "higher",
+      "topicId": "diversification"
+    },
+    {
+      "id": "fof-domestic",
+      "group": "fund-of-funds",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "varies",
+      "topicId": "diversification"
+    },
+    {
+      "id": "fof-overseas",
+      "group": "fund-of-funds",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "varies",
+      "topicId": "diversification"
+    },
+    {
+      "id": "fof-others",
+      "group": "fund-of-funds",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "varies",
+      "topicId": "diversification"
+    },
+    {
+      "id": "solution-childrens",
+      "group": "solution-oriented",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "varies",
+      "topicId": "future-goals"
+    },
+    {
+      "id": "solution-retirement",
+      "group": "solution-oriented",
+      "instrumentKind": "mutual-fund",
+      "riskBand": "varies",
+      "topicId": "retirement-nps"
+    }
+  ]
+}

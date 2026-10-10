@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "draft",
+  "topicId": "money-basics",
+  "gradeGroup": "grade-8-10",
+  "locale": "en",
+  "learningGoals": [
+    "Name common ways money comes into a student's or family's hands: pocket money, gifts, wages, a stipend or scholarship.",
+    "Name common ways money goes out: daily spending, bills, fees and paying back borrowed money.",
+    "Explain that knowing both sides is the first step to deciding what to keep, spend or save."
+  ],
+  "keyIdeas": [
+    {
+      "conceptId": "money-in",
+      "explanation": "Money in is anything that adds to what you have: pocket money, gifts, wages, a scholarship. Some of it is regular and some is a one-off, and that difference matters for planning."
+    },
+    {
+      "conceptId": "money-out",
+      "explanation": "Money out is anything that takes from what you have: snacks, bus fare, school fees, the electricity bill, paying back a friend. Small, frequent spends add up as much as big ones."
+    }
+  ],
+  "misconceptions": [
+    {
+      "misconception": "Money that comes in has to be spent straight away.",
+      "correction": "Money in can be split: some spent, some kept aside. Deciding that is what budgeting is about."
+    },
+    {
+      "misconception": "Only big purchases count as money going out.",
+      "correction": "₹20 a day on snacks is about ₹600 a month. Small, frequent spends are often the biggest leak."
+    },
+    {
+      "misconception": "Borrowed money is money coming in.",
+      "correction": "Borrowed money arrives now but has to go out again later, often with extra on top."
+    }
+  ],
+  "examples": [
+    "Meena (fictional, Class 9) gets ₹300 pocket money a month and ₹500 from her aunt at Diwali. She lists both as money in, and her bus fare and snacks as money out.",
+    "A family's month: wages come in, then rent, groceries, the electricity bill and school fees go out."
+  ],
+  "quizObjectives": [
+    {
+      "conceptId": "money-in",
+      "objective": "Pick out money coming in from a mixed list, including a one-off gift and a regular wage."
+    },
+    { "conceptId": "money-out", "objective": "Recognise a bill, a purchase and repaying a loan as money going out." }
+  ]
+}

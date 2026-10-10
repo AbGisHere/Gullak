@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "draft",
+  "topicId": "emergency-fund",
+  "gradeGroup": "grade-8-10",
+  "locale": "en",
+  "learningGoals": [
+    "Explain what an emergency fund is for and what it is not for.",
+    "Describe how families usually size one: a few months of essential expenses.",
+    "Explain why it should be easy to take out quickly."
+  ],
+  "keyIdeas": [
+    {
+      "conceptId": "why-emergency-fund",
+      "explanation": "Surprises like an illness, a repair or a lost job cost money. With money already kept aside, a family doesn't have to borrow at high interest, sell something in a hurry or skip needs."
+    },
+    {
+      "conceptId": "how-much",
+      "explanation": "Families often aim for a few months of essential expenses. A student can start small, putting a fixed share of every bit of pocket money aside, and grow it over time."
+    },
+    {
+      "conceptId": "easy-to-reach",
+      "explanation": "Emergencies don't wait, so the fund should be somewhere quick to withdraw, like a savings account, not locked away for years or in something whose price swings."
+    }
+  ],
+  "misconceptions": [
+    {
+      "misconception": "An emergency fund should earn the highest return possible.",
+      "correction": "Its job is to be there when needed. Safety and easy access matter more than return."
+    },
+    {
+      "misconception": "A sale or a festival counts as an emergency.",
+      "correction": "An emergency is unexpected and necessary. Planned spending needs its own savings goal."
+    },
+    {
+      "misconception": "You only need one if you earn a lot.",
+      "correction": "Families with smaller or irregular incomes are hit hardest by surprises, so even a small fund helps."
+    }
+  ],
+  "examples": [
+    "A hospital bill of ₹15,000 arrives (fictional family). With an emergency fund they pay it; without one they borrow at high interest or break a deposit early and lose some interest.",
+    "Meena (fictional) puts ₹30 of her ₹300 pocket money aside every month for surprises, and uses it when her school bag strap breaks."
+  ],
+  "quizObjectives": [
+    {
+      "conceptId": "why-emergency-fund",
+      "objective": "Identify the purpose of an emergency fund among options that include shopping and high returns."
+    },
+    {
+      "conceptId": "how-much",
+      "objective": "Recognise months of essential expenses as the usual way to size the fund."
+    },
+    { "conceptId": "easy-to-reach", "objective": "Choose the most suitable place to keep it based on quick access." }
+  ]
+}

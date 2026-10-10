@@ -1,0 +1,11 @@
+{
+  "id": "upi-and-phishing-scams",
+  "pillar": "stay-safe",
+  "instrument": null,
+  "concepts": [
+    { "id": "pin-only-to-pay", "label": "pin-only-to-pay" },
+    { "id": "fake-links-and-calls", "label": "fake-links-and-calls" },
+    { "id": "pause-and-check", "label": "pause-and-check" }
+  ],
+  "estimatedMinutes": 3
+}

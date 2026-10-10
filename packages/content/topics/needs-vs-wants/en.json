@@ -1,0 +1,56 @@
+{
+  "topicId": "needs-vs-wants",
+  "locale": "en",
+  "title": "Needs and wants",
+  "summary": "Needs are things we must have to live and learn; wants make life nicer but can wait.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["needs", "wants", "depends-on-situation"],
+      "markdown": "**English draft for R5 review.**\n\nA **need** is something you must have to stay safe, healthy and able to learn: food, a roof, school books, the bus fare to school. A **want** makes life nicer, but you can manage without it for now: a new phone cover, a second pair of shoes, snacks after class.\n\nThe same thing can move between the two. A phone can be a need for a parent who gets work calls, and a want when it's the newest model. Pay for needs first, then decide which wants are worth it. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "spot-the-need",
+          "conceptId": "needs",
+          "prompt": "Which of these is a need?",
+          "options": [
+            { "id": "0", "text": "The monthly bus pass to get to school" },
+            { "id": "1", "text": "A new video game" },
+            { "id": "2", "text": "A cricket jersey of your favourite team" }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Getting to school is something you can't skip; the game and the jersey can wait."
+        },
+        {
+          "id": "spot-the-want",
+          "conceptId": "wants",
+          "prompt": "Ravi's family has ₹500 left for the week. Which is a want?",
+          "options": [
+            { "id": "0", "text": "Rice and dal for dinner" },
+            { "id": "1", "text": "Medicine for his sister's fever" },
+            { "id": "2", "text": "Pizza on Saturday" }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Pizza is nice but optional. Food and medicine come first."
+        },
+        {
+          "id": "it-depends",
+          "conceptId": "depends-on-situation",
+          "prompt": "When is a smartphone more likely to be a need?",
+          "options": [
+            { "id": "0", "text": "When a parent needs it to get work calls" },
+            { "id": "1", "text": "When a newer model comes out" },
+            { "id": "2", "text": "When a friend gets one" }
+          ],
+          "correctOptionId": "0",
+          "explanation": "The same item can be a need or a want depending on what it's for."
+        }
+      ]
+    }
+  ]
+}

@@ -8,6 +8,10 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- First curriculum briefs (Grades 8–10, English drafts for R5 review) for the demo topics: money basics, needs vs wants, emergency fund, compounding, and UPI and phishing scams. New English drafts (transcript + quiz) and concept metadata for the four new topics. A content test checks every brief against its topic's concepts, the graph and the supported locales.
+- Mutual fund category catalogue for the investing topics: 61 categories (SEBI's categories, SIFs and a few platform groupings such as "short and mid term"), each with its group, paper-portfolio instrument, a coarse risk band and the topic that teaches it, and English text (what it holds, what to watch out for). Validated against the topic graph and locales.
+
 ## [0.0.12] - 2026-10-10
 
 ### Added

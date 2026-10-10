@@ -1,5 +1,6 @@
-import { Experience, GradeGroup, Locale, UnlockRule } from "@gullak/types";
+import { Experience, FundCategory, GradeGroup, Locale, UnlockRule } from "@gullak/types";
 import { z } from "zod";
+import fundCategoriesJson from "../config/fund-categories.json";
 import localesJson from "../config/locales.json";
 import startingCapitalJson from "../config/starting-capital.json";
 import topicGraphJson from "../config/topic-graph.json";
@@ -68,9 +69,20 @@ export const LocalesConfig = z
     message: "defaultLocale must be one of locales",
   });
 
+export const FundCategoriesConfig = z
+  .object({ categories: z.array(FundCategory).min(1) })
+  .superRefine(({ categories }, ctx) => {
+    if (new Set(categories.map((c) => c.id)).size !== categories.length) {
+      ctx.addIssue({ code: "custom", message: "duplicate fund category id" });
+    }
+  });
+
 export const startingCapital = StartingCapitalConfig.parse(startingCapitalJson);
 export const topicGraph = TopicGraphConfig.parse(topicGraphJson);
 export const locales = LocalesConfig.parse(localesJson);
 
 /** Every topic's unlock rule, in curriculum order (pillar by pillar). */
 export const allUnlockRules: readonly UnlockRule[] = topicGraph.topics;
+
+/** SEBI fund categories for the investing topics; text per locale in fund-categories/<locale>.json. */
+export const fundCategories: readonly FundCategory[] = FundCategoriesConfig.parse(fundCategoriesJson).categories;

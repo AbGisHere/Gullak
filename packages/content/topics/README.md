@@ -10,6 +10,10 @@ topics/<topic-id>/
 
 Both are validated against the Zod schemas in `@gullak/types` by this package's tests.
 
+Curriculum briefs, the reviewed input to lesson pre-generation, sit beside the topics as `briefs/<topic-id>/<grade-group>.<locale>.json` (`CurriculumBrief`). Tests check each against the topic's concepts, the graph and the supported locales.
+
+Mutual fund categories (SEBI's categories plus SIFs) are reference data for the investing topics: `config/fund-categories.json` holds each category's group, paper-portfolio instrument, coarse risk band and teaching topic; `fund-categories/<locale>.json` holds its name, a plain summary and what to watch out for. Educational only, never a recommendation.
+
 Learn-by-doing data lives beside it, one file per locale:
 
 ```

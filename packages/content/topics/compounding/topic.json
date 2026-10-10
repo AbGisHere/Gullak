@@ -1,0 +1,11 @@
+{
+  "id": "compounding",
+  "pillar": "understand-investing",
+  "instrument": null,
+  "concepts": [
+    { "id": "growth-on-growth", "label": "growth-on-growth" },
+    { "id": "start-early", "label": "start-early" },
+    { "id": "rate-and-time", "label": "rate-and-time" }
+  ],
+  "estimatedMinutes": 3
+}

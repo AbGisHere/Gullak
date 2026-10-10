@@ -1,0 +1,11 @@
+{
+  "id": "emergency-fund",
+  "pillar": "save-and-manage",
+  "instrument": null,
+  "concepts": [
+    { "id": "why-emergency-fund", "label": "why-emergency-fund" },
+    { "id": "how-much", "label": "how-much" },
+    { "id": "easy-to-reach", "label": "easy-to-reach" }
+  ],
+  "estimatedMinutes": 3
+}

@@ -1,0 +1,310 @@
+{
+  "locale": "en",
+  "categories": {
+    "overnight": {
+      "name": "Overnight fund",
+      "summary": "Lends money for just one day at a time, rolling it over every day.",
+      "watchOut": "Grows very slowly; often just below what money-market rates pay."
+    },
+    "liquid": {
+      "name": "Liquid fund",
+      "summary": "Holds very short-term debt that matures within 91 days.",
+      "watchOut": "Not a savings account: the value can dip slightly if a borrower defaults."
+    },
+    "ultra-short-duration": {
+      "name": "Ultra short duration fund",
+      "summary": "Holds debt whose average duration is 3 to 6 months.",
+      "watchOut": "A little more sensitive to interest-rate changes than a liquid fund."
+    },
+    "low-duration": {
+      "name": "Low duration fund",
+      "summary": "Holds debt whose average duration is 6 to 12 months.",
+      "watchOut": "Value moves a little when interest rates change."
+    },
+    "money-market": {
+      "name": "Money market fund",
+      "summary": "Holds money-market instruments that mature within one year, such as treasury bills and certificates of deposit.",
+      "watchOut": "Returns follow short-term interest rates, which change over time."
+    },
+    "short-duration": {
+      "name": "Short duration fund",
+      "summary": "Holds bonds whose average duration is 1 to 3 years.",
+      "watchOut": "When interest rates rise, the value of its bonds falls for a while."
+    },
+    "short-and-mid-term": {
+      "name": "Short and mid term fund",
+      "summary": "A platform label rather than a SEBI category: debt funds holding bonds of roughly short to medium duration.",
+      "watchOut": "Check which SEBI category the fund actually belongs to."
+    },
+    "medium-duration": {
+      "name": "Medium duration fund",
+      "summary": "Holds bonds whose average duration is 3 to 4 years.",
+      "watchOut": "More sensitive to interest-rate changes than short duration funds."
+    },
+    "medium-to-long-duration": {
+      "name": "Medium to long duration fund",
+      "summary": "Holds bonds whose average duration is 4 to 7 years.",
+      "watchOut": "Its value can swing noticeably when interest rates change."
+    },
+    "long-duration": {
+      "name": "Long duration fund",
+      "summary": "Holds bonds whose average duration is more than 7 years.",
+      "watchOut": "The most sensitive debt fund to interest-rate changes; it can fall for long stretches."
+    },
+    "dynamic-bond": {
+      "name": "Dynamic bond fund",
+      "summary": "Moves between short and long bonds depending on where the manager thinks interest rates are heading.",
+      "watchOut": "Depends on the manager's calls about interest rates, which can be wrong."
+    },
+    "corporate-bond": {
+      "name": "Corporate bond fund",
+      "summary": "Puts at least 80% in company bonds with the highest credit ratings (AA+ and above).",
+      "watchOut": "Even highly rated companies can be downgraded."
+    },
+    "credit-risk": {
+      "name": "Credit risk fund",
+      "summary": "Puts at least 65% in company bonds rated below the highest grades, which pay more interest.",
+      "watchOut": "Higher interest comes with a higher chance a borrower doesn't pay back."
+    },
+    "banking-and-psu": {
+      "name": "Banking and PSU debt fund",
+      "summary": "Puts at least 80% in bonds of banks, public sector companies and public financial institutions.",
+      "watchOut": "Still carries interest-rate risk and some credit risk."
+    },
+    "gilt": {
+      "name": "Gilt fund",
+      "summary": "Puts at least 80% in government securities, so the government is the borrower.",
+      "watchOut": "Very low default risk, but prices still swing when interest rates change."
+    },
+    "gilt-10-year-constant-maturity": {
+      "name": "Gilt fund with 10-year constant maturity",
+      "summary": "Puts at least 80% in government securities, keeping the portfolio's duration at about 10 years.",
+      "watchOut": "Long duration, so strongly affected by interest-rate changes."
+    },
+    "floater": {
+      "name": "Floater fund",
+      "summary": "Puts at least 65% in bonds whose interest rate resets as market rates change.",
+      "watchOut": "Returns fall when interest rates fall."
+    },
+    "index-debt": {
+      "name": "Debt index fund",
+      "summary": "Copies a bond index instead of picking bonds; some hold bonds until a fixed maturity date.",
+      "watchOut": "Prices still move with interest rates before maturity."
+    },
+    "arbitrage": {
+      "name": "Arbitrage fund",
+      "summary": "Buys a share in the cash market and sells it in the futures market at the same time, earning the small price gap. At least 65% is in shares, but hedged.",
+      "watchOut": "Returns depend on how big those price gaps are, which changes with market conditions."
+    },
+    "equity-savings": {
+      "name": "Equity savings fund",
+      "summary": "Mixes shares (partly hedged with arbitrage) and at least 10% debt.",
+      "watchOut": "The unhedged share portion can still fall."
+    },
+    "conservative-hybrid": {
+      "name": "Conservative hybrid fund",
+      "summary": "Holds mostly debt (75–90%) with a small share portion (10–25%).",
+      "watchOut": "The share portion can still pull the value down in a market fall."
+    },
+    "balanced-advantage": {
+      "name": "Balanced advantage fund",
+      "summary": "Shifts between shares and debt, anywhere from 0 to 100%, based on the fund's own rules or market levels.",
+      "watchOut": "How it behaves depends on the fund's model; two such funds can be very different."
+    },
+    "dynamic-asset-allocation": {
+      "name": "Dynamic asset allocation fund",
+      "summary": "The same SEBI category as balanced advantage: it moves between shares and debt anywhere from 0 to 100%.",
+      "watchOut": "Read what rules the fund follows; the name alone doesn't say."
+    },
+    "aggressive-hybrid": {
+      "name": "Aggressive hybrid fund",
+      "summary": "Holds 65–80% in shares and 20–35% in debt.",
+      "watchOut": "Mostly shares, so it can fall sharply in a crash."
+    },
+    "balanced-hybrid": {
+      "name": "Balanced hybrid fund",
+      "summary": "Holds 40–60% in shares and 40–60% in debt, without arbitrage.",
+      "watchOut": "Half in shares means real ups and downs."
+    },
+    "multi-asset-allocation": {
+      "name": "Multi asset allocation fund",
+      "summary": "Holds at least three asset classes, such as shares, debt and gold, with at least 10% in each.",
+      "watchOut": "Spreading out lowers risk but doesn't remove it."
+    },
+    "sif": {
+      "name": "Specialised investment fund (SIF)",
+      "summary": "A newer SEBI product between mutual funds and portfolio management, for investors putting in at least ₹10 lakh. It can use strategies normal funds can't, such as limited short selling.",
+      "watchOut": "Not a regular mutual fund: higher minimums and more complex strategies."
+    },
+    "large-cap": {
+      "name": "Large cap fund",
+      "summary": "Puts at least 80% in the 100 largest listed companies by market value.",
+      "watchOut": "Big companies still fall in a crash."
+    },
+    "large-and-mid-cap": {
+      "name": "Large and mid cap fund",
+      "summary": "Puts at least 35% in large companies (top 100) and at least 35% in mid-sized ones (101st to 250th).",
+      "watchOut": "Mid-sized companies swing more than large ones."
+    },
+    "elss": {
+      "name": "ELSS (tax saver) fund",
+      "summary": "Puts at least 80% in shares and locks money in for 3 years. Under the old tax regime, money put in can reduce taxable income.",
+      "watchOut": "You can't take the money out for 3 years, even in an emergency."
+    },
+    "multi-cap": {
+      "name": "Multi cap fund",
+      "summary": "Puts at least 25% each in large, mid-sized and small companies.",
+      "watchOut": "The fixed small-company share adds swings."
+    },
+    "flexi-cap": {
+      "name": "Flexi cap fund",
+      "summary": "Puts at least 65% in shares of any size, in any mix the manager chooses.",
+      "watchOut": "The mix depends on the manager's choices."
+    },
+    "focused": {
+      "name": "Focused fund",
+      "summary": "Holds at most 30 companies' shares.",
+      "watchOut": "Fewer holdings means one bad pick hurts more."
+    },
+    "value": {
+      "name": "Value fund",
+      "summary": "Picks shares that look cheap compared with what the company earns or owns.",
+      "watchOut": "Cheap shares can stay cheap for years."
+    },
+    "contra": {
+      "name": "Contra fund",
+      "summary": "Buys shares that are currently out of favour, betting against the crowd.",
+      "watchOut": "Going against the crowd can mean waiting a long time, or being wrong."
+    },
+    "mid-cap": {
+      "name": "Mid cap fund",
+      "summary": "Puts at least 65% in mid-sized companies (101st to 250th by market value).",
+      "watchOut": "Swings more than large cap funds in both directions."
+    },
+    "small-cap": {
+      "name": "Small cap fund",
+      "summary": "Puts at least 65% in small companies (251st onwards by market value).",
+      "watchOut": "Can fall very sharply and take years to recover."
+    },
+    "dividend-yield": {
+      "name": "Dividend yield fund",
+      "summary": "Puts at least 65% in shares of companies that pay out a good part of their profits as dividends.",
+      "watchOut": "Dividends can be cut, and share prices still fall."
+    },
+    "index-nifty-50": {
+      "name": "Nifty 50 index fund",
+      "summary": "Copies the Nifty 50: the 50 large companies in the NSE's main index, in the same proportions.",
+      "watchOut": "Falls with the whole market; there's no manager trying to avoid it."
+    },
+    "index-nifty-next-50": {
+      "name": "Nifty Next 50 index fund",
+      "summary": "Copies the Nifty Next 50: the 50 companies ranked just after the Nifty 50.",
+      "watchOut": "Swings more than the Nifty 50."
+    },
+    "index-sensex": {
+      "name": "Sensex index fund",
+      "summary": "Copies the Sensex: 30 large companies listed on the BSE.",
+      "watchOut": "Only 30 companies, so a few big ones move it a lot."
+    },
+    "index-others": {
+      "name": "Other index funds",
+      "summary": "Copy other indices, such as mid cap, small cap, sector or strategy indices.",
+      "watchOut": "Risk depends on the index it copies."
+    },
+    "etf-index": {
+      "name": "Index ETF",
+      "summary": "Copies an index like an index fund, but is bought and sold on the stock exchange during the day, like a share.",
+      "watchOut": "Needs a demat account, and the trading price can differ slightly from the fund's value."
+    },
+    "gold-etf": {
+      "name": "Gold ETF",
+      "summary": "Tracks the price of gold in India and is backed by physical gold, traded on the stock exchange.",
+      "watchOut": "Gold prices can fall and stay flat for years."
+    },
+    "etf-others": {
+      "name": "Other ETFs",
+      "summary": "Exchange-traded funds that track silver, bonds, sectors or other indices.",
+      "watchOut": "Risk depends on what it tracks."
+    },
+    "sector-banking-financial-services": {
+      "name": "Banking and financial services fund",
+      "summary": "Puts at least 80% in banks, lenders, insurers and other financial companies.",
+      "watchOut": "One sector means one bad patch for that sector hits the whole fund."
+    },
+    "sector-infrastructure": {
+      "name": "Infrastructure fund",
+      "summary": "Puts at least 80% in companies building roads, power, ports, construction and similar.",
+      "watchOut": "Depends heavily on government spending and interest rates."
+    },
+    "sector-auto": {
+      "name": "Auto fund",
+      "summary": "Puts at least 80% in vehicle makers and their parts suppliers.",
+      "watchOut": "Tied to how many vehicles people buy."
+    },
+    "sector-energy-and-power": {
+      "name": "Energy and power fund",
+      "summary": "Puts at least 80% in oil, gas, power and other energy companies.",
+      "watchOut": "Moves with fuel prices and government rules."
+    },
+    "sector-pharma": {
+      "name": "Pharma and healthcare fund",
+      "summary": "Puts at least 80% in medicine makers, hospitals and healthcare companies.",
+      "watchOut": "Tied to one industry's regulations and exports."
+    },
+    "sector-consumption": {
+      "name": "Consumption fund",
+      "summary": "Puts at least 80% in companies selling everyday goods and services to households.",
+      "watchOut": "Depends on how much people spend."
+    },
+    "sector-services": {
+      "name": "Services fund",
+      "summary": "Puts at least 80% in service companies, such as finance, telecom and logistics.",
+      "watchOut": "Concentrated in one part of the economy."
+    },
+    "sector-technology": {
+      "name": "Technology fund",
+      "summary": "Puts at least 80% in software, IT services and tech companies.",
+      "watchOut": "Can rise and fall sharply with global tech spending."
+    },
+    "thematic-global": {
+      "name": "Global fund",
+      "summary": "Invests in companies listed outside India.",
+      "watchOut": "Adds currency risk: the rupee's value changes returns."
+    },
+    "thematic-mnc": {
+      "name": "MNC fund",
+      "summary": "Invests in Indian-listed companies whose parent is a multinational.",
+      "watchOut": "Concentrated in one style of company."
+    },
+    "thematic-others": {
+      "name": "Other thematic funds",
+      "summary": "Follow a theme across sectors, such as manufacturing, ESG or defence.",
+      "watchOut": "Themes go in and out of fashion."
+    },
+    "fof-domestic": {
+      "name": "Fund of funds (domestic)",
+      "summary": "Invests in other Indian mutual funds instead of buying shares or bonds directly.",
+      "watchOut": "Two layers of costs, and risk depends on the funds it holds."
+    },
+    "fof-overseas": {
+      "name": "Fund of funds (overseas)",
+      "summary": "Invests in mutual funds or ETFs abroad.",
+      "watchOut": "Currency risk, plus limits on how much Indian funds may invest overseas."
+    },
+    "fof-others": {
+      "name": "Other funds of funds",
+      "summary": "Funds of funds that don't fit the domestic or overseas groups.",
+      "watchOut": "Check what the underlying funds hold."
+    },
+    "solution-childrens": {
+      "name": "Children's fund",
+      "summary": "Built around a child's future, with a lock-in of at least 5 years or until the child turns 18, whichever comes first.",
+      "watchOut": "The lock-in means the money isn't available for emergencies."
+    },
+    "solution-retirement": {
+      "name": "Retirement fund",
+      "summary": "Built for retirement, with a lock-in of at least 5 years or until retirement age, whichever comes first.",
+      "watchOut": "The lock-in means the money isn't available for emergencies."
+    }
+  }
+}

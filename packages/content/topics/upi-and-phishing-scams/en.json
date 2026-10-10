@@ -1,0 +1,56 @@
+{
+  "topicId": "upi-and-phishing-scams",
+  "locale": "en",
+  "title": "Spot the fake request",
+  "summary": "You never need your UPI PIN or an OTP to receive money; scammers rely on hurry and fake links.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["pin-only-to-pay", "fake-links-and-calls", "pause-and-check"],
+      "markdown": "**English draft for R5 review.**\n\nOn UPI you enter your PIN only when money is **leaving** your account. If someone says \"enter your PIN to receive ₹2,000\", it is a scam. Never share an OTP or PIN with anyone, even someone who says they are from the bank.\n\nScammers send fake links, collect requests and calls that sound urgent: \"your account will be blocked today\". Stop, don't click, and check with a trusted adult or the bank's official number. If money is lost, call the cybercrime helpline 1930 quickly. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "pin-to-receive",
+          "conceptId": "pin-only-to-pay",
+          "prompt": "A buyer says: \"Enter your UPI PIN to receive ₹2,000 for your old cycle.\" What is true?",
+          "options": [
+            { "id": "0", "text": "You never need a PIN to receive money, so this is a scam" },
+            { "id": "1", "text": "It's normal; receiving money needs a PIN" },
+            { "id": "2", "text": "It's fine if the amount is small" }
+          ],
+          "correctOptionId": "0",
+          "explanation": "A UPI PIN only approves money going out of your account."
+        },
+        {
+          "id": "urgent-message",
+          "conceptId": "fake-links-and-calls",
+          "prompt": "A message says your bank account will be blocked today unless you click a link. What is the red flag?",
+          "options": [
+            { "id": "0", "text": "The pressure to act fast through a link" },
+            { "id": "1", "text": "It mentions your bank" },
+            { "id": "2", "text": "It arrived in the morning" }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Hurry plus a link is the most common phishing pattern."
+        },
+        {
+          "id": "caller-wants-otp",
+          "conceptId": "pause-and-check",
+          "prompt": "A caller \"from the bank\" asks Nani for the OTP she just got. What should she do?",
+          "options": [
+            { "id": "0", "text": "Hang up and call the bank's official number herself" },
+            { "id": "1", "text": "Share it quickly so the account isn't blocked" },
+            { "id": "2", "text": "Share only half the OTP" }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Banks never ask for an OTP. Pause and check through an official channel."
+        }
+      ]
+    }
+  ]
+}

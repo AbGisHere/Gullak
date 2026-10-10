@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "draft",
+  "topicId": "compounding",
+  "gradeGroup": "grade-8-10",
+  "locale": "en",
+  "learningGoals": [
+    "Calculate two years of compound growth on a simple amount and see the growth on growth.",
+    "Explain why starting early can matter more than starting with a bigger amount.",
+    "Name rate and time as the two drivers, and treat any rate shown as an assumption."
+  ],
+  "keyIdeas": [
+    {
+      "conceptId": "growth-on-growth",
+      "explanation": "With compounding, each year's growth is added to the amount, so next year's growth is calculated on a bigger number. ₹1,000 at an assumed 10% becomes ₹1,100, then ₹1,210."
+    },
+    {
+      "conceptId": "start-early",
+      "explanation": "Money left for longer compounds more times. Two savers with the same amount and rate end far apart if one starts years earlier."
+    },
+    {
+      "conceptId": "rate-and-time",
+      "explanation": "A higher rate or a longer time both add growth. Higher possible rates usually come with more risk, and no future rate is guaranteed."
+    }
+  ],
+  "misconceptions": [
+    {
+      "misconception": "10% a year for two years means exactly 20% growth.",
+      "correction": "With compounding it's more than 20% (21% in this example), because the second year's 10% is on the bigger amount."
+    },
+    {
+      "misconception": "Compounding guarantees money will grow.",
+      "correction": "Compounding is maths on an assumed rate. Real returns can be lower or even negative, so projections are assumptions, not promises."
+    },
+    {
+      "misconception": "Starting late is fine if you save a bit more.",
+      "correction": "Saving more helps, but lost years can't be bought back. Time is the hardest thing to make up."
+    }
+  ],
+  "examples": [
+    "₹1,000 at an assumed 10% a year: ₹1,100 after one year, ₹1,210 after two, about ₹2,594 after ten.",
+    "Asha and Bilal (fictional) save the same amount every month at the same assumed rate; Asha starts five years earlier and ends with noticeably more."
+  ],
+  "quizObjectives": [
+    {
+      "conceptId": "growth-on-growth",
+      "objective": "Compute the value after two years of compound growth on a round amount."
+    },
+    {
+      "conceptId": "start-early",
+      "objective": "Compare two savers who differ only in start date and pick who ends higher."
+    },
+    {
+      "conceptId": "rate-and-time",
+      "objective": "Identify rate and time as the drivers, rejecting irrelevant factors."
+    }
+  ]
+}

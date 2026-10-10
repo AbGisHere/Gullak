@@ -23,7 +23,7 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [ ] Snapshot pipeline, P1 sources: MF NAVs for every fund category, NIFTY 50 + TRI (incl. 2008, 2016, 2020), CPI by group, gold, bank savings/FD/RD rates, small-savings rates, household spending ([data/snapshots](data/snapshots/README.md)) (R3)
 - [x] Curriculum plan: four pillars, 33 topics tagged by grade group, learn-by-doing engines ([docs/curriculum.md](docs/curriculum.md)) (R1, R5)
 - [x] Curriculum schemas: grade groups (6–7 / 8–10 / 11–12) replace age bands, `pillar` on topics, prerequisite graph, `Activity` and `Episode` schemas for the three engines, one example per engine (R1, R4)
-- [ ] Curriculum entry per topic (goals, key ideas, misconceptions, scenario, quiz goals) for all four pillars (R5)
+- [ ] Curriculum entry per topic (goals, key ideas, misconceptions, scenario, quiz goals) for all four pillars (R5); Grade 8–10 English briefs done for the five demo topics
 - [x] Vercel project + preview deploys (R1): production at [gullak.abgupta.me](https://gullak.abgupta.me)
 - [ ] Ask organisers for sponsored AA/FIU sandbox access; otherwise enquire with Setu, Finvu or Sahamati. Confirm student eligibility, provisioning time, test credentials/users/OTPs, API/Postman docs and webhook requirements (R1 lead, R3)
 

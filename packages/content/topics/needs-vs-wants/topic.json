@@ -1,0 +1,11 @@
+{
+  "id": "needs-vs-wants",
+  "pillar": "plan-and-budget",
+  "instrument": null,
+  "concepts": [
+    { "id": "needs", "label": "needs" },
+    { "id": "wants", "label": "wants" },
+    { "id": "depends-on-situation", "label": "depends-on-situation" }
+  ],
+  "estimatedMinutes": 3
+}

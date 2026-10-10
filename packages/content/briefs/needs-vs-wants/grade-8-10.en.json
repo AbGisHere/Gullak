@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "draft",
+  "topicId": "needs-vs-wants",
+  "gradeGroup": "grade-8-10",
+  "locale": "en",
+  "learningGoals": [
+    "Sort common spending into needs and wants and give a reason for each.",
+    "Explain why the same item can be a need for one person and a want for another.",
+    "Use \"needs first, then chosen wants\" when money is limited."
+  ],
+  "keyIdeas": [
+    {
+      "conceptId": "needs",
+      "explanation": "Needs keep you safe, healthy and able to learn or work: food, shelter, basic clothes, medicine, school fees and getting to school."
+    },
+    {
+      "conceptId": "wants",
+      "explanation": "Wants make life nicer but can wait or be skipped: eating out, the newest phone, branded shoes. Wants aren't bad; they're chosen after needs are covered."
+    },
+    {
+      "conceptId": "depends-on-situation",
+      "explanation": "Whether something is a need depends on its purpose and the situation: a basic phone for work calls versus the newest model, school shoes versus a third pair."
+    }
+  ],
+  "misconceptions": [
+    {
+      "misconception": "Wants are wasteful and you should never spend on them.",
+      "correction": "Wants are a normal part of life. The skill is covering needs first, then choosing wants on purpose."
+    },
+    {
+      "misconception": "If everyone around me has it, it's a need.",
+      "correction": "Friends having something makes it feel urgent, but it's still a want unless it's needed to stay safe, healthy or learning."
+    },
+    {
+      "misconception": "Anything expensive is a need and anything cheap is a want.",
+      "correction": "Price doesn't decide it; purpose does. Medicine can be cheap and a need; a concert ticket can be costly and a want."
+    }
+  ],
+  "examples": [
+    "Ravi's family (fictional) has ₹500 left for the week: rice and dal, his sister's fever medicine and a Saturday pizza. They cover food and medicine first.",
+    "A phone: a need for a parent who gets work calls, a want when a newer model comes out."
+  ],
+  "quizObjectives": [
+    { "conceptId": "needs", "objective": "Choose the need from a list that mixes school, health and fun spending." },
+    { "conceptId": "wants", "objective": "Identify which item a family on a tight week should drop first." },
+    {
+      "conceptId": "depends-on-situation",
+      "objective": "Explain, through a scenario, when the same item moves from want to need."
+    }
+  ]
+}

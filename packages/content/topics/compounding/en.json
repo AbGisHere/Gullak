@@ -1,0 +1,56 @@
+{
+  "topicId": "compounding",
+  "locale": "en",
+  "title": "Money that grows on its growth",
+  "summary": "With compounding, the growth itself starts to grow, so time matters as much as the amount.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["growth-on-growth", "start-early", "rate-and-time"],
+      "markdown": "**English draft for R5 review.**\n\nSay ₹1,000 grows by 10% a year (an assumption for this example, not a promise). After one year it is ₹1,100. In the second year the 10% is on ₹1,100, so it becomes ₹1,210. The growth is now growing too. That is **compounding**.\n\nThe longer money compounds, the faster it grows, so starting early can matter more than starting big. The rate matters too, but higher rates usually come with more risk. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "second-year",
+          "conceptId": "growth-on-growth",
+          "prompt": "₹1,000 grows 10% a year, compounded. How much after two years?",
+          "options": [
+            { "id": "0", "text": "₹1,200" },
+            { "id": "1", "text": "₹1,210" },
+            { "id": "2", "text": "₹1,100" }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Year 1: ₹1,100. Year 2: 10% of ₹1,100 is ₹110, so ₹1,210."
+        },
+        {
+          "id": "who-ends-higher",
+          "conceptId": "start-early",
+          "prompt": "Asha and Bilal save the same amount at the same rate. Asha starts five years earlier. Who likely ends up with more?",
+          "options": [
+            { "id": "0", "text": "Asha" },
+            { "id": "1", "text": "Bilal" },
+            { "id": "2", "text": "They end up equal" }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Asha's money has more years to grow on its growth."
+        },
+        {
+          "id": "what-matters",
+          "conceptId": "rate-and-time",
+          "prompt": "Which two things most change how much compounding adds?",
+          "options": [
+            { "id": "0", "text": "The rate and how long the money stays" },
+            { "id": "1", "text": "The colour of the passbook and the bank's name" },
+            { "id": "2", "text": "The day of the week you start" }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Rate and time drive compounding; any rate shown is an assumption, not a promise."
+        }
+      ]
+    }
+  ]
+}

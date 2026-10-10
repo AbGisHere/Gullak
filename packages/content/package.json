@@ -10,7 +10,9 @@
     "./server": "./src/topic-loader.ts",
     "./config/*": "./config/*",
     "./activities/*": "./activities/*",
-    "./episodes/*": "./episodes/*"
+    "./episodes/*": "./episodes/*",
+    "./briefs/*": "./briefs/*",
+    "./fund-categories/*": "./fund-categories/*"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

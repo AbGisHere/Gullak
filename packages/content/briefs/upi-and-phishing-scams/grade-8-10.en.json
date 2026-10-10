@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "draft",
+  "topicId": "upi-and-phishing-scams",
+  "gradeGroup": "grade-8-10",
+  "locale": "en",
+  "learningGoals": [
+    "State that a UPI PIN is only ever needed to send money, never to receive it.",
+    "Spot the red flags in fake links, collect requests and calls: urgency, prizes and requests for OTP or PIN.",
+    "Know the safe response: stop, don't share, check through an official channel, and report quickly (helpline 1930)."
+  ],
+  "keyIdeas": [
+    {
+      "conceptId": "pin-only-to-pay",
+      "explanation": "Entering a UPI PIN approves money leaving your account. Anyone asking you to enter a PIN or scan a QR code to receive money is trying to take it."
+    },
+    {
+      "conceptId": "fake-links-and-calls",
+      "explanation": "Scammers pose as banks, delivery companies or buyers. They send links to fake pages, collect requests that look like payments, and calls that create panic, such as \"your account will be blocked today\"."
+    },
+    {
+      "conceptId": "pause-and-check",
+      "explanation": "Banks never ask for an OTP or PIN. Hang up, don't click, and check using the official number or app, or ask a trusted adult. If money is lost, call 1930 or report at cybercrime.gov.in as soon as possible."
+    }
+  ],
+  "misconceptions": [
+    {
+      "misconception": "You need a PIN to receive money on UPI.",
+      "correction": "Receiving money never needs a PIN. A PIN only approves money going out."
+    },
+    {
+      "misconception": "If the caller knows my name and bank, they must be genuine.",
+      "correction": "Scammers often have some personal details. Knowing them proves nothing; asking for an OTP proves it's a scam."
+    },
+    {
+      "misconception": "Only careless or old people get scammed.",
+      "correction": "Scams are designed to rush anyone. The habit of pausing and checking protects everyone."
+    }
+  ],
+  "examples": [
+    "Selling an old cycle online, a \"buyer\" sends a request and says \"enter your PIN to receive ₹2,000\". Entering it would send money instead.",
+    "Nani (story character) gets a call \"from the bank\" asking for the OTP she just received. The safe move is to hang up and call the bank's official number."
+  ],
+  "quizObjectives": [
+    { "conceptId": "pin-only-to-pay", "objective": "Identify a \"PIN to receive money\" request as a scam." },
+    {
+      "conceptId": "fake-links-and-calls",
+      "objective": "Pick out urgency through a link as the red flag in a message."
+    },
+    { "conceptId": "pause-and-check", "objective": "Choose the safe action when a caller asks for an OTP." }
+  ]
+}

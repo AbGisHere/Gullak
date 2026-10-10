@@ -1,0 +1,56 @@
+{
+  "topicId": "emergency-fund",
+  "locale": "en",
+  "title": "Money for surprises",
+  "summary": "An emergency fund is money kept aside only for surprises, so a bad day doesn't become a debt.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["why-emergency-fund", "how-much", "easy-to-reach"],
+      "markdown": "**English draft for R5 review.**\n\nSurprises cost money: a fever, a broken phone screen, a sudden trip to see family. An **emergency fund** is money you keep aside only for these, so you don't have to borrow, sell something in a hurry or skip a need.\n\nA family often aims for a few months of essential expenses. For you, it might start as a small amount from every bit of pocket money. Keep it somewhere you can reach quickly, like a savings account, not money locked away for years. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "why-keep-it",
+          "conceptId": "why-emergency-fund",
+          "prompt": "Why keep an emergency fund?",
+          "options": [
+            { "id": "0", "text": "So a surprise cost doesn't force you to borrow or sell in a hurry" },
+            { "id": "1", "text": "To buy things on sale" },
+            { "id": "2", "text": "To earn the highest return" }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Its job is protection, not growth or shopping."
+        },
+        {
+          "id": "how-big",
+          "conceptId": "how-much",
+          "prompt": "A family usually sizes its emergency fund by…",
+          "options": [
+            { "id": "0", "text": "A few months of essential expenses" },
+            { "id": "1", "text": "Whatever is left after buying wants" },
+            { "id": "2", "text": "One day's spending" }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Counting months of needs shows how long the family could manage if income stopped."
+        },
+        {
+          "id": "where-to-keep",
+          "conceptId": "easy-to-reach",
+          "prompt": "Where is an emergency fund most useful?",
+          "options": [
+            { "id": "0", "text": "Somewhere you can take it out quickly" },
+            { "id": "1", "text": "Locked away for ten years" },
+            { "id": "2", "text": "Lent to a friend" }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Emergencies don't wait, so the money has to be easy to reach."
+        }
+      ]
+    }
+  ]
+}
