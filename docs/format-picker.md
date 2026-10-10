@@ -92,10 +92,6 @@ transcript. Multi-format examples in unit tests are fixtures, not shipped lesson
 - **R4:** next steps are lesson pre-generation and, later, evidence-driven format
   choice. Do not label a learner with a permanent learning style.
 
-`CLAUDE.md` imports `AGENTS.md`; the picker convention is documented there rather
-than duplicated in Claude-specific instructions. The roadmap checkbox remains
-open until this feature lands on team main.
-
 ## Local testing (PowerShell, repository root)
 
 Use Node 24 or newer and the repo's pnpm setup. Install exactly the lockfile:
@@ -129,17 +125,3 @@ Those browser tests cover the existing UI, not a picker screen. To inspect the
 authenticated lesson response manually, follow `docs/backend-setup.md` and use its
 Postman collection with a verified learner session. Engine tests are the simplest
 way to test this feature alone, without backend setup.
-
-## Verification on 2026-10-11
-
-- The focused picker tests and backend integration tests passed, including real
-  English draft topics and onboarding's actual Mix it up default.
-- All 178 repository unit tests passed. Lint passed with existing onboarding-cookie
-  and Biome-configuration warnings. Shared-package typechecks passed; direct web
-  `tsc --noEmit` passed using the available route types.
-- Full web type generation and the production build are blocked on this Windows
-  machine by `ERR_SWC_NATIVE_CACHE`: the native loader rejects permissions on its
-  default cache directory. The documented temporary-cache option did not resolve
-  it. No permissions were changed and no checks were disabled. Phone/desktop e2e
-  has not run because it requires a successful production build. A green full
-  verification/CI is still required before merge.

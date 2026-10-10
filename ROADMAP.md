@@ -31,7 +31,7 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [x] Onboarding flow: grade group, current experience, how they like to learn (optional, "Mix it up" default) (R1)
 - [ ] Lesson pre-generation script (topic × format × grade group × language, cached), run on the first curriculum entries (R4)
 - [ ] Demo topics in every format (one per pillar, e.g. needs vs wants, emergency fund, compounding, UPI scams): video, story, visual, formula + live calculator (KaTeX), transcript, simulation, quiz, audio (R2, R5)
-- [ ] Format picker from preferences (R4) — implementation and tests on `feat/format-picker`, pending merge; [handoff and local testing](docs/format-picker.md). Learned bandit remains Phase 4.
+- [x] Format picker from preferences (R4) ([handoff](docs/format-picker.md)); the learned bandit stays in Phase 4
 - [ ] Quiz pass → unlock rules over the prerequisite graph (R2)
 - [ ] Life + market sim engine (Practice): monthly needs/wants/savings split, personas, event deck, unlocked instruments on real prices, FD/RD early-exit rules, selling units at the day's price (R4)
 - [ ] Practice renderer + flagship episode: March 2020 + hospital bill, with speed control and the side-by-side reveal (R2, R5)
