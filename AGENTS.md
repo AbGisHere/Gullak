@@ -100,6 +100,12 @@ We don't fine-tune LLMs. Small adaptive models (e.g. knowledge tracing) are trai
 
 `pickLessonVariant` in `@gullak/engine` selects an eligible non-quiz variant from an already-open topic in one resolved locale. Explicit preferences are ordered; onboarding's full-format list means Mix it up, with deterministic caller-owned rotation. Authored content order breaks ties and defines fallback. It never changes mastery or unlocks; quizzes remain separate assessments. The lesson API adds `formatSelection` metadata, selecting at index 0 until per-learner rotation is integrated. Translate reason codes in the lesson UI, never display them as raw strings. Contract and teammate handoff: [`docs/format-picker.md`](docs/format-picker.md).
 
+### Curriculum brief validation (pre-generation step 1)
+
+`CurriculumBrief` and `CurriculumBriefContext` live in `@gullak/types`; `validateCurriculumBrief(input, context)` in `@gullak/ai` validates them offline. Briefs require schema version 1, status `draft`, topic/grade/locale, learning goals, concept-linked key ideas and quiz objectives, misconceptions with corrections, and examples. Teaching text is trimmed and limited to 1–600 characters; each list has 1–12 items; topic/concept IDs are kebab-case with at most 80 characters. Unknown brief/nested fields are rejected.
+
+Callers supply canonical `meta`, graph `rule` and `supportedLocales`. Topic IDs and pillars must agree, the grade/locale must be supported, and referenced concepts must exist; duplicate canonical concept IDs are rejected. A successful result is still an **unreviewed draft**, not factual/safety/privacy approval or permission to generate/publish. Keep engineering fixtures in tests, not published topic files. This step adds no provider calls, assets, translations or publication workflow. Usage/testing notes: [`docs/architecture.md`](docs/architecture.md#offline-curriculum-preparation).
+
 ### How to add a market-data adapter
 
 1. In `packages/market-data/src/adapters/<source>.ts`, implement `MarketDataAdapter` (`getQuote`, `getSeries`). Validate the source's raw response with Zod and map it to `MarketQuote` / `SeriesPoint`, setting `asOf` from the source.
