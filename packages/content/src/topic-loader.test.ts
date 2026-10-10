@@ -1,11 +1,19 @@
-import { readdirSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { readdirSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { allUnlockRules } from "./config";
-import { loadTopic } from "./topic-loader";
+import { loadTopic, loadVersionedTopic } from "./topic-loader";
 
 const directory = fileURLToPath(new URL("../topics/", import.meta.url));
 describe("server topic loader", () => {
+  it("pins grading to the exact content bytes rather than reserialized JSON", async () => {
+    const { topic, contentVersion } = await loadVersionedTopic(directory, "fixed-deposit", "en");
+    const bytes = readFileSync(resolve(directory, "fixed-deposit/en.json"));
+    expect(contentVersion).toBe(createHash("sha256").update(bytes).digest("hex"));
+    expect(contentVersion).not.toBe(createHash("sha256").update(JSON.stringify(topic.content)).digest("hex"));
+  });
   const topicIds = readdirSync(directory, { withFileTypes: true })
     .filter((d) => d.isDirectory())
     .map((d) => d.name);

@@ -1,9 +1,15 @@
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { Locale, Slug, Topic, TopicContent, TopicMeta } from "@gullak/types";
 
 /** Server-side file loader. Identifiers are validated before constructing any path. */
 export async function loadTopic(directory: string, topicId: string, locale: string): Promise<Topic> {
+  return (await loadVersionedTopic(directory, topicId, locale)).topic;
+}
+
+/** Hash the same exact UTF-8 bytes that are validated and used for grading. */
+export async function loadVersionedTopic(directory: string, topicId: string, locale: string) {
   Slug.parse(topicId);
   Locale.parse(locale);
   const [meta, content] = await Promise.all([
@@ -31,5 +37,5 @@ export async function loadTopic(directory: string, topicId: string, locale: stri
   }
   if (new Set(topic.content.variants.map((v) => v.id)).size !== topic.content.variants.length)
     throw new Error("duplicate variant");
-  return topic;
+  return { topic, contentVersion: createHash("sha256").update(content, "utf8").digest("hex") };
 }

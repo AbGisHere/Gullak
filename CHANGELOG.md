@@ -9,6 +9,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Added
+- Add typed per-answer quiz evidence, authoritative grading and exact-byte content versions for backend integration.
 - Atomic per-question quiz evidence with authoritative correctness/concepts, content fingerprints, attempt events, learner-only reads and a service-only invoker-security export; preserve legacy quiz callers and retries without historical backfill.
 
 ## [0.2.9] - 2026-10-11
