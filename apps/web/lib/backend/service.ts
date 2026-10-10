@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { allUnlockRules, locales, startingCapital } from "@gullak/content";
 import {
   gradeQuiz,
+  isTopicCompleted,
   isTopicOpen,
   monthlyForTarget,
   pickLessonVariant,
@@ -32,6 +33,8 @@ export function requireTopicOpen(state: LearnerState, topicId: string) {
   if (!rule.gradeGroups.includes(state.profile.gradeGroup)) throw new ApiError(403, "topic_locked");
   if (!isTopicOpen(rule, allUnlockRules, new Map(state.progress.map((p) => [p.topicId, p]))))
     throw new ApiError(403, "topic_locked");
+  // Old completion rows must not bypass the current graph's transitive prerequisites.
+  for (const prerequisite of rule.requiresTopicIds) requireTopicOpen(state, prerequisite);
   return rule;
 }
 export function publicLesson(topic: Topic, state: LearnerState) {
@@ -76,7 +79,18 @@ export function createBackendService(db: DataAccess, learnerId: string, now = ()
       return {
         progress: state.progress,
         unlockedInstruments: [
-          ...unlockedInstruments(allUnlockRules, new Map(state.progress.map((p) => [p.topicId, p]))),
+          ...unlockedInstruments(
+            allUnlockRules.filter((r) => {
+              try {
+                requireTopicOpen(state, r.topicId);
+                return true;
+              } catch (error) {
+                if (error instanceof ApiError && error.code === "topic_locked") return false;
+                throw error;
+              }
+            }),
+            new Map(state.progress.map((p) => [p.topicId, p])),
+          ),
         ],
       };
     },
@@ -117,6 +131,9 @@ export function createBackendService(db: DataAccess, learnerId: string, now = ()
       const state = await db.state();
       const rule = allUnlockRules.find((r) => r.unlocksInstruments.includes("fixed-deposit"));
       if (!rule) throw new ApiError(503, "fd_rule_missing");
+      requireTopicOpen(state, rule.topicId);
+      if (!isTopicCompleted(rule, new Map(state.progress.map((p) => [p.topicId, p]))))
+        throw new ApiError(403, "instrument_locked");
       // Transaction checks completion and balance again under a lock.
       const holding = DepositHolding.parse({
         id: randomUUID(),

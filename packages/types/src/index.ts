@@ -7,6 +7,7 @@ export * from "./format-picker";
 export * from "./fund-category";
 export * from "./goal";
 export * from "./instrument";
+export * from "./learning-run";
 export * from "./market";
 export * from "./portfolio";
 export * from "./profile";

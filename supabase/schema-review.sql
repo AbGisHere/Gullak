@@ -13,7 +13,7 @@ select table_name, column_name, data_type, is_nullable, column_default
 from information_schema.columns
 where table_schema = 'public'
   and table_name in ('learners','topic_progress','portfolios','holdings',
-    'backend_commands','cohorts','cohort_learners','cohort_facilitators')
+    'backend_commands','cohorts','cohort_learners','cohort_facilitators','learning_runs')
 order by table_name, ordinal_position;
 
 select c.relname as table_name, c.relrowsecurity as rls_enabled,
@@ -46,7 +46,7 @@ select p.proname as function_name,
 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
 where n.nspname = 'public'
   and p.proname in ('onboard_learner','record_lesson','record_quiz',
-    'invest_fd','facilitator_progress','learner_state')
+    'invest_fd','facilitator_progress','learner_state','read_learning_run','start_learning_run','save_learning_bookmark')
 order by p.proname;
 
 rollback;

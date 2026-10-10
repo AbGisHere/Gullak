@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "Gullak R3 backend",
-    "description": "Local manual tests. Set public project URL/key and obtain a learner access token. Never add the Supabase server secret. Run core loop requests in order; retain keys and token for idempotency and persistence tests.",
+    "description": "Local manual tests. Set public project URL/key and obtain a learner access token. Never add the Supabase server secret. Run core loop requests in order; retain keys and token for idempotency and persistence tests. Current graph requires money-basics and saving-habit before bank-accounts-upi and FD. New run routes persist navigation only, not scores/completion. Keep learner A/B tokens separate; never seed shared Auth rows.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "auth": {
@@ -52,6 +52,31 @@
     },
     {
       "key": "cohortId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "runId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "startRunKey",
+      "value": "33333333-3333-4333-8333-333333333333",
+      "type": "string"
+    },
+    {
+      "key": "bookmarkKey",
+      "value": "44444444-4444-4444-8444-444444444444",
+      "type": "string"
+    },
+    {
+      "key": "accessTokenA",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "accessTokenB",
       "value": "",
       "type": "string"
     }
@@ -107,7 +132,7 @@
         "url": "{{baseUrl}}/api/onboarding",
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"ageBand\": \"college\",\n  \"experience\": \"none\",\n  \"locale\": \"en\",\n  \"preferredFormats\": [\n    \"transcript\",\n    \"quiz\"\n  ]\n}",
+          "raw": "{\n  \"experience\": \"none\",\n  \"locale\": \"en\",\n  \"preferredFormats\": [\n    \"transcript\",\n    \"quiz\"\n  ],\n  \"gradeGroup\": \"grade-8-10\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -115,6 +140,108 @@
           }
         }
       }
+    },
+    {
+      "name": "Prerequisite: money-basics",
+      "item": [
+        {
+          "name": "Read money-basics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/lessons/money-basics"
+          }
+        },
+        {
+          "name": "Record transcript",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/lessons/money-basics/progress",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"variantId\": \"read\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Submit server-graded quiz",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "11111111-1111-4111-8111-111111111111"
+              }
+            ],
+            "url": "{{baseUrl}}/api/lessons/money-basics/quiz",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"variantId\": \"check\",\n  \"answers\": [\n    {\n      \"questionId\": \"money-in\",\n      \"optionId\": \"0\"\n    },\n    {\n      \"questionId\": \"money-out\",\n      \"optionId\": \"0\"\n    }\n  ]\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Prerequisite: saving-habit",
+      "item": [
+        {
+          "name": "Read saving-habit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/lessons/saving-habit"
+          }
+        },
+        {
+          "name": "Record transcript",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/lessons/saving-habit/progress",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"variantId\": \"read\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Submit server-graded quiz",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "22222222-2222-4222-8222-222222222222"
+              }
+            ],
+            "url": "{{baseUrl}}/api/lessons/saving-habit/quiz",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"variantId\": \"check\",\n  \"answers\": [\n    {\n      \"questionId\": \"pay-yourself-first\",\n      \"optionId\": \"0\"\n    },\n    {\n      \"questionId\": \"saving-streak\",\n      \"optionId\": \"0\"\n    }\n  ]\n}"
+            }
+          }
+        }
+      ]
     },
     {
       "name": "3. Read savings lesson",
@@ -337,6 +464,122 @@
         "header": [],
         "url": "{{baseUrl}}/api/facilitator/cohorts/{{cohortId}}/progress"
       }
+    },
+    {
+      "name": "Learning runs (navigation only; required topic drafts may be unavailable)",
+      "item": [
+        {
+          "name": "Start activity (requires needs-vs-wants completion)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{startRunKey}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/activities/needs-or-wants/runs",
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 200) { pm.collectionVariables.set(\"runId\", pm.response.json().data.id); }"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List current profile runs (switch A/B tokens to test isolation)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/learning-runs"
+          }
+        },
+        {
+          "name": "Read owned run",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/learning-runs/{{runId}}"
+          }
+        },
+        {
+          "name": "Save bookmark; repeat same key/body",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{bookmarkKey}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/learning-runs/{{runId}}/bookmark",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expectedRevision\": 0,\n  \"bookmark\": {\n    \"kind\": \"item\",\n    \"itemId\": \"rice-and-dal\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Reject client-completed claim",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{startRunKey}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/activities/needs-or-wants/runs",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"completed\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Start episode (requires its graph unlock)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "55555555-5555-4555-8555-555555555555"
+              }
+            ],
+            "url": "{{baseUrl}}/api/episodes/march-2020-hospital-bill/runs",
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            }
+          }
+        }
+      ]
     }
   ]
 }

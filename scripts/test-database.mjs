@@ -3,6 +3,7 @@ import { mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { createServer } from "node:net";
 import { tmpdir } from "node:os";
 import { join, relative, resolve, sep } from "node:path";
+import { demoSeedSql } from "./demo-seed.mjs";
 import { generateDatabaseTypes } from "./generate-database-types.mjs";
 
 // Uses a fresh temporary database, never the user's installed cluster or Supabase account.
@@ -43,6 +44,7 @@ try {
     "20261010130000_init.sql",
     "20261010140000_backend_transactions.sql",
     "20261010150000_grade_group_onboarding.sql",
+    "20261011090000_learning_runs.sql",
   ]) {
     if (file === "20261010150000_grade_group_onboarding.sql") {
       sql(`insert into auth.users values ('66666666-6666-4666-8666-666666666666');
@@ -51,6 +53,13 @@ try {
     sql(readFileSync(new URL(`../supabase/migrations/${file}`, import.meta.url), "utf8"));
   }
   sql(readFileSync(new URL("../supabase/tests/core.sql", import.meta.url), "utf8"));
+  sql(demoSeedSql());
+  sql(demoSeedSql());
+  sql(readFileSync(new URL("../supabase/tests/learning-runs.sql", import.meta.url), "utf8"));
+  sql(demoSeedSql());
+  sql(
+    "select public.test_assert((select cash_paise=499900 from public.portfolios where learner_id='a1111111-1111-4111-8111-111111111111'), 'seed preserves existing cash');",
+  );
   if (process.argv.includes("--generate-types")) {
     generateDatabaseTypes((text) => run("psql", [...args, "-t", "-A"], text).trim());
     console.log("Generated database types from migrated local schema.");

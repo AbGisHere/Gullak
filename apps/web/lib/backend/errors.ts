@@ -15,6 +15,9 @@ export function databaseError(error: { code: string; message: string }): never {
     insufficient_cash: 409,
     idempotency_conflict: 409,
     facilitator_forbidden: 403,
+    learning_run_not_found: 404,
+    revision_conflict: 409,
+    content_changed: 409,
   };
   const status = known[error.message];
   if (status) throw new ApiError(status, error.message);

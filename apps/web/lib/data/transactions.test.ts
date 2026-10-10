@@ -40,6 +40,29 @@ function client(result: unknown) {
   });
 }
 describe("validated database responses", () => {
+  it("returns a non-enumerating 404 for another profile's run", async () => {
+    const db = client(null);
+    await expect(createDataAccess(db, db, id).run(id)).rejects.toMatchObject({
+      status: 404,
+      code: "learning_run_not_found",
+    });
+  });
+  it("rejects a run response owned by a different learner", async () => {
+    const db = client({
+      id,
+      learnerId: "22222222-2222-4222-8222-222222222222",
+      kind: "activity",
+      contentId: "needs-or-wants",
+      locale: "en",
+      contentHash: "a".repeat(64),
+      status: "in-progress",
+      revision: 0,
+      bookmark: null,
+      createdAt: at,
+      updatedAt: at,
+    });
+    await expect(createDataAccess(db, db, id).run(id)).rejects.toMatchObject({ code: "ownership_mismatch" });
+  });
   it("asks legacy learners to select a grade without treating their state as corrupt", async () => {
     const db = client({ ...state, profile: { ...state.profile, gradeGroup: undefined } });
     await expect(createDataAccess(db, db, id).state()).rejects.toMatchObject({

@@ -15,6 +15,22 @@ vi.mock("@supabase/supabase-js", () => ({ createClient: mocks.createClient }));
 import { verifiedIdentity } from "./auth";
 
 describe("verified request identity", () => {
+  it("switches bearer identities on a shared device without using the previous cookie identity", async () => {
+    mocks.createClient.mockReturnValue({ auth: { getUser: mocks.getUser } });
+    mocks.getUser.mockImplementation(async (token: string) => ({
+      data: { user: { id: token === "token-a" ? "learner-a" : "learner-b" } },
+      error: null,
+    }));
+    for (const token of ["token-a", "token-b", "token-a"]) {
+      const result = await verifiedIdentity(
+        new Request("http://localhost:3000/api/profile", {
+          headers: { Authorization: `Bearer ${token}`, Cookie: "old-session=learner-a" },
+        }),
+      );
+      expect(result.learnerId).toBe(token === "token-a" ? "learner-a" : "learner-b");
+    }
+    mocks.getUser.mockReset();
+  });
   it("gets the user from Supabase verification, never from a body or learner_id header", async () => {
     mocks.createClient.mockReturnValue({ auth: { getUser: mocks.getUser } });
     mocks.getUser.mockResolvedValue({ data: { user: { id: "verified-user" } }, error: null });

@@ -188,6 +188,56 @@ export type Database = {
         };
         Relationships: [];
       };
+      learning_runs: {
+        Row: {
+          id: string;
+          learner_id: string;
+          kind: string;
+          content_id: string;
+          locale: string;
+          content_hash: string;
+          status: string;
+          revision: number;
+          bookmark: Json | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          learner_id: string;
+          kind: string;
+          content_id: string;
+          locale: string;
+          content_hash: string;
+          status?: string;
+          revision?: number;
+          bookmark?: Json | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          learner_id?: string;
+          kind?: string;
+          content_id?: string;
+          locale?: string;
+          content_hash?: string;
+          status?: string;
+          revision?: number;
+          bookmark?: Json | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "learning_runs_learner_id_fkey";
+            columns: ["learner_id"];
+            isOneToOne: false;
+            referencedRelation: "learners";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       portfolios: {
         Row: {
           id: string;
@@ -277,6 +327,7 @@ export type Database = {
       };
       learner_state: { Args: Record<string, never>; Returns: Json };
       onboard_learner: { Args: { p_learner: string; p_profile: Json; p_cash: number }; Returns: Json };
+      read_learning_run: { Args: { p_run: string }; Returns: Json };
       record_lesson: { Args: { p_learner: string; p_topic: string }; Returns: undefined };
       record_quiz: {
         Args: {
@@ -290,7 +341,14 @@ export type Database = {
         };
         Returns: Json;
       };
-      test_assert: { Args: { ok: boolean; label: string }; Returns: undefined };
+      save_learning_bookmark: {
+        Args: { p_learner: string; p_run: string; p_key: string; p_request: Json; p_hash: string };
+        Returns: Json;
+      };
+      start_learning_run: {
+        Args: { p_learner: string; p_key: string; p_request: Json; p_run: Json; p_requires: string[] };
+        Returns: Json;
+      };
     };
     Enums: { [_ in never]: never };
     CompositeTypes: { [_ in never]: never };
