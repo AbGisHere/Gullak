@@ -270,8 +270,8 @@ export interface PaperPortfolioLabels {
   tabHoldings: (count: number) => string;
   tabLiquidity: string;
   tabGoals: (count: number) => string;
-  instrumentKinds?: Record<string, string>;
-  monthsOfSuppliedExpenses?: (months: number) => string;
+  portfolioSectionsAria: string;
+  liquidityDistributionAria: (pctNow: number, pctCond: number, pctLong: number) => string;
 }
 
 export const defaultPaperPortfolioLabels: PaperPortfolioLabels = {
@@ -334,6 +334,9 @@ export const defaultPaperPortfolioLabels: PaperPortfolioLabels = {
   },
   monthsOfSuppliedExpenses: (months) =>
     `At the assumptions used in this scenario, this reserve represents about ${months} months of the supplied monthly expense amount.`,
+  portfolioSectionsAria: "Portfolio sections",
+  liquidityDistributionAria: (pctNow, pctCond, pctLong) =>
+    `Liquidity distribution: ${pctNow}% available now, ${pctCond}% conditional access, ${pctLong}% longer-term market`,
 };
 
 /* -------------------------------------------------------------------------- */
@@ -362,6 +365,15 @@ export interface PracticeSimulationLabels {
   episodeCompleteNote: string;
   finishEpisode: string;
   continueAction: string;
+  seeTradeoffsAction: string;
+  confirmDecisionAction: string;
+  selectOptionToProceed: string;
+  portfolioAfterOutcome: string;
+  yourReflection: string;
+  selectReflectionOption: string;
+  whatHelpedTradeoff: string;
+  protagonistLabel: string;
+  supportingCharacterLabel: string;
 }
 
 export const defaultPracticeSimulationLabels: PracticeSimulationLabels = {
@@ -387,6 +399,15 @@ export const defaultPracticeSimulationLabels: PracticeSimulationLabels = {
     "Nobody knew what would happen next — including professional fund managers. The important question was how much flexibility your financial setup gave you when the unexpected expense arrived.",
   finishEpisode: "Finish Episode",
   continueAction: "Continue",
+  seeTradeoffsAction: "See Trade-offs & Next Steps",
+  confirmDecisionAction: "Confirm Decision",
+  selectOptionToProceed: "Select an option to proceed",
+  portfolioAfterOutcome: "Portfolio After Decision",
+  yourReflection: "Your Reflection",
+  selectReflectionOption: "Select a reflection to continue",
+  whatHelpedTradeoff: "What gave you flexibility during this expense?",
+  protagonistLabel: "Protagonist",
+  supportingCharacterLabel: "Supporting character",
 };
 
 /* -------------------------------------------------------------------------- */
@@ -417,6 +438,10 @@ export interface FinancialRewindLabels {
   dimensionComparisonHeading: string;
   backToDecision: string;
   continueEpisode: string;
+  alternative: string;
+  alternativePathsAria: string;
+  rewindReflectionAria: string;
+  protagonistReviewingAlternatives: string;
 }
 
 export const defaultFinancialRewindLabels: FinancialRewindLabels = {
@@ -445,4 +470,8 @@ export const defaultFinancialRewindLabels: FinancialRewindLabels = {
   dimensionComparisonHeading: "Direct Dimension Comparison",
   backToDecision: "Back to Decision",
   continueEpisode: "Continue Episode",
+  alternative: "Alternative",
+  alternativePathsAria: "Alternative paths",
+  rewindReflectionAria: "Rewind reflection options",
+  protagonistReviewingAlternatives: "Protagonist reviewing alternatives",
 };

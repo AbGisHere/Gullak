@@ -610,4 +610,169 @@ describe("ui", () => {
       expect(screen.queryByRole("button", { name: "Decode term: Liquidity" })).toBeNull();
     });
   });
+
+  describe("Localization & Multi-Language Layout Hardening (R2)", () => {
+    const hindiTermData: MoneyTermData = {
+      term: "परिपक्वता",
+      expandedName: "सावधि जमा परिपक्वता अवधि",
+      plainMeaning: "वह निर्धारित तारीख जब आपका जमा किया गया पैसा और उस पर मिला ब्याज वापस मिलता है।",
+      whereYouSeeIt: ["बैंक पासबुक", "सावधि जमा प्रमाणपत्र", "मोबाइल बैंकिंग ऐप"],
+      example: "यदि आपने ₹5,000 एक वर्ष के लिए जमा किए हैं, तो एक वर्ष पूर्ण होने की तिथि परिपक्वता तिथि है।",
+      whyItMattersHere: "यदि आप परिपक्वता से पहले पैसा निकालते हैं, तो बैंक पेनल्टी काट सकता है।",
+      misconception: "परिपक्वता से पहले कभी भी पूरा ब्याज नहीं मिलता।",
+    };
+
+    it("renders MoneyDecoder with Hindi UI copy, translated aria-labels, and Devanagari script", () => {
+      render(
+        <MoneyDecoder
+          termData={hindiTermData}
+          labels={{
+            badgeTitle: "मुद्रा डिकोडर",
+            closeAria: "डिकोडर बंद करें",
+            triggerAriaPrefix: "शब्दावली डिकोड करें:",
+            plainMeaning: "सरल अर्थ",
+            whyItMatters: "यहाँ इसका महत्व",
+            whereYouSeeIt: "आप इसे कहाँ देखेंगे",
+            realLifeExample: "दैनिक जीवन का उदाहरण",
+            watchOut: "सावधान रहें / आम गलतफहमी",
+            gotIt: "समझ गया",
+          }}
+        />
+      );
+
+      // Verify trigger with translated aria-label
+      const trigger = screen.getByRole("button", { name: "शब्दावली डिकोड करें: परिपक्वता" });
+      expect(trigger).toBeDefined();
+
+      // Open drawer
+      fireEvent.click(trigger);
+
+      // Verify Hindi UI headings and Devanagari content
+      expect(screen.getByText("मुद्रा डिकोडर")).toBeDefined();
+      expect(screen.getByText("सरल अर्थ")).toBeDefined();
+      expect(screen.getByText(hindiTermData.plainMeaning)).toBeDefined();
+      expect(screen.getByText("यहाँ इसका महत्व")).toBeDefined();
+      expect(screen.getByText(hindiTermData.whyItMattersHere!)).toBeDefined();
+      expect(screen.getByText("सावधान रहें / आम गलतफहमी")).toBeDefined();
+      expect(screen.getByRole("button", { name: "डिकोडर बंद करें" })).toBeDefined();
+      expect(screen.getByText("समझ गया")).toBeDefined();
+
+      // Close drawer with translated button
+      fireEvent.click(screen.getByRole("button", { name: "डिकोडर बंद करें" }));
+    });
+
+    it("renders MoneyDecoder with Telugu UI copy, translated aria-labels, and Telugu script", () => {
+      const teluguTermData: MoneyTermData = {
+        term: "లిక్విడిటీ",
+        expandedName: "ద్రవ్యలభ్యత / తక్షణ నగదు యాక్సెస్",
+        plainMeaning: "మీ డబ్బును నష్టం లేకుండా ఎంత త్వరగా నగదుగా మార్చుకోవచ్చో తెలిపే సామర్థ్యం.",
+        whereYouSeeIt: ["పొదుపు ఖాతా", "అత్యవసర నిధి"],
+        example: "బ్యాంక్ ఖాతాలోని నగదు అత్యధిక లిక్విడిటీ కలిగి ఉంటుంది, కానీ స్థిరాస్తికి తక్కువ లిక్విడిటీ ఉంటుంది.",
+      };
+
+      render(
+        <MoneyDecoder
+          termData={teluguTermData}
+          labels={{
+            badgeTitle: "మనీ డీకోడర్",
+            closeAria: "డీకోడర్ మూసివేయి",
+            triggerAriaPrefix: "పదాన్ని డీకోడ్ చేయి:",
+            plainMeaning: "స్పష్టమైన అర్థం",
+            whereYouSeeIt: "మీరు దీనిని ఎక్కడ చూస్తారు",
+            realLifeExample: "నిజ జీవిత ఉదాహరణ",
+            gotIt: "అర్థమైంది",
+          }}
+        />
+      );
+
+      // Verify trigger with Telugu aria-label
+      const trigger = screen.getByRole("button", { name: "పదాన్ని డీకోడ్ చేయి: లిక్విడిటీ" });
+      expect(trigger).toBeDefined();
+
+      // Open drawer
+      fireEvent.click(trigger);
+
+      // Verify Telugu copy
+      expect(screen.getByText("మనీ డీకోడర్")).toBeDefined();
+      expect(screen.getByText("స్పష్టమైన అర్థం")).toBeDefined();
+      expect(screen.getByText(teluguTermData.plainMeaning)).toBeDefined();
+      expect(screen.getByRole("button", { name: "డీకోడర్ మూసివేయి" })).toBeDefined();
+      expect(screen.getByText("అర్థమైంది")).toBeDefined();
+    });
+
+    it("renders TopicLesson with translated labels and non-English content without truncation", () => {
+      const hindiLesson: TopicLessonData = {
+        id: "lesson-hindi-budget",
+        topicId: "needs-vs-wants",
+        title: "आवश्यकताएं बनाम इच्छाएं: समझदारी से बजट बनाना",
+        pillar: "plan-budget",
+        gradeGroup: "grade-8-10",
+        steps: [
+          {
+            id: "step-1",
+            type: "intro",
+            title: "पैसे के फैसले की शुरुआत",
+            hook: "क्या आपने कभी सोचा है कि जेबखर्च खत्म होने के बाद महत्वपूर्ण चीजों के लिए पैसे क्यों नहीं बचते?",
+            estimatedMinutes: 5,
+            learningPointers: [
+              "आवश्यक जरूरतों और अस्थायी इच्छाओं में अंतर पहचानें",
+              "सीमित बजट में प्राथमिकताओं का संतुलन बनाएं",
+            ],
+          },
+        ],
+      };
+
+      render(
+        <TopicLesson
+          lesson={hindiLesson}
+          labels={{
+            theHook: "मुख्य प्रसंग",
+            whatYoullExplore: "आप क्या सीखेंगे",
+            estimatedTime: (mins) => `अनुमानित समय: ~${mins} मिनट`,
+            continueAction: "आगे बढ़ें",
+            previous: "पिछला",
+            finishLesson: "पाठ समाप्त करें",
+            pillars: {
+              "plan-budget": "योजना और बजट",
+              "save-manage": "बचत और प्रबंधन",
+              "understand-investing": "निवेश समझें",
+              "stay-safe": "सुरक्षित रहें",
+            },
+          }}
+        />
+      );
+
+      expect(screen.getByText("योजना और बजट")).toBeDefined();
+      expect(screen.getByText("मुख्य प्रसंग")).toBeDefined();
+      expect(screen.getByText(hindiLesson.steps[0]!.title)).toBeDefined();
+      expect(screen.getByText("आगे बढ़ें")).toBeDefined();
+      expect(screen.getByText("अनुमानित समय: ~5 मिनट")).toBeDefined();
+    });
+
+    it("renders PaperPortfolio with Telugu labels and complex script without layout failure", () => {
+      render(
+        <PaperPortfolio
+          portfolio={exampleStudentPortfolio}
+          labels={{
+            paperPortfolioTitle: "పేపర్ పోర్ట్‌ఫోలియో",
+            playMoneyBadge: "ఆట డబ్బు",
+            availableCash: "అందుబాటులో ఉన్న నగదు",
+            emergencyBuffer: "అత్యవసర నిధి బఫర్",
+            liquidityAndAccess: "లిక్విడిటీ & యాక్సెస్",
+            tabOverview: "సమీక్ష",
+            tabHoldings: (count) => `హోల్డింగ్స్ (${count})`,
+            tabLiquidity: "లిక్విడిటీ & నిల్వ",
+            tabGoals: (count) => `లక్ష్యాలు (${count})`,
+          }}
+        />
+      );
+
+      expect(screen.getByText("పేపర్ పోర్ట్‌ఫోలియో")).toBeDefined();
+      expect(screen.getByText("ఆట డబ్బు")).toBeDefined();
+      expect(screen.getByText("అందుబాటులో ఉన్న నగదు")).toBeDefined();
+      expect(screen.getByText("అత్యవసర నిధి బఫర్")).toBeDefined();
+      expect(screen.getByText("సమీక్ష")).toBeDefined();
+      expect(screen.getByTestId("portfolio-tab-liquidity")).toBeDefined();
+    });
+  });
 });

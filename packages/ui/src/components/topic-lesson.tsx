@@ -175,13 +175,6 @@ export interface TopicLessonProps {
   className?: string;
 }
 
-const pillarLabels: Record<TopicLessonData["pillar"], string> = {
-  "plan-budget": "Plan & Budget",
-  "save-manage": "Save & Manage",
-  "understand-investing": "Understand Investing",
-  "stay-safe": "Stay Financially Safe",
-};
-
 /**
  * TopicLesson: Unified orchestrator for multi-step adaptive financial lessons.
  * Coordinates EXPERIENCE -> DECODE -> UNDERSTAND -> DECIDE -> TRANSFER flows.
@@ -346,7 +339,7 @@ export function TopicLesson({
             expression="excited"
             accent="lime"
             size="lg"
-            label="Lesson completed celebration"
+            label={l.lessonCompleted}
           />
         </div>
 
