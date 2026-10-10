@@ -1,25 +1,12 @@
+import { ArrowLeft, ArrowRight, ChevronRight, GitCompare, HelpCircle, Lightbulb, RotateCcw } from "lucide-react";
 import * as React from "react";
+import { defaultFinancialRewindLabels, type FinancialRewindLabels } from "../lib/labels";
 import { cn } from "../lib/utils";
-import { PlayMoneyBadge } from "./play-money-badge";
-import { Character, type CharacterState } from "./character";
+import { Character } from "./character";
 import { MoneyDecoder, type MoneyTermData } from "./money-decoder";
-import {
-  PortfolioSummary,
-  type PortfolioViewModel,
-} from "./paper-portfolio";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ChevronRight,
-  GitCompare,
-  HelpCircle,
-  Info,
-  Lightbulb,
-  RefreshCw,
-  RotateCcw,
-  Sparkles,
-} from "lucide-react";
-import { type FinancialRewindLabels, defaultFinancialRewindLabels } from "../lib/labels";
+import { PortfolioSummary, type PortfolioViewModel } from "./paper-portfolio";
+import { PlayMoneyBadge } from "./play-money-badge";
+import type { CharacterState } from "./practice-simulation";
 
 export type { FinancialRewindLabels };
 
@@ -169,9 +156,7 @@ export function FinancialRewind({
         <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-border/60">
           <div className="flex items-center gap-2">
             <RotateCcw className="h-4 w-4 text-brand-lilac" aria-hidden="true" />
-            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              {l.rewindBadge}
-            </span>
+            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{l.rewindBadge}</span>
             <PlayMoneyBadge label={l.playMoney} />
           </div>
           {onReturnToChosen && (
@@ -200,9 +185,7 @@ export function FinancialRewind({
             <h2 id="rewind-main-heading" className="text-lg font-bold text-foreground">
               {l.mainHeading}
             </h2>
-            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-              {l.subtitle}
-            </p>
+            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{l.subtitle}</p>
             {activeReaction.dialogue && (
               <div className="mt-3 rounded-xl bg-muted/50 border border-border/50 px-3 py-2.5">
                 <p className="text-sm text-foreground italic">"{activeReaction.dialogue}"</p>
@@ -229,17 +212,14 @@ export function FinancialRewind({
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             {l.selectAlternativeLabel}
           </span>
-          <div
-            role="tablist"
-            aria-label={l.alternativePathsAria}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-2"
-          >
+          <div role="tablist" aria-label={l.alternativePathsAria} className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {alternatives.map((alt, idx) => {
               const isSelected = idx === selectedAltIndex;
               const altId = alt.id ?? alt.decisionId;
 
               return (
                 <button
+                  type="button"
                   key={altId}
                   role="tab"
                   aria-selected={isSelected}
@@ -249,7 +229,7 @@ export function FinancialRewind({
                     "min-h-[44px] rounded-xl border-2 p-3 text-left transition-all duration-150 focus:outline-hidden focus:ring-2 focus:ring-ring flex items-center justify-between gap-2",
                     isSelected
                       ? "border-brand-lilac bg-brand-lilac/10 font-bold text-foreground shadow-xs"
-                      : "border-border/70 bg-card text-muted-foreground hover:border-foreground/30 hover:text-foreground"
+                      : "border-border/70 bg-card text-muted-foreground hover:border-foreground/30 hover:text-foreground",
                   )}
                 >
                   <div className="flex items-center gap-2">
@@ -261,7 +241,7 @@ export function FinancialRewind({
                   <ChevronRight
                     className={cn(
                       "h-4 w-4 shrink-0 transition-transform",
-                      isSelected ? "text-brand-lilac rotate-90" : "text-muted-foreground"
+                      isSelected ? "text-brand-lilac rotate-90" : "text-muted-foreground",
                     )}
                     aria-hidden="true"
                   />
@@ -289,18 +269,13 @@ export function FinancialRewind({
       </div>
 
       {/* Main Path Cards: Stacked on mobile, side-by-side on desktop if in compare mode */}
-      <div
-        className={cn(
-          "grid gap-4",
-          showCompareMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
-        )}
-      >
+      <div className={cn("grid gap-4", showCompareMode ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1")}>
         {/* YOUR CHOSEN PATH */}
         <div
           data-testid="rewind-chosen-path-card"
           className={cn(
             "rounded-2xl border-2 border-border/80 bg-card p-4 sm:p-5 shadow-xs space-y-3.5",
-            !showCompareMode && "order-2 opacity-95"
+            !showCompareMode && "order-2 opacity-95",
           )}
         >
           <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-border/50">
@@ -308,29 +283,26 @@ export function FinancialRewind({
               <span className="h-2 w-2 rounded-full bg-brand-lime" aria-hidden="true" />
               {l.yourChoice}
             </span>
-            <span className="text-xs font-semibold text-foreground font-mono">
-              {chosenPath.decisionLabel}
-            </span>
+            <span className="text-xs font-semibold text-foreground font-mono">{chosenPath.decisionLabel}</span>
           </div>
 
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              {l.whatHappened}
-            </span>
+            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{l.whatHappened}</span>
             <p className="mt-1 text-sm text-foreground leading-relaxed" data-testid="chosen-narrative">
               {chosenPath.narrativeConsequence}
             </p>
             {chosenPath.stateDelta && (
-              <div className="mt-2 rounded-lg bg-muted/50 px-2.5 py-1.5 text-xs font-mono text-foreground" data-testid="chosen-state-delta">
+              <div
+                className="mt-2 rounded-lg bg-muted/50 px-2.5 py-1.5 text-xs font-mono text-foreground"
+                data-testid="chosen-state-delta"
+              >
                 {chosenPath.stateDelta}
               </div>
             )}
           </div>
 
           <div className="pt-2 border-t border-border/40">
-            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              {l.tradeoffMade}
-            </span>
+            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{l.tradeoffMade}</span>
             <p className="mt-1 text-xs text-foreground leading-relaxed" data-testid="chosen-tradeoff">
               {chosenPath.tradeoff}
             </p>
@@ -352,7 +324,7 @@ export function FinancialRewind({
             data-testid="rewind-alternative-path-card"
             className={cn(
               "rounded-2xl border-2 border-brand-lilac/70 bg-card p-4 sm:p-5 shadow-xs space-y-3.5",
-              !showCompareMode && "order-1"
+              !showCompareMode && "order-1",
             )}
           >
             <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-border/50">
@@ -373,7 +345,10 @@ export function FinancialRewind({
                 {currentAlt.summary ?? currentAlt.resultingSummary}
               </p>
               {currentAlt.stateDelta && (
-                <div className="mt-2 rounded-lg bg-brand-lilac/10 border border-brand-lilac/30 px-2.5 py-1.5 text-xs font-mono text-foreground" data-testid="alt-state-delta">
+                <div
+                  className="mt-2 rounded-lg bg-brand-lilac/10 border border-brand-lilac/30 px-2.5 py-1.5 text-xs font-mono text-foreground"
+                  data-testid="alt-state-delta"
+                >
                   {currentAlt.stateDelta}
                 </div>
               )}
@@ -434,7 +409,10 @@ export function FinancialRewind({
         >
           <div className="flex items-center gap-2">
             <GitCompare className="h-4 w-4 text-brand-lime" aria-hidden="true" />
-            <h3 id="metrics-comparison-heading" className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+            <h3
+              id="metrics-comparison-heading"
+              className="text-sm font-bold uppercase tracking-wider text-muted-foreground"
+            >
               {l.dimensionComparisonHeading}
             </h3>
           </div>
@@ -446,9 +424,7 @@ export function FinancialRewind({
                 data-testid={`comparison-metric-${metric.id}`}
                 className="rounded-xl bg-muted/40 border border-border/50 p-3 text-xs space-y-1.5"
               >
-                <span className="font-bold text-foreground block text-xs">
-                  {metric.label}
-                </span>
+                <span className="font-bold text-foreground block text-xs">{metric.label}</span>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-foreground font-mono">
                   <div className="rounded-lg bg-card border border-border/40 px-2.5 py-1.5">
                     <span className="text-[10px] text-muted-foreground block font-sans">{l.yourChoice}</span>
@@ -460,9 +436,7 @@ export function FinancialRewind({
                   </div>
                 </div>
                 {metric.note && (
-                  <p className="text-[11px] text-muted-foreground pt-1 italic font-sans">
-                    {metric.note}
-                  </p>
+                  <p className="text-[11px] text-muted-foreground pt-1 italic font-sans">{metric.note}</p>
                 )}
               </div>
             ))}
@@ -484,7 +458,7 @@ export function FinancialRewind({
             </h3>
           </div>
 
-          <div className="space-y-2" role="group" aria-label={l.rewindReflectionAria}>
+          <fieldset className="space-y-2" aria-label={l.rewindReflectionAria}>
             {reflectionPrompt.options.map((opt) => (
               <button
                 key={opt.id}
@@ -496,7 +470,7 @@ export function FinancialRewind({
                 {opt.label}
               </button>
             ))}
-          </div>
+          </fieldset>
         </section>
       )}
 

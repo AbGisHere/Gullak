@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Feature branches add entries under **[Unreleased]** only; the version bump happens on `main`.
 
 ## [Unreleased]
+- R2 visual preview route for reviewing adaptive learning UI components, with import repairs so the preview renders.
 
 ## [0.0.18] - 2026-10-11
 
