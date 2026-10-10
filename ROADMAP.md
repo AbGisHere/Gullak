@@ -1,6 +1,6 @@
 # Roadmap
 
-24-hour plan. Owners: **R1** lead/frontend core · **R2** frontend/game · **R3** backend/data · **R4** AI/adaptive · **R5** product/content/QA.
+24-hour plan. Owners: **R1** lead/frontend core (@AbGisHere) · **R2** frontend/game (@mayankSuman404, @Parthvi1707) · **R3** backend/data (@ishitaanmol975) · **R4** AI/adaptive (@VanshGoel-01) · **R5** product/content/QA (shared, led by R1).
 Tick items as they land on `main`. Finishing a phase = minor version bump.
 
 ## Phase 0 · Setup (h0–h2) → v0.0.1
@@ -16,7 +16,8 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [x] PWA (Serwist), i18n en/hi/te (next-intl), Supabase client helpers (R1)
 
 ## Phase 1 · Skeleton (h2–h5)
-- [ ] Design direction + tokens via Impeccable; app shell with phone bottom tabs + desktop sidebar (R1)
+- [ ] Design direction + tokens via Impeccable (R2)
+- [ ] App shell with phone bottom tabs + desktop sidebar (R1)
 - [ ] Locale switcher (cookie) and play-money badge in the shell (R1)
 - [ ] Supabase project, first migration (learners, progress, portfolios), generated types, data-access layer (R3)
 - [ ] Snapshot pipeline: real FD rates, NIFTY 50 history (incl. 2020), sample MF NAVs, gold, CPI into `data/snapshots` (R3)
