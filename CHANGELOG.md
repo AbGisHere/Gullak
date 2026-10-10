@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Changed
+- Product docs: the *Nani's Gullak* storyline (three seasons, cast, Gullu, no fixed years, "FYI, this really happened" reveals), differentiators (one continuous money life, take-home missions, built for shared phones and no data), Money Multiverse, class market, more ways to learn beyond games, more games and stories, and habit design rules (never addictive).
+
 ## [0.0.9] - 2026-10-10
 
 ### Added

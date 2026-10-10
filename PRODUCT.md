@@ -36,6 +36,16 @@ Success means the learner can apply a concept and understand why their next acti
 
 Gullak combines a four-pillar curriculum, multiple presentation formats and learn-by-doing engines. Quizzes, activities and simulation decisions supply evidence to knowledge tracing. The format bandit learns from what a learner completes and how they do; it does not declare a permanent learning style.
 
+Games are in the problem statement, so every team will have them; ours are how learners learn, not the differentiator. Gullak stands apart in five ways (detail in `docs/curriculum.md`, "The storyline" and "What makes Gullak different"):
+
+1. **One story that remembers every choice:** *Nani's Gullak*, three seasons from Class 6 to 12, with Gullu (the revived gullak) as companion and tutor voice. No fixed years in the story; after each arc, an "FYI, this really happened" reveal with real data.
+2. **One continuous money life** from Class 6 to 12 on real Indian prices, where every topic unlocks the next instrument, instead of separate mini-games that each start from zero.
+3. **The student becomes the family's money teacher:** take-home missions reach a parent, and reach is measured in households.
+4. **Built for real conditions:** shared phones, little or no data, Telugu and Hindi.
+5. **A habit, not an addiction:** a 2-minute daily loop on real prices, with a living Gullak that grows only with good habits.
+
+The play layer adds the **Money Multiverse** (a parallel self lives the other choice on the same real data) and the **class market** (fictional companies whose prices come from the class's own orders).
+
 Practice and Live are two modes of the same life + market sim, using the same portfolio, instruments and engine maths. Practice exposes consequences in committed historical episodes; Live tests habits when nobody knows tomorrow. Neither is real-money trading or financial advice.
 
 ## Operating Context
@@ -155,6 +165,8 @@ This initialization captures agreed direction only. It does not establish that P
 3. Keep curriculum and scenarios as data, with one reusable engine per agreed interaction model.
 4. Make safe, accessible practice the centre of the demo; lead with the Practice episode and show Live as the same portfolio on current prices.
 5. Preserve the agreed P0 scope while prioritising a coherent, reliable learner journey over disconnected feature displays.
+6. Build habits, never compulsion: no loot boxes, guilt notifications, endless feeds or money leaderboards for learners aged 11–17.
+7. Reach the household: design every lesson so a learner can take it home and teach it.
 
 ## Accessibility & Inclusion
 
