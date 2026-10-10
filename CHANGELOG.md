@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Knowledge-tracing notebook, increment 2: fits per-concept BKT by EM on synthetic learners drawn from known parameters, checks parameter recovery and held-out next-answer prediction against a constant baseline, and exports a draft parameter file labelled synthetic. Runs on a Colab CPU in under a minute with no installs; the app does not load it.
+
 ## [0.1.2] - 2026-10-11
 
 ### Changed

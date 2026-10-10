@@ -29,7 +29,20 @@ events/questions and mixed versions within a submission fail validation.
 
 Synthetic provenance is in notebook/dataset metadata, not extra table columns.
 Do not upload real learner rows to the shared Colab. Story verdicts are excluded
-from BKT. Fitting/evaluation and experimental parameter export are later increments;
+from BKT.
+
+## Synthetic BKT fitting (increment 2)
+
+The same notebook then simulates 400 synthetic learners from known per-concept
+BKT parameters (4,800 answers in the nine-field contract, validated as above),
+splits them by learner hash (no learner in both sets), fits P(init), P(learn),
+P(slip) and P(guess) per concept by EM in pure Python, and reports recovery
+(true vs fitted) and held-out next-answer log loss, AUC and accuracy against a
+constant training-rate baseline. It writes and, on Colab, downloads
+`knowledge-tracing-params.synthetic-draft.json`, labelled synthetic and not
+production-approved. The app does not load it: priors and unlock rules are
+unchanged. Fitting on real quiz answers (exported by R3, never uploaded to this
+shared notebook) and porting the predictor to `packages/engine` come next;
 notify R1 before a Colab training run.
 
 Lightweight local checks (validation only, Python standard library):
@@ -38,5 +51,7 @@ Lightweight local checks (validation only, Python standard library):
 python -B -m unittest discover -s notebooks -p "test_*.py"
 ```
 
-The same tests run in CI and in the notebook's test cell. The local test file
-loads the notebook definitions directly; it does not maintain a second implementation.
+The same tests run in CI and in the notebook's test cells. `test_bkt_input.py`
+loads the notebook definitions directly; `test_bkt_fit.py` also loads the
+fitting test class from the notebook's `fit-tests` cell, so neither keeps a
+second implementation.
