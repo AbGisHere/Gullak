@@ -23,6 +23,7 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [ ] Snapshot pipeline: real FD rates, NIFTY 50 history (incl. 2020), sample MF NAVs, gold, CPI into `data/snapshots` (R3)
 - [ ] Topic content folder structure + FD topic draft (en) (R5)
 - [ ] Vercel project + preview deploys (R1)
+- [ ] Ask organisers for sponsored AA/FIU sandbox access; otherwise enquire with Setu, Finvu or Sahamati. Confirm student eligibility, provisioning time, test credentials/users/OTPs, API/Postman docs and webhook requirements (R1 lead, R3)
 
 ## Phase 2 · Core loop (h5–h11)
 - [ ] Onboarding flow: age band, experience, language, formats, goal (R1)
@@ -43,7 +44,9 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [ ] Lesson pre-generation script (topic × format × age band × language, cached) (R4)
 - [ ] AI tutor: grounded in topic content, learner's language, guardrails, rate limit, cache, content-search fallback (R4)
 - [ ] Knowledge-tracing notebook on Colab → parameters in `/data`; format bandit in engine (R4)
-- [ ] Mock Account Aggregator personas → learning nudges (never product advice) (R3, R4)
+- [ ] AA data adapter: Zod-validated synthetic deposit-account fixtures and, if access is provisioned, hosted FIU sandbox authentication, consent flow, data fetch and webhooks behind the same interface (R3)
+- [ ] AA transaction summaries → deterministic learning nudges (income variability, spending categories, savings consistency); pass only validated summaries to R4, never raw statements to an LLM; never product advice (R3, R4)
+- [ ] AA demo consent flow and explicit synthetic-data label; review nudge copy and demo claims (R1, R2, R5)
 
 ## Phase 5 · Facilitator dashboard (h19–h21)
 - [ ] Cohort progress and weakest concepts (from knowledge tracing) (R3, R1)
@@ -54,3 +57,14 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [ ] Guardrail review of all content and tutor answers (R5)
 - [ ] E2E for the full core loop on phone + desktop (R5)
 - [ ] Code freeze, demo script, pitch (R5, R1)
+
+## AA access plan · 24-hour demo
+
+Time-box initial access attempts to 30–60 minutes, then continue with synthetic fixtures while approval is pending. Sandbox provisioning is not guaranteed; production bank-data access requires eligible regulated FIU onboarding and is outside this demo's scope.
+
+1. Ask the hackathon organisers for partner sandbox credentials and sample financial data (R1 lead).
+2. Check [Setu sandbox credential setup](https://support.setu.co/support/solutions/articles/81000412878-how-does-one-generate-sandbox-credentials-). If company PAN/GSTIN is required, ask `aa@setu.co` about student hackathon access; do not invent company details (R1 lead, R3).
+3. Request a hosted FIU sandbox and simulated data through [Finvu](https://finvu.github.io/sandbox/get_started.html), contact `support@cookiejar.co.in`. Alternatively enquire at `sandbox@sahamati.org.in`; the published [Sahamati sandbox guide](https://sahamati.org.in/account-aggregator-sahamati-buildaathon-2024/) is from its 2024 event, so confirm current availability (R1 lead, R3).
+4. Demonstrate simulated consent → synthetic transaction summary → learning signal → relevant lesson, labelled **AA demo — synthetic data**. If provider access arrives, replace the data adapter while retaining the summary contract and nudge logic (R3, R4, R1/R2).
+
+Resource handoff: R3 shares the summary schema and fixtures with R4; R4 shares concept IDs and nudge outputs with R1/R2; R5 reviews the educational wording. R1 manages server-only deployment credentials. Follow the [Sahamati onboarding requirements](https://sahamati.org.in/faq/) before considering any future production integration.
