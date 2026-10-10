@@ -1,11 +1,11 @@
+import type { MoneyTermData } from "../components/money-decoder";
+import type { PortfolioViewModel } from "../components/paper-portfolio";
 import type {
   EpisodeMetadata,
-  SimulationState,
   ResolvedOutcome,
   SimulationDecisionOption,
+  SimulationState,
 } from "../components/practice-simulation";
-import type { PortfolioViewModel } from "../components/paper-portfolio";
-import type { MoneyTermData } from "../components/money-decoder";
 
 /**
  * Educational term definitions for Practice Simulation fixtures.
@@ -17,28 +17,32 @@ export const simulationFixtureTerms: Record<string, MoneyTermData> = {
     plainMeaning: "How quickly and easily you can convert an asset into spendable money without losing value.",
     whereYouSeeIt: ["Savings accounts", "Emergency funds", "Cash reserves"],
     example: "Cash in a bank savings account is immediately liquid; money in a 1-year deposit is locked.",
-    whyItMattersHere: "Having liquid reserves allows you to pay immediate bills without paying penalties or selling investments at a loss.",
+    whyItMattersHere:
+      "Having liquid reserves allows you to pay immediate bills without paying penalties or selling investments at a loss.",
   },
   "Emergency Fund": {
     term: "Emergency Fund",
     plainMeaning: "A dedicated buffer of accessible money saved strictly for unplanned life events.",
     whereYouSeeIt: ["Personal budgeting plans", "High-interest savings accounts"],
     example: "Keeping ₹10,000 set aside in case someone gets sick or an essential appliance breaks.",
-    whyItMattersHere: "An emergency fund protects long-term investments and goals from being disrupted by unexpected expenses.",
+    whyItMattersHere:
+      "An emergency fund protects long-term investments and goals from being disrupted by unexpected expenses.",
   },
   Tenure: {
     term: "Tenure",
     plainMeaning: "The agreed length of time an investment stays invested before reaching its maturity date.",
     whereYouSeeIt: ["Fixed Deposits (FD)", "Recurring Deposits (RD)", "Bank loans"],
     example: "A 12-month tenure means the deposit is scheduled to run for a full year.",
-    whyItMattersHere: "Committing money for a longer tenure usually earns higher interest, but restricts access during that period.",
+    whyItMattersHere:
+      "Committing money for a longer tenure usually earns higher interest, but restricts access during that period.",
   },
   Maturity: {
     term: "Maturity",
     plainMeaning: "The date on which an investment period ends and you receive back the principal and interest.",
     whereYouSeeIt: ["Fixed Deposit receipts", "Bonds", "Government savings schemes"],
     example: "An FD opened on 1 January with a 1-year tenure reaches maturity on 31 December.",
-    whyItMattersHere: "Waiting until maturity ensures you receive the full agreed interest rate without early exit deductions.",
+    whyItMattersHere:
+      "Waiting until maturity ensures you receive the full agreed interest rate without early exit deductions.",
   },
   "Premature Withdrawal": {
     term: "Premature Withdrawal",
@@ -52,14 +56,17 @@ export const simulationFixtureTerms: Record<string, MoneyTermData> = {
     plainMeaning: "Equal parts of ownership in a pooled investment like an index fund or mutual fund.",
     whereYouSeeIt: ["Index fund account statements", "Mutual fund portfolio overviews"],
     example: "Owning 50 units of a virtual Nifty 50 index fund.",
-    whyItMattersHere: "The value of your holding is the number of units multiplied by the current price per unit (NAV).",
+    whyItMattersHere:
+      "The value of your holding is the number of units multiplied by the current price per unit (NAV).",
   },
   "Market Value": {
     term: "Market Value",
     plainMeaning: "What an investment could currently be sold for based on prevailing market prices right now.",
     whereYouSeeIt: ["Stock exchange quotes", "Mutual fund statements", "Gold prices"],
-    example: "If unit prices drop by 25%, the market value of your holding drops even though you still own the exact same number of units.",
-    whyItMattersHere: "Market values fluctuate continuously; selling during a downturn locks in that reduced value as an actual loss.",
+    example:
+      "If unit prices drop by 25%, the market value of your holding drops even though you still own the exact same number of units.",
+    whyItMattersHere:
+      "Market values fluctuate continuously; selling during a downturn locks in that reduced value as an actual loss.",
   },
 };
 
@@ -87,7 +94,8 @@ export const march2020StartingPortfolio: PortfolioViewModel = {
     conditional: "Time-locked term deposit with premature exit conditions.",
     "long-term": "Market-linked units whose selling value depends on current market conditions.",
   },
-  allocationDescription: "Portfolio is diversified across liquid reserves, guaranteed term deposits, and market index units.",
+  allocationDescription:
+    "Portfolio is diversified across liquid reserves, guaranteed term deposits, and market index units.",
   goals: [
     {
       id: "goal-laptop",
@@ -182,7 +190,8 @@ export const march2020Decisions: SimulationDecisionOption[] = [
     id: "decision-break-fd",
     label: "Break Fixed Deposit Early",
     description: "Withdraw funds prematurely from the 1-year FD committed to the laptop goal.",
-    financialDetail: "Breaks the ₹12,000 FD. Pays ₹7,000 medical bill, remaining ₹5,000 moves to cash. Incurs early exit penalty.",
+    financialDetail:
+      "Breaks the ₹12,000 FD. Pays ₹7,000 medical bill, remaining ₹5,000 moves to cash. Incurs early exit penalty.",
     consequencePreview: "Incurs premature withdrawal penalty and interrupts progress toward the laptop goal.",
     requiredTermIds: ["Fixed Deposit", "Premature Withdrawal", "Tenure"],
   },
@@ -190,7 +199,8 @@ export const march2020Decisions: SimulationDecisionOption[] = [
     id: "decision-sell-market",
     label: "Sell Virtual Index Fund Units",
     description: "Sell ₹7,000 worth of virtual Nifty 50 units at today's dropped market prices.",
-    financialDetail: "Sells 70 of 80 units at depressed prices. Locks in the temporary market decline as a realized loss.",
+    financialDetail:
+      "Sells 70 of 80 units at depressed prices. Locks in the temporary market decline as a realized loss.",
     consequencePreview: "Turns a temporary drop into an actual loss. The market's future direction was unknown.",
     requiredTermIds: ["Units", "Market Value"],
   },
@@ -204,35 +214,45 @@ export const precomputedMarch2020Outcomes: Record<string, ResolvedOutcome> = {
   "decision-emergency-reserve": {
     decisionId: "decision-emergency-reserve",
     stateDelta: "Emergency reserve: ₹8,000 → ₹1,000 (-₹7,000). Fixed Deposit and Index Fund untouched.",
-    narrativeConsequence: "You paid the hospital bill immediately without stress. Your laptop FD and index fund units remained completely undisturbed.",
-    financialConsequenceSummary: "Your liquid buffer absorbed the shock exactly as designed. Your long-term investments did not need to be liquidated.",
-    learningExplanation: "This is why an emergency reserve exists. Even though your reserve is now low and will need rebuilding, you avoided premature exit penalties and avoided selling market assets during a slump.",
+    narrativeConsequence:
+      "You paid the hospital bill immediately without stress. Your laptop FD and index fund units remained completely undisturbed.",
+    financialConsequenceSummary:
+      "Your liquid buffer absorbed the shock exactly as designed. Your long-term investments did not need to be liquidated.",
+    learningExplanation:
+      "This is why an emergency reserve exists. Even though your reserve is now low and will need rebuilding, you avoided premature exit penalties and avoided selling market assets during a slump.",
     tradeoff: "Your emergency buffer is now down to ₹1,000, leaving you temporarily vulnerable until you replenish it.",
-    whatWasUnknown: "In March 2020, nobody knew how long the market slump or economic shutdown would last. Having cash in hand meant not needing to guess.",
+    whatWasUnknown:
+      "In March 2020, nobody knew how long the market slump or economic shutdown would last. Having cash in hand meant not needing to guess.",
     characterReaction: {
       variant: "blob",
       pose: "explaining",
       expression: "thinking",
       accent: "lime",
-      dialogue: "That was close! Having that reserve ready saved us from having to touch my laptop savings or sell our index fund at a loss.",
+      dialogue:
+        "That was close! Having that reserve ready saved us from having to touch my laptop savings or sell our index fund at a loss.",
     },
     alternativeOutcomes: [
       {
         id: "alt-break-fd",
         decisionId: "decision-break-fd",
         decisionLabel: "Break Fixed Deposit Early",
-        summary: "Would have closed the ₹12,000 FD prematurely with a 1% penalty deduction. Paid hospital bill and left ₹5,000 in cash.",
-        resultingSummary: "Would have closed the ₹12,000 FD prematurely with a 1% penalty deduction. Paid hospital bill and left ₹5,000 in cash.",
+        summary:
+          "Would have closed the ₹12,000 FD prematurely with a 1% penalty deduction. Paid hospital bill and left ₹5,000 in cash.",
+        resultingSummary:
+          "Would have closed the ₹12,000 FD prematurely with a 1% penalty deduction. Paid hospital bill and left ₹5,000 in cash.",
         stateDelta: "FD closed prematurely. ₹5,000 moved to cash. Emergency reserve kept at ₹8,000.",
-        tradeoff: "Protected the emergency buffer, but sacrificed earned interest and halted progress on the laptop goal.",
-        tradeoffComparison: "Protected emergency buffer, but sacrificed earned interest and halted progress on the laptop goal.",
+        tradeoff:
+          "Protected the emergency buffer, but sacrificed earned interest and halted progress on the laptop goal.",
+        tradeoffComparison:
+          "Protected emergency buffer, but sacrificed earned interest and halted progress on the laptop goal.",
         whatWasUnknown: "Whether another emergency would happen before the deposit would have reached maturity.",
         characterReaction: {
           variant: "blob",
           pose: "cautious",
           expression: "concerned",
           accent: "coral",
-          dialogue: "Our emergency reserve would still be full, but breaking the FD meant losing interest and starting over on my laptop.",
+          dialogue:
+            "Our emergency reserve would still be full, but breaking the FD meant losing interest and starting over on my laptop.",
         },
         portfolioAfter: {
           ...march2020StartingPortfolio,
@@ -281,26 +301,31 @@ export const precomputedMarch2020Outcomes: Record<string, ResolvedOutcome> = {
         ],
         termData: [
           simulationFixtureTerms["Premature Withdrawal"]!,
-          simulationFixtureTerms["Tenure"]!,
-          simulationFixtureTerms["Maturity"]!,
+          simulationFixtureTerms.Tenure!,
+          simulationFixtureTerms.Maturity!,
         ],
       },
       {
         id: "alt-sell-market",
         decisionId: "decision-sell-market",
         decisionLabel: "Sell Virtual Index Fund Units",
-        summary: "Would have sold 70 units while the market was down 27%, raising ₹7,000 but locking in a steep paper loss.",
-        resultingSummary: "Would have sold 70 units while the market was down 27%, raising ₹7,000 but locking in a steep paper loss.",
+        summary:
+          "Would have sold 70 units while the market was down 27%, raising ₹7,000 but locking in a steep paper loss.",
+        resultingSummary:
+          "Would have sold 70 units while the market was down 27%, raising ₹7,000 but locking in a steep paper loss.",
         stateDelta: "Sold 70 index units at slump price. Emergency reserve untouched at ₹8,000. FD untouched.",
-        tradeoff: "Preserved emergency buffer and FD, but permanently crystallized a temporary market drop as an actual loss.",
-        tradeoffComparison: "Preserved emergency buffer and FD, but permanently crystallized a temporary market drop as an actual loss.",
+        tradeoff:
+          "Preserved emergency buffer and FD, but permanently crystallized a temporary market drop as an actual loss.",
+        tradeoffComparison:
+          "Preserved emergency buffer and FD, but permanently crystallized a temporary market drop as an actual loss.",
         whatWasUnknown: "At the moment of selling, nobody knew whether the market would rebound or decline further.",
         characterReaction: {
           variant: "blob",
           pose: "pondering",
           expression: "thinking",
           accent: "lilac",
-          dialogue: "We would have protected cash and the FD, but selling index units after a 27% drop would have permanently locked in the loss.",
+          dialogue:
+            "We would have protected cash and the FD, but selling index units after a 27% drop would have permanently locked in the loss.",
         },
         portfolioAfter: {
           ...march2020StartingPortfolio,
@@ -311,7 +336,7 @@ export const precomputedMarch2020Outcomes: Record<string, ResolvedOutcome> = {
                   units: 10,
                   currentValuePaise: 100000, // ₹1,000 remaining
                 }
-              : h
+              : h,
           ),
         },
         comparisonMetrics: [
@@ -338,9 +363,9 @@ export const precomputedMarch2020Outcomes: Record<string, ResolvedOutcome> = {
           },
         ],
         termData: [
-          simulationFixtureTerms["Units"]!,
+          simulationFixtureTerms.Units!,
           simulationFixtureTerms["Market Value"]!,
-          simulationFixtureTerms["Liquidity"]!,
+          simulationFixtureTerms.Liquidity!,
         ],
       },
     ],
@@ -348,9 +373,12 @@ export const precomputedMarch2020Outcomes: Record<string, ResolvedOutcome> = {
   "decision-break-fd": {
     decisionId: "decision-break-fd",
     stateDelta: "Fixed deposit broken: ₹12,000 closed early with 1% interest deduction. Hospital bill paid.",
-    narrativeConsequence: "The bill was paid, but your bank deducted a premature exit penalty and your laptop savings plan was halted.",
-    financialConsequenceSummary: "Lost earned interest due to early withdrawal penalty. Progress on the laptop goal will need to restart.",
-    learningExplanation: "Fixed deposits give predictable interest because you promise not to touch the money for the tenure. When you break that promise, banks reduce the interest paid.",
+    narrativeConsequence:
+      "The bill was paid, but your bank deducted a premature exit penalty and your laptop savings plan was halted.",
+    financialConsequenceSummary:
+      "Lost earned interest due to early withdrawal penalty. Progress on the laptop goal will need to restart.",
+    learningExplanation:
+      "Fixed deposits give predictable interest because you promise not to touch the money for the tenure. When you break that promise, banks reduce the interest paid.",
     tradeoff: "Protected the emergency buffer, but sacrificed interest and delayed the coding laptop purchase.",
     whatWasUnknown: "At that time, future interest rates and market directions were uncertain.",
     characterReaction: {
@@ -364,17 +392,22 @@ export const precomputedMarch2020Outcomes: Record<string, ResolvedOutcome> = {
   "decision-sell-market": {
     decisionId: "decision-sell-market",
     stateDelta: "Sold 70 units at depressed prices. Locked in -27% market drop as a realized loss.",
-    narrativeConsequence: "You paid the medical bill by selling index fund units while their market price was sharply down.",
-    financialConsequenceSummary: "Locked in a 27% drop that was previously only on paper. Lost potential recovery on those sold units.",
-    learningExplanation: "When market prices fall, you only lose money if you are forced to sell. Selling during a market shock converts a paper decline into a permanent loss.",
+    narrativeConsequence:
+      "You paid the medical bill by selling index fund units while their market price was sharply down.",
+    financialConsequenceSummary:
+      "Locked in a 27% drop that was previously only on paper. Lost potential recovery on those sold units.",
+    learningExplanation:
+      "When market prices fall, you only lose money if you are forced to sell. Selling during a market shock converts a paper decline into a permanent loss.",
     tradeoff: "Preserved cash and FD, but permanently sold market assets at their lowest price point in the scenario.",
-    whatWasUnknown: "At that moment, nobody knew whether the market would fall another 20% or rebound. Selling eliminated the risk of further drops, but also eliminated any recovery.",
+    whatWasUnknown:
+      "At that moment, nobody knew whether the market would fall another 20% or rebound. Selling eliminated the risk of further drops, but also eliminated any recovery.",
     characterReaction: {
       variant: "blob",
       pose: "pondering",
       expression: "concerned",
       accent: "lilac",
-      dialogue: "We got the cash, but selling while prices were down locked in a big loss. In March 2020, we had no idea what tomorrow looked like.",
+      dialogue:
+        "We got the cash, but selling while prices were down locked in a big loss. In March 2020, we had no idea what tomorrow looked like.",
     },
   },
 };
@@ -392,7 +425,8 @@ export const initialPracticeSimulationState: SimulationState = {
     expression: "friendly",
     accent: "lime",
     label: "Aarav",
-    dialogue: "It's March 2020. You've saved steadily, started a laptop FD, and put some money into index funds. But unexpected events are about to test our plan.",
+    dialogue:
+      "It's March 2020. You've saved steadily, started a laptop FD, and put some money into index funds. But unexpected events are about to test our plan.",
   },
   marketContext: {
     label: "Nifty 50 Market Indicator",
@@ -402,7 +436,8 @@ export const initialPracticeSimulationState: SimulationState = {
   currentEvent: {
     id: "event-hospital-bill",
     title: "Urgent Family Medical Emergency",
-    description: "Your cousin was admitted to the hospital with a sudden viral infection. The hospital requires an immediate deposit of ₹7,000 for tests and medication.",
+    description:
+      "Your cousin was admitted to the hospital with a sudden viral infection. The hospital requires an immediate deposit of ₹7,000 for tests and medication.",
     urgencyLabel: "Due Today",
     amountPaise: 700000, // ₹7,000
     supportingCharacter: {
@@ -411,7 +446,8 @@ export const initialPracticeSimulationState: SimulationState = {
       expression: "concerned",
       accent: "coral",
       label: "Uncle Ramesh",
-      dialogue: "Aarav, the clinic needs ₹7,000 right now before they can start the treatment. Do we have funds available?",
+      dialogue:
+        "Aarav, the clinic needs ₹7,000 right now before they can start the treatment. Do we have funds available?",
     },
   },
   availableDecisions: march2020Decisions,

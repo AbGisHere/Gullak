@@ -1,27 +1,27 @@
-import * as React from "react";
-import { cn } from "../lib/utils";
-import { formatInr } from "../lib/format";
-import { PlayMoneyBadge } from "./play-money-badge";
-import { Character } from "./character";
-import { MoneyDecoder, type MoneyTermData } from "./money-decoder";
 import {
-  Wallet,
-  PiggyBank,
-  Landmark,
-  ShieldCheck,
-  TrendingUp,
-  Coins,
-  Target,
-  Calendar,
-  Clock,
-  ChevronRight,
-  Lock,
-  Unlock,
   AlertCircle,
+  Calendar,
+  ChevronRight,
+  Clock,
+  Coins,
+  Landmark,
   Layers,
+  Lock,
+  PiggyBank,
+  ShieldCheck,
+  Target,
+  TrendingUp,
+  Unlock,
+  Wallet,
   X,
 } from "lucide-react";
-import { type PaperPortfolioLabels, defaultPaperPortfolioLabels } from "../lib/labels";
+import * as React from "react";
+import { formatInr } from "../lib/format";
+import { defaultPaperPortfolioLabels, type PaperPortfolioLabels } from "../lib/labels";
+import { cn } from "../lib/utils";
+import { Character } from "./character";
+import { MoneyDecoder, type MoneyTermData } from "./money-decoder";
+import { PlayMoneyBadge } from "./play-money-badge";
 
 export type { PaperPortfolioLabels };
 
@@ -34,10 +34,7 @@ export type InstrumentKind =
   | "index-fund"
   | "stock";
 
-export type LiquidityCategory =
-  | "available-now"
-  | "conditional"
-  | "long-term";
+export type LiquidityCategory = "available-now" | "conditional" | "long-term";
 
 export interface PortfolioHoldingItem {
   id: string;
@@ -230,22 +227,25 @@ export function PortfolioSummary({
     <section
       data-testid="portfolio-summary"
       aria-labelledby="portfolio-summary-title"
-      className={cn(
-        "rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs text-card-foreground",
-        className
-      )}
+      className={cn("rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs text-card-foreground", className)}
     >
       {/* Top Header */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/60 pb-3">
         <div className="flex items-center gap-2">
-          <h2 id="portfolio-summary-title" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+          <h2
+            id="portfolio-summary-title"
+            className="text-sm font-semibold uppercase tracking-wider text-muted-foreground"
+          >
             {l.paperPortfolioTitle}
           </h2>
           <PlayMoneyBadge label={l.playMoneyBadge} />
         </div>
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
-          <span data-testid="portfolio-as-of">{l.asOfPrefix}{portfolio.asOf}</span>
+          <span data-testid="portfolio-as-of">
+            {l.asOfPrefix}
+            {portfolio.asOf}
+          </span>
         </div>
       </div>
 
@@ -335,10 +335,7 @@ export function LiquidityBreakdown({
     <section
       data-testid="liquidity-breakdown"
       aria-labelledby="liquidity-breakdown-title"
-      className={cn(
-        "rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs text-card-foreground",
-        className
-      )}
+      className={cn("rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs text-card-foreground", className)}
     >
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
@@ -398,9 +395,7 @@ export function LiquidityBreakdown({
             <span className="text-xs font-bold text-foreground">{l.availableNow}</span>
             <span className="text-xs font-mono font-semibold text-foreground">{pctNow}%</span>
           </div>
-          <p className="mt-1 text-sm font-bold font-mono text-foreground">
-            {formatInr(totals.availableNowPaise)}
-          </p>
+          <p className="mt-1 text-sm font-bold font-mono text-foreground">{formatInr(totals.availableNowPaise)}</p>
           {portfolio.liquidityDescriptions?.["available-now"] && (
             <p className="mt-1.5 text-[11px] text-muted-foreground">
               {portfolio.liquidityDescriptions["available-now"]}
@@ -414,13 +409,9 @@ export function LiquidityBreakdown({
             <span className="text-xs font-bold text-foreground">{l.conditionalAccess}</span>
             <span className="text-xs font-mono font-semibold text-foreground">{pctCond}%</span>
           </div>
-          <p className="mt-1 text-sm font-bold font-mono text-foreground">
-            {formatInr(totals.conditionalPaise)}
-          </p>
+          <p className="mt-1 text-sm font-bold font-mono text-foreground">{formatInr(totals.conditionalPaise)}</p>
           {portfolio.liquidityDescriptions?.conditional && (
-            <p className="mt-1.5 text-[11px] text-muted-foreground">
-              {portfolio.liquidityDescriptions.conditional}
-            </p>
+            <p className="mt-1.5 text-[11px] text-muted-foreground">{portfolio.liquidityDescriptions.conditional}</p>
           )}
         </div>
 
@@ -430,13 +421,9 @@ export function LiquidityBreakdown({
             <span className="text-xs font-bold text-foreground">{l.longerTermMarket}</span>
             <span className="text-xs font-mono font-semibold text-foreground">{pctLong}%</span>
           </div>
-          <p className="mt-1 text-sm font-bold font-mono text-foreground">
-            {formatInr(totals.longTermPaise)}
-          </p>
+          <p className="mt-1 text-sm font-bold font-mono text-foreground">{formatInr(totals.longTermPaise)}</p>
           {portfolio.liquidityDescriptions?.["long-term"] && (
-            <p className="mt-1.5 text-[11px] text-muted-foreground">
-              {portfolio.liquidityDescriptions["long-term"]}
-            </p>
+            <p className="mt-1.5 text-[11px] text-muted-foreground">{portfolio.liquidityDescriptions["long-term"]}</p>
           )}
         </div>
       </div>
@@ -477,10 +464,7 @@ export function EmergencyReserveCard({
     <section
       data-testid="emergency-reserve-card"
       aria-labelledby="emergency-reserve-title"
-      className={cn(
-        "rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs text-card-foreground",
-        className
-      )}
+      className={cn("rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs text-card-foreground", className)}
     >
       <div className="flex items-start justify-between gap-3">
         <div>
@@ -497,9 +481,7 @@ export function EmergencyReserveCard({
               />
             )}
           </div>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {l.emergencyReserveSubtitle}
-          </p>
+          <p className="mt-1 text-xs text-muted-foreground">{l.emergencyReserveSubtitle}</p>
         </div>
         <Character variant="blob" pose="saving" accent="lime" size="sm" />
       </div>
@@ -509,7 +491,12 @@ export function EmergencyReserveCard({
         <div className="flex flex-wrap items-baseline justify-between gap-1 text-xs">
           <span className="font-medium text-muted-foreground">{l.currentBuffer}</span>
           <span className="font-mono font-bold text-foreground">
-            {formatInr(current)} {target > 0 && <span className="font-normal text-muted-foreground">of {formatInr(target)} {l.ofTargetSuffix}</span>}
+            {formatInr(current)}{" "}
+            {target > 0 && (
+              <span className="font-normal text-muted-foreground">
+                of {formatInr(target)} {l.ofTargetSuffix}
+              </span>
+            )}
           </span>
         </div>
 
@@ -559,7 +546,7 @@ export function HoldingCard({
       data-testid={`holding-card-${holding.id}`}
       className={cn(
         "rounded-2xl border border-border/70 bg-card p-4 transition-all duration-150 hover:border-foreground/30 shadow-xs",
-        className
+        className,
       )}
     >
       {/* Top Header */}
@@ -578,7 +565,7 @@ export function HoldingCard({
         <span
           className={cn(
             "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold shrink-0",
-            liquidity.classes
+            liquidity.classes,
           )}
         >
           <LiquidityIcon className="h-2.5 w-2.5" aria-hidden="true" />
@@ -589,7 +576,9 @@ export function HoldingCard({
       {/* Financial Details */}
       <div className="mt-3.5 flex flex-wrap items-baseline justify-between gap-2 border-t border-border/50 pt-2.5">
         <div>
-          <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">{l.currentValue}</span>
+          <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+            {l.currentValue}
+          </span>
           <div className="text-base font-extrabold font-mono text-foreground" data-testid="holding-current-value">
             {formatInr(holding.currentValuePaise)}
           </div>
@@ -612,8 +601,14 @@ export function HoldingCard({
             <div className="text-xs font-semibold font-mono text-foreground">
               {holding.units} {l.units}
               {holding.changePaise !== undefined && (
-                <span className={cn("ml-1.5 font-normal text-[11px]", holding.changePaise >= 0 ? "text-foreground" : "text-muted-foreground")}>
-                  ({holding.changePaise >= 0 ? "+" : ""}{formatInr(holding.changePaise)})
+                <span
+                  className={cn(
+                    "ml-1.5 font-normal text-[11px]",
+                    holding.changePaise >= 0 ? "text-foreground" : "text-muted-foreground",
+                  )}
+                >
+                  ({holding.changePaise >= 0 ? "+" : ""}
+                  {formatInr(holding.changePaise)})
                 </span>
               )}
             </div>
@@ -625,20 +620,24 @@ export function HoldingCard({
       {holding.linkedGoalLabel && (
         <div className="mt-2.5 flex items-center gap-1.5 rounded-lg bg-brand-coral/10 border border-brand-coral/25 px-2.5 py-1 text-xs text-foreground">
           <Target className="h-3 w-3 text-brand-coral shrink-0" aria-hidden="true" />
-          <span className="text-[11px] font-medium">{l.partOfGoalPrefix}<strong>{holding.linkedGoalLabel}</strong></span>
+          <span className="text-[11px] font-medium">
+            {l.partOfGoalPrefix}
+            <strong>{holding.linkedGoalLabel}</strong>
+          </span>
         </div>
       )}
 
       {/* Liquidity Note / Early exit notice */}
       {holding.liquidityNote && (
-        <p className="mt-2 text-[11px] text-muted-foreground leading-normal">
-          {holding.liquidityNote}
-        </p>
+        <p className="mt-2 text-[11px] text-muted-foreground leading-normal">{holding.liquidityNote}</p>
       )}
 
       {/* Interactive Detail Trigger with accessible 44px min-height */}
       <div className="mt-3 flex items-center justify-between pt-2 border-t border-border/40">
-        <span className="text-[10px] text-muted-foreground">{l.valuedAsOfPrefix}{holding.asOf}</span>
+        <span className="text-[10px] text-muted-foreground">
+          {l.valuedAsOfPrefix}
+          {holding.asOf}
+        </span>
         <button
           type="button"
           onClick={() => onOpen?.(holding.id)}
@@ -694,7 +693,9 @@ export function HoldingsList({
             onClick={() => setFilter("all")}
             className={cn(
               "min-h-[44px] h-auto rounded-lg px-3 py-2 font-medium transition-colors flex items-center",
-              filter === "all" ? "bg-card text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
+              filter === "all"
+                ? "bg-card text-foreground shadow-xs font-semibold"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             {l.filterAll}
@@ -704,7 +705,9 @@ export function HoldingsList({
             onClick={() => setFilter("deposit")}
             className={cn(
               "min-h-[44px] h-auto rounded-lg px-3 py-2 font-medium transition-colors flex items-center",
-              filter === "deposit" ? "bg-card text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
+              filter === "deposit"
+                ? "bg-card text-foreground shadow-xs font-semibold"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             {l.filterDeposits}
@@ -714,7 +717,9 @@ export function HoldingsList({
             onClick={() => setFilter("market")}
             className={cn(
               "min-h-[44px] h-auto rounded-lg px-3 py-2 font-medium transition-colors flex items-center",
-              filter === "market" ? "bg-card text-foreground shadow-xs font-semibold" : "text-muted-foreground hover:text-foreground"
+              filter === "market"
+                ? "bg-card text-foreground shadow-xs font-semibold"
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             {l.filterMarket}
@@ -724,13 +729,7 @@ export function HoldingsList({
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {filtered.map((holding) => (
-          <HoldingCard
-            key={holding.id}
-            holding={holding}
-            labels={l}
-            onOpen={onHoldingOpen}
-            onTermOpen={onTermOpen}
-          />
+          <HoldingCard key={holding.id} holding={holding} labels={l} onOpen={onHoldingOpen} onTermOpen={onTermOpen} />
         ))}
       </div>
     </section>
@@ -757,10 +756,7 @@ export function GoalsList({
     <section
       data-testid="goals-list-section"
       aria-labelledby="goals-list-title"
-      className={cn(
-        "rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs text-card-foreground",
-        className
-      )}
+      className={cn("rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs text-card-foreground", className)}
     >
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
@@ -786,7 +782,10 @@ export function GoalsList({
                   <h4 className="text-sm font-bold text-foreground">{goal.label}</h4>
                   <div className="mt-0.5 flex items-center gap-2 text-[11px] text-muted-foreground">
                     <Calendar className="h-3 w-3" aria-hidden="true" />
-                    <span>{l.targetDatePrefix}{goal.targetDate}</span>
+                    <span>
+                      {l.targetDatePrefix}
+                      {goal.targetDate}
+                    </span>
                   </div>
                 </div>
                 <span className="rounded-md bg-brand-coral/15 px-2 py-0.5 text-xs font-mono font-bold text-foreground">
@@ -803,10 +802,11 @@ export function GoalsList({
               </div>
 
               <div className="mt-2 flex items-center justify-between text-xs font-mono">
-                <span className="font-semibold text-foreground">
-                  {formatInr(goal.currentSavingsPaise)}
+                <span className="font-semibold text-foreground">{formatInr(goal.currentSavingsPaise)}</span>
+                <span className="text-muted-foreground">
+                  {l.targetPrefix}
+                  {formatInr(goal.targetPaise)}
                 </span>
-                <span className="text-muted-foreground">{l.targetPrefix}{formatInr(goal.targetPaise)}</span>
               </div>
             </div>
           );
@@ -861,10 +861,7 @@ export function AllocationView({
     <section
       data-testid="allocation-view"
       aria-labelledby="allocation-view-title"
-      className={cn(
-        "rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs text-card-foreground",
-        className
-      )}
+      className={cn("rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs text-card-foreground", className)}
     >
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
@@ -898,7 +895,7 @@ export function AllocationView({
               idx % 4 === 0 && "bg-brand-lime",
               idx % 4 === 1 && "bg-brand-lilac",
               idx % 4 === 2 && "bg-brand-yellow",
-              idx % 4 === 3 && "bg-brand-coral"
+              idx % 4 === 3 && "bg-brand-coral",
             )}
             title={`${item.label}: ${item.percentage}%`}
           />
@@ -1026,9 +1023,7 @@ export function HoldingDetailModal({
 
           {/* Educational Role */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              {l.whyAssetHeld}
-            </h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{l.whyAssetHeld}</h4>
             <p className="mt-1 text-sm text-foreground leading-relaxed">
               {holding.educationalNote ?? l.defaultEducationalNote}
             </p>
@@ -1041,9 +1036,7 @@ export function HoldingDetailModal({
                 <AlertCircle className="h-4 w-4 text-brand-yellow" aria-hidden="true" />
                 <span>{l.accessEarlyWithdrawalConditions}</span>
               </div>
-              <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
-                {holding.liquidityNote}
-              </p>
+              <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">{holding.liquidityNote}</p>
             </div>
           )}
 
@@ -1106,16 +1099,9 @@ export function PaperPortfolio({
   const selectedHolding = portfolio.holdings.find((h) => h.id === selectedHoldingId);
 
   return (
-    <div
-      data-testid="paper-portfolio-container"
-      className={cn("w-full space-y-4 text-foreground", className)}
-    >
+    <div data-testid="paper-portfolio-container" className={cn("w-full space-y-4 text-foreground", className)}>
       {/* Summary always visible at top */}
-      <PortfolioSummary
-        portfolio={portfolio}
-        labels={l}
-        onTermOpen={onTermOpen}
-      />
+      <PortfolioSummary portfolio={portfolio} labels={l} onTermOpen={onTermOpen} />
 
       {/* Mobile-Friendly Section Switcher with 44px min-height touch targets */}
       <nav
@@ -1130,7 +1116,7 @@ export function PaperPortfolio({
             "min-h-[44px] h-auto rounded-lg px-3.5 py-2.5 font-medium transition-colors whitespace-nowrap flex items-center",
             activeTab === "overview"
               ? "bg-card text-foreground shadow-xs font-bold"
-              : "text-muted-foreground hover:text-foreground"
+              : "text-muted-foreground hover:text-foreground",
           )}
         >
           {l.tabOverview}
@@ -1143,7 +1129,7 @@ export function PaperPortfolio({
             "min-h-[44px] h-auto rounded-lg px-3.5 py-2.5 font-medium transition-colors whitespace-nowrap flex items-center",
             activeTab === "holdings"
               ? "bg-card text-foreground shadow-xs font-bold"
-              : "text-muted-foreground hover:text-foreground"
+              : "text-muted-foreground hover:text-foreground",
           )}
         >
           {l.tabHoldings(portfolio.holdings.length)}
@@ -1156,7 +1142,7 @@ export function PaperPortfolio({
             "min-h-[44px] h-auto rounded-lg px-3.5 py-2.5 font-medium transition-colors whitespace-nowrap flex items-center",
             activeTab === "liquidity"
               ? "bg-card text-foreground shadow-xs font-bold"
-              : "text-muted-foreground hover:text-foreground"
+              : "text-muted-foreground hover:text-foreground",
           )}
         >
           {l.tabLiquidity}
@@ -1169,7 +1155,7 @@ export function PaperPortfolio({
             "min-h-[44px] h-auto rounded-lg px-3.5 py-2.5 font-medium transition-colors whitespace-nowrap flex items-center",
             activeTab === "goals"
               ? "bg-card text-foreground shadow-xs font-bold"
-              : "text-muted-foreground hover:text-foreground"
+              : "text-muted-foreground hover:text-foreground",
           )}
         >
           {l.tabGoals(portfolio.goals.length)}
@@ -1186,11 +1172,7 @@ export function PaperPortfolio({
               labels={l}
               onTermOpen={onTermOpen}
             />
-            <LiquidityBreakdown
-              portfolio={portfolio}
-              labels={l}
-              onTermOpen={onTermOpen}
-            />
+            <LiquidityBreakdown portfolio={portfolio} labels={l} onTermOpen={onTermOpen} />
             <HoldingsList
               holdings={portfolio.holdings}
               labels={l}
@@ -1211,32 +1193,20 @@ export function PaperPortfolio({
 
         {activeTab === "liquidity" && (
           <div className="space-y-4">
-            <LiquidityBreakdown
-              portfolio={portfolio}
-              labels={l}
-              onTermOpen={onTermOpen}
-            />
+            <LiquidityBreakdown portfolio={portfolio} labels={l} onTermOpen={onTermOpen} />
             <EmergencyReserveCard
               reserve={portfolio.emergencyReserve}
               terms={portfolio.terms}
               labels={l}
               onTermOpen={onTermOpen}
             />
-            <AllocationView
-              portfolio={portfolio}
-              labels={l}
-              onTermOpen={onTermOpen}
-            />
+            <AllocationView portfolio={portfolio} labels={l} onTermOpen={onTermOpen} />
           </div>
         )}
 
         {activeTab === "goals" && (
           <div className="space-y-4">
-            <GoalsList
-              goals={portfolio.goals}
-              labels={l}
-              onGoalOpen={onGoalOpen}
-            />
+            <GoalsList goals={portfolio.goals} labels={l} onGoalOpen={onGoalOpen} />
             <HoldingsList
               holdings={portfolio.holdings.filter((h) => Boolean(h.linkedGoalId))}
               labels={l}

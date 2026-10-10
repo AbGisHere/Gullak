@@ -24,8 +24,10 @@ export const exampleScamStoryScenario: StoryScenario = {
             term: "Guaranteed Return",
             plainMeaning: "A promise that your money will grow by an exact amount without any chance of loss.",
             whereYouSeeIt: ["Fixed Deposits (backed by DICGC cover up to ₹5 lakh)", "Government small savings"],
-            example: "An FD offering 7% per year is a regulated guaranteed return. A private chat admin offering 100% in 3 days is an extreme warning sign.",
-            whyItMattersHere: "In genuine investing, higher potential returns always come with risk. Promises of quick doubling without risk are almost certainly fraudulent.",
+            example:
+              "An FD offering 7% per year is a regulated guaranteed return. A private chat admin offering 100% in 3 days is an extreme warning sign.",
+            whyItMattersHere:
+              "In genuine investing, higher potential returns always come with risk. Promises of quick doubling without risk are almost certainly fraudulent.",
             misconception: "Private apps or chat admins cannot legally guarantee quick doubling of money.",
           },
         ],
@@ -53,7 +55,8 @@ export const exampleScamStoryScenario: StoryScenario = {
               "The money left your account immediately via UPI. The admin posted a fake confirmation slip, asked for ₹500 more for 'processing fees', and stopped responding.",
             financialPrinciple:
               "Urgency ('slots close tonight') is designed to prevent critical questions. Once a UPI transfer completes, reversing it without consent is extremely difficult.",
-            whatToCheckNext: "Before sending money to unfamiliar recipients, pause and consult a trusted adult or official bank channel.",
+            whatToCheckNext:
+              "Before sending money to unfamiliar recipients, pause and consult a trusted adult or official bank channel.",
             protagonistPose: "cautious",
             protagonistExpression: "concerned",
             friendPose: "cautious",
@@ -79,7 +82,8 @@ export const exampleScamStoryScenario: StoryScenario = {
               "Rohit asked for the registered business name. The admin became evasive, deleted the question, and removed Rohit from the group. Checking official records showed no such authorized investment entity.",
             financialPrinciple:
               "Verifying registration with regulators (like SEBI or RBI) is a vital filter, though not the only one—fraudsters often impersonate legitimate companies. Independent verification on official portals helps detect claims.",
-            whatToCheckNext: "Check whether the entity is registered on the regulator's official directory and whether the payment account matches the company name.",
+            whatToCheckNext:
+              "Check whether the entity is registered on the regulator's official directory and whether the payment account matches the company name.",
             protagonistPose: "explaining",
             protagonistExpression: "curious",
             friendPose: "pondering",
@@ -104,7 +108,8 @@ export const exampleScamStoryScenario: StoryScenario = {
               "You showed Rohit that even diversified market instruments and regulated deposits take years to double capital. Rohit decided not to send his pocket money.",
             financialPrinciple:
               "Risk and return are inseparable. Understanding realistic growth benchmarks helps identify mathematical impossibilities before committing funds.",
-            whatToCheckNext: "Check benchmark return rates from regulated savings and market indexes to evaluate realistic expectations.",
+            whatToCheckNext:
+              "Check benchmark return rates from regulated savings and market indexes to evaluate realistic expectations.",
             protagonistPose: "celebrating",
             protagonistExpression: "friendly",
             friendPose: "saving",
@@ -152,7 +157,8 @@ export const exampleScamStoryScenario: StoryScenario = {
               "Both of you recognized that taking time to verify prevents rushed mistakes, especially when promises appear attractive.",
             financialPrinciple:
               "Treat unusually high or guaranteed returns as a warning sign and verify independently through multiple official sources before transferring any money.",
-            whatToCheckNext: "Report suspicious financial solicitations to the 1930 cyber helpline or cybercrime.gov.in.",
+            whatToCheckNext:
+              "Report suspicious financial solicitations to the 1930 cyber helpline or cybercrime.gov.in.",
             protagonistPose: "saving",
             protagonistExpression: "friendly",
             friendPose: "neutral",

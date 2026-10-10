@@ -1,22 +1,27 @@
-import * as React from "react";
-import { cn } from "../lib/utils";
-import { Character, type CharacterVariant, type CharacterPose, type CharacterExpression, type CharacterAccent } from "./character";
-import { MoneyDecoder, MoneyDecoderCard, type MoneyTermData, type GradeGroup } from "./money-decoder";
-import { StoryChoices, type StoryScenario, type StoryResult } from "./story-choices";
-import { SpotAndSort, type SpotAndSortActivity, type SpotAndSortResult } from "./spot-and-sort";
 import {
-  ArrowRight,
   ArrowLeft,
+  ArrowRight,
+  Check,
   CheckCircle2,
   Clock,
-  Sparkles,
-  BookOpen,
-  Lightbulb,
   Compass,
+  Lightbulb,
   RotateCcw,
-  Check,
+  Sparkles,
 } from "lucide-react";
-import { type TopicLessonLabels, defaultTopicLessonLabels } from "../lib/labels";
+import * as React from "react";
+import { defaultTopicLessonLabels, type TopicLessonLabels } from "../lib/labels";
+import { cn } from "../lib/utils";
+import {
+  Character,
+  type CharacterAccent,
+  type CharacterExpression,
+  type CharacterPose,
+  type CharacterVariant,
+} from "./character";
+import { type GradeGroup, MoneyDecoder, MoneyDecoderCard, type MoneyTermData } from "./money-decoder";
+import { SpotAndSort, type SpotAndSortActivity, type SpotAndSortResult } from "./spot-and-sort";
+import { StoryChoices, type StoryResult, type StoryScenario } from "./story-choices";
 
 export type { TopicLessonLabels };
 
@@ -265,21 +270,19 @@ export function TopicLesson({
 
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;
-    let match: RegExpExecArray | null;
-
-    while ((match = regexPattern.exec(text)) !== null) {
+    for (const match of text.matchAll(regexPattern)) {
       const matchIndex = match.index;
       if (matchIndex > lastIndex) {
         parts.push(text.substring(lastIndex, matchIndex));
       }
 
       const matchedWord = match[0];
-      const matchedData = sortedTerms.find(
-        (t) => t.term.toLowerCase() === matchedWord.toLowerCase()
-      );
+      const matchedData = sortedTerms.find((t) => t.term.toLowerCase() === matchedWord.toLowerCase());
 
       if (matchedData) {
         parts.push(
+          // biome-ignore lint/a11y/noStaticElementInteractions: records clicks bubbling from the decoder's own button, which already handles keyboard activation
+          // biome-ignore lint/a11y/useKeyWithClickEvents: keyboard activation of the inner button fires this same click
           <span
             key={`term-${matchIndex}`}
             onClick={() => {
@@ -292,7 +295,7 @@ export function TopicLesson({
             <MoneyDecoder termData={matchedData} triggerVariant="underline">
               {matchedWord}
             </MoneyDecoder>
-          </span>
+          </span>,
         );
       } else {
         parts.push(matchedWord);
@@ -314,7 +317,7 @@ export function TopicLesson({
       <div
         className={cn(
           "flex w-full max-w-xl flex-col gap-6 rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-sm",
-          className
+          className,
         )}
         data-testid="topic-lesson-finished"
       >
@@ -326,9 +329,7 @@ export function TopicLesson({
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               {l.lessonCompleted}
             </span>
-            <h2 className="text-xl font-bold tracking-tight text-foreground">
-              {lesson.title}
-            </h2>
+            <h2 className="text-xl font-bold tracking-tight text-foreground">{lesson.title}</h2>
           </div>
         </div>
 
@@ -345,8 +346,14 @@ export function TopicLesson({
 
         <div className="rounded-xl border border-border bg-muted/40 p-4">
           <div className="flex items-center justify-between text-xs font-semibold text-muted-foreground">
-            <span>{l.pillarLabelPrefix}{l.pillars[lesson.pillar]}</span>
-            <span>{l.targetPrefix}{lesson.gradeGroup}</span>
+            <span>
+              {l.pillarLabelPrefix}
+              {l.pillars[lesson.pillar]}
+            </span>
+            <span>
+              {l.targetPrefix}
+              {lesson.gradeGroup}
+            </span>
           </div>
           <p className="mt-2 text-sm font-medium text-foreground leading-relaxed">
             {l.completedSummary(lesson.steps.length)}
@@ -373,30 +380,30 @@ export function TopicLesson({
     (currentStep.type === "intro"
       ? (l.sectionLabels?.start ?? "Start")
       : currentStep.type === "experience"
-      ? (l.sectionLabels?.experience ?? "Experience")
-      : currentStep.type === "notice"
-      ? (l.sectionLabels?.notice ?? "Notice")
-      : currentStep.type === "decoder"
-      ? (l.sectionLabels?.decode ?? "Decode")
-      : currentStep.type === "explanation"
-      ? (l.sectionLabels?.understand ?? "Understand")
-      : currentStep.type === "worked-example"
-      ? (l.sectionLabels?.workedExample ?? "Worked Example")
-      : currentStep.type === "spot-and-sort"
-      ? (l.sectionLabels?.practiceSort ?? "Practice Sort")
-      : currentStep.type === "story-choice"
-      ? (l.sectionLabels?.decide ?? "Decide")
-      : currentStep.type === "reflection"
-      ? (l.sectionLabels?.reflect ?? "Reflect")
-      : currentStep.type === "transfer"
-      ? (l.sectionLabels?.transfer ?? "Transfer")
-      : (l.sectionLabels?.recap ?? "Recap"));
+        ? (l.sectionLabels?.experience ?? "Experience")
+        : currentStep.type === "notice"
+          ? (l.sectionLabels?.notice ?? "Notice")
+          : currentStep.type === "decoder"
+            ? (l.sectionLabels?.decode ?? "Decode")
+            : currentStep.type === "explanation"
+              ? (l.sectionLabels?.understand ?? "Understand")
+              : currentStep.type === "worked-example"
+                ? (l.sectionLabels?.workedExample ?? "Worked Example")
+                : currentStep.type === "spot-and-sort"
+                  ? (l.sectionLabels?.practiceSort ?? "Practice Sort")
+                  : currentStep.type === "story-choice"
+                    ? (l.sectionLabels?.decide ?? "Decide")
+                    : currentStep.type === "reflection"
+                      ? (l.sectionLabels?.reflect ?? "Reflect")
+                      : currentStep.type === "transfer"
+                        ? (l.sectionLabels?.transfer ?? "Transfer")
+                        : (l.sectionLabels?.recap ?? "Recap"));
 
   return (
     <div
       className={cn(
         "flex w-full max-w-xl flex-col gap-5 rounded-2xl border border-border bg-card p-4 text-card-foreground shadow-sm sm:p-6",
-        className
+        className,
       )}
       data-testid="topic-lesson-container"
     >
@@ -406,38 +413,31 @@ export function TopicLesson({
           <span className="inline-flex items-center gap-1 rounded bg-brand-muted px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
             {l.pillars[lesson.pillar]}
           </span>
-          <span
-            className="text-xs font-semibold tabular-nums text-muted-foreground"
-            data-testid="lesson-step-counter"
-          >
+          <span className="text-xs font-semibold tabular-nums text-muted-foreground" data-testid="lesson-step-counter">
             {l.stepOf(currentStepIndex + 1, lesson.steps.length)} · {currentSectionLabel}
           </span>
         </div>
 
         {/* Segmented Step Progress Bar */}
         <div className="flex h-1.5 w-full gap-1 overflow-hidden rounded-full bg-muted">
-          {lesson.steps.map((_, idx) => (
+          {lesson.steps.map((s, idx) => (
             <div
-              key={`prog-${idx}`}
+              key={s.id}
               className={cn(
                 "h-full flex-1 transition-colors duration-200",
                 idx < currentStepIndex
                   ? "bg-foreground"
                   : idx === currentStepIndex
-                  ? "bg-brand-lime"
-                  : "bg-muted-foreground/20"
+                    ? "bg-brand-lime"
+                    : "bg-muted-foreground/20",
               )}
             />
           ))}
         </div>
 
         <div>
-          <h1 className="text-lg font-bold tracking-tight text-foreground sm:text-xl">
-            {lesson.title}
-          </h1>
-          <p className="text-xs font-semibold text-muted-foreground">
-            {currentStep.title}
-          </p>
+          <h1 className="text-lg font-bold tracking-tight text-foreground sm:text-xl">{lesson.title}</h1>
+          <p className="text-xs font-semibold text-muted-foreground">{currentStep.title}</p>
         </div>
       </div>
 
@@ -466,9 +466,7 @@ export function TopicLesson({
             className="flex min-h-[44px] h-auto py-2 items-center gap-1.5 rounded-lg bg-primary px-4 text-xs font-bold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             data-testid="lesson-continue-btn"
           >
-            <span>
-              {currentStepIndex + 1 < lesson.steps.length ? l.continueAction : l.finishLesson}
-            </span>
+            <span>{currentStepIndex + 1 < lesson.steps.length ? l.continueAction : l.finishLesson}</span>
             <ArrowRight aria-hidden="true" className="size-3.5" />
           </button>
         </div>
@@ -477,6 +475,7 @@ export function TopicLesson({
   );
 
   function renderStepContent() {
+    if (!currentStep) return null;
     switch (currentStep.type) {
       case "intro":
         return renderIntro(currentStep);
@@ -524,9 +523,7 @@ export function TopicLesson({
             <Sparkles aria-hidden="true" className="size-3.5 text-brand-ink" />
             <span>{l.theHook}</span>
           </div>
-          <p className="mt-1 text-sm font-medium text-foreground leading-relaxed">
-            {step.hook}
-          </p>
+          <p className="mt-1 text-sm font-medium text-foreground leading-relaxed">{step.hook}</p>
         </div>
 
         {step.learningPointers.length > 0 && (
@@ -535,8 +532,8 @@ export function TopicLesson({
               {l.whatYoullExplore}
             </span>
             <ul className="space-y-1.5 text-xs sm:text-sm text-foreground">
-              {step.learningPointers.map((p, idx) => (
-                <li key={idx} className="flex items-start gap-2">
+              {step.learningPointers.map((p, _idx) => (
+                <li key={p} className="flex items-start gap-2">
                   <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-brand-lime text-[10px] font-bold text-brand-ink">
                     ✓
                   </span>
@@ -610,12 +607,8 @@ export function TopicLesson({
         </div>
 
         <div className="rounded-xl border border-brand-lime/40 bg-brand-lime/10 p-4 text-foreground">
-          <span className="block text-xs font-bold uppercase tracking-wider text-brand-ink">
-            {l.guidingQuestion}
-          </span>
-          <p className="mt-1 text-sm sm:text-base font-semibold leading-snug">
-            {step.guidingQuestion}
-          </p>
+          <span className="block text-xs font-bold uppercase tracking-wider text-brand-ink">{l.guidingQuestion}</span>
+          <p className="mt-1 text-sm sm:text-base font-semibold leading-snug">{step.guidingQuestion}</p>
         </div>
 
         <div className="rounded-xl border border-border bg-card p-3.5 text-xs sm:text-sm text-muted-foreground">
@@ -629,9 +622,7 @@ export function TopicLesson({
   function renderDecoder(step: DecoderStep) {
     return (
       <div className="space-y-4">
-        <p className="text-sm text-foreground leading-relaxed">
-          {step.introduction}
-        </p>
+        <p className="text-sm text-foreground leading-relaxed">{step.introduction}</p>
 
         <div className="space-y-3">
           {step.terms.map((term) => (
@@ -657,8 +648,8 @@ export function TopicLesson({
               {l.keyRelationships}
             </span>
             <div className="grid gap-2">
-              {step.breakdownPoints.map((pt, idx) => (
-                <div key={idx} className="rounded-lg border border-border bg-muted/30 p-3 text-xs sm:text-sm">
+              {step.breakdownPoints.map((pt) => (
+                <div key={pt} className="rounded-lg border border-border bg-muted/30 p-3 text-xs sm:text-sm">
                   {renderTextWithTerms(pt, step.terms)}
                 </div>
               ))}
@@ -671,9 +662,7 @@ export function TopicLesson({
             <span className="block text-xs font-bold uppercase tracking-wider text-foreground">
               {step.visualCallout.title}
             </span>
-            <p className="mt-1 text-xs sm:text-sm text-foreground leading-relaxed">
-              {step.visualCallout.description}
-            </p>
+            <p className="mt-1 text-xs sm:text-sm text-foreground leading-relaxed">{step.visualCallout.description}</p>
           </div>
         )}
       </div>
@@ -688,20 +677,20 @@ export function TopicLesson({
         </p>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          {step.comparisonItems.map((item, idx) => (
+          {step.comparisonItems.map((item) => (
             <div
-              key={idx}
+              key={item.title}
               className={cn(
                 "rounded-xl border p-3.5 text-xs sm:text-sm",
-                item.highlight
-                  ? "border-brand-lime bg-brand-lime/10"
-                  : "border-border bg-card"
+                item.highlight ? "border-brand-lime bg-brand-lime/10" : "border-border bg-card",
               )}
             >
               <h3 className="font-bold text-foreground">{item.title}</h3>
               <ul className="mt-2 space-y-1 text-muted-foreground">
-                {item.details.map((d, dIdx) => (
-                  <li key={dIdx} className="leading-snug">• {d}</li>
+                {item.details.map((d) => (
+                  <li key={d} className="leading-snug">
+                    • {d}
+                  </li>
                 ))}
               </ul>
               {item.highlight && (
@@ -758,9 +747,7 @@ export function TopicLesson({
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             {l.reflectOnTradeoff}
           </span>
-          <h3 className="text-sm sm:text-base font-semibold text-foreground">
-            {step.prompt}
-          </h3>
+          <h3 className="text-sm sm:text-base font-semibold text-foreground">{step.prompt}</h3>
         </div>
 
         <div className="grid gap-2">
@@ -778,7 +765,7 @@ export function TopicLesson({
                   "flex min-h-[44px] h-auto w-full items-center justify-between rounded-xl border p-3 text-left text-xs sm:text-sm transition-all",
                   isSelected
                     ? "border-foreground bg-foreground text-background font-semibold"
-                    : "border-border bg-card text-foreground hover:bg-muted/40"
+                    : "border-border bg-card text-foreground hover:bg-muted/40",
                 )}
                 data-testid="lesson-reflection-option"
               >
@@ -803,18 +790,14 @@ export function TopicLesson({
     return (
       <div className="space-y-4">
         <div className="rounded-xl border border-border bg-muted/40 p-4">
-          <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            {l.newContext}
-          </span>
+          <span className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">{l.newContext}</span>
           <p className="mt-1 text-sm text-foreground leading-relaxed">
             {renderTextWithTerms(step.newContextDescription, step.terms)}
           </p>
         </div>
 
         <div className="space-y-2">
-          <h3 className="text-sm font-semibold text-foreground">
-            {step.transferQuestion}
-          </h3>
+          <h3 className="text-sm font-semibold text-foreground">{step.transferQuestion}</h3>
           <div className="grid gap-2">
             {step.options.map((opt) => {
               const isSelected = selectedTransferOption === opt;
@@ -830,7 +813,7 @@ export function TopicLesson({
                     "flex min-h-[44px] h-auto w-full items-center justify-between rounded-xl border p-3 text-left text-xs sm:text-sm transition-all",
                     isSelected
                       ? "border-foreground bg-foreground text-background font-semibold"
-                      : "border-border bg-card text-foreground hover:bg-muted/40"
+                      : "border-border bg-card text-foreground hover:bg-muted/40",
                   )}
                   data-testid="lesson-transfer-option"
                 >
@@ -856,9 +839,7 @@ export function TopicLesson({
     return (
       <div className="space-y-4">
         <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-          <p className="text-sm font-medium text-foreground leading-relaxed">
-            {step.summaryText}
-          </p>
+          <p className="text-sm font-medium text-foreground leading-relaxed">{step.summaryText}</p>
         </div>
 
         {step.keyPrinciples.length > 0 && (
@@ -867,8 +848,8 @@ export function TopicLesson({
               {l.summaryPrinciples}
             </span>
             <div className="space-y-1.5">
-              {step.keyPrinciples.map((principle, idx) => (
-                <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-foreground">
+              {step.keyPrinciples.map((principle, _idx) => (
+                <div key={principle} className="flex items-start gap-2 text-xs sm:text-sm text-foreground">
                   <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-brand-lime text-[10px] font-bold text-brand-ink">
                     ✓
                   </span>

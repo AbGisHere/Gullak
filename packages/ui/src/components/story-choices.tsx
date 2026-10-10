@@ -1,9 +1,15 @@
+import { ArrowRight, CheckCircle2, Compass, MessageSquare, RotateCcw, Search, Sparkles } from "lucide-react";
 import * as React from "react";
+import { defaultStoryChoicesLabels, type StoryChoicesLabels } from "../lib/labels";
 import { cn } from "../lib/utils";
-import { Character, type CharacterPose, type CharacterExpression, type CharacterVariant, type CharacterAccent } from "./character";
+import {
+  Character,
+  type CharacterAccent,
+  type CharacterExpression,
+  type CharacterPose,
+  type CharacterVariant,
+} from "./character";
 import { MoneyDecoder, type MoneyTermData } from "./money-decoder";
-import { ArrowRight, RotateCcw, CheckCircle2, Sparkles, MessageSquare, Compass, Search } from "lucide-react";
-import { type StoryChoicesLabels, defaultStoryChoicesLabels } from "../lib/labels";
 
 export type { StoryChoicesLabels };
 
@@ -85,13 +91,7 @@ export interface StoryChoicesProps {
  * StoryChoices: Pure UI renderer for branching financial decisions and consequences.
  * Content-agnostic, mobile-first, and evidence-emitting without assigning scores or mastery.
  */
-export function StoryChoices({
-  scenario,
-  labels,
-  onComplete,
-  onChoiceSelect,
-  className,
-}: StoryChoicesProps) {
+export function StoryChoices({ scenario, labels, onComplete, onChoiceSelect, className }: StoryChoicesProps) {
   const l: StoryChoicesLabels = { ...defaultStoryChoicesLabels, ...labels };
   const [currentNodeId, setCurrentNodeId] = React.useState(scenario.initialNodeId);
   const [selectedChoiceId, setSelectedChoiceId] = React.useState<string | null>(null);
@@ -117,7 +117,8 @@ export function StoryChoices({
   const protagonistProps = {
     variant: currentNode.protagonistState?.variant ?? "blob",
     pose: selectedChoice?.consequence.protagonistPose ?? currentNode.protagonistState?.pose ?? "neutral",
-    expression: selectedChoice?.consequence.protagonistExpression ?? currentNode.protagonistState?.expression ?? "friendly",
+    expression:
+      selectedChoice?.consequence.protagonistExpression ?? currentNode.protagonistState?.expression ?? "friendly",
     accent: currentNode.protagonistState?.accent ?? "lime",
   };
 
@@ -163,8 +164,8 @@ export function StoryChoices({
             const node = scenario.nodes[h.nodeId];
             const ch = node?.choices.find((c) => c.id === h.choiceId);
             return ch?.outcomeTags ?? [];
-          })
-        )
+          }),
+        ),
       );
 
       onComplete?.({
@@ -205,24 +206,20 @@ export function StoryChoices({
 
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;
-    let match: RegExpExecArray | null;
-
-    while ((match = regexPattern.exec(text)) !== null) {
+    for (const match of text.matchAll(regexPattern)) {
       const matchIndex = match.index;
       if (matchIndex > lastIndex) {
         parts.push(text.substring(lastIndex, matchIndex));
       }
 
       const matchedWord = match[0];
-      const matchedData = sortedTerms.find(
-        (t) => t.term.toLowerCase() === matchedWord.toLowerCase()
-      );
+      const matchedData = sortedTerms.find((t) => t.term.toLowerCase() === matchedWord.toLowerCase());
 
       if (matchedData) {
         parts.push(
           <MoneyDecoder key={`term-${matchIndex}`} termData={matchedData} triggerVariant="underline">
             {matchedWord}
-          </MoneyDecoder>
+          </MoneyDecoder>,
         );
       } else {
         parts.push(matchedWord);
@@ -243,7 +240,7 @@ export function StoryChoices({
       <div
         className={cn(
           "flex w-full max-w-xl flex-col gap-6 rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-sm",
-          className
+          className,
         )}
         data-testid="story-choices-finished"
       >
@@ -255,14 +252,19 @@ export function StoryChoices({
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               {l.scenarioCompleted}
             </span>
-            <h2 className="text-xl font-bold tracking-tight text-foreground">
-              {scenario.title}
-            </h2>
+            <h2 className="text-xl font-bold tracking-tight text-foreground">{scenario.title}</h2>
           </div>
         </div>
 
         <div className="flex items-center justify-center py-2">
-          <Character variant="blob" pose="celebrating" expression="excited" accent="lime" size="lg" label={l.scenarioCompleted} />
+          <Character
+            variant="blob"
+            pose="celebrating"
+            expression="excited"
+            accent="lime"
+            size="lg"
+            label={l.scenarioCompleted}
+          />
         </div>
 
         {scenario.summaryTakeaway && (
@@ -270,9 +272,7 @@ export function StoryChoices({
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               {l.summaryObservation}
             </span>
-            <p className="mt-1 text-sm font-medium text-foreground leading-relaxed">
-              {scenario.summaryTakeaway}
-            </p>
+            <p className="mt-1 text-sm font-medium text-foreground leading-relaxed">{scenario.summaryTakeaway}</p>
           </div>
         )}
 
@@ -294,7 +294,7 @@ export function StoryChoices({
     <div
       className={cn(
         "flex w-full max-w-xl flex-col gap-5 rounded-2xl border border-border bg-card p-4 text-card-foreground shadow-sm sm:p-6",
-        className
+        className,
       )}
       data-testid="story-choices-container"
     >
@@ -309,14 +309,8 @@ export function StoryChoices({
             {l.stepPrefix} {nodePath.length}
           </span>
         </div>
-        <h2 className="text-lg font-bold tracking-tight text-foreground sm:text-xl">
-          {scenario.title}
-        </h2>
-        {currentNode.contextNote && (
-          <p className="text-xs text-muted-foreground italic">
-            {currentNode.contextNote}
-          </p>
-        )}
+        <h2 className="text-lg font-bold tracking-tight text-foreground sm:text-xl">{scenario.title}</h2>
+        {currentNode.contextNote && <p className="text-xs text-muted-foreground italic">{currentNode.contextNote}</p>}
       </div>
 
       {/* Characters Stage: Protagonist + Optional Friend */}
@@ -357,8 +351,8 @@ export function StoryChoices({
           {currentNode.dialogue.speaker === "protagonist"
             ? l.speakerYou
             : currentNode.dialogue.speaker === "friend"
-            ? friendProps?.name ?? "Friend"
-            : l.speakerScene}
+              ? (friendProps?.name ?? "Friend")
+              : l.speakerScene}
         </div>
         <div className="text-sm font-normal leading-relaxed sm:text-base">
           {renderDialogueWithTerms(currentNode.dialogue.text, currentNode.dialogue.terms)}
@@ -380,9 +374,7 @@ export function StoryChoices({
       {!selectedChoice ? (
         /* State 1: Active Decision Choices */
         <div className="space-y-3" data-testid="story-choices-list">
-          <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            {l.whatWillYouDo}
-          </div>
+          <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{l.whatWillYouDo}</div>
           <div className="grid gap-2.5">
             {currentNode.choices.map((choice, index) => {
               const letter = String.fromCharCode(65 + index);
@@ -394,16 +386,14 @@ export function StoryChoices({
                   className={cn(
                     "group flex w-full items-start gap-3 rounded-xl border border-border bg-card p-3.5 text-left transition-all",
                     "hover:border-foreground/50 hover:bg-muted/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                    "min-h-[52px] active:scale-[0.99]"
+                    "min-h-[52px] active:scale-[0.99]",
                   )}
                   data-testid={`story-choice-${choice.id}`}
                 >
                   <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-muted text-xs font-bold text-foreground group-hover:bg-brand-lime group-hover:text-brand-ink">
                     {letter}
                   </span>
-                  <span className="text-sm font-medium text-foreground leading-snug">
-                    {choice.text}
-                  </span>
+                  <span className="text-sm font-medium text-foreground leading-snug">{choice.text}</span>
                 </button>
               );
             })}
@@ -425,9 +415,7 @@ export function StoryChoices({
             <h3 className="text-base font-bold text-foreground sm:text-lg leading-snug">
               {selectedChoice.consequence.title}
             </h3>
-            <p className="text-sm text-foreground leading-relaxed">
-              {selectedChoice.consequence.description}
-            </p>
+            <p className="text-sm text-foreground leading-relaxed">{selectedChoice.consequence.description}</p>
           </div>
 
           {/* Section: Why this matters */}
@@ -436,9 +424,7 @@ export function StoryChoices({
               <Sparkles aria-hidden="true" className="size-3.5 text-brand-ink" />
               <span>{l.whyThisMatters}</span>
             </div>
-            <p className="leading-relaxed">
-              {selectedChoice.consequence.financialPrinciple}
-            </p>
+            <p className="leading-relaxed">{selectedChoice.consequence.financialPrinciple}</p>
           </div>
 
           {/* Section: What to check next (if specified) */}
@@ -448,9 +434,7 @@ export function StoryChoices({
                 <Search aria-hidden="true" className="size-3.5 text-brand-ink" />
                 <span>{l.whatToCheckNext}</span>
               </div>
-              <p className="leading-relaxed text-muted-foreground">
-                {selectedChoice.consequence.whatToCheckNext}
-              </p>
+              <p className="leading-relaxed text-muted-foreground">{selectedChoice.consequence.whatToCheckNext}</p>
             </div>
           )}
 
@@ -472,7 +456,7 @@ export function StoryChoices({
                         "rounded-lg border px-3 py-1.5 text-xs font-medium transition-all min-h-[44px]",
                         isSelected
                           ? "border-foreground bg-foreground text-background"
-                          : "border-border bg-muted/50 text-foreground hover:bg-muted"
+                          : "border-border bg-muted/50 text-foreground hover:bg-muted",
                       )}
                       data-testid="story-reflection-option"
                     >

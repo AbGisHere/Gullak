@@ -49,11 +49,13 @@ export const exampleNeedVsWantActivity: SpotAndSortActivity = {
           plainMeaning: "The next best thing you give up when you choose to spend money on one purchase instead.",
           whereYouSeeIt: ["Budgeting decisions", "Choosing between saving vs buying today"],
           example: "Spending ₹2,000 on a headset means ₹2,000 less for your upcoming exam fee or emergency savings.",
-          whyItMattersHere: "Recognizing wants helps you decide which purchases can wait until your essential needs are funded.",
+          whyItMattersHere:
+            "Recognizing wants helps you decide which purchases can wait until your essential needs are funded.",
         },
       ],
       explanation: {
-        whyItFits: "While social and enjoyable, existing audio earphones work, and upgrading can be postponed if savings are needed.",
+        whyItFits:
+          "While social and enjoyable, existing audio earphones work, and upgrading can be postponed if savings are needed.",
         whatToNotice: "Comfort items bring happiness, but living safely does not depend on having this brand.",
         clueForNextTime: "Ask: 'Can this purchase wait another month without causing an emergency?'",
       },
@@ -66,7 +68,8 @@ export const exampleNeedVsWantActivity: SpotAndSortActivity = {
       expectedCategoryId: "need",
       explanation: {
         whyItFits: "Health recovery and prescribed treatment are fundamental survival needs.",
-        whatToNotice: "Delaying essential medical treatment harms health and often leads to higher emergency costs later.",
+        whatToNotice:
+          "Delaying essential medical treatment harms health and often leads to higher emergency costs later.",
         clueForNextTime: "Essential healthcare always takes priority in an emergency fund.",
       },
       outcomeTags: ["health-necessity", "emergency-reserve"],

@@ -1,5 +1,5 @@
-import type { PortfolioViewModel } from "../components/paper-portfolio";
 import type { MoneyTermData } from "../components/money-decoder";
+import type { PortfolioViewModel } from "../components/paper-portfolio";
 
 /**
  * Educational term definitions for development fixtures.
@@ -11,18 +11,21 @@ export const portfolioFixtureTerms: Record<string, MoneyTermData> = {
     plainMeaning: "How quickly and easily you can convert an asset into spendable cash without losing its value.",
     whereYouSeeIt: ["Bank savings accounts", "Emergency funds", "Investment brochures"],
     example: "Cash in your wallet has instant liquidity; money locked in a 3-year deposit has low liquidity.",
-    whyItMattersHere: "Having high liquidity protects you against emergencies so you never have to break investments or pay penalty fees.",
+    whyItMattersHere:
+      "Having high liquidity protects you against emergencies so you never have to break investments or pay penalty fees.",
   },
   Tenure: {
     term: "Tenure",
     plainMeaning: "The agreed duration of time an investment stays invested before reaching its maturity date.",
     whereYouSeeIt: ["Fixed Deposits (FD)", "Recurring Deposits (RD)", "Bank loans"],
     example: "A 12-month tenure means your money is committed for one full year.",
-    whyItMattersHere: "Longer tenures usually yield higher interest rates, but require you to commit your money for that full duration.",
+    whyItMattersHere:
+      "Longer tenures usually yield higher interest rates, but require you to commit your money for that full duration.",
   },
   Maturity: {
     term: "Maturity",
-    plainMeaning: "The date when an investment period ends and you receive your original money back plus accumulated interest.",
+    plainMeaning:
+      "The date when an investment period ends and you receive your original money back plus accumulated interest.",
     whereYouSeeIt: ["Fixed Deposit certificates", "Bonds", "Government savings schemes"],
     example: "When your FD matures on 15 Oct, the full principal and interest are transferred to your savings account.",
     whyItMattersHere: "Matching maturity dates to when you actually need cash prevents premature withdrawal penalties.",
@@ -51,17 +54,21 @@ export const portfolioFixtureTerms: Record<string, MoneyTermData> = {
   },
   Diversification: {
     term: "Diversification",
-    plainMeaning: "Spreading your savings across different types of investments so a downturn in one doesn't wipe out everything.",
+    plainMeaning:
+      "Spreading your savings across different types of investments so a downturn in one doesn't wipe out everything.",
     whereYouSeeIt: ["Index funds", "Balanced personal portfolios", "Risk management guides"],
     example: "Keeping some money in bank savings, some in FDs, and some in broad index funds.",
-    whyItMattersHere: "Diversification ensures that if one asset drops, your other savings continue to provide stability.",
+    whyItMattersHere:
+      "Diversification ensures that if one asset drops, your other savings continue to provide stability.",
   },
   "Emergency Fund": {
     term: "Emergency Fund",
-    plainMeaning: "An accessible pool of cash saved strictly for unpredictable, urgent expenses like medical care or urgent repairs.",
+    plainMeaning:
+      "An accessible pool of cash saved strictly for unpredictable, urgent expenses like medical care or urgent repairs.",
     whereYouSeeIt: ["Savings accounts", "Liquid mutual funds", "Cash reserves"],
     example: "Keeping ₹5,000 untouched in a bank account until an unforeseen emergency strikes.",
-    whyItMattersHere: "An emergency buffer lets you handle life surprises without borrowing money at high interest or destroying investments.",
+    whyItMattersHere:
+      "An emergency buffer lets you handle life surprises without borrowing money at high interest or destroying investments.",
   },
 };
 
@@ -88,15 +95,18 @@ export const exampleStudentPortfolio: PortfolioViewModel = {
   liquidityDescriptions: {
     "available-now": "Readily accessible funds modeled for immediate needs without early exit penalties.",
     conditional: "Term deposits with committed durations where early withdrawal conditions apply under scenario rules.",
-    "long-term": "Market-linked instruments where value fluctuates; amount available when sold depends on prevailing prices.",
+    "long-term":
+      "Market-linked instruments where value fluctuates; amount available when sold depends on prevailing prices.",
   },
-  allocationDescription: "Spreading money across multiple asset categories divides exposure across different return and risk characteristics.",
+  allocationDescription:
+    "Spreading money across multiple asset categories divides exposure across different return and risk characteristics.",
   emergencyReserve: {
     currentReservePaise: 500000, // ₹5,000
     targetPaise: 600000, // ₹6,000 target
     monthlyExpensesPaise: 200000, // ₹2,000/month estimated scenario expense baseline
     monthsCovered: 2.5,
-    statusNote: "At the assumptions used in this scenario, this reserve represents about 2.5 months of the supplied monthly expense amount.",
+    statusNote:
+      "At the assumptions used in this scenario, this reserve represents about 2.5 months of the supplied monthly expense amount.",
   },
   goals: [
     {
@@ -184,7 +194,8 @@ export const exampleStudentPortfolio: PortfolioViewModel = {
       openedAt: "10 Aug 2026",
       asOf: "11 Oct 2026",
       liquidityCategory: "long-term",
-      liquidityNote: "Redeemable in 1-2 business days. Market-linked value can rise or fall, so the amount available when you sell may differ from the amount invested.",
+      liquidityNote:
+        "Redeemable in 1-2 business days. Market-linked value can rise or fall, so the amount available when you sell may differ from the amount invested.",
       educationalNote: "Mirrors a virtual basket of 50 large companies rather than an individual stock.",
     },
   ],

@@ -1,6 +1,4 @@
 import type { TopicLessonData } from "../components/topic-lesson";
-import { exampleNeedVsWantActivity } from "./spot-and-sort-fixtures";
-import { exampleScamStoryScenario } from "./story-fixtures";
 
 /**
  * Example demo fixture: "Emergency Fund & Fixed Deposits".
@@ -48,7 +46,8 @@ export const exampleEmergencyFundLesson: TopicLessonData = {
         {
           term: "Fixed Deposit",
           expandedName: "Term Deposit / FD",
-          plainMeaning: "A deposit where money is locked with a bank for a fixed duration in exchange for a fixed interest rate.",
+          plainMeaning:
+            "A deposit where money is locked with a bank for a fixed duration in exchange for a fixed interest rate.",
           whereYouSeeIt: ["Bank branches", "Banking mobile apps", "Postal savings"],
           example: "Depositing ₹10,000 in a 1-year FD at 6.5% interest.",
           whyItMattersHere: "FDs offer safety and guaranteed interest, but money is committed for the agreed duration.",
@@ -71,7 +70,8 @@ export const exampleEmergencyFundLesson: TopicLessonData = {
           plainMeaning: "How quickly and easily you can convert an asset into spendable cash without losing value.",
           whereYouSeeIt: ["Savings accounts (high liquidity)", "Fixed deposits & real estate (lower liquidity)"],
           example: "Cash in your wallet is 100% liquid; land or locked FDs are illiquid.",
-          whyItMattersHere: "Emergency expenses require high liquidity so you don't face penalties or distress selling.",
+          whyItMattersHere:
+            "Emergency expenses require high liquidity so you don't face penalties or distress selling.",
         },
       ],
     },
@@ -84,10 +84,12 @@ export const exampleEmergencyFundLesson: TopicLessonData = {
       terms: [
         {
           term: "Emergency Fund",
-          plainMeaning: "A pool of readily accessible savings kept strictly for unpredictable, urgent expenses like medical bills or critical repairs.",
+          plainMeaning:
+            "A pool of readily accessible savings kept strictly for unpredictable, urgent expenses like medical bills or critical repairs.",
           whereYouSeeIt: ["High-interest savings accounts", "Liquid mutual funds", "Cash reserves"],
           example: "Keeping ₹5,000 in a savings account untouched until a genuine emergency hits.",
-          whyItMattersHere: "Having an emergency fund means you never have to break locked FDs or borrow money at high interest.",
+          whyItMattersHere:
+            "Having an emergency fund means you never have to break locked FDs or borrow money at high interest.",
         },
         {
           term: "Tenure",
@@ -104,7 +106,8 @@ export const exampleEmergencyFundLesson: TopicLessonData = {
       type: "worked-example",
       title: "Locked vs Balanced Allocation",
       sectionLabel: "Worked Example",
-      scenarioDescription: "Compare what happens when an unexpected ₹4,000 expense arrives under two different savings strategies:",
+      scenarioDescription:
+        "Compare what happens when an unexpected ₹4,000 expense arrives under two different savings strategies:",
       comparisonItems: [
         {
           title: "Strategy A: 100% Locked in FD",

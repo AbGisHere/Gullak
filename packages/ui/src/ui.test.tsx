@@ -1,26 +1,24 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { Button } from "./components/button";
-import { PlayMoneyBadge } from "./components/play-money-badge";
 import { Character } from "./components/character";
 import { MoneyDecoder, MoneyDecoderCard, type MoneyTermData } from "./components/money-decoder";
-import { StoryChoices, type StoryScenario } from "./components/story-choices";
-import { SpotAndSort, type SpotAndSortActivity } from "./components/spot-and-sort";
-import { TopicLesson, type TopicLessonData } from "./components/topic-lesson";
 import {
+  AllocationView,
+  EmergencyReserveCard,
+  GoalsList,
+  LiquidityBreakdown,
   PaperPortfolio,
   PortfolioSummary,
-  LiquidityBreakdown,
-  EmergencyReserveCard,
-  HoldingCard,
-  HoldingsList,
-  GoalsList,
-  AllocationView,
 } from "./components/paper-portfolio";
-import { exampleScamStoryScenario } from "./fixtures/story-fixtures";
-import { exampleNeedVsWantActivity } from "./fixtures/spot-and-sort-fixtures";
+import { PlayMoneyBadge } from "./components/play-money-badge";
+import { SpotAndSort } from "./components/spot-and-sort";
+import { StoryChoices } from "./components/story-choices";
+import { TopicLesson, type TopicLessonData } from "./components/topic-lesson";
 import { exampleEmergencyFundLesson } from "./fixtures/lesson-fixtures";
 import { exampleStudentPortfolio } from "./fixtures/portfolio-fixtures";
+import { exampleNeedVsWantActivity } from "./fixtures/spot-and-sort-fixtures";
+import { exampleScamStoryScenario } from "./fixtures/story-fixtures";
 import { formatInr } from "./lib/format";
 
 describe("ui", () => {
@@ -54,9 +52,7 @@ describe("ui", () => {
     });
 
     it("supports various silhouettes, poses, and sizes", () => {
-      const { rerender, container } = render(
-        <Character variant="pillar" pose="saving" accent="lime" size="sm" />
-      );
+      const { rerender, container } = render(<Character variant="pillar" pose="saving" accent="lime" size="sm" />);
       expect(container.querySelector("svg")?.getAttribute("width")).toBe("36");
 
       rerender(<Character variant="spark" pose="celebrating" accent="lilac" size="xl" />);
@@ -154,8 +150,8 @@ describe("ui", () => {
       expect(screen.getByText("Urgent transfer sent under time pressure")).toBeDefined();
       expect(
         screen.getByText(
-          "Urgency ('slots close tonight') is designed to prevent critical questions. Once a UPI transfer completes, reversing it without consent is extremely difficult."
-        )
+          "Urgency ('slots close tonight') is designed to prevent critical questions. Once a UPI transfer completes, reversing it without consent is extremely difficult.",
+        ),
       ).toBeDefined();
     });
 
@@ -196,7 +192,7 @@ describe("ui", () => {
       fireEvent.click(finishBtn);
 
       expect(onCompleteMock).toHaveBeenCalledTimes(1);
-      const result = onCompleteMock.mock.calls[0][0];
+      const result = onCompleteMock.mock.calls[0]?.[0];
       expect(result.storyId).toBe("double-money-scam");
       expect(result.selectedChoices).toHaveLength(1);
       expect(result.selectedChoices[0].choiceId).toBe("choice-refuse-firmly");
@@ -233,7 +229,7 @@ describe("ui", () => {
       expect(screen.getByText("Category Matched")).toBeDefined();
       expect(screen.getByText("Why this fits")).toBeDefined();
       expect(
-        screen.getByText("Regular travel to school directly supports daily education and attendance.")
+        screen.getByText("Regular travel to school directly supports daily education and attendance."),
       ).toBeDefined();
     });
 
@@ -284,7 +280,7 @@ describe("ui", () => {
       fireEvent.click(screen.getByTestId("spot-and-sort-next-btn"));
 
       expect(onCompleteMock).toHaveBeenCalledTimes(1);
-      const result = onCompleteMock.mock.calls[0][0];
+      const result = onCompleteMock.mock.calls[0]?.[0];
       expect(result.activityId).toBe("needs-vs-wants-demo");
       expect(result.responses).toHaveLength(3);
       expect(result.responses[0].itemId).toBe("item-bus-pass");
@@ -366,6 +362,7 @@ describe("ui", () => {
       const activityLesson: TopicLessonData = {
         id: "activity-lesson",
         topicId: "needs-vs-wants",
+        title: "Needs vs wants",
         pillar: "plan-budget",
         gradeGroup: "grade-6-7",
         steps: [
@@ -405,6 +402,7 @@ describe("ui", () => {
       const storyLesson: TopicLessonData = {
         id: "story-lesson",
         topicId: "stay-safe",
+        title: "Spotting a scam",
         pillar: "stay-safe",
         gradeGroup: "grade-8-10",
         steps: [
@@ -440,11 +438,7 @@ describe("ui", () => {
       const onLessonMock = vi.fn();
 
       render(
-        <TopicLesson
-          lesson={exampleEmergencyFundLesson}
-          onStepComplete={onStepMock}
-          onLessonComplete={onLessonMock}
-        />
+        <TopicLesson lesson={exampleEmergencyFundLesson} onStepComplete={onStepMock} onLessonComplete={onLessonMock} />,
       );
 
       const continueBtn = screen.getByTestId("lesson-continue-btn");
@@ -455,7 +449,7 @@ describe("ui", () => {
 
       expect(onStepMock).toHaveBeenCalled();
       expect(onLessonMock).toHaveBeenCalledTimes(1);
-      const result = onLessonMock.mock.calls[0][0];
+      const result = onLessonMock.mock.calls[0]?.[0];
       expect(result.lessonId).toBe("emergency-fund-fd-lesson");
       expect(result.topicId).toBe("emergency-fund");
       expect(result.gradeGroup).toBe("grade-8-10");
@@ -637,7 +631,7 @@ describe("ui", () => {
             watchOut: "सावधान रहें / आम गलतफहमी",
             gotIt: "समझ गया",
           }}
-        />
+        />,
       );
 
       // Verify trigger with translated aria-label
@@ -682,7 +676,7 @@ describe("ui", () => {
             realLifeExample: "నిజ జీవిత ఉదాహరణ",
             gotIt: "అర్థమైంది",
           }}
-        />
+        />,
       );
 
       // Verify trigger with Telugu aria-label
@@ -714,10 +708,7 @@ describe("ui", () => {
             title: "पैसे के फैसले की शुरुआत",
             hook: "क्या आपने कभी सोचा है कि जेबखर्च खत्म होने के बाद महत्वपूर्ण चीजों के लिए पैसे क्यों नहीं बचते?",
             estimatedMinutes: 5,
-            learningPointers: [
-              "आवश्यक जरूरतों और अस्थायी इच्छाओं में अंतर पहचानें",
-              "सीमित बजट में प्राथमिकताओं का संतुलन बनाएं",
-            ],
+            learningPointers: ["आवश्यक जरूरतों और अस्थायी इच्छाओं में अंतर पहचानें", "सीमित बजट में प्राथमिकताओं का संतुलन बनाएं"],
           },
         ],
       };
@@ -739,7 +730,7 @@ describe("ui", () => {
               "stay-safe": "सुरक्षित रहें",
             },
           }}
-        />
+        />,
       );
 
       expect(screen.getByText("योजना और बजट")).toBeDefined();
@@ -764,7 +755,7 @@ describe("ui", () => {
             tabLiquidity: "లిక్విడిటీ & నిల్వ",
             tabGoals: (count) => `లక్ష్యాలు (${count})`,
           }}
-        />
+        />,
       );
 
       expect(screen.getByText("పేపర్ పోర్ట్‌ఫోలియో")).toBeDefined();

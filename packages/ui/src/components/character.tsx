@@ -1,27 +1,10 @@
-import * as React from "react";
+import type * as React from "react";
 import { cn } from "../lib/utils";
 
 export type CharacterVariant = "blob" | "pillar" | "spark" | "arch";
-export type CharacterPose =
-  | "neutral"
-  | "pondering"
-  | "celebrating"
-  | "explaining"
-  | "cautious"
-  | "saving";
-export type CharacterExpression =
-  | "friendly"
-  | "curious"
-  | "excited"
-  | "thinking"
-  | "concerned";
-export type CharacterAccent =
-  | "lime"
-  | "lilac"
-  | "coral"
-  | "yellow"
-  | "ink"
-  | "muted";
+export type CharacterPose = "neutral" | "pondering" | "celebrating" | "explaining" | "cautious" | "saving";
+export type CharacterExpression = "friendly" | "curious" | "excited" | "thinking" | "concerned";
+export type CharacterAccent = "lime" | "lilac" | "coral" | "yellow" | "ink" | "muted";
 export type CharacterSize = "sm" | "md" | "lg" | "xl";
 
 export interface CharacterProps extends React.SVGProps<SVGSVGElement> {
@@ -114,7 +97,7 @@ export function Character({
   );
 }
 
-function renderBody(variant: CharacterVariant, accentColor: string) {
+function renderBody(variant: CharacterVariant, _accentColor: string) {
   switch (variant) {
     case "pillar":
       // Slender, taller pill-like silhouette
@@ -149,7 +132,6 @@ function renderBody(variant: CharacterVariant, accentColor: string) {
           strokeLinejoin="round"
         />
       );
-    case "blob":
     default:
       // Organic rounded friendly teardrop-blob
       return (
@@ -176,12 +158,7 @@ function renderAccentBadge(variant: CharacterVariant, accentColor: string) {
         stroke="var(--foreground, #171717)"
         strokeWidth="2"
       />
-      <circle
-        cx={variant === "pillar" ? "50" : "58"}
-        cy="68"
-        r="2"
-        fill="var(--foreground, #171717)"
-      />
+      <circle cx={variant === "pillar" ? "50" : "58"} cy="68" r="2" fill="var(--foreground, #171717)" />
     </g>
   );
 }
@@ -198,10 +175,7 @@ function renderFace(expression: CharacterExpression) {
           <path d="M38 33 Q42 30 46 32" fill="none" />
           <path d="M54 32 Q58 30 62 33" fill="none" />
           {/* Big open smile */}
-          <path
-            d="M44 48 Q50 56 56 48 Z"
-            fill="var(--foreground, #171717)"
-          />
+          <path d="M44 48 Q50 56 56 48 Z" fill="var(--foreground, #171717)" />
         </g>
       );
     case "curious":
@@ -243,7 +217,6 @@ function renderFace(expression: CharacterExpression) {
           <path d="M45 50 Q50 47 55 50" fill="none" />
         </g>
       );
-    case "friendly":
     default:
       return (
         <g stroke="var(--foreground, #171717)" strokeWidth="2.5" strokeLinecap="round">
@@ -342,27 +315,12 @@ function renderArms(pose: CharacterPose, accentColor: string) {
           <path {...strokeProps} d="M26 58 Q34 68 44 64" />
           <path {...strokeProps} d="M74 58 Q66 68 56 64" />
           {/* Shiny coin between hands */}
-          <circle
-            cx="50"
-            cy="64"
-            r="6"
-            fill={accentColor}
-            stroke="var(--foreground, #171717)"
-            strokeWidth="2"
-          />
-          <text
-            x="50"
-            y="67"
-            textAnchor="middle"
-            fontSize="7"
-            fontWeight="bold"
-            fill="var(--foreground, #171717)"
-          >
+          <circle cx="50" cy="64" r="6" fill={accentColor} stroke="var(--foreground, #171717)" strokeWidth="2" />
+          <text x="50" y="67" textAnchor="middle" fontSize="7" fontWeight="bold" fill="var(--foreground, #171717)">
             ₹
           </text>
         </g>
       );
-    case "neutral":
     default:
       // Calm, rested arms by side
       return (

@@ -1,7 +1,7 @@
+import { AlertTriangle, BookOpen, Compass, HelpCircle, Lightbulb, X } from "lucide-react";
 import * as React from "react";
+import { defaultMoneyDecoderLabels, type MoneyDecoderLabels } from "../lib/labels";
 import { cn } from "../lib/utils";
-import { BookOpen, HelpCircle, X, AlertTriangle, Lightbulb, Compass } from "lucide-react";
-import { type MoneyDecoderLabels, defaultMoneyDecoderLabels } from "../lib/labels";
 
 export type { MoneyDecoderLabels };
 
@@ -138,14 +138,12 @@ export function MoneyDecoder({
         data-testid="money-decoder-trigger"
       >
         <span>{children ?? termData.term}</span>
-        <HelpCircle
-          aria-hidden="true"
-          className="size-3.5 shrink-0 opacity-60 transition-opacity hover:opacity-100"
-        />
+        <HelpCircle aria-hidden="true" className="size-3.5 shrink-0 opacity-60 transition-opacity hover:opacity-100" />
       </button>
 
       {/* Accessible Backdrop + Bottom Drawer (mobile) / Modal (desktop) */}
       {isOpen && (
+        // biome-ignore lint/a11y/noStaticElementInteractions: backdrop click-to-close; keyboard users close with Escape or the close button
         <div
           role="presentation"
           className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 backdrop-blur-[2px] transition-opacity duration-200 sm:items-center sm:p-4"
@@ -165,7 +163,7 @@ export function MoneyDecoder({
               // Mobile: bottom sheet with rounded top corners
               "rounded-t-2xl sm:rounded-2xl border-t sm:border border-border",
               // Mobile full-width, no horizontal overflow
-              "max-w-full sm:max-w-lg"
+              "max-w-full sm:max-w-lg",
             )}
             data-testid="money-decoder-sheet"
           >
@@ -192,9 +190,7 @@ export function MoneyDecoder({
                   {termData.term}
                 </h2>
                 {termData.expandedName && (
-                  <p className="text-sm font-medium text-muted-foreground">
-                    {termData.expandedName}
-                  </p>
+                  <p className="text-sm font-medium text-muted-foreground">{termData.expandedName}</p>
                 )}
               </div>
 
@@ -231,9 +227,7 @@ export function MoneyDecoder({
                     <Compass aria-hidden="true" className="size-3.5" />
                     <span>{l.whyItMatters}</span>
                   </div>
-                  <p className="text-sm font-medium leading-relaxed">
-                    {termData.whyItMattersHere}
-                  </p>
+                  <p className="text-sm font-medium leading-relaxed">{termData.whyItMattersHere}</p>
                 </div>
               )}
 
@@ -273,9 +267,7 @@ export function MoneyDecoder({
                     <AlertTriangle aria-hidden="true" className="size-3.5" />
                     <span>{l.watchOut}</span>
                   </div>
-                  <p className="mt-1 text-xs sm:text-sm leading-relaxed">
-                    {termData.misconception}
-                  </p>
+                  <p className="mt-1 text-xs sm:text-sm leading-relaxed">{termData.misconception}</p>
                 </div>
               )}
             </div>
@@ -315,10 +307,7 @@ export function MoneyDecoderCard({
 
   return (
     <div
-      className={cn(
-        "rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-sm",
-        className
-      )}
+      className={cn("rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-sm", className)}
       data-testid="money-decoder-card"
     >
       <div className="flex items-center justify-between gap-2">
@@ -333,18 +322,10 @@ export function MoneyDecoderCard({
         )}
       </div>
 
-      <h3 className="mt-2 text-xl font-bold tracking-tight text-foreground">
-        {termData.term}
-      </h3>
-      {termData.expandedName && (
-        <p className="text-xs font-medium text-muted-foreground">
-          {termData.expandedName}
-        </p>
-      )}
+      <h3 className="mt-2 text-xl font-bold tracking-tight text-foreground">{termData.term}</h3>
+      {termData.expandedName && <p className="text-xs font-medium text-muted-foreground">{termData.expandedName}</p>}
 
-      <p className="mt-3 text-sm text-foreground leading-relaxed">
-        {termData.plainMeaning}
-      </p>
+      <p className="mt-3 text-sm text-foreground leading-relaxed">{termData.plainMeaning}</p>
 
       {termData.whyItMattersHere && (
         <div className="mt-3 rounded-lg border border-brand-lime/40 bg-brand-lime/10 p-2.5 text-xs text-foreground">

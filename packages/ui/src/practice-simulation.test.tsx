@@ -1,24 +1,16 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { PracticeSimulation, type SimulationState } from "./components/practice-simulation";
 import {
-  PracticeSimulation,
-  type SimulationState,
-} from "./components/practice-simulation";
-import {
-  march2020EpisodeMetadata,
   initialPracticeSimulationState,
+  march2020EpisodeMetadata,
   precomputedMarch2020Outcomes,
 } from "./fixtures/simulation-fixtures";
 
 describe("PracticeSimulation", () => {
   // 1. renders briefing state
   it("renders briefing state correctly", () => {
-    render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={initialPracticeSimulationState}
-      />
-    );
+    render(<PracticeSimulation episode={march2020EpisodeMetadata} state={initialPracticeSimulationState} />);
 
     expect(screen.getByTestId("sim-phase-briefing")).toBeDefined();
     expect(screen.getByText("The March Shock: When Plans Meet Reality")).toBeDefined();
@@ -28,12 +20,7 @@ describe("PracticeSimulation", () => {
 
   // 2. renders current portfolio / play-money indicator
   it("renders current portfolio and play-money indicator", () => {
-    render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={initialPracticeSimulationState}
-      />
-    );
+    render(<PracticeSimulation episode={march2020EpisodeMetadata} state={initialPracticeSimulationState} />);
 
     expect(screen.getByTestId("play-money-badge")).toBeDefined();
     expect(screen.getByTestId("portfolio-summary-card")).toBeDefined();
@@ -46,12 +33,7 @@ describe("PracticeSimulation", () => {
       phase: "active",
     };
 
-    render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={activeState}
-      />
-    );
+    render(<PracticeSimulation episode={march2020EpisodeMetadata} state={activeState} />);
 
     expect(screen.getByTestId("sim-phase-active")).toBeDefined();
     expect(screen.getByTestId("sim-life-event")).toBeDefined();
@@ -67,12 +49,7 @@ describe("PracticeSimulation", () => {
       phase: "decision",
     };
 
-    render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={decisionState}
-      />
-    );
+    render(<PracticeSimulation episode={march2020EpisodeMetadata} state={decisionState} />);
 
     expect(screen.getByTestId("sim-phase-decision")).toBeDefined();
     expect(screen.getByTestId("sim-decision-decision-emergency-reserve")).toBeDefined();
@@ -88,13 +65,7 @@ describe("PracticeSimulation", () => {
       phase: "decision",
     };
 
-    render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={decisionState}
-        onDecision={onDecision}
-      />
-    );
+    render(<PracticeSimulation episode={march2020EpisodeMetadata} state={decisionState} onDecision={onDecision} />);
 
     const btn = screen.getByTestId("sim-decision-decision-emergency-reserve");
     fireEvent.click(btn);
@@ -115,12 +86,7 @@ describe("PracticeSimulation", () => {
       resolvedOutcome: outcome,
     };
 
-    render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={consequenceState}
-      />
-    );
+    render(<PracticeSimulation episode={march2020EpisodeMetadata} state={consequenceState} />);
 
     expect(screen.getByTestId("sim-phase-consequence")).toBeDefined();
     expect(screen.getByTestId("sim-consequence-narrative").textContent).toContain(outcome.narrativeConsequence);
@@ -139,11 +105,7 @@ describe("PracticeSimulation", () => {
     };
 
     render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={reflectionState}
-        onReflection={onReflection}
-      />
+      <PracticeSimulation episode={march2020EpisodeMetadata} state={reflectionState} onReflection={onReflection} />,
     );
 
     expect(screen.getByTestId("sim-phase-reflection")).toBeDefined();
@@ -174,12 +136,7 @@ describe("PracticeSimulation", () => {
       resolvedOutcome: precomputedMarch2020Outcomes["decision-emergency-reserve"]!,
     };
 
-    render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={consequenceState}
-      />
-    );
+    render(<PracticeSimulation episode={march2020EpisodeMetadata} state={consequenceState} />);
 
     // Summary card should render the updated portfolio
     expect(screen.getByTestId("portfolio-summary-card")).toBeDefined();
@@ -193,13 +150,7 @@ describe("PracticeSimulation", () => {
       phase: "decision",
     };
 
-    render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={decisionState}
-        onTermOpen={onTermOpen}
-      />
-    );
+    render(<PracticeSimulation episode={march2020EpisodeMetadata} state={decisionState} onTermOpen={onTermOpen} />);
 
     const termBtn = screen.getByRole("button", { name: /Decode term: Emergency Fund/i });
     fireEvent.click(termBtn);
@@ -220,7 +171,7 @@ describe("PracticeSimulation", () => {
         episode={march2020EpisodeMetadata}
         state={completeState}
         onEpisodeComplete={onEpisodeComplete}
-      />
+      />,
     );
 
     expect(screen.getByTestId("sim-phase-complete")).toBeDefined();
@@ -233,7 +184,7 @@ describe("PracticeSimulation", () => {
         decisions: expect.any(Array),
         reflections: expect.any(Array),
         completedAt: expect.any(String),
-      })
+      }),
     );
   });
 
@@ -246,12 +197,7 @@ describe("PracticeSimulation", () => {
       resolvedOutcome: outcome,
     };
 
-    render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={consequenceState}
-      />
-    );
+    render(<PracticeSimulation episode={march2020EpisodeMetadata} state={consequenceState} />);
 
     expect(screen.queryByText(/Correct!/i)).toBeNull();
     expect(screen.queryByText(/Wrong!/i)).toBeNull();
@@ -267,13 +213,7 @@ describe("PracticeSimulation", () => {
       phase: "decision",
     };
 
-    render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={decisionState}
-        onDecision={onDecision}
-      />
-    );
+    render(<PracticeSimulation episode={march2020EpisodeMetadata} state={decisionState} onDecision={onDecision} />);
 
     const btn = screen.getByTestId("sim-decision-decision-emergency-reserve");
     btn.focus();
@@ -296,11 +236,7 @@ describe("PracticeSimulation", () => {
     };
 
     render(
-      <PracticeSimulation
-        episode={march2020EpisodeMetadata}
-        state={consequenceState}
-        onRewindOpen={onRewindOpen}
-      />
+      <PracticeSimulation episode={march2020EpisodeMetadata} state={consequenceState} onRewindOpen={onRewindOpen} />,
     );
 
     const rewindBtn = screen.getByTestId("sim-consequence-rewind");
@@ -318,4 +254,3 @@ describe("PracticeSimulation", () => {
     expect(screen.getByTestId("rewind-alternative-path-card")).toBeDefined();
   });
 });
-

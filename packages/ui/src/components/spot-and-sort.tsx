@@ -1,9 +1,9 @@
+import { ArrowRight, CheckCircle2, Compass, Lightbulb, RotateCcw, Sparkles } from "lucide-react";
 import * as React from "react";
+import { defaultSpotAndSortLabels, type SpotAndSortLabels } from "../lib/labels";
 import { cn } from "../lib/utils";
-import { Character, type CharacterPose, type CharacterExpression, type CharacterVariant, type CharacterAccent } from "./character";
+import { Character, type CharacterExpression, type CharacterPose } from "./character";
 import { MoneyDecoder, type MoneyTermData } from "./money-decoder";
-import { ArrowRight, RotateCcw, CheckCircle2, Compass, Lightbulb, Sparkles, HelpCircle } from "lucide-react";
-import { type SpotAndSortLabels, defaultSpotAndSortLabels } from "../lib/labels";
 
 export type { SpotAndSortLabels };
 
@@ -83,13 +83,7 @@ export interface SpotAndSortProps {
  * SpotAndSort: Fast, mobile-first reinforcement interaction for classification rounds.
  * Data-driven, accessible tap-based sorting with explanatory feedback.
  */
-export function SpotAndSort({
-  activity,
-  labels,
-  onComplete,
-  onItemSelect,
-  className,
-}: SpotAndSortProps) {
+export function SpotAndSort({ activity, labels, onComplete, onItemSelect, className }: SpotAndSortProps) {
   const l: SpotAndSortLabels = { ...defaultSpotAndSortLabels, ...labels };
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [selectedCategoryId, setSelectedCategoryId] = React.useState<string | null>(null);
@@ -112,14 +106,14 @@ export function SpotAndSort({
   // Determine character presentation based on state
   const characterPose: CharacterPose = selectedCategoryId
     ? isMatch
-      ? currentItem.characterReaction?.matchPose ?? "celebrating"
-      : currentItem.characterReaction?.retryPose ?? "pondering"
+      ? (currentItem.characterReaction?.matchPose ?? "celebrating")
+      : (currentItem.characterReaction?.retryPose ?? "pondering")
     : "neutral";
 
   const characterExpression: CharacterExpression = selectedCategoryId
     ? isMatch
-      ? currentItem.characterReaction?.matchExpression ?? "excited"
-      : currentItem.characterReaction?.retryExpression ?? "thinking"
+      ? (currentItem.characterReaction?.matchExpression ?? "excited")
+      : (currentItem.characterReaction?.retryExpression ?? "thinking")
     : "friendly";
 
   const handleSelectCategory = (categoryId: string) => {
@@ -183,24 +177,20 @@ export function SpotAndSort({
 
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;
-    let match: RegExpExecArray | null;
-
-    while ((match = regexPattern.exec(text)) !== null) {
+    for (const match of text.matchAll(regexPattern)) {
       const matchIndex = match.index;
       if (matchIndex > lastIndex) {
         parts.push(text.substring(lastIndex, matchIndex));
       }
 
       const matchedWord = match[0];
-      const matchedData = sortedTerms.find(
-        (t) => t.term.toLowerCase() === matchedWord.toLowerCase()
-      );
+      const matchedData = sortedTerms.find((t) => t.term.toLowerCase() === matchedWord.toLowerCase());
 
       if (matchedData) {
         parts.push(
           <MoneyDecoder key={`term-${matchIndex}`} termData={matchedData} triggerVariant="underline">
             {matchedWord}
-          </MoneyDecoder>
+          </MoneyDecoder>,
         );
       } else {
         parts.push(matchedWord);
@@ -225,7 +215,7 @@ export function SpotAndSort({
       <div
         className={cn(
           "flex w-full max-w-lg flex-col gap-5 rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-sm",
-          className
+          className,
         )}
         data-testid="spot-and-sort-finished"
       >
@@ -234,12 +224,8 @@ export function SpotAndSort({
             <CheckCircle2 aria-hidden="true" className="size-6" />
           </div>
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              {l.roundComplete}
-            </span>
-            <h2 className="text-xl font-bold tracking-tight text-foreground">
-              {activity.title}
-            </h2>
+            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{l.roundComplete}</span>
+            <h2 className="text-xl font-bold tracking-tight text-foreground">{activity.title}</h2>
           </div>
         </div>
 
@@ -285,7 +271,7 @@ export function SpotAndSort({
     <div
       className={cn(
         "flex w-full max-w-lg flex-col gap-4 rounded-2xl border border-border bg-card p-4 text-card-foreground shadow-sm sm:p-5",
-        className
+        className,
       )}
       data-testid="spot-and-sort-container"
     >
@@ -303,16 +289,16 @@ export function SpotAndSort({
 
         {/* Segmented Step Progress Bar */}
         <div className="flex h-1.5 w-full gap-1 overflow-hidden rounded-full bg-muted">
-          {activity.items.map((_, idx) => (
+          {activity.items.map((item, idx) => (
             <div
-              key={`prog-${idx}`}
+              key={item.id}
               className={cn(
                 "h-full flex-1 transition-colors duration-200",
                 idx < currentIndex
                   ? "bg-foreground"
                   : idx === currentIndex
-                  ? "bg-brand-lime"
-                  : "bg-muted-foreground/20"
+                    ? "bg-brand-lime"
+                    : "bg-muted-foreground/20",
               )}
             />
           ))}
@@ -322,9 +308,7 @@ export function SpotAndSort({
           <h2 className="text-base font-bold tracking-tight text-foreground sm:text-lg leading-snug">
             {activity.title}
           </h2>
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            {activity.instruction}
-          </p>
+          <p className="text-xs text-muted-foreground leading-relaxed">{activity.instruction}</p>
         </div>
       </div>
 
@@ -388,19 +372,19 @@ export function SpotAndSort({
                   isSelected
                     ? "border-foreground bg-foreground text-background font-bold shadow-sm"
                     : "border-border bg-card text-foreground hover:bg-muted/40",
-                  !selectedCategoryId && accentClass
+                  !selectedCategoryId && accentClass,
                 )}
                 data-testid={`category-btn-${cat.id}`}
               >
                 <div className="space-y-0.5">
-                  <span className="block text-sm font-bold leading-tight">
-                    {cat.label}
-                  </span>
+                  <span className="block text-sm font-bold leading-tight">{cat.label}</span>
                   {cat.shortHint && (
-                    <span className={cn(
-                      "block text-[11px] leading-tight",
-                      isSelected ? "text-background/80" : "text-muted-foreground"
-                    )}>
+                    <span
+                      className={cn(
+                        "block text-[11px] leading-tight",
+                        isSelected ? "text-background/80" : "text-muted-foreground",
+                      )}
+                    >
                       {cat.shortHint}
                     </span>
                   )}
@@ -422,9 +406,7 @@ export function SpotAndSort({
             <span
               className={cn(
                 "inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-bold",
-                isMatch
-                  ? "bg-brand-lime text-brand-ink"
-                  : "bg-brand-coral/15 text-brand-coral"
+                isMatch ? "bg-brand-lime text-brand-ink" : "bg-brand-coral/15 text-brand-coral",
               )}
             >
               {isMatch ? (
@@ -447,9 +429,7 @@ export function SpotAndSort({
               <Compass aria-hidden="true" className="size-3.5 text-brand-coral" />
               <span>{l.whyThisFits}</span>
             </div>
-            <p className="text-sm font-medium text-foreground leading-relaxed">
-              {currentItem.explanation.whyItFits}
-            </p>
+            <p className="text-sm font-medium text-foreground leading-relaxed">{currentItem.explanation.whyItFits}</p>
           </div>
 
           {/* Section: What to notice */}
@@ -458,9 +438,7 @@ export function SpotAndSort({
               <Lightbulb aria-hidden="true" className="size-3.5 text-brand-ink" />
               <span>{l.whatToNotice}</span>
             </div>
-            <p className="leading-relaxed">
-              {currentItem.explanation.whatToNotice}
-            </p>
+            <p className="leading-relaxed">{currentItem.explanation.whatToNotice}</p>
           </div>
 
           {/* Section: Clue for next time (Optional) */}
@@ -483,7 +461,9 @@ export function SpotAndSort({
                 <RotateCcw aria-hidden="true" className="size-3.5" />
                 <span>{l.tryAnother}</span>
               </button>
-            ) : <div />}
+            ) : (
+              <div />
+            )}
 
             <button
               type="button"

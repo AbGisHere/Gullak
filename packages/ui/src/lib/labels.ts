@@ -1,3 +1,5 @@
+import type { InstrumentKind } from "../components/paper-portfolio";
+
 /**
  * Localized Interface Copy definitions for @gullak/ui.
  *
@@ -272,6 +274,8 @@ export interface PaperPortfolioLabels {
   tabGoals: (count: number) => string;
   portfolioSectionsAria: string;
   liquidityDistributionAria: (pctNow: number, pctCond: number, pctLong: number) => string;
+  instrumentKinds: Record<InstrumentKind, string>;
+  monthsOfSuppliedExpenses: (months: number) => string;
 }
 
 export const defaultPaperPortfolioLabels: PaperPortfolioLabels = {
@@ -450,7 +454,7 @@ export const defaultFinancialRewindLabels: FinancialRewindLabels = {
   returnToYourPath: "Return to your path",
   mainHeading: "Rewind & Compare Decisions",
   subtitle:
-    "Explore what trade-offs would have unfolded under alternative actions. There is no single \"correct\" answer — financial resilience is about having options when life surprises happen.",
+    'Explore what trade-offs would have unfolded under alternative actions. There is no single "correct" answer — financial resilience is about having options when life surprises happen.',
   uncertaintyDefault:
     "At the time of this decision, the future was uncertain. Nobody knew what markets or conditions would do next.",
   selectAlternativeLabel: "Select an alternative path to examine:",
