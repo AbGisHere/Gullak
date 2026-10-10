@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { checkLearnerQuestion, checkModelOutput, resolveProviderOrder } from "./index";
+import { checkLearnerQuestion, checkModelOutput, resolveProviderOrder, TUTOR_PROMPT, TUTOR_PROMPT_V1 } from "./index";
 
 describe("guardrails", () => {
   it.each([
@@ -34,5 +34,19 @@ describe("provider selection", () => {
 
   it("returns no providers without keys, so callers use the content fallback", () => {
     expect(resolveProviderOrder({})).toEqual([]);
+  });
+});
+
+describe("tutor prompt", () => {
+  it("v2 pitches answers at the learner's grade group and keeps every rule", () => {
+    expect(TUTOR_PROMPT.version).toBe(2);
+    expect(TUTOR_PROMPT.system).toContain("({gradeGroup})");
+    expect(TUTOR_PROMPT.system).not.toContain("ageBand");
+    for (const line of TUTOR_PROMPT_V1.system
+      .split("\n")
+      .filter((l) => l.startsWith("- "))
+      .slice(0, 5)) {
+      expect(TUTOR_PROMPT.system).toContain(line);
+    }
   });
 });

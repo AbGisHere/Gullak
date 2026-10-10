@@ -17,6 +17,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - English savings and FD transcript/quiz drafts for content review, local PostgreSQL concurrency/isolation tests, and a beginner setup guide with an importable Postman collection.
 
 ### Changed
+- The AI tutor pitches answers at the learner's grade group (prompt v2); v1 stays unchanged so cached answers keyed by version remain valid.
 - The data-access entry point requires a verified Request and fails explicitly when persistence is unconfigured; no module-memory session fallback.
 - Authenticated API responses bypass service-worker caches so learner data is not reused after an account change.
 - Market snapshot ranges compare timestamps rather than ISO string ordering, and AMFI parsing supports both column layouts with calendar-date validation.

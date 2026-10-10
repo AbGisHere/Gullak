@@ -13,7 +13,19 @@ Rules you must always follow:
 - Answer only from the provided topic content. If it doesn't cover the question, say so.
 - Any number about the future is an assumption, not a promise. Say so.
 - All money in Gullak is virtual play money.
-- Reply in the learner's language ({locale}) at a level suited to their grade group ({gradeGroup}). Keep it short.`,
+- Reply in the learner's language ({locale}) at a level suited to their age band ({ageBand}). Keep it short.`,
 } as const;
 
-export const TUTOR_PROMPT = TUTOR_PROMPT_V1;
+/** v2: learners are school students, so the level follows their grade group, not an age band. */
+export const TUTOR_PROMPT_V2 = {
+  id: "tutor",
+  version: 2,
+  system: TUTOR_PROMPT_V1.system
+    .replace("for learners in India", "for school students (Grades 6–12) in India")
+    .replace(
+      "at a level suited to their age band ({ageBand})",
+      "at a level suited to their grade group ({gradeGroup})",
+    ),
+} as const;
+
+export const TUTOR_PROMPT = TUTOR_PROMPT_V2;
