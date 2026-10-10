@@ -3,8 +3,6 @@
 24-hour plan. Owners: **R1** lead/frontend core (@AbGisHere) · **R2** frontend/game (@mayankSuman404, @Parthvi1707) · **R3** backend/data (@ishitaanmol975) · **R4** AI/adaptive (@VanshGoel-01) · **R5** product/content/QA (shared, led by R1).
 Tick items as they land on `main`. Finishing a phase = minor version bump.
 
-R3 uncommitted work against v0.0.10: tightened prerequisite/grade checks, session-isolated activity/episode run and bookmark persistence, local synthetic repeatable seeds, updated Postman examples and generated local schema types. Completion/mastery and full simulation actions are pending R4 contracts. Hosted schema/session verification and broader market snapshots remain pending. See `docs/backend-v0010-inventory.md`; no phase checkbox is marked complete by this branch work.
-
 ## Phase 0 · Setup (h0–h2) → v0.0.1
 - [x] Monorepo: pnpm workspaces + catalog, Turborepo, strict TS (R1)
 - [x] Biome, Husky (pre-commit / commit-msg / pre-push), commitlint, attribution + changelog checks (R1)
