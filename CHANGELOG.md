@@ -8,6 +8,12 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Changed
+- `pnpm release` updates the README version badge, and the release check verifies it.
+
+### Fixed
+- `pnpm release` no longer leaves package versions half-bumped when it refuses an empty `[Unreleased]`.
+
 ## [0.0.2] - 2026-10-10
 
 ### Changed
