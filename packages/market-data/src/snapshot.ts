@@ -5,6 +5,8 @@ import { type MarketDataAdapter, MarketDataError } from "./adapter";
 /** Shape of a committed snapshot file in `/data/snapshots`. */
 export const SnapshotFile = z.object({
   symbol: z.string().min(1),
+  /** Human-readable name, e.g. the fund's scheme name. */
+  name: z.string().min(1).optional(),
   source: z.string().min(1),
   /** Where the data came from, for attribution in the UI and README. */
   attribution: z.string().min(1),

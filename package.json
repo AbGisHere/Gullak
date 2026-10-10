@@ -22,6 +22,7 @@
     "release": "node scripts/release.mjs",
     "check:release": "node scripts/check-release.mjs",
     "check:attribution": "node scripts/check-attribution.mjs",
+    "snapshots:mf": "node scripts/snapshots/mf-nav.mjs",
     "prepare": "husky"
   },
   "lint-staged": {

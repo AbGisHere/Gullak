@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Holding, LearnerProfile, Locale, Portfolio, TopicContent } from "./index";
+import { Holding, LearnerProfile, Locale, Portfolio, TopicContent, TopicProgress } from "./index";
 
 const uuid = "8f14e45f-ceea-467f-a0e6-1c2f1a3b4d5e";
 const now = "2026-10-10T10:00:00+05:30";
@@ -61,5 +61,12 @@ describe("schemas", () => {
       variants: [{ id: "read", format: "transcript", markdown: "..." }],
     });
     expect(result.success).toBe(false);
+  });
+
+  it("defaults quiz attempts and bounds the best score", () => {
+    const base = { learnerId: uuid, topicId: "fixed-deposit", status: "in-progress", updatedAt: now };
+    expect(TopicProgress.parse(base).quizAttempts).toBe(0);
+    expect(TopicProgress.safeParse({ ...base, bestScore: 1.2 }).success).toBe(false);
+    expect(TopicProgress.safeParse({ ...base, topicId: "Fixed Deposit" }).success).toBe(false);
   });
 });
