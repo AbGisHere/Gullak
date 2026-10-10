@@ -10,6 +10,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [0.0.5] - 2026-10-10
 
+### Added
+- A responsive, skippable onboarding flow that captures a learner's age band, investing experience, preferred learning formats, language and optional goal. It stores a schema-shaped local profile until learner persistence is connected.
+
 ### Changed
 - New curriculum plan in `docs/curriculum.md`: four pillars from the problem statement (plan & budget, save & manage, understand investing, stay financially safe) with 33 topics tagged by grade group (6–7, 8–10, 11–12), from needs vs wants and emergencies to money markets, bonds and index funds.
 - Learn by doing through four data-driven engines: market sim (paper portfolio and Time Machine), life sim, story choices, spot & sort, plus a what-if sandbox.
