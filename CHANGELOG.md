@@ -8,6 +8,11 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.9] - 2026-10-10
+
+### Added
+- M1 approach PDF in `deliverables/`.
+
 ## [0.0.8] - 2026-10-10
 
 ### Added
