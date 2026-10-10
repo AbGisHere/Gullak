@@ -22,7 +22,7 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [ ] Supabase project, first migration (learners, progress, portfolios), generated types, data-access layer (R3)
 - [ ] Snapshot pipeline: real FD rates, NIFTY 50 history (incl. 2020), sample MF NAVs, gold, CPI into `data/snapshots` (R3)
 - [ ] Topic content folder structure + FD topic draft (en) (R5)
-- [ ] Vercel project + preview deploys (R1)
+- [x] Vercel project + preview deploys (R1): production at [gullak.abgupta.me](https://gullak.abgupta.me)
 - [ ] Ask organisers for sponsored AA/FIU sandbox access; otherwise enquire with Setu, Finvu or Sahamati. Confirm student eligibility, provisioning time, test credentials/users/OTPs, API/Postman docs and webhook requirements (R1 lead, R3)
 
 ## Phase 2 · Core loop (h5–h11)

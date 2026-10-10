@@ -1,5 +1,6 @@
 # Gullak
 
+[![Live demo](https://img.shields.io/badge/demo-gullak.abgupta.me-ea580c?logo=vercel&logoColor=white)](https://gullak.abgupta.me)
 [![Version](https://img.shields.io/badge/version-0.0.3-0f766e)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Node](https://img.shields.io/badge/node-24_LTS-339933?logo=nodedotjs&logoColor=white)](.nvmrc)
@@ -8,7 +9,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](packages/typescript-config)
 [![PWA](https://img.shields.io/badge/PWA-phone_%2B_desktop-5A0FC8?logo=pwa&logoColor=white)](apps/web)
 
-**Learn money. Practise with play money on real markets.**
+**Learn money. Practise with play money on real markets.** Try it at **[gullak.abgupta.me](https://gullak.abgupta.me)** (installable on phone and desktop).
 
 Gullak (गुल्लक, "piggy bank") is an adaptive financial-literacy platform built for Megathon X (Vanguard problem statement). Learners climb a topic ladder from savings accounts to stocks. Each topic is taught in the format that suits them (story, video, visual, formula, simulation, quiz, audio), in English, Hindi or Telugu. Passing a topic unlocks that instrument in a **paper portfolio** valued on **real market data**, with a Time Machine that replays real history.
 

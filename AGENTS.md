@@ -147,5 +147,6 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
 | 2026-10-10 | **CI runs every check; `pre-push` only runs the release check on main** | No double effort: the full suite runs automatically on every push and PR, including forks. A red CI is fixed, never merged. |
 | 2026-10-10 | **No branch protection on main**; fork + PR workflow | Team lead's call. Merger must confirm CI is green. |
 | 2026-10-10 | **Graded submission repo `IIIT-ECell/megathon26-claude2create`** (remote `submission`), pushed only when R1 says so | It's what gets graded and teammates have no access. R1 picks which released, green versions graders see. |
+| 2026-10-10 | **Vercel hosting at `gullak.abgupta.me`** (CNAME on Namecheap); production from `main`, previews per branch; functions in Mumbai (`bom1`) | Zero-config Next/Turborepo deploys; a stable custom URL for judges and the installed PWA; Mumbai is closest to learners and to Supabase. |
 | 2026-10-10 | **MIT licence** | Standard for hackathon projects; team lead approved. |
 | 2026-10-10 | **Impeccable skill committed** for all agents; hooks in shared settings | UI quality is how we win; every teammate's agent gets the same design checks. |
