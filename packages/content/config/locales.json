@@ -1,0 +1,9 @@
+{
+  "$comment": "Supported locales. Adding a language = add a row here, a messages file in apps/web/messages, and topic content files. No code change.",
+  "defaultLocale": "en",
+  "locales": [
+    { "code": "en", "name": "English", "nativeName": "English" },
+    { "code": "hi", "name": "Hindi", "nativeName": "हिन्दी" },
+    { "code": "te", "name": "Telugu", "nativeName": "తెలుగు" }
+  ]
+}

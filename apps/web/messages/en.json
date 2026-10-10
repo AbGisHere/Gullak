@@ -1,0 +1,11 @@
+{
+  "app": {
+    "name": "Gullak",
+    "tagline": "Learn money. Practise with play money on real markets.",
+    "playMoney": "Play money",
+    "playMoneyNote": "All money in Gullak is virtual. We teach; we never tell you what to buy or sell.",
+    "startingCash": "A college student new to investing starts with",
+    "start": "Start learning",
+    "offline": "You're offline. Lessons you've opened before still work."
+  }
+}

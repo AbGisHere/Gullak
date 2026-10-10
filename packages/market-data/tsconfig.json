@@ -1,0 +1,4 @@
+{
+  "extends": "@gullak/typescript-config/library.json",
+  "include": ["src", "*.config.ts"]
+}

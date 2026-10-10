@@ -1,0 +1,7 @@
+# AGENTS.md › Git rules › 3. Fast local gate; CI runs the full suite incl. production build + e2e.
+branch=$(git rev-parse --abbrev-ref HEAD)
+echo "▶ pre-push: lint, typecheck, unit tests ($branch)"
+pnpm lint && pnpm typecheck && pnpm test || { echo "✖ checks failed: fix them, don't skip them."; exit 1; }
+if [ "$branch" = "main" ]; then
+  node scripts/check-release.mjs --tag || exit 1
+fi

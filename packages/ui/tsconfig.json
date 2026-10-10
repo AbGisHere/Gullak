@@ -1,0 +1,9 @@
+{
+  "extends": "@gullak/typescript-config/react-library.json",
+  "compilerOptions": {
+    "paths": {
+      "@gullak/ui/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "*.config.ts"]
+}
