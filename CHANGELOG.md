@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.11] - 2026-10-10
+
 ### Added
 - Grade-aware, preference-first lesson format picker with validated request/result contracts, deterministic caller-owned mixed-format rotation, explicit unavailable results and quiz exclusion. The lesson API includes answer-free selection metadata; unit and backend integration tests cover selection and boundary cases.
 - R4 format-picker integration and local-testing guide, including content/frontend/backend handoffs and the distinction from the later learned bandit.
