@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-10-11
+
 ### Changed
 - README has a "What works today" section and no longer claims data sources that aren't committed yet; ROADMAP and the snapshot pipeline table match what is on `main`.
 
