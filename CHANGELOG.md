@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Changed
+- Team workflow: commit each logical step on fork branches and push often; PRs merge by rebase or fast-forward (never squash), and versions still bump only on merge.
+
 ## [0.0.14] - 2026-10-10
 
 ### Added
