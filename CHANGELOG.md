@@ -8,6 +8,14 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Session-scoped activity/episode run creation and resumable navigation bookmarks with content hashes, revision checks and idempotent writes; no client-supplied completion, money or mastery.
+- Repeatable synthetic local demo seeds and regression coverage for grade-specific cash, transitive prerequisites, shared-device identity switching and cross-profile progress isolation.
+
+### Fixed
+- Apply current graph prerequisites and grade eligibility to FD investment and instrument unlock output.
+- Align Postman prerequisite examples and setup balances with the v0.0.10 config; distinguish team commits from new backend work.
+
 ## [0.0.12] - 2026-10-10
 
 ### Added

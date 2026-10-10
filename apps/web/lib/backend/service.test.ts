@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { startingCapital } from "@gullak/content";
 import { loadTopic } from "@gullak/content/server";
 import { startingCash } from "@gullak/engine";
-import { LearnerProfile, OnboardingRequest, Portfolio, type Topic } from "@gullak/types";
+import { Experience, GradeGroup, LearnerProfile, OnboardingRequest, Portfolio, type Topic } from "@gullak/types";
 import { describe, expect, it, vi } from "vitest";
 import type { DataAccess, LearnerState } from "../data/transactions";
 import { createBackendService, publicLesson } from "./service";
@@ -39,6 +39,10 @@ const state: LearnerState = {
 };
 function database(): DataAccess {
   return {
+    run: vi.fn(),
+    runs: vi.fn(),
+    startRun: vi.fn(),
+    bookmark: vi.fn(),
     state: vi.fn(async () => state),
     onboard: vi.fn(async (p) => p),
     lesson: vi.fn(async () => undefined),
@@ -139,6 +143,38 @@ describe("backend orchestration", () => {
     expect(publicLesson(restricted, state)).toMatchObject({
       formatSelection: { status: "unavailable", reason: "no-eligible-variant" },
     });
+  });
+  it("uses the configured starting cash for all nine grade/experience combinations", async () => {
+    for (const gradeGroup of GradeGroup.options)
+      for (const experience of Experience.options) {
+        const db = database();
+        await createBackendService(db, id).onboard({
+          gradeGroup,
+          experience,
+          locale: "en",
+          preferredFormats: ["transcript"],
+        });
+        expect(db.onboard).toHaveBeenCalledWith(
+          expect.objectContaining({ gradeGroup, experience }),
+          startingCash(startingCapital, gradeGroup, experience),
+        );
+      }
+  });
+  it("rejects stale parent completion when its prerequisite is absent", () => {
+    const stale = { ...state, progress: state.progress.filter((p) => p.topicId !== "money-basics") };
+    expect(() => publicLesson(topic, stale)).toThrow("topic_locked");
+  });
+  it("rejects FD investments from a grade excluded by the curriculum", async () => {
+    const db = database();
+    db.state = vi.fn(async () => ({ ...state, profile: { ...state.profile, gradeGroup: "grade-6-7" as const } }));
+    await expect(
+      createBackendService(db, id).invest({ principalPaise: 100, tenureMonths: 12 }, id, {
+        value: 6.25,
+        asOf: at,
+        source: "fixture",
+      }),
+    ).rejects.toMatchObject({ status: 403 });
+    expect(db.invest).not.toHaveBeenCalled();
   });
   it("uses config starting cash and verified identity", async () => {
     const db = database();

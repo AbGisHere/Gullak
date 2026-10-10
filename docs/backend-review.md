@@ -79,3 +79,5 @@ The expanded snapshot plan in `data/snapshots/README.md` prioritises category-sp
 - AA synthetic adapters/summary nudges, hosted sandbox integration, production pagination/rate limiting and broader operational hardening remain roadmap work.
 
 See the setup guide's stage table for changed-file ownership and the endpoint list. No release versions are bumped on this feature branch.
+
+Latest v0.0.10 inventory, run contracts and validation: see [backend-v0010-inventory.md](backend-v0010-inventory.md). This supersedes older age-band/capital and feature-branch status notes above.

@@ -29,7 +29,7 @@ export function generateDatabaseTypes(query) {
     query(`select coalesce(json_agg(t order by t.name),'[]') from (
     select p.proname as name,format_type(p.prorettype,null) as returns,
       (select coalesce(json_agg(json_build_object('name',p.proargnames[i+1],'type',format_type(p.proargtypes[i],null)) order by i),'[]') from generate_series(0,p.pronargs-1) i) as args
-    from pg_proc p where p.pronamespace='public'::regnamespace and p.prokind='f') t;`),
+    from pg_proc p where p.pronamespace='public'::regnamespace and p.prokind='f' and p.proname not like 'test_%') t;`),
   );
   const lines = [
     "// Generated from an isolated PostgreSQL database after applying committed migration files.",
