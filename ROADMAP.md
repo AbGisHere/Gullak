@@ -16,11 +16,11 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [x] PWA (Serwist), i18n en/hi/te (next-intl), Supabase client helpers (R1)
 
 ## Phase 1 · Skeleton (h2–h5)
-- [ ] Design direction + tokens via Impeccable (R2)
+- [x] Design direction + tokens via Impeccable (R2): [DESIGN.md](DESIGN.md), [PRODUCT.md](PRODUCT.md), brand tokens in `packages/ui`
 - [ ] App shell with phone bottom tabs + desktop sidebar (R1)
 - [ ] Locale switcher (cookie) and play-money badge in the shell (R1)
-- [ ] Supabase project, first migration (learners, progress, portfolios), generated types, data-access layer (R3)
-- [ ] Snapshot pipeline, P1 sources: MF NAVs for every fund category, NIFTY 50 + TRI (incl. 2008, 2016, 2020), CPI by group, gold, bank savings/FD/RD rates, small-savings rates, household spending ([data/snapshots](data/snapshots/README.md)) (R3)
+- [x] Supabase project, first migration (learners, progress, portfolios), generated types, data-access layer (R3)
+- [ ] Snapshot pipeline, P1 sources: MF NAVs for every fund category, NIFTY 50 + TRI (incl. 2008, 2016, 2020), CPI by group, gold, bank savings/FD/RD rates, small-savings rates, household spending ([data/snapshots](data/snapshots/README.md)) (R3); one AMFI NAV history and the SBI 1-year FD rate committed
 - [x] Curriculum plan: four pillars, 33 topics tagged by grade group, learn-by-doing engines ([docs/curriculum.md](docs/curriculum.md)) (R1, R5)
 - [x] Curriculum schemas: grade groups (6–7 / 8–10 / 11–12) replace age bands, `pillar` on topics, prerequisite graph, `Activity` and `Episode` schemas for the three engines, one example per engine (R1, R4)
 - [ ] Curriculum entry per topic (goals, key ideas, misconceptions, scenario, quiz goals) for all four pillars (R5); Grade 8–10 English briefs done for the five demo topics
@@ -30,15 +30,15 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 ## Phase 2 · Core loop (h5–h11)
 - [x] Onboarding flow: grade group, current experience, how they like to learn (optional, "Mix it up" default) (R1)
 - [ ] Lesson pre-generation script (topic × format × grade group × language, cached), run on the first curriculum entries (R4); the brief validator (step 1) is done, generation and caching are not
-- [ ] Demo topics in every format (one per pillar, e.g. needs vs wants, emergency fund, compounding, UPI scams): video, story, visual, formula + live calculator (KaTeX), transcript, simulation, quiz, audio (R2, R5)
+- [ ] Demo topics in every format (one per pillar, e.g. needs vs wants, emergency fund, compounding, UPI scams): video, story, visual, formula + live calculator (KaTeX), transcript, simulation, quiz, audio (R2, R5); 8 topics have a reading lesson and a quiz, and the lesson renderer is built but not wired
 - [x] Format picker from preferences (R4) ([handoff](docs/format-picker.md)); the learned bandit stays in Phase 4
 - [ ] Quiz pass → unlock rules over the prerequisite graph (R2)
 - [ ] Life + market sim engine (Practice): monthly needs/wants/savings split, personas, event deck, unlocked instruments on real prices, FD/RD early-exit rules, selling units at the day's price (R4)
-- [ ] Practice renderer + flagship episode: March 2020 + hospital bill, with speed control and the side-by-side reveal (R2, R5)
+- [ ] Practice renderer + flagship episode: March 2020 + hospital bill, with speed control and the side-by-side reveal (R2, R5); renderer and rewind comparison built on sample data, episode data committed, not yet joined
 - [x] Activity and episode runs: start, resumable bookmarks, pinned content hashes, idempotent writes (R3)
 - [ ] Activity answers: server-graded spot & sort and story choices, run completion ([contract](docs/activity-answers.md)) (R3); request/response schemas done, route and storage not yet
-- [ ] Spot & sort engine + renderer (need or want, scam or real) (R4, R2)
-- [ ] Shared portfolio: cash, piggy bank, RD, FD, gold, funds; valuation with as-of prices (R2, R3)
+- [ ] Spot & sort engine + renderer (need or want, scam or real) (R4, R2); renderer built on sample data, grading belongs to activity answers
+- [ ] Shared portfolio: cash, piggy bank, RD, FD, gold, funds; valuation with as-of prices (R2, R3); portfolio + FD API and the paper-portfolio UI exist, not yet joined
 - [ ] Demo topics translated to hi + te (R5)
 - [ ] Living Gullak: a piggy-bank character that grows and evolves with habits (streaks, emergency fund, scams spotted), never with spending or luck (R2, R1)
 - [ ] Daily loop: today's real-price move as a micro-lesson + the 2-minute daily drop, streaks with forgiveness (R2, R4)
@@ -49,7 +49,7 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [ ] Live mode: paper trading on current prices via the market-data adapters (live index + gold adapters), unlocked per instrument after Practice, habit scoring, no returns leaderboard (R3, R4, R2)
 - [ ] Simulation decisions report to knowledge tracing as evidence (R4)
 - [ ] Goal engine: monthly amount needed; savings vs FD vs index SIP with assumptions shown (R4, R2)
-- [ ] Story choices engine + renderer: branching nodes, consequences, try again (R4, R2)
+- [ ] Story choices engine + renderer: branching nodes, consequences, try again (R4, R2); renderer built on sample data
 - [ ] Nani's Gullak as data: seasons, episodes, cast, story state carried across episodes and seasons, links to topics, Practice episodes and missions; Season 1 episodes 1–3 first (R5, R4, R2)
 - [ ] Gullu: the revived gullak as companion, narrator and tutor voice (R4, R2)
 - [ ] "FYI, this really happened" reveal after each arc, with real data and a replay as a Practice episode (R2, R3)

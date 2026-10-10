@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Changed
+- README has a "What works today" section and no longer claims data sources that aren't committed yet; ROADMAP and the snapshot pipeline table match what is on `main`.
+
 ## [0.1.1] - 2026-10-11
 
 ### Fixed
@@ -21,7 +24,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - `/r2-preview` route for reviewing the learning components on fixtures.
 
 ### Known issues
-- 35 of the 49 component tests in `packages/ui/src/ui.test.tsx` fail, and the components are not yet wired to the backend. Both are fixed in the next 0.1.x.
+- 35 of the 49 component tests in `packages/ui/src/ui.test.tsx` fail (fixed in 0.1.1), and the components are not yet wired to the backend (still open).
 
 ## [0.0.18] - 2026-10-11
 

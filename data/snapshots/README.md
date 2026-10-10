@@ -23,7 +23,7 @@ Priority: **P1** is needed for the demo topics and the market sim (Phase 1–2);
 | NIFTY 50 and NIFTY 50 TRI history (incl. 2008, 2016, Feb–Apr 2020) | P1 | TODO(R3) | `scripts/snapshots/nse-index.mjs` | niftyindices.com historical data (NSE Indices) | `NIFTY50`, `NIFTY50-TRI` |
 | CPI inflation, headline and by group (food, fuel, education, health) | P1 | TODO(R3) | `scripts/snapshots/cpi.mjs` | MOSPI CPI (Combined), base 2012=100 | `CPI-IN`, `CPI-IN-FOOD`, … |
 | Gold price (₹/gram, 24K) | P1 | TODO(R3) | `scripts/snapshots/gold.mjs` | IBJA published rates, or RBI DBIE | `XAU-INR` |
-| Savings account, FD and RD rates | P1 | TODO(R3) | `scripts/snapshots/bank-rates.mjs` (from a hand-checked CSV with source URLs) | Banks' published rate pages, with the date checked | e.g. `FD-SBI-1Y`, `RD-SBI-1Y`, `SB-SBI` |
+| Savings account, FD and RD rates | P1 | Partial: SBI 1-year FD rate committed | `scripts/snapshots/bank-rates.mjs` (from a hand-checked CSV with source URLs) | Banks' published rate pages, with the date checked | e.g. `FD-SBI-1Y`, `RD-SBI-1Y`, `SB-SBI` |
 | Small-savings rates (PPF, SSY, NSC, post office) and history | P1 | TODO(R3) | `scripts/snapshots/small-savings.mjs` (hand-checked CSV) | Ministry of Finance quarterly notifications | `PPF`, `SSY`, `NSC` |
 | Household spending by category | P1 | TODO(R3) | `scripts/snapshots/hces.mjs` (hand-checked CSV) | MoSPI HCES 2022–23 fact sheet | `HCES-RURAL`, `HCES-URBAN` |
 | Other indices: Next 50, Midcap 150, a few sectors | P2 | TODO(R3) | `scripts/snapshots/nse-index.mjs` | NSE Indices | `NIFTYNEXT50`, … |

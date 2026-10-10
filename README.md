@@ -27,6 +27,18 @@ cp .env.example apps/web/.env.local   # optional: everything works without keys
 pnpm dev                          # http://localhost:3000
 ```
 
+Open `/` for onboarding and `/r2-preview` for the learning components (lesson, spot & sort, story choices, money decoder, paper portfolio, Practice simulation and the rewind comparison) running on sample data.
+
+## What works today
+
+- **Onboarding** in English, Hindi and Telugu: language, grade group, experience, learning formats and an optional goal. The profile is saved on the device.
+- **Learning components** in `@gullak/ui`, shown on sample data at `/r2-preview`. They are not yet connected to the backend or the content files.
+- **Backend API** (Supabase, sign-in required): profile, onboarding, lessons, quiz grading and unlocks, progress, portfolio and fixed deposits, goal planning, market quotes, activity and episode runs with resumable bookmarks, a Time Machine replay and a facilitator cohort view. See [the backend guide](docs/backend-setup.md).
+- **Content as data:** 8 topics, each with a reading lesson and a quiz (English), the topic prerequisite graph, one spot & sort round, one branching story and the March 2020 Practice episode.
+- **Engine:** interest (FD, RD, SIP, compounding), valuation, quiz grading, unlock rules, starting capital and the lesson format picker, all unit-tested.
+
+Not built yet: the app screens after onboarding, the AI tutor, translated topic content, Live mode and the facilitator dashboard UI. The plan is in [ROADMAP.md](ROADMAP.md).
+
 ## Scripts
 
 | Command | What it does |
@@ -73,7 +85,7 @@ notebooks              Colab notebooks (knowledge-tracing model)
 
 ## Data sources
 
-Every topic and simulation runs on real Indian data. Each value shows its source and as-of date, and committed snapshots back every source, so the demo works offline. The full map from data to topic is in [docs/curriculum.md](docs/curriculum.md#real-data-behind-every-topic), and pipeline status is in [data/snapshots](data/snapshots/README.md).
+Gullak is designed to run every topic and simulation on real Indian data, with each value showing its source and as-of date, and committed snapshots behind every source so the demo works offline. **Committed so far:** AMFI NAV history for a NIFTY 50 index fund (daily since 2019, including the March 2020 crash) and SBI's published one-year FD rate. The sources below are planned; status per source is in [data/snapshots](data/snapshots/README.md), and the map from data to topic is in [docs/curriculum.md](docs/curriculum.md#real-data-behind-every-topic).
 
 - **Prices and spending:** MoSPI CPI (headline and by group) and the Household Consumption Expenditure Survey
 - **Saving and borrowing:** bank savings, FD, RD and loan rates (dated); small-savings rates (PPF, SSY, NSC) from the Ministry of Finance; RBI repo rate; NPCI UPI statistics
