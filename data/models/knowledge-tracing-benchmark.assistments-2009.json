@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "name": "ASSISTments 2009-2010 skill builder (corrected)",
+    "citation": "ASSISTments 2009-2010 skill builder data (corrected), https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010. Feng, M., Heffernan, N.T. & Koedinger, K.R. (2009). Addressing the assessment challenge in an Intelligent Tutoring System that tutors as it assesses. User Modeling and User-Adapted Interaction, 19, 243-266.",
+    "answers": 283105,
+    "learners": 4163,
+    "skills": 149,
+    "droppedWithoutSkill": 63755,
+    "note": "Real US middle-school maths answers. Aggregate results only; the data itself is never committed."
+  },
+  "protocol": "5-fold cross-validation split by learner (SHA-256 of the id); each held-out learner's answers after their first are predicted one step ahead; DKT picks its epoch on 10% of training learners.",
+  "models": {
+    "Overall correct rate": {
+      "auc": {
+        "mean": 0.5,
+        "std": 0.0
+      },
+      "rmse": {
+        "mean": 0.4739,
+        "std": 0.0036
+      },
+      "accuracy": {
+        "mean": 0.6595,
+        "std": 0.0109
+      },
+      "log_loss": {
+        "mean": 0.6415,
+        "std": 0.0072
+      }
+    },
+    "Per-skill correct rate": {
+      "auc": {
+        "mean": 0.6288,
+        "std": 0.0041
+      },
+      "rmse": {
+        "mean": 0.462,
+        "std": 0.0028
+      },
+      "accuracy": {
+        "mean": 0.6708,
+        "std": 0.0082
+      },
+      "log_loss": {
+        "mean": 0.6161,
+        "std": 0.0057
+      }
+    },
+    "BKT": {
+      "auc": {
+        "mean": 0.7224,
+        "std": 0.008
+      },
+      "rmse": {
+        "mean": 0.4375,
+        "std": 0.0029
+      },
+      "accuracy": {
+        "mean": 0.715,
+        "std": 0.0046
+      },
+      "log_loss": {
+        "mean": 0.5661,
+        "std": 0.0059
+      }
+    },
+    "BKT + forgetting": {
+      "auc": {
+        "mean": 0.7274,
+        "std": 0.0076
+      },
+      "rmse": {
+        "mean": 0.4358,
+        "std": 0.0027
+      },
+      "accuracy": {
+        "mean": 0.7173,
+        "std": 0.0044
+      },
+      "log_loss": {
+        "mean": 0.5626,
+        "std": 0.0056
+      }
+    },
+    "PFA": {
+      "auc": {
+        "mean": 0.7097,
+        "std": 0.0084
+      },
+      "rmse": {
+        "mean": 0.4435,
+        "std": 0.0029
+      },
+      "accuracy": {
+        "mean": 0.7034,
+        "std": 0.0056
+      },
+      "log_loss": {
+        "mean": 0.5825,
+        "std": 0.0076
+      }
+    },
+    "DKT (LSTM)": {
+      "auc": {
+        "mean": 0.7391,
+        "std": 0.0095
+      },
+      "rmse": {
+        "mean": 0.4315,
+        "std": 0.0037
+      },
+      "accuracy": {
+        "mean": 0.7235,
+        "std": 0.0062
+      },
+      "log_loss": {
+        "mean": 0.5544,
+        "std": 0.0075
+      }
+    }
+  },
+  "bktParameterRanges": {
+    "p_init": {
+      "p10": 0.2966,
+      "p25": 0.5399,
+      "p50": 0.6775,
+      "p75": 0.8344,
+      "p90": 0.926
+    },
+    "p_learn": {
+      "p10": 0.0193,
+      "p25": 0.0657,
+      "p50": 0.1347,
+      "p75": 0.2485,
+      "p90": 0.44
+    },
+    "p_slip": {
+      "p10": 0.0673,
+      "p25": 0.1178,
+      "p50": 0.1901,
+      "p75": 0.2755,
+      "p90": 0.3
+    },
+    "p_guess": {
+      "p10": 0.0432,
+      "p25": 0.0916,
+      "p50": 0.2042,
+      "p75": 0.3627,
+      "p90": 0.4536
+    },
+    "skills_per_fold": 109
+  },
+  "useInGullak": "Model choice and realistic BKT parameter ranges only. Maths skills are not money concepts; Gullak keeps onboarding priors and quiz pass marks until its own data exists."
+}
