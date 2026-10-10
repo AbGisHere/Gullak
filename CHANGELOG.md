@@ -8,7 +8,10 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.16] - 2026-10-11
+
 ### Added
+- Activity answers contract ([docs/activity-answers.md](docs/activity-answers.md)): server-graded spot & sort and story answers against the run's pinned content hash, a separate `activity_answers` table and run completion.
 - Synthetic-only BKT input-preparation notebook with the nine-field version-pinned quiz-answer contract, deterministic fixtures, content-derived answer ordering and local/CI validation tests. No training, production mastery changes or unlock changes.
 
 ## [0.0.15] - 2026-10-10
