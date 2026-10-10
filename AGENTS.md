@@ -113,13 +113,13 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
    1. `git pull --rebase` from the remote branch (and from `main` when pushing to main), then resolve any conflicts. On a fork: `git pull --rebase upstream main`.
    2. Install dependencies if the lockfile changed.
    3. Run lint, typecheck, unit tests and production build. **All must pass. If anything fails, fix it; never push a broken build and never skip or disable checks to get green.**
-      *Automation (see Decisions, 2026-10-10):* the `pre-push` hook runs lint, typecheck and unit tests locally; CI runs the full suite including the production build and phone + desktop e2e on every push and PR. A PR must be green in CI before it's merged; whoever merges checks this.
+      *Automation (see Decisions, 2026-10-10):* CI runs the full suite (lint, typecheck, unit tests, production build, phone + desktop e2e) on every push and PR; nobody needs to run it locally. The `pre-push` hook only runs the release check on main. A PR must be green in CI before it's merged; whoever merges checks this.
    4. Bump the version following SemVer, starting at `0.0.1`: patch for fixes and small changes, minor for a finished feature or roadmap phase. Keep all package.json versions in sync. (`pnpm release patch|minor` does this.)
    5. Update `CHANGELOG.md` (move items from Unreleased into the new version with today's date), tick completed items in `ROADMAP.md`, and update `AGENTS.md` if any convention, structure or decision changed. These three files must be fully accurate before the push.
    6. Commit, tag `vX.Y.Z` on main, push.
    *Enforced on main:* `scripts/check-release.mjs` (versions in sync, dated changelog section, tag present) in `pre-push` and CI.
 4. **Team workflow:** 5 people push to this repo. Work on feature branches (`feat/<area>`), keep PRs small. To avoid version-file conflicts between teammates, feature branches only add entries under `[Unreleased]`; the version bump and changelog release happen on the push/merge to `main`.
-   *In practice:* teammates **fork** the repo, work on `feat/<area>` in their fork, and open PRs into `AbGisHere/Claude2Create_MegathonX:main`. Enable Actions once in your fork (Actions tab → "I understand my workflows, go ahead and enable them") so CI runs on your pushes.
+   *In practice:* **R1 (team lead)** works on branches in this repo and merges them to `main` when ready. **R2–R5 fork** the repo, work on `feat/<area>` in their fork, and open PRs into `AbGisHere/Claude2Create_MegathonX:main`. Enable Actions once in your fork (Actions tab → "I understand my workflows, go ahead and enable them") so CI runs on your pushes.
 5. **Never** force-push to main, commit secrets, or commit generated build output.
 6. **After every successful push:** stop and tell me: "Pushed vX.Y.Z — good time to run /compact." Wait for me before continuing.
 7. **AI agents ask before every commit and every push.** Show the human the message and what's staged, and wait for an explicit yes. Approval for one commit or push doesn't carry over to the next. *Enforced:* `.claude/settings.json` sets `git commit`, `git push`, `git tag` and PR create/merge to "ask", and denies `--no-verify` and force-push.
@@ -141,7 +141,7 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
 | 2026-10-10 | **Locale stored in a cookie** (no `/en` URL prefix) | Stable start URL for installed PWAs; simpler routing. |
 | 2026-10-10 | **pnpm catalog** for dependency versions | One place to bump versions; avoids drift across 7 workspaces and 5 people. |
 | 2026-10-10 | **Node 24 LTS** in CI and `engines` | Node 25 is not LTS. |
-| 2026-10-10 | **Pre-push runs lint + typecheck + unit tests; CI runs everything** (adds build + e2e) | Keeps pushes fast for 5 people; the full suite still runs automatically on every push and PR, including forks. |
+| 2026-10-10 | **CI runs every check; `pre-push` only runs the release check on main** | No double effort: the full suite runs automatically on every push and PR, including forks. A red CI is fixed, never merged. |
 | 2026-10-10 | **No branch protection on main**; fork + PR workflow | Team lead's call. Merger must confirm CI is green. |
 | 2026-10-10 | **MIT licence** | Standard for hackathon projects; team lead approved. |
 | 2026-10-10 | **Impeccable skill committed** for all agents; hooks in shared settings | UI quality is how we win; every teammate's agent gets the same design checks. |
