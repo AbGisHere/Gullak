@@ -7,5 +7,61 @@
     "startingCash": "A college student new to investing starts with",
     "start": "Start learning",
     "offline": "You're offline. Lessons you've opened before still work."
+  },
+  "onboarding": {
+    "brand": "Gullak",
+    "playMoney": "Play money",
+    "languageLabel": "Choose your language",
+    "progress": "Step {current} of {total}",
+    "time": "About 2 minutes",
+    "welcomeTitle": "Learn money by doing, with play money.",
+    "welcomeDescription": "Tell us a little about yourself. We'll pick your first lessons and give you virtual cash to practise with safely.",
+    "guardrail": "Everything here is play money. We explain choices; we never tell you what to buy or sell.",
+    "aboutTitle": "Let's start where you are.",
+    "aboutDescription": "This only sets a starting point. What you do in lessons and activities shapes what comes next.",
+    "experienceLabel": "How much do you already know about saving and money?",
+    "experience": {
+      "none": "Just getting started",
+      "some": "I know a few basics",
+      "regular": "I save or track money regularly"
+    },
+    "cashPreview": "Your virtual starting balance will be {cash}.",
+    "formatTitle": "How do you like to learn?",
+    "formatDescription": "Optional. Pick any you like, or let us mix it up.",
+    "format": {
+      "story": "Stories and comics",
+      "visual": "Visual explainers",
+      "video": "Short videos",
+      "formula": "Formulas and calculators",
+      "transcript": "Reading",
+      "simulation": "Try-it simulations",
+      "quiz": "Quick quizzes",
+      "audio": "Listen"
+    },
+    "formatHint": "We start with your picks, then adapt to what works for you.",
+    "goalTitle": "Is there something you are working toward?",
+    "goalDescription": "Optional for now. A goal makes the practice feel more personal.",
+    "goalNameLabel": "What is the goal?",
+    "goalNamePlaceholder": "For example, a bicycle, a laptop or a course",
+    "goalAmountLabel": "Target amount (₹)",
+    "goalAmountPlaceholder": "25,000",
+    "goalDateLabel": "When would you like it?",
+    "goalIncomplete": "Add a name, amount, and date — or skip this for now.",
+    "back": "Back",
+    "skip": "Skip",
+    "continue": "Continue",
+    "finish": "Create my path",
+    "readyTitle": "Your learning path is ready.",
+    "readyDescription": "Start with the basics, learn at your pace, and practise only with virtual money.",
+    "savedLocally": "Your setup is saved on this device. Account sync can be added when the learner service is connected.",
+    "reviewProfile": "Review my profile",
+    "gradeLabel": "Which class are you in?",
+    "grade": {
+      "grade-6-7": "Class 6–7",
+      "grade-8-10": "Class 8–10",
+      "grade-11-12": "Class 11–12"
+    },
+    "mixItUp": "Mix it up",
+    "notSaved": "We couldn't save your setup on this device, so you may be asked again next time."
   }
 }

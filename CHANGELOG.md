@@ -9,6 +9,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Added
+- Learner onboarding on phone and desktop: language (from `locales.json`), grade group (required), current experience with a starting-cash preview from config, an optional format step ("Mix it up" by default, or Skip) and an optional goal in the learner's own words. The profile is validated and stored on the device until learner persistence is connected.
 - Curriculum as data: a 33-topic prerequisite graph (`packages/content/config/topic-graph.json`) with a pillar, grade groups, prerequisites and unlocks per topic, validated at load (no unknown prerequisites, no cycles, and prerequisites are taught to the same grade groups).
 - `Activity` schemas for spot & sort rounds and branching stories, and an `Episode` schema for Practice episodes (date range, persona, instruments, starting holdings, scheduled and random life events, reveal), with one example each: need or want, the doubling scheme, and March 2020 + a hospital bill priced from the committed index-fund snapshot.
 - Instrument kinds for every unlock in the curriculum: piggy bank, PPF, liquid fund, bond, debt fund, ETF and NPS.
@@ -21,6 +22,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - English savings and FD transcript/quiz drafts for content review, local PostgreSQL concurrency/isolation tests, and a beginner setup guide with an importable Postman collection.
 
 ### Changed
+- Translation uses Sarvam (LLM fallback, human review) instead of Bhashini; existing Hindi and Telugu strings are unreviewed drafts.
 - Starting cash scales by grade group and experience (₹2,000–₹20,000).
 - Topics form a prerequisite graph tagged by pillar and grade group instead of a linear ladder; the savings draft is now `bank-accounts-upi`, and the backend also refuses topics not taught to the learner's grade group.
 - The AI tutor pitches answers at the learner's grade group (prompt v2); v1 stays unchanged so cached answers keyed by version remain valid.

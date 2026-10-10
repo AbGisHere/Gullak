@@ -91,7 +91,7 @@ We don't fine-tune LLMs. Small adaptive models (e.g. knowledge tracing) are trai
 ### How to add a language
 
 1. Add `{ code, name, nativeName }` to `packages/content/config/locales.json`.
-2. Add `apps/web/messages/<code>.json` with every key from `en.json` (Bhashini first, LLM fallback, human review by R5).
+2. Add `apps/web/messages/<code>.json` with every key from `en.json` (Sarvam first, LLM fallback, human review by R5).
 3. Add `topics/*/<code>.json` content files (or generate them with the pre-generation script).
 4. Run `pnpm test`. No code changes needed.
 
@@ -150,5 +150,6 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
 | 2026-10-10 | **Vercel hosting at `gullak.abgupta.me`** (CNAME on Namecheap); production from `main`, previews per branch; functions in Mumbai (`bom1`) | Zero-config Next/Turborepo deploys; a stable custom URL for judges and the installed PWA; Mumbai is closest to learners and to Supabase. |
 | 2026-10-10 | **Four-pillar curriculum for Grades 6–12** (grade groups 6–7 / 8–10 / 11–12) instead of an instrument ladder for adults; **learn-by-doing engines** with every scenario as data | Matches the problem statement (school students, four pillars, learn by doing). Engines are coded once; topics, personas, events, stories and languages are added without code changes. |
 | 2026-10-10 | **Life sim and market sim merged into one engine with Practice (replayed history + life events + reveal) and Live (paper trading on current prices)**; the Time Machine becomes Practice episodes; Live scores habits, not returns | Forced selling during a life event teaches liquidity and why an emergency fund matters, across three pillars and every grade group. One shared portfolio and engine instead of two builds. Scoring habits keeps Live educational rather than a trading game. |
+| 2026-10-10 | **Sarvam** for en → hi / te translation (UI messages and topic content), LLM fallback, human review before shipping; replaces Bhashini | Built for Indian languages; one provider for every locale. Hindi and Telugu strings written before it lands are unreviewed drafts. |
 | 2026-10-10 | **MIT licence** | Standard for hackathon projects; team lead approved. |
 | 2026-10-10 | **Impeccable skill committed** for all agents; hooks in shared settings | UI quality is how we win; every teammate's agent gets the same design checks. |
