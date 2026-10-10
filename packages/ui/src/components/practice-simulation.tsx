@@ -9,7 +9,6 @@ import {
   LiquidityBreakdown,
   HoldingsList,
   type PortfolioViewModel,
-} from "./paper-portfolio";
 import {
   AlertTriangle,
   ArrowRight,
@@ -28,6 +27,9 @@ import {
   X,
 } from "lucide-react";
 import { FinancialRewind } from "./financial-rewind";
+import { type PracticeSimulationLabels, defaultPracticeSimulationLabels } from "../lib/labels";
+
+export type { PracticeSimulationLabels };
 
 /* -------------------------------------------------------------------------- */
 /*                              Type Definitions                              */
@@ -169,6 +171,7 @@ export interface EpisodeCompletePayload {
 export interface PracticeSimulationProps {
   episode: EpisodeMetadata;
   state: SimulationState;
+  labels?: Partial<PracticeSimulationLabels>;
   onDecision?: (payload: DecisionPayload) => void;
   onReflection?: (payload: ReflectionPayload) => void;
   onEpisodeComplete?: (payload: EpisodeCompletePayload) => void;
@@ -189,10 +192,12 @@ export interface PracticeSimulationProps {
 function BriefingPhase({
   episode,
   state,
+  labels: l,
   onContinue,
 }: {
   episode: EpisodeMetadata;
   state: SimulationState;
+  labels: PracticeSimulationLabels;
   onContinue: () => void;
 }) {
   return (
@@ -203,9 +208,9 @@ function BriefingPhase({
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-brand-lime" aria-hidden="true" />
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Practice Episode
+              {l.practiceEpisode}
             </span>
-            <PlayMoneyBadge label="Play Money" />
+            <PlayMoneyBadge label={l.playMoney} />
           </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
@@ -220,7 +225,7 @@ function BriefingPhase({
             expression={state.protagonist.expression ?? "friendly"}
             accent={state.protagonist.accent ?? "lime"}
             size="md"
-            label={state.protagonist.label ?? "Protagonist"}
+            label={state.protagonist.label ?? l.protagonistLabel}
           />
           <div className="flex-1">
             <h2 className="text-lg font-bold text-foreground leading-snug">
@@ -243,7 +248,7 @@ function BriefingPhase({
         {episode.learningGoals.length > 0 && (
           <div className="mt-4 pt-3 border-t border-border/50">
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              What you will explore
+              {l.whatYouWillExplore}
             </span>
             <ul className="mt-2 space-y-1.5">
               {episode.learningGoals.map((goal, idx) => (
@@ -268,7 +273,7 @@ function BriefingPhase({
           data-testid="sim-briefing-continue"
           className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-foreground text-background px-5 py-2.5 text-sm font-bold hover:bg-foreground/90 transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring"
         >
-          <span>Begin Scenario</span>
+          <span>{l.beginScenario}</span>
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </button>
       </div>
@@ -281,10 +286,12 @@ function BriefingPhase({
  */
 function ActiveEventPhase({
   state,
+  labels: l,
   onTermOpen,
   onAcknowledgeEvent,
 }: {
   state: SimulationState;
+  labels: PracticeSimulationLabels;
   onTermOpen?: (term: string) => void;
   onAcknowledgeEvent: () => void;
 }) {
@@ -326,7 +333,7 @@ function ActiveEventPhase({
                 expression={event.supportingCharacter.expression ?? "concerned"}
                 accent={event.supportingCharacter.accent ?? "coral"}
                 size="sm"
-                label={event.supportingCharacter.label ?? "Supporting character"}
+                label={event.supportingCharacter.label ?? l.supportingCharacterLabel}
               />
             )}
             <div className="flex-1">
@@ -347,7 +354,7 @@ function ActiveEventPhase({
               </p>
               {event.amountPaise !== undefined && (
                 <div className="mt-2.5 rounded-lg bg-card border border-border/60 px-3 py-2 inline-flex items-baseline gap-2">
-                  <span className="text-xs text-muted-foreground">Amount needed:</span>
+                  <span className="text-xs text-muted-foreground">{l.amountNeeded}</span>
                   <span className="text-base font-extrabold font-mono text-foreground">
                     {formatInr(event.amountPaise)}
                   </span>
@@ -370,7 +377,7 @@ function ActiveEventPhase({
               data-testid="sim-event-acknowledge"
               className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-foreground text-background px-5 py-2.5 text-sm font-bold hover:bg-foreground/90 transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring"
             >
-              <span>What are my options?</span>
+              <span>{l.whatAreMyOptions}</span>
               <ChevronRight className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
@@ -386,11 +393,13 @@ function ActiveEventPhase({
 function DecisionPhase({
   episode,
   state,
+  labels: l,
   onDecision,
   onTermOpen,
 }: {
   episode: EpisodeMetadata;
   state: SimulationState;
+  labels: PracticeSimulationLabels;
   onDecision: (decisionId: string) => void;
   onTermOpen?: (term: string) => void;
 }) {
@@ -422,17 +431,17 @@ function DecisionPhase({
           expression="thinking"
           accent={state.protagonist.accent ?? "lime"}
           size="sm"
-          label="Protagonist considering options"
+          label={state.protagonist.label ?? l.protagonistLabel}
         />
         <div className="rounded-xl bg-muted/50 border border-border/50 px-3 py-2.5 flex-1">
           <p className="text-sm text-foreground">
-            {state.protagonist.dialogue ?? "How should I handle this expense right now?"}
+            {state.protagonist.dialogue ?? l.defaultProtagonistPrompt}
           </p>
         </div>
       </div>
 
       {/* Decision cards */}
-      <div className="space-y-3" role="group" aria-label="Available decisions">
+      <div className="space-y-3" role="group" aria-label={l.whatAreMyOptions}>
         {decisions.map((decision) => {
           // Inline term decoders for required terms
           const termDecoders = (decision.requiredTermIds ?? [])
@@ -500,7 +509,13 @@ function DecisionPhase({
 /**
  * Resolving Phase: Loading/thinking state while engine processes.
  */
-function ResolvingPhase({ state }: { state: SimulationState }) {
+function ResolvingPhase({
+  state,
+  labels: l,
+}: {
+  state: SimulationState;
+  labels: PracticeSimulationLabels;
+}) {
   return (
     <div data-testid="sim-phase-resolving" className="flex flex-col items-center justify-center gap-4 py-12">
       <Character
@@ -509,12 +524,12 @@ function ResolvingPhase({ state }: { state: SimulationState }) {
         expression="thinking"
         accent={state.protagonist.accent ?? "lime"}
         size="lg"
-        label="Protagonist waiting for outcome"
+        label={l.protagonistLabel}
       />
       <div className="text-center">
-        <p className="text-sm font-bold text-foreground">Processing your decision…</p>
+        <p className="text-sm font-bold text-foreground">{l.processingDecision}</p>
         <p className="mt-1 text-xs text-muted-foreground">
-          Calculating what happens next in this scenario.
+          {l.calculatingOutcome}
         </p>
       </div>
     </div>
@@ -526,11 +541,13 @@ function ResolvingPhase({ state }: { state: SimulationState }) {
  */
 function ConsequencePhase({
   state,
+  labels: l,
   onContinue,
   onOpenRewind,
   onTermOpen,
 }: {
   state: SimulationState;
+  labels: PracticeSimulationLabels;
   onContinue: () => void;
   onOpenRewind?: () => void;
   onTermOpen?: (term: string) => void;
@@ -550,7 +567,7 @@ function ConsequencePhase({
           expression={charReaction.expression ?? "thinking"}
           accent={charReaction.accent ?? "lime"}
           size="sm"
-          label="Protagonist reacting to outcome"
+          label={charReaction.label ?? l.protagonistLabel}
         />
         {charReaction.dialogue && (
           <div className="rounded-xl bg-muted/50 border border-border/50 px-3 py-2.5 flex-1">
@@ -569,7 +586,7 @@ function ConsequencePhase({
           <div className="flex items-center gap-2">
             <Info className="h-4 w-4 text-brand-lime" aria-hidden="true" />
             <h3 id="consequence-title" className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-              What Changed
+              {l.whatChanged}
             </h3>
           </div>
           <p className="mt-1.5 text-sm text-foreground leading-relaxed" data-testid="sim-consequence-narrative">
@@ -585,7 +602,7 @@ function ConsequencePhase({
           <div className="flex items-center gap-2">
             <Lightbulb className="h-4 w-4 text-brand-yellow" aria-hidden="true" />
             <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-              Why It Matters
+              {l.whyItMatters}
             </h4>
           </div>
           <p className="mt-1.5 text-sm text-foreground leading-relaxed" data-testid="sim-consequence-explanation">
@@ -598,7 +615,7 @@ function ConsequencePhase({
           <div className="flex items-center gap-2">
             <RefreshCw className="h-4 w-4 text-brand-lilac" aria-hidden="true" />
             <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-              What Trade-off Did You Make?
+              {l.whatTradeoff}
             </h4>
           </div>
           <p className="mt-1.5 text-sm text-foreground leading-relaxed" data-testid="sim-consequence-tradeoff">
@@ -612,7 +629,7 @@ function ConsequencePhase({
             <div className="flex items-center gap-2">
               <HelpCircle className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
               <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                What Was Unknown?
+                {l.whatWasUnknown}
               </h4>
             </div>
             <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed" data-testid="sim-consequence-unknown">
@@ -627,10 +644,10 @@ function ConsequencePhase({
             <div>
               <h4 className="text-sm font-bold text-foreground flex items-center gap-1.5">
                 <RotateCcw className="h-4 w-4 text-brand-lilac" aria-hidden="true" />
-                <span>Explore Alternative Paths</span>
+                <span>{l.exploreAlternatives}</span>
               </h4>
               <p className="text-xs text-muted-foreground mt-0.5">
-                Rewind this moment to compare what trade-offs other options would have created.
+                {l.exploreAlternativesSubtitle}
               </p>
             </div>
             <button
@@ -640,7 +657,7 @@ function ConsequencePhase({
               className="min-h-[44px] shrink-0 inline-flex items-center gap-1.5 rounded-xl border border-brand-lilac/70 bg-brand-lilac/10 px-3.5 py-2 text-xs font-bold text-foreground hover:bg-brand-lilac/20 transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring cursor-pointer"
             >
               <RotateCcw className="h-3.5 w-3.5 text-brand-lilac" aria-hidden="true" />
-              <span>Rewind & Compare</span>
+              <span>{l.rewindAndCompare}</span>
             </button>
           </div>
         )}
@@ -657,7 +674,7 @@ function ConsequencePhase({
           data-testid="sim-consequence-continue"
           className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-foreground text-background px-5 py-2.5 text-sm font-bold hover:bg-foreground/90 transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring"
         >
-          <span>Continue</span>
+          <span>{l.continueAction}</span>
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </button>
       </div>
@@ -671,10 +688,12 @@ function ConsequencePhase({
 function ReflectionPhase({
   episode,
   state,
+  labels: l,
   onReflection,
 }: {
   episode: EpisodeMetadata;
   state: SimulationState;
+  labels: PracticeSimulationLabels;
   onReflection: (reflectionId: string) => void;
 }) {
   const reflection = state.reflection;
@@ -689,7 +708,7 @@ function ReflectionPhase({
           expression="thinking"
           accent={state.protagonist.accent ?? "lime"}
           size="sm"
-          label="Protagonist reflecting"
+          label={l.protagonistLabel}
         />
         <div className="rounded-xl bg-muted/50 border border-border/50 px-3 py-2.5 flex-1">
           <p className="text-sm font-semibold text-foreground">
@@ -698,7 +717,7 @@ function ReflectionPhase({
         </div>
       </div>
 
-      <div className="space-y-2.5" role="group" aria-label="Reflection options">
+      <div className="space-y-2.5" role="group" aria-label={l.yourReflection}>
         {reflection.options.map((opt) => (
           <button
             key={opt.id}
@@ -721,10 +740,12 @@ function ReflectionPhase({
 function CompletePhase({
   episode,
   state,
+  labels: l,
   onComplete,
 }: {
   episode: EpisodeMetadata;
   state: SimulationState;
+  labels: PracticeSimulationLabels;
   onComplete: () => void;
 }) {
   return (
@@ -736,20 +757,18 @@ function CompletePhase({
           expression="excited"
           accent={state.protagonist.accent ?? "lime"}
           size="lg"
-          label="Protagonist celebrating completion"
+          label={l.episodeComplete}
         />
-        <h3 className="mt-4 text-lg font-bold text-foreground">Episode Complete</h3>
+        <h3 className="mt-4 text-lg font-bold text-foreground">{l.episodeComplete}</h3>
         <p className="mt-1 text-sm text-muted-foreground">
-          You explored a fictional scenario and made a real financial decision under uncertainty.
+          {l.episodeCompleteSubtitle}
         </p>
         <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-          Nobody knew what would happen next — including professional fund managers.
-          The important question was how much flexibility your financial setup gave you
-          when the unexpected expense arrived.
+          {l.episodeCompleteNote}
         </p>
 
         <div className="mt-4 pt-3 border-t border-border/50">
-          <PlayMoneyBadge label="Play Money" />
+          <PlayMoneyBadge label={l.playMoney} />
         </div>
       </div>
 
@@ -763,7 +782,7 @@ function CompletePhase({
           className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-foreground text-background px-6 py-2.5 text-sm font-bold hover:bg-foreground/90 transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring"
         >
           <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
-          <span>Finish Episode</span>
+          <span>{l.finishEpisode}</span>
         </button>
       </div>
     </div>
@@ -784,6 +803,7 @@ function CompletePhase({
 export function PracticeSimulation({
   episode,
   state,
+  labels,
   onDecision,
   onReflection,
   onEpisodeComplete,
@@ -793,6 +813,7 @@ export function PracticeSimulation({
   onTermOpen,
   className,
 }: PracticeSimulationProps) {
+  const l: PracticeSimulationLabels = { ...defaultPracticeSimulationLabels, ...labels };
   const [decisions, setDecisions] = React.useState<string[]>([]);
   const [reflections, setReflections] = React.useState<string[]>([]);
   const [isRewinding, setIsRewinding] = React.useState<boolean>(false);
@@ -869,6 +890,7 @@ export function PracticeSimulation({
         <BriefingPhase
           episode={episode}
           state={state}
+          labels={l}
           onContinue={handleBriefingContinue}
         />
       )}
@@ -876,6 +898,7 @@ export function PracticeSimulation({
       {state.phase === "active" && (
         <ActiveEventPhase
           state={state}
+          labels={l}
           onTermOpen={onTermOpen}
           onAcknowledgeEvent={handleEventAcknowledge}
         />
@@ -885,13 +908,14 @@ export function PracticeSimulation({
         <DecisionPhase
           episode={episode}
           state={state}
+          labels={l}
           onDecision={handleDecision}
           onTermOpen={onTermOpen}
         />
       )}
 
       {state.phase === "resolving" && (
-        <ResolvingPhase state={state} />
+        <ResolvingPhase state={state} labels={l} />
       )}
 
       {state.phase === "consequence" && (
@@ -921,6 +945,7 @@ export function PracticeSimulation({
         ) : (
           <ConsequencePhase
             state={state}
+            labels={l}
             onContinue={handleConsequenceContinue}
             onOpenRewind={handleOpenRewind}
             onTermOpen={onTermOpen}
@@ -932,6 +957,7 @@ export function PracticeSimulation({
         <ReflectionPhase
           episode={episode}
           state={state}
+          labels={l}
           onReflection={handleReflection}
         />
       )}
@@ -940,6 +966,7 @@ export function PracticeSimulation({
         <CompletePhase
           episode={episode}
           state={state}
+          labels={l}
           onComplete={handleComplete}
         />
       )}

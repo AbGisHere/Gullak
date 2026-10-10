@@ -360,7 +360,7 @@ export function LiquidityBreakdown({
       <div className="mt-4">
         <div
           role="progressbar"
-          aria-label={`Liquidity distribution: ${pctNow}% ${l.availableNow}, ${pctCond}% ${l.conditionalAccess}, ${pctLong}% ${l.longerTermMarket}`}
+          aria-label={l.liquidityDistributionAria(pctNow, pctCond, pctLong)}
           aria-valuenow={pctNow}
           aria-valuemin={0}
           aria-valuemax={100}
@@ -1119,7 +1119,7 @@ export function PaperPortfolio({
 
       {/* Mobile-Friendly Section Switcher with 44px min-height touch targets */}
       <nav
-        aria-label="Portfolio sections"
+        aria-label={l.portfolioSectionsAria}
         className="flex items-center gap-1.5 overflow-x-auto rounded-xl bg-muted/60 p-1.5 text-xs"
       >
         <button

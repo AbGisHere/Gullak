@@ -250,7 +250,7 @@ export function SpotAndSort({
             expression="excited"
             accent="lime"
             size="lg"
-            label="Learner completed round"
+            label={l.roundComplete}
           />
         </div>
 
@@ -351,7 +351,7 @@ export function SpotAndSort({
             expression={characterExpression}
             accent="lime"
             size="sm"
-            label="Reaction character"
+            label={selectedCategoryId ? (isMatch ? l.categoryMatched : l.alternativeCategory) : l.spotAndSortBadge}
           />
         </div>
 

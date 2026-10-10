@@ -19,6 +19,9 @@ import {
   RotateCcw,
   Sparkles,
 } from "lucide-react";
+import { type FinancialRewindLabels, defaultFinancialRewindLabels } from "../lib/labels";
+
+export type { FinancialRewindLabels };
 
 /* -------------------------------------------------------------------------- */
 /*                              Type Definitions                              */
@@ -76,6 +79,7 @@ export interface FinancialRewindProps {
   uncertaintyMessage?: string;
   reflectionPrompt?: RewindReflectionData;
   gradeGroup?: "grade-6-7" | "grade-8-10" | "grade-11-12";
+  labels?: Partial<FinancialRewindLabels>;
   onAlternativeView?: (payload: { episodeId: string; alternativeId: string }) => void;
   onComparisonComplete?: (payload: { episodeId: string; viewedAlternatives: string[] }) => void;
   onReflectionSelect?: (payload: { episodeId: string; reflectionId: string }) => void;
@@ -100,9 +104,10 @@ export function FinancialRewind({
   episodeId,
   chosenPath,
   alternatives,
-  uncertaintyMessage = "At the time of this decision, the future was uncertain. Nobody knew what markets or conditions would do next.",
+  uncertaintyMessage,
   reflectionPrompt,
   gradeGroup = "grade-8-10",
+  labels,
   onAlternativeView,
   onComparisonComplete,
   onReflectionSelect,
@@ -111,6 +116,8 @@ export function FinancialRewind({
   onTermOpen,
   className,
 }: FinancialRewindProps) {
+  const l: FinancialRewindLabels = { ...defaultFinancialRewindLabels, ...labels };
+  const effectiveUncertaintyMessage = uncertaintyMessage ?? l.uncertaintyDefault;
   // Currently active alternative index
   const [selectedAltIndex, setSelectedAltIndex] = React.useState<number>(0);
   const [viewedAlternatives, setViewedAlternatives] = React.useState<string[]>([]);
@@ -163,9 +170,9 @@ export function FinancialRewind({
           <div className="flex items-center gap-2">
             <RotateCcw className="h-4 w-4 text-brand-lilac" aria-hidden="true" />
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Financial Rewind · Alternative Paths
+              {l.rewindBadge}
             </span>
-            <PlayMoneyBadge label="Play Money" />
+            <PlayMoneyBadge label={l.playMoney} />
           </div>
           {onReturnToChosen && (
             <button
@@ -175,7 +182,7 @@ export function FinancialRewind({
               className="min-h-[44px] inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
             >
               <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
-              <span>Return to your path</span>
+              <span>{l.returnToYourPath}</span>
             </button>
           )}
         </div>
@@ -187,15 +194,14 @@ export function FinancialRewind({
             expression={activeReaction.expression ?? "thinking"}
             accent={activeReaction.accent ?? "lilac"}
             size="md"
-            label="Protagonist reviewing alternatives"
+            label={l.protagonistReviewingAlternatives}
           />
           <div className="flex-1">
             <h2 id="rewind-main-heading" className="text-lg font-bold text-foreground">
-              Rewind & Compare Decisions
+              {l.mainHeading}
             </h2>
             <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-              Explore what trade-offs would have unfolded under alternative actions. There is no
-              single "correct" answer — financial resilience is about having options when life surprises happen.
+              {l.subtitle}
             </p>
             {activeReaction.dialogue && (
               <div className="mt-3 rounded-xl bg-muted/50 border border-border/50 px-3 py-2.5">
@@ -206,13 +212,13 @@ export function FinancialRewind({
         </div>
 
         {/* Persistent Uncertainty Notice (No Hindsight Bias) */}
-        {uncertaintyMessage && (
+        {effectiveUncertaintyMessage && (
           <div
             data-testid="rewind-uncertainty-notice"
             className="mt-4 rounded-xl bg-muted/40 border border-border/50 p-3 flex items-start gap-2.5 text-xs text-muted-foreground leading-relaxed"
           >
             <HelpCircle className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" aria-hidden="true" />
-            <span>{uncertaintyMessage}</span>
+            <span>{effectiveUncertaintyMessage}</span>
           </div>
         )}
       </div>
@@ -221,11 +227,11 @@ export function FinancialRewind({
       {alternatives.length > 0 && (
         <div className="space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Select an alternative path to examine:
+            {l.selectAlternativeLabel}
           </span>
           <div
             role="tablist"
-            aria-label="Alternative paths"
+            aria-label={l.alternativePathsAria}
             className="grid grid-cols-1 sm:grid-cols-2 gap-2"
           >
             {alternatives.map((alt, idx) => {
@@ -269,7 +275,7 @@ export function FinancialRewind({
       {/* Toggle View: Side-by-Side Comparison vs Single View */}
       <div className="flex items-center justify-between gap-2 pt-1">
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          {showCompareMode ? "Comparing Paths" : "Path Details"}
+          {showCompareMode ? l.comparingPaths : l.pathDetails}
         </span>
         <button
           type="button"
@@ -278,7 +284,7 @@ export function FinancialRewind({
           className="min-h-[44px] inline-flex items-center gap-1.5 rounded-lg border border-border/70 bg-card px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-muted/50 transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring"
         >
           <GitCompare className="h-3.5 w-3.5 text-brand-lime" aria-hidden="true" />
-          <span>{showCompareMode ? "View Single Path" : "Compare with Your Choice"}</span>
+          <span>{showCompareMode ? l.viewSinglePath : l.compareWithYourChoice}</span>
         </button>
       </div>
 
@@ -300,7 +306,7 @@ export function FinancialRewind({
           <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-border/50">
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-brand-lime" aria-hidden="true" />
-              Your Choice
+              {l.yourChoice}
             </span>
             <span className="text-xs font-semibold text-foreground font-mono">
               {chosenPath.decisionLabel}
@@ -309,7 +315,7 @@ export function FinancialRewind({
 
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              What Happened
+              {l.whatHappened}
             </span>
             <p className="mt-1 text-sm text-foreground leading-relaxed" data-testid="chosen-narrative">
               {chosenPath.narrativeConsequence}
@@ -323,7 +329,7 @@ export function FinancialRewind({
 
           <div className="pt-2 border-t border-border/40">
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Trade-off Made
+              {l.tradeoffMade}
             </span>
             <p className="mt-1 text-xs text-foreground leading-relaxed" data-testid="chosen-tradeoff">
               {chosenPath.tradeoff}
@@ -333,7 +339,7 @@ export function FinancialRewind({
           {chosenPath.portfolioAfter && (
             <div className="pt-2 border-t border-border/40 space-y-1.5">
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                Resulting Portfolio
+                {l.resultingPortfolio}
               </span>
               <PortfolioSummary portfolio={chosenPath.portfolioAfter} onTermOpen={onTermOpen} />
             </div>
@@ -352,7 +358,7 @@ export function FinancialRewind({
             <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-border/50">
               <span className="text-xs font-bold uppercase tracking-wider text-brand-lilac flex items-center gap-1.5">
                 <RotateCcw className="h-3 w-3" aria-hidden="true" />
-                Alternative Path
+                {l.alternativePath}
               </span>
               <span className="text-xs font-semibold text-foreground font-mono" data-testid="alt-decision-label">
                 {currentAlt.decisionLabel}
@@ -361,7 +367,7 @@ export function FinancialRewind({
 
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                What Would Have Happened
+                {l.whatWouldHaveHappened}
               </span>
               <p className="mt-1 text-sm text-foreground leading-relaxed" data-testid="alt-narrative">
                 {currentAlt.summary ?? currentAlt.resultingSummary}
@@ -375,7 +381,7 @@ export function FinancialRewind({
 
             <div className="pt-2 border-t border-border/40">
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                Alternative Trade-off
+                {l.alternativeTradeoff}
               </span>
               <p className="mt-1 text-xs text-foreground leading-relaxed" data-testid="alt-tradeoff">
                 {currentAlt.tradeoff ?? currentAlt.tradeoffComparison}
@@ -385,7 +391,7 @@ export function FinancialRewind({
             {currentAlt.whatWasUnknown && (
               <div className="pt-2 border-t border-border/40">
                 <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  What Was Still Unknown
+                  {l.whatWasStillUnknown}
                 </span>
                 <p className="mt-1 text-xs text-muted-foreground leading-relaxed" data-testid="alt-unknown">
                   {currentAlt.whatWasUnknown}
@@ -396,7 +402,7 @@ export function FinancialRewind({
             {currentAlt.portfolioAfter && (
               <div className="pt-2 border-t border-border/40 space-y-1.5" data-testid="alt-portfolio-section">
                 <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  Alternative Resulting Portfolio
+                  {l.alternativeResultingPortfolio}
                 </span>
                 <PortfolioSummary portfolio={currentAlt.portfolioAfter} onTermOpen={onTermOpen} />
               </div>
@@ -429,7 +435,7 @@ export function FinancialRewind({
           <div className="flex items-center gap-2">
             <GitCompare className="h-4 w-4 text-brand-lime" aria-hidden="true" />
             <h3 id="metrics-comparison-heading" className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-              Direct Dimension Comparison
+              {l.dimensionComparisonHeading}
             </h3>
           </div>
 
@@ -445,11 +451,11 @@ export function FinancialRewind({
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-foreground font-mono">
                   <div className="rounded-lg bg-card border border-border/40 px-2.5 py-1.5">
-                    <span className="text-[10px] text-muted-foreground block font-sans">Your Choice</span>
+                    <span className="text-[10px] text-muted-foreground block font-sans">{l.yourChoice}</span>
                     <span>{metric.chosenValue}</span>
                   </div>
                   <div className="rounded-lg bg-brand-lilac/10 border border-brand-lilac/30 px-2.5 py-1.5">
-                    <span className="text-[10px] text-brand-lilac block font-sans">Alternative</span>
+                    <span className="text-[10px] text-brand-lilac block font-sans">{l.alternative}</span>
                     <span>{metric.alternativeValue}</span>
                   </div>
                 </div>
@@ -478,7 +484,7 @@ export function FinancialRewind({
             </h3>
           </div>
 
-          <div className="space-y-2" role="group" aria-label="Rewind reflection options">
+          <div className="space-y-2" role="group" aria-label={l.rewindReflectionAria}>
             {reflectionPrompt.options.map((opt) => (
               <button
                 key={opt.id}
@@ -503,7 +509,7 @@ export function FinancialRewind({
             className="min-h-[44px] inline-flex items-center gap-2 rounded-xl border border-border/80 bg-card px-4 py-2.5 text-sm font-semibold text-foreground hover:bg-muted/60 transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            <span>Back to Decision</span>
+            <span>{l.backToDecision}</span>
           </button>
         )}
 
@@ -514,7 +520,7 @@ export function FinancialRewind({
             data-testid="rewind-continue-btn"
             className="min-h-[44px] inline-flex items-center gap-2 rounded-xl bg-foreground text-background px-5 py-2.5 text-sm font-bold hover:bg-foreground/90 transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring ml-auto"
           >
-            <span>Continue Episode</span>
+            <span>{l.continueEpisode}</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </button>
         )}

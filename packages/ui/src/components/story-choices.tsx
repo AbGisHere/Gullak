@@ -262,7 +262,7 @@ export function StoryChoices({
         </div>
 
         <div className="flex items-center justify-center py-2">
-          <Character variant="blob" pose="celebrating" expression="excited" accent="lime" size="lg" label="Learner completed scenario" />
+          <Character variant="blob" pose="celebrating" expression="excited" accent="lime" size="lg" label={l.scenarioCompleted} />
         </div>
 
         {scenario.summaryTakeaway && (
@@ -328,7 +328,7 @@ export function StoryChoices({
             expression={protagonistProps.expression}
             accent={protagonistProps.accent}
             size="md"
-            label="Protagonist"
+            label={l.speakerYou}
           />
           <span className="text-[11px] font-semibold text-muted-foreground">{l.speakerYou}</span>
         </div>
