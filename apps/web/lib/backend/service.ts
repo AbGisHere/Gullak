@@ -27,6 +27,8 @@ export function ruleFor(topicId: string) {
 }
 export function requireTopicOpen(state: LearnerState, topicId: string) {
   const rule = ruleFor(topicId);
+  // A topic not taught to the learner's grade group is never open to them.
+  if (!rule.gradeGroups.includes(state.profile.gradeGroup)) throw new ApiError(403, "topic_locked");
   if (!isTopicOpen(rule, allUnlockRules, new Map(state.progress.map((p) => [p.topicId, p]))))
     throw new ApiError(403, "topic_locked");
   return rule;

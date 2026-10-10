@@ -58,7 +58,7 @@ Dependency direction: `web → (ui, ai, market-data, content, engine, types)`; `
 ## Scalability rules
 
 - **Content is data, not code.** A new topic or language never needs a code change.
-- **LLM output for lessons is generated once per topic × format × age band × language and cached.** Live LLM calls are only for the tutor, and those are rate-limited and cached.
+- **LLM output for lessons is generated once per topic × format × grade group × language and cached.** Live LLM calls are only for the tutor, and those are rate-limited and cached.
 - **Every market data source sits behind an adapter with caching and a snapshot fallback,** so no screen breaks if an API is down.
 - **Domain logic lives in `/packages/engine`,** which is pure functions, fully unit-tested and free of any framework imports.
 - **Stateless server code,** ready for edge/CDN deployment; no in-memory session state. (`MemoryCache` is for tests/local only.)
@@ -83,7 +83,7 @@ We don't fine-tune LLMs. Small adaptive models (e.g. knowledge tracing) are trai
 
 ### How to add a topic
 
-1. Add an unlock rule to `packages/content/config/topic-ladder.json` (ladder or `staySafe`).
+1. Add a node to `packages/content/config/topic-graph.json`: pillar, grade groups, prerequisites, pass mark, and the instruments and activities it unlocks. Loading rejects unknown prerequisites, cycles and prerequisites not taught to the same grade groups.
 2. Create `packages/content/topics/<topic-id>/topic.json` (`TopicMeta`) and `<locale>.json` per locale (`TopicContent`, must include a quiz variant).
 3. Formula variants reference an `@gullak/engine` function by name in `calculator`.
 4. Run `pnpm test`: content is validated against the schemas. No code changes needed.

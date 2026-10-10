@@ -22,17 +22,17 @@ do $$ begin
 end $$;
 set role service_role;
 do $$ begin
-  begin perform public.record_quiz('11111111-1111-4111-8111-111111111111', 'fixed-deposit', 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', '{}', 1, 0.6, array['savings-account']); raise exception 'prerequisite ignored'; exception when insufficient_privilege then null; end;
+  begin perform public.record_quiz('11111111-1111-4111-8111-111111111111', 'fixed-deposit', 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', '{}', 1, 0.6, array['bank-accounts-upi']); raise exception 'prerequisite ignored'; exception when insufficient_privilege then null; end;
 end $$;
-select public.record_lesson('11111111-1111-4111-8111-111111111111', 'savings-account');
-select public.record_quiz('11111111-1111-4111-8111-111111111111', 'savings-account', 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', '{}', 1, 0.6, array[]::text[]);
+select public.record_lesson('11111111-1111-4111-8111-111111111111', 'bank-accounts-upi');
+select public.record_quiz('11111111-1111-4111-8111-111111111111', 'bank-accounts-upi', 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', '{}', 1, 0.6, array[]::text[]);
 do $$ begin
-  begin perform public.record_quiz('11111111-1111-4111-8111-111111111111', 'fixed-deposit', 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', '{}', 1, 0.6, array['savings-account']); raise exception 'lesson ignored'; exception when insufficient_privilege then null; end;
+  begin perform public.record_quiz('11111111-1111-4111-8111-111111111111', 'fixed-deposit', 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', '{}', 1, 0.6, array['bank-accounts-upi']); raise exception 'lesson ignored'; exception when insufficient_privilege then null; end;
 end $$;
 select public.record_lesson('11111111-1111-4111-8111-111111111111', 'fixed-deposit');
-select public.record_quiz('11111111-1111-4111-8111-111111111111', 'fixed-deposit', 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', '{}', 1, 0.6, array['savings-account']);
+select public.record_quiz('11111111-1111-4111-8111-111111111111', 'fixed-deposit', 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', '{}', 1, 0.6, array['bank-accounts-upi']);
 -- Identical quiz retry returns original result; conflicting reuse is rejected.
-select public.record_quiz('11111111-1111-4111-8111-111111111111', 'fixed-deposit', 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', '{}', 0, 0.6, array['savings-account']);
+select public.record_quiz('11111111-1111-4111-8111-111111111111', 'fixed-deposit', 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', '{}', 0, 0.6, array['bank-accounts-upi']);
 reset role;
 select public.test_assert((select quiz_attempts = 1 from public.topic_progress where learner_id = '11111111-1111-4111-8111-111111111111' and topic_id = 'fixed-deposit'), 'quiz retry does not count twice');
 set role service_role;
@@ -42,10 +42,10 @@ reset role;
 select public.test_assert((select best_score >= 0.7 from public.topic_progress where learner_id = '11111111-1111-4111-8111-111111111111' and topic_id = 'stocks'), 'pass threshold preserves double precision');
 set role service_role;
 do $$ begin
-  begin perform public.record_quiz('11111111-1111-4111-8111-111111111111', 'fixed-deposit', 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', '{"changed":true}', 1, 0.6, array['savings-account']); raise exception 'conflicting retry allowed'; exception when unique_violation then null; end;
+  begin perform public.record_quiz('11111111-1111-4111-8111-111111111111', 'fixed-deposit', 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', '{"changed":true}', 1, 0.6, array['bank-accounts-upi']); raise exception 'conflicting retry allowed'; exception when unique_violation then null; end;
 end $$;
-select public.invest_fd('11111111-1111-4111-8111-111111111111', 'cccccccc-cccc-4ccc-8ccc-cccccccccccc', '{"principalPaise":600}', '{"id":"dddddddd-dddd-4ddd-8ddd-dddddddddddd","principalPaise":600,"type":"deposit","kind":"fixed-deposit","tenureMonths":12,"instrumentId":"virtual-fd","openedAt":"2026-10-10T10:00:00Z"}', array['savings-account','fixed-deposit']);
-select public.invest_fd('11111111-1111-4111-8111-111111111111', 'cccccccc-cccc-4ccc-8ccc-cccccccccccc', '{"principalPaise":600}', '{"id":"eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee","principalPaise":600,"type":"deposit","kind":"fixed-deposit","tenureMonths":12,"instrumentId":"virtual-fd","openedAt":"2026-10-10T10:00:00Z"}', array['savings-account','fixed-deposit']);
+select public.invest_fd('11111111-1111-4111-8111-111111111111', 'cccccccc-cccc-4ccc-8ccc-cccccccccccc', '{"principalPaise":600}', '{"id":"dddddddd-dddd-4ddd-8ddd-dddddddddddd","principalPaise":600,"type":"deposit","kind":"fixed-deposit","tenureMonths":12,"instrumentId":"virtual-fd","openedAt":"2026-10-10T10:00:00Z"}', array['bank-accounts-upi','fixed-deposit']);
+select public.invest_fd('11111111-1111-4111-8111-111111111111', 'cccccccc-cccc-4ccc-8ccc-cccccccccccc', '{"principalPaise":600}', '{"id":"eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee","principalPaise":600,"type":"deposit","kind":"fixed-deposit","tenureMonths":12,"instrumentId":"virtual-fd","openedAt":"2026-10-10T10:00:00Z"}', array['bank-accounts-upi','fixed-deposit']);
 do $$ begin
   begin perform public.invest_fd('11111111-1111-4111-8111-111111111111', 'ffffffff-ffff-4fff-8fff-ffffffffffff', '{}', '{"id":"ffffffff-ffff-4fff-8fff-ffffffffffff","principalPaise":600,"type":"deposit","kind":"fixed-deposit","tenureMonths":12,"instrumentId":"virtual-fd","openedAt":"2026-10-10T10:00:00Z"}', array['fixed-deposit']); raise exception 'overdraft allowed'; exception when check_violation then null; end;
   begin perform public.facilitator_progress('11111111-1111-4111-8111-111111111111', 'ffffffff-ffff-4fff-8fff-ffffffffffff'); raise exception 'cohort leak'; exception when insufficient_privilege then null; end;

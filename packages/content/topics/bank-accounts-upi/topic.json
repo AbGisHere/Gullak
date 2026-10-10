@@ -1,6 +1,6 @@
 {
-  "id": "savings-account",
-  "track": "ladder",
+  "id": "bank-accounts-upi",
+  "pillar": "save-and-manage",
   "instrument": "savings",
   "concepts": [
     {

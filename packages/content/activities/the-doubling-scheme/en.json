@@ -1,0 +1,93 @@
+{
+  "kind": "story",
+  "id": "the-doubling-scheme",
+  "locale": "en",
+  "title": "The doubling scheme",
+  "topicIds": ["too-good-to-be-true", "report-a-fraud"],
+  "startNodeId": "the-offer",
+  "nodes": [
+    {
+      "id": "the-offer",
+      "speaker": "Rohan",
+      "text": "Bro, there's this app. Put in ₹500 today and you get ₹1,000 back next week. Guaranteed! My cousin already got paid.",
+      "choices": [
+        {
+          "id": "send-500",
+          "text": "Send ₹500 right away",
+          "nextNodeId": "money-gone",
+          "consequence": "You sent ₹500 to an app you'd never heard of.",
+          "verdict": "harmful",
+          "cashDeltaPaise": -50000
+        },
+        {
+          "id": "ask-questions",
+          "text": "\"How does it double so fast?\"",
+          "nextNodeId": "bring-friends",
+          "consequence": "Asking how the money is made is the right first step.",
+          "verdict": "safe"
+        },
+        {
+          "id": "tell-an-adult",
+          "text": "Say no and tell a parent or teacher",
+          "nextNodeId": "safe-ending",
+          "consequence": "You kept your money and got a second opinion.",
+          "verdict": "safe"
+        }
+      ]
+    },
+    {
+      "id": "bring-friends",
+      "speaker": "Rohan",
+      "text": "Don't worry about how. You just have to get two friends to join, and then you get paid from what they put in.",
+      "choices": [
+        {
+          "id": "join-anyway",
+          "text": "Join anyway, Rohan's cousin got paid",
+          "nextNodeId": "money-gone",
+          "consequence": "Early joiners get paid with newer joiners' money, until new people stop coming.",
+          "verdict": "harmful",
+          "cashDeltaPaise": -50000
+        },
+        {
+          "id": "spot-the-pattern",
+          "text": "\"So new people's money pays old people? That's a scam.\"",
+          "nextNodeId": "report-ending",
+          "consequence": "You spotted it: no real business, just new money paying old investors.",
+          "verdict": "safe"
+        }
+      ]
+    },
+    {
+      "id": "money-gone",
+      "text": "A week later the app has vanished from the store. Rohan's messages to the \"support\" number bounce. The ₹500 is gone.",
+      "choices": [
+        {
+          "id": "report-it",
+          "text": "Report it",
+          "nextNodeId": "report-ending",
+          "consequence": "Reporting fast gives the best chance of stopping it, and protects others.",
+          "verdict": "safe"
+        },
+        {
+          "id": "keep-quiet",
+          "text": "Keep quiet, it's embarrassing",
+          "nextNodeId": "quiet-ending",
+          "consequence": "Staying quiet lets the scam keep finding new people.",
+          "verdict": "risky"
+        }
+      ]
+    },
+    {
+      "id": "safe-ending",
+      "text": "Your teacher explains: nobody can guarantee to double money in a week. Real savings and investments grow slowly, and even they aren't guaranteed. You kept your ₹500."
+    },
+    {
+      "id": "report-ending",
+      "text": "You call the cybercrime helpline 1930 and file a report at cybercrime.gov.in, and you warn your friends. If money was sent through a bank or UPI, tell the bank straight away too."
+    },
+    {
+      "id": "quiet-ending",
+      "text": "The app shows up again under a new name, and two classmates lose money too. Being scammed is nothing to be ashamed of. Reporting it is how scams get stopped. Try again?"
+    }
+  ]
+}

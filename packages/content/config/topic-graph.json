@@ -1,0 +1,302 @@
+{
+  "$comment": "Topic prerequisite graph (docs/curriculum.md). A topic opens for a learner when it's taught to their grade group and every prerequisite's quiz is passed; passing it unlocks instruments in the paper portfolio and activities. Plan & budget and Stay financially safe have roots with no prerequisites, so they're open from day one. Validated at load: ids unique, prerequisites exist, no cycles, and a prerequisite is taught to every grade group of the topic that needs it.",
+  "topics": [
+    {
+      "topicId": "money-basics",
+      "pillar": "plan-and-budget",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": [],
+      "passMark": 0.6,
+      "unlocksInstruments": ["piggy-bank"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "needs-vs-wants",
+      "pillar": "plan-and-budget",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["money-basics"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": ["needs-or-wants"]
+    },
+    {
+      "topicId": "making-a-budget",
+      "pillar": "plan-and-budget",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["needs-vs-wants"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "opportunity-cost",
+      "pillar": "plan-and-budget",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["needs-vs-wants"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "setting-goals",
+      "pillar": "plan-and-budget",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["making-a-budget"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "prices-and-inflation",
+      "pillar": "plan-and-budget",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["money-basics"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "future-goals",
+      "pillar": "plan-and-budget",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["setting-goals", "prices-and-inflation"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "saving-habit",
+      "pillar": "save-and-manage",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["money-basics"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "tracking-spending",
+      "pillar": "save-and-manage",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["needs-vs-wants"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "emergency-fund",
+      "pillar": "save-and-manage",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["saving-habit"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "bank-accounts-upi",
+      "pillar": "save-and-manage",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["saving-habit"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["savings"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "fixed-deposit",
+      "pillar": "save-and-manage",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["bank-accounts-upi"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["fixed-deposit"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "recurring-deposit",
+      "pillar": "save-and-manage",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["saving-habit"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["recurring-deposit"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "ppf-small-savings",
+      "pillar": "save-and-manage",
+      "gradeGroups": ["grade-11-12"],
+      "requiresTopicIds": ["fixed-deposit"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["ppf"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "borrowing-and-credit",
+      "pillar": "save-and-manage",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["bank-accounts-upi"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "insurance-basics",
+      "pillar": "save-and-manage",
+      "gradeGroups": ["grade-11-12"],
+      "requiresTopicIds": ["emergency-fund"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "compounding",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["needs-vs-wants", "saving-habit"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "risk-and-return",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["compounding"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "gold",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["risk-and-return"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["gold"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "money-market",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-11-12"],
+      "requiresTopicIds": ["risk-and-return", "fixed-deposit"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["liquid-fund"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "bonds",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-11-12"],
+      "requiresTopicIds": ["money-market"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["bond"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "debt-funds",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-11-12"],
+      "requiresTopicIds": ["bonds"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["debt-fund"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "mutual-funds-sip",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["risk-and-return"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["mutual-fund"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "index-funds-etfs",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["mutual-funds-sip"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["index-fund", "etf"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "stocks",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["index-funds-etfs"],
+      "passMark": 0.7,
+      "unlocksInstruments": ["stock"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "diversification",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["mutual-funds-sip", "gold"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "market-ups-and-downs",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["index-funds-etfs", "emergency-fund"],
+      "passMark": 0.7,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": ["march-2020-hospital-bill"]
+    },
+    {
+      "topicId": "retirement-nps",
+      "pillar": "understand-investing",
+      "gradeGroups": ["grade-11-12"],
+      "requiresTopicIds": ["compounding", "mutual-funds-sip"],
+      "passMark": 0.6,
+      "unlocksInstruments": ["nps"],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "protect-your-info",
+      "pillar": "stay-safe",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": [],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "upi-and-phishing-scams",
+      "pillar": "stay-safe",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["protect-your-info"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "too-good-to-be-true",
+      "pillar": "stay-safe",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["protect-your-info"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": ["the-doubling-scheme"]
+    },
+    {
+      "topicId": "fake-apps-and-loans",
+      "pillar": "stay-safe",
+      "gradeGroups": ["grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["upi-and-phishing-scams"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    },
+    {
+      "topicId": "report-a-fraud",
+      "pillar": "stay-safe",
+      "gradeGroups": ["grade-6-7", "grade-8-10", "grade-11-12"],
+      "requiresTopicIds": ["protect-your-info"],
+      "passMark": 0.6,
+      "unlocksInstruments": [],
+      "unlocksActivityIds": []
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "topicId": "saving-habit",
+  "locale": "en",
+  "title": "The saving habit",
+  "summary": "Pay yourself first: put some money aside before you spend.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "markdown": "**English draft for R5 review.**\n\n**Pay yourself first** means putting a little money aside as soon as it comes in, before spending on anything else. Small, regular amounts add up, and saving every week builds a habit. Saving is a habit, not a promise of returns."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "pay-yourself-first",
+          "conceptId": "pay-yourself-first",
+          "prompt": "You get ₹200 pocket money. What does \"pay yourself first\" mean?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Put some aside before spending"
+            },
+            {
+              "id": "1",
+              "text": "Spend it all, then save what's left"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Saving first means the saving actually happens."
+        },
+        {
+          "id": "saving-streak",
+          "conceptId": "saving-streak",
+          "prompt": "Why save a small amount every week?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Regular saving builds a habit and adds up"
+            },
+            {
+              "id": "1",
+              "text": "Small amounts never matter"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Even small amounts add up over time when you save regularly."
+        }
+      ]
+    }
+  ]
+}

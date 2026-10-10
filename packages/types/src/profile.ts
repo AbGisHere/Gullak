@@ -6,9 +6,10 @@ export const LearnerProfile = z.object({
   id: z.uuid(),
   displayName: z.string().min(1).max(60).optional(),
   gradeGroup: GradeGroup,
+  /** Starting prior only; evidence from quizzes, activities and sims drives mastery. */
   experience: Experience,
   locale: Locale,
-  /** Stated at onboarding, ordered by preference; refined later by behaviour. */
+  /** Optional at onboarding ("Mix it up" stores every format); refined later by the format bandit. */
   preferredFormats: z.array(LearningFormat).min(1),
   goal: Goal.optional(),
   /** Facilitator / NGO cohort, if the learner joined through one. */

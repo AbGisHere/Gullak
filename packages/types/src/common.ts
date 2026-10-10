@@ -27,6 +27,7 @@ export const IsoDateTime = z.iso.datetime({ offset: true });
 /** Annual rate as a percentage, e.g. `7.1` for 7.1% p.a. */
 export const RatePercent = z.number().min(0).max(100);
 
+/** School grade group the learner is in (docs/curriculum.md › Learners). */
 export const GradeGroup = z.enum(["grade-6-7", "grade-8-10", "grade-11-12"]);
 export type GradeGroup = z.infer<typeof GradeGroup>;
 

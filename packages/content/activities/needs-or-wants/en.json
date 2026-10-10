@@ -1,0 +1,71 @@
+{
+  "kind": "spot-sort",
+  "id": "needs-or-wants",
+  "locale": "en",
+  "title": "Need or want?",
+  "topicIds": ["needs-vs-wants"],
+  "prompt": "Sort each thing: is it a need or a want?",
+  "categories": [{ "id": "need", "label": "Need" }, { "id": "want", "label": "Want" }],
+  "items": [
+    {
+      "id": "rice-and-dal",
+      "text": "Rice and dal for the week",
+      "correctCategoryId": "need",
+      "explanation": "Food you need to stay healthy is a need."
+    },
+    {
+      "id": "school-bus-pass",
+      "text": "Monthly school bus pass",
+      "correctCategoryId": "need",
+      "explanation": "Getting to school is a need. A cheaper way there could still meet it."
+    },
+    {
+      "id": "fever-medicine",
+      "text": "Medicine for a fever",
+      "correctCategoryId": "need",
+      "explanation": "Health comes first, so medicine is a need."
+    },
+    {
+      "id": "electricity-bill",
+      "text": "The electricity bill",
+      "correctCategoryId": "need",
+      "explanation": "Bills that keep the home running are needs. Skipping them causes bigger problems later."
+    },
+    {
+      "id": "school-notebooks",
+      "text": "Notebooks for school",
+      "correctCategoryId": "need",
+      "explanation": "You need them for school. Fancy covers would be the want part."
+    },
+    {
+      "id": "movie-ticket",
+      "text": "A movie ticket with friends",
+      "correctCategoryId": "want",
+      "explanation": "Fun is fine to plan for, but it's a want. You can choose when to spend on it."
+    },
+    {
+      "id": "new-phone-cover",
+      "text": "A new phone cover when the old one works",
+      "correctCategoryId": "want",
+      "explanation": "The old one still does the job, so a new one is a want."
+    },
+    {
+      "id": "game-skin",
+      "text": "A skin in an online game",
+      "correctCategoryId": "want",
+      "explanation": "It looks nice but you don't need it. Small in-game buys add up quickly."
+    },
+    {
+      "id": "brand-shoes",
+      "text": "Brand-name shoes when yours still fit",
+      "correctCategoryId": "want",
+      "explanation": "Shoes are a need, but new branded ones while yours fit are a want."
+    },
+    {
+      "id": "street-food-daily",
+      "text": "Street food every day after school",
+      "correctCategoryId": "want",
+      "explanation": "A treat now and then is fine. Every day, it's a want that eats your savings."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Curriculum
 
-The learning map for Gullak, built on the four pillars of the Vanguard problem statement. This is the plan the content, schemas and engines follow; the source of truth for each topic will be its data in `packages/content` once `feat/curriculum` lands.
+The learning map for Gullak, built on the four pillars of the Vanguard problem statement. This is the plan the content, schemas and engines follow; the source of truth is the data in `packages/content`: the prerequisite graph in `config/topic-graph.json`, activities in `activities/` and Practice episodes in `episodes/`.
 
 > **Guardrail:** we educate; we never recommend real products or tell anyone to buy or sell. Simulations are assumptions, not promises. All money is virtual.
 
@@ -48,7 +48,7 @@ Grade columns: **J** = Grade 6–7, **M** = Grade 8–10, **S** = Grade 11–12.
 | `emergency-fund` | explain why to keep money aside for surprises and how much | ✓ | ✓ | ✓ |
 | `bank-accounts-upi` | describe a savings account, interest, debit cards and UPI |  | ✓ | ✓ |
 | `fixed-deposit` | explain an FD: lump sum, fixed rate, fixed period, early-exit penalty |  | ✓ | ✓ |
-| `recurring-deposit` | explain an RD: a fixed amount every month |  | ✓ | ✓ |
+| `recurring-deposit` | explain an RD: a fixed amount every month | ✓ | ✓ | ✓ |
 | `ppf-small-savings` | describe long-term government small-savings schemes such as PPF |  |  | ✓ |
 | `borrowing-and-credit` | explain interest you pay, EMIs, credit scores and the cost of easy loans |  | ✓ | ✓ |
 | `insurance-basics` | explain insurance as protection, not investment |  |  | ✓ |

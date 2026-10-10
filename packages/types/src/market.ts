@@ -19,7 +19,7 @@ export const MarketQuote = z.object({
 });
 export type MarketQuote = z.infer<typeof MarketQuote>;
 
-/** A point in a historical series, used by the Time Machine replay. */
+/** A point in a historical series, used by Practice episode replays. */
 export const SeriesPoint = z.object({
   t: IsoDateTime,
   value: z.number().finite().nonnegative(),

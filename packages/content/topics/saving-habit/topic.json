@@ -1,0 +1,16 @@
+{
+  "id": "saving-habit",
+  "pillar": "save-and-manage",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "pay-yourself-first",
+      "label": "pay-yourself-first"
+    },
+    {
+      "id": "saving-streak",
+      "label": "saving-streak"
+    }
+  ],
+  "estimatedMinutes": 3
+}

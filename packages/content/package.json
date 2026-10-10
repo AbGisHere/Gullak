@@ -8,7 +8,9 @@
   "exports": {
     ".": "./src/index.ts",
     "./server": "./src/topic-loader.ts",
-    "./config/*": "./config/*"
+    "./config/*": "./config/*",
+    "./activities/*": "./activities/*",
+    "./episodes/*": "./episodes/*"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

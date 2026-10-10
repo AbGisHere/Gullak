@@ -1,0 +1,85 @@
+{
+  "id": "march-2020-hospital-bill",
+  "locale": "en",
+  "title": "March 2020: the hospital bill",
+  "intro": "It's October 2019. You're Asha, in Class 12, and you help your family manage its money. Each month, after the household needs are paid, you decide how much to keep aside, save or invest. Prices are real; nobody in the story knows what comes next.",
+  "topicIds": ["market-ups-and-downs", "emergency-fund", "fixed-deposit", "index-funds-etfs"],
+  "gradeGroups": ["grade-8-10", "grade-11-12"],
+  "startDate": "2019-10-01",
+  "endDate": "2020-06-30",
+  "persona": {
+    "name": "Asha",
+    "description": "Class 12 student helping her family manage the household savings",
+    "startingCashPaise": 500000,
+    "monthlyIncomePaise": 3000000,
+    "monthlyNeedsPaise": 2400000
+  },
+  "instruments": [
+    {
+      "type": "deposit",
+      "instrumentId": "emergency-fund",
+      "kind": "savings",
+      "label": "Emergency fund (savings account)",
+      "ratePercent": 3.5,
+      "rateAsOf": "2019-10-01",
+      "rateSource": "assumption: a typical savings account rate in 2019, until the bank-rates snapshot lands"
+    },
+    {
+      "type": "deposit",
+      "instrumentId": "six-month-fd",
+      "kind": "fixed-deposit",
+      "label": "6-month fixed deposit",
+      "ratePercent": 6.25,
+      "tenureMonths": 6,
+      "earlyExitPenaltyPercent": 1,
+      "rateAsOf": "2019-09-25",
+      "rateSource": "assumption: a typical 6-month bank FD rate in 2019, until the bank-rates snapshot lands"
+    },
+    {
+      "type": "market",
+      "instrumentId": "nifty-50-index-fund",
+      "kind": "index-fund",
+      "label": "A NIFTY 50 index fund",
+      "snapshot": "amfi-120716"
+    }
+  ],
+  "startingHoldings": [{ "instrumentId": "six-month-fd", "amountPaise": 1000000, "openedOn": "2019-09-25" }],
+  "scheduledEvents": [
+    {
+      "id": "hospital-bill",
+      "on": "2020-03-23",
+      "title": "A hospital bill",
+      "description": "Your grandmother needs hospital treatment. The bill is ₹15,000 and it has to be paid this week.",
+      "cashDeltaPaise": -1500000,
+      "mustPay": true
+    }
+  ],
+  "randomEvents": [
+    {
+      "id": "phone-repair",
+      "title": "Cracked phone screen",
+      "description": "The family phone's screen cracks. The repair costs ₹2,500.",
+      "cashDeltaPaise": -250000,
+      "mustPay": true,
+      "monthlyChance": 0.08
+    },
+    {
+      "id": "school-trip",
+      "title": "School trip",
+      "description": "There's a class trip for ₹1,500. You can go, or skip it.",
+      "cashDeltaPaise": -150000,
+      "monthlyChance": 0.1
+    },
+    {
+      "id": "festival-gift",
+      "title": "Festival gift",
+      "description": "Relatives give you ₹2,000 for the festival.",
+      "cashDeltaPaise": 200000,
+      "monthlyChance": 0.1
+    }
+  ],
+  "reveal": {
+    "compareOn": "2020-06-23",
+    "lesson": "On 23 March 2020 nobody knew whether prices would fall further or recover, just as nobody knows tomorrow today. Selling at that point turned a fall on paper into a real loss, and breaking the FD gave up interest two days before it matured. The family with an emergency fund didn't have to choose. Past prices don't predict future ones."
+  }
+}

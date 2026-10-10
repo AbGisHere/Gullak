@@ -1,0 +1,16 @@
+{
+  "id": "money-basics",
+  "pillar": "plan-and-budget",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "money-in",
+      "label": "money-in"
+    },
+    {
+      "id": "money-out",
+      "label": "money-out"
+    }
+  ],
+  "estimatedMinutes": 3
+}

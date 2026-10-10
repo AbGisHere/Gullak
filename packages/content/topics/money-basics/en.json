@@ -1,0 +1,53 @@
+{
+  "topicId": "money-basics",
+  "locale": "en",
+  "title": "Where money comes from and goes",
+  "summary": "Money comes in from pocket money, gifts or wages, and goes out on things we buy.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "markdown": "**English draft for R5 review.**\n\nMoney **comes in** from places like pocket money, gifts or wages. It **goes out** when we buy things or pay bills. Knowing both sides is the first step to deciding what to do with it. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "money-in",
+          "conceptId": "money-in",
+          "prompt": "Which of these is money coming in?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Pocket money from family"
+            },
+            {
+              "id": "1",
+              "text": "Buying a snack"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Pocket money is money coming in; buying a snack is money going out."
+        },
+        {
+          "id": "money-out",
+          "conceptId": "money-out",
+          "prompt": "Paying the electricity bill is…",
+          "options": [
+            {
+              "id": "0",
+              "text": "Money going out"
+            },
+            {
+              "id": "1",
+              "text": "Money coming in"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Paying a bill means money leaves your hands."
+        }
+      ]
+    }
+  ]
+}

@@ -5,11 +5,12 @@ import { InstrumentKind } from "./instrument";
 /**
  * A topic is stored ONCE as structured content (TopicMeta + one TopicContent
  * per locale) and rendered in many formats. Renderers pick variants by the
- * learner's preferred formats and age band.
+ * learner's preferred formats and grade group.
  */
 
-export const TopicTrack = z.enum(["ladder", "stay-safe"]);
-export type TopicTrack = z.infer<typeof TopicTrack>;
+/** The four pillars of the problem statement (docs/curriculum.md › Pillars and topics). */
+export const Pillar = z.enum(["plan-and-budget", "save-and-manage", "understand-investing", "stay-safe"]);
+export type Pillar = z.infer<typeof Pillar>;
 
 export const Concept = z.object({
   id: Slug,
@@ -19,8 +20,8 @@ export const Concept = z.object({
 
 export const TopicMeta = z.object({
   id: Slug,
-  track: TopicTrack,
-  /** Instrument this topic teaches; null for the stay-safe track. */
+  pillar: Pillar,
+  /** Instrument this topic teaches; null when it teaches no instrument. */
   instrument: InstrumentKind.nullable(),
   concepts: z.array(Concept).min(1),
   estimatedMinutes: z.number().int().positive(),
@@ -29,7 +30,7 @@ export type TopicMeta = z.infer<typeof TopicMeta>;
 
 const VariantBase = z.object({
   id: Slug,
-  /** Age bands this variant is written for; omitted means all. */
+  /** Grade groups this variant is written for (depth per grade); omitted means all. */
   audience: z.array(GradeGroup).optional(),
   /** Concepts this variant covers, for knowledge tracing. */
   conceptIds: z.array(Slug).default([]),

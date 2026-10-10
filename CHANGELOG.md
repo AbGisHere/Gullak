@@ -9,7 +9,11 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Added
-- Grade-group onboarding with optional mixed-format defaults, existing default virtual capital, a non-destructive legacy-profile migration, and database types generated from local PostgreSQL schema introspection.
+- Curriculum as data: a 33-topic prerequisite graph (`packages/content/config/topic-graph.json`) with a pillar, grade groups, prerequisites and unlocks per topic, validated at load (no unknown prerequisites, no cycles, and prerequisites are taught to the same grade groups).
+- `Activity` schemas for spot & sort rounds and branching stories, and an `Episode` schema for Practice episodes (date range, persona, instruments, starting holdings, scheduled and random life events, reveal), with one example each: need or want, the doubling scheme, and March 2020 + a hospital bill priced from the committed index-fund snapshot.
+- Instrument kinds for every unlock in the curriculum: piggy bank, PPF, liquid fund, bond, debt fund, ETF and NPS.
+- Engine helpers for grade-aware topic availability and unlocked activities; English drafts for `money-basics` and `saving-habit` so the lesson → quiz → FD loop follows the graph.
+- Grade-group onboarding with optional mixed-format defaults, a non-destructive legacy-profile migration, and database types generated from local PostgreSQL schema introspection.
 - Read-only shared-schema inventory and backend review checklist covering migration approval, Ubuntu browser verification and two-learner hosted acceptance tests.
 - Verified-session backend API for config-driven onboarding, lesson progress, server-graded quizzes, virtual FD investment and persistent portfolio valuation, with strict Zod request contracts and server-only privileged access.
 - Follow-up Supabase migration restricting direct learner writes and providing atomic, idempotent transactions plus assigned-cohort facilitator aggregates; preserves the original schema.
@@ -17,6 +21,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - English savings and FD transcript/quiz drafts for content review, local PostgreSQL concurrency/isolation tests, and a beginner setup guide with an importable Postman collection.
 
 ### Changed
+- Starting cash scales by grade group and experience (₹2,000–₹20,000).
+- Topics form a prerequisite graph tagged by pillar and grade group instead of a linear ladder; the savings draft is now `bank-accounts-upi`, and the backend also refuses topics not taught to the learner's grade group.
 - The AI tutor pitches answers at the learner's grade group (prompt v2); v1 stays unchanged so cached answers keyed by version remain valid.
 - The data-access entry point requires a verified Request and fails explicitly when persistence is unconfigured; no module-memory session fallback.
 - Authenticated API responses bypass service-worker caches so learner data is not reused after an account change.

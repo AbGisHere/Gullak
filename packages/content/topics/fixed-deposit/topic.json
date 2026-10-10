@@ -1,6 +1,6 @@
 {
   "id": "fixed-deposit",
-  "track": "ladder",
+  "pillar": "save-and-manage",
   "instrument": "fixed-deposit",
   "concepts": [
     {

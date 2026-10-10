@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { IsoDate, IsoDateTime, NonNegativePaise, RatePercent, Slug } from "./common";
+import { DepositKind, MarketKind } from "./instrument";
 
 const HoldingBase = z.object({
   id: z.uuid(),
@@ -7,14 +8,14 @@ const HoldingBase = z.object({
   openedAt: IsoDateTime,
 });
 
-/** Savings / FD / RD: valued from terms, not market prices. */
+/** Piggy bank / savings / FD / RD / PPF: valued from terms, not market prices. */
 export const DepositHolding = HoldingBase.extend({
   type: z.literal("deposit"),
-  kind: z.enum(["savings", "fixed-deposit", "recurring-deposit"]),
+  kind: DepositKind,
   /** Lump sum for FD/savings; monthly instalment for RD. */
   principalPaise: NonNegativePaise,
   ratePercent: RatePercent,
-  /** Absent for savings (no fixed tenure). */
+  /** Absent for a piggy bank or savings (no fixed tenure). */
   tenureMonths: z.number().int().positive().optional(),
   compoundsPerYear: z.number().int().positive().default(4),
   /** When and from which source the rate was taken, shown next to it. */
@@ -23,10 +24,10 @@ export const DepositHolding = HoldingBase.extend({
 });
 export type DepositHolding = z.infer<typeof DepositHolding>;
 
-/** Gold / mutual fund / index fund / stock: units × latest market quote. */
+/** Gold / funds / bonds / stocks / NPS: units × latest market quote or NAV. */
 export const MarketHolding = HoldingBase.extend({
   type: z.literal("market"),
-  kind: z.enum(["gold", "mutual-fund", "index-fund", "stock"]),
+  kind: MarketKind,
   symbol: z.string().min(1),
   units: z.number().finite().positive(),
   costBasisPaise: NonNegativePaise,

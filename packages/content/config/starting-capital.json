@@ -1,5 +1,15 @@
 {
-  "$comment": "Virtual cash in whole rupees. Grade-specific overrides are not yet agreed; use the existing default for every grade and experience.",
-  "defaultInr": 10000,
-  "rows": []
+  "$comment": "Virtual (play-money) starting cash in whole rupees, by grade group × current experience. Edit here, never in UI code. Practice episodes set their own persona's cash.",
+  "defaultInr": 5000,
+  "rows": [
+    { "gradeGroup": "grade-6-7", "experience": "none", "inr": 2000 },
+    { "gradeGroup": "grade-6-7", "experience": "some", "inr": 3000 },
+    { "gradeGroup": "grade-6-7", "experience": "regular", "inr": 5000 },
+    { "gradeGroup": "grade-8-10", "experience": "none", "inr": 5000 },
+    { "gradeGroup": "grade-8-10", "experience": "some", "inr": 7500 },
+    { "gradeGroup": "grade-8-10", "experience": "regular", "inr": 10000 },
+    { "gradeGroup": "grade-11-12", "experience": "none", "inr": 10000 },
+    { "gradeGroup": "grade-11-12", "experience": "some", "inr": 15000 },
+    { "gradeGroup": "grade-11-12", "experience": "regular", "inr": 20000 }
+  ]
 }

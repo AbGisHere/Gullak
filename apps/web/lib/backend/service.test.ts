@@ -24,7 +24,14 @@ const state: LearnerState = {
     createdAt: at,
     updatedAt: at,
   }),
-  progress: [],
+  // Prerequisites of the bank-accounts-upi fixture in the topic graph.
+  progress: ["money-basics", "saving-habit"].map((topicId) => ({
+    topicId,
+    bestQuizScore: 1,
+    passed: true,
+    lessonViewedAt: at,
+    updatedAt: at,
+  })),
 };
 function database(): DataAccess {
   return {
@@ -38,14 +45,14 @@ function database(): DataAccess {
 }
 const topic: Topic = {
   meta: {
-    id: "savings-account",
-    track: "ladder",
+    id: "bank-accounts-upi",
+    pillar: "save-and-manage",
     instrument: "savings",
     concepts: [{ id: "saving", label: "Saving" }],
     estimatedMinutes: 2,
   },
   content: {
-    topicId: "savings-account",
+    topicId: "bank-accounts-upi",
     locale: "en",
     title: "Savings",
     summary: "Draft",
@@ -105,11 +112,15 @@ describe("backend orchestration", () => {
     const db = database();
     const input = { variantId: "check", answers: [{ questionId: "one", optionId: "b" }] };
     expect(await createBackendService(db, id).quiz(topic, input, id)).toMatchObject({ score: 0, passed: false });
-    expect(db.quiz).toHaveBeenCalledWith("savings-account", id, input, 0, 0.6, []);
+    expect(db.quiz).toHaveBeenCalledWith("bank-accounts-upi", id, input, 0, 0.6, ["saving-habit"]);
   });
   it("blocks FD lessons until savings is completed", async () => {
     const fd = { ...topic, meta: { ...topic.meta, id: "fixed-deposit" } };
     await expect(createBackendService(database(), id).lesson(fd, "read")).rejects.toMatchObject({ status: 403 });
+  });
+  it("keeps topics closed to grade groups they aren't taught to", () => {
+    const junior = { ...state, profile: { ...state.profile, gradeGroup: "grade-6-7" as const } };
+    expect(() => publicLesson(topic, junior)).toThrow(expect.objectContaining({ status: 403 }));
   });
   it("does not accept a quiz as proof of lesson viewing", async () => {
     const db = database();

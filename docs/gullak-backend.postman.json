@@ -121,7 +121,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "{{baseUrl}}/api/lessons/savings-account"
+        "url": "{{baseUrl}}/api/lessons/bank-accounts-upi"
       }
     },
     {
@@ -134,7 +134,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseUrl}}/api/lessons/savings-account/progress",
+        "url": "{{baseUrl}}/api/lessons/bank-accounts-upi/progress",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"variantId\": \"read\"\n}",
@@ -160,7 +160,7 @@
             "value": "{{savingsQuizKey}}"
           }
         ],
-        "url": "{{baseUrl}}/api/lessons/savings-account/quiz",
+        "url": "{{baseUrl}}/api/lessons/bank-accounts-upi/quiz",
         "body": {
           "mode": "raw",
           "raw": "{\n  \"variantId\": \"check\",\n  \"answers\": [\n    {\n      \"questionId\": \"virtual-money\",\n      \"optionId\": \"0\"\n    },\n    {\n      \"questionId\": \"saving-purpose\",\n      \"optionId\": \"0\"\n    }\n  ]\n}",
