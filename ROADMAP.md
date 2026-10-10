@@ -28,7 +28,7 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 - [ ] Ask organisers for sponsored AA/FIU sandbox access; otherwise enquire with Setu, Finvu or Sahamati. Confirm student eligibility, provisioning time, test credentials/users/OTPs, API/Postman docs and webhook requirements (R1 lead, R3)
 
 ## Phase 2 · Core loop (h5–h11)
-- [ ] Onboarding flow: grade group, current experience, how they like to learn (optional, "Mix it up" default) (R1)
+- [x] Onboarding flow: grade group, current experience, how they like to learn (optional, "Mix it up" default) (R1)
 - [ ] Lesson pre-generation script (topic × format × grade group × language, cached), run on the first curriculum entries (R4)
 - [ ] Demo topics in every format (one per pillar, e.g. needs vs wants, emergency fund, compounding, UPI scams): video, story, visual, formula + live calculator (KaTeX), transcript, simulation, quiz, audio (R2, R5)
 - [ ] Format picker from preferences (R4)

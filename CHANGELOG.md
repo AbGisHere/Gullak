@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.8] - 2026-10-10
+
 ### Added
 - Learner onboarding on phone and desktop: language (from `locales.json`), grade group (required), current experience with a starting-cash preview from config, an optional format step ("Mix it up" by default, or Skip) and an optional goal in the learner's own words. The profile is validated and stored on the device until learner persistence is connected.
 - Curriculum as data: a 33-topic prerequisite graph (`packages/content/config/topic-graph.json`) with a pillar, grade groups, prerequisites and unlocks per topic, validated at load (no unknown prerequisites, no cycles, and prerequisites are taught to the same grade groups).
