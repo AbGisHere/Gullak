@@ -4,14 +4,14 @@ The single source of truth for every AI agent (Claude Code, Codex, Gemini, OpenC
 
 ## Product
 
-**Gullak** is an adaptive financial-literacy platform (Megathon X · Vanguard problem statement). Core loop: **learn → unlock → practise with play money on real markets.**
+**Gullak** is an adaptive financial-literacy platform (Megathon X · Vanguard problem statement) for school students in Grades 6–12, especially from underserved communities in Hyderabad. Core loop: **learn → unlock → learn by doing with play money.** The full learning map is in [`docs/curriculum.md`](docs/curriculum.md).
 
-1. Onboarding: age band (teen / college / first job / parent), experience (none / some / regular), language (en / hi / te), preferred formats, a personal goal.
+1. Onboarding (after picking a language, en / hi / te): grade group (6–7 / 8–10 / 11–12), current experience (none / some / regular), how they like to learn (preferred formats).
 2. Virtual starting cash from `packages/content/config/starting-capital.json`.
-3. Topic ladder: Savings → FD → RD → Gold → Mutual funds / SIP → Index funds → Stocks → Risk & diversification, plus an always-open **Stay safe** (scam-spotting) track. Order lives in `packages/content/config/topic-ladder.json`.
+3. Four pillars from the problem statement: **Plan & budget** (needs vs wants, budgeting, goals, inflation), **Save & manage** (habits, emergency fund, bank accounts/UPI, FD, RD, PPF, borrowing, insurance), **Understand investing** (risk, compounding, gold, money market, bonds, debt funds, MF/SIP, index funds/ETFs, stocks, diversification, retirement) and **Stay financially safe** (protecting information, scams, fake apps, reporting fraud). Topics form a prerequisite graph tagged by grade group, all as data in `packages/content`.
 4. Every topic is stored once and rendered as video, story/comic, visual, formula + calculator, transcript, simulation, quiz and audio.
-5. Passing a topic's quiz unlocks its instrument in the paper portfolio.
-6. Paper portfolio on real data (FD rates with as-of dates, MF NAVs, index/stock prices, gold) and a **Time Machine** replay of real history (e.g. March 2020 crash, with a Panic Sell button).
+5. Passing a topic's quiz unlocks instruments in the paper portfolio, simulations or the next topics.
+6. Learn by doing through four data-driven engines: **market sim** (paper portfolio on real data and a **Time Machine** replay of real history, e.g. the March 2020 crash with a Panic Sell button), **life sim** (month-by-month budgeting with random events), **story choices** (branching consequences) and **spot & sort** (need or want, scam or real), plus a what-if sandbox over engine formulas.
 7. Goal engine, mock Account Aggregator insights → learning nudges, facilitator/NGO dashboard, multilingual AI tutor.
 
 ### Hard guardrail (non-negotiable)
@@ -148,5 +148,6 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
 | 2026-10-10 | **No branch protection on main**; fork + PR workflow | Team lead's call. Merger must confirm CI is green. |
 | 2026-10-10 | **Graded submission repo `IIIT-ECell/megathon26-claude2create`** (remote `submission`), pushed only when R1 says so | It's what gets graded and teammates have no access. R1 picks which released, green versions graders see. |
 | 2026-10-10 | **Vercel hosting at `gullak.abgupta.me`** (CNAME on Namecheap); production from `main`, previews per branch; functions in Mumbai (`bom1`) | Zero-config Next/Turborepo deploys; a stable custom URL for judges and the installed PWA; Mumbai is closest to learners and to Supabase. |
+| 2026-10-10 | **Four-pillar curriculum for Grades 6–12** (grade groups 6–7 / 8–10 / 11–12) instead of an instrument ladder for adults; **four simulation engines** with every scenario as data | Matches the problem statement (school students, four pillars, learn by doing). Engines are coded once; topics, personas, events, stories and languages are added without code changes. |
 | 2026-10-10 | **MIT licence** | Standard for hackathon projects; team lead approved. |
 | 2026-10-10 | **Impeccable skill committed** for all agents; hooks in shared settings | UI quality is how we win; every teammate's agent gets the same design checks. |

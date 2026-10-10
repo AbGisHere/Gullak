@@ -11,7 +11,7 @@
 
 **Learn money. Practise with play money on real markets.** Try it at **[gullak.abgupta.me](https://gullak.abgupta.me)** (installable on phone and desktop).
 
-Gullak (गुल्लक, "piggy bank") is an adaptive financial-literacy platform built by team **Claude2Create** for Megathon X (Vanguard problem statement). Learners climb a topic ladder from savings accounts to stocks. Each topic is taught in the format that suits them (story, video, visual, formula, simulation, quiz, audio), in English, Hindi or Telugu. Passing a topic unlocks that instrument in a **paper portfolio** valued on **real market data**, with a Time Machine that replays real history.
+Gullak (गुल्लक, "piggy bank") is an adaptive financial-literacy platform built by team **Claude2Create** for Megathon X (Vanguard problem statement). For school students in Grades 6–12, it covers four pillars: plan & budget, save & manage, understand investing and stay financially safe ([curriculum](docs/curriculum.md)). Each topic is taught in the format that suits them (story, video, visual, formula, simulation, quiz, audio), in English, Hindi or Telugu. Students learn by doing: a month-by-month life sim, branching stories, scam-spotting rounds and a **paper portfolio** valued on **real market data**, with a Time Machine that replays real history.
 
 > **Guardrail:** Gullak educates; it never recommends real products or tells anyone to buy or sell. All projections are assumptions, not promises. **All money is virtual.**
 

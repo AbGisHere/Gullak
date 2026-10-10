@@ -1,6 +1,6 @@
 # Topic content
 
-One folder per topic id from `config/topic-ladder.json`:
+One folder per topic id from `config/topic-ladder.json` (the full planned list is in [`docs/curriculum.md`](../../../docs/curriculum.md)):
 
 ```
 topics/<topic-id>/
