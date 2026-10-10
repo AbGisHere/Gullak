@@ -45,13 +45,39 @@ unchanged. Fitting on real quiz answers (exported by R3, never uploaded to this
 shared notebook) and porting the predictor to `packages/engine` come next;
 notify R1 before a Colab training run.
 
-Lightweight local checks (validation only, Python standard library):
+## Real-data benchmark on ASSISTments 2009–10 (increment 3)
+
+The notebook downloads the [ASSISTments 2009–2010 skill builder data (corrected)](https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010)
+at run time (real answers from about 4,200 US middle-school maths students) and
+compares the overall and per-skill correct rate, BKT, BKT with forgetting, PFA
+and DKT (an LSTM, trained on the GPU with early stopping) under 5-fold
+learner-separated cross-validation. Every model is scored on the same held-out
+answers (each held-out learner's answers after their first). It downloads
+`knowledge-tracing-benchmark.assistments-2009.json` with aggregate results and the
+spread of fitted BKT parameters, which become starting ranges for Gullak
+concepts. Maths skills are not money concepts, so no parameter is used directly.
+
+Run it on Colab with a **T4 GPU** runtime (Runtime → Change runtime type), then
+Runtime → Run all: about 10 minutes.
+
+**Data terms (accepted by R1 on 2026-10-11):** never commit or share the CSV
+(`.gitignore` blocks `assistments-*.csv`), keep the code public, don't try to
+identify students, and cite the dataset URL above plus Feng, M., Heffernan,
+N.T. & Koedinger, K.R. (2009), *Addressing the assessment challenge in an
+Intelligent Tutoring System that tutors as it assesses*, User Modeling and
+User-Adapted Interaction 19, 243–266.
+
+## Tests
 
 ```powershell
+pip install -r notebooks/requirements-test.txt
 python -B -m unittest discover -s notebooks -p "test_*.py"
 ```
 
 The same tests run in CI and in the notebook's test cells. `test_bkt_input.py`
-loads the notebook definitions directly; `test_bkt_fit.py` also loads the
-fitting test class from the notebook's `fit-tests` cell, so neither keeps a
-second implementation.
+loads the notebook definitions directly; `test_bkt_fit.py` and
+`test_bkt_benchmark.py` also load their test classes from the notebook's
+`fit-tests` and `benchmark-tests` cells, so nothing keeps a second
+implementation. The benchmark tests use a small fake CSV in the ASSISTments
+layout and check that the vectorised BKT matches the reviewed Python version;
+the DKT smoke test runs only where PyTorch is installed.

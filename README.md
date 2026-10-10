@@ -35,6 +35,7 @@ Open `/` for onboarding and `/r2-preview` for the learning components (lesson, s
 - **Learning components** in `@gullak/ui`, shown on sample data at `/r2-preview`. They are not yet connected to the backend or the content files.
 - **Backend API** (Supabase, sign-in required): profile, onboarding, lessons, quiz grading and unlocks, progress, portfolio and fixed deposits, goal planning, market quotes, activity and episode runs with resumable bookmarks, a Time Machine replay and a facilitator cohort view. See [the backend guide](docs/backend-setup.md).
 - **Content as data:** 8 topics, each with a reading lesson and a quiz (English), the topic prerequisite graph, one spot & sort round, one branching story and the March 2020 Practice episode.
+- **Knowledge tracing (Colab notebook):** BKT fitted on synthetic learners, plus a benchmark of BKT, BKT with forgetting, PFA and DKT on real student answers from ASSISTments 2009–10. See [notebooks](notebooks/README.md). Not yet used in the app.
 - **Engine:** interest (FD, RD, SIP, compounding), valuation, quiz grading, unlock rules, starting capital and the lesson format picker, all unit-tested.
 
 Not built yet: the app screens after onboarding, the AI tutor, translated topic content, Live mode and the facilitator dashboard UI. The plan is in [ROADMAP.md](ROADMAP.md).
@@ -92,6 +93,8 @@ Gullak is designed to run every topic and simulation on real Indian data, with e
 - **Investing:** AMFI NAVs for every fund category (liquid, money market, debt, index, equity, ETFs); NSE index history (NIFTY 50, Next 50, Midcap, sectors) and example stock prices; IBJA gold prices; RBI T-bill and G-sec yields; NPS Trust NAVs
 - **Staying safe:** real scam patterns from RBI, I4C/cybercrime.gov.in and NPCI
 - **Practice episodes:** 2008, demonetisation (2016), March 2020, gold in 2020 and the 2022 rate rises, each replayed on real series
+
+**Knowledge-tracing benchmark:** [ASSISTments 2009–2010 skill builder data](https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010) (Feng, Heffernan & Koedinger, 2009), downloaded at run time by the notebook and never committed.
 
 ## Stack
 

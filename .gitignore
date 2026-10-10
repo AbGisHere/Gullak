@@ -54,5 +54,8 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# ASSISTments data: its terms forbid redistribution (notebooks/README.md)
+assistments-*.csv
+
 # Impeccable platform binaries (launcher downloads the right one per OS)
 **/skills/impeccable/scripts/bin/
