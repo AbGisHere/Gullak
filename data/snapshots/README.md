@@ -36,7 +36,7 @@ Priority: **P1** is needed for the demo topics and the market sim (Phase 1–2);
 
 Scam patterns (RBI Sachet and "BE(A)WARE", I4C / cybercrime.gov.in, NPCI) are not time series. They live in `packages/content` as activity data, each item citing its source.
 
-Committed so far: `amfi-120716.json` (UTI Nifty 50 Index Fund, Direct, Growth), daily since 2019-01-01. It tracks NIFTY 50, so it already shows the March 2020 crash (77.52 on 3 Feb → 50.40 on 23 Mar 2020) for the Time Machine.
+Committed so far: `amfi-120716.json` (UTI Nifty 50 Index Fund, Direct, Growth), daily since 2019-01-01. It tracks NIFTY 50, so it already shows the March 2020 crash (77.52 on 3 Feb → 50.40 on 23 Mar 2020) for the flagship Practice episode.
 
 ### Adding a source (R3)
 

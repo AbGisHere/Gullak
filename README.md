@@ -11,7 +11,7 @@
 
 **Learn money. Practise with play money on real markets.** Try it at **[gullak.abgupta.me](https://gullak.abgupta.me)** (installable on phone and desktop).
 
-Gullak (गुल्लक, "piggy bank") is an adaptive financial-literacy platform built by team **Claude2Create** for Megathon X (Vanguard problem statement). For school students in Grades 6–12, it covers four pillars: plan & budget, save & manage, understand investing and stay financially safe ([curriculum](docs/curriculum.md)). Each topic is taught in the format that suits them (story, video, visual, formula, simulation, quiz, audio), in English, Hindi or Telugu. Students learn by doing: a month-by-month life sim, branching stories, scam-spotting rounds and a **paper portfolio** valued on **real market data**, with a Time Machine that replays real history.
+Gullak (गुल्लक, "piggy bank") is an adaptive financial-literacy platform built by team **Claude2Create** for Megathon X (Vanguard problem statement). For school students in Grades 6–12, it covers four pillars: plan & budget, save & manage, understand investing and stay financially safe ([curriculum](docs/curriculum.md)). Each topic is taught in the format that suits them (story, video, visual, formula, simulation, quiz, audio), in English, Hindi or Telugu. Students learn by doing: a life + market sim where they budget, save and invest play money month by month while life happens, in **Practice** (replaying real history, like a hospital bill in March 2020) and **Live** (paper trading on today's **real market data**), plus branching stories and scam-spotting rounds.
 
 > **Guardrail:** Gullak educates; it never recommends real products or tells anyone to buy or sell. All projections are assumptions, not promises. **All money is virtual.**
 
@@ -77,7 +77,7 @@ Every topic and simulation runs on real Indian data. Each value shows its source
 - **Saving and borrowing:** bank savings, FD, RD and loan rates (dated); small-savings rates (PPF, SSY, NSC) from the Ministry of Finance; RBI repo rate; NPCI UPI statistics
 - **Investing:** AMFI NAVs for every fund category (liquid, money market, debt, index, equity, ETFs); NSE index history (NIFTY 50, Next 50, Midcap, sectors) and example stock prices; IBJA gold prices; RBI T-bill and G-sec yields; NPS Trust NAVs
 - **Staying safe:** real scam patterns from RBI, I4C/cybercrime.gov.in and NPCI
-- **Time Machine episodes:** 2008, demonetisation (2016), March 2020, gold in 2020 and the 2022 rate rises, each replayed on real series
+- **Practice episodes:** 2008, demonetisation (2016), March 2020, gold in 2020 and the 2022 rate rises, each replayed on real series
 
 ## Stack
 
@@ -90,7 +90,7 @@ Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS 4 · shadcn/ui · Motion 
 | Role | Who | Focus |
 |---|---|---|
 | **R1** Lead · frontend core | Abhinav Gupta ([@AbGisHere](https://github.com/AbGisHere)) | App shell, routing, onboarding, releases. Also helps across frontend, backend and ML. |
-| **R2** Frontend · game | Mayank Suman ([@mayankSuman404](https://github.com/mayankSuman404)), Parthvi Mishra ([@Parthvi1707](https://github.com/Parthvi1707)) | Website flow (with R1), design direction, lessons, paper portfolio, Time Machine, charts |
+| **R2** Frontend · game | Mayank Suman ([@mayankSuman404](https://github.com/mayankSuman404)), Parthvi Mishra ([@Parthvi1707](https://github.com/Parthvi1707)) | Website flow (with R1), design direction, lessons, sim + portfolio UI (Practice and Live), charts |
 | **R3** Backend · data | Ishita Anmol ([@ishitaanmol975](https://github.com/ishitaanmol975)) | Supabase, data-access layer, market data and snapshots, route handlers |
 | **R4** AI · adaptive engine (ML) | Vansh Goel ([@VanshGoel-01](https://github.com/VanshGoel-01)) | AI tutor, guardrails, knowledge tracing on Colab, format bandit |
 | **R5** Product · content · QA | Shared, led by R1 | Topic content and translations, quiz quality, guardrail review, e2e, demo script |

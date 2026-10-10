@@ -6,12 +6,12 @@ The single source of truth for every AI agent (Claude Code, Codex, Gemini, OpenC
 
 **Gullak** is an adaptive financial-literacy platform (Megathon X · Vanguard problem statement) for school students in Grades 6–12, especially from underserved communities in Hyderabad. Core loop: **learn → unlock → learn by doing with play money.** The full learning map is in [`docs/curriculum.md`](docs/curriculum.md).
 
-1. Onboarding (after picking a language, en / hi / te): grade group (6–7 / 8–10 / 11–12), current experience (none / some / regular), how they like to learn (preferred formats).
+1. Onboarding (after picking a language, en / hi / te): grade group (6–7 / 8–10 / 11–12), current experience (none / some / regular), how they like to learn (optional; default "Mix it up"). Experience only sets a starting prior; evidence from quizzes, activities and simulation decisions drives mastery and unlocks.
 2. Virtual starting cash from `packages/content/config/starting-capital.json`.
 3. Four pillars from the problem statement: **Plan & budget** (needs vs wants, budgeting, goals, inflation), **Save & manage** (habits, emergency fund, bank accounts/UPI, FD, RD, PPF, borrowing, insurance), **Understand investing** (risk, compounding, gold, money market, bonds, debt funds, MF/SIP, index funds/ETFs, stocks, diversification, retirement) and **Stay financially safe** (protecting information, scams, fake apps, reporting fraud). Topics form a prerequisite graph tagged by grade group, all as data in `packages/content`.
 4. Every topic is stored once and rendered as video, story/comic, visual, formula + calculator, transcript, simulation, quiz and audio.
 5. Passing a topic's quiz unlocks instruments in the paper portfolio, simulations or the next topics.
-6. Learn by doing through four data-driven engines: **market sim** (paper portfolio on real data and a **Time Machine** replay of real history, e.g. the March 2020 crash with a Panic Sell button), **life sim** (month-by-month budgeting with random events), **story choices** (branching consequences) and **spot & sort** (need or want, scam or real), plus a what-if sandbox over engine formulas.
+6. Learn by doing through three data-driven engines: **life + market sim** (month-by-month budgeting and investing with life events, in two play-money modes: **Practice** replays real history as episodes, e.g. March 2020 + a hospital bill, with a reveal of the alternatives; **Live** is paper trading on current prices, scored on habits, never returns), **story choices** (branching consequences) and **spot & sort** (need or want, scam or real), plus a what-if sandbox over engine formulas. The demo story is the adaptive loop: evidence → recommendation → activity → simulation → mastery update → changed recommendation.
 7. Goal engine, mock Account Aggregator insights → learning nudges, facilitator/NGO dashboard, multilingual AI tutor.
 
 ### Hard guardrail (non-negotiable)
@@ -50,7 +50,7 @@ Dependency direction: `web → (ui, ai, market-data, content, engine, types)`; `
 | Role | Who | Owns |
 |---|---|---|
 | **R1** Lead / frontend core | @AbGisHere | `apps/web` shell, routing, layouts (phone + desktop), onboarding, design system (`packages/ui`), release management. Also helps on R2–R4 work. |
-| **R2** Frontend / game | @mayankSuman404, @Parthvi1707 | Website flow (with R1), design direction + tokens (Impeccable init), lesson renderers (all formats), paper portfolio UI, Time Machine, charts, animations |
+| **R2** Frontend / game | @mayankSuman404, @Parthvi1707 | Website flow (with R1), design direction + tokens (Impeccable init), lesson renderers (all formats), sim + portfolio UI (Practice and Live), charts, animations |
 | **R3** Backend / data | @ishitaanmol975 | `packages/market-data`, `data/snapshots`, Supabase schema + migrations, data-access layer, route handlers |
 | **R4** AI / adaptive engine | @VanshGoel-01 | `packages/ai`, `packages/engine` (adaptive parts), `notebooks/` (knowledge tracing on Colab), format bandit, tutor, lesson pre-generation |
 | **R5** Product / content / QA | shared, led by R1 | `packages/content` (topics, translations), quiz quality, guardrail review, Playwright e2e, demo script |
@@ -148,6 +148,7 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
 | 2026-10-10 | **No branch protection on main**; fork + PR workflow | Team lead's call. Merger must confirm CI is green. |
 | 2026-10-10 | **Graded submission repo `IIIT-ECell/megathon26-claude2create`** (remote `submission`), pushed only when R1 says so | It's what gets graded and teammates have no access. R1 picks which released, green versions graders see. |
 | 2026-10-10 | **Vercel hosting at `gullak.abgupta.me`** (CNAME on Namecheap); production from `main`, previews per branch; functions in Mumbai (`bom1`) | Zero-config Next/Turborepo deploys; a stable custom URL for judges and the installed PWA; Mumbai is closest to learners and to Supabase. |
-| 2026-10-10 | **Four-pillar curriculum for Grades 6–12** (grade groups 6–7 / 8–10 / 11–12) instead of an instrument ladder for adults; **four simulation engines** with every scenario as data | Matches the problem statement (school students, four pillars, learn by doing). Engines are coded once; topics, personas, events, stories and languages are added without code changes. |
+| 2026-10-10 | **Four-pillar curriculum for Grades 6–12** (grade groups 6–7 / 8–10 / 11–12) instead of an instrument ladder for adults; **learn-by-doing engines** with every scenario as data | Matches the problem statement (school students, four pillars, learn by doing). Engines are coded once; topics, personas, events, stories and languages are added without code changes. |
+| 2026-10-10 | **Life sim and market sim merged into one engine with Practice (replayed history + life events + reveal) and Live (paper trading on current prices)**; the Time Machine becomes Practice episodes; Live scores habits, not returns | Forced selling during a life event teaches liquidity and why an emergency fund matters, across three pillars and every grade group. One shared portfolio and engine instead of two builds. Scoring habits keeps Live educational rather than a trading game. |
 | 2026-10-10 | **MIT licence** | Standard for hackathon projects; team lead approved. |
 | 2026-10-10 | **Impeccable skill committed** for all agents; hooks in shared settings | UI quality is how we win; every teammate's agent gets the same design checks. |

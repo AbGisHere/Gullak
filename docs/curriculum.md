@@ -12,9 +12,9 @@ Onboarding asks three things, in order (language is picked first via the locale 
 
 1. **Grade group:** `grade-6-7`, `grade-8-10`, `grade-11-12`.
 2. **Current experience:** none / some / regular.
-3. **How they like to learn:** preferred formats (story, video, visual, formula, simulation, quiz, audio).
+3. **How they like to learn (optional):** preferred formats (story, video, visual, formula, simulation, quiz, audio), with **Mix it up** as the default and a Skip. The format bandit adapts from what they actually use.
 
-Every topic is tagged with the grade groups it suits. A topic can also have depth per grade group (e.g. compounding as a growing piggy bank in Grade 6–7, as a formula in Grade 11–12).
+Current experience sets a starting point only; evidence decides skill level (see [Evidence and adaptation](#evidence-and-adaptation)). Every topic is tagged with the grade groups it suits. A topic can also have depth per grade group (e.g. compounding as a growing piggy bank in Grade 6–7, as a formula in Grade 11–12).
 
 ## Structure
 
@@ -67,7 +67,7 @@ Grade columns: **J** = Grade 6–7, **M** = Grade 8–10, **S** = Grade 11–12.
 | `index-funds-etfs` | explain index funds and ETFs: owning the whole market |  | ✓ | ✓ |
 | `stocks` | explain what a share is and why prices go up and down |  | ✓ | ✓ |
 | `diversification` | explain not putting all eggs in one basket |  | ✓ | ✓ |
-| `market-ups-and-downs` | stay calm in a crash (Time Machine: March 2020) |  | ✓ | ✓ |
+| `market-ups-and-downs` | stay calm in a crash (Practice episode: March 2020) |  | ✓ | ✓ |
 | `retirement-nps` | explain long-term retirement saving such as NPS |  |  | ✓ |
 
 ### 4. Stay financially safe — protect information, spot suspicious offers
@@ -80,20 +80,45 @@ Grade columns: **J** = Grade 6–7, **M** = Grade 8–10, **S** = Grade 11–12.
 | `fake-apps-and-loans` | spot fake trading apps and predatory loan apps |  | ✓ | ✓ |
 | `report-a-fraud` | know where to report (cybercrime helpline 1930, cybercrime.gov.in, the bank) | ✓ | ✓ | ✓ |
 
-## Learn by doing: four engines
+## Learn by doing: three engines
 
 Each engine is coded once in `packages/engine` (pure, tested) with a renderer in `apps/web`. Every scenario is data.
 
 | Engine | What the learner does | Pillars | Data |
 |---|---|---|---|
-| **Market sim** | Invests play money across unlocked instruments in the paper portfolio; replays real history in the Time Machine (March 2020, Panic Sell) | 3 | Instruments, real snapshots, replay episodes |
-| **Life sim** | Plays month by month: money comes in, they split it into needs, wants and savings, random events hit (phone breaks, festival, illness), goals and the emergency fund respond | 1, 2 | Personas (starting situation), an event deck with odds and money effects, goals |
+| **Life + market sim** (Practice and Live) | Lives month by month: money comes in, they split it into needs, wants and savings and put savings into whatever they've unlocked (piggy bank, RD, FD, gold, funds). Life events hit and they must raise cash: emergency fund, break the FD early, or sell units at that day's price | 1, 2, 3 | Episodes, personas, an event deck with odds and money effects, instruments, real price series |
 | **Story choices** | Short branching stories (a friend's "doubling" scheme, a first salary); every choice shows its consequence, then try again | 1–4 | A graph of story nodes, choices and effects |
 | **Spot & sort** | Quick swipe rounds: need or want, scam or real, riskier or safer | 1, 4 | Items with the correct answer and an explanation |
 
 Plus a **what-if sandbox**: sliders over engine formulas (start an SIP at 15 vs 25, ₹100 then vs now with real CPI), reusing each topic's formula variant.
 
-Every activity reports results to knowledge tracing, so the adaptive engine learns from play as well as quizzes. Facilitators can assign any activity to a class.
+### Practice vs Live
+
+One portfolio, one set of instruments and the same engine maths (valuation, FD/RD early-exit rules, buying and selling units). Only the clock and the price source differ. Both use play money.
+
+| | **Practice** (simulation) | **Live** (paper trading) |
+|---|---|---|
+| Clock | Replays real history, with speed control | The real calendar, one trading day per day |
+| Prices | Committed snapshots | Current prices from the market-data adapters (snapshot fallback, as-of date shown) |
+| Life events | From the event deck, plus events an episode schedules | Optional, e.g. one random event a week |
+| Tomorrow | Known, so it can be revealed | Unknown |
+| Afterwards | Reveal: the learner's choice side by side with the alternatives | A review of their habits over time; no hindsight |
+| Purpose | Learn and make mistakes safely | Test what they learned when nobody knows tomorrow |
+
+- **Episodes are data:** a date range, the instruments open in it, scheduled events, random-event odds and a narrative. The flagship demo episode is **March 2020 + a hospital bill**: raise ₹15,000 by spending the emergency fund, breaking the FD (penalty, "it would have matured in 2 days") or selling the index fund at the bottom ("here's where it was 3 months later"). More episodes: 2008, demonetisation (2016), gold in 2020, the 2022 rate rises.
+- **Every grade group plays it** through unlocks: Grade 6–7 learners hold a piggy bank and an RD and feel the RD exit penalty; Grade 11–12 learners face March 2020 with funds and gold.
+- **The reveal never teaches timing the market.** It always ends on the same lesson: nobody knew tomorrow, and the learner with an emergency fund didn't have to choose.
+- **Live opens after Practice:** an instrument becomes available in Live once the learner has finished a Practice episode with it.
+- **Live scores habits, never returns:** emergency fund kept, money spread out, plan followed, no panic selling. There is no returns leaderboard. Example funds are named only as examples, with no "buy" prompts and no broker links.
+- **Demo:** lead with the Practice episode; show Live briefly as "the same portfolio on today's real prices".
+
+## Evidence and adaptation
+
+The demo story is the adaptive loop: **evidence → recommendation → activity → simulation → mastery update → changed recommendation.**
+
+- **Current experience** (onboarding) only sets the starting prior. Skill level comes from evidence: quizzes, activities and simulation decisions (did they keep an emergency fund, did they panic sell) all report to knowledge tracing.
+- Mastery, not quiz score alone, drives unlocks and recommendations.
+- The format bandit learns which formats work for each learner from what they finish and how they do. Facilitators can assign any activity to a class.
 
 ## Real data behind every topic
 
@@ -108,15 +133,15 @@ Learners play with real Indian numbers, not made-up ones. Every value carries it
 | RBI repo rate history | RBI | `borrowing-and-credit`, `bonds`, why rates move |
 | Loan and credit-card interest rates | Banks' published rate pages, RBI | `borrowing-and-credit`, story choices (easy loans) |
 | UPI volumes | NPCI monthly statistics | `bank-accounts-upi` |
-| Mutual fund NAVs by category: liquid, overnight, money market, debt, index, equity, ETFs | AMFI (same script, one scheme code per example) | `money-market`, `debt-funds`, `mutual-funds-sip`, `index-funds-etfs`, `diversification`, market sim |
-| Index history: NIFTY 50 (and TRI), Next 50, Midcap 150, a few sectors | NSE Indices | `stocks`, `index-funds-etfs`, `diversification`, Time Machine |
+| Mutual fund NAVs by category: liquid, overnight, money market, debt, index, equity, ETFs | AMFI (same script, one scheme code per example) | `money-market`, `debt-funds`, `mutual-funds-sip`, `index-funds-etfs`, `diversification`, life + market sim |
+| Index history: NIFTY 50 (and TRI), Next 50, Midcap 150, a few sectors | NSE Indices | `stocks`, `index-funds-etfs`, `diversification`, Practice episodes |
 | A few example stock prices | NSE end-of-day data | `stocks`, `risk-and-return` |
-| Gold price (₹/gram) | IBJA, RBI DBIE | `gold`, `diversification`, market sim |
+| Gold price (₹/gram) | IBJA, RBI DBIE | `gold`, `diversification`, life + market sim |
 | T-bill and 10-year G-sec yields | RBI DBIE | `money-market`, `bonds`, `risk-and-return` |
 | NPS scheme NAVs | NPS Trust | `retirement-nps` |
 | Real scam patterns and advice | RBI (Sachet, "BE(A)WARE"), I4C / cybercrime.gov.in, NPCI safety guidance | all of Stay financially safe, spot & sort, story choices |
 
-**Time Machine episodes** are data, each a date range on real series with a narrative: the 2008 crash, demonetisation (2016), the March 2020 crash and recovery, gold's 2020 jump, and the 2022 rate rises (debt fund NAVs vs FD rates). Life-sim event costs and odds also cite their source (CPI groups, HCES) rather than invented numbers.
+**Practice episodes** run on these real series: the 2008 crash, demonetisation (2016), the March 2020 crash and recovery, gold's 2020 jump, and the 2022 rate rises (debt fund NAVs vs FD rates). Live mode reads the same sources' current values through the market-data adapters. Life-sim event costs and odds also cite their source (CPI groups, HCES) rather than invented numbers.
 
 Example funds and stocks are only there to practise with play money. Content never calls them good, best or recommended.
 
