@@ -29,7 +29,7 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 
 ## Phase 2 · Core loop (h5–h11)
 - [x] Onboarding flow: grade group, current experience, how they like to learn (optional, "Mix it up" default) (R1)
-- [ ] Lesson pre-generation script (topic × format × grade group × language, cached), run on the first curriculum entries (R4) — offline brief contract/validator only on `feat/lesson-brief`, pending merge; generation, caching and publication are not implemented.
+- [ ] Lesson pre-generation script (topic × format × grade group × language, cached), run on the first curriculum entries (R4); the brief validator (step 1) is done, generation and caching are not
 - [ ] Demo topics in every format (one per pillar, e.g. needs vs wants, emergency fund, compounding, UPI scams): video, story, visual, formula + live calculator (KaTeX), transcript, simulation, quiz, audio (R2, R5)
 - [x] Format picker from preferences (R4) ([handoff](docs/format-picker.md)); the learned bandit stays in Phase 4
 - [ ] Quiz pass → unlock rules over the prerequisite graph (R2)

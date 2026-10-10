@@ -33,7 +33,7 @@ accuracy, financial safety or absence of sensitive information in free text.
 
 Run focused tests from the repository root, without credentials:
 
-```powershell
+```bash
 pnpm --filter @gullak/types exec vitest run src/curriculum-brief.test.ts
 pnpm --filter @gullak/ai exec vitest run src/curriculum-brief.test.ts
 ```
