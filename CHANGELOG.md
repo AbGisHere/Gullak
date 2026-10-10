@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.0.12] - 2026-10-10
+
 ### Added
 - Draft-only curriculum brief contracts and a pure offline validator checking canonical topic/graph identity, grade and locale eligibility, and concept references. Bounded strict inputs and unit tests prepare the first lesson-generation step without generating or publishing lessons.
 
