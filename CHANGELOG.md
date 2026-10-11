@@ -10,6 +10,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ### Added
 - Strict offline BKT parameter and step/sequence contracts with explicit caller-supplied probabilities, boolean quiz observations and distinguishable emissions; no defaults, artifact loading or app activation.
+- Pure inert BKT-with-forgetting step and ordered-sequence inference with observation-then-transition semantics, fail-closed impossible observations and synthetic notebook parity tests; no mastery, persistence or unlock wiring.
 
 ## [0.2.16] - 2026-10-11
 

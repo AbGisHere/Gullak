@@ -112,7 +112,7 @@ pnpm --filter @gullak/types typecheck
 pnpm --filter @gullak/engine typecheck
 ```
 
-## Offline BKT contracts
+## Offline BKT inference
 
 `BktParameters`, `BktStepInput` and `BktSequenceInput` in `@gullak/types`
 define an inert, per-concept inference boundary. All five parameters (`pInit`,
@@ -128,6 +128,40 @@ contracts do not import events, group learners or infer order. `pForget` means
 forgetting in the transition after each observation, with no elapsed-time unit.
 There are no defaults, artifact loaders or production-readiness flags. These
 contracts do not activate BKT, replace stored mastery or change quiz unlocks.
+
+`bktStep(input)` in `@gullak/engine` returns `{ pCorrect, posterior, pKnown }`:
+
+1. Predict before observing: `pCorrect = pKnown*(1-pSlip) + (1-pKnown)*pGuess`.
+2. Observe: correct answers use `pKnown*(1-pSlip)` and `(1-pKnown)*pGuess`;
+   incorrect answers use `pKnown*pSlip` and `(1-pKnown)*(1-pGuess)`.
+   `posterior` is the known-state weight divided by the sum of both weights.
+3. Transition: `pKnown = posterior*(1-pForget) + (1-posterior)*pLearn`.
+
+`bktSequence(input)` returns `{ predictions, pKnown }`, where predictions are
+one-step-ahead P(correct) values in input order and the final pKnown includes
+the last observation's transition. An empty sequence returns no predictions
+and preserves pInit. Both functions validate before calculating and do not
+mutate input. Invalid shapes/probabilities raise ZodError. A zero observation
+likelihood (impossible or numerically unrepresentable) raises RangeError,
+with no fabricated posterior or partial sequence return. Summing incorrect
+emission weights directly avoids cancellation when `1-pCorrect` rounds to zero.
+
+The zero-forgetting case matches the notebook's `predict_sequence`; synthetic
+fixtures also match `predict_bkt_batch` at pForget 0, 0.05 and 0.2. These are
+engineering parity tests, not evidence of accuracy on Gullak learners. No
+parameters are fitted or read from artifacts. Post-demo real evidence,
+parameter review, persistence and app activation are separate work; the current
+0.1/0.3/0.5 onboarding priors, 0.6/0.95 thresholds and quiz-only unlocks stay
+unchanged. Story verdicts are excluded.
+
+Focused offline checks:
+
+```powershell
+pnpm --filter @gullak/types exec vitest run src/bkt.test.ts
+pnpm --filter @gullak/engine exec vitest run src/bkt.test.ts
+pnpm --filter @gullak/types typecheck
+pnpm --filter @gullak/engine typecheck
+```
 
 ## Offline lesson draft validation
 
