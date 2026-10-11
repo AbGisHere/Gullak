@@ -30,6 +30,7 @@ For manual SQL Editor setup, the migration order, Postman collection and Windows
 - The follow-up migration gives learners read-only access. Grading and money writes use service-role-only transaction functions; RLS ownership alone must not permit balance or score edits.
 - Money columns are `bigint` paise. Portfolios have `check (is_virtual)`: no real money, even in the database.
 - Enum-like columns mirror `@gullak/types` with `check` constraints. Locale stays free text, because languages are data.
+- Progress storage must support the eight-world journey: learner stage, world id, lesson id, attempts, mastery, XP, fictional rewards and unlock state. Never store real-money activity.
 
 ## TODO(R3)
 

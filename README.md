@@ -11,7 +11,7 @@
 
 **Learn money. Practise with play money on real markets.** Try it at **[gullak.abgupta.me](https://gullak.abgupta.me)** (installable on phone and desktop).
 
-Gullak (गुल्लक, "piggy bank") is an adaptive financial-literacy platform built by team **Claude2Create** for Megathon X (Vanguard problem statement). For school students in Grades 6–12, it covers four pillars: plan & budget, save & manage, understand investing and stay financially safe ([curriculum](docs/curriculum.md)). Each topic is taught in the format that suits them (story, video, visual, formula, simulation, quiz, audio), in English, Hindi or Telugu. Students learn by doing: a life + market sim where they budget, save and invest play money month by month while life happens, in **Practice** (replaying real history, like a hospital bill in March 2020) and **Live** (paper trading on today's **real market data**), plus branching stories and scam-spotting rounds.
+Gullak (गुल्लक, "piggy bank") is a gamified, adaptive financial-literacy platform built by team **Claude2Create** for Megathon X. Students in Classes 6–12 learn through eight connected worlds: Candy Economy, Savings Quest, Bankopolis, Market Mayhem, Grow Your Money, Stock Street, Life Simulator and Finance Tycoon ([curriculum](docs/curriculum.md)). Each 3–5 minute lesson starts with a familiar situation, asks for a decision, shows its consequence, explains the idea, and gives the learner a new chance to apply it. The same worlds adapt in depth for Classes 6–7, 8–9 and 10–12, in English, Hindi and Telugu, through stories, simulations, quizzes and play-money practice.
 
 > **Guardrail:** Gullak educates; it never recommends real products or tells anyone to buy or sell. All projections are assumptions, not promises. **All money is virtual.**
 
@@ -75,7 +75,7 @@ The full rules are in **[AGENTS.md](AGENTS.md)**. Hooks and CI enforce them for 
 apps/web               Next.js PWA (UI + thin route handlers)
 packages/types         Zod schemas for every boundary
 packages/engine        Pure TS finance maths, unlock rules, goal planner
-packages/content       Topics + config as data (one source, many formats)
+packages/content       Worlds, lessons, stage variants and translations as data
 packages/market-data   Adapters with cache + snapshot fallback
 packages/ai            Provider-agnostic LLM client, prompts, guardrails
 packages/ui            Design system (shadcn/ui + tokens)
@@ -103,11 +103,11 @@ Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS 4 · shadcn/ui · Motion 
 
 | Role | Who | Focus |
 |---|---|---|
-| **R1** Lead · frontend core | Abhinav Gupta ([@AbGisHere](https://github.com/AbGisHere)) | App shell, routing, onboarding, releases. Also helps across frontend, backend and ML. |
-| **R2** Frontend · game | Mayank Suman ([@mayankSuman404](https://github.com/mayankSuman404)), Parthvi Mishra ([@Parthvi1707](https://github.com/Parthvi1707)) | Website flow (with R1), design direction, lessons, sim + portfolio UI (Practice and Live), charts |
+| **R1** Lead · frontend core | Abhinav Gupta ([@AbGisHere](https://github.com/AbGisHere)) | App shell, routing, learner profile, world map, releases. Also helps across frontend, backend and ML. |
+| **R2** Frontend · game | Mayank Suman ([@mayankSuman404](https://github.com/mayankSuman404)), Parthvi Mishra ([@Parthvi1707](https://github.com/Parthvi1707)) | Game UI, reusable lesson renderer, world maps, mechanics, Practice/Live simulation and portfolio UI, charts and motion |
 | **R3** Backend · data | Ishita Anmol ([@ishitaanmol975](https://github.com/ishitaanmol975)) | Supabase, data-access layer, market data and snapshots, route handlers |
 | **R4** AI · adaptive engine (ML) | Vansh Goel ([@VanshGoel-01](https://github.com/VanshGoel-01)) | AI tutor, guardrails, knowledge tracing on Colab, format bandit |
-| **R5** Product · content · QA | Shared, led by R1 | Topic content and translations, quiz quality, guardrail review, e2e, demo script |
+| **R5** Product · content · QA | Shared, led by R1 | World/lesson content, translations, decision feedback, quiz quality, guardrail review, e2e and demo script |
 
 ## License
 

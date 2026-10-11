@@ -40,3 +40,5 @@ python -B -m unittest discover -s notebooks -p "test_*.py"
 
 The same tests run in CI and in the notebook's test cell. The local test file
 loads the notebook definitions directly; it does not maintain a second implementation.
+
+Adaptive artifacts may model lesson mastery, spaced review and stage-appropriate next-lesson selection across the eight-world curriculum. They must not optimise investment returns or make recommendations.
