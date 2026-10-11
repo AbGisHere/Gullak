@@ -51,7 +51,15 @@ For a shared project, start with [the review checklist](backend-review.md) and `
 1. Ask R1 whether a project already exists. Check its Table Editor and migration history before running SQL. Local files cannot prove a remote project is empty. Use a free project; no paid service is needed.
 2. For an empty project, apply **in order** `20261010130000_init.sql`, then `20261010140000_backend_transactions.sql`, then `20261010150000_grade_group_onboarding.sql`, then the reviewed `20261011090000_learning_runs.sql` using the project's SQL Editor. If the initial migration is already applied, review the follow-ups and apply only those not already present. Stop and inspect any unexpected existing tables; do not rerun the initial migration over them. SQL Editor application is manual and does not automatically populate CLI migration history; record which files you applied for R1.
 3. Under Authentication settings, enable anonymous sign-ins for the hackathon learner flow. An anonymous Supabase Auth user still has a verified user ID and authenticated database role. Use the dashboard's recommended abuse protection when publicly deploying; a CAPTCHA-enabled signup also needs a real CAPTCHA token.
-4. Copy `.env.example` to `apps/web/.env.local` using `Copy-Item .env.example apps/web/.env.local` **only if that file does not already exist**. Fill `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and `SUPABASE_SECRET_KEY` locally. Restart the app. Do not send keys in chat or commit this file. Persistent backend routes need all three; the UI skeleton can still start without them.
+4. Copy `apps/web/.env.example` to `apps/web/.env.local` **only if that file does not already exist**:
+
+   ```powershell
+   if (-not (Test-Path -LiteralPath apps/web/.env.local)) {
+     Copy-Item -LiteralPath apps/web/.env.example -Destination apps/web/.env.local
+   }
+   ```
+
+   Fill `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and `SUPABASE_SECRET_KEY` locally. Restart the app. Do not send keys in chat or commit this file. Persistent backend routes need all three; the UI skeleton can still start without them.
 5. In Table Editor, verify RLS on learners, topic_progress, portfolios, holdings and the new tables. Learners get read-only access to their rows. Anonymous and authenticated roles cannot call write RPCs; only the server secret can. Membership tables have no client grants or policies.
 6. Facilitator access is assigned by an administrator through SQL Editor: create a cohort, add learner memberships and assign the facilitator's verified Auth user ID in `cohort_facilitators`. A self-supplied cohort ID or user metadata grants no access. Do not grant facilitators raw learner-table access.
 7. Once CLI setup is available, generate types from the linked database, review the diff in `apps/web/lib/data/database.types.ts`, and keep the RPC contract in sync. Do not expose the secret in a browser or Postman learner requests.

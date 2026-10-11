@@ -13,6 +13,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - Add attributed NIFTY 50 historical price-index snapshots with dated provenance, reproducible acquisition and explicit snapshot API metadata.
 
 ### Changed
+- Move the placeholder environment template into the Next.js app, align Sarvam configuration and correct setup paths while preserving existing local credentials.
 - Refresh backend handoff and Postman examples, distinguish hosted acceptance from historical review notes, and extend read-only schema review to quiz/activity evidence and export security.
 
 ## [0.2.12] - 2026-10-11

@@ -23,7 +23,7 @@ Requirements: Node 24+ and pnpm (the pinned version, 12.10.1, is picked up from 
 git clone https://github.com/<you>/Claude2Create_MegathonX.git
 cd Claude2Create_MegathonX
 pnpm install                      # also installs the git hooks
-cp .env.example apps/web/.env.local   # optional: everything works without keys
+cp -n apps/web/.env.example apps/web/.env.local   # preserve existing local credentials
 pnpm dev                          # http://localhost:3000
 ```
 
@@ -56,7 +56,7 @@ Not built yet: syncing progress to the backend, the AI tutor, translated topic c
 
 ## Environment variables
 
-See [`.env.example`](.env.example). The UI skeleton starts without keys; persistent backend routes require the Supabase URL, public publishable key and server-only secret key. They return an explicit configuration error when unavailable. Without AI keys the tutor answers from topic content. AI keys are free: Gemini from [Google AI Studio](https://aistudio.google.com/apikey) and Groq from [console.groq.com](https://console.groq.com/keys).
+See [`apps/web/.env.example`](apps/web/.env.example). The UI skeleton starts without keys; persistent backend routes require the Supabase URL, public publishable key and server-only secret key. They return an explicit configuration error when unavailable. Without AI keys the tutor answers from topic content. AI keys are free: Gemini from [Google AI Studio](https://aistudio.google.com/apikey) and Groq from [console.groq.com/keys](https://console.groq.com/keys).
 
 For R3 setup, migration order and a Postman core-loop walkthrough, see [the backend guide](docs/backend-setup.md) and [Postman collection](docs/gullak-backend.postman.json). Never share or commit real secrets.
 
