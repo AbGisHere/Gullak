@@ -8,6 +8,11 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.11] - 2026-10-11
+
+### Changed
+- CI skips every job in the graded submission repo; releases pushed there are already green in the team repo.
+
 ## [0.2.10] - 2026-10-11
 
 ### Added
