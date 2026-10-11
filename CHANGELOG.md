@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.16] - 2026-10-11
+
 ### Changed
 - The MIT licence names Team 268 (our team ID) as the copyright holder, as Megathon X requires.
 
