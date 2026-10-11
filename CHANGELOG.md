@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Changed
+- The app opens in light mode by default instead of following the device theme; Dark and System stay available under Me → Appearance.
+
 ### Added
 - Strict synthetic-only ML fixture input/output boundaries with explicit transition parameters and graph fields, disabled status and identity-free frontend results.
 - Deterministic version-pinned synthetic quiz replay through BKT and educational recommendations, retaining onboarding priors and quiz-only unlocks without production model activation.
