@@ -10,6 +10,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ### Added
 - Strict virtual unit-price comparison input contracts: safe integer paise, positive whole quantities and matching piece/gram/millilitre units; ambiguous units, real-money flags and extra fields are rejected.
+- Pure exact unit-price comparison in `@gullak/engine`, using integer cross products without rounding or unsafe intermediate numbers; returns only left/right/equal and does not change lessons, purchases, rewards or unlocks.
 
 ## [0.2.7] - 2026-10-11
 
