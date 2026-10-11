@@ -48,10 +48,13 @@
   --color-brand-coral: var(--brand-coral);
   --color-brand-yellow: var(--brand-yellow);
   --color-brand-muted: var(--brand-muted);
+  /* Text-safe coral: brand coral is for shapes; this passes 4.5:1 as text */
+  --color-brand-coral-ink: var(--brand-coral-ink);
 
   /* Semantic feedback tokens */
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-success-ink: var(--success-ink);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
   --color-danger: var(--danger);
@@ -99,12 +102,14 @@
   --brand-lime: #dfff3f;
   --brand-lilac: #cbb5ff;
   --brand-coral: #ff6847;
+  --brand-coral-ink: #b3361b;
   --brand-yellow: #ffd84d;
   --brand-muted: #ece8df;
 
   /* Semantic status indicators */
   --success: #16a34a;
   --success-foreground: #ffffff;
+  --success-ink: #166534;
   --warning: #d97706;
   --warning-foreground: #ffffff;
   --danger: #dc2626;
@@ -153,12 +158,14 @@
   --brand-lime: #dfff3f;
   --brand-lilac: #cbb5ff;
   --brand-coral: #ff6847;
+  --brand-coral-ink: #ff8a65;
   --brand-yellow: #ffd84d;
   --brand-muted: #162032;
 
   /* Semantic in dark context */
   --success: #22c55e;
   --success-foreground: #052e16;
+  --success-ink: #86efac;
   --warning: #f59e0b;
   --warning-foreground: #451a03;
   --danger: #ef4444;

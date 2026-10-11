@@ -8,6 +8,12 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Fixed
+- The home app and the /learn map are one app: the Learn tab opens /learn, both share nav labels, the world
+  map scrolls to the current world with one Play button and a "coming soon in the story" state for worlds
+  without a mission, its strings are translated, "Vanguard" and the old four-pillar learn tab are gone, and
+  the locked-world dialog, navigation, text sizes and coral text meet accessibility and contrast needs.
+
 ## [0.2.18] - 2026-10-11
 
 ### Fixed

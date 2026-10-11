@@ -150,7 +150,7 @@ export function ActivityModal({ activityType, topicId, gradeGroup, onClose, onAc
             </div>
 
             <div className="space-y-2">
-              <span className="rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 px-3 py-1 text-xs font-black uppercase">
+              <span className="rounded-full bg-success/15 text-success-ink px-3 py-1 text-xs font-black uppercase">
                 {tProgress("activityDoneBadge")}
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-brand-ink">{tProgress("activityDoneTitle")}</h2>
@@ -160,7 +160,7 @@ export function ActivityModal({ activityType, topicId, gradeGroup, onClose, onAc
             </div>
 
             <div className="rounded-2xl border border-border bg-brand-paper p-4 text-left max-w-md mx-auto space-y-2 text-xs font-semibold">
-              <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300">
+              <div className="flex items-center gap-2 text-success-ink">
                 <CheckCircle2 className="size-4 shrink-0" />
                 <span>{tProgress("activityXp", { xp: XP_PER_ACTIVITY })}</span>
               </div>

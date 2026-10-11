@@ -13,6 +13,8 @@ export interface WorldDef {
   accent: "lime" | "yellow" | "coral" | "lilac";
   missionTitle: string;
   missionDuration: string;
+  /** True when the world's first mission is playable today; open worlds without one show a "coming soon" state. */
+  hasMission?: boolean;
 }
 
 export const CURRICULUM_WORLDS: WorldDef[] = [
@@ -30,6 +32,7 @@ export const CURRICULUM_WORLDS: WorldDef[] = [
     accent: "lime",
     missionTitle: "Gullu Goes Shopping",
     missionDuration: "3 min",
+    hasMission: true,
   },
   {
     id: 2,
@@ -130,6 +133,7 @@ export const CURRICULUM_WORLDS: WorldDef[] = [
     accent: "coral",
     missionTitle: "The Financial Twin Dilemma",
     missionDuration: "7 min",
+    hasMission: true,
   },
   {
     id: 8,

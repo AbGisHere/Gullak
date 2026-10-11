@@ -12,39 +12,42 @@ interface RewardsTabProps {
 }
 
 export function RewardsTab({ gradeGroup, progress }: RewardsTabProps) {
-  const t = useTranslations("progressData");
+  const t = useTranslations("home.rewards");
+  const tProgress = useTranslations("progressData");
   return (
     <div className="space-y-6 px-3 sm:px-6 py-4 max-w-4xl mx-auto">
       {/* Rewards Header Banner */}
       <section className="rounded-2xl border border-border bg-card p-5 sm:p-6 space-y-4">
         <div className="flex items-center gap-3">
           <div className="grid size-12 place-items-center rounded-2xl bg-muted">
-            <Trophy className="size-6 text-foreground" />
+            <Trophy className="size-6 text-foreground" aria-hidden="true" />
           </div>
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-foreground">Rewards &amp; Achievements</h1>
-            <p className="text-xs text-muted-foreground font-semibold">
-              Earn XP and badges by protecting your family and completing take-home missions.
-            </p>
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground">{t("title")}</h1>
+            <p className="text-xs text-muted-foreground font-semibold">{t("description")}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
           <div className="rounded-2xl bg-muted p-3">
-            <span className="text-xs font-bold uppercase text-muted-foreground">{t("xpLabel")}</span>
-            <p className="text-lg font-bold tabular-nums text-foreground">{t("xpShort", { xp: progress.xp })}</p>
+            <span className="text-xs font-bold uppercase text-muted-foreground">{tProgress("xpLabel")}</span>
+            <p className="text-lg font-bold tabular-nums text-foreground">
+              {tProgress("xpShort", { xp: progress.xp })}
+            </p>
             <p className="text-xs font-semibold text-muted-foreground">
-              {t("xpToNext", { remaining: XP_PER_LEVEL - progress.xpIntoLevel, next: progress.level + 1 })}
+              {tProgress("xpToNext", { remaining: XP_PER_LEVEL - progress.xpIntoLevel, next: progress.level + 1 })}
             </p>
           </div>
 
           <div className="rounded-2xl bg-muted p-3">
-            <span className="text-xs font-bold uppercase text-muted-foreground">{t("streakLabel")}</span>
-            <p className="text-lg font-bold text-foreground">{t("streakValue", { days: progress.streakDays })}</p>
+            <span className="text-xs font-bold uppercase text-muted-foreground">{tProgress("streakLabel")}</span>
+            <p className="text-lg font-bold text-foreground">
+              {tProgress("streakValue", { days: progress.streakDays })}
+            </p>
           </div>
 
           <div className="col-span-2 sm:col-span-1 rounded-2xl bg-muted p-3">
-            <span className="text-xs font-bold uppercase text-muted-foreground">{t("topicsPassedLabel")}</span>
+            <span className="text-xs font-bold uppercase text-muted-foreground">{tProgress("topicsPassedLabel")}</span>
             <p className="text-lg font-bold tabular-nums text-foreground">{progress.topicsPassed}</p>
           </div>
         </div>

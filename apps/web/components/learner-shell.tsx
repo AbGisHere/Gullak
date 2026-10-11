@@ -2,7 +2,7 @@
 
 import { locales } from "@gullak/content";
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
-import { BookOpen, CircleUserRound, Layers3, Sparkles } from "lucide-react";
+import { BookOpen, CircleUserRound, Compass, Layers3, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
@@ -11,7 +11,9 @@ import { Gullu } from "@/components/game/gullu";
 import { readProfile } from "@/components/onboarding";
 import { LOCALE_COOKIE } from "@/i18n/locale";
 
+// Same destinations and labels as the home app shell: "World" returns to Gullu's world map at "/".
 const nav = [
+  { href: "/", key: "world", icon: Compass },
   { href: "/learn", key: "learn", icon: BookOpen },
   { href: "/practice", key: "practice", icon: Sparkles },
   { href: "/portfolio", key: "portfolio", icon: Layers3 },
@@ -20,6 +22,8 @@ const nav = [
 
 export function LearnerShell({ children }: { children: React.ReactNode }) {
   const t = useTranslations("learner");
+  const tNav = useTranslations("nav");
+  const label = (key: (typeof nav)[number]["key"]) => (key === "world" ? tNav("world") : t(key));
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -42,7 +46,7 @@ export function LearnerShell({ children }: { children: React.ReactNode }) {
         className={`flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold transition-colors ${active ? "bg-foreground text-background" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
       >
         <Icon className="size-5 shrink-0" aria-hidden="true" />
-        <span>{t(key)}</span>
+        <span>{label(key)}</span>
       </Link>
     );
   });
@@ -86,7 +90,7 @@ export function LearnerShell({ children }: { children: React.ReactNode }) {
       </main>
       <nav
         aria-label={t("navigation")}
-        className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t bg-background px-1 pb-[env(safe-area-inset-bottom)] pt-1 lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t bg-background px-1 pb-[env(safe-area-inset-bottom)] pt-1 lg:hidden"
       >
         {nav.map(({ href, key, icon: Icon }) => {
           const active = pathname === href || (href === "/learn" && pathname.startsWith("/learn/"));
@@ -98,7 +102,7 @@ export function LearnerShell({ children }: { children: React.ReactNode }) {
               className={`flex min-h-14 flex-col items-center justify-center gap-1 text-xs font-semibold ${active ? "text-foreground" : "text-muted-foreground"}`}
             >
               <Icon className="size-5" aria-hidden="true" />
-              <span>{t(key)}</span>
+              <span>{label(key)}</span>
             </Link>
           );
         })}

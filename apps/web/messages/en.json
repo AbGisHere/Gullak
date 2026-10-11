@@ -312,18 +312,6 @@
       }
     }
   },
-  "learn": {
-    "title": "Learning Map",
-    "subtitle": "Master financial concepts through four Vanguard pillars.",
-    "planBudget": "Plan & Budget",
-    "saveManage": "Save & Manage",
-    "investing": "Understand Investing",
-    "staySafe": "Stay Financially Safe",
-    "locked": "Locked",
-    "unlocked": "Unlocked",
-    "startLesson": "Start Lesson",
-    "startActivity": "Play Activity"
-  },
   "portfolio": {
     "title": "Paper Portfolio",
     "subtitle": "Your virtual holdings on real market prices.",
@@ -358,5 +346,119 @@
   },
   "look": {
     "formatOrPick": "Or pick a few you like"
+  },
+  "home": {
+    "shell": {
+      "companion": "Your companion",
+      "gulluTip": "Namaste! Pick a world on the map to play our next money challenge.",
+      "storyNoteTitle": "Gullu's world",
+      "storyNote": "Every choice you make shapes your money story and grows your living Gullak.",
+      "learnerMenu": "Learner menu",
+      "closeLearnerMenu": "Close learner menu",
+      "currentProfile": "Current profile",
+      "streakShort": "{days}d",
+      "streakLabel": "{days}-day streak",
+      "scoreShort": "Score {score}",
+      "habitScore": "Habit score: {score}/100",
+      "changeClass": "Change class and goals",
+      "resetOnboarding": "Reset and replay onboarding"
+    },
+    "map": {
+      "currentDestination": "Current destination",
+      "gulluHello": "Say hello to Gullu",
+      "welcome": "Welcome to our lane! Nani gave us our first errand at the kirana shop. Tap <world>{name}</world> to begin.",
+      "worldNumber": "World {number}",
+      "youAreHere": "You are here",
+      "statusLocked": "Locked",
+      "statusSoon": "Coming soon",
+      "statusDone": "Completed",
+      "statusOpen": "Open",
+      "nodeLabel": "World {number}, {title}: {tagline}. {status}",
+      "play": "Play: {mission} · {minutes} min",
+      "close": "Close",
+      "lockedHeading": "How to open this world",
+      "lockedFallback": "Finish the earlier worlds to open this one.",
+      "soonHeading": "Coming soon in the story",
+      "soonBody": "Gullu and Nani reach {world} later in the story. Its first mission, “{mission}”, is still being written.",
+      "soonNext": "For now, keep the story moving in {current}.",
+      "backToMap": "Back to the map",
+      "worlds": {
+        "candy-economy": { "tagline": "Ravi uncle's kirana shop", "mission": "Gullu goes shopping" },
+        "savings-quest": { "tagline": "Nani's courtyard", "mission": "The leaky pocket mystery" },
+        "bankopolis": { "tagline": "The bank branch and UPI stall", "mission": "Nani's first bank passbook" },
+        "market-mayhem": {
+          "tagline": "The Sunday street bazaar",
+          "mission": "Lucky Bhai's scheme",
+          "unlock": "Pass the Bankopolis and UPI safety quiz to enter the bazaar."
+        },
+        "grow-your-money": {
+          "tagline": "The rooftop plant nursery",
+          "mission": "The compounding sapling",
+          "unlock": "Save in your Gullak on three different days to open this world."
+        },
+        "stock-street": {
+          "tagline": "The busy market road",
+          "mission": "The index rollercoaster",
+          "unlock": "Learn compounding and the emergency fund first."
+        },
+        "life-simulator": { "tagline": "The ₹15,000 hospital bill", "mission": "The financial twin dilemma" },
+        "finance-tycoon": {
+          "tagline": "Planning a future for Nani and family",
+          "mission": "Building security for the family",
+          "unlock": "Finish the Life Simulator to open future planning for Class 11–12."
+        }
+      }
+    },
+    "gullu": {
+      "heading": "Your living Gullak",
+      "tapLabel": "Tap Gullu to talk",
+      "tapHint": "Tap me!",
+      "greeting": "Namaste! I am your living Gullak. When you save steadily and stay safe from scams, I grow stronger!",
+      "tips": {
+        "tickle": "Hehehe! That tickles! The coins are safe and warm inside me.",
+        "basket": "Tip from Nani: never put all your eggs in one basket.",
+        "small": "Did you know? Small, regular savings beat big, irregular bets.",
+        "kintsugi": "I broke once, and Nani mended me with gold lacquer (kintsugi)!"
+      },
+      "level": "Living Gullak · Level {level}",
+      "streak": "{days}-day streak",
+      "score": "Score {score}/100",
+      "habitNote": "Your Gullak grows with steady habits (saving, emergency funds, scam drills), never with lucky gambles.",
+      "insideTitle": "What's inside your Gullak",
+      "insideDescription": "A paper portfolio of virtual instruments you unlock across lessons."
+    },
+    "rewards": {
+      "title": "Rewards and achievements",
+      "description": "Earn XP and badges by protecting your family and finishing take-home missions.",
+      "xp": "Learning XP",
+      "xpValue": "{xp} XP",
+      "streak": "Daily streak",
+      "streakValue": "{days} days",
+      "habit": "Habit score",
+      "habitValue": "{score}/100"
+    },
+    "profile": {
+      "title": "Learner profile",
+      "titleNamed": "Learner: {name}",
+      "description": "Manage your class, language, appearance and shared-phone profile.",
+      "nickname": "Nickname",
+      "nicknameDescription": "What Gullu calls you during missions.",
+      "nicknamePlaceholder": "e.g. Bunty or Priya",
+      "save": "Save",
+      "appearance": "Appearance",
+      "appearanceDescription": "Choose warm paper, deep midnight navy, or match your device.",
+      "theme": { "light": "Light", "dark": "Dark", "system": "System" },
+      "classGroup": "Change class group",
+      "active": "Active",
+      "gradeTopics": {
+        "grade-6-7": "Needs and wants, the piggy bank, UPI basics",
+        "grade-8-10": "Budgeting, fixed deposits, compounding, the hospital-bill simulation",
+        "grade-11-12": "Gold, index funds, SIPs, stocks and the family's future"
+      },
+      "language": "App language",
+      "sharedTitle": "Shared phone: switch learner",
+      "sharedDescription": "Built for families sharing one phone. Reset this profile so another student can set up theirs.",
+      "reset": "Reset profile and replay onboarding"
+    }
   }
 }

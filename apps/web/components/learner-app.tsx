@@ -15,7 +15,6 @@ import { Onboarding } from "./onboarding";
 import { SettingsDialog } from "./settings-dialog";
 import { FinancialTwinTab } from "./tabs/financial-twin-tab";
 import { GulluTab } from "./tabs/gullu-tab";
-import { LearnTab } from "./tabs/learn-tab";
 import { ProfileTab } from "./tabs/profile-tab";
 import { RewardsTab } from "./tabs/rewards-tab";
 
@@ -152,20 +151,6 @@ export function LearnerApp() {
         )}
 
         {currentTab === "twin" && <FinancialTwinTab />}
-
-        {currentTab === "learn" && (
-          <LearnTab
-            gradeGroup={profile.gradeGroup}
-            onLaunchLesson={(topicId) => {
-              setActiveTopicId(topicId);
-              setActiveActivity(topicId === "candy-coin-shop" ? "coin-shop" : "lesson");
-            }}
-            onLaunchSpotAndSort={() => {
-              setActiveTopicId("needs-vs-wants");
-              setActiveActivity("spot-and-sort");
-            }}
-          />
-        )}
 
         {(currentTab === "gullu" || currentTab === "portfolio") && (
           <GulluTab gradeGroup={profile.gradeGroup} virtualCashPaise={virtualCash} progress={progress} />

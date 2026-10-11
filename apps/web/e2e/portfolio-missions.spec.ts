@@ -20,7 +20,7 @@ async function openLearner(page: import("@playwright/test").Page, gradeGroup = "
 test("savings respond to keyboard, repeated deposits, goals, undo and reset", async ({ page }) => {
   // Class 6–7 with some experience starts with ₹3,000 (starting-capital.json), the amount onboarding shows.
   await openLearner(page, "grade-6-7");
-  await page.getByRole("button", { name: "Gullu", exact: true }).click();
+  await page.getByRole("button", { name: "Portfolio", exact: true }).click();
   const save = page.getByRole("button", { name: "Save ₹100", exact: true });
   await save.focus();
   await page.keyboard.press("Enter");
@@ -49,7 +49,7 @@ test("savings respond to keyboard, repeated deposits, goals, undo and reset", as
 
 test("older learners can explore losses without changing jar balances", async ({ page }) => {
   await openLearner(page);
-  await page.getByRole("button", { name: "Gullu", exact: true }).click();
+  await page.getByRole("button", { name: "Portfolio", exact: true }).click();
   await page.getByRole("button", { name: "50 in each business" }).click();
   await expect(page.getByText("After this event: 90 fictional tokens (started with 100).")).toBeVisible();
   await page.getByLabel("Choose a hypothetical event").selectOption("bothDown");
@@ -140,7 +140,7 @@ test("all quests teach their reasoning and unlock an earned cosmetic", async ({ 
 test("younger learner gets touch-friendly saving without the older portfolio scenario", async ({ page, isMobile }) => {
   await openLearner(page, "grade-6-7");
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.getByRole("button", { name: "Gullu", exact: true }).click();
+  await page.getByRole("button", { name: "Portfolio", exact: true }).click();
   await expect(page.getByRole("heading", { name: "One basket or several?" })).toHaveCount(0);
   const deposit = page.getByRole("button", { name: "Save ₹50", exact: true });
   if (isMobile) await deposit.tap();

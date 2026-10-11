@@ -107,14 +107,14 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             <X className="size-5" />
           </button>
           <div>
-            <h1 className="font-display text-sm sm:text-base font-extrabold leading-none">Candy Economy · Mission 1</h1>
+            <h1 className="text-sm sm:text-base font-extrabold leading-none">Candy Economy · Mission 1</h1>
             <p className="text-xs font-bold text-muted-foreground">Ravi Uncle&apos;s Kirana</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Wallet Coins Counter */}
-          <div className="flex items-center gap-1.5 rounded-xl border border-border bg-brand-lime text-brand-ink dark:text-background px-2.5 sm:px-3 py-1 font-display text-sm sm:text-base font-black">
+          <div className="flex items-center gap-1.5 rounded-xl border border-border bg-brand-lime text-brand-ink dark:text-background px-2.5 sm:px-3 py-1 text-sm sm:text-base font-bold">
             <span className="text-base sm:text-lg">🪙</span>
             <span className="tabular">{formatInr(remainingPaise)}</span>
           </div>
@@ -163,25 +163,25 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             </SpeechBubble>
 
             <div className="w-full rounded-2xl border border-border bg-card p-4 text-left space-y-3">
-              <div className="flex items-center gap-2 font-display text-sm font-extrabold uppercase text-foreground">
+              <div className="flex items-center gap-2 text-sm font-extrabold uppercase text-brand-coral-ink">
                 <Sparkles className="size-4" />
                 <span>Your Mission Goal</span>
               </div>
               <ul className="text-xs sm:text-sm font-medium space-y-2 text-foreground">
                 <li className="flex items-start gap-2">
-                  <span className="text-foreground font-bold">1.</span>
+                  <span className="text-brand-coral-ink font-bold">1.</span>
                   <span>
                     Buy a <strong>Class Notebook</strong> for school tomorrow.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-foreground font-bold">2.</span>
+                  <span className="text-brand-coral-ink font-bold">2.</span>
                   <span>
                     Save <strong>₹10 for Bus Fare</strong> to ride home safely.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-foreground font-bold">3.</span>
+                  <span className="text-brand-coral-ink font-bold">3.</span>
                   <span>Use any leftover money as you wish (or keep it in Gullu)!</span>
                 </li>
               </ul>
@@ -238,10 +238,10 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             {/* Shelf Items Grid */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="font-display text-xs sm:text-sm font-extrabold uppercase tracking-wide text-muted-foreground">
+                <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wide text-muted-foreground">
                   Ravi Uncle&apos;s Shelf · Tap to add
                 </span>
-                <span className="text-xs font-bold text-foreground">
+                <span className="text-xs font-bold text-brand-coral-ink">
                   {remainingPaise < BUS_FARE_PAISE ? "⚠️ Bus fare at risk!" : "✓ Bus fare safe"}
                 </span>
               </div>
@@ -265,35 +265,29 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                       )}
                     >
                       {item.temptationBadge && (
-                        <span className="absolute -top-2 -right-1 rounded-full bg-brand-coral text-brand-ink px-2 py-0.5 text-xs font-black border border-border shadow-xs">
+                        <span className="absolute -top-2 -right-1 rounded-full bg-[#FF6847] text-foreground px-2 py-0.5 text-xs font-bold border border-foreground dark:border-[#334155] shadow-xs">
                           {item.temptationBadge}
                         </span>
                       )}
 
                       <div className="flex items-start justify-between">
                         <span className="text-2xl sm:text-3xl">{item.icon}</span>
-                        <span className="rounded-lg border border-border bg-brand-yellow text-brand-ink dark:text-background px-1.5 py-0.5 font-display text-xs sm:text-sm font-extrabold shadow-xs">
+                        <span className="rounded-lg border border-border bg-brand-yellow text-brand-ink dark:text-background px-1.5 py-0.5 text-xs sm:text-sm font-extrabold shadow-xs">
                           {formatInr(item.pricePaise)}
                         </span>
                       </div>
 
                       <div className="mt-2">
-                        <p className="font-display text-xs sm:text-sm font-black leading-tight text-foreground">
-                          {item.name}
-                        </p>
+                        <p className="text-xs sm:text-sm font-bold leading-tight text-foreground">{item.name}</p>
                         <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">{item.description}</p>
                       </div>
 
-                      <div className="mt-2.5 pt-1.5 border-t border-border flex items-center justify-between text-xs font-bold">
-                        <span
-                          className={cn(
-                            item.category === "need" ? "text-emerald-700 dark:text-emerald-400" : "text-foreground",
-                          )}
-                        >
+                      <div className="mt-2.5 pt-1.5 border-t border-foreground/10 dark:border-[#334155] flex items-center justify-between text-xs font-bold">
+                        <span className={cn(item.category === "need" ? "text-success-ink" : "text-brand-coral-ink")}>
                           {item.category === "need" ? "Essential" : "Treat"}
                         </span>
                         {inBasketCount > 0 && (
-                          <span className="rounded-full bg-primary text-primary-foreground size-5 grid place-items-center text-xs font-bold">
+                          <span className="rounded-full bg-[#171717] dark:bg-brand-lime text-white dark:text-foreground size-5 grid place-items-center text-xs font-bold">
                             {inBasketCount}
                           </span>
                         )}
@@ -309,7 +303,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               <div className="flex items-center justify-between border-b border-border pb-2 mb-2">
                 <div className="flex items-center gap-2">
                   <ShoppingBag className="size-4" />
-                  <span className="font-display text-xs sm:text-sm font-extrabold uppercase">
+                  <span className="text-xs sm:text-sm font-extrabold uppercase">
                     Your Basket ({basket.length} items)
                   </span>
                 </div>
@@ -317,7 +311,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                   <button
                     type="button"
                     onClick={handleUndo}
-                    className="flex items-center gap-1 text-xs font-bold text-foreground hover:text-foreground"
+                    className="flex items-center gap-1 text-xs font-bold text-foreground hover:text-brand-coral-ink"
                   >
                     <RotateCcw className="size-3" />
                     <span>Undo</span>
@@ -337,7 +331,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                       type="button"
                       onClick={() => handleRemoveItem(idx)}
                       title="Tap to remove"
-                      className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-muted text-foreground px-2.5 py-1 text-xs font-bold hover:bg-muted transition-colors"
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-foreground dark:border-[#334155] bg-[#ECE8DF] dark:bg-[#162032] text-foreground px-2.5 py-1 text-xs font-bold hover:bg-[#FF6847] hover:text-foreground transition-colors"
                     >
                       <span>{item.icon}</span>
                       <span>{item.name}</span>
@@ -389,26 +383,28 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
         {step === "consequences" && (
           <div className="space-y-6 my-auto max-w-lg mx-auto py-4">
             <div className="text-center space-y-1">
-              <span className="text-xs font-black uppercase tracking-wider text-foreground">Observe Consequences</span>
-              <h2 className="font-display text-2xl font-black">How Your Decision Played Out</h2>
+              <span className="text-xs font-bold uppercase tracking-wider text-brand-coral-ink">
+                Observe Consequences
+              </span>
+              <h2 className="text-2xl font-bold">How Your Decision Played Out</h2>
             </div>
 
             {/* Scene 1: The Bus Conductor */}
             <div className="rounded-2xl border border-border bg-card p-4 space-y-3">
-              <div className="flex items-center gap-2 font-display text-base font-extrabold">
-                <Bus className="size-5 text-foreground" />
+              <div className="flex items-center gap-2 text-base font-extrabold">
+                <Bus className="size-5 text-brand-coral-ink" />
                 <span>Scene 1 · 4:00 PM: The Red Bus Stop</span>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-3xl">{hasBusFare ? "🚌" : "🚶‍♂️"}</span>
                 <div className="text-xs sm:text-sm leading-relaxed">
                   {hasBusFare ? (
-                    <p className="text-emerald-800 dark:text-emerald-300 font-semibold">
+                    <p className="text-success-ink font-semibold">
                       <strong>You paid ₹10 to the conductor!</strong> You and Gullu sat comfortably by the window and
                       reached home in 10 minutes safely!
                     </p>
                   ) : (
-                    <p className="text-foreground font-semibold">
+                    <p className="text-brand-coral-ink font-semibold">
                       <strong>Not enough for bus fare!</strong> You only had {formatInr(remainingPaise)} left. The
                       conductor couldn&apos;t give you a ticket, so you had to walk 40 minutes under the hot sun with
                       sore feet!
@@ -420,7 +416,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
 
             {/* Scene 2: School the Next Day */}
             <div className="rounded-2xl border border-border bg-card p-4 space-y-3">
-              <div className="flex items-center gap-2 font-display text-base font-extrabold">
+              <div className="flex items-center gap-2 text-base font-extrabold">
                 <span>🏫</span>
                 <span>Scene 2 · Next Morning in Class</span>
               </div>
@@ -428,7 +424,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                 <span className="text-3xl">{hasNotebook ? "✍️" : "📄"}</span>
                 <div className="text-xs sm:text-sm leading-relaxed">
                   {hasNotebook ? (
-                    <p className="text-emerald-800 dark:text-emerald-300 font-semibold">
+                    <p className="text-success-ink font-semibold">
                       <strong>Teacher checked homework:</strong> &quot;Well done! You have your clean math notebook
                       ready!&quot; You scored full marks for preparation.
                     </p>
@@ -472,8 +468,8 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
         {step === "understand" && (
           <div className="space-y-6 my-auto max-w-lg mx-auto py-4">
             <div className="text-center space-y-1">
-              <span className="text-xs font-black uppercase tracking-wider text-foreground">Concept Reveal</span>
-              <h2 className="font-display text-2xl font-black">Needs vs Wants: The 2 Jars Rule</h2>
+              <span className="text-xs font-bold uppercase tracking-wider text-brand-coral-ink">Concept Reveal</span>
+              <h2 className="text-2xl font-bold">Needs vs Wants: The 2 Jars Rule</h2>
             </div>
 
             {/* Two Animated Jars */}
@@ -481,7 +477,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               {/* Needs Jar */}
               <div className="rounded-2xl border border-border bg-brand-lime/30 p-3 sm:p-4 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-1.5 font-display text-sm sm:text-base font-black text-foreground">
+                  <div className="flex items-center gap-1.5 text-sm sm:text-base font-bold text-foreground">
                     <span>🌱</span>
                     <span>NEEDS</span>
                   </div>
@@ -490,7 +486,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                   </p>
                 </div>
 
-                <div className="mt-3 pt-2 border-t border-border space-y-1 text-xs font-bold text-emerald-900 dark:text-emerald-300">
+                <div className="mt-3 pt-2 border-t border-foreground/20 dark:border-[#334155] space-y-1 text-xs font-bold text-success-ink">
                   <p>✓ Notebook (School)</p>
                   <p>✓ ₹10 Bus Fare</p>
                   <p>✓ Pencil / Medicine</p>
@@ -500,7 +496,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               {/* Wants Jar */}
               <div className="rounded-2xl border border-border bg-brand-lilac/30 p-3 sm:p-4 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-1.5 font-display text-sm sm:text-base font-black text-foreground">
+                  <div className="flex items-center gap-1.5 text-sm sm:text-base font-bold text-foreground">
                     <span>⭐</span>
                     <span>WANTS</span>
                   </div>
@@ -546,10 +542,10 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
         {step === "apply" && (
           <div className="space-y-4 my-auto max-w-lg mx-auto py-2">
             <div className="text-center space-y-0.5">
-              <span className="text-xs font-black uppercase tracking-wider text-foreground">
+              <span className="text-xs font-bold uppercase tracking-wider text-brand-coral-ink">
                 Quick Drill · 3 Questions
               </span>
-              <h2 className="font-display text-xl sm:text-2xl font-black">Need or Want? You Decide!</h2>
+              <h2 className="text-xl sm:text-2xl font-bold">Need or Want? You Decide!</h2>
             </div>
 
             <div className="space-y-3">
@@ -560,7 +556,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
 
                 return (
                   <div key={q.id} className="rounded-2xl border border-border bg-card p-3 sm:p-4 space-y-2.5">
-                    <p className="font-display text-xs sm:text-sm font-bold text-foreground">
+                    <p className="text-xs sm:text-sm font-bold text-foreground">
                       {idx + 1}. {q.prompt}
                     </p>
 
@@ -597,7 +593,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                         className={cn(
                           "rounded-xl p-2.5 text-xs font-medium border leading-snug",
                           isCorrect
-                            ? "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200"
+                            ? "bg-success/10 border-success text-success-ink"
                             : "bg-amber-50 dark:bg-amber-950/40 border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200",
                         )}
                       >
@@ -631,35 +627,31 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             <Gullu state="celebrate" size={140} label="Gullu celebrating your victory" />
 
             <div className="space-y-1">
-              <span className="text-xs font-black uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-                Mission Complete!
-              </span>
-              <h2 className="font-display text-2xl sm:text-3xl font-black">Gullu Goes Shopping Cleared!</h2>
+              <span className="text-xs font-bold uppercase tracking-wider text-success-ink">Mission Complete!</span>
+              <h2 className="text-2xl sm:text-3xl font-bold">Gullu Goes Shopping Cleared!</h2>
             </div>
 
             {/* Rewards Card */}
             <div className="w-full rounded-2xl border border-border bg-card p-4 text-left space-y-3">
-              <div className="flex items-center justify-between border-b border-border pb-2">
+              <div className="flex items-center justify-between border-b border-foreground/10 dark:border-[#334155] pb-2">
                 <span className="text-xs font-extrabold uppercase text-muted-foreground">Learning XP Earned</span>
-                <span className="font-display text-lg font-black text-emerald-700 dark:text-emerald-400">
-                  +35 XP ⚡
-                </span>
+                <span className="text-lg font-bold text-success-ink">+35 XP ⚡</span>
               </div>
 
-              <div className="flex items-center justify-between border-b border-border pb-2">
+              <div className="flex items-center justify-between border-b border-foreground/10 dark:border-[#334155] pb-2">
                 <span className="text-xs font-extrabold uppercase text-muted-foreground">Habit Score Boost</span>
-                <span className="font-display text-lg font-black text-foreground">+5 Score 🔥</span>
+                <span className="text-lg font-bold text-brand-coral-ink">+5 Score 🔥</span>
               </div>
 
               <div className="flex items-center justify-between">
                 <span className="text-xs font-extrabold uppercase text-muted-foreground">Coins saved into Gullak</span>
-                <span className="font-display text-lg font-black text-foreground">🪙 {formatInr(remainingPaise)}</span>
+                <span className="text-lg font-bold text-foreground">🪙 {formatInr(remainingPaise)}</span>
               </div>
             </div>
 
             {/* Take-Home Mission Callout */}
             <div className="w-full rounded-2xl border border-border bg-brand-lime/40 p-3.5 text-left space-y-1">
-              <p className="font-display text-xs font-black uppercase text-foreground">🏡 Take-Home Mission</p>
+              <p className="text-xs font-bold uppercase text-foreground">🏡 Take-Home Mission</p>
               <p className="text-xs text-foreground leading-snug">
                 Ask someone at home today:{" "}
                 <em>&quot;What was one Need and one Want from this week&apos;s grocery shopping?&quot;</em>
