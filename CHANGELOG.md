@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-10-11
+
 ### Added
 - Strict educational recommendation input/output contracts with validated topic graphs, quiz scores and complete topic-scoped concept mastery.
 - Pure `recommendNext` educational ranking: weak-concept reviews, prerequisite-readiness ordering and completed-topic reviews. Grade filtering and quiz-only unlocks remain unchanged; no trained parameters, database writes or UI integration.
