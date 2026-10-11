@@ -8,6 +8,15 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Live paper trading on Portfolio. **Buy** opens an Invest page where learners search any stock, ETF, mutual fund or index listed on NSE or BSE and see its live (possibly delayed) Yahoo Finance price. They can trade with play money only after passing the lesson that teaches that kind of instrument; the lesson is read from the topic graph. Otherwise the page says "Not unlocked yet" and links to the lesson. Indices are view-only.
+- A **Sell** button beside every holding, on Portfolio and on the Invest page.
+- Holdings and trade cash are saved on the device and valued at live prices on Portfolio.
+- Yahoo Finance adapter for Indian listings in `@gullak/market-data`, tested with recorded responses.
+- Play-money buy and sell maths in `@gullak/engine`: integer paise, milli-unit fractional fund units, no overdrafts.
+- Public, cached `/api/market/search` and `/api/market/live/[symbol]` routes.
+- English, Hindi and Telugu text. The Hindi and Telugu strings are unreviewed drafts.
+
 ## [0.2.25] - 2026-10-11
 
 ### Fixed

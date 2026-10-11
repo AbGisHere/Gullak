@@ -8,6 +8,7 @@ export * from "./money";
 export * from "./quiz";
 export * from "./recommend-next";
 export * from "./stage";
+export * from "./trade";
 export * from "./unit-price";
 export * from "./unlock";
 export * from "./valuation";

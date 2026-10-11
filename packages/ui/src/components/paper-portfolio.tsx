@@ -95,6 +95,8 @@ export interface PaperPortfolioProps {
   portfolio: PortfolioViewModel;
   labels?: Partial<PaperPortfolioLabels>;
   onHoldingOpen?: (holdingId: string) => void;
+  /** Optional per-holding action rendered beside the holding, e.g. a Sell link. */
+  renderHoldingAction?: (holding: PortfolioHoldingItem) => React.ReactNode;
   onGoalOpen?: (goalId: string) => void;
   onTermOpen?: (term: string) => void;
   onActionRequest?: (action: string, payload?: unknown) => void;
@@ -527,11 +529,13 @@ export function HoldingCard({
   labels,
   onOpen,
   onTermOpen,
+  action,
   className,
 }: {
   holding: PortfolioHoldingItem;
   labels?: Partial<PaperPortfolioLabels>;
   onOpen?: (holdingId: string) => void;
+  action?: React.ReactNode;
   onTermOpen?: (term: string) => void;
   className?: string;
 }) {
@@ -638,15 +642,18 @@ export function HoldingCard({
           {l.valuedAsOfPrefix}
           {holding.asOf}
         </span>
-        <button
-          type="button"
-          onClick={() => onOpen?.(holding.id)}
-          data-testid={`holding-detail-btn-${holding.id}`}
-          className="inline-flex min-h-[44px] h-auto py-2 items-center gap-1 rounded-lg px-2.5 text-xs font-semibold text-foreground hover:bg-muted/60 transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring"
-        >
-          <span>{l.whyHeldBtn}</span>
-          <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
-        </button>
+        <div className="flex items-center gap-2">
+          {action}
+          <button
+            type="button"
+            onClick={() => onOpen?.(holding.id)}
+            data-testid={`holding-detail-btn-${holding.id}`}
+            className="inline-flex min-h-[44px] h-auto py-2 items-center gap-1 rounded-lg px-2.5 text-xs font-semibold text-foreground hover:bg-muted/60 transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring"
+          >
+            <span>{l.whyHeldBtn}</span>
+            <ChevronRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </article>
   );
@@ -659,12 +666,14 @@ export function HoldingsList({
   holdings,
   labels,
   onHoldingOpen,
+  renderHoldingAction,
   onTermOpen,
   className,
 }: {
   holdings: PortfolioHoldingItem[];
   labels?: Partial<PaperPortfolioLabels>;
   onHoldingOpen?: (holdingId: string) => void;
+  renderHoldingAction?: (holding: PortfolioHoldingItem) => React.ReactNode;
   onTermOpen?: (term: string) => void;
   className?: string;
 }) {
@@ -729,7 +738,14 @@ export function HoldingsList({
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {filtered.map((holding) => (
-          <HoldingCard key={holding.id} holding={holding} labels={l} onOpen={onHoldingOpen} onTermOpen={onTermOpen} />
+          <HoldingCard
+            key={holding.id}
+            holding={holding}
+            labels={l}
+            onOpen={onHoldingOpen}
+            onTermOpen={onTermOpen}
+            action={renderHoldingAction?.(holding)}
+          />
         ))}
       </div>
     </section>
@@ -1081,6 +1097,7 @@ export function PaperPortfolio({
   portfolio,
   labels,
   onHoldingOpen,
+  renderHoldingAction,
   onGoalOpen,
   onTermOpen,
   onActionRequest,
@@ -1177,6 +1194,7 @@ export function PaperPortfolio({
               holdings={portfolio.holdings}
               labels={l}
               onHoldingOpen={handleOpenHolding}
+              renderHoldingAction={renderHoldingAction}
               onTermOpen={onTermOpen}
             />
           </div>
@@ -1187,6 +1205,7 @@ export function PaperPortfolio({
             holdings={portfolio.holdings}
             labels={l}
             onHoldingOpen={handleOpenHolding}
+            renderHoldingAction={renderHoldingAction}
             onTermOpen={onTermOpen}
           />
         )}
@@ -1211,6 +1230,7 @@ export function PaperPortfolio({
               holdings={portfolio.holdings.filter((h) => Boolean(h.linkedGoalId))}
               labels={l}
               onHoldingOpen={handleOpenHolding}
+              renderHoldingAction={renderHoldingAction}
               onTermOpen={onTermOpen}
             />
           </div>

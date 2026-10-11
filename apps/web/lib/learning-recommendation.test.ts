@@ -18,7 +18,15 @@ const topics: TopicSummary[] = allUnlockRules.map((rule) => {
     playable: true,
   };
 });
-const empty: LearnerState = { mastery: {}, quizAttempts: [], passedTopics: [], practiceCashPaise: 0, activities: [] };
+const empty: LearnerState = {
+  mastery: {},
+  quizAttempts: [],
+  passedTopics: [],
+  practiceCashPaise: 0,
+  activities: [],
+  paperHoldings: [],
+  liveCashDeltaPaise: 0,
+};
 
 describe("learningRecommendation", () => {
   it("keeps missing evidence explicit without changing it or opening a gated lesson", () => {

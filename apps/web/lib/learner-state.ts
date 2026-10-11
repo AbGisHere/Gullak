@@ -1,4 +1,4 @@
-import type { LearnerProfile } from "@gullak/types";
+import { IndianSymbol, type LearnerProfile, ListedKind } from "@gullak/types";
 import { z } from "zod";
 
 export { readProfile } from "@/components/onboarding";
@@ -17,6 +17,21 @@ const LearnerStateSchema = z.object({
   activities: z
     .array(z.object({ id: z.string().min(1), at: z.string(), xp: z.number().int().min(0).max(100).optional() }))
     .default([]),
+  /** Live paper-trading holdings of real Indian listings, bought with play money. */
+  paperHoldings: z
+    .array(
+      z.object({
+        symbol: IndianSymbol,
+        name: z.string().min(1),
+        kind: ListedKind,
+        milliUnits: z.number().int().safe().positive(),
+        costPaise: z.number().int().safe().nonnegative(),
+        openedAt: z.string(),
+      }),
+    )
+    .default([]),
+  /** Net play money moved by Live trades (sales minus purchases); added to starting and Practice cash. */
+  liveCashDeltaPaise: z.number().int().safe().default(0),
 });
 export type LearnerState = z.infer<typeof LearnerStateSchema>;
 
@@ -26,6 +41,8 @@ export const emptyState = (): LearnerState => ({
   mastery: {},
   practiceCashPaise: 0,
   activities: [],
+  paperHoldings: [],
+  liveCashDeltaPaise: 0,
 });
 
 export function readLearnerState(): LearnerState {
