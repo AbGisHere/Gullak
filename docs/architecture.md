@@ -253,6 +253,30 @@ reliability or R5 approval. Candy Economy Lesson 1 remains excluded.
 pnpm --filter @gullak/ai exec vitest run src/lesson-runner.integration.test.ts
 ```
 
+## Versioned quiz-answer boundary
+
+`QuizAnswerEvent` in `@gullak/types` validates the nine R3-approved row fields:
+`event_id`, `learner_id` (UUIDs); `topic_id`, `concept_id`, `question_id`
+(kebab-case slugs); `correct` (boolean); `answered_at` (ISO timestamp with UTC
+or an explicit offset); `attempt_no` (positive safe integer); `content_version`
+(64-character lowercase SHA-256 hex of the exact topic-content bytes).
+No coercion, timestamp conversion or additional columns are allowed. False
+answers remain valid evidence. There is no `question_index`: order within an
+attempt must come from the question position in the pinned content version.
+
+This validates one row's shape only. It cannot verify that a hash exists, that
+a question belongs to its topic/concept, that correctness matches the pinned
+answer key, or that an event/submission is unique and ordered. R3 must enforce
+those persistence rules; the notebook's registry/import validator handles batch
+checks. Do not score older answers against current content. This increment adds
+no DB table, import pipeline, BKT updates, real learner export, or unlock changes.
+Synthetic provenance belongs in dataset metadata, never extra row columns;
+story verdicts remain excluded.
+
+```powershell
+pnpm --filter @gullak/types exec vitest run src/quiz-answer.test.ts
+```
+
 ## Draft world metadata
 
 These inactive Phase 0 contracts in `@gullak/types` do not replace the topic
