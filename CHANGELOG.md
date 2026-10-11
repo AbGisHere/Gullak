@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.19] - 2026-10-11
+
 ### Fixed
 - The home app and the /learn map are one app: the Learn tab opens /learn, both share nav labels, the world
   map scrolls to the current world with one Play button and a "coming soon in the story" state for worlds
