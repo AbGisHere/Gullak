@@ -1,8 +1,9 @@
 import { readFileSync } from "node:fs";
 import { CurriculumBrief, TopicMeta, UnlockRule } from "@gullak/types";
+import { MockLanguageModelV3 } from "ai/test";
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
-import { generateLessonDraft } from "./index";
+import { createLessonDraftGenerator, generateLessonDraft } from "./index";
 
 // Literal expectations independent of the prompt builder and validator.
 const topics = [
@@ -115,5 +116,89 @@ describe("approved-brief draft pipeline (offline synthetic outputs)", () => {
     await expect(generateLessonDraft(input(topicId, "quiz"), async () => incomplete)).rejects.toBeInstanceOf(
       z.ZodError,
     );
+  });
+});
+
+function sdkGenerator(fixture: unknown) {
+  const model = new MockLanguageModelV3({
+    doGenerate: {
+      content: [{ type: "text", text: JSON.stringify(fixture) }],
+      finishReason: { unified: "stop", raw: undefined },
+      usage: {
+        inputTokens: { total: 10, noCache: 10, cacheRead: undefined, cacheWrite: undefined },
+        outputTokens: { total: 20, text: 20, reasoning: undefined },
+      },
+      warnings: [],
+    },
+  });
+  return { model, generate: createLessonDraftGenerator(model) };
+}
+
+describe("structured-provider draft pipeline (offline synthetic responses)", () => {
+  it.each(cases)("validates $topicId / $format after real SDK parsing", async ({ topicId, format, concepts }) => {
+    const caller = input(topicId, format);
+    const before = structuredClone(caller);
+    const { model, generate } = sdkGenerator(output(topicId, format, concepts));
+    const result = await generateLessonDraft(caller, generate);
+    expect(result).toMatchObject({
+      topicId,
+      gradeGroup: "grade-8-10",
+      locale: "en",
+      reviewStatus: "draft",
+      variant: { format, conceptIds: concepts, audience: ["grade-8-10"] },
+    });
+    expect(caller).toEqual(before);
+    expect(model.doGenerateCalls).toHaveLength(1);
+  });
+
+  it.each(cases)(
+    "rejects structurally valid foreign concepts in $topicId / $format",
+    async ({ topicId, format, concepts }) => {
+      const fixture = output(topicId, format, concepts);
+      fixture.variant.conceptIds.push("foreign-test-concept");
+      await expect(generateLessonDraft(input(topicId, format), sdkGenerator(fixture).generate)).rejects.toBeInstanceOf(
+        z.ZodError,
+      );
+    },
+  );
+
+  it.each(topics)("rejects a parsed $topicId quiz with missing objective coverage", async ({ topicId, concepts }) => {
+    const fixture = output(topicId, "quiz", concepts);
+    if (!("questions" in fixture.variant)) throw new Error("quiz fixture must contain questions");
+    fixture.variant.questions = fixture.variant.questions.slice(1);
+    await expect(generateLessonDraft(input(topicId, "quiz"), sdkGenerator(fixture).generate)).rejects.toBeInstanceOf(
+      z.ZodError,
+    );
+  });
+
+  it.each([{ topicId: "needs-vs-wants" }, { locale: "hi" }, { gradeGroup: "grade-6-7" }])(
+    "rejects parsed output with mismatched identity",
+    async (patch) => {
+      const fixture = { ...output("money-basics", "transcript", ["money-in", "money-out"]), ...patch };
+      await expect(
+        generateLessonDraft(input("money-basics", "transcript"), sdkGenerator(fixture).generate),
+      ).rejects.toBeInstanceOf(z.ZodError);
+    },
+  );
+
+  it("rejects a structurally valid but unrequested format", async () => {
+    const fixture = output("money-basics", "audio", ["money-in", "money-out"]);
+    await expect(
+      generateLessonDraft(input("money-basics", "transcript"), sdkGenerator(fixture).generate),
+    ).rejects.toBeInstanceOf(z.ZodError);
+  });
+
+  it.each(["transcript", "story", "audio"] as const)("screens advice after SDK parsing of %s", async (format) => {
+    const fixture = output("money-basics", format, ["money-in", "money-out"]);
+    const unsafe = "You should buy shares.";
+    const fields = {
+      transcript: { markdown: unsafe },
+      story: { panels: [{ id: "unsafe-panel", text: unsafe }] },
+      audio: { ttsText: unsafe },
+    };
+    const unsafeFixture = { ...fixture, variant: { ...fixture.variant, ...fields[format] } };
+    await expect(
+      generateLessonDraft(input("money-basics", format), sdkGenerator(unsafeFixture).generate),
+    ).rejects.toBeInstanceOf(z.ZodError);
   });
 });

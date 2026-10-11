@@ -269,6 +269,12 @@ drafts, implement a cache or approve content. Tests use the real SDK with a fake
 model at the network boundary; all teaching outputs are synthetic fixtures.
 Models supplied here must be model objects, not implicit gateway strings.
 
+The integration suite additionally runs all five approved briefs in all four
+formats through this adapter and the real SDK parser, then the existing semantic
+validator. It rejects parsed foreign concepts, missing quiz-objective coverage,
+mismatched identity/format and screened advice. These synthetic tests establish
+compatibility and rejection behavior, not live model reliability or teaching quality.
+
 ```ts
 const generator = createLessonDraftGenerator(createModel("google", env));
 // Explicit execution only, in a future authoring workflow, never per lesson view:
