@@ -24,7 +24,7 @@ Current-model bridge: an injectable draft-generation runner is implemented in
 topic brief/request/validation flow; it does not generate or publish world
 lessons, add live providers/caching, or migrate stage and unlock contracts.
 Offline integration tests cover all five approved Grade 8–10 English briefs
-across four draft formats on the R4 feature branch, using synthetic provider
+across four draft formats, using synthetic provider
 outputs only; live generation and human review remain pending.
 
 - [x] Monorepo, strict TypeScript, Biome, Husky, CI, PWA, i18n and Supabase helpers
@@ -35,7 +35,7 @@ outputs only; live generation and human review remain pending.
 
 ## Phase 1 · First-time learner journey
 
-- [ ] Onboarding: class group, experience, preferred format and optional placement challenge (R1, R4); pure draft `stageForClass` selector implemented on the R4 feature branch, class-based app onboarding and placement remain pending
+- [ ] Onboarding: class group, experience, preferred format and optional placement challenge (R1, R4); pure draft `stageForClass` selector implemented in `@gullak/engine`; class-based app onboarding and placement remain pending
 - [ ] Responsive app shell: phone navigation, desktop layout, XP/streak/play-money indicators (R1, R2); shell, navigation and Play Money badge built, XP and streak not yet
 - [ ] World map with locked, open and completed lesson states (R2)
 - [ ] Progress persistence for profile, XP, lesson attempts, mastery and unlocks (R3)
@@ -46,7 +46,7 @@ outputs only; live generation and human review remain pending.
 - [ ] Candyville visual direction, recurring guide and World 1 map (R2)
 - [ ] Candy Economy lessons: money, barter, currency, prices, needs/wants, scarcity, opportunity cost, earning, spending and saving (R5)
 - [ ] Barter, limited-coin shop, sorting, price-comparison and earning mechanics (R2, R4)
-  - R4's exact virtual unit-price input contracts and engine helper are implemented on `feat/unit-price-comparison` with tests; UI integration and approved activity content remain pending.
+  - R4's exact virtual unit-price input contracts and engine helper are implemented in `@gullak/types` and `@gullak/engine` with tests; UI integration and approved activity content remain pending.
   - Current R2 renderer mapping and evidence-integration gaps are recorded in [architecture](docs/architecture.md#confirmed-current-renderer-handoff). Lesson 1 is still an unapproved R5 draft; generation, XP and gameplay are on hold until sign-off and reviewed JSON.
 - [ ] Shopping-day final challenge, XP/retry/unlock behaviour and E2E core loop (R2, R5)
 - [ ] English, Hindi and Telugu review for the complete World 1 slice (R5)

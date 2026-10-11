@@ -167,7 +167,6 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
 5. **Never** force-push to main (on either remote), commit secrets, or commit generated build output.
 6. **After every successful push:** stop and tell me: "Pushed vX.Y.Z — good time to run /compact." Wait for me before continuing.
 7. **AI agents ask before every commit and every push.** Show the human the message and what's staged, and wait for an explicit yes. Approval for one commit or push doesn't carry over to the next. *Enforced:* `.claude/settings.json` sets `git commit`, `git push`, `git tag` and PR create/merge to "ask", and denies `--no-verify` and force-push.
-   **R4 fork exception — standing user authorization, 2026-10-11:** @VanshGoel-01 has explicitly authorized agents working on his fork to automatically commit and push changes within work he has requested, without asking again for each commit/push. Use separate meaningful Conventional Commits for logical increments, include tests and required changelog entries, and never create padding commits. Sync from `upstream main` before a work batch and every push, preserve local work, and verify the resulting tree before pushing. This is not permission for unrelated work, unapproved content, force-pushes, skipped checks, releases, merges or submission-repo pushes. Other teammates retain the default approval rule. PR creation still requires a user request/approval. Tool-level approval prompts remain in effect; do not weaken shared security settings to bypass them.
 
 ## Decisions
 
