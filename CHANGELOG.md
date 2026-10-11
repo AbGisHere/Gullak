@@ -9,6 +9,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Added
+- Controlled Financial Twin story presentation components for compact progress, household dialogue, supplied money state, decisions, consequence feedback, reflection and correctly paired rewind alternatives.
 - Complete learner-facing frontend experience in `apps/web`: connected learner dashboard with habit streak, adaptive recommendations ("Why Gullu picked this for you"), daily 2-minute drop, and quick portfolio glance.
 - Persistent Financial Twin narrative journey (*Nani's Gullak*): 7-step connected flow spanning Hyderabad lane context, March 2020 emergency dilemma, branching choices, Practice simulation, Multiverse Counterfactual Rewind, and "FYI, This Really Happened" historical reveal.
 - Mobile-first app shell (`AppShell`) with accessible 44px+ touch bottom navigation bar, companion Gullu avatar status, and full responsive desktop sidebar layout.
