@@ -383,6 +383,20 @@ text is never truncated, combined or calculated. `insufficient-relevance`,
 matching may miss short questions, synonyms and inflected forms; it is not
 semantic retrieval, recommendation, tutoring assessment or learner accuracy.
 
+Offline integration tests verify the allowlist covers all 33 pinned English
+sources and their exact bytes, prepare teaching-only payloads for all three
+existing grade groups, and preserve complete text in representative fallback
+excerpts. They reject newly hashed source edits, the unapproved Candy teaching
+file, unsupported locales and advice. Synthetic unit fixtures exercise explicit
+audience filtering, story/audio text extraction, unsafe-output rejection and
+lexical edge cases; they never acquire editorial permission through public APIs.
+The approved source bytes retain their original draft markers unchanged; this
+allowlist records the scoped human grounding authorization, not invented reviews.
+
+```powershell
+pnpm --filter @gullak/ai exec vitest run src/tutor.test.ts src/tutor-grounding.test.ts src/tutor-excerpt.test.ts src/tutor.integration.test.ts
+```
+
 ## Provider eligibility
 
 `resolveProviderOrder(env)` in `@gullak/ai` uses the explicit `AI_PROVIDER_ORDER`

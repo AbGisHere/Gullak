@@ -86,6 +86,7 @@ outputs only; live generation and human review remain pending.
 - [x] Align onboarding priors with the approved 0.1/0.3/0.5 values (R4); centralized engine function, exact-value tests and web re-export; saved mastery and quiz unlocks unchanged
 - [ ] Tutor grounded only in approved lesson content and learner language (R4, R5)
 - [x] Inactive post-demo English tutor preparation: exact v0.2.12 editorial hashes, grade-eligible teaching-only citations and JSON question isolation; app wiring and multilingual review remain separate (R4)
+- [x] Inactive verbatim English tutor excerpt fallback with conservative term matching, source provenance and all 33 pinned topic-source integration checks; no model or app activation (R4)
 
 ## Phase 5 · Quality and demo
 

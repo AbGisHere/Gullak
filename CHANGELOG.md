@@ -11,6 +11,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ### Added
 - Inactive offline English tutor request preparation with exact-byte v0.2.12 editorial grounding allowlist, grade filtering, teaching-only source citations and learner-question guardrails; no provider calls or app activation.
 - Deterministic approved-content tutor excerpt fallback with complete verbatim fields, lexical provenance and conservative no-excerpt reason codes; never fabricates an answer or truncates assumptions.
+- Offline tutor integration coverage for all 33 approved English source hashes and all existing grades, including edited-source and unapproved Candy rejection, guardrail behavior and verbatim excerpt provenance.
 
 ## [0.2.16] - 2026-10-11
 
