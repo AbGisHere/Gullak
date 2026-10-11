@@ -28,6 +28,9 @@ Current-model bridge: an injectable draft-generation runner is implemented in
 `@gullak/ai` (`generateLessonDraft`). It connects the existing
 topic brief/request/validation flow; it does not generate or publish world
 lessons, add live providers/caching, or migrate stage and unlock contracts.
+An explicit structured-output provider adapter is implemented on the R4 feature
+branch; it requires caller-selected models and has no automatic retries. App
+wiring, live generation, provider fallback, caching and human review remain pending.
 Offline integration tests cover all five approved Grade 8–10 English briefs
 across four draft formats, using synthetic provider
 outputs only; live generation and human review remain pending.

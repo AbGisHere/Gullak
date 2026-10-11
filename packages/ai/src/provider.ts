@@ -32,7 +32,7 @@ export function resolveProviderOrder(env: AiEnv): ProviderId[] {
   );
 }
 
-export function createModel(id: ProviderId, env: AiEnv): LanguageModel {
+export function createModel(id: ProviderId, env: AiEnv): Exclude<LanguageModel, string> {
   switch (id) {
     case "google":
       return createGoogleGenerativeAI({ apiKey: env.GOOGLE_GENERATIVE_AI_API_KEY })(
@@ -44,6 +44,6 @@ export function createModel(id: ProviderId, env: AiEnv): LanguageModel {
 }
 
 /** Ordered list of models to try; empty means "no LLM, use content fallback". */
-export function availableModels(env: AiEnv): Array<{ id: ProviderId; model: LanguageModel }> {
+export function availableModels(env: AiEnv): Array<{ id: ProviderId; model: Exclude<LanguageModel, string> }> {
   return resolveProviderOrder(env).map((id) => ({ id, model: createModel(id, env) }));
 }

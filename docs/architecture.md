@@ -253,6 +253,33 @@ reliability or R5 approval. Candy Economy Lesson 1 remains excluded.
 pnpm --filter @gullak/ai exec vitest run src/lesson-runner.integration.test.ts
 ```
 
+## Explicit lesson-provider adapter
+
+`createLessonDraftGenerator(model)` bridges an explicitly supplied AI SDK model
+to the existing `generateLessonDraft(input, generator)` flow. It uses structured
+`Output.object({ schema: LessonDraft })`, preserves the separate system and user
+prompts, and disables automatic retries. Invalid JSON/schema output and provider
+failures reject rather than being repaired, published or silently replaced.
+The SDK adapter only checks structure: always use the runner for canonical
+concepts, identity, requested format, quiz integrity and advice screening.
+
+Creating the adapter does not invoke a model; calling it does. This increment
+does not wire live API calls into the app, select/fail over providers, persist
+drafts, implement a cache or approve content. Tests use the real SDK with a fake
+model at the network boundary; all teaching outputs are synthetic fixtures.
+Models supplied here must be model objects, not implicit gateway strings.
+
+```ts
+const generator = createLessonDraftGenerator(createModel("google", env));
+// Explicit execution only, in a future authoring workflow, never per lesson view:
+const draft = await generateLessonDraft({ brief, context, format: "transcript" }, generator);
+// Keep draft unpublished until R5 reviews it.
+```
+
+```powershell
+pnpm --filter @gullak/ai exec vitest run src/lesson-provider.test.ts
+```
+
 ## Provider eligibility
 
 `resolveProviderOrder(env)` in `@gullak/ai` uses the explicit `AI_PROVIDER_ORDER`
