@@ -6,6 +6,7 @@ import {
   LearningRun,
   Portfolio,
   ProgressRecord,
+  QuizEvidence,
   QuizResult,
 } from "@gullak/types";
 import type { SupabaseClient } from "@supabase/supabase-js";
@@ -100,7 +101,15 @@ export function createDataAccess(user: SupabaseClient<Database>, admin: Supabase
       const { error } = await admin.rpc("record_lesson", { p_learner: learnerId, p_topic: topicId });
       if (error) databaseError(error);
     },
-    async quiz(topicId: string, key: string, request: Json, score: number, passMark: number, requires: string[]) {
+    async quiz(
+      topicId: string,
+      key: string,
+      request: Json,
+      score: number,
+      passMark: number,
+      requires: string[],
+      evidence?: QuizEvidence,
+    ) {
       const { data, error } = await admin.rpc("record_quiz", {
         p_learner: learnerId,
         p_topic: topicId,
@@ -109,6 +118,7 @@ export function createDataAccess(user: SupabaseClient<Database>, admin: Supabase
         p_score: score,
         p_pass_mark: passMark,
         p_requires: requires,
+        ...(evidence ? { p_evidence: QuizEvidence.parse(evidence) as Json } : {}),
       });
       if (error) databaseError(error);
       return validatedResult(QuizResult, data);

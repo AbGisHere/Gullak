@@ -4,6 +4,8 @@
 
 The product is an eight-world, decision-led learning journey. Each completed item should land through a small PR and be checked on phone and desktop.
 
+Quiz evidence API integration is prepared locally against v0.2.8, including typed transactional writes and exact-byte content versions; hosted migration and acceptance remain pending. See [quiz integration](docs/quiz-api-integration.md).
+
 ## Built so far (v0.0.1–v0.2.1, on the earlier topic model)
 
 These ship today and carry over to the eight worlds; the content model and grade groups still need migrating.

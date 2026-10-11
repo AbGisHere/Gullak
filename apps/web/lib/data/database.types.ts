@@ -276,6 +276,50 @@ export type Database = {
           },
         ];
       };
+      quiz_answers: {
+        Row: {
+          event_id: string;
+          learner_id: string;
+          topic_id: string;
+          concept_id: string;
+          question_id: string;
+          correct: boolean;
+          answered_at: string;
+          attempt_no: number;
+          content_version: string;
+        };
+        Insert: {
+          event_id: string;
+          learner_id: string;
+          topic_id: string;
+          concept_id: string;
+          question_id: string;
+          correct: boolean;
+          answered_at: string;
+          attempt_no: number;
+          content_version: string;
+        };
+        Update: {
+          event_id?: string;
+          learner_id?: string;
+          topic_id?: string;
+          concept_id?: string;
+          question_id?: string;
+          correct?: boolean;
+          answered_at?: string;
+          attempt_no?: number;
+          content_version?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "quiz_answers_learner_id_fkey";
+            columns: ["learner_id"];
+            isOneToOne: false;
+            referencedRelation: "learners";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       topic_progress: {
         Row: {
           learner_id: string;
@@ -318,7 +362,22 @@ export type Database = {
         ];
       };
     };
-    Views: { [_ in never]: never };
+    Views: {
+      quiz_answers_export: {
+        Row: {
+          event_id: string | null;
+          learner_id: string | null;
+          topic_id: string | null;
+          concept_id: string | null;
+          question_id: string | null;
+          correct: boolean | null;
+          answered_at: string | null;
+          attempt_no: number | null;
+          content_version: string | null;
+        };
+        Relationships: [];
+      };
+    };
     Functions: {
       facilitator_progress: { Args: { p_facilitator: string; p_cohort: string }; Returns: Json };
       invest_fd: {
@@ -338,6 +397,7 @@ export type Database = {
           p_score: number;
           p_pass_mark: number;
           p_requires: string[];
+          p_evidence?: Json;
         };
         Returns: Json;
       };

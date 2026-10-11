@@ -40,6 +40,53 @@ function client(result: unknown) {
   });
 }
 describe("validated database responses", () => {
+  it("preserves the legacy quiz caller without requiring evidence", async () => {
+    const fetch = vi.fn(
+      async (_input: RequestInfo | URL, _init?: RequestInit) =>
+        new Response(JSON.stringify({ topicId: "saving-habit", score: 1, passed: true }), {
+          headers: { "Content-Type": "application/json" },
+        }),
+    );
+    const db = createClient<Database>("https://fixture.invalid", "test-fixture", {
+      global: { fetch },
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    });
+    await createDataAccess(db, db, id).quiz("saving-habit", id, {}, 1, 0.7, []);
+    expect(JSON.parse(String(fetch.mock.calls[0]?.[1]?.body))).not.toHaveProperty("p_evidence");
+  });
+  it("rejects invalid internal evidence before sending a database request", async () => {
+    const fetch = vi.fn();
+    const db = createClient<Database>("https://fixture.invalid", "test-fixture", {
+      global: { fetch },
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    });
+    await expect(
+      createDataAccess(db, db, id).quiz("saving-habit", id, {}, 1, 0.7, [], {
+        contentVersion: "untrusted-version",
+        answers: [{ questionId: "one", conceptId: "saving", correct: true }],
+      }),
+    ).rejects.toThrow();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+  it("sends verified identity and graded evidence through the quiz transaction", async () => {
+    const fetch = vi.fn(
+      async (_input: RequestInfo | URL, _init?: RequestInit) =>
+        new Response(JSON.stringify({ topicId: "saving-habit", score: 1, passed: true }), {
+          headers: { "Content-Type": "application/json" },
+        }),
+    );
+    const db = createClient<Database>("https://fixture.invalid", "test-fixture", {
+      global: { fetch },
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    });
+    const evidence = {
+      contentVersion: `${"a".repeat(64)}`,
+      answers: [{ questionId: "one", conceptId: "saving", correct: true }],
+    };
+    await createDataAccess(db, db, id).quiz("saving-habit", id, {}, 1, 0.7, [], evidence);
+    const body = JSON.parse(String(fetch.mock.calls[0]?.[1]?.body));
+    expect(body).toMatchObject({ p_learner: id, p_evidence: evidence, p_score: 1 });
+  });
   it("returns a non-enumerating 404 for another profile's run", async () => {
     const db = client(null);
     await expect(createDataAccess(db, db, id).run(id)).rejects.toMatchObject({

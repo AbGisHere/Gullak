@@ -45,6 +45,7 @@ try {
     "20261010140000_backend_transactions.sql",
     "20261010150000_grade_group_onboarding.sql",
     "20261011090000_learning_runs.sql",
+    "20261011100000_quiz_answers.sql",
   ]) {
     if (file === "20261010150000_grade_group_onboarding.sql") {
       sql(`insert into auth.users values ('66666666-6666-4666-8666-666666666666');
@@ -53,6 +54,7 @@ try {
     sql(readFileSync(new URL(`../supabase/migrations/${file}`, import.meta.url), "utf8"));
   }
   sql(readFileSync(new URL("../supabase/tests/core.sql", import.meta.url), "utf8"));
+  sql(readFileSync(new URL("../supabase/tests/quiz-answers.sql", import.meta.url), "utf8"));
   sql(demoSeedSql());
   sql(demoSeedSql());
   sql(readFileSync(new URL("../supabase/tests/learning-runs.sql", import.meta.url), "utf8"));
@@ -100,8 +102,39 @@ try {
   if (retries.some((r) => r.status !== 0)) throw new Error("Concurrent identical retries failed");
   if (!sql(`select cash_paise from public.portfolios where learner_id = '${learner}';`).includes("400"))
     throw new Error("Retries charged cash twice");
+  // Independent connections race with identical and distinct quiz keys.
+  sql("select public.record_lesson('11111111-1111-4111-8111-111111111111','concurrent-quiz');");
+  const quiz = (key) =>
+    new Promise((resolve) => {
+      const child = spawn(join(bin, `psql${suffix}`), args, { windowsHide: true });
+      let stderr = "";
+      child.stderr.on("data", (chunk) => {
+        stderr += chunk;
+      });
+      child.stdout.resume();
+      child.on("error", (error) => resolve({ status: -1, stderr: error.message }));
+      child.on("close", (status) => resolve({ status, stderr }));
+      child.stdin.end(`set role service_role; select public.record_quiz('11111111-1111-4111-8111-111111111111',
+      'concurrent-quiz','${key}','{"answers":[{"questionId":"one","optionId":"a"}]}',1,0.7,array[]::text[],
+      jsonb_build_object('contentVersion',''||repeat('c',64),'answers',
+      '[{"questionId":"one","conceptId":"saving","correct":true}]'::jsonb));`);
+    });
+  const quizKey = "40000000-0000-4000-8000-000000000001";
+  const sameQuiz = await Promise.all([quiz(quizKey), quiz(quizKey)]);
+  if (sameQuiz.some((result) => result.status !== 0)) throw new Error("Concurrent quiz retry failed");
+  sql(
+    "select public.test_assert((select quiz_attempts=1 from public.topic_progress where topic_id='concurrent-quiz'), 'concurrent retries increment once');",
+  );
+  const newQuizzes = await Promise.all([
+    quiz("40000000-0000-4000-8000-000000000002"),
+    quiz("40000000-0000-4000-8000-000000000003"),
+  ]);
+  if (newQuizzes.some((result) => result.status !== 0)) throw new Error("Concurrent quiz submissions failed");
+  sql(
+    "select public.test_assert((select count(*)=3 and count(distinct event_id)=3 and count(distinct attempt_no)=3 from public.quiz_answers where topic_id='concurrent-quiz'), 'concurrent attempts have distinct events and sequential attempt numbers');",
+  );
   console.log(
-    "Database tests passed: migrations, RLS, restricted writes, quiz gates, retries, rollback, facilitator scope and concurrent investments.",
+    "Database tests passed: migrations, RLS, restricted writes, quiz grading gates, retries, rollback, facilitator scope and concurrent investments/quiz requests.",
   );
 } finally {
   if (started) run("pg_ctl", ["-D", data, "-m", "fast", "-w", "stop"]);

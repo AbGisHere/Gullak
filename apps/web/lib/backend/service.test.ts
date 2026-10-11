@@ -88,6 +88,29 @@ const topic: Topic = {
   },
 };
 describe("backend orchestration", () => {
+  it("derives answer evidence, concepts and versions from server content", async () => {
+    const db = database();
+    const service = createBackendService(db, id);
+    const input = { variantId: "check", answers: [{ questionId: "one", optionId: "b" }] };
+    await service.quiz(topic, input, id, "a".repeat(64));
+    expect(db.quiz).toHaveBeenLastCalledWith(topic.meta.id, id, input, 0, expect.any(Number), expect.any(Array), {
+      contentVersion: expect.stringMatching(/^[a-f0-9]{64}$/),
+      answers: [{ questionId: "one", conceptId: "saving", correct: false }],
+    });
+    const firstVersion = vi.mocked(db.quiz).mock.calls[0]?.[6]?.contentVersion;
+    await service.quiz(
+      { ...topic, content: { ...topic.content, title: "Revised content" } },
+      input,
+      id,
+      "b".repeat(64),
+    );
+    expect(vi.mocked(db.quiz).mock.calls[1]?.[6]?.contentVersion).not.toBe(firstVersion);
+    const invalid = { ...topic, meta: { ...topic.meta, concepts: [{ id: "different", label: "Different" }] } };
+    await expect(service.quiz(invalid, input, id, "a".repeat(64))).rejects.toMatchObject({
+      code: "quiz_concept_invalid",
+    });
+    expect(db.quiz).toHaveBeenCalledTimes(2);
+  });
   it("recognises the actual onboarding default as mixed mode", () => {
     const input = OnboardingRequest.parse({ gradeGroup: "grade-8-10", experience: "none", locale: "en" });
     expect(
@@ -210,8 +233,21 @@ describe("backend orchestration", () => {
   it("grades on the server and persists the calculated score", async () => {
     const db = database();
     const input = { variantId: "check", answers: [{ questionId: "one", optionId: "b" }] };
-    expect(await createBackendService(db, id).quiz(topic, input, id)).toMatchObject({ score: 0, passed: false });
-    expect(db.quiz).toHaveBeenCalledWith("bank-accounts-upi", id, input, 0, 0.6, ["saving-habit"]);
+    expect(await createBackendService(db, id).quiz(topic, input, id, "a".repeat(64))).toMatchObject({
+      score: 0,
+      passed: false,
+    });
+    expect(db.quiz).toHaveBeenCalledWith(
+      "bank-accounts-upi",
+      id,
+      input,
+      0,
+      0.6,
+      ["saving-habit"],
+      expect.objectContaining({
+        answers: [{ questionId: "one", conceptId: "saving", correct: false }],
+      }),
+    );
   });
   it("blocks FD lessons until savings is completed", async () => {
     const fd = { ...topic, meta: { ...topic.meta, id: "fixed-deposit" } };

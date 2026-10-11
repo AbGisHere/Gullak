@@ -1,7 +1,7 @@
 import "server-only";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { loadTopic } from "@gullak/content/server";
+import { loadVersionedTopic } from "@gullak/content/server";
 import { IdempotencyKey, Slug } from "@gullak/types";
 import { z } from "zod";
 import { getDataAccess } from "../data";
@@ -65,13 +65,16 @@ export async function context(request: Request) {
   return { db, service: createBackendService(db, learnerId) };
 }
 export async function learnerTopic(db: DataAccess, topicId: string) {
+  return (await learnerVersionedTopic(db, topicId)).topic;
+}
+export async function learnerVersionedTopic(db: DataAccess, topicId: string) {
   Slug.parse(topicId);
   const state = await db.state();
   const root = existsSync(resolve(process.cwd(), "packages/content/topics"))
     ? process.cwd()
     : resolve(process.cwd(), "../..");
   try {
-    return await loadTopic(resolve(root, "packages/content/topics"), topicId, state.profile.locale);
+    return await loadVersionedTopic(resolve(root, "packages/content/topics"), topicId, state.profile.locale);
   } catch (error) {
     if (error && typeof error === "object" && "code" in error && error.code === "ENOENT")
       throw new ApiError(503, "lesson_content_unavailable");

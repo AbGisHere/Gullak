@@ -1,5 +1,5 @@
 import { QuizSubmission } from "@gullak/types";
-import { api, body, context, learnerTopic, requestKey } from "@/lib/backend/http";
+import { api, body, context, learnerVersionedTopic, requestKey } from "@/lib/backend/http";
 import { ruleFor } from "@/lib/backend/service";
 
 export const runtime = "nodejs";
@@ -9,6 +9,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ top
     const { topicId } = await params;
     ruleFor(topicId);
     const input = await body(request, QuizSubmission);
-    return service.quiz(await learnerTopic(db, topicId), input, requestKey(request));
+    const { topic, contentVersion } = await learnerVersionedTopic(db, topicId);
+    return service.quiz(topic, input, requestKey(request), contentVersion);
   });
 }

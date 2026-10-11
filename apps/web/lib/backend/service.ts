@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { allUnlockRules, locales, startingCapital } from "@gullak/content";
 import {
   gradeQuiz,
+  gradeQuizAnswers,
   isTopicCompleted,
   isTopicOpen,
   monthlyForTarget,
@@ -15,6 +16,7 @@ import {
   GoalPlanRequest,
   LearnerProfile,
   type OnboardingRequest,
+  QuizEvidence,
   type QuizSubmission,
   type Topic,
 } from "@gullak/types";
@@ -105,7 +107,7 @@ export function createBackendService(db: DataAccess, learnerId: string, now = ()
       await db.lesson(topic.meta.id);
       return { recorded: true };
     },
-    async quiz(topic: Topic, input: QuizSubmission, key: string) {
+    async quiz(topic: Topic, input: QuizSubmission, key: string, contentVersion: string) {
       const state = await db.state();
       const rule = requireTopicOpen(state, topic.meta.id);
       const quiz = topic.content.variants.find(
@@ -121,7 +123,14 @@ export function createBackendService(db: DataAccess, learnerId: string, now = ()
       } catch {
         throw new ApiError(400, "invalid_quiz_answers");
       }
-      return db.quiz(topic.meta.id, key, input as Json, score, rule.passMark, rule.requiresTopicIds);
+      const evidence = QuizEvidence.parse({
+        // The trusted loader hashes the exact bytes used to load this definition.
+        contentVersion,
+        answers: gradeQuizAnswers(quiz, input),
+      });
+      if (evidence.answers.some((answer) => !topic.meta.concepts.some((concept) => concept.id === answer.conceptId)))
+        throw new ApiError(503, "quiz_concept_invalid");
+      return db.quiz(topic.meta.id, key, input as Json, score, rule.passMark, rule.requiresTopicIds, evidence);
     },
     async invest(
       input: { principalPaise: number; tenureMonths: 12 },
