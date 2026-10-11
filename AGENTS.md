@@ -15,7 +15,7 @@ The single source of truth for every AI agent (Claude Code, Codex, Gemini, OpenC
 7. Goal engine, mock Account Aggregator insights → learning nudges, facilitator/NGO dashboard, multilingual AI tutor.
 8. **Differentiators** (games are table stakes): **one storyline that remembers every choice** (*Nani's Gullak*: one arc per world across all eight, Gullu as companion, world guide and tutor voice, a recurring cast and villain; no fixed years in the story, then an "FYI, this really happened" reveal with real data); one continuous money life with learn → unlock → invest; **take-home missions** that make the learner the family's money teacher (reach counted in households); built for shared phones and no data; a **habit loop, never addictive** (living Gullak, daily real-price moment, 2-minute drop). Play layer: Money Multiverse and the class market. More ways to learn: Teach the AI, Kitna? lens, pocket-money diary, real documents explained, debate cards, spaced recall, and Stock Street's company report card, which explains every company metric on fictional companies ([`docs/company-metrics.md`](docs/company-metrics.md)). Full design: [`docs/curriculum.md`](docs/curriculum.md).
 
-**Migration status:** the app still runs on the earlier topic model (four pillars, `topics/`, grade groups 6–7 / 8–10 / 11–12). Moving code and content to worlds and lessons is Phase 0 of [ROADMAP.md](ROADMAP.md); until then, the topic-model sections below describe what the code does.
+**Migration status:** the app still runs on the earlier topic model (four pillars, `topics/`, grade groups 6–7 / 8–10 / 11–12) and stays there until after the demo. Phase 0 metadata contracts may be drafted without activating them; moving app code/content is later work. Until then, the topic-model sections below describe what the code does.
 
 ### Hard guardrail (non-negotiable)
 
@@ -109,6 +109,8 @@ Until the content schema migrates, mirror this structure in `packages/content/co
 
 ### Educational recommendations
 
+`initialMastery(experience)` in `@gullak/engine` initializes onboarding with the approved exact priors: none 0.1, some 0.3, regular 0.5. The web helper re-exports it. Never reset stored mastery on reads or change quiz-only unlocks; the temporary web evidence updater and its parameters are not replaced by this function.
+
 `recommendNext(input)` in `@gullak/engine` is a pure ranker, not a mastery updater or unlock rule. `RecommendationRequest` and `NextRecommendation` in `@gullak/types` define its contract: grade group, graph-ordered rules extended with canonical `conceptIds`, best quiz scores and complete topic-scoped mastery. Missing evidence state is rejected, never silently reset to onboarding priors. Review the lowest weak concept (<0.6) in passed grade-eligible topics first; otherwise rank open unfinished topics by the mean of every prerequisite concept (foundation readiness 1); otherwise review the passed topic with the lowest mean mastery, or return null. Ties follow graph then authored concept order. Never load synthetic parameters here. UI/DB wiring is separate; translate reason codes. Usage and R2/R3 handoff: [`docs/architecture.md`](docs/architecture.md#educational-recommendation-ranking).
 
 ### Curriculum brief validation (pre-generation step 1)
@@ -124,6 +126,10 @@ Callers supply canonical `meta`, graph `rule` and `supportedLocales`. Topic IDs 
 `buildLessonGenerationRequest({ brief, context, format })` prepares offline, versioned requests for the same four draft formats. Keep teaching data out of system instructions; add new prompt versions instead of editing a published one. A prepared request is not generated or approved content. Provider execution, hash-aware caching and output/request identity validation remain future work. Contract: [`docs/architecture.md`](docs/architecture.md#offline-lesson-generation-requests).
 
 `generateLessonDraft(input, generate)` connects the current-topic request builder and validator through one caller-supplied async generator. It pins brief/context before awaiting output, rejects mismatched identity/format and returns only validated, unreviewed drafts. No built-in provider, retry, cache, persistence or publication. This does not implement the eight-world migration: wait for agreed world/lesson/stage contracts before adapting generation. Contract: [`docs/architecture.md`](docs/architecture.md#current-topic-draft-generation-runner).
+
+### Draft world metadata (inactive until after the demo)
+
+`Stage`, `World` and `Lesson` in `@gullak/types` are metadata-only Phase 0 drafts. Stage IDs are foundation-explorers (Classes 6–7), money-navigators (8–9), financial-strategists (10–12). Worlds and lessons use kebab-case slugs. Lesson metadata carries stages/concepts, predecessor and its own explicit quiz pass mark; it carries no mastery gate. Existing topic types, loaders, routes and onboarding remain unchanged. Full localized gameplay, rewards, catalog links/cycles and migration are separate work. Contract and examples: [`docs/architecture.md`](docs/architecture.md#draft-world-metadata).
 
 ### How to add a market-data adapter
 
