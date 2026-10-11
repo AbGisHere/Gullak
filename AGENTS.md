@@ -109,6 +109,14 @@ Until the content schema migrates, mirror this structure in `packages/content/co
 
 ### Educational recommendations
 
+The experimental `MlFixtureInput` / `MlFixtureResult` boundaries and
+`replayQuizFixture` connect synthetic quiz fixtures to BKT and `recommendNext`.
+Inactive web backend/frontend adapters validate learner scope and transport context.
+They are not connected to routes, components, storage or model artifacts and must
+not be used to activate real mastery. Results are always synthetic and disabled;
+the fixture registry is not R3's immutable production registry. See
+[`docs/architecture.md`](docs/architecture.md#disabled-ml-fixture-integration).
+
 `initialMastery(experience)` in `@gullak/engine` initializes onboarding with the approved exact priors: none 0.1, some 0.3, regular 0.5. The web helper re-exports it. Never reset stored mastery on reads or change quiz-only unlocks; the temporary web evidence updater and its parameters are not replaced by this function.
 
 `recommendNext(input)` in `@gullak/engine` is a pure ranker, not a mastery updater or unlock rule. `RecommendationRequest` and `NextRecommendation` in `@gullak/types` define its contract: grade group, graph-ordered rules extended with canonical `conceptIds`, best quiz scores and complete topic-scoped mastery. Missing evidence state is rejected, never silently reset to onboarding priors. Review the lowest weak concept (<0.6) in passed grade-eligible topics first; otherwise rank open unfinished topics by the mean of every prerequisite concept (foundation readiness 1); otherwise review the passed topic with the lowest mean mastery, or return null. Ties follow graph then authored concept order. Never load synthetic parameters here. UI/DB wiring is separate; translate reason codes. Usage and R2/R3 handoff: [`docs/architecture.md`](docs/architecture.md#educational-recommendation-ranking).
