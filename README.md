@@ -1,7 +1,7 @@
 # Gullak
 
 [![Live demo](https://img.shields.io/badge/demo-gullak.abgupta.me-ea580c?logo=vercel&logoColor=white)](https://gullak.abgupta.me)
-[![Version](https://img.shields.io/badge/version-0.2.5-0f766e)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.2.6-0f766e)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Node](https://img.shields.io/badge/node-24_LTS-339933?logo=nodedotjs&logoColor=white)](.nvmrc)
 [![pnpm](https://img.shields.io/badge/pnpm-12.10.1-F69220?logo=pnpm&logoColor=white)](package.json)
@@ -34,7 +34,7 @@ Open `/` for onboarding, which leads into the learner app (Learn, Practice, Port
 - **Onboarding** in English, Hindi and Telugu: language, grade group, experience, learning formats and an optional goal. The profile is saved on the device.
 - **Learning components** in `@gullak/ui`, shown on sample data at `/r2-preview`. They are not yet connected to the backend or the content files.
 - **Backend API** (Supabase, sign-in required): profile, onboarding, lessons, quiz grading and unlocks, progress, portfolio and fixed deposits, goal planning, market quotes, activity and episode runs with resumable bookmarks, a Time Machine replay and a facilitator cohort view. See [the backend guide](docs/backend-setup.md).
-- **Content as data:** 8 topics, each with a reading lesson and a quiz (English), the topic prerequisite graph, one spot & sort round, one branching story and the March 2020 Practice episode.
+- **Content as data:** all 33 topics, each with a reading lesson and a quiz (English), the topic prerequisite graph, one spot & sort round, one branching story and the March 2020 Practice episode.
 - **Knowledge tracing (Colab notebook):** BKT fitted on synthetic learners, plus a benchmark of BKT, BKT with forgetting, PFA and DKT on 283,105 real student answers from ASSISTments 2009–10 (AUC: DKT 0.739, BKT with forgetting 0.727, BKT 0.722, PFA 0.710). See [notebooks](notebooks/README.md#results-colab-t4-run-2026-10-11). Not yet used in the app.
 - **Engine:** interest (FD, RD, SIP, compounding), valuation, quiz grading, unlock rules, starting capital and the lesson format picker, all unit-tested.
 - **Learner app** on phone and desktop: a grade-filtered learning map, content-backed lessons, quizzes that unlock the next topics, an on-device mastery meter, the March 2020 Practice episode and the paper portfolio. Progress stays on the device; Practice decisions use bundled sample outcomes.
