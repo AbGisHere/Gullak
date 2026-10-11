@@ -286,6 +286,42 @@ const draft = await generateLessonDraft({ brief, context, format: "transcript" }
 pnpm --filter @gullak/ai exec vitest run src/lesson-provider.test.ts
 ```
 
+## Offline lesson-batch preparation
+
+`prepareLessonBatch({ jobs })` in `@gullak/ai` prepares a bounded, deterministic
+manifest using the existing request builder and cache-key helper. Each job supplies
+`{ id, brief, context, formats, model: { provider, modelId }, source: { bytes, sha256 } }`.
+Source bytes must be a `Uint8Array` (including Node Buffers); callers read their own
+files. The preparer has no generator argument, provider calls, file access, cache
+reads/writes, learner fields or publication behavior.
+
+Catalog v1 is fixed to the approved v0.2.12 / `fddbdeb` English Grade 8–10 briefs:
+money-basics, needs-vs-wants, emergency-fund, compounding and
+upi-and-phishing-scams. It verifies SHA-256 of the exact source bytes against both
+the caller hash and the fixed catalog pin, parses fatal UTF-8 JSON as `TopicContent`,
+and checks source topic/locale identity. Normalized brief and context fingerprints
+(recursively sorted object keys, original array order) must also match the fixed
+catalog. Unsupported locales, grades, topics and changed briefs/context/source
+reject; callers cannot supply their own approval catalog. New approvals require
+an explicitly reviewed catalog revision. This does not approve generated drafts.
+
+Inputs are strict and bounded to 1–5 jobs, 1–4 distinct formats per job
+(transcript/story/audio/quiz), 1–524288 source bytes per job, 80-character IDs,
+200-character model identity fields, and at most 12 context concepts/locales or
+graph references. Brief teaching-text/list limits remain those of `CurriculumBrief`.
+Duplicate job IDs or topic-grade-locale-format identities reject, including
+identical entries with different model IDs. Missing and unknown fields reject.
+Nested inputs and bytes (including Buffer/subarray views) are copied synchronously
+before any await; later caller mutation cannot change preparation.
+
+Every job is validated before a manifest is returned. The result contains
+`schemaVersion: 1`, `keyVersion: 1`, `catalogVersion: 1`, `status: "prepared-only"`,
+and flat `jobs` in caller topic order, then caller format order. Each entry carries
+the job ID, verified `contentVersion`, explicit model identity, full request and
+existing `lesson-draft:v1:…` key. It contains no source bytes, timestamps or
+generated output. Prepared manifests are engineering data, not reviewed or
+published lessons; app wiring, execution and persistent caching remain post-demo.
+
 ## Lesson-draft cache-key preparation
 
 `buildLessonDraftCacheKey({ request, model, contentVersion })` prepares a key only.

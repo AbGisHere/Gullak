@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Bounded offline lesson-batch preparation for the five pinned English Grade 8–10 briefs, validating exact source bytes, approved brief/context fingerprints and duplicate identities before returning deterministic prepared-only requests and cache keys; no generation or storage is activated.
+
 ## [0.2.16] - 2026-10-11
 
 ### Changed
