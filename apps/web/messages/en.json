@@ -355,5 +355,8 @@
     "activityDoneBody": "This activity is recorded on this device. Each activity earns XP once, so replaying it is just for practice.",
     "activityXp": "+{xp} XP the first time you finish it",
     "activityUnlockNote": "Pass a topic's quiz to unlock what comes next."
+  },
+  "look": {
+    "formatOrPick": "Or pick a few you like"
   }
 }

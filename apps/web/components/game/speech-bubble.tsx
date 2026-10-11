@@ -19,12 +19,10 @@ export function SpeechBubble({
   variant = "paper",
 }: SpeechBubbleProps) {
   const bgStyles = {
-    paper:
-      "bg-[#FFFDF7] dark:bg-[#1E293B] text-[#171717] dark:text-[#F8FAFC] border-[#171717] dark:border-[#334155] shadow-[3px_3px_0px_#171717] dark:shadow-[3px_3px_0px_#000000]",
-    lime: "bg-[#DFFF3F] text-[#171717] border-[#171717] shadow-[3px_3px_0px_#171717] dark:shadow-[3px_3px_0px_#000000]",
-    yellow:
-      "bg-[#FFD84D] text-[#171717] border-[#171717] shadow-[3px_3px_0px_#171717] dark:shadow-[3px_3px_0px_#000000]",
-    coral: "bg-[#FF6847] text-white border-[#171717] shadow-[3px_3px_0px_#171717] dark:shadow-[3px_3px_0px_#000000]",
+    paper: "bg-card text-foreground border-border",
+    lime: "bg-brand-lime text-brand-ink dark:text-background border-border",
+    yellow: "bg-brand-yellow text-brand-ink dark:text-background border-border",
+    coral: "bg-brand-coral text-brand-ink dark:text-background border-border",
   }[variant];
 
   return (
@@ -32,17 +30,13 @@ export function SpeechBubble({
       aria-label={`${speakerName} says`}
       aria-live="polite"
       className={cn(
-        "g-bubble relative rounded-2xl border-2 p-3 sm:p-4 font-display text-sm sm:text-base leading-snug",
+        "g-bubble relative rounded-2xl border p-3 sm:p-4 text-sm sm:text-base leading-snug",
         bgStyles,
         className,
       )}
     >
-      {speakerName && (
-        <span className="block text-[11px] font-black uppercase tracking-wider text-[#171717]/70 dark:text-[#94A3B8] mb-0.5">
-          {speakerName}
-        </span>
-      )}
-      <div className="font-medium text-[#171717] dark:text-[#F8FAFC]">{children}</div>
+      {speakerName && <span className="block text-xs font-semibold opacity-70 mb-0.5">{speakerName}</span>}
+      <div className="font-medium">{children}</div>
 
       {/* Tail SVG pointing to character */}
       {tailPosition === "bottom-left" && (
@@ -56,14 +50,14 @@ export function SpeechBubble({
             d="M0 0 L8 12 L16 0 Z"
             className={
               variant === "paper"
-                ? "fill-[#FFFDF7] dark:fill-[#1E293B] stroke-[#171717] dark:stroke-[#334155]"
+                ? "fill-card stroke-border"
                 : variant === "lime"
-                  ? "fill-[#DFFF3F] stroke-[#171717]"
+                  ? "fill-brand-lime stroke-border"
                   : variant === "yellow"
-                    ? "fill-[#FFD84D] stroke-[#171717]"
-                    : "fill-[#FF6847] stroke-[#171717]"
+                    ? "fill-brand-yellow stroke-border"
+                    : "fill-brand-coral stroke-border"
             }
-            strokeWidth="2"
+            strokeWidth="1"
             strokeLinejoin="round"
           />
         </svg>
@@ -80,14 +74,14 @@ export function SpeechBubble({
             d="M12 0 L0 8 L12 16 Z"
             className={
               variant === "paper"
-                ? "fill-[#FFFDF7] dark:fill-[#1E293B] stroke-[#171717] dark:stroke-[#334155]"
+                ? "fill-card stroke-border"
                 : variant === "lime"
-                  ? "fill-[#DFFF3F] stroke-[#171717]"
+                  ? "fill-brand-lime stroke-border"
                   : variant === "yellow"
-                    ? "fill-[#FFD84D] stroke-[#171717]"
-                    : "fill-[#FF6847] stroke-[#171717]"
+                    ? "fill-brand-yellow stroke-border"
+                    : "fill-brand-coral stroke-border"
             }
-            strokeWidth="2"
+            strokeWidth="1"
             strokeLinejoin="round"
           />
         </svg>

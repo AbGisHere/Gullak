@@ -70,27 +70,23 @@ export function AppShell({
   }
 
   return (
-    <div className="flex min-h-svh w-full flex-col bg-brand-paper text-brand-ink selection:bg-brand-lime selection:text-brand-ink">
+    <div className="flex min-h-svh w-full flex-col bg-background text-foreground">
       {/* Top Header */}
-      <header className="sticky top-0 z-30 flex h-14 sm:h-16 w-full items-center justify-between border-b border-border/80 bg-brand-paper/95 px-3 sm:px-6 backdrop-blur-md">
+      <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b bg-background px-4 sm:px-6">
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
             onClick={() => onSelectTab("world")}
             className="flex items-center gap-2 text-left focus-visible:outline-2 focus-visible:outline-ring"
           >
-            <div className="grid size-9 sm:size-10 place-items-center rounded-xl bg-brand-ink text-brand-paper shadow-sm overflow-hidden p-0.5">
-              <Gullu state="wave" size={34} />
-            </div>
+            <Gullu state="wave" size={32} />
             <div>
-              <span className="block text-base sm:text-lg font-black tracking-tight leading-none font-display">
-                Gullak
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Vanguard</span>
+              <span className="block text-lg font-extrabold tracking-tight leading-none">Gullak</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Vanguard</span>
             </div>
           </button>
 
-          <span className="hidden sm:inline-flex items-center rounded-full bg-brand-muted px-2.5 py-0.5 text-xs font-semibold text-brand-ink">
+          <span className="hidden sm:inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-foreground">
             {gradeDisplay}
           </span>
         </div>
@@ -124,11 +120,11 @@ export function AppShell({
               onClick={() => setShowProfileMenu((prev) => !prev)}
               aria-label="Learner menu"
               aria-expanded={showProfileMenu}
-              className="flex h-8 sm:h-9 items-center gap-1 sm:gap-2 rounded-xl border border-border bg-card px-2 sm:px-3 text-xs sm:text-sm font-semibold hover:border-brand-ink/40 transition-colors"
+              className="flex h-8 sm:h-9 items-center gap-1 sm:gap-2 rounded-xl border border-border bg-card px-2 sm:px-3 text-xs sm:text-sm font-semibold hover:border-foreground/40 transition-colors"
             >
               {streakDays > 0 ? (
                 <>
-                  <span className="flex items-center gap-1 text-brand-coral">
+                  <span className="flex items-center gap-1 text-foreground">
                     <Flame className="size-3.5" aria-hidden="true" />
                     <span className="font-bold" aria-hidden="true">
                       {tProgress("streakShort", { days: streakDays })}
@@ -149,11 +145,11 @@ export function AppShell({
                   className="fixed inset-0 z-40 bg-transparent cursor-default border-0 p-0"
                   onClick={() => setShowProfileMenu(false)}
                 />
-                <div className="absolute right-0 top-full mt-2 z-50 w-56 rounded-2xl border border-border bg-card p-2 shadow-xl animate-in fade-in zoom-in-95">
+                <div className="absolute right-0 top-full mt-2 z-50 w-56 rounded-xl border border-border bg-card p-2 shadow-lg animate-in fade-in zoom-in-95">
                   <div className="px-3 py-2 border-b border-border/60">
                     <p className="text-xs text-muted-foreground">Current Profile</p>
-                    <p className="text-sm font-bold text-brand-ink">{gradeDisplay}</p>
-                    <p className="text-[11px] text-muted-foreground font-medium tabular-nums">
+                    <p className="text-sm font-bold text-foreground">{gradeDisplay}</p>
+                    <p className="text-xs text-muted-foreground font-medium tabular-nums">
                       {tProgress("levelSummary", { level, xp })}
                     </p>
                   </div>
@@ -163,7 +159,7 @@ export function AppShell({
                       setShowProfileMenu(false);
                       onOpenSettings();
                     }}
-                    className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-brand-ink hover:bg-brand-muted transition-colors"
+                    className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
                   >
                     <Settings className="size-4" />
                     <span>Change Grade & Goals</span>
@@ -189,20 +185,7 @@ export function AppShell({
       {/* Main Container with Desktop Sidebar Layout */}
       <div className="mx-auto flex w-full max-w-7xl flex-1 items-start">
         {/* Desktop Sidebar (hidden on phone, visible md+) */}
-        <aside className="sticky top-16 hidden md:flex w-64 shrink-0 flex-col gap-6 border-r border-border/80 p-5 self-stretch">
-          <div className="rounded-2xl bg-[#FFFDF7] p-4 border-2 border-[#171717] shadow-[3px_3px_0_#171717]">
-            <div className="flex items-center gap-3 mb-2">
-              <Gullu state="wave" size={54} />
-              <div>
-                <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">Companion</p>
-                <p className="text-base font-black text-brand-ink font-display">Gullu</p>
-              </div>
-            </div>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              &quot;Namaste! Choose a world from the map to play our next money challenge!&quot;
-            </p>
-          </div>
-
+        <aside className="sticky top-16 hidden md:flex w-60 shrink-0 flex-col gap-6 border-r px-4 py-6 self-stretch">
           <nav className="flex flex-col gap-2" aria-label="Desktop navigation">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -214,30 +197,18 @@ export function AppShell({
                   onClick={() => onSelectTab(item.id)}
                   data-active={isActive}
                   className={cn(
-                    "flex h-11 items-center gap-3 rounded-2xl px-3.5 text-sm font-extrabold transition-all text-left font-display border-2",
+                    "flex min-h-11 items-center gap-3 rounded-lg px-3 text-left text-sm font-semibold transition-colors",
                     isActive
-                      ? "bg-[#171717] dark:bg-[#DFFF3F] text-[#FFFDF7] dark:text-[#0B1120] border-[#171717] dark:border-[#DFFF3F] shadow-[2px_2px_0_#171717] dark:shadow-[2px_2px_0_#000000]"
-                      : "border-transparent text-brand-ink dark:text-[#F8FAFC] hover:bg-brand-muted dark:hover:bg-[#162032] hover:border-[#171717]/20 dark:hover:border-[#334155]",
+                      ? "bg-foreground text-background"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
                   )}
                 >
-                  <Icon
-                    className={cn("size-5", isActive ? "text-[#DFFF3F] dark:text-[#0B1120]" : "text-muted-foreground")}
-                  />
+                  <Icon className="size-5 shrink-0" aria-hidden="true" />
                   <span>{item.label}</span>
                 </button>
               );
             })}
           </nav>
-
-          <div className="mt-auto rounded-2xl border-2 border-dashed border-[#171717]/30 dark:border-[#334155] p-4 bg-[#FFFDF7]/60 dark:bg-[#162032]/60">
-            <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground mb-1">
-              <Sparkles className="size-3.5 text-brand-coral" />
-              <span>Gullu&apos;s World</span>
-            </div>
-            <p className="text-xs text-brand-ink/80 dark:text-[#94A3B8] leading-snug">
-              Every decision you make shapes your financial story and evolves your living Gullak!
-            </p>
-          </div>
         </aside>
 
         {/* Primary Page Content */}
@@ -247,7 +218,7 @@ export function AppShell({
       {/* Mobile Bottom Navigation Bar (Phone only, fixed at bottom, thumb-friendly 48px+ targets) */}
       <nav
         aria-label="Mobile navigation"
-        className="fixed bottom-0 left-0 right-0 z-30 flex md:hidden h-16 items-center justify-around border-t-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur-md shadow-lg"
+        className="fixed bottom-0 left-0 right-0 z-30 flex md:hidden items-center justify-around border-t bg-background px-1 pt-1 pb-[env(safe-area-inset-bottom)]"
       >
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -259,25 +230,12 @@ export function AppShell({
               onClick={() => onSelectTab(item.id)}
               data-active={isActive}
               className={cn(
-                "flex flex-1 min-h-[48px] min-w-[48px] flex-col items-center justify-center gap-1 py-1 text-[11px] font-bold transition-transform active:scale-95 font-display",
-                isActive
-                  ? "text-[#171717] dark:text-[#DFFF3F]"
-                  : "text-[#171717]/60 dark:text-[#94A3B8] hover:text-[#171717] dark:hover:text-[#F8FAFC]",
+                "flex flex-1 min-h-14 min-w-[48px] flex-col items-center justify-center gap-1 text-xs font-semibold transition-colors",
+                isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
               )}
             >
-              <div
-                className={cn(
-                  "grid size-8 place-items-center rounded-xl transition-all",
-                  isActive
-                    ? "bg-[#171717] dark:bg-[#DFFF3F] text-[#DFFF3F] dark:text-[#0B1120] shadow-[1px_1px_0_#171717] dark:shadow-[1px_1px_0_#000000]"
-                    : "bg-transparent text-[#171717]/60 dark:text-[#94A3B8]",
-                )}
-              >
-                <Icon className="size-4" />
-              </div>
-              <span className={cn("leading-none", isActive && "font-black text-[#171717] dark:text-[#DFFF3F]")}>
-                {item.label}
-              </span>
+              <Icon className="size-5" aria-hidden="true" />
+              <span className={cn("leading-none", isActive && "font-bold")}>{item.label}</span>
             </button>
           );
         })}

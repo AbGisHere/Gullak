@@ -78,6 +78,7 @@ function saveLocally(profile: LearnerProfile): boolean {
 
 export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) => void } = {}) {
   const t = useTranslations("onboarding");
+  const tLook = useTranslations("look");
   const locale = useLocale();
   const router = useRouter();
   const [step, setStep] = useState(0);
@@ -204,7 +205,7 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
           <div className="max-w-xl space-y-6">
             <div className="flex items-center gap-4">
               <Gullu state="wave" size={88} label="Gullu greeting you" />
-              <div className="rounded-2xl border-2 border-foreground bg-card p-3 text-xs sm:text-sm font-medium shadow-[2px_2px_0_#171717]">
+              <div className="rounded-2xl border bg-card p-3 text-sm font-medium">
                 &quot;Namaste! I&apos;m Gullu, your companion. Let&apos;s set up your journey!&quot;
               </div>
             </div>
@@ -263,34 +264,37 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
               <h1 className="text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">{t("formatTitle")}</h1>
               <p className="text-muted-foreground">{t("formatDescription")}</p>
             </div>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <button
-                type="button"
-                onClick={() => setChosenFormats(null)}
-                aria-pressed={chosenFormats === null}
-                data-selected={chosenFormats === null}
-                className={`${choiceClass} sm:col-span-2`}
-              >
-                <span>{t("mixItUp")}</span>
-                {chosenFormats === null ? <Check className="size-4" aria-hidden="true" /> : null}
-              </button>
-              {LearningFormat.options.map((format) => {
-                const selected = chosenFormats?.includes(format) ?? false;
-                return (
-                  <button
-                    key={format}
-                    type="button"
-                    onClick={() => toggleFormat(format)}
-                    aria-pressed={selected}
-                    data-selected={selected}
-                    className={choiceClass}
-                  >
-                    <span>{t(`format.${format}`)}</span>
-                    {selected ? <Check className="size-4" aria-hidden="true" /> : null}
-                  </button>
-                );
-              })}
-            </div>
+            <button
+              type="button"
+              onClick={() => setChosenFormats(null)}
+              aria-pressed={chosenFormats === null}
+              data-selected={chosenFormats === null}
+              className="flex min-h-16 w-full items-center justify-between gap-3 rounded-xl border px-5 py-4 text-left text-base font-semibold transition-colors hover:border-foreground/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring data-[selected=true]:border-foreground data-[selected=true]:bg-brand-lime data-[selected=true]:text-brand-ink"
+            >
+              <span>{t("mixItUp")}</span>
+              {chosenFormats === null ? <Check className="size-5" aria-hidden="true" /> : null}
+            </button>
+            <fieldset className="space-y-3">
+              <legend className="text-sm font-medium text-muted-foreground">{tLook("formatOrPick")}</legend>
+              <div className="flex flex-wrap gap-2">
+                {LearningFormat.options.map((format) => {
+                  const selected = chosenFormats?.includes(format) ?? false;
+                  return (
+                    <button
+                      key={format}
+                      type="button"
+                      onClick={() => toggleFormat(format)}
+                      aria-pressed={selected}
+                      data-selected={selected}
+                      className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium transition-colors hover:border-foreground/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring data-[selected=true]:border-foreground data-[selected=true]:bg-foreground data-[selected=true]:text-background"
+                    >
+                      {selected ? <Check className="size-3.5" aria-hidden="true" /> : null}
+                      <span>{t(`format.${format}`)}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </fieldset>
             <p className="text-sm text-muted-foreground">{t("formatHint")}</p>
           </div>
         ) : null}

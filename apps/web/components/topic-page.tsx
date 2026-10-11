@@ -82,7 +82,7 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
         <p className="text-lg leading-7 text-muted-foreground">{topic.content.summary}</p>
       </header>
       <section aria-label={t("lessonSection")}>
-        <TopicLesson lesson={lesson} labels={lessonLabels} />
+        <TopicLesson lesson={lesson} labels={lessonLabels} hideTitle />
       </section>
       {quiz ? (
         <section className="space-y-5 border-t pt-7" aria-labelledby="quiz-title">

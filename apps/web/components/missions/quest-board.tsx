@@ -12,7 +12,7 @@ import { initialQuests, QUESTS, type QuestId, questReducer, questUnlocked } from
 const messages = { en, hi, te };
 const icons = { sort: ShoppingBag, scam: ShieldCheck, budget: Wallet, compare: ShoppingBag };
 const buttonClass =
-  "min-h-11 rounded-xl border border-border px-4 py-3 text-base font-semibold hover:bg-brand-lime hover:text-brand-ink active:bg-brand-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-50";
+  "min-h-11 rounded-xl border border-border px-4 py-3 text-base font-semibold hover:bg-muted active:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-50";
 
 export function QuestBoard() {
   const locale = useLocale();
@@ -64,7 +64,7 @@ function Board() {
         <h1
           ref={boardHeadingRef}
           tabIndex={-1}
-          className="text-3xl font-black tracking-tight focus-visible:outline-2 focus-visible:outline-ring sm:text-4xl"
+          className="text-3xl font-extrabold tracking-[-0.03em] focus-visible:outline-2 focus-visible:outline-ring sm:text-4xl"
         >
           {t("title")}
         </h1>
@@ -87,7 +87,7 @@ function Board() {
           return (
             <article
               key={item.id}
-              className={`flex flex-col gap-3 rounded-2xl border border-border p-5 ${done ? "bg-brand-lime text-brand-ink" : "bg-card"}`}
+              className={`flex flex-col gap-3 rounded-2xl border border-border p-5 ${done ? "bg-muted" : "bg-card"}`}
             >
               <div className="flex items-center justify-between gap-2">
                 <Icon aria-hidden="true" className="size-7" />
@@ -146,7 +146,7 @@ function Board() {
               close();
             }
           }}
-          className="space-y-4 rounded-2xl border-2 border-brand-ink bg-card p-5 sm:p-6"
+          className="space-y-4 rounded-2xl border border-border bg-card p-5 sm:p-6"
         >
           <h2
             id={`${activityId}-title`}
@@ -166,7 +166,7 @@ function Board() {
                     key={`${step.id}-${choice}`}
                     type="button"
                     aria-pressed={selected === choice}
-                    className={`${buttonClass} text-left ${selected === choice ? "bg-brand-lilac text-brand-ink" : "bg-background"}`}
+                    className={`${buttonClass} text-left ${selected === choice ? "bg-foreground text-background border-foreground" : "bg-background"}`}
                     onClick={() => {
                       setSelected(choice);
                       dispatch({ type: "answer", questId: quest.id, stepId: step.id, choice });
@@ -185,7 +185,7 @@ function Board() {
               tabIndex={-1}
               role="status"
               aria-live="polite"
-              className="space-y-3 rounded-xl bg-brand-muted p-4 text-brand-ink focus-visible:outline-2 focus-visible:outline-ring"
+              className="space-y-3 rounded-xl bg-muted p-4 text-foreground focus-visible:outline-2 focus-visible:outline-ring"
             >
               <p className="font-bold">{t(feedback.correct ? "correct" : "incorrect")}</p>
               <p>{t(`${quest.id}.${displayedStep.id}Why`)}</p>

@@ -89,7 +89,7 @@ export function Gullu({ state = "idle", size = 120, reactionKey = 0, label, onTa
         onTap();
       }}
       className={cn(
-        "inline-block shrink-0 rounded-[40%] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-[#171717] cursor-pointer [-webkit-tap-highlight-color:transparent]",
+        "inline-block shrink-0 rounded-[40%] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-ring cursor-pointer [-webkit-tap-highlight-color:transparent]",
         className,
       )}
     >

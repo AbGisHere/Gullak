@@ -177,6 +177,8 @@ export interface TopicLessonProps {
   onStepComplete?: (stepIndex: number, stepId: string) => void;
   onInteraction?: (type: string, details: unknown) => void;
   onLessonComplete?: (result: LessonResult) => void;
+  /** Set when the host page already shows the lesson title as its heading. */
+  hideTitle?: boolean;
   className?: string;
 }
 
@@ -190,6 +192,7 @@ export function TopicLesson({
   onStepComplete,
   onInteraction,
   onLessonComplete,
+  hideTitle = false,
   className,
 }: TopicLessonProps) {
   const l: TopicLessonLabels = { ...defaultTopicLessonLabels, ...labels };
@@ -436,8 +439,12 @@ export function TopicLesson({
         </div>
 
         <div>
-          <h1 className="text-lg font-bold tracking-tight text-foreground sm:text-xl">{lesson.title}</h1>
-          <p className="text-xs font-semibold text-muted-foreground">{currentStep.title}</p>
+          {hideTitle ? null : (
+            <h1 className="text-lg font-bold tracking-tight text-foreground sm:text-xl">{lesson.title}</h1>
+          )}
+          {currentStep.title !== lesson.title ? (
+            <p className="text-xs font-semibold text-muted-foreground">{currentStep.title}</p>
+          ) : null}
         </div>
       </div>
 

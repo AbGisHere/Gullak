@@ -2,17 +2,18 @@
 
 import { MoneyDecoder, type MoneyDecoderLabels } from "@gullak/ui/components/money-decoder";
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
-import { Coins, PiggyBank, RotateCcw, Undo2 } from "lucide-react";
+import { Coins, RotateCcw, Undo2 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { NextIntlClientProvider, useLocale, useTranslations } from "next-intl";
 import { useId, useReducer, useState } from "react";
+import { Gullu } from "../game/gullu";
 import en from "./messages/en.json";
 import hi from "./messages/hi.json";
 import te from "./messages/te.json";
 import { GOALS, goalProgress, initialPlayground, playgroundReducer } from "./playground-state";
 
 const actionClass =
-  "min-h-11 rounded-xl border border-border px-4 py-3 text-base font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-50 hover:bg-brand-lime hover:text-brand-ink active:bg-brand-muted";
+  "min-h-11 rounded-xl border border-border px-4 py-3 text-base font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-50 hover:bg-muted active:bg-muted";
 const messages = { en, hi, te };
 // Authored outcome fixtures, not a market calculator or forecast.
 const events = ["oneDown", "bothDown", "oneUp"] as const;
@@ -72,7 +73,7 @@ function Playground({ gradeGroup, startingPaise }: { gradeGroup?: string; starti
   return (
     <div className="mx-auto w-full max-w-5xl space-y-8 px-4 py-6 text-foreground sm:px-6 sm:py-8">
       <header className="space-y-3">
-        <h1 className="text-3xl font-black tracking-tight sm:text-4xl">{t("title")}</h1>
+        <h1 className="text-3xl font-extrabold tracking-[-0.03em] sm:text-4xl">{t("title")}</h1>
         <PlayMoneyBadge label={t("virtual")} />
         <p className="max-w-prose text-base">{t("instructions")}</p>
         <p className="max-w-prose text-sm text-muted-foreground">{t("local")}</p>
@@ -86,14 +87,14 @@ function Playground({ gradeGroup, startingPaise }: { gradeGroup?: string; starti
             {t("jar")}
           </h2>
           <div
-            className="relative mx-auto flex h-48 w-44 items-end justify-center overflow-hidden rounded-2xl border-2 border-brand-ink bg-brand-paper"
+            className="relative mx-auto flex h-48 w-44 items-end justify-center overflow-hidden rounded-2xl border border-border bg-muted"
             aria-hidden="true"
           >
             <div
               className="absolute inset-x-0 bottom-0 bg-brand-lime motion-safe:transition-[height] motion-safe:duration-300"
               style={{ height: `${Math.min(100, state.savedPaise / 1000)}%` }}
             />
-            <PiggyBank className="relative mb-6 size-24 text-brand-ink" strokeWidth={1.5} />
+            <Gullu state={goal.reached ? "celebrate" : "idle"} size={104} className="relative mb-4" />
             {state.lastDepositPaise > 0 && (
               <motion.span
                 key={state.depositSequence}
@@ -126,7 +127,7 @@ function Playground({ gradeGroup, startingPaise }: { gradeGroup?: string; starti
                   type="button"
                   aria-pressed={state.goalId === item.id}
                   onClick={() => dispatch({ kind: "goal", goalId: item.id })}
-                  className={`${actionClass} ${state.goalId === item.id ? "bg-brand-lime text-brand-ink" : "bg-background"}`}
+                  className={`${actionClass} ${state.goalId === item.id ? "bg-foreground text-background border-foreground" : "bg-background"}`}
                 >
                   {t("goalChoice", { name: t(item.id), amount: money(item.targetPaise) })}
                 </button>
@@ -167,7 +168,7 @@ function Playground({ gradeGroup, startingPaise }: { gradeGroup?: string; starti
             role="status"
             aria-live="polite"
             aria-atomic="true"
-            className="min-h-20 space-y-2 rounded-xl bg-brand-muted p-4 text-brand-ink"
+            className="min-h-20 space-y-2 rounded-xl bg-muted p-4 text-foreground"
           >
             <p>{t(feedbackKey)}</p>
             {state.feedback === "saved" &&
@@ -229,7 +230,7 @@ function Playground({ gradeGroup, startingPaise }: { gradeGroup?: string; starti
                 type="button"
                 aria-pressed={allocation === choice}
                 onClick={() => setAllocation(choice)}
-                className={`${actionClass} ${allocation === choice ? "bg-brand-lilac text-brand-ink" : "bg-background"}`}
+                className={`${actionClass} ${allocation === choice ? "bg-foreground text-background border-foreground" : "bg-background"}`}
               >
                 {t(choice)}
               </button>

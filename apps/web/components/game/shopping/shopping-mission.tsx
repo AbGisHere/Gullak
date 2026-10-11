@@ -94,27 +94,27 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-[#F7F3E8] dark:bg-[#0B1120] text-[#171717] dark:text-[#F8FAFC] overflow-hidden select-none">
+    <div className="fixed inset-0 z-50 flex flex-col bg-background text-foreground overflow-hidden select-none">
       {/* Top Game HUD Header */}
-      <header className="sticky top-0 z-30 flex h-14 sm:h-16 w-full items-center justify-between border-b-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] px-3 sm:px-6 shadow-[0_2px_0_#171717] dark:shadow-[0_2px_0_#000000]">
+      <header className="sticky top-0 z-30 flex h-14 sm:h-16 w-full items-center justify-between border-b border-border bg-card px-3 sm:px-6">
         <div className="flex items-center gap-2 sm:gap-4">
           <button
             type="button"
             onClick={onClose}
             aria-label="Exit shopping mission"
-            className="flex size-9 sm:size-10 items-center justify-center rounded-xl border-2 border-[#171717] dark:border-[#334155] bg-[#ECE8DF] dark:bg-[#162032] hover:bg-[#DFFF3F] dark:hover:bg-[#DFFF3F] dark:hover:text-[#0B1120] transition-colors"
+            className="flex size-9 sm:size-10 items-center justify-center rounded-xl border border-border bg-muted hover:bg-brand-lime transition-colors"
           >
             <X className="size-5" />
           </button>
           <div>
             <h1 className="font-display text-sm sm:text-base font-extrabold leading-none">Candy Economy · Mission 1</h1>
-            <p className="text-[11px] font-bold text-[#171717]/70 dark:text-[#94A3B8]">Ravi Uncle&apos;s Kirana</p>
+            <p className="text-xs font-bold text-muted-foreground">Ravi Uncle&apos;s Kirana</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Wallet Coins Counter */}
-          <div className="flex items-center gap-1.5 rounded-xl border-2 border-[#171717] dark:border-[#334155] bg-[#DFFF3F] text-[#171717] px-2.5 sm:px-3 py-1 font-display text-sm sm:text-base font-black shadow-[2px_2px_0_#171717] dark:shadow-[2px_2px_0_#000000]">
+          <div className="flex items-center gap-1.5 rounded-xl border border-border bg-brand-lime text-brand-ink dark:text-background px-2.5 sm:px-3 py-1 font-display text-sm sm:text-base font-black">
             <span className="text-base sm:text-lg">🪙</span>
             <span className="tabular">{formatInr(remainingPaise)}</span>
           </div>
@@ -124,7 +124,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
       </header>
 
       {/* Progress Dots / Steps Indicator */}
-      <div className="flex items-center justify-center gap-1.5 py-2 border-b border-[#171717]/10 dark:border-[#334155] bg-[#ECE8DF]/40 dark:bg-[#162032]/40">
+      <div className="flex items-center justify-center gap-1.5 py-2 border-b border-border bg-muted">
         {(["intro", "shelf", "consequences", "understand", "apply", "complete"] as const).map((s, idx) => {
           const stepOrder = ["intro", "shelf", "consequences", "understand", "apply", "complete"];
           const currentIdx = stepOrder.indexOf(step);
@@ -136,11 +136,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               key={s}
               className={cn(
                 "h-2 rounded-full transition-all duration-300",
-                isCurrent
-                  ? "w-6 bg-[#171717] dark:bg-[#DFFF3F]"
-                  : isDone
-                    ? "w-2 bg-[#DFFF3F] border border-[#171717] dark:border-[#334155]"
-                    : "w-2 bg-[#171717]/20 dark:bg-[#94A3B8]/30",
+                isCurrent ? "w-6 bg-primary" : isDone ? "w-2 bg-brand-lime border border-border" : "w-2 bg-primary/20",
               )}
             />
           );
@@ -166,26 +162,26 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               {gulluMessage}
             </SpeechBubble>
 
-            <div className="w-full rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] p-4 text-left shadow-[4px_4px_0_#171717] dark:shadow-[4px_4px_0_#000000] space-y-3">
-              <div className="flex items-center gap-2 font-display text-sm font-extrabold uppercase text-[#FF6847]">
+            <div className="w-full rounded-2xl border border-border bg-card p-4 text-left space-y-3">
+              <div className="flex items-center gap-2 font-display text-sm font-extrabold uppercase text-foreground">
                 <Sparkles className="size-4" />
                 <span>Your Mission Goal</span>
               </div>
-              <ul className="text-xs sm:text-sm font-medium space-y-2 text-[#171717] dark:text-[#F8FAFC]">
+              <ul className="text-xs sm:text-sm font-medium space-y-2 text-foreground">
                 <li className="flex items-start gap-2">
-                  <span className="text-[#FF6847] font-bold">1.</span>
+                  <span className="text-foreground font-bold">1.</span>
                   <span>
                     Buy a <strong>Class Notebook</strong> for school tomorrow.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#FF6847] font-bold">2.</span>
+                  <span className="text-foreground font-bold">2.</span>
                   <span>
                     Save <strong>₹10 for Bus Fare</strong> to ride home safely.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#FF6847] font-bold">3.</span>
+                  <span className="text-foreground font-bold">3.</span>
                   <span>Use any leftover money as you wish (or keep it in Gullu)!</span>
                 </li>
               </ul>
@@ -211,9 +207,9 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
         {step === "shelf" && (
           <div className="space-y-4 pb-6">
             {/* Kirana Roof Awning & Dialogue */}
-            <div className="relative overflow-hidden rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] p-3 sm:p-4 shadow-[4px_4px_0_#171717] dark:shadow-[4px_4px_0_#000000]">
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-3 sm:p-4">
               {/* Awning Stripes */}
-              <div className="absolute top-0 left-0 right-0 h-3 bg-[repeating-linear-gradient(45deg,#FF6847,#FF6847_14px,#FFFDF7_14px,#FFFDF7_28px)] dark:bg-[repeating-linear-gradient(45deg,#FF6847,#FF6847_14px,#1E293B_14px,#1E293B_28px)] border-b-2 border-[#171717] dark:border-[#334155]" />
+              <div className="absolute top-0 left-0 right-0 h-3 bg-[repeating-linear-gradient(45deg,#FF6847,#FF6847_14px,#FFFDF7_14px,#FFFDF7_28px)] dark:bg-[repeating-linear-gradient(45deg,#FF6847,#FF6847_14px,#1E293B_14px,#1E293B_28px)] border-b-2 border-border" />
 
               <div className="flex items-start gap-3 sm:gap-4 mt-2">
                 <Gullu
@@ -242,10 +238,10 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             {/* Shelf Items Grid */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="font-display text-xs sm:text-sm font-extrabold uppercase tracking-wide text-[#171717]/80 dark:text-[#94A3B8]">
+                <span className="font-display text-xs sm:text-sm font-extrabold uppercase tracking-wide text-muted-foreground">
                   Ravi Uncle&apos;s Shelf · Tap to add
                 </span>
-                <span className="text-xs font-bold text-[#FF6847]">
+                <span className="text-xs font-bold text-foreground">
                   {remainingPaise < BUS_FARE_PAISE ? "⚠️ Bus fare at risk!" : "✓ Bus fare safe"}
                 </span>
               </div>
@@ -264,45 +260,40 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                       disabled={!isAffordable}
                       className={cn(
                         "g-tap flex flex-col justify-between rounded-2xl p-3 text-left relative",
-                        !isAffordable &&
-                          "opacity-50 grayscale hover:translate-y-0 hover:shadow-[4px_4px_0_#171717] dark:hover:shadow-[4px_4px_0_#000000]",
+                        !isAffordable && "opacity-50 grayscale hover:translate-y-0 hover: dark:hover:",
                         isNudged && "g-nudge",
                       )}
                     >
                       {item.temptationBadge && (
-                        <span className="absolute -top-2 -right-1 rounded-full bg-[#FF6847] text-white px-2 py-0.5 text-[9px] font-black border border-[#171717] dark:border-[#334155] shadow-xs">
+                        <span className="absolute -top-2 -right-1 rounded-full bg-brand-coral text-brand-ink px-2 py-0.5 text-xs font-black border border-border shadow-xs">
                           {item.temptationBadge}
                         </span>
                       )}
 
                       <div className="flex items-start justify-between">
                         <span className="text-2xl sm:text-3xl">{item.icon}</span>
-                        <span className="rounded-lg border-2 border-[#171717] dark:border-[#334155] bg-[#FFD84D] text-[#171717] px-1.5 py-0.5 font-display text-xs sm:text-sm font-extrabold shadow-xs">
+                        <span className="rounded-lg border border-border bg-brand-yellow text-brand-ink dark:text-background px-1.5 py-0.5 font-display text-xs sm:text-sm font-extrabold shadow-xs">
                           {formatInr(item.pricePaise)}
                         </span>
                       </div>
 
                       <div className="mt-2">
-                        <p className="font-display text-xs sm:text-sm font-black leading-tight text-[#171717] dark:text-[#F8FAFC]">
+                        <p className="font-display text-xs sm:text-sm font-black leading-tight text-foreground">
                           {item.name}
                         </p>
-                        <p className="text-[10px] text-[#171717]/70 dark:text-[#94A3B8] line-clamp-1 mt-0.5">
-                          {item.description}
-                        </p>
+                        <p className="text-xs text-muted-foreground line-clamp-1 mt-0.5">{item.description}</p>
                       </div>
 
-                      <div className="mt-2.5 pt-1.5 border-t border-[#171717]/10 dark:border-[#334155] flex items-center justify-between text-[11px] font-bold">
+                      <div className="mt-2.5 pt-1.5 border-t border-border flex items-center justify-between text-xs font-bold">
                         <span
                           className={cn(
-                            item.category === "need"
-                              ? "text-emerald-700 dark:text-emerald-400"
-                              : "text-[#FF6847] dark:text-[#FF8A65]",
+                            item.category === "need" ? "text-emerald-700 dark:text-emerald-400" : "text-foreground",
                           )}
                         >
                           {item.category === "need" ? "Essential" : "Treat"}
                         </span>
                         {inBasketCount > 0 && (
-                          <span className="rounded-full bg-[#171717] dark:bg-[#DFFF3F] text-white dark:text-[#171717] size-5 grid place-items-center text-[10px] font-bold">
+                          <span className="rounded-full bg-primary text-primary-foreground size-5 grid place-items-center text-xs font-bold">
                             {inBasketCount}
                           </span>
                         )}
@@ -314,8 +305,8 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             </div>
 
             {/* Shopping Basket Tray */}
-            <div className="rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] p-3 sm:p-4 shadow-[4px_4px_0_#171717] dark:shadow-[4px_4px_0_#000000]">
-              <div className="flex items-center justify-between border-b border-[#171717]/10 dark:border-[#334155] pb-2 mb-2">
+            <div className="rounded-2xl border border-border bg-card p-3 sm:p-4">
+              <div className="flex items-center justify-between border-b border-border pb-2 mb-2">
                 <div className="flex items-center gap-2">
                   <ShoppingBag className="size-4" />
                   <span className="font-display text-xs sm:text-sm font-extrabold uppercase">
@@ -326,7 +317,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                   <button
                     type="button"
                     onClick={handleUndo}
-                    className="flex items-center gap-1 text-xs font-bold text-[#171717] dark:text-[#F8FAFC] hover:text-[#FF6847]"
+                    className="flex items-center gap-1 text-xs font-bold text-foreground hover:text-foreground"
                   >
                     <RotateCcw className="size-3" />
                     <span>Undo</span>
@@ -335,7 +326,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               </div>
 
               {basket.length === 0 ? (
-                <p className="text-xs sm:text-sm text-[#171717]/60 dark:text-[#94A3B8] italic py-2">
+                <p className="text-xs sm:text-sm text-muted-foreground italic py-2">
                   Basket is empty. Tap any item from the shelf above to add it.
                 </p>
               ) : (
@@ -346,11 +337,11 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                       type="button"
                       onClick={() => handleRemoveItem(idx)}
                       title="Tap to remove"
-                      className="inline-flex items-center gap-1.5 rounded-xl border border-[#171717] dark:border-[#334155] bg-[#ECE8DF] dark:bg-[#162032] text-[#171717] dark:text-[#F8FAFC] px-2.5 py-1 text-xs font-bold hover:bg-[#FF6847] hover:text-white transition-colors"
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-muted text-foreground px-2.5 py-1 text-xs font-bold hover:bg-muted transition-colors"
                     >
                       <span>{item.icon}</span>
                       <span>{item.name}</span>
-                      <span className="text-[10px] opacity-70">({formatInr(item.pricePaise)})</span>
+                      <span className="text-xs opacity-70">({formatInr(item.pricePaise)})</span>
                       <X className="size-3 ml-0.5" />
                     </button>
                   ))}
@@ -358,7 +349,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               )}
 
               {/* Basket Summary & Next Action */}
-              <div className="mt-3 pt-3 border-t-2 border-[#171717]/10 dark:border-[#334155] flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="mt-3 pt-3 border-t-2 border-border flex flex-col sm:flex-row items-center justify-between gap-3">
                 <div className="text-xs sm:text-sm text-left w-full sm:w-auto">
                   <span>
                     Total spent: <strong>{formatInr(spentPaise)}</strong>
@@ -398,14 +389,14 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
         {step === "consequences" && (
           <div className="space-y-6 my-auto max-w-lg mx-auto py-4">
             <div className="text-center space-y-1">
-              <span className="text-xs font-black uppercase tracking-wider text-[#FF6847]">Observe Consequences</span>
+              <span className="text-xs font-black uppercase tracking-wider text-foreground">Observe Consequences</span>
               <h2 className="font-display text-2xl font-black">How Your Decision Played Out</h2>
             </div>
 
             {/* Scene 1: The Bus Conductor */}
-            <div className="rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] p-4 shadow-[4px_4px_0_#171717] dark:shadow-[4px_4px_0_#000000] space-y-3">
+            <div className="rounded-2xl border border-border bg-card p-4 space-y-3">
               <div className="flex items-center gap-2 font-display text-base font-extrabold">
-                <Bus className="size-5 text-[#FF6847]" />
+                <Bus className="size-5 text-foreground" />
                 <span>Scene 1 · 4:00 PM: The Red Bus Stop</span>
               </div>
               <div className="flex items-start gap-3">
@@ -417,7 +408,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                       reached home in 10 minutes safely!
                     </p>
                   ) : (
-                    <p className="text-[#FF6847] dark:text-[#FF8A65] font-semibold">
+                    <p className="text-foreground font-semibold">
                       <strong>Not enough for bus fare!</strong> You only had {formatInr(remainingPaise)} left. The
                       conductor couldn&apos;t give you a ticket, so you had to walk 40 minutes under the hot sun with
                       sore feet!
@@ -428,7 +419,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             </div>
 
             {/* Scene 2: School the Next Day */}
-            <div className="rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] p-4 shadow-[4px_4px_0_#171717] dark:shadow-[4px_4px_0_#000000] space-y-3">
+            <div className="rounded-2xl border border-border bg-card p-4 space-y-3">
               <div className="flex items-center gap-2 font-display text-base font-extrabold">
                 <span>🏫</span>
                 <span>Scene 2 · Next Morning in Class</span>
@@ -481,25 +472,25 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
         {step === "understand" && (
           <div className="space-y-6 my-auto max-w-lg mx-auto py-4">
             <div className="text-center space-y-1">
-              <span className="text-xs font-black uppercase tracking-wider text-[#FF6847]">Concept Reveal</span>
+              <span className="text-xs font-black uppercase tracking-wider text-foreground">Concept Reveal</span>
               <h2 className="font-display text-2xl font-black">Needs vs Wants: The 2 Jars Rule</h2>
             </div>
 
             {/* Two Animated Jars */}
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {/* Needs Jar */}
-              <div className="rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#DFFF3F]/30 dark:bg-[#DFFF3F]/15 p-3 sm:p-4 shadow-[4px_4px_0_#171717] dark:shadow-[4px_4px_0_#000000] flex flex-col justify-between">
+              <div className="rounded-2xl border border-border bg-brand-lime/30 p-3 sm:p-4 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-1.5 font-display text-sm sm:text-base font-black text-[#171717] dark:text-[#F8FAFC]">
+                  <div className="flex items-center gap-1.5 font-display text-sm sm:text-base font-black text-foreground">
                     <span>🌱</span>
                     <span>NEEDS</span>
                   </div>
-                  <p className="text-[11px] text-[#171717]/80 dark:text-[#94A3B8] mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     Things you <strong>must have</strong> to survive, learn, stay healthy, or travel.
                   </p>
                 </div>
 
-                <div className="mt-3 pt-2 border-t border-[#171717]/20 dark:border-[#334155] space-y-1 text-xs font-bold text-emerald-900 dark:text-emerald-300">
+                <div className="mt-3 pt-2 border-t border-border space-y-1 text-xs font-bold text-emerald-900 dark:text-emerald-300">
                   <p>✓ Notebook (School)</p>
                   <p>✓ ₹10 Bus Fare</p>
                   <p>✓ Pencil / Medicine</p>
@@ -507,18 +498,18 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               </div>
 
               {/* Wants Jar */}
-              <div className="rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#CBB5FF]/30 dark:bg-[#CBB5FF]/15 p-3 sm:p-4 shadow-[4px_4px_0_#171717] dark:shadow-[4px_4px_0_#000000] flex flex-col justify-between">
+              <div className="rounded-2xl border border-border bg-brand-lilac/30 p-3 sm:p-4 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-1.5 font-display text-sm sm:text-base font-black text-[#171717] dark:text-[#F8FAFC]">
+                  <div className="flex items-center gap-1.5 font-display text-sm sm:text-base font-black text-foreground">
                     <span>⭐</span>
                     <span>WANTS</span>
                   </div>
-                  <p className="text-[11px] text-[#171717]/80 dark:text-[#94A3B8] mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     Things that are <strong>fun and nice</strong>, but you can live safely without them.
                   </p>
                 </div>
 
-                <div className="mt-3 pt-2 border-t border-[#171717]/20 dark:border-[#334155] space-y-1 text-xs font-bold text-purple-900 dark:text-purple-300">
+                <div className="mt-3 pt-2 border-t border-border space-y-1 text-xs font-bold text-purple-900 dark:text-purple-300">
                   <p>• Kite / Toys</p>
                   <p>• Chocolate &amp; Soda</p>
                   <p>• Fancy Stickers</p>
@@ -526,11 +517,11 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               </div>
             </div>
 
-            <div className="rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] p-4 shadow-[4px_4px_0_#171717] dark:shadow-[4px_4px_0_#000000] text-xs sm:text-sm leading-relaxed space-y-2">
-              <p className="font-bold text-[#171717] dark:text-[#F8FAFC]">
+            <div className="rounded-2xl border border-border bg-card p-4 text-xs sm:text-sm leading-relaxed space-y-2">
+              <p className="font-bold text-foreground">
                 💡 <strong>Important Truth:</strong> Wants are NOT bad!
               </p>
-              <p className="text-[#171717]/80 dark:text-[#94A3B8]">
+              <p className="text-muted-foreground">
                 Everyone enjoys treats! But smart money managers always fund their{" "}
                 <strong>essential needs first</strong>. Whatever is leftover can be spent on wants or saved in Gullak
                 for bigger dreams!
@@ -555,7 +546,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
         {step === "apply" && (
           <div className="space-y-4 my-auto max-w-lg mx-auto py-2">
             <div className="text-center space-y-0.5">
-              <span className="text-xs font-black uppercase tracking-wider text-[#FF6847]">
+              <span className="text-xs font-black uppercase tracking-wider text-foreground">
                 Quick Drill · 3 Questions
               </span>
               <h2 className="font-display text-xl sm:text-2xl font-black">Need or Want? You Decide!</h2>
@@ -568,11 +559,8 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                 const isCorrect = answer === q.category;
 
                 return (
-                  <div
-                    key={q.id}
-                    className="rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] p-3 sm:p-4 shadow-[3px_3px_0_#171717] dark:shadow-[3px_3px_0_#000000] space-y-2.5"
-                  >
-                    <p className="font-display text-xs sm:text-sm font-bold text-[#171717] dark:text-[#F8FAFC]">
+                  <div key={q.id} className="rounded-2xl border border-border bg-card p-3 sm:p-4 space-y-2.5">
+                    <p className="font-display text-xs sm:text-sm font-bold text-foreground">
                       {idx + 1}. {q.prompt}
                     </p>
 
@@ -583,8 +571,8 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                         className={cn(
                           "g-btn g-btn--sm py-2 text-xs",
                           answer === "need"
-                            ? "bg-[#DFFF3F] text-[#171717]"
-                            : "bg-[#ECE8DF] dark:bg-[#162032] text-[#171717] dark:text-[#F8FAFC]",
+                            ? "bg-brand-lime text-brand-ink dark:text-background"
+                            : "bg-muted text-foreground",
                         )}
                       >
                         Essential Need 🌱
@@ -596,8 +584,8 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                         className={cn(
                           "g-btn g-btn--sm py-2 text-xs",
                           answer === "want"
-                            ? "bg-[#CBB5FF] text-[#171717]"
-                            : "bg-[#ECE8DF] dark:bg-[#162032] text-[#171717] dark:text-[#F8FAFC]",
+                            ? "bg-brand-lilac text-brand-ink dark:text-background"
+                            : "bg-muted text-foreground",
                         )}
                       >
                         Fun Want ⭐
@@ -650,39 +638,29 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             </div>
 
             {/* Rewards Card */}
-            <div className="w-full rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] p-4 text-left shadow-[4px_4px_0_#171717] dark:shadow-[4px_4px_0_#000000] space-y-3">
-              <div className="flex items-center justify-between border-b border-[#171717]/10 dark:border-[#334155] pb-2">
-                <span className="text-xs font-extrabold uppercase text-[#171717]/70 dark:text-[#94A3B8]">
-                  Learning XP Earned
-                </span>
+            <div className="w-full rounded-2xl border border-border bg-card p-4 text-left space-y-3">
+              <div className="flex items-center justify-between border-b border-border pb-2">
+                <span className="text-xs font-extrabold uppercase text-muted-foreground">Learning XP Earned</span>
                 <span className="font-display text-lg font-black text-emerald-700 dark:text-emerald-400">
                   +35 XP ⚡
                 </span>
               </div>
 
-              <div className="flex items-center justify-between border-b border-[#171717]/10 dark:border-[#334155] pb-2">
-                <span className="text-xs font-extrabold uppercase text-[#171717]/70 dark:text-[#94A3B8]">
-                  Habit Score Boost
-                </span>
-                <span className="font-display text-lg font-black text-[#FF6847] dark:text-[#FF8A65]">+5 Score 🔥</span>
+              <div className="flex items-center justify-between border-b border-border pb-2">
+                <span className="text-xs font-extrabold uppercase text-muted-foreground">Habit Score Boost</span>
+                <span className="font-display text-lg font-black text-foreground">+5 Score 🔥</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold uppercase text-[#171717]/70 dark:text-[#94A3B8]">
-                  Coins saved into Gullak
-                </span>
-                <span className="font-display text-lg font-black text-[#171717] dark:text-[#F8FAFC]">
-                  🪙 {formatInr(remainingPaise)}
-                </span>
+                <span className="text-xs font-extrabold uppercase text-muted-foreground">Coins saved into Gullak</span>
+                <span className="font-display text-lg font-black text-foreground">🪙 {formatInr(remainingPaise)}</span>
               </div>
             </div>
 
             {/* Take-Home Mission Callout */}
-            <div className="w-full rounded-2xl border-2 border-[#171717] dark:border-[#334155] bg-[#DFFF3F]/40 dark:bg-[#DFFF3F]/15 p-3.5 text-left shadow-[2px_2px_0_#171717] dark:shadow-[2px_2px_0_#000000] space-y-1">
-              <p className="font-display text-xs font-black uppercase text-[#171717] dark:text-[#DFFF3F]">
-                🏡 Take-Home Mission
-              </p>
-              <p className="text-xs text-[#171717] dark:text-[#F8FAFC] leading-snug">
+            <div className="w-full rounded-2xl border border-border bg-brand-lime/40 p-3.5 text-left space-y-1">
+              <p className="font-display text-xs font-black uppercase text-foreground">🏡 Take-Home Mission</p>
+              <p className="text-xs text-foreground leading-snug">
                 Ask someone at home today:{" "}
                 <em>&quot;What was one Need and one Want from this week&apos;s grocery shopping?&quot;</em>
               </p>

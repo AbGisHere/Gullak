@@ -257,7 +257,7 @@ export function LearnTab({ gradeGroup, onLaunchLesson, onLaunchSpotAndSort }: Le
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <span className="rounded-full bg-brand-lime text-brand-ink px-2.5 py-0.5 text-xs font-black uppercase">
+            <span className="rounded-full bg-brand-lime text-brand-ink px-2.5 py-0.5 text-xs font-bold uppercase">
               Curriculum Map
             </span>
             <span className="rounded-full bg-brand-lilac text-brand-ink px-2.5 py-0.5 text-xs font-bold">
@@ -265,7 +265,7 @@ export function LearnTab({ gradeGroup, onLaunchLesson, onLaunchSpotAndSort }: Le
             </span>
             <PlayMoneyBadge label="Learn By Doing" />
           </div>
-          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-brand-ink mt-1">
+          <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-brand-ink mt-1">
             The Four Vanguard Pillars
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
@@ -287,11 +287,11 @@ export function LearnTab({ gradeGroup, onLaunchLesson, onLaunchSpotAndSort }: Le
               className={cn(
                 "flex items-center gap-2 shrink-0 rounded-2xl px-4 py-2.5 text-xs font-bold transition-all border",
                 isSelected
-                  ? "bg-brand-ink text-brand-paper border-brand-ink shadow-xs"
+                  ? "bg-foreground text-background border-foreground"
                   : "bg-card text-muted-foreground border-border hover:bg-brand-muted hover:text-brand-ink",
               )}
             >
-              <Icon className={cn("size-3.5", isSelected ? "text-brand-lime" : "")} />
+              <Icon className="size-3.5" />
               <span>{pillar.label}</span>
             </button>
           );
@@ -301,33 +301,23 @@ export function LearnTab({ gradeGroup, onLaunchLesson, onLaunchSpotAndSort }: Le
       {/* Topic Cards Grid */}
       <div className="grid gap-4 sm:grid-cols-2">
         {filteredTopics.map((topic) => {
-          const pillarBorder =
-            topic.pillar === "plan-budget"
-              ? "border-l-4 border-l-brand-lime"
-              : topic.pillar === "save-manage"
-                ? "border-l-4 border-l-brand-lilac"
-                : topic.pillar === "investing"
-                  ? "border-l-4 border-l-brand-yellow"
-                  : "border-l-4 border-l-brand-coral";
-
           return (
             <div
               key={topic.id}
               className={cn(
-                "flex flex-col justify-between rounded-3xl border border-border bg-card p-5 sm:p-6 shadow-xs transition-all hover:shadow-md",
-                pillarBorder,
+                "flex flex-col justify-between rounded-2xl border border-border bg-card p-5 sm:p-6 transition-colors hover:border-foreground/40",
                 !topic.isUnlocked && "opacity-60 bg-brand-muted/30",
               )}
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-muted-foreground uppercase tracking-wider">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground uppercase tracking-wider">
                     <Clock className="size-3" />
                     <span>~{topic.durationMinutes} mins</span>
                   </div>
 
                   {topic.isCompleted ? (
-                    <span className="flex items-center gap-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 px-2.5 py-0.5 text-xs font-black">
+                    <span className="flex items-center gap-1 rounded-full bg-muted text-foreground px-2.5 py-0.5 text-xs font-bold">
                       <CheckCircle2 className="size-3" /> Mastered
                     </span>
                   ) : topic.isUnlocked ? (
@@ -342,7 +332,7 @@ export function LearnTab({ gradeGroup, onLaunchLesson, onLaunchSpotAndSort }: Le
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-black text-brand-ink">{topic.title}</h3>
+                  <h3 className="text-lg font-bold text-brand-ink">{topic.title}</h3>
                   <p className="text-xs text-muted-foreground leading-relaxed mt-1">{topic.description}</p>
                 </div>
 
@@ -351,7 +341,7 @@ export function LearnTab({ gradeGroup, onLaunchLesson, onLaunchSpotAndSort }: Le
                   {topic.formats.map((fmt) => (
                     <span
                       key={fmt}
-                      className="rounded-lg border border-border/80 bg-brand-paper px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-ink/80"
+                      className="rounded-lg border border-border/80 bg-brand-paper px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-brand-ink/80"
                     >
                       {fmt}
                     </span>
@@ -361,7 +351,7 @@ export function LearnTab({ gradeGroup, onLaunchLesson, onLaunchSpotAndSort }: Le
 
               {/* Action Button */}
               <div className="pt-4 mt-4 border-t border-border/60 flex items-center justify-between">
-                <span className="text-[11px] font-bold text-muted-foreground">
+                <span className="text-xs font-bold text-muted-foreground">
                   {topic.pillar === "plan-budget"
                     ? "Plan & Budget"
                     : topic.pillar === "save-manage"

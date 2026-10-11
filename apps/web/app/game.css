@@ -452,7 +452,8 @@
   .g-float,
   .g-drift,
   .g-nudge,
-  .g-rise {
+  .g-rise,
+  .animate-in {
     animation: none !important;
   }
   .g-btn,
