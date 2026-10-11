@@ -91,7 +91,10 @@ describe("offline lesson batch preparation", () => {
     "rejects verified source bytes with %s",
     async (kind) => {
       const job = batchJob();
-      const source = JSON.parse(new TextDecoder().decode(job.source.bytes));
+      const source = z
+        .object({ topicId: z.string(), locale: z.string(), variants: z.array(z.unknown()) })
+        .passthrough()
+        .parse(JSON.parse(new TextDecoder().decode(job.source.bytes)));
       if (kind === "invalid-topic") source.variants = [];
       if (kind === "wrong-topic") source.topicId = "needs-vs-wants";
       if (kind === "wrong-locale") source.locale = "hi";
@@ -206,5 +209,194 @@ describe("offline lesson batch preparation", () => {
     expect(manifest.jobs[0]?.model.modelId).toBe("fixture-model-v1");
     expect(manifest.jobs[0]?.request.prompt).not.toContain("Synthetic caller mutation");
     expect(manifest.jobs[0]?.request.prompt).not.toContain("synthetic-mutation");
+  });
+});
+
+const approved = [
+  {
+    topicId: "money-basics",
+    concepts: ["money-in", "money-out"],
+    sourceHash: "5ddcb2e9de08c1e20e08117628c8802c45f12b40a326c2e7922f55286900c8d2",
+  },
+  {
+    topicId: "needs-vs-wants",
+    concepts: ["needs", "wants", "depends-on-situation"],
+    sourceHash: "2278d69571d05b554df08822081bab8ce6029ded80340e1aaa2b42e3c552ca64",
+  },
+  {
+    topicId: "emergency-fund",
+    concepts: ["why-emergency-fund", "how-much", "easy-to-reach"],
+    sourceHash: "6caca82c5965456e0b78e6273fb46e1c8b92b101d732baee7cc527f0466e3fc8",
+  },
+  {
+    topicId: "compounding",
+    concepts: ["growth-on-growth", "start-early", "rate-and-time"],
+    sourceHash: "31f7ad8216a8fad958c7130671c6d2b889307de7e355f6940dedd4877356ec7c",
+  },
+  {
+    topicId: "upi-and-phishing-scams",
+    concepts: ["pin-only-to-pay", "fake-links-and-calls", "pause-and-check"],
+    sourceHash: "9773dcdd8250399373bb8f099e2baaea2fec18564b55706796a749731432b56c",
+  },
+];
+const formats = ["transcript", "story", "audio", "quiz"];
+const approvedCases = approved.flatMap((topic) => formats.map((format) => ({ ...topic, format })));
+
+describe("approved five-brief batch catalog (offline, synthetic model identities)", () => {
+  it.each(approvedCases)("prepares $topicId / $format with pinned evidence and concept coverage", async (testCase) => {
+    const job = batchJob(testCase.topicId);
+    job.formats = [testCase.format];
+    const manifest = await ai.prepareLessonBatch({ jobs: [job] });
+    expect(manifest.jobs).toHaveLength(1);
+    const entry = manifest.jobs[0];
+    if (!entry) throw new Error("prepared entry missing");
+    expect(entry.contentVersion).toBe(testCase.sourceHash);
+    expect(entry.request).toMatchObject({
+      topicId: testCase.topicId,
+      gradeGroup: "grade-8-10",
+      locale: "en",
+      format: testCase.format,
+    });
+    expect(JSON.parse(entry.request.prompt)).toMatchObject({
+      canonicalConceptIds: testCase.concepts,
+      outputEnvelope: {
+        schemaVersion: 1,
+        reviewStatus: "draft",
+        topicId: testCase.topicId,
+        gradeGroup: "grade-8-10",
+        locale: "en",
+      },
+      variantRequirements: { format: testCase.format, audience: ["grade-8-10"], conceptIds: testCase.concepts },
+    });
+    // Independent Node SHA-256 implementation of the documented v1 key tuple.
+    const request = entry.request;
+    const digest = createHash("sha256")
+      .update(
+        JSON.stringify([
+          "lesson-draft-cache",
+          1,
+          testCase.sourceHash,
+          "synthetic-offline",
+          "fixture-model-v1",
+          request.promptId,
+          request.promptVersion,
+          testCase.topicId,
+          "grade-8-10",
+          "en",
+          testCase.format,
+          request.system,
+          request.prompt,
+        ]),
+      )
+      .digest("hex");
+    expect(entry.key).toBe(`lesson-draft:v1:${digest}`);
+  });
+
+  it("prepares all20 entries atomically in non-catalog caller order", async () => {
+    const order = ["compounding", "emergency-fund", "money-basics", "upi-and-phishing-scams", "needs-vs-wants"];
+    const input = {
+      jobs: order.map((topicId) => ({ ...batchJob(topicId), formats: ["quiz", "audio", "story", "transcript"] })),
+    };
+    const before = structuredClone(input);
+    const manifest = await ai.prepareLessonBatch(input);
+    expect(manifest).toMatchObject({ schemaVersion: 1, keyVersion: 1, catalogVersion: 1, status: "prepared-only" });
+    expect(manifest.jobs).toHaveLength(20);
+    expect(new Set(manifest.jobs.map((entry) => entry.key)).size).toBe(20);
+    expect(manifest.jobs.map((entry) => `${entry.request.topicId}:${entry.request.format}`)).toEqual([
+      "compounding:quiz",
+      "compounding:audio",
+      "compounding:story",
+      "compounding:transcript",
+      "emergency-fund:quiz",
+      "emergency-fund:audio",
+      "emergency-fund:story",
+      "emergency-fund:transcript",
+      "money-basics:quiz",
+      "money-basics:audio",
+      "money-basics:story",
+      "money-basics:transcript",
+      "upi-and-phishing-scams:quiz",
+      "upi-and-phishing-scams:audio",
+      "upi-and-phishing-scams:story",
+      "upi-and-phishing-scams:transcript",
+      "needs-vs-wants:quiz",
+      "needs-vs-wants:audio",
+      "needs-vs-wants:story",
+      "needs-vs-wants:transcript",
+    ]);
+    expect(input).toEqual(before);
+    expect(await ai.prepareLessonBatch(input)).toEqual(manifest);
+    input.jobs[4] = { ...batchJob("needs-vs-wants"), formats: ["video"] };
+    await expect(ai.prepareLessonBatch(input)).rejects.toBeInstanceOf(z.ZodError);
+  });
+
+  it.each(approved.flatMap((topic) => ["brief", "context", "source"].map((field) => ({ ...topic, field }))))(
+    "rejects unapproved $field changes for $topicId",
+    async ({ topicId, field }) => {
+      const job = batchJob(topicId);
+      if (field === "brief") job.brief.examples.push("Synthetic unreviewed example, never learner content.");
+      if (field === "context") job.context.rule.passMark = 0.7;
+      if (field === "source") {
+        job.source.bytes = new Uint8Array([...job.source.bytes, 32]);
+        job.source.sha256 = createHash("sha256").update(job.source.bytes).digest("hex");
+      }
+      await expect(ai.prepareLessonBatch({ jobs: [job] })).rejects.toBeInstanceOf(z.ZodError);
+    },
+  );
+
+  it.each([
+    {},
+    { bytes: undefined },
+    { bytes: null },
+    { bytes: "synthetic" },
+    { bytes: [] },
+    { bytes: new Uint8Array() },
+    { sha256: undefined },
+    { sha256: "A".repeat(64) },
+    { sha256: "g".repeat(64) },
+    { learnerId: "synthetic-private-field" },
+  ])("rejects malformed or incomplete source boundaries %j", async (patch) => {
+    const job = batchJob();
+    const source = Object.keys(patch).length === 0 ? {} : { ...job.source, ...patch };
+    await expect(ai.prepareLessonBatch({ jobs: [{ ...job, source }] })).rejects.toBeInstanceOf(z.ZodError);
+  });
+
+  it("accepts reordered object fields but preserves semantic approval pins", async () => {
+    const job = batchJob("emergency-fund");
+    const before = await ai.prepareLessonBatch({ jobs: [job] });
+    const reordered = {
+      ...job,
+      brief: Object.fromEntries(Object.entries(job.brief).reverse()),
+      context: {
+        supportedLocales: job.context.supportedLocales,
+        rule: Object.fromEntries(Object.entries(job.context.rule).reverse()),
+        meta: Object.fromEntries(Object.entries(job.context.meta).reverse()),
+      },
+    };
+    expect(await ai.prepareLessonBatch({ jobs: [reordered] })).toEqual(before);
+  });
+
+  it("detaches manifests from caller data and other returned entry identities", async () => {
+    const job = batchJob("compounding");
+    const first = await ai.prepareLessonBatch({ jobs: [job] });
+    const original = structuredClone(first);
+    const entry = first.jobs[0];
+    if (!entry) throw new Error("prepared entry missing");
+    entry.model.modelId = "synthetic-modified-result";
+    entry.request.prompt = "synthetic-modified-result";
+    expect(first.jobs[1]?.model.modelId).toBe("fixture-model-v1");
+    expect(await ai.prepareLessonBatch({ jobs: [job] })).toEqual(original);
+  });
+
+  it("copies later-job byte views before the first job hash await", async () => {
+    const later = batchJob("compounding");
+    const backing = Buffer.from(later.source.bytes);
+    later.source.bytes = backing.subarray(0);
+    const pending = ai.prepareLessonBatch({ jobs: [batchJob(), later] });
+    backing.fill(0);
+    later.source.sha256 = "b".repeat(64);
+    const manifest = await pending;
+    expect(manifest.jobs[2]?.contentVersion).toBe("31f7ad8216a8fad958c7130671c6d2b889307de7e355f6940dedd4877356ec7c");
+    expect(manifest.jobs[2]?.request.topicId).toBe("compounding");
   });
 });
