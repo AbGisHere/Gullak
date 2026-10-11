@@ -123,6 +123,8 @@ Callers supply canonical `meta`, graph `rule` and `supportedLocales`. Topic IDs 
 
 `buildLessonGenerationRequest({ brief, context, format })` prepares offline, versioned requests for the same four draft formats. Keep teaching data out of system instructions; add new prompt versions instead of editing a published one. A prepared request is not generated or approved content. Provider execution, hash-aware caching and output/request identity validation remain future work. Contract: [`docs/architecture.md`](docs/architecture.md#offline-lesson-generation-requests).
 
+`generateLessonDraft(input, generate)` connects the current-topic request builder and validator through one caller-supplied async generator. It pins brief/context before awaiting output, rejects mismatched identity/format and returns only validated, unreviewed drafts. No built-in provider, retry, cache, persistence or publication. This does not implement the eight-world migration: wait for agreed world/lesson/stage contracts before adapting generation. Contract: [`docs/architecture.md`](docs/architecture.md#current-topic-draft-generation-runner).
+
 ### How to add a market-data adapter
 
 1. In `packages/market-data/src/adapters/<source>.ts`, implement `MarketDataAdapter` (`getQuote`, `getSeries`). Validate the source's raw response with Zod and map it to `MarketQuote` / `SeriesPoint`, setting `asOf` from the source.
