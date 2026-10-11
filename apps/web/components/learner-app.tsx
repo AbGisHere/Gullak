@@ -21,6 +21,7 @@ export function LearnerApp() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentTab, setCurrentTab] = useState<NavTab>("home");
   const [activeActivity, setActiveActivity] = useState<ActivityType | null>(null);
+  const [activeTopicId, setActiveTopicId] = useState<string | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [streakDays, setStreakDays] = useState(3);
   const [habitScore, setHabitScore] = useState(88);
@@ -121,8 +122,14 @@ export function LearnerApp() {
         {currentTab === "learn" && (
           <LearnTab
             gradeGroup={profile.gradeGroup}
-            onLaunchLesson={(_topicId) => setActiveActivity("lesson")}
-            onLaunchSpotAndSort={() => setActiveActivity("spot-and-sort")}
+            onLaunchLesson={(topicId) => {
+              setActiveTopicId(topicId);
+              setActiveActivity(topicId === "candy-coin-shop" ? "coin-shop" : "lesson");
+            }}
+            onLaunchSpotAndSort={() => {
+              setActiveTopicId("needs-vs-wants");
+              setActiveActivity("spot-and-sort");
+            }}
           />
         )}
 
@@ -135,7 +142,12 @@ export function LearnerApp() {
       {activeActivity && (
         <ActivityModal
           activityType={activeActivity}
-          onClose={() => setActiveActivity(null)}
+          topicId={activeTopicId}
+          gradeGroup={profile.gradeGroup}
+          onClose={() => {
+            setActiveActivity(null);
+            setActiveTopicId(null);
+          }}
           onActivitySuccess={handleActivitySuccess}
         />
       )}
