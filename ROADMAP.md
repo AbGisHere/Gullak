@@ -29,7 +29,7 @@ Tick items as they land on `main`. Finishing a phase = minor version bump.
 
 ## Phase 2 · Core loop (h5–h11)
 - [x] Onboarding flow: grade group, current experience, how they like to learn (optional, "Mix it up" default) (R1)
-- [ ] Lesson pre-generation script (topic × format × grade group × language, cached), run on the first curriculum entries (R4); brief validation is done; draft/output validation in PR #14; offline versioned request builder implemented on `feat/lesson-generation-request`, pending review/merge; provider generation and caching remain separate
+- [ ] Lesson pre-generation script (topic × format × grade group × language, cached), run on the first curriculum entries (R4); brief validation is done; draft/output validation and the offline versioned request builder are done; provider generation and caching remain separate
 - [ ] Demo topics in every format (one per pillar, e.g. needs vs wants, emergency fund, compounding, UPI scams): video, story, visual, formula + live calculator (KaTeX), transcript, simulation, quiz, audio (R2, R5); 8 topics have a reading lesson and a quiz, and the lesson renderer is built but not wired
 - [x] Format picker from preferences (R4) ([handoff](docs/format-picker.md)); the learned bandit stays in Phase 4
 - [x] Quiz pass → unlock rules over the prerequisite graph (R2); on-device in the learner app, not yet synced to the backend
