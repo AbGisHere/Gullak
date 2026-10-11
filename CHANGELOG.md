@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Strict offline BKT parameter and step/sequence contracts with explicit caller-supplied probabilities, boolean quiz observations and distinguishable emissions; no defaults, artifact loading or app activation.
+
 ## [0.2.16] - 2026-10-11
 
 ### Changed
