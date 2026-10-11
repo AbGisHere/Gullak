@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.9] - 2026-10-11
+
 ### Added
 - Controlled Financial Twin story presentation components for compact progress, household dialogue, supplied money state, decisions, consequence feedback, reflection and correctly paired rewind alternatives.
 - Complete learner-facing frontend experience in `apps/web`: connected learner dashboard with habit streak, adaptive recommendations ("Why Gullu picked this for you"), daily 2-minute drop, and quick portfolio glance.
