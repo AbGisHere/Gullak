@@ -80,6 +80,17 @@
     "continueLearning": "Continue",
     "openTopic": "Open topic",
     "topicContentComing": "Lesson content is being prepared.",
+    "world": {
+      "candy-economy": "Candy Economy",
+      "savings-quest": "Savings Quest",
+      "bankopolis": "Bankopolis",
+      "market-mayhem": "Market Mayhem",
+      "grow-your-money": "Grow Your Money",
+      "stock-street": "Stock Street",
+      "life-simulator": "Life Simulator",
+      "finance-tycoon": "Finance Tycoon"
+    },
+    "worldComing": "New lessons are on the way.",
     "pillar": {
       "plan-and-budget": "Plan & budget",
       "save-and-manage": "Save & manage",

@@ -4,6 +4,7 @@ import fundCategoriesJson from "../config/fund-categories.json";
 import localesJson from "../config/locales.json";
 import startingCapitalJson from "../config/starting-capital.json";
 import topicGraphJson from "../config/topic-graph.json";
+import topicWorldsJson from "../config/topic-worlds.json";
 
 export const StartingCapitalConfig = z.object({
   defaultInr: z.number().int().positive(),
@@ -77,12 +78,31 @@ export const FundCategoriesConfig = z
     }
   });
 
+export const TopicWorldsConfig = z
+  .object({
+    worlds: z
+      .array(z.object({ id: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/), topicIds: z.array(z.string()) }))
+      .min(1),
+  })
+  .superRefine(({ worlds }, ctx) => {
+    if (new Set(worlds.map((w) => w.id)).size !== worlds.length) {
+      ctx.addIssue({ code: "custom", message: "duplicate world id" });
+    }
+    const topicIds = worlds.flatMap((w) => w.topicIds);
+    if (new Set(topicIds).size !== topicIds.length) {
+      ctx.addIssue({ code: "custom", message: "a topic is in more than one world" });
+    }
+  });
+
 export const startingCapital = StartingCapitalConfig.parse(startingCapitalJson);
 export const topicGraph = TopicGraphConfig.parse(topicGraphJson);
 export const locales = LocalesConfig.parse(localesJson);
 
 /** Every topic's unlock rule, in curriculum order (pillar by pillar). */
 export const allUnlockRules: readonly UnlockRule[] = topicGraph.topics;
+
+/** The eight worlds in order, each with today's topic ids (until the content migrates to worlds). */
+export const topicWorlds = TopicWorldsConfig.parse(topicWorldsJson).worlds;
 
 /** SEBI fund categories for the investing topics; text per locale in fund-categories/<locale>.json. */
 export const fundCategories: readonly FundCategory[] = FundCategoriesConfig.parse(fundCategoriesJson).categories;

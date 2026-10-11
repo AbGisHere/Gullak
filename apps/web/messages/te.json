@@ -80,6 +80,17 @@
     "continueLearning": "కొనసాగించండి",
     "openTopic": "అంశాన్ని తెరవండి",
     "topicContentComing": "పాఠ్యాంశం సిద్ధమవుతోంది.",
+    "world": {
+      "candy-economy": "క్యాండీ ఎకానమీ",
+      "savings-quest": "పొదుపు అన్వేషణ",
+      "bankopolis": "బ్యాంకోపోలిస్",
+      "market-mayhem": "మార్కెట్ హడావుడి",
+      "grow-your-money": "మీ డబ్బును పెంచండి",
+      "stock-street": "స్టాక్ స్ట్రీట్",
+      "life-simulator": "జీవిత సిమ్యులేటర్",
+      "finance-tycoon": "ఫైనాన్స్ టైకూన్"
+    },
+    "worldComing": "కొత్త పాఠాలు త్వరలో వస్తున్నాయి.",
     "pillar": {
       "plan-and-budget": "ప్రణాళిక మరియు బడ్జెట్",
       "save-and-manage": "పొదుపు మరియు నిర్వహణ",

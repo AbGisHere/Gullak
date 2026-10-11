@@ -1,6 +1,14 @@
 import { Experience, GradeGroup, Pillar, type UnlockRule } from "@gullak/types";
 import { describe, expect, it } from "vitest";
-import { allUnlockRules, findPrerequisiteCycle, locales, startingCapital, TopicGraphConfig } from "./config";
+import {
+  allUnlockRules,
+  findPrerequisiteCycle,
+  locales,
+  startingCapital,
+  TopicGraphConfig,
+  TopicWorldsConfig,
+  topicWorlds,
+} from "./config";
 
 const rule = (topicId: string, requiresTopicIds: string[] = [], gradeGroups = GradeGroup.options) => ({
   topicId,
@@ -75,5 +83,44 @@ describe("topic graph", () => {
     const rules = [rule("a", ["c"]), rule("b", ["a"]), rule("c", ["b"])] as UnlockRule[];
     expect(findPrerequisiteCycle(rules)).toEqual(["a", "c", "b", "a"]);
     expect(findPrerequisiteCycle(allUnlockRules)).toBeNull();
+  });
+});
+
+describe("topic worlds", () => {
+  it("lists the eight worlds in curriculum order", () => {
+    expect(topicWorlds.map((w) => w.id)).toEqual([
+      "candy-economy",
+      "savings-quest",
+      "bankopolis",
+      "market-mayhem",
+      "grow-your-money",
+      "stock-street",
+      "life-simulator",
+      "finance-tycoon",
+    ]);
+  });
+
+  it("places every graph topic in exactly one world and no unknown topics", () => {
+    const placed = topicWorlds.flatMap((w) => w.topicIds);
+    expect([...placed].sort()).toEqual(allUnlockRules.map((r) => r.topicId).sort());
+  });
+
+  it("rejects a topic in two worlds and duplicate world ids", () => {
+    expect(
+      TopicWorldsConfig.safeParse({
+        worlds: [
+          { id: "a", topicIds: ["x"] },
+          { id: "b", topicIds: ["x"] },
+        ],
+      }).success,
+    ).toBe(false);
+    expect(
+      TopicWorldsConfig.safeParse({
+        worlds: [
+          { id: "a", topicIds: [] },
+          { id: "a", topicIds: [] },
+        ],
+      }).success,
+    ).toBe(false);
   });
 });

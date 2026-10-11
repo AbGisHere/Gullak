@@ -1,0 +1,51 @@
+{
+  "$comment": "Temporary map from today's topics to the eight worlds (docs/curriculum.md › Where today's topics go), so the learning map can group by world before the content migrates. Every topic in topic-graph.json appears exactly once.",
+  "worlds": [
+    { "id": "candy-economy", "topicIds": ["money-basics", "needs-vs-wants", "opportunity-cost"] },
+    {
+      "id": "savings-quest",
+      "topicIds": ["making-a-budget", "setting-goals", "saving-habit", "tracking-spending", "emergency-fund"]
+    },
+    {
+      "id": "bankopolis",
+      "topicIds": [
+        "bank-accounts-upi",
+        "recurring-deposit",
+        "protect-your-info",
+        "upi-and-phishing-scams",
+        "report-a-fraud"
+      ]
+    },
+    { "id": "market-mayhem", "topicIds": ["prices-and-inflation"] },
+    {
+      "id": "grow-your-money",
+      "topicIds": [
+        "compounding",
+        "fixed-deposit",
+        "ppf-small-savings",
+        "risk-and-return",
+        "gold",
+        "money-market",
+        "bonds",
+        "debt-funds",
+        "future-goals"
+      ]
+    },
+    {
+      "id": "stock-street",
+      "topicIds": [
+        "stocks",
+        "mutual-funds-sip",
+        "index-funds-etfs",
+        "diversification",
+        "market-ups-and-downs",
+        "too-good-to-be-true"
+      ]
+    },
+    {
+      "id": "life-simulator",
+      "topicIds": ["borrowing-and-credit", "insurance-basics", "retirement-nps", "fake-apps-and-loans"]
+    },
+    { "id": "finance-tycoon", "topicIds": [] }
+  ]
+}

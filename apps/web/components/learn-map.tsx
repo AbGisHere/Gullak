@@ -1,6 +1,6 @@
 "use client";
 
-import { allUnlockRules } from "@gullak/content";
+import { allUnlockRules, topicWorlds } from "@gullak/content";
 import { isTopicCompleted, isTopicOpen } from "@gullak/engine";
 import { ArrowRight, Check, LockKeyhole, Sparkles } from "lucide-react";
 import Link from "next/link";
@@ -18,7 +18,6 @@ export type TopicSummary = {
   concepts: string[];
   playable: boolean;
 };
-const pillarKeys = ["plan-and-budget", "save-and-manage", "understand-investing", "stay-safe"] as const;
 
 export function LearnMap({ topics }: { topics: TopicSummary[] }) {
   const t = useTranslations("learner");
@@ -91,15 +90,17 @@ export function LearnMap({ topics }: { topics: TopicSummary[] }) {
           </Link>
         </section>
       ) : null}
-      {pillarKeys.map((pillar) => {
-        const group = rules.filter((rule) => rule.pillar === pillar);
-        if (!group.length) return null;
+      {topicWorlds.map((world) => {
+        const group = rules.filter((rule) => world.topicIds.includes(rule.topicId));
+        // A world with topics, none for this grade, is hidden; a world with no topics yet says so.
+        if (!group.length && world.topicIds.length) return null;
         return (
-          <section key={pillar} className="space-y-3" aria-labelledby={`pillar-${pillar}`}>
-            <h2 id={`pillar-${pillar}`} className="border-b pb-2 text-xl font-bold">
-              {t(`pillar.${pillar}`)}
+          <section key={world.id} className="space-y-3" aria-labelledby={`world-${world.id}`}>
+            <h2 id={`world-${world.id}`} className="border-b pb-2 text-xl font-bold">
+              {t(`world.${world.id}`)}
             </h2>
-            <ul className="divide-y divide-border">
+            {group.length ? null : <p className="text-sm text-muted-foreground">{t("worldComing")}</p>}
+            <ul className="divide-y divide-border empty:hidden">
               {group.map((rule) => {
                 const topic = topics.find((item) => item.id === rule.topicId);
                 const passed = isTopicCompleted(rule, progress);

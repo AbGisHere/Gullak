@@ -8,6 +8,10 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Changed
+
+- The learning map is grouped by the eight worlds (Candy Economy to Finance Tycoon) instead of the four pillars, using a new `topic-worlds.json` that places each of the 33 topics in one world as `docs/curriculum.md` maps them; a topic page names its world. Finance Tycoon shows that new lessons are on the way. Hindi and Telugu world names are unreviewed drafts.
+
 ## [0.2.6] - 2026-10-11
 
 ### Added

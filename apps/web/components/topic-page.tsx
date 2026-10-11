@@ -1,5 +1,6 @@
 "use client";
 
+import { topicWorlds } from "@gullak/content";
 import { gradeQuiz } from "@gullak/engine";
 import type { Topic, UnlockRule } from "@gullak/types";
 import { TopicLesson, type TopicLessonLabels } from "@gullak/ui/components/topic-lesson";
@@ -22,6 +23,7 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
   useEffect(() => setProfile(readProfile()), []);
   const gradeGroup = profile?.gradeGroup ?? "grade-8-10";
   const lesson = topicToLesson(topic, gradeGroup);
+  const world = topicWorlds.find((item) => item.topicIds.includes(rule.topicId));
   function submitQuiz() {
     if (!quiz || Object.keys(answers).length !== quiz.questions.length) return;
     const score = gradeQuiz(quiz, {
@@ -73,7 +75,9 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
         {t("backToLearn")}
       </Link>
       <header className="space-y-2">
-        <p className="text-sm font-semibold text-muted-foreground">{t(`pillar.${rule.pillar}`)}</p>
+        <p className="text-sm font-semibold text-muted-foreground">
+          {world ? t(`world.${world.id}`) : t(`pillar.${rule.pillar}`)}
+        </p>
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{topic.content.title}</h1>
         <p className="text-lg leading-7 text-muted-foreground">{topic.content.summary}</p>
       </header>

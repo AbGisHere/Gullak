@@ -80,6 +80,17 @@
     "continueLearning": "जारी रखें",
     "openTopic": "विषय खोलें",
     "topicContentComing": "पाठ की सामग्री तैयार की जा रही है।",
+    "world": {
+      "candy-economy": "कैंडी इकॉनमी",
+      "savings-quest": "बचत की खोज",
+      "bankopolis": "बैंकोपोलिस",
+      "market-mayhem": "बाज़ार की हलचल",
+      "grow-your-money": "पैसा बढ़ाओ",
+      "stock-street": "स्टॉक स्ट्रीट",
+      "life-simulator": "ज़िंदगी का सिम्युलेटर",
+      "finance-tycoon": "फ़ाइनेंस टाइकून"
+    },
+    "worldComing": "नए पाठ जल्द आ रहे हैं।",
     "pillar": {
       "plan-and-budget": "योजना और बजट",
       "save-and-manage": "बचत और प्रबंधन",
