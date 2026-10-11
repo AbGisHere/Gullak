@@ -1,7 +1,7 @@
 "use client";
 
 import type { LearnerProfile } from "@gullak/types";
-import { ArrowRight, BookOpen, CalendarDays, Compass } from "lucide-react";
+import { ArrowRight, Award, BookOpen, CalendarDays, Compass, PiggyBank } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { TopicSummary } from "@/components/learn-map";
 import { RecommendationCard } from "@/components/recommendation-card";
@@ -11,7 +11,7 @@ interface HomeTabProps {
   profile: LearnerProfile;
   topics: TopicSummary[];
   daysPractised: number;
-  onNavigateToTab: (tab: "home" | "twin" | "learn" | "portfolio" | "missions") => void;
+  onNavigateToTab: (tab: "home" | "twin" | "learn" | "gullu" | "rewards") => void;
   onLaunchActivity: (activityType: "lesson" | "spot-and-sort" | "simulation" | "rewind") => void;
 }
 
@@ -53,6 +53,18 @@ export function HomeTab({
               description: t("storyDescription"),
               icon: Compass,
               action: () => onNavigateToTab("twin"),
+            },
+            {
+              title: t("gullak"),
+              description: t("gullakDescription"),
+              icon: PiggyBank,
+              action: () => onNavigateToTab("gullu"),
+            },
+            {
+              title: t("rewards"),
+              description: t("rewardsDescription"),
+              icon: Award,
+              action: () => onNavigateToTab("rewards"),
             },
             {
               title: t("drill"),

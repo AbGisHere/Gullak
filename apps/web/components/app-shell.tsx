@@ -2,29 +2,18 @@
 
 import { locales } from "@gullak/content";
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
-import { cn } from "@gullak/ui/lib/utils";
-import {
-  Award,
-  BookOpen,
-  CalendarDays,
-  CircleHelp,
-  CircleUserRound,
-  Compass,
-  Layers3,
-  RotateCcw,
-  Settings,
-} from "lucide-react";
+import { CalendarDays, CircleHelp, RotateCcw, Settings } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { type ReactNode, useState } from "react";
 import { LOCALE_COOKIE } from "@/i18n/locale";
 import { Gullu } from "./game/gullu";
+import { PrimaryNav } from "./primary-nav";
 
 export type NavTab = "world" | "learn" | "gullu" | "rewards" | "profile" | "home" | "twin" | "portfolio" | "missions";
 
 interface AppShellProps {
-  currentTab: NavTab;
   onSelectTab: (tab: NavTab) => void;
   gradeGroup: string;
   /** Distinct days practised, accumulated without resets (0 for a new learner). */
@@ -38,7 +27,6 @@ interface AppShellProps {
 }
 
 export function AppShell({
-  currentTab,
   onSelectTab,
   gradeGroup,
   daysPractised,
@@ -48,7 +36,6 @@ export function AppShell({
   onResetOnboarding,
   children,
 }: AppShellProps) {
-  const tNav = useTranslations("nav");
   const tProgress = useTranslations("progressData");
   const tLearner = useTranslations("learner");
   const tGrade = useTranslations("onboarding.grade");
@@ -64,25 +51,6 @@ export function AppShell({
   }
 
   const gradeDisplay = tGrade(gradeGroup);
-
-  // The 5 primary bottom/sidebar destinations. Labels match the routed learner shell; "Learn" opens
-  // the one learning map at /learn instead of a second, parallel topic list.
-  const navItems: { id: NavTab; label: string; icon: typeof Compass; href?: string }[] = [
-    { id: "home", label: tNav("home"), icon: Compass },
-    { id: "learn", label: tLearner("learn"), icon: BookOpen, href: "/learn" },
-    { id: "gullu", label: tLearner("portfolio"), icon: Layers3 },
-    { id: "rewards", label: tNav("rewards"), icon: Award },
-    { id: "profile", label: tLearner("me"), icon: CircleUserRound },
-  ];
-
-  // Helper to determine if an item is active
-  function isTabActive(itemId: NavTab): boolean {
-    if (currentTab === itemId) return true;
-    if (itemId === "home" && (currentTab === "world" || currentTab === "twin")) return true;
-    if (itemId === "gullu" && currentTab === "portfolio") return true;
-    if (itemId === "rewards" && currentTab === "missions") return true;
-    return false;
-  }
 
   return (
     <div className="flex min-h-svh w-full flex-col bg-background text-foreground">
@@ -205,95 +173,16 @@ export function AppShell({
 
       {/* Main Container with Desktop Sidebar Layout */}
       <div className="mx-auto flex w-full max-w-7xl flex-1 items-start">
-        {/* Desktop Sidebar (hidden on phone, visible md+) */}
-        <aside className="sticky top-16 hidden md:flex w-60 shrink-0 flex-col gap-6 border-r px-4 py-6 self-stretch">
-          <nav className="flex flex-col gap-2" aria-label={tLearner("navigation")}>
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = isTabActive(item.id);
-              return (
-                <NavEntry
-                  key={item.id}
-                  href={item.href}
-                  onSelect={() => onSelectTab(item.id)}
-                  active={isActive}
-                  className={cn(
-                    "flex min-h-11 items-center gap-3 rounded-lg px-3 text-left text-sm font-semibold transition-colors",
-                    isActive
-                      ? "bg-foreground text-background"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                  )}
-                >
-                  <Icon className="size-5 shrink-0" aria-hidden="true" />
-                  <span>{item.label}</span>
-                </NavEntry>
-              );
-            })}
-          </nav>
+        {/* Desktop sidebar from lg, the same breakpoint and destinations as the routed learner shell */}
+        <aside className="sticky top-16 hidden lg:flex w-60 shrink-0 flex-col gap-6 border-r px-4 py-6 self-stretch">
+          <PrimaryNav variant="sidebar" onHome={() => onSelectTab("home")} />
         </aside>
 
         {/* Primary Page Content */}
-        <main className="flex-1 min-w-0 pb-20 md:pb-10">{children}</main>
+        <main className="flex-1 min-w-0 pb-24 lg:pb-10">{children}</main>
       </div>
 
-      {/* Mobile Bottom Navigation Bar (Phone only, fixed at bottom, thumb-friendly 48px+ targets) */}
-      <nav
-        aria-label={tLearner("navigation")}
-        className="fixed bottom-0 left-0 right-0 z-30 flex md:hidden items-center justify-around border-t bg-background px-1 pt-1 pb-[env(safe-area-inset-bottom)]"
-      >
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = isTabActive(item.id);
-          return (
-            <NavEntry
-              key={item.id}
-              href={item.href}
-              onSelect={() => onSelectTab(item.id)}
-              active={isActive}
-              className={cn(
-                "flex flex-1 min-h-14 min-w-[48px] flex-col items-center justify-center gap-1 text-xs font-semibold transition-colors",
-                isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
-              )}
-            >
-              <Icon className="size-5" aria-hidden="true" />
-              <span className={cn("leading-none", isActive && "font-bold")}>{item.label}</span>
-            </NavEntry>
-          );
-        })}
-      </nav>
+      <PrimaryNav variant="bar" onHome={() => onSelectTab("home")} />
     </div>
-  );
-}
-
-function NavEntry({
-  href,
-  onSelect,
-  active,
-  className,
-  children,
-}: {
-  href?: string;
-  onSelect: () => void;
-  active: boolean;
-  className: string;
-  children: ReactNode;
-}) {
-  if (href) {
-    return (
-      <Link href={href} aria-current={active ? "page" : undefined} data-active={active} className={className}>
-        {children}
-      </Link>
-    );
-  }
-  return (
-    <button
-      type="button"
-      onClick={onSelect}
-      aria-current={active ? "page" : undefined}
-      data-active={active}
-      className={className}
-    >
-      {children}
-    </button>
   );
 }

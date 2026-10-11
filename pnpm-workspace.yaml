@@ -19,6 +19,7 @@ catalog:
   "@types/node": 24.19.2
   "@types/react": 19.3.0
   "@types/react-dom": 19.3.0
+  "@vercel/analytics": 2.0.1
   "@vitejs/plugin-react": 6.1.2
   ai: 7.0.137
   class-variance-authority: 0.7.1

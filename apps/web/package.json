@@ -22,6 +22,7 @@
     "@supabase/ssr": "catalog:",
     "@supabase/supabase-js": "catalog:",
     "@tanstack/react-query": "catalog:",
+    "@vercel/analytics": "catalog:",
     "katex": "catalog:",
     "lightweight-charts": "catalog:",
     "lucide-react": "catalog:",

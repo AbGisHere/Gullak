@@ -43,7 +43,7 @@ test("onboarding to passed quiz opens the next topic", async ({ page }, testInfo
   await page.getByRole("link", { name: "Portfolio" }).click();
   await expect(page.getByRole("heading", { name: "Your paper portfolio" })).toBeVisible();
   await auditScreen("portfolio");
-  await page.getByRole("link", { name: "Me" }).click();
-  await expect(page.getByRole("heading", { name: "About this device" })).toBeVisible();
+  await page.getByRole("link", { name: "Me", exact: true }).first().click();
+  await expect(page.getByRole("heading", { name: "Learner profile" })).toBeVisible();
   await auditScreen("me");
 });

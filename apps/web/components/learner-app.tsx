@@ -104,6 +104,12 @@ export function LearnerApp({ topics }: { topics: TopicSummary[] }) {
     }
   }
 
+  // Tabs share one scroll container, so start each new tab at the top instead of mid-page.
+  function selectTab(tab: NavTab) {
+    setCurrentTab(tab);
+    window.scrollTo({ top: 0 });
+  }
+
   function handleActivitySuccess() {
     if (activeActivity) recordActivity(`${activeActivity}:${activeTopicId ?? "default"}`);
   }
@@ -133,13 +139,12 @@ export function LearnerApp({ topics }: { topics: TopicSummary[] }) {
   return (
     <>
       <AppShell
-        currentTab={currentTab}
-        onSelectTab={setCurrentTab}
+        onSelectTab={selectTab}
         gradeGroup={profile.gradeGroup}
         daysPractised={progress.activeDays}
         xp={progress.xp}
         level={progress.level}
-        onOpenSettings={() => setCurrentTab("profile")}
+        onOpenSettings={() => router.push("/me")}
         onResetOnboarding={handleResetOnboarding}
       >
         {currentTab === "home" && (
@@ -147,7 +152,7 @@ export function LearnerApp({ topics }: { topics: TopicSummary[] }) {
             profile={profile}
             topics={topics}
             daysPractised={progress.activeDays}
-            onNavigateToTab={(tab) => (tab === "learn" ? router.push("/learn") : setCurrentTab(tab))}
+            onNavigateToTab={(tab) => (tab === "learn" ? router.push("/learn") : selectTab(tab))}
             onLaunchActivity={setActiveActivity}
             onLaunchShopping={() => setIsShoppingMissionOpen(true)}
           />

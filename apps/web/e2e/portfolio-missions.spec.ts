@@ -17,10 +17,20 @@ async function openLearner(page: import("@playwright/test").Page, gradeGroup = "
   await page.goto("/");
 }
 
+// The savings jar lives on Home's explore list; the Portfolio tab opens the paper portfolio at /portfolio.
+async function openJar(page: import("@playwright/test").Page, title = "Your living Gullak") {
+  await page.getByRole("button", { name: new RegExp(`^${title}`) }).click();
+}
+
+// Rewards also opens from Home's explore list; the bottom bar keeps one model on every screen.
+async function openRewards(page: import("@playwright/test").Page, title = "Rewards and quests") {
+  await page.getByRole("button", { name: new RegExp(`^${title}`) }).click();
+}
+
 test("savings respond to keyboard, repeated deposits, goals, undo and reset", async ({ page }) => {
   // Class 6–7 with some experience starts with ₹3,000 (starting-capital.json), the amount onboarding shows.
   await openLearner(page, "grade-6-7");
-  await page.getByRole("button", { name: "Portfolio", exact: true }).click();
+  await openJar(page);
   const save = page.getByRole("button", { name: "Save ₹100", exact: true });
   await save.focus();
   await page.keyboard.press("Enter");
@@ -52,7 +62,7 @@ test("savings respond to keyboard, repeated deposits, goals, undo and reset", as
 
 test("older learners can explore losses without changing jar balances", async ({ page }) => {
   await openLearner(page);
-  await page.getByRole("button", { name: "Portfolio", exact: true }).click();
+  await openJar(page);
   await page.getByRole("button", { name: "50 in each business" }).click();
   await expect(page.getByText("After this event: 90 fictional tokens (started with 100).")).toBeVisible();
   await page.getByLabel("Choose a hypothetical event").selectOption("bothDown");
@@ -62,7 +72,7 @@ test("older learners can explore losses without changing jar balances", async ({
 
 test("quest retries, locks, one-time rewards, focus recovery and reset", async ({ page }) => {
   await openLearner(page);
-  await page.getByRole("button", { name: "Rewards", exact: true }).click();
+  await openRewards(page);
   const sort = page
     .getByRole("article")
     .filter({ has: page.getByRole("heading", { name: "Needs or wants?", exact: true }) });
@@ -106,18 +116,18 @@ test("quest retries, locks, one-time rewards, focus recovery and reset", async (
   await expect(budget.getByRole("button")).toBeDisabled();
 });
 
-for (const [locale, portfolioTitle, missionsTitle, portfolioNav, rewardsNav] of [
-  ["hi", "गुल्लू का बचत खेल", "गुल्लू का खोज बोर्ड", "पोर्टफोलियो", "पुरस्कार"],
-  ["te", "గుల్లు పొదుపు ఆట", "గుల్లు అన్వేషణ బోర్డు", "పోర్ట్‌ఫోలియో", "రివార్డులు"],
+for (const [locale, portfolioTitle, missionsTitle, jarEntry, rewardsNav] of [
+  ["hi", "गुल्लू का बचत खेल", "गुल्लू का खोज बोर्ड", "आपका जीवित गुल्लक", "पुरस्कार और खोज"],
+  ["te", "గుల్లు పొదుపు ఆట", "గుల్లు అన్వేషణ బోర్డు", "మీ సజీవ గుల్లక్", "రివార్డులు, అన్వేషణలు"],
 ]) {
   test(`module translations render in ${locale}`, async ({ page }) => {
     await page.context().addCookies([{ name: "GULLAK_LOCALE", value: locale ?? "en", url: "http://localhost:3000" }]);
     await openLearner(page);
-    // Learn is now a link; select translated destinations rather than button positions.
-    const nav = page.locator("nav:visible");
-    await nav.getByRole("button", { name: portfolioNav, exact: true }).click();
+    await openJar(page, jarEntry);
     await expect(page.getByRole("heading", { name: portfolioTitle })).toBeVisible();
-    await nav.getByRole("button", { name: rewardsNav, exact: true }).click();
+    // Home is the first destination in every locale; it returns from a Home tab to the explore list.
+    await page.getByRole("navigation").filter({ visible: true }).first().getByRole("link").first().click();
+    await openRewards(page, rewardsNav);
     await expect(page.getByRole("heading", { name: missionsTitle })).toBeVisible();
   });
 }
@@ -125,7 +135,7 @@ for (const [locale, portfolioTitle, missionsTitle, portfolioNav, rewardsNav] of 
 test("all quests teach their reasoning and unlock an earned cosmetic", async ({ page }) => {
   await openLearner(page);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.getByRole("button", { name: "Rewards", exact: true }).click();
+  await openRewards(page);
   for (const [title, answers] of [
     ["Needs or wants?", ["Need", "Want"]],
     ["Spot the payment trap", ["Decline and verify with a trusted adult"]],
@@ -152,11 +162,31 @@ test("all quests teach their reasoning and unlock an earned cosmetic", async ({ 
 test("younger learner gets touch-friendly saving without the older portfolio scenario", async ({ page, isMobile }) => {
   await openLearner(page, "grade-6-7");
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.getByRole("button", { name: "Portfolio", exact: true }).click();
+  await openJar(page);
   await expect(page.getByRole("heading", { name: "One basket or several?" })).toHaveCount(0);
   const deposit = page.getByRole("button", { name: "Save ₹50", exact: true });
   if (isMobile) await deposit.tap();
   else await deposit.click();
   await expect(page.getByTestId("jar-balance")).toHaveText("In the jar: ₹50");
   await expect(page.getByTestId("goal-progress")).toContainText("25% saved");
+});
+
+test("one navigation model: same destinations everywhere and each Home tab starts at the top", async ({ page }) => {
+  await openLearner(page);
+  const mainNav = () => page.getByRole("navigation", { name: "Main navigation" }).filter({ visible: true });
+  const nav = mainNav();
+  const destinations = ["Home", "Learn", "Practice", "Portfolio", "Me"];
+  await expect(nav.getByRole("link")).toHaveText(destinations);
+  await page.mouse.wheel(0, 3000);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  await openRewards(page);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await nav.getByRole("link", { name: "Portfolio", exact: true }).click();
+  await expect(page).toHaveURL(/\/portfolio$/);
+  await expect(page.getByRole("heading", { name: "Your paper portfolio" })).toBeVisible();
+  await expect(mainNav().getByRole("link")).toHaveText(destinations);
+  await mainNav().getByRole("link", { name: "Me", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Learner profile" })).toBeVisible();
+  await mainNav().getByRole("link", { name: "Home", exact: true }).click();
+  await expect(page).toHaveURL(/\/$/);
 });

@@ -656,6 +656,10 @@
     "storyDescription": "Explore a family decision using virtual money.",
     "drill": "Try a sorting round",
     "drillDescription": "Practise spotting needs and wants, at your own pace.",
+    "gullak": "Your living Gullak",
+    "gullakDescription": "Fill Gullu's savings jar with play money and watch it grow with your habits.",
+    "rewards": "Rewards and quests",
+    "rewardsDescription": "Solve Gullu's quests and earn badges for understanding, never for returns.",
     "reason": {
       "foundation-topic": "This is a starting lesson for your class group. No earlier quiz is needed.",
       "prerequisite-readiness": "You have passed the required quizzes. Your understanding of those concepts makes this a useful next step.",

@@ -2,6 +2,7 @@ import "@gullak/ui/globals.css";
 import "./game.css";
 import { cn } from "@gullak/ui/lib/utils";
 import { SerwistProvider } from "@serwist/turbopack/react";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { Baloo_2, Baloo_Tammudu_2, Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
@@ -66,6 +67,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <Providers>{children}</Providers>
           </NextIntlClientProvider>
         </SerwistProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -2,28 +2,18 @@
 
 import { locales } from "@gullak/content";
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
-import { BookOpen, CircleHelp, CircleUserRound, Compass, Layers3, Sparkles } from "lucide-react";
+import { CircleHelp } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Gullu } from "@/components/game/gullu";
 import { readProfile } from "@/components/onboarding";
+import { PrimaryNav } from "@/components/primary-nav";
 import { LOCALE_COOKIE } from "@/i18n/locale";
-
-// Same destinations and labels as the home app shell: "World" returns to Gullu's world map at "/".
-const nav = [
-  { href: "/", key: "world", icon: Compass },
-  { href: "/learn", key: "learn", icon: BookOpen },
-  { href: "/practice", key: "practice", icon: Sparkles },
-  { href: "/portfolio", key: "portfolio", icon: Layers3 },
-  { href: "/me", key: "me", icon: CircleUserRound },
-] as const;
 
 export function LearnerShell({ children }: { children: React.ReactNode }) {
   const t = useTranslations("learner");
-  const tNav = useTranslations("nav");
-  const label = (key: (typeof nav)[number]["key"]) => (key === "world" ? tNav("world") : t(key));
   const tHelp = useTranslations("help");
   const locale = useLocale();
   const pathname = usePathname();
@@ -37,20 +27,6 @@ export function LearnerShell({ children }: { children: React.ReactNode }) {
     document.cookie = `${LOCALE_COOKIE}=${nextLocale}; path=/; max-age=31536000; samesite=lax`;
     router.refresh();
   }
-  const links = nav.map(({ href, key, icon: Icon }) => {
-    const active = pathname === href || (href === "/learn" && pathname.startsWith("/learn/"));
-    return (
-      <Link
-        key={href}
-        href={href}
-        aria-current={active ? "page" : undefined}
-        className={`flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold transition-colors ${active ? "bg-foreground text-background" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
-      >
-        <Icon className="size-5 shrink-0" aria-hidden="true" />
-        <span>{label(key)}</span>
-      </Link>
-    );
-  });
   return (
     <div className="min-h-svh bg-background text-foreground">
       <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b bg-background px-4 md:px-6 lg:pl-64">
@@ -58,7 +34,7 @@ export function LearnerShell({ children }: { children: React.ReactNode }) {
           <Gullu state="wave" size={32} />
           Gullak
         </Link>
-        <div className="flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2">
           <Link
             href="/help"
             aria-label={tHelp("link")}
@@ -90,32 +66,12 @@ export function LearnerShell({ children }: { children: React.ReactNode }) {
           <Gullu state="wave" size={36} />
           Gullak
         </Link>
-        <nav aria-label={t("navigation")} className="space-y-2">
-          {links}
-        </nav>
+        <PrimaryNav variant="sidebar" />
       </aside>
       <main className="mx-auto min-h-[calc(100svh-4rem)] w-full max-w-6xl px-4 pb-24 pt-6 sm:px-6 sm:pt-8 lg:ml-60 lg:w-[calc(100%-15rem)] lg:px-10 lg:pb-10">
         {profileReady ? children : null}
       </main>
-      <nav
-        aria-label={t("navigation")}
-        className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t bg-background px-1 pb-[env(safe-area-inset-bottom)] pt-1 lg:hidden"
-      >
-        {nav.map(({ href, key, icon: Icon }) => {
-          const active = pathname === href || (href === "/learn" && pathname.startsWith("/learn/"));
-          return (
-            <Link
-              key={href}
-              href={href}
-              aria-current={active ? "page" : undefined}
-              className={`flex min-h-14 flex-col items-center justify-center gap-1 text-xs font-semibold ${active ? "text-foreground" : "text-muted-foreground"}`}
-            >
-              <Icon className="size-5" aria-hidden="true" />
-              <span>{label(key)}</span>
-            </Link>
-          );
-        })}
-      </nav>
+      <PrimaryNav variant="bar" />
     </div>
   );
 }
