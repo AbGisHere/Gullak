@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Strict synthetic-only ML fixture input/output boundaries with explicit transition parameters and graph fields, disabled status and identity-free frontend results.
+
 ## [0.2.22] - 2026-10-11
 
 ### Changed
