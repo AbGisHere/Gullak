@@ -9,6 +9,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Added
+- Explicit AI SDK structured-output adapter for the existing lesson-draft runner, with strict draft-schema parsing and zero automatic retries; callers choose a model, and no live generation, publication or storage is activated.
 - Strict nine-field `QuizAnswerEvent` contract for version-pinned quiz evidence, preserving false answers and explicit timestamp offsets while rejecting missing/extra fields and malformed IDs, attempts or hashes; no persistence or mastery changes.
 
 ### Fixed
