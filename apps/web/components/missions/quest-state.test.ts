@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { initialQuests, QUESTS, questReducer, questUnlocked } from "./quest-state";
+import { initialQuests, QUESTS, questHasProgress, questReducer, questUnlocked } from "./quest-state";
 
 describe("local quest progression", () => {
   it("allows wrong answers to retry without XP loss or advancing", () => {
@@ -47,5 +47,15 @@ describe("local quest progression", () => {
     const state = initialQuests();
     expect(questReducer(state, { type: "answer", questId: "sort", stepId: "toy", choice: "want" })).toBe(state);
     expect(questReducer(state, { type: "answer", questId: "sort", stepId: "water", choice: "made-up" })).toBe(state);
+  });
+
+  it("reports progress only after an answer or the family check", () => {
+    const state = initialQuests();
+    expect(questHasProgress(state)).toBe(false);
+    expect(
+      questHasProgress(questReducer(state, { type: "answer", questId: "sort", stepId: "water", choice: "need" })),
+    ).toBe(true);
+    expect(questHasProgress(questReducer(state, { type: "family" }))).toBe(true);
+    expect(questHasProgress(questReducer(questReducer(state, { type: "family" }), { type: "reset" }))).toBe(false);
   });
 });

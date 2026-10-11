@@ -48,6 +48,10 @@ export type QuestAction =
 export function initialQuests(): QuestState {
   return { progress: { sort: 0, scam: 0, budget: 0, compare: 0 }, xp: 0, familyDone: false, feedback: null };
 }
+/** True once the learner has done anything a reset would throw away. */
+export function questHasProgress(state: QuestState): boolean {
+  return state.familyDone || state.xp > 0 || Object.values(state.progress).some((step) => step > 0);
+}
 export function questUnlocked(state: QuestState, quest: QuestDefinition) {
   if (!quest.prerequisite) return true;
   const previous = QUESTS.find((item) => item.id === quest.prerequisite);

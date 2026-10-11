@@ -3,11 +3,13 @@
 import { startingCapital } from "@gullak/content";
 import { startingCash } from "@gullak/engine";
 import { type GradeGroup, LearnerProfile } from "@gullak/types";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { clearLearnerState, recordActivity } from "@/lib/learner-state";
+import { clearLearnerData, recordActivity } from "@/lib/learner-state";
 import { useLearnerProgress } from "@/lib/use-progress-summary";
 import { ActivityModal, type ActivityType } from "./activity-modal";
 import { AppShell, type NavTab } from "./app-shell";
+import { ConfirmDialog } from "./confirm-dialog";
 import { ShoppingMission } from "./game/shopping/shopping-mission";
 import { WorldMap } from "./game/world-map";
 import { CURRICULUM_WORLDS } from "./game/worlds";
@@ -21,6 +23,7 @@ import { RewardsTab } from "./tabs/rewards-tab";
 const ONBOARDING_STORAGE_KEY = "gullak-onboarding-profile";
 
 export function LearnerApp() {
+  const tSafety = useTranslations("safety");
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentTab, setCurrentTab] = useState<NavTab>("world");
@@ -30,6 +33,7 @@ export function LearnerApp() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   // Every tab reads this one derived summary; until onboarding finishes it describes no evidence.
   const progress = useLearnerProgress(profile?.gradeGroup ?? "grade-6-7");
+  const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -56,14 +60,15 @@ export function LearnerApp() {
     }
   }
 
+  // Every "switch learner / reset" entry point asks first: on a shared family phone,
+  // one stray tap would otherwise wipe someone else's profile and progress for good.
   function handleResetOnboarding() {
-    try {
-      window.localStorage.removeItem(ONBOARDING_STORAGE_KEY);
-    } catch {
-      // Ignore
-    }
-    // A shared phone's next learner must not inherit this learner's progress.
-    clearLearnerState();
+    setIsResetConfirmOpen(true);
+  }
+
+  function confirmResetOnboarding() {
+    clearLearnerData();
+    setIsResetConfirmOpen(false);
     setProfile(null);
     setCurrentTab("home");
   }
@@ -197,6 +202,22 @@ export function LearnerApp() {
           onUpdateGrade={handleUpdateGrade}
           onResetOnboarding={handleResetOnboarding}
           onClose={() => setIsSettingsOpen(false)}
+        />
+      )}
+
+      {isResetConfirmOpen && (
+        <ConfirmDialog
+          title={
+            profile.displayName
+              ? tSafety("switchLearner.titleNamed", { name: profile.displayName })
+              : tSafety("switchLearner.title")
+          }
+          description={tSafety("switchLearner.description")}
+          consequences={[tSafety("switchLearner.lossProfile"), tSafety("switchLearner.lossProgress")]}
+          confirmLabel={tSafety("switchLearner.confirm")}
+          cancelLabel={tSafety("switchLearner.cancel")}
+          onConfirm={confirmResetOnboarding}
+          onCancel={() => setIsResetConfirmOpen(false)}
         />
       )}
     </>

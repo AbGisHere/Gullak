@@ -165,6 +165,8 @@ export function AppShell({
                     <Settings className="size-4" aria-hidden="true" />
                     <span>{t("changeClass")}</span>
                   </button>
+                  {/* Destructive action sits apart from routine settings and always asks first. */}
+                  <div aria-hidden="true" className="my-1.5 border-t border-border/60" />
                   <button
                     type="button"
                     onClick={() => {

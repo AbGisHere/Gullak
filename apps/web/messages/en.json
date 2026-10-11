@@ -100,7 +100,11 @@
       "understand-investing": "Understand investing",
       "stay-safe": "Stay financially safe"
     },
-    "status": { "locked": "Locked", "open": "Open", "passed": "Passed" },
+    "status": {
+      "locked": "Locked",
+      "open": "Open",
+      "passed": "Passed"
+    },
     "backToLearn": "Back to Learn",
     "lessonSection": "Lesson",
     "quizTitle": "Quick check",
@@ -459,6 +463,54 @@
       "sharedTitle": "Shared phone: switch learner",
       "sharedDescription": "Built for families sharing one phone. Reset this profile so another student can set up theirs.",
       "reset": "Reset profile and replay onboarding"
+    }
+  },
+  "safety": {
+    "switchLearner": {
+      "title": "Switch to a new learner?",
+      "titleNamed": "Remove {name}'s profile?",
+      "description": "Gullak keeps progress only on this phone, so this can't be undone. Do it only when someone else is going to learn here.",
+      "lossProfile": "Nickname, class and savings goal",
+      "lossProgress": "Lessons passed, quiz scores and practice money",
+      "confirm": "Remove and start over",
+      "cancel": "Keep this profile"
+    },
+    "leaveActivity": {
+      "title": "Leave this activity?",
+      "description": "Your choices here aren't saved yet. You can start it again any time from the same place.",
+      "confirm": "Leave activity",
+      "cancel": "Keep playing"
+    },
+    "resetQuests": {
+      "title": "Start every mission again?",
+      "description": "This clears the missions you've finished on this board, including the family check.",
+      "confirm": "Clear missions",
+      "cancel": "Keep my progress"
+    },
+    "onboarding": {
+      "gradeRequired": "Choose your class to continue.",
+      "amountZero": "Enter an amount more than ₹0.",
+      "amountTooLarge": "Keep the goal at {max} or less.",
+      "dateInvalid": "Pick a date from the calendar.",
+      "dateInPast": "Pick today or a date in the future.",
+      "notCreated": "We couldn't set up your profile. Check your answers, then tap Finish again."
+    },
+    "quiz": {
+      "answerAll": "Answer {remaining, plural, one {# more question} other {# more questions}} to check your answers.",
+      "saveFailed": "Your score is ready, but this phone didn't let Gullak save it. Free up some storage or leave private browsing, then try again. Your answers are still here.",
+      "retrySave": "Try saving again"
+    },
+    "error": {
+      "title": "This screen tripped up",
+      "description": "Something went wrong while showing this page. Progress saved on this phone is safe.",
+      "offline": "You're offline right now. Lessons you've opened before still work.",
+      "retry": "Try again",
+      "home": "Back to Gullak"
+    },
+    "notFound": {
+      "title": "We couldn't find that page",
+      "description": "The link may be old or typed a little wrong. Your progress is safe.",
+      "home": "Back to Gullak"
     }
   }
 }

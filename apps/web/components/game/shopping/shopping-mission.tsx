@@ -4,7 +4,9 @@ import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
 import { cn } from "@gullak/ui/lib/utils";
 import { Bus, RotateCcw, ShoppingBag, Sparkles, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { ConfirmDialog } from "../../confirm-dialog";
 import { Gullu, type GulluState } from "../gullu";
 import { SpeechBubble } from "../speech-bubble";
 import { APPLY_QUESTIONS, type BasketItem, KIRANA_ITEMS, type ShoppingItem } from "./types";
@@ -20,7 +22,9 @@ const INITIAL_BUDGET_PAISE = 5000; // ₹50
 const BUS_FARE_PAISE = 1000; // ₹10
 
 export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionProps) {
+  const tSafety = useTranslations("safety");
   const [step, setStep] = useState<MissionStep>("intro");
+  const [confirmingExit, setConfirmingExit] = useState(false);
   const [basket, setBasket] = useState<BasketItem[]>([]);
   const [gulluState, setGulluState] = useState<GulluState>("wave");
   const [gulluMessage, setGulluMessage] = useState(
@@ -100,7 +104,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
         <div className="flex items-center gap-2 sm:gap-4">
           <button
             type="button"
-            onClick={onClose}
+            onClick={() => (step === "intro" || step === "complete" ? onClose() : setConfirmingExit(true))}
             aria-label="Exit shopping mission"
             className="flex size-9 sm:size-10 items-center justify-center rounded-xl border border-border bg-muted hover:bg-brand-lime transition-colors"
           >
@@ -671,6 +675,19 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
           </div>
         )}
       </main>
+      {confirmingExit ? (
+        <ConfirmDialog
+          title={tSafety("leaveActivity.title")}
+          description={tSafety("leaveActivity.description")}
+          confirmLabel={tSafety("leaveActivity.confirm")}
+          cancelLabel={tSafety("leaveActivity.cancel")}
+          onConfirm={() => {
+            setConfirmingExit(false);
+            onClose();
+          }}
+          onCancel={() => setConfirmingExit(false)}
+        />
+      ) : null}
     </div>
   );
 }

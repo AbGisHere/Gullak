@@ -4,34 +4,46 @@ import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { Award, CheckCircle2, Home, Lock, ShieldCheck, ShoppingBag, Wallet } from "lucide-react";
 import { NextIntlClientProvider, useLocale, useTranslations } from "next-intl";
 import { useId, useLayoutEffect, useReducer, useRef, useState } from "react";
+import { ConfirmDialog } from "../confirm-dialog";
 import en from "./messages/en.json";
 import hi from "./messages/hi.json";
 import te from "./messages/te.json";
-import { initialQuests, QUESTS, type QuestId, questReducer, questUnlocked } from "./quest-state";
+import { initialQuests, QUESTS, type QuestId, questHasProgress, questReducer, questUnlocked } from "./quest-state";
 
 const messages = { en, hi, te };
 const icons = { sort: ShoppingBag, scam: ShieldCheck, budget: Wallet, compare: ShoppingBag };
 const buttonClass =
   "min-h-11 rounded-xl border border-border px-4 py-3 text-base font-semibold hover:bg-muted active:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-50";
 
+type ResetCopy = { title: string; description: string; confirm: string; cancel: string };
+
 export function QuestBoard() {
   const locale = useLocale();
+  // Read app-level strings here: the nested provider below only carries this game's messages.
+  const tSafety = useTranslations("safety");
+  const resetCopy: ResetCopy = {
+    title: tSafety("resetQuests.title"),
+    description: tSafety("resetQuests.description"),
+    confirm: tSafety("resetQuests.confirm"),
+    cancel: tSafety("resetQuests.cancel"),
+  };
   return (
     <NextIntlClientProvider
       locale={locale}
       messages={{ missionsGame: messages[locale as keyof typeof messages] ?? en }}
     >
-      <Board />
+      <Board resetCopy={resetCopy} />
     </NextIntlClientProvider>
   );
 }
 
-function Board() {
+function Board({ resetCopy }: { resetCopy: ResetCopy }) {
   const t = useTranslations("missionsGame");
   const [state, dispatch] = useReducer(questReducer, undefined, initialQuests);
   const [activeId, setActiveId] = useState<QuestId | null>(null);
   const [awaitingContinue, setAwaitingContinue] = useState(false);
   const [resetNotice, setResetNotice] = useState(false);
+  const [confirmingReset, setConfirmingReset] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const feedbackRef = useRef<HTMLDivElement>(null);
@@ -235,16 +247,27 @@ function Board() {
       <button
         type="button"
         className={buttonClass}
-        onClick={() => {
-          dispatch({ type: "reset" });
-          setActiveId(null);
-          setAwaitingContinue(false);
-          setSelected(null);
-          setResetNotice(true);
-        }}
+        onClick={() => (questHasProgress(state) ? setConfirmingReset(true) : setResetNotice(true))}
       >
         {t("reset")}
       </button>
+      {confirmingReset ? (
+        <ConfirmDialog
+          title={resetCopy.title}
+          description={resetCopy.description}
+          confirmLabel={resetCopy.confirm}
+          cancelLabel={resetCopy.cancel}
+          onConfirm={() => {
+            setConfirmingReset(false);
+            dispatch({ type: "reset" });
+            setActiveId(null);
+            setAwaitingContinue(false);
+            setSelected(null);
+            setResetNotice(true);
+          }}
+          onCancel={() => setConfirmingReset(false)}
+        />
+      ) : null}
       <p role="status" aria-live="polite">
         {resetNotice ? t("resetDone") : ""}
       </p>

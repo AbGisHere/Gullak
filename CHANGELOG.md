@@ -8,6 +8,11 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Error prevention and recovery: switching learner, leaving an activity mid-way and resetting quests ask
+  first; onboarding explains why it cannot continue and validates the goal; quiz answers survive a reload and
+  a failed save can be retried; app and learner error pages and a not-found page with Gullu.
+
 ## [0.2.19] - 2026-10-11
 
 ### Fixed

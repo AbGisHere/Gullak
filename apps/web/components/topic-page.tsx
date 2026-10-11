@@ -8,6 +8,7 @@ import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { restoreQuizDraft } from "@/lib/form-safety";
 import { readLearnerState, readProfile, saveLearnerState } from "@/lib/learner-state";
 import { DEFAULT_MASTERY_PARAMS, initialMastery, updateMastery } from "@/lib/mastery";
 import { topicToLesson } from "@/lib/topic-adapter";
@@ -15,10 +16,33 @@ import { useLearnerState } from "@/lib/use-learner-state";
 
 export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
   const t = useTranslations("learner");
+  const tQuiz = useTranslations("safety.quiz");
   const state = useLearnerState();
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [result, setResult] = useState<{ score: number; passed: boolean } | null>(null);
+  const [saveFailed, setSaveFailed] = useState(false);
   const quiz = topic.content.variants.find((variant) => variant.format === "quiz");
+  const draftKey = `gullak-quiz-draft:${topic.meta.id}`;
+  // Keep unchecked answers for this tab session, so a reload or a stray tap on the nav loses nothing.
+  useEffect(() => {
+    if (!quiz) return;
+    try {
+      setAnswers(restoreQuizDraft(window.sessionStorage.getItem(draftKey), quiz.questions));
+    } catch {
+      // Storage blocked: start with an empty quiz.
+    }
+  }, [draftKey, quiz]);
+  function chooseAnswer(questionId: string, optionId: string) {
+    setAnswers((current) => {
+      const next = { ...current, [questionId]: optionId };
+      try {
+        window.sessionStorage.setItem(draftKey, JSON.stringify(next));
+      } catch {
+        // Storage blocked: answers still live in memory for this visit.
+      }
+      return next;
+    });
+  }
   const [profile, setProfile] = useState<ReturnType<typeof readProfile>>(null);
   useEffect(() => setProfile(readProfile()), []);
   const gradeGroup = profile?.gradeGroup ?? "grade-8-10";
@@ -41,14 +65,23 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
       );
     });
     const passed = score >= rule.passMark;
-    saveLearnerState({
+    const saved = saveLearnerState({
       ...next,
       mastery,
       passedTopics: passed ? [...new Set([...next.passedTopics, topic.meta.id])] : next.passedTopics,
       quizAttempts: [...next.quizAttempts, { topicId: topic.meta.id, score, at: new Date().toISOString() }],
     });
     setResult({ score, passed });
+    setSaveFailed(!saved);
+    if (saved) {
+      try {
+        window.sessionStorage.removeItem(draftKey);
+      } catch {
+        // Nothing to clear.
+      }
+    }
   }
+  const remaining = quiz ? quiz.questions.length - Object.keys(answers).length : 0;
   const lessonLabels: Partial<TopicLessonLabels> = {
     pillars: {
       "plan-budget": t("pillar.plan-and-budget"),
@@ -108,7 +141,7 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
                       name={question.id}
                       value={option.id}
                       checked={answers[question.id] === option.id}
-                      onChange={() => setAnswers((current) => ({ ...current, [question.id]: option.id }))}
+                      onChange={() => chooseAnswer(question.id, option.id)}
                       className="size-4 accent-foreground"
                     />
                     <span>{option.text}</span>
@@ -120,11 +153,29 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
           <button
             type="button"
             onClick={submitQuiz}
-            disabled={Object.keys(answers).length !== quiz.questions.length}
+            disabled={remaining > 0}
+            aria-describedby={remaining > 0 ? "quiz-remaining" : undefined}
             className="min-h-12 rounded-lg bg-foreground px-5 font-bold text-background disabled:cursor-not-allowed disabled:opacity-50"
           >
             {t("submitQuiz")}
           </button>
+          {remaining > 0 ? (
+            <p id="quiz-remaining" className="text-sm text-muted-foreground">
+              {tQuiz("answerAll", { remaining })}
+            </p>
+          ) : null}
+          {saveFailed ? (
+            <div role="alert" className="space-y-3 rounded-xl border-2 border-destructive p-4">
+              <p className="text-sm font-medium">{tQuiz("saveFailed")}</p>
+              <button
+                type="button"
+                onClick={submitQuiz}
+                className="min-h-11 rounded-lg border-2 border-foreground px-4 text-sm font-bold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              >
+                {tQuiz("retrySave")}
+              </button>
+            </div>
+          ) : null}
           {result ? (
             <div role="status" className="space-y-4 rounded-xl bg-muted p-4">
               <p className="flex items-center gap-2 font-bold">
@@ -154,7 +205,7 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
                   );
                 })}
               </div>
-              {result.passed ? (
+              {result.passed && !saveFailed ? (
                 <Link
                   href="/learn"
                   className="inline-flex min-h-11 items-center gap-2 font-semibold underline underline-offset-4"

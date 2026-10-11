@@ -3,6 +3,8 @@ import { z } from "zod";
 
 export { readProfile } from "@/components/onboarding";
 
+import { ONBOARDING_STORAGE_KEY } from "@/components/onboarding";
+
 import { initialMastery } from "./mastery";
 
 export const LEARNER_STATE_KEY = "gullak-learner-state";
@@ -37,12 +39,26 @@ export function readLearnerState(): LearnerState {
   }
 }
 
-export function saveLearnerState(state: LearnerState): void {
+/** Saves progress on this device. Returns false when storage is full or blocked, so callers can offer a retry. */
+export function saveLearnerState(state: LearnerState): boolean {
   try {
     window.localStorage.setItem(LEARNER_STATE_KEY, JSON.stringify(state));
     window.dispatchEvent(new Event("gullak-state-change"));
+    return true;
   } catch {
     // Keep the current session usable when storage is unavailable.
+    return false;
+  }
+}
+
+/** Removes this device's learner profile and progress (shared-phone "switch learner"). */
+export function clearLearnerData(): void {
+  try {
+    window.localStorage.removeItem(ONBOARDING_STORAGE_KEY);
+    window.localStorage.removeItem(LEARNER_STATE_KEY);
+    window.dispatchEvent(new Event("gullak-state-change"));
+  } catch {
+    // Storage blocked: nothing persisted to clear.
   }
 }
 

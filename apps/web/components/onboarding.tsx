@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { LOCALE_COOKIE } from "@/i18n/locale";
+import { goalDraftIssue, localIsoDate, MAX_GOAL_INR } from "@/lib/form-safety";
 import { Gullu } from "./game/gullu";
 
 export const ONBOARDING_STORAGE_KEY = "gullak-onboarding-profile";
@@ -79,6 +80,7 @@ function saveLocally(profile: LearnerProfile): boolean {
 export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) => void } = {}) {
   const t = useTranslations("onboarding");
   const tLook = useTranslations("look");
+  const tSafety = useTranslations("safety.onboarding");
   const locale = useLocale();
   const router = useRouter();
   const [step, setStep] = useState(0);
@@ -92,10 +94,22 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
   const [targetDate, setTargetDate] = useState("");
   const [savedLocally, setSavedLocally] = useState(true);
   const [createdProfile, setCreatedProfile] = useState<LearnerProfile | null>(null);
+  const [createFailed, setCreateFailed] = useState(false);
+  const [today] = useState(() => localIsoDate(new Date()));
 
   const goalStarted = Boolean(goalLabel || targetInr || targetDate);
-  const goalComplete = Boolean(goalLabel.trim() && Number(targetInr) > 0 && targetDate);
-  const canContinue = (step !== 1 || gradeGroup !== null) && (step !== 3 || !goalStarted || goalComplete);
+  // Validate the optional goal before Finish so a learner can never submit a profile that fails to save.
+  const goalIssue = goalDraftIssue({ label: goalLabel, amountInr: targetInr, date: targetDate }, today);
+  const goalComplete = goalStarted && goalIssue === null;
+  const canContinue = (step !== 1 || gradeGroup !== null) && (step !== 3 || goalIssue === null);
+  const blockedReason =
+    step === 1 && gradeGroup === null
+      ? tSafety("gradeRequired")
+      : step === 3 && goalIssue
+        ? goalIssue === "incomplete"
+          ? t("goalIncomplete")
+          : tSafety(goalIssue, { max: formatInr(inrToPaise(MAX_GOAL_INR)) })
+        : null;
   const cash = gradeGroup ? startingCash(startingCapital, gradeGroup, experience) : null;
 
   function toggleFormat(format: LearningFormat) {
@@ -137,7 +151,11 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
           }
         : {}),
     });
-    if (!parsed.success) return;
+    if (!parsed.success) {
+      setCreateFailed(true);
+      return;
+    }
+    setCreateFailed(false);
     setCreatedProfile(parsed.data);
     setSavedLocally(saveLocally(parsed.data));
     setStep(TOTAL_STEPS);
@@ -322,6 +340,8 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
                   value={targetInr}
                   onChange={(event) => setTargetInr(event.target.value.replace(/[^0-9]/g, ""))}
                   inputMode="numeric"
+                  maxLength={9}
+                  aria-invalid={goalIssue === "amountZero" || goalIssue === "amountTooLarge" ? true : undefined}
                   placeholder={t("goalAmountPlaceholder")}
                   className={inputClass}
                 />
@@ -332,11 +352,12 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
                   value={targetDate}
                   onChange={(event) => setTargetDate(event.target.value)}
                   type="date"
+                  min={today}
+                  aria-invalid={goalIssue === "dateInPast" || goalIssue === "dateInvalid" ? true : undefined}
                   className={inputClass}
                 />
               </label>
             </div>
-            {goalStarted && !goalComplete ? <p className="text-sm text-destructive">{t("goalIncomplete")}</p> : null}
           </div>
         ) : null}
 
@@ -354,6 +375,15 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
         ) : null}
       </section>
 
+      {step < TOTAL_STEPS && (blockedReason || createFailed) ? (
+        <p
+          id="onboarding-blocked-reason"
+          role="status"
+          className={`mx-auto mb-3 w-full max-w-2xl text-sm font-medium ${step === 3 || createFailed ? "text-destructive" : "text-muted-foreground"}`}
+        >
+          {blockedReason ?? tSafety("notCreated")}
+        </p>
+      ) : null}
       {step < TOTAL_STEPS ? (
         <footer className="mx-auto flex w-full max-w-2xl items-center justify-between gap-3 border-t pt-5">
           <Button variant="ghost" onClick={() => setStep((current) => Math.max(0, current - 1))} disabled={step === 0}>
@@ -373,7 +403,11 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
                 {t("skip")}
               </Button>
             ) : null}
-            <Button onClick={next} disabled={!canContinue}>
+            <Button
+              onClick={next}
+              disabled={!canContinue}
+              aria-describedby={blockedReason || createFailed ? "onboarding-blocked-reason" : undefined}
+            >
               {step === TOTAL_STEPS - 1 ? t("finish") : t("continue")}
               <ArrowRight aria-hidden="true" />
             </Button>

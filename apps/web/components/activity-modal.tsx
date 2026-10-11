@@ -19,6 +19,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { getCandyEconomyLesson1 } from "@/lib/candy-economy-lesson";
 import { XP_PER_ACTIVITY } from "@/lib/progress-summary";
+import { ConfirmDialog } from "./confirm-dialog";
 
 export type ActivityType = "lesson" | "spot-and-sort" | "simulation" | "rewind" | "coin-shop";
 
@@ -32,7 +33,15 @@ interface ActivityModalProps {
 
 export function ActivityModal({ activityType, topicId, gradeGroup, onClose, onActivitySuccess }: ActivityModalProps) {
   const tProgress = useTranslations("progressData");
+  const tSafety = useTranslations("safety");
   const [completed, setCompleted] = useState(false);
+  const [confirmingLeave, setConfirmingLeave] = useState(false);
+
+  // Leaving mid-activity drops the learner's choices, so ask first; once finished, just close.
+  function requestClose() {
+    if (completed) onClose();
+    else setConfirmingLeave(true);
+  }
   const [simState, setSimState] = useState<SimulationState>(initialPracticeSimulationState);
 
   function handleComplete() {
@@ -47,7 +56,7 @@ export function ActivityModal({ activityType, topicId, gradeGroup, onClose, onAc
         <div className="flex items-center justify-between border-b border-border pb-3">
           <button
             type="button"
-            onClick={onClose}
+            onClick={requestClose}
             className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-brand-ink transition-colors"
           >
             <ArrowLeft className="size-4" />
@@ -64,7 +73,7 @@ export function ActivityModal({ activityType, topicId, gradeGroup, onClose, onAc
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={requestClose}
             aria-label="Close activity"
             className="grid size-8 place-items-center rounded-full text-muted-foreground hover:bg-brand-muted hover:text-brand-ink"
           >
@@ -180,6 +189,19 @@ export function ActivityModal({ activityType, topicId, gradeGroup, onClose, onAc
           </div>
         )}
       </div>
+      {confirmingLeave ? (
+        <ConfirmDialog
+          title={tSafety("leaveActivity.title")}
+          description={tSafety("leaveActivity.description")}
+          confirmLabel={tSafety("leaveActivity.confirm")}
+          cancelLabel={tSafety("leaveActivity.cancel")}
+          onConfirm={() => {
+            setConfirmingLeave(false);
+            onClose();
+          }}
+          onCancel={() => setConfirmingLeave(false)}
+        />
+      ) : null}
     </div>
   );
 }
