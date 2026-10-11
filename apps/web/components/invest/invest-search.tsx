@@ -3,12 +3,12 @@
 import type { InstrumentSearchResult, LearnerProfile } from "@gullak/types";
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
-import { ChevronRight, Eye, Lock, Search, Unlock } from "lucide-react";
+import { ChevronDown, ChevronRight, Eye, Lock, Search, Unlock } from "lucide-react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useId, useState } from "react";
 import { TermHelp } from "@/components/help/term-help";
-import { groupedCategories } from "@/lib/category-search";
+import { groupedCategories, STOCKS_CATEGORY } from "@/lib/category-search";
 import { availableCashPaise, formatUnits, searchListings, type TradeAccess, tradeAccess } from "@/lib/invest";
 import { type LearnerState, readLearnerState, readProfile } from "@/lib/learner-state";
 
@@ -36,8 +36,53 @@ function CategoryButton({
   );
 }
 
-export function instrumentHref(symbol: string) {
-  return `/portfolio/invest/${encodeURIComponent(symbol)}`;
+export function instrumentHref(symbol: string, category?: string) {
+  const base = `/portfolio/invest/${encodeURIComponent(symbol)}`;
+  return category && category !== STOCKS_CATEGORY ? `${base}?category=${encodeURIComponent(category)}` : base;
+}
+
+/** One fund group in the sidebar: a heading that opens and closes its list. Closed until clicked. */
+function CategoryGroup({
+  label,
+  activeId,
+  categories,
+  onSelect,
+}: {
+  label: string;
+  activeId: string;
+  categories: { id: string; name: string }[];
+  onSelect: (id: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const listId = useId();
+  const holdsActive = categories.some((c) => c.id === activeId);
+  return (
+    <div className="space-y-1">
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={listId}
+        onClick={() => setOpen((value) => !value)}
+        className="flex min-h-10 w-full items-center justify-between gap-2 rounded-lg px-3 py-1.5 text-left text-sm font-bold text-foreground hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      >
+        <span className="flex items-center gap-2">
+          {label}
+          {holdsActive && !open ? <span className="size-1.5 rounded-full bg-foreground" aria-hidden="true" /> : null}
+        </span>
+        <ChevronDown
+          className={`size-4 shrink-0 text-muted-foreground transition-transform duration-200 motion-reduce:transition-none ${open ? "rotate-180" : ""}`}
+          aria-hidden="true"
+        />
+      </button>
+      <div id={listId} hidden={!open} className="space-y-1 pl-2">
+        {categories.map((c) => (
+          <CategoryButton key={c.id} active={activeId === c.id} onSelect={() => onSelect(c.id)}>
+            {c.name}
+          </CategoryButton>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 /** Reads the learner's profile and play-money state, and follows changes from other screens. */
@@ -123,15 +168,18 @@ export function InvestSearch() {
           <CategoryButton active={category === ""} onSelect={() => setCategory("")}>
             {t("allListings")}
           </CategoryButton>
+          <CategoryButton active={category === STOCKS_CATEGORY} onSelect={() => setCategory(STOCKS_CATEGORY)}>
+            {t("stocksCategory")}
+          </CategoryButton>
+          <p className="px-3 pt-2 text-sm font-semibold text-muted-foreground">{t("fundTypesLabel")}</p>
           {CATEGORY_GROUPS.map(({ group, categories }) => (
-            <div key={group} className="space-y-1">
-              <p className="px-3 text-sm font-semibold text-muted-foreground">{t(`groups.${group}`)}</p>
-              {categories.map((c) => (
-                <CategoryButton key={c.id} active={category === c.id} onSelect={() => setCategory(c.id)}>
-                  {c.name}
-                </CategoryButton>
-              ))}
-            </div>
+            <CategoryGroup
+              key={group}
+              label={t(`groups.${group}`)}
+              activeId={category}
+              categories={categories}
+              onSelect={setCategory}
+            />
           ))}
         </div>
       </aside>
@@ -156,6 +204,7 @@ export function InvestSearch() {
             className="min-h-12 w-full rounded-xl border-2 border-foreground bg-card px-3 text-base font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             <option value="">{t("allListings")}</option>
+            <option value={STOCKS_CATEGORY}>{t("stocksCategory")}</option>
             {CATEGORY_GROUPS.map(({ group, categories }) => (
               <optgroup key={group} label={t(`groups.${group}`)}>
                 {categories.map((c) => (
@@ -204,6 +253,7 @@ export function InvestSearch() {
         </div>
 
         <div aria-live="polite" className="space-y-3">
+          {category === STOCKS_CATEGORY ? <p className="text-muted-foreground">{t("stocksNote")}</p> : null}
           {search.status === "loading" ? <p className="text-muted-foreground">{t("searching")}</p> : null}
           {search.status === "error" ? (
             <div className="flex flex-wrap items-center gap-3">
@@ -225,7 +275,7 @@ export function InvestSearch() {
               {search.results.map((result) => (
                 <li key={result.symbol}>
                   <Link
-                    href={instrumentHref(result.symbol)}
+                    href={instrumentHref(result.symbol, category)}
                     className="flex min-h-18 items-center gap-4 py-3 hover:bg-muted/60 focus-visible:outline-2 focus-visible:outline-ring"
                   >
                     <span className="min-w-0 flex-1 space-y-1">

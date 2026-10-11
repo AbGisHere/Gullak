@@ -795,7 +795,7 @@
     "guardrail": "Practice only. Gullak never tells you what to buy or sell in real life.",
     "holdingLine": "{units} units · you paid {cost}",
     "sellHolding": "Sell {name}",
-    "categoryLabel": "Fund category",
+    "categoryLabel": "Category",
     "allListings": "All listings",
     "categoryHint": "Pick a category to see its funds, or type to search everything.",
     "categoryEmpty": "Yahoo Finance has no listings for this category right now.",
@@ -812,6 +812,20 @@
       "fund-of-funds": "Funds of funds",
       "solution-oriented": "Solution oriented",
       "specialised": "Specialised"
+    },
+    "stocksCategory": "Stocks",
+    "fundTypesLabel": "Fund types",
+    "stocksNote": "A starter list of large companies on the NSE, in A–Z order. It's not a ranking. Type to search any company listed in India.",
+    "learnTitle": "Learn about this",
+    "fundTypeListed": "Category: {name}",
+    "fundTypeGuess": "From its name, this looks like a {name}.",
+    "watchOut": "Watch out: {text}",
+    "learnAction": "Learn: {title}",
+    "learnKind": {
+      "stock": "A share is a small piece of one company. Its price moves with how the company does and what people expect.",
+      "etf": "An ETF is a basket of many investments that trades on the exchange like a share.",
+      "mutual-fund": "A mutual fund pools many people's money, and a manager invests it by a stated plan.",
+      "index": "An index tracks a group of companies to show how a part of the market is doing."
     }
   }
 }

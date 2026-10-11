@@ -3,7 +3,7 @@ import { createYahooAdapter, MarketDataError } from "@gullak/market-data";
 import { IndianSymbol, type InstrumentQuote, type InstrumentSearchResult } from "@gullak/types";
 import { unstable_cache } from "next/cache";
 import { z } from "zod";
-import { CATEGORY_IDS, categoryQueries } from "../category-search";
+import { CATEGORY_IDS, categoryQueries, STARTER_STOCKS, STOCKS_CATEGORY } from "../category-search";
 import { ApiError } from "./errors";
 
 // Live paper trading looks up real Indian listings on Yahoo Finance. Results sit in Next's
@@ -59,16 +59,19 @@ export async function liveQuote(symbol: string): Promise<InstrumentQuote> {
 }
 
 /**
- * Free-text search, or a fund category's listings optionally narrowed by text.
+ * Free-text search, or a category's listings (the starter stocks or a fund category) optionally narrowed by text.
  * Mutual funds can come back named by code, so missing names are filled from the quote.
  */
 export async function searchInstruments(query: string, category?: string | null): Promise<InstrumentSearchResult[]> {
   let results: InstrumentSearchResult[];
   try {
     if (category) {
-      if (!CATEGORY_IDS.has(category)) throw new ApiError(400, "invalid_category");
+      if (category !== STOCKS_CATEGORY && !CATEGORY_IDS.has(category)) throw new ApiError(400, "invalid_category");
       const text = query.trim().toLowerCase().slice(0, 60);
-      results = (await cachedCategory(category)).filter((r) => !text || r.name.toLowerCase().includes(text));
+      const listed = category === STOCKS_CATEGORY ? STARTER_STOCKS : await cachedCategory(category);
+      results = listed.filter(
+        (r) => !text || r.name.toLowerCase().includes(text) || r.symbol.toLowerCase().includes(text),
+      );
     } else {
       results = await cachedSearch(SearchQuery.parse(query).toLowerCase());
     }

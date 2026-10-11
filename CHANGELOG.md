@@ -8,6 +8,15 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+
+- Invest: a **Stocks** entry above the fund categories lists large NSE companies (A–Z, not a ranking) without typing.
+- Invest: every listing page has a "Learn about this" panel. Funds and ETFs show their exact SEBI category (from the list the learner browsed, else guessed from the name), what it holds, what to watch out for and a link to its lesson; stocks and indices link to their lesson. Locked listings show it too.
+
+### Changed
+
+- Invest: fund groups in the category sidebar are collapsible headings, closed until clicked.
+
 ## [0.2.27] - 2026-10-11
 
 ### Added

@@ -22,6 +22,15 @@ const quote = {
   source: "yahoo-finance",
 };
 
+const fundQuote = {
+  ...quote,
+  symbol: "0P0000XVLA.BO",
+  name: "Example Liquid Dir Gr",
+  exchange: "BSE",
+  kind: "mutual-fund",
+  price: 4100.25,
+};
+
 async function openLearner(page: Page, passedTopics: string[]) {
   await page.addInitScript((passed) => {
     window.localStorage.setItem(
@@ -52,7 +61,9 @@ async function openLearner(page: Page, passedTopics: string[]) {
       },
     }),
   );
-  await page.route("**/api/market/live/*", (route) => route.fulfill({ json: { data: { quote } } }));
+  await page.route("**/api/market/live/*", (route) =>
+    route.fulfill({ json: { data: { quote: route.request().url().includes("0P0000XVLA") ? fundQuote : quote } } }),
+  );
 }
 
 test("a locked stock explains which lesson opens it", async ({ page }) => {
@@ -65,6 +76,7 @@ test("a locked stock explains which lesson opens it", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Not unlocked yet" })).toBeVisible();
   await expect(page.getByText("₹3,000.50")).toBeVisible();
   await expect(page.getByRole("link", { name: "Go to the lesson" })).toHaveAttribute("href", "/learn/stocks");
+  await expect(page.getByRole("link", { name: /^Learn: / })).toHaveAttribute("href", "/learn/stocks");
   await expect(page.getByRole("button", { name: "Buy with play money" })).toHaveCount(0);
   // Locked listings still show their numbers, each with a plain-language explanation.
   await expect(page.getByText("₹2,500.00 – ₹4,000.00")).toBeVisible();
@@ -76,9 +88,29 @@ test("a locked stock explains which lesson opens it", async ({ page }) => {
 test("a fund category lists its funds without typing", async ({ page, isMobile }) => {
   await openLearner(page, []);
   await page.goto("/portfolio/invest");
-  if (isMobile) await page.getByRole("combobox", { name: "Fund category" }).selectOption("liquid");
-  else await page.getByRole("button", { name: "Liquid fund", exact: true }).click();
-  await expect(page.getByRole("link", { name: /Example Liquid Dir Gr/ })).toBeVisible();
+  if (isMobile) await page.getByRole("combobox", { name: "Category" }).selectOption("liquid");
+  else {
+    // Fund groups start closed and open on click.
+    const debt = page.getByRole("button", { name: "Debt", exact: true });
+    await expect(debt).toHaveAttribute("aria-expanded", "false");
+    await expect(page.getByRole("button", { name: "Liquid fund", exact: true })).toBeHidden();
+    await debt.click();
+    await page.getByRole("button", { name: "Liquid fund", exact: true }).click();
+  }
+  await page.getByRole("link", { name: /Example Liquid Dir Gr/ }).click();
+  // The fund's page teaches its exact category, locked or not.
+  await expect(page.getByText("Category: Liquid fund")).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Learn: / })).toHaveAttribute("href", "/learn/money-market");
+});
+
+test("stocks sit above the fund categories and list without typing", async ({ page, isMobile }) => {
+  await openLearner(page, []);
+  await page.unroute("**/api/market/search?*");
+  await page.goto("/portfolio/invest");
+  if (isMobile) await page.getByRole("combobox", { name: "Category" }).selectOption("stocks");
+  else await page.getByRole("button", { name: "Stocks", exact: true }).click();
+  await expect(page.getByRole("link", { name: /Reliance Industries/ })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Infosys/ })).toBeVisible();
 });
 
 test("after the lesson, buy with play money and sell from the holding", async ({ page }) => {

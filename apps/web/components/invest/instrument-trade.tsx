@@ -4,17 +4,16 @@ import { MILLI_UNITS, pricePaiseFromRupees } from "@gullak/engine";
 import type { InstrumentQuote } from "@gullak/types";
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
-import { ArrowLeft, Eye, Lock, Minus, TrendingDown, TrendingUp } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Eye, Lock, Minus, TrendingDown, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { type FormEvent, useEffect, useId, useState } from "react";
 import { TermHelp } from "@/components/help/term-help";
 import { AccessLabel, useLearner } from "@/components/invest/invest-search";
+import { fundCategoryInfo, guessFundCategory } from "@/lib/category-search";
 import type { HelpTerm } from "@/lib/help-terms";
-import { applyTrade, availableCashPaise, fetchQuote, formatUnits, tradeAccess } from "@/lib/invest";
+import { applyTrade, availableCashPaise, fetchQuote, formatUnits, tradeAccess, unlockTopicId } from "@/lib/invest";
 import { saveLearnerState } from "@/lib/learner-state";
-
-export type UnlockLessons = Partial<Record<"stock" | "etf" | "mutual-fund", { topicId: string; title: string }>>;
 
 type QuoteState = { status: "loading" } | { status: "unavailable" } | { status: "ready"; quote: InstrumentQuote };
 type Message = { tone: "done" | "error"; text: string } | null;
@@ -30,11 +29,15 @@ function parseUnits(value: string, whole: boolean): number | null {
 
 export function InstrumentTrade({
   symbol,
-  lessons,
+  topicTitles,
+  category,
   initialSide = "buy",
 }: {
   symbol: string;
-  lessons: UnlockLessons;
+  /** Lesson titles by topic id, in the learner's language. */
+  topicTitles: Record<string, string>;
+  /** The fund category the learner browsed from, when they came from one. */
+  category?: string;
   initialSide?: "buy" | "sell";
 }) {
   const t = useTranslations("invest");
@@ -101,7 +104,14 @@ export function InstrumentTrade({
     minute: "2-digit",
     timeZone: "Asia/Kolkata",
   }).format(new Date(quote.asOf));
-  const lesson = quote.kind === "index" ? undefined : lessons[quote.kind];
+  const unlockTopic = unlockTopicId(quote.kind);
+  // Funds and ETFs teach their exact SEBI category when we know it: from the list the learner
+  // browsed, else from the fund's name. Stocks and indices link to their kind's lesson.
+  const fundCategoryId =
+    quote.kind === "mutual-fund" || quote.kind === "etf" ? (category ?? guessFundCategory(quote.name)) : null;
+  const fundType = fundCategoryId ? fundCategoryInfo(fundCategoryId) : null;
+  const learnTopicId = fundType?.topicId ?? unlockTopic ?? "index-funds-etfs";
+  const learnTitle = topicTitles[learnTopicId];
   const show = (n: number) =>
     isIndex
       ? new Intl.NumberFormat(locale, { maximumFractionDigits: 2 }).format(n)
@@ -208,6 +218,33 @@ export function InstrumentTrade({
         )}
       </section>
 
+      <section aria-labelledby="learn-title" className="space-y-3 rounded-2xl bg-muted p-5">
+        <h2 id="learn-title" className="flex items-center gap-2 text-lg font-bold">
+          <BookOpen className="size-5 shrink-0" aria-hidden="true" />
+          {t("learnTitle")}
+        </h2>
+        {fundType ? (
+          <div className="space-y-2">
+            <p className="font-semibold">
+              {category ? t("fundTypeListed", { name: fundType.name }) : t("fundTypeGuess", { name: fundType.name })}
+            </p>
+            <p>{fundType.summary}</p>
+            <p className="text-muted-foreground">{t("watchOut", { text: fundType.watchOut })}</p>
+          </div>
+        ) : (
+          <p>{t(`learnKind.${quote.kind}`)}</p>
+        )}
+        {learnTitle ? (
+          <Link
+            href={`/learn/${learnTopicId}`}
+            className="inline-flex min-h-11 items-center gap-2 font-bold underline underline-offset-4 hover:no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            {t("learnAction", { title: learnTitle })}
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
+        ) : null}
+      </section>
+
       {access.status === "view-only" ? (
         <div className="flex gap-3 rounded-2xl bg-muted p-5">
           <Eye className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
@@ -225,7 +262,7 @@ export function InstrumentTrade({
             <h2 className="text-lg font-bold">{t("lockedTitle")}</h2>
             <p>
               {access.status === "locked"
-                ? t("lockedBody", { lesson: lesson?.title ?? access.topicId, kindPlural })
+                ? t("lockedBody", { lesson: topicTitles[access.topicId] ?? access.topicId, kindPlural })
                 : t("notInClassBody", { kindPlural })}
             </p>
             {access.status === "locked" ? (

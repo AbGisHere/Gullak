@@ -1,6 +1,6 @@
 import { fundCategories } from "@gullak/content";
 import categoryText from "@gullak/content/fund-categories/en.json";
-import type { FundCategoryGroup } from "@gullak/types";
+import type { FundCategoryGroup, InstrumentSearchResult } from "@gullak/types";
 
 /**
  * Yahoo Finance search only matches words that appear in short Indian fund names
@@ -51,7 +51,7 @@ const SEARCH_WORDS: Partial<Record<string, string[]>> = {
 /** Big fund houses whose names make Yahoo's search return a category's funds reliably. */
 export const FUND_HOUSES = ["sbi", "hdfc", "icici pru", "axis", "nippon india", "kotak"] as const;
 
-const texts = categoryText.categories as Record<string, { name: string }>;
+const texts = categoryText.categories as Record<string, { name: string; summary: string; watchOut: string }>;
 
 /** "Overnight fund" → ["overnight"]; overrides above where fund names use other words. */
 export function categorySearchWords(categoryId: string): string[] {
@@ -89,4 +89,88 @@ export function groupedCategories(): { group: FundCategoryGroup; categories: Cat
     entry.categories.push({ id: category.id, name: texts[category.id]?.name ?? category.id });
   }
   return groups;
+}
+
+/** The "Stocks" entry above the fund categories: a fixed starter list, so it opens without a search. */
+export const STOCKS_CATEGORY = "stocks";
+
+// Large, well-known NSE companies, listed only so learners can browse without typing.
+// Alphabetical on purpose: this is not a ranking or a recommendation.
+const LARGE_NSE_STOCKS: [symbol: string, name: string][] = [
+  ["ADANIPORTS", "Adani Ports and Special Economic Zone"],
+  ["APOLLOHOSP", "Apollo Hospitals Enterprise"],
+  ["ASIANPAINT", "Asian Paints"],
+  ["AXISBANK", "Axis Bank"],
+  ["BAJAJFINSV", "Bajaj Finserv"],
+  ["BAJFINANCE", "Bajaj Finance"],
+  ["BEL", "Bharat Electronics"],
+  ["BHARTIARTL", "Bharti Airtel"],
+  ["BRITANNIA", "Britannia Industries"],
+  ["CIPLA", "Cipla"],
+  ["COALINDIA", "Coal India"],
+  ["DRREDDY", "Dr. Reddy's Laboratories"],
+  ["EICHERMOT", "Eicher Motors"],
+  ["GRASIM", "Grasim Industries"],
+  ["HCLTECH", "HCL Technologies"],
+  ["HDFCBANK", "HDFC Bank"],
+  ["HDFCLIFE", "HDFC Life Insurance"],
+  ["HEROMOTOCO", "Hero MotoCorp"],
+  ["HINDALCO", "Hindalco Industries"],
+  ["HINDUNILVR", "Hindustan Unilever"],
+  ["ICICIBANK", "ICICI Bank"],
+  ["INFY", "Infosys"],
+  ["ITC", "ITC"],
+  ["JSWSTEEL", "JSW Steel"],
+  ["KOTAKBANK", "Kotak Mahindra Bank"],
+  ["LT", "Larsen & Toubro"],
+  ["M&M", "Mahindra & Mahindra"],
+  ["MARUTI", "Maruti Suzuki India"],
+  ["NESTLEIND", "Nestle India"],
+  ["NTPC", "NTPC"],
+  ["ONGC", "Oil and Natural Gas Corporation"],
+  ["POWERGRID", "Power Grid Corporation of India"],
+  ["RELIANCE", "Reliance Industries"],
+  ["SBILIFE", "SBI Life Insurance"],
+  ["SBIN", "State Bank of India"],
+  ["SUNPHARMA", "Sun Pharmaceutical Industries"],
+  ["TATACONSUM", "Tata Consumer Products"],
+  ["TATASTEEL", "Tata Steel"],
+  ["TCS", "Tata Consultancy Services"],
+  ["TECHM", "Tech Mahindra"],
+  ["TITAN", "Titan Company"],
+  ["TRENT", "Trent"],
+  ["ULTRACEMCO", "UltraTech Cement"],
+  ["WIPRO", "Wipro"],
+];
+
+export const STARTER_STOCKS: readonly InstrumentSearchResult[] = LARGE_NSE_STOCKS.map(([symbol, name]) => ({
+  symbol: `${symbol}.NS`,
+  name,
+  exchange: "NSE",
+  kind: "stock",
+}));
+
+/**
+ * The SEBI category a fund's name points to ("SBI Liquid Fund Direct Growth" → "liquid"), or null.
+ * The longest matching search word wins, so "nifty 50 index" beats "index".
+ */
+export function guessFundCategory(name: string): string | null {
+  const text = ` ${name.toLowerCase().replace(/[^a-z0-9&]+/g, " ")} `;
+  let best: { id: string; length: number } | null = null;
+  for (const { id } of fundCategories)
+    for (const word of categorySearchWords(id)) {
+      const needle = ` ${word.replace(/[^a-z0-9&]+/g, " ").trim()} `;
+      if (needle.trim().length >= 3 && text.includes(needle) && (!best || needle.length > best.length))
+        best = { id, length: needle.length };
+    }
+  return best?.id ?? null;
+}
+
+/** A fund category's English teaching text and the lesson that covers it. */
+export function fundCategoryInfo(
+  categoryId: string,
+): { name: string; summary: string; watchOut: string; topicId: string } | null {
+  const category = fundCategories.find((c) => c.id === categoryId);
+  const text = texts[categoryId];
+  return category && text ? { ...text, topicId: category.topicId } : null;
 }
