@@ -61,6 +61,7 @@ const Context = z
       topicId: Id,
       gradeGroups: UnlockRule.shape.gradeGroups.max(3),
       requiresTopicIds: z.array(Id).max(12),
+      passMark: UnlockRule.shape.passMark.unwrap(),
       unlocksInstruments: UnlockRule.shape.unlocksInstruments.unwrap().max(12),
       unlocksActivityIds: z.array(Id).max(12),
     }).strict(),
