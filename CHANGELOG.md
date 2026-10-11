@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.17] - 2026-10-11
+
 ### Added
 - Inactive offline English tutor request preparation with exact-byte v0.2.12 editorial grounding allowlist, grade filtering, teaching-only source citations and learner-question guardrails; no provider calls or app activation.
 - Deterministic approved-content tutor excerpt fallback with complete verbatim fields, lexical provenance and conservative no-excerpt reason codes; never fabricates an answer or truncates assumptions.
@@ -15,14 +17,14 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - Strict offline BKT parameter and step/sequence contracts with explicit caller-supplied probabilities, boolean quiz observations and distinguishable emissions; no defaults, artifact loading or app activation.
 - Pure inert BKT-with-forgetting step and ordered-sequence inference with observation-then-transition semantics, fail-closed impossible observations and synthetic notebook parity tests; no mastery, persistence or unlock wiring.
 - Bounded offline lesson-batch preparation for the five pinned English Grade 8–10 briefs, validating exact source bytes, approved brief/context fingerprints and duplicate identities before returning deterministic prepared-only requests and cache keys; no generation or storage is activated.
-
-### Fixed
-- Require the caller's explicit graph pass mark during offline lesson-batch preparation instead of silently inserting the shared unlock-rule default; omitted or undefined nested graph metadata rejects without changing shared graph behavior.
 - Gullu, the mascot, is now the favicon, the Apple touch icon and the installable app icon
   (SVG, 192/512 PNG and a maskable tile), and sits beside the wordmark in the learner shell header.
 - Every page has its own localized tab title ("Learn · Gullak", topic titles with summaries),
   plus Open Graph/Twitter cards with a Gullu social image, `robots.txt` and `sitemap.xml`
   (every topic page listed; API, preview and offline pages kept out of search).
+
+### Fixed
+- Require the caller's explicit graph pass mark during offline lesson-batch preparation instead of silently inserting the shared unlock-rule default; omitted or undefined nested graph metadata rejects without changing shared graph behavior.
 
 ## [0.2.16] - 2026-10-11
 
