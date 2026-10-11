@@ -10,6 +10,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ### Added
 - Draft-only lesson contracts for transcript, text-only story, device narration and quiz, with strict fields and bounded editorial text limits compatible with existing renderers.
+- Offline lesson-draft validation against curriculum briefs and canonical concepts, with audience checks, unique panel/question/option IDs, quiz answer-key and objective coverage checks, and existing investment-advice screening. Validation never approves or publishes content.
 
 ## [0.1.5] - 2026-10-11
 
