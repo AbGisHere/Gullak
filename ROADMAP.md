@@ -31,6 +31,9 @@ lessons, add live providers/caching, or migrate stage and unlock contracts.
 An explicit structured-output provider adapter is implemented on the R4 feature
 branch; it requires caller-selected models and has no automatic retries. App
 wiring, live generation, provider fallback, caching and human review remain pending.
+Deterministic draft-cache key preparation is also implemented on that branch;
+source-content hashes, prompt versions, complete requests and model identities
+invalidate keys. Persistent cache storage and reviewed-content publication are separate work.
 Offline integration tests cover all five approved Grade 8–10 English briefs
 across four draft formats, using synthetic provider
 outputs only; live generation and human review remain pending.
