@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-11
+
 ### Added
 
 - Lessons change with age: each of the 14 lessons open to every class now has a simpler Class 6–7 version (small numbers, everyday examples, easier quiz) and a deeper Class 11–12 version (formulas, tax, regulators, harder quiz), beside the existing Class 8–10 one. They live in `topics/<id>/en.stages.json`, so the pinned `en.json` bytes are unchanged.
