@@ -227,3 +227,44 @@ all identity checks. Tests inject deterministic generators, never real APIs.
 ```powershell
 pnpm --filter @gullak/ai exec vitest run src/lesson-runner.test.ts
 ```
+## Approved onboarding mastery initialization
+
+`initialMastery(experience)` is exported from `@gullak/engine`. It validates
+experience and returns exactly 0.1 (`none`), 0.3 (`some`) or 0.5 (`regular`).
+`apps/web/lib/mastery.ts` re-exports the shared function instead of maintaining
+drifting priors. This is initialization only: no database writes, model training,
+saved-state reset, or changes to the temporary web evidence updater. Quiz pass
+marks remain the sole progress gate; mastery ranks recommendations and reviews.
+
+## Draft world metadata
+
+These inactive Phase 0 contracts in `@gullak/types` do not replace the topic
+model during the demo:
+
+- `Stage`: `foundation-explorers` (Classes 6–7), `money-navigators` (8–9),
+  `financial-strategists` (10–12). Legacy grade-group values are not stage IDs.
+- `World`: `{ id, lessonIds }`. All IDs are kebab-case slugs; lesson IDs are
+  nonempty, unique and ordered. World membership is data, not a hard-coded enum.
+- `Lesson`: `{ id, worldId, stages, conceptIds, previousLessonId, checkPassMark }`.
+  Stages and concepts are nonempty and unique. A predecessor is an explicit slug
+  or `null` for a root; self-dependency is rejected. A lesson's own quiz threshold
+  is explicit, finite and 0–1. The next lesson requires its predecessor to pass
+  that predecessor's check, not to meet a mastery threshold.
+
+Unknown fields are rejected. These schemas validate individual metadata records,
+not a complete catalog: referential integrity, world ownership, ordering versus
+predecessor links and multi-record cycles need a future catalog validator.
+Metadata alone does not evaluate unlocks or grant progress.
+
+R1/R5 should supply world IDs as `candy-economy`, `savings-quest`, `bankopolis`,
+`market-mayhem`, `grow-your-money`, `stock-street`, `life-simulator`,
+`finance-tycoon`. R5/R2 still need to agree on localized hook, mechanic,
+decisions/outcomes, recovery feedback, reveal, application, review and XP data.
+Those payloads, stage selection/placement and migration of profile/content/
+progress are not implemented here. Do not load draft metadata into the demo app.
+
+```powershell
+pnpm --filter @gullak/engine exec vitest run src/mastery-prior.test.ts
+pnpm --filter @gullak/types exec vitest run src/world.test.ts
+pnpm --filter @gullak/web exec vitest run lib/mastery.test.ts lib/topic-adapter.test.ts
+```

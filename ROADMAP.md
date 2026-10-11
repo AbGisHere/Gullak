@@ -26,7 +26,7 @@ lessons, add live providers/caching, or migrate stage and unlock contracts.
 
 - [x] Monorepo, strict TypeScript, Biome, Husky, CI, PWA, i18n and Supabase helpers
 - [ ] Replace the old four-pillar topic model with the eight-world curriculum and three learner stages (R1, R5)
-- [ ] Update schemas: `world`, `lesson`, stage variants, mechanic, decision/outcome, XP, mastery and unlocks (R1, R4)
+- [ ] Update schemas: `world`, `lesson`, stage variants, mechanic, decision/outcome, XP, mastery and unlocks (R1, R4); metadata-only `Stage`, `World`, `Lesson` drafted on `feat/lesson-generation-runner`, pending review/merge; full gameplay payloads and app migration remain post-demo
 - [ ] Create content folder conventions and validators for lessons and translations (R5, R1)
 - [ ] Preserve virtual-money, no-advice and anti-speculation guardrails in all content and UI (R1, R5)
 
@@ -61,6 +61,7 @@ lessons, add live providers/caching, or migrate stage and unlock contracts.
 - [ ] Life Simulator: salary, bills, emergency, loan/EMI, insurance and scam-event loop (R2, R4, R5)
 - [ ] Finance Tycoon: cash flow, inventory, business decisions, break-even and responsible growth (R2, R4, R5)
 - [ ] Placement/challenge scoring, spaced review and adaptive next-lesson selection (R4)
+- [ ] Align onboarding priors with the approved 0.1/0.3/0.5 values (R4); centralized engine function, exact-value tests and web re-export implemented on `feat/lesson-generation-runner`, pending review/merge; saved mastery and quiz unlocks unchanged
 - [ ] Tutor grounded only in approved lesson content and learner language (R4, R5)
 
 ## Phase 5 · Quality and demo
