@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Draft-only lesson contracts for transcript, text-only story, device narration and quiz, with strict fields and bounded editorial text limits compatible with existing renderers.
+
 ## [0.1.5] - 2026-10-11
 
 ### Added
