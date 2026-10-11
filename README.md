@@ -1,7 +1,7 @@
 # Gullak
 
 [![Live demo](https://img.shields.io/badge/demo-gullak.abgupta.me-ea580c?logo=vercel&logoColor=white)](https://gullak.abgupta.me)
-[![Version](https://img.shields.io/badge/version-0.1.5-0f766e)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.2.0-0f766e)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Node](https://img.shields.io/badge/node-24_LTS-339933?logo=nodedotjs&logoColor=white)](.nvmrc)
 [![pnpm](https://img.shields.io/badge/pnpm-12.10.1-F69220?logo=pnpm&logoColor=white)](package.json)
@@ -27,7 +27,7 @@ cp .env.example apps/web/.env.local   # optional: everything works without keys
 pnpm dev                          # http://localhost:3000
 ```
 
-Open `/` for onboarding and `/r2-preview` for the learning components (lesson, spot & sort, story choices, money decoder, paper portfolio, Practice simulation and the rewind comparison) running on sample data.
+Open `/` for onboarding, which leads into the learner app (Learn, Practice, Portfolio, Me), and `/r2-preview` for the learning components (lesson, spot & sort, story choices, money decoder, paper portfolio, Practice simulation and the rewind comparison) running on sample data.
 
 ## What works today
 
@@ -37,8 +37,9 @@ Open `/` for onboarding and `/r2-preview` for the learning components (lesson, s
 - **Content as data:** 8 topics, each with a reading lesson and a quiz (English), the topic prerequisite graph, one spot & sort round, one branching story and the March 2020 Practice episode.
 - **Knowledge tracing (Colab notebook):** BKT fitted on synthetic learners, plus a benchmark of BKT, BKT with forgetting, PFA and DKT on 283,105 real student answers from ASSISTments 2009–10 (AUC: DKT 0.739, BKT with forgetting 0.727, BKT 0.722, PFA 0.710). See [notebooks](notebooks/README.md#results-colab-t4-run-2026-10-11). Not yet used in the app.
 - **Engine:** interest (FD, RD, SIP, compounding), valuation, quiz grading, unlock rules, starting capital and the lesson format picker, all unit-tested.
+- **Learner app** on phone and desktop: a grade-filtered learning map, content-backed lessons, quizzes that unlock the next topics, an on-device mastery meter, the March 2020 Practice episode and the paper portfolio. Progress stays on the device; Practice decisions use bundled sample outcomes.
 
-Not built yet: the app screens after onboarding, the AI tutor, translated topic content, Live mode and the facilitator dashboard UI. The plan is in [ROADMAP.md](ROADMAP.md).
+Not built yet: syncing progress to the backend, the AI tutor, translated topic content, Live mode and the facilitator dashboard UI. The plan is in [ROADMAP.md](ROADMAP.md).
 
 ## Scripts
 
