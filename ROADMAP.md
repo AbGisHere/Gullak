@@ -43,6 +43,11 @@ invalidate keys. Persistent cache storage and reviewed-content publication are s
 Offline integration tests cover all five approved Grade 8–10 English briefs
 across four draft formats, using synthetic provider
 outputs only; live generation and human review remain pending.
+Bounded offline batch preparation is implemented on the post-demo R4 branch.
+It verifies the five approved English Grade 8–10 brief/context/source pins and
+prepares up to 20 deterministic requests/keys in caller order; the full
+five-brief × four-format matrix is regression-tested. It performs no generation,
+storage or app activation; catalog expansion needs reviewed approval.
 
 - [x] Monorepo, strict TypeScript, Biome, Husky, CI, PWA, i18n and Supabase helpers
 - [ ] Replace the old four-pillar topic model with the eight-world curriculum and three learner stages (R1, R5)

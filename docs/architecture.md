@@ -322,6 +322,19 @@ existing `lesson-draft:v1:…` key. It contains no source bytes, timestamps or
 generated output. Prepared manifests are engineering data, not reviewed or
 published lessons; app wiring, execution and persistent caching remain post-demo.
 
+Offline regression tests exercise all five approved briefs × four formats,
+independently hash the documented key tuple with Node SHA-256, and prepare a
+20-entry manifest in deliberately different caller order. They reject teaching,
+context and exact-byte source edits for every topic, malformed source boundaries,
+and an invalid final job in an otherwise valid batch. Buffer mutation in a later
+job during the first hash is covered; removing the source pin or the byte copy
+has been checked to fail the corresponding regressions. Model identities and
+unapproved edits in tests are synthetic; no provider output is generated.
+
+```sh
+pnpm --filter @gullak/ai exec vitest run src/lesson-batch.test.ts
+```
+
 ## Lesson-draft cache-key preparation
 
 `buildLessonDraftCacheKey({ request, model, contentVersion })` prepares a key only.
