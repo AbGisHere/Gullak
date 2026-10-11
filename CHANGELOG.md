@@ -100,6 +100,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ### Added
 - Knowledge-tracing notebook, increment 2: fits per-concept BKT by EM on synthetic learners drawn from known parameters, checks parameter recovery and held-out next-answer prediction against a constant baseline, and exports a draft parameter file labelled synthetic. Runs on a Colab CPU in under a minute with no installs; the app does not load it.
 
+### Changed
+- Redesign Financial Twin as an illustrated seven-stage Hyderabad household story with localized dialogue, a consistent ₹15,000 bill, three choices, immediate consequences, rewind alternatives, reflection and replay. Replace mismatched ₹7,000 outcomes and unsupported return/penalty claims with clearly labelled qualitative fixtures. Include phone/desktop screenshots, 19 unit cases and six complete browser checks.
+
 ## [0.1.2] - 2026-10-11
 
 ### Changed
