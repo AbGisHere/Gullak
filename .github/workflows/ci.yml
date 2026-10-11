@@ -16,6 +16,8 @@ permissions:
 jobs:
   rules:
     name: Git rules (attribution, commits)
+    # The graded submission repo only receives releases already green here.
+    if: github.repository != 'IIIT-ECell/megathon26-claude2create'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -50,6 +52,7 @@ jobs:
 
   verify:
     name: Lint · typecheck · test · build
+    if: github.repository != 'IIIT-ECell/megathon26-claude2create'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -75,6 +78,7 @@ jobs:
 
   e2e:
     name: E2E (phone + desktop)
+    if: github.repository != 'IIIT-ECell/megathon26-claude2create'
     runs-on: ubuntu-latest
     needs: verify
     steps:
