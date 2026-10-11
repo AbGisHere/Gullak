@@ -94,7 +94,7 @@ We don't fine-tune LLMs. Small adaptive models (e.g. knowledge tracing) are trai
 4. Reference an `@gullak/engine` function only for deterministic calculations or simulations.
 5. Run `pnpm test`: content is validated against the schemas. No renderer code change is required.
 
-Until the content schema migrates, mirror this structure in `packages/content/config/topic-graph.json` and its topic files so the existing renderer keeps working.
+Until the content schema migrates, mirror this structure in `packages/content/config/topic-graph.json` and its topic files so the existing renderer keeps working, and place each topic in exactly one world in `packages/content/config/topic-worlds.json` (the learning map groups by it; tested).
 
 ### How to add a language
 
