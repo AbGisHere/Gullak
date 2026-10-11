@@ -1,0 +1,197 @@
+{
+  "topicId": "recurring-deposit",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["rd-monthly-habit", "rd-maturity"],
+      "markdown": "**English draft for R5 review.**\n\nA **recurring deposit**, or **RD**, is like a piggy bank at a bank.\n\nYou put in the **same amount every month**, say ₹100, for a set time, like 12 months. That's ₹1,200 of your own money.\n\nThe bank adds a little extra called **interest** for keeping your money. So at the end you get back a bit **more** than ₹1,200. How much more depends on the interest rate, which is just an example here, not a promise.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-rd",
+          "conceptId": "rd-monthly-habit",
+          "prompt": "What do you do in an RD?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Put in the same amount every month"
+            },
+            {
+              "id": "1",
+              "text": "Put in money only once"
+            },
+            {
+              "id": "2",
+              "text": "Take money out every day"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "An RD is a monthly saving habit."
+        },
+        {
+          "id": "young-total",
+          "conceptId": "rd-maturity",
+          "prompt": "₹100 every month for 12 months. How much of your own money is that?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹100"
+            },
+            {
+              "id": "1",
+              "text": "₹1,200"
+            },
+            {
+              "id": "2",
+              "text": "₹12"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "100 × 12 = 1,200."
+        },
+        {
+          "id": "young-extra",
+          "conceptId": "rd-maturity",
+          "prompt": "Why do you get back a bit more than you put in?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The bank adds interest"
+            },
+            {
+              "id": "1",
+              "text": "Money grows on trees"
+            },
+            {
+              "id": "2",
+              "text": "Someone made a mistake"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Interest is the extra the bank pays you."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["rd-monthly-habit", "rd-maturity"],
+      "markdown": "**English draft for R5 review.**\n\nAn RD accepts a fixed monthly instalment for a fixed tenure and pays interest, usually compounded quarterly. Because each instalment stays for a different time, the first earns interest for the full tenure and the last for only a month.\n\nExample with an **assumed** 6.5% yearly rate (an assumption, not a promise): ₹2,000 a month for 24 months is ₹48,000 of deposits, and the maturity amount comes to a little over ₹51,000. The interest is far less than 6.5% of ₹48,000 over two years, because on average the money is deposited for only about half the tenure.\n\nThings to compare between RDs: the rate, the compounding frequency, **penalties for missed instalments** and for **premature closure**, and tax. Interest is taxable at your slab rate, and banks may deduct TDS above a threshold.\n\nAn RD suits a **known goal on a fixed date** with a fixed monthly surplus. It is not flexible: if your income is irregular, a savings account with a standing transfer may suit better.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-avg",
+          "conceptId": "rd-maturity",
+          "prompt": "Why is RD interest much less than the yearly rate applied to the total deposited?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Banks round down"
+            },
+            {
+              "id": "1",
+              "text": "Each instalment stays in for a different, shorter time"
+            },
+            {
+              "id": "2",
+              "text": "Interest is charged, not paid"
+            },
+            {
+              "id": "3",
+              "text": "Rates fall every month"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Later instalments earn for only a few months, so the average time is about half the tenure."
+        },
+        {
+          "id": "deep-total-rd",
+          "conceptId": "rd-maturity",
+          "prompt": "₹2,000 a month for 24 months is how much in deposits?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹24,000"
+            },
+            {
+              "id": "1",
+              "text": "₹48,000"
+            },
+            {
+              "id": "2",
+              "text": "₹51,000"
+            },
+            {
+              "id": "3",
+              "text": "₹2,400"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "₹2,000 × 24 = ₹48,000; interest comes on top."
+        },
+        {
+          "id": "deep-fit",
+          "conceptId": "rd-monthly-habit",
+          "prompt": "Who is an RD best suited for?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Someone with a fixed monthly surplus and a dated goal"
+            },
+            {
+              "id": "1",
+              "text": "Someone who needs daily access"
+            },
+            {
+              "id": "2",
+              "text": "Someone with very irregular income"
+            },
+            {
+              "id": "3",
+              "text": "Someone who wants high risk"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Fixed instalments match a steady surplus and a known date."
+        },
+        {
+          "id": "deep-tax",
+          "conceptId": "rd-maturity",
+          "prompt": "How is RD interest usually treated for tax?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Always tax-free"
+            },
+            {
+              "id": "1",
+              "text": "Taxable at your slab rate"
+            },
+            {
+              "id": "2",
+              "text": "Taxed only if you close early"
+            },
+            {
+              "id": "3",
+              "text": "Taxed at 50%"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "RD interest is added to income and taxed at your slab rate."
+        }
+      ]
+    }
+  ]
+}

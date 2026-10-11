@@ -8,6 +8,8 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { clearLearnerData, readLearnerState, recordActivity, saveLearnerState } from "@/lib/learner-state";
 import { initialiseRecommendationEvidence } from "@/lib/learning-recommendation";
+import type { PlacementRound } from "@/lib/placement";
+import { useLearnerState } from "@/lib/use-learner-state";
 import { useLearnerProgress } from "@/lib/use-progress-summary";
 import { ActivityModal, type ActivityType } from "./activity-modal";
 import { AppShell, type NavTab } from "./app-shell";
@@ -16,6 +18,7 @@ import { ShoppingMission } from "./game/shopping/shopping-mission";
 import type { TopicSummary } from "./learn-map";
 import { LearnMap } from "./learn-map";
 import { Onboarding } from "./onboarding";
+import { PlacementQuiz } from "./placement-quiz";
 import { SettingsDialog } from "./settings-dialog";
 import { FinancialTwinTab } from "./tabs/financial-twin-tab";
 import { GulluTab } from "./tabs/gullu-tab";
@@ -25,7 +28,13 @@ import { RewardsTab } from "./tabs/rewards-tab";
 
 const ONBOARDING_STORAGE_KEY = "gullak-onboarding-profile";
 
-export function LearnerApp({ topics }: { topics: TopicSummary[] }) {
+export function LearnerApp({
+  topics,
+  placement,
+}: {
+  topics: TopicSummary[];
+  placement: Record<GradeGroup, PlacementRound[]>;
+}) {
   const router = useRouter();
   const tSafety = useTranslations("safety");
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
@@ -38,6 +47,9 @@ export function LearnerApp({ topics }: { topics: TopicSummary[] }) {
   // Every tab reads this one derived summary; until onboarding finishes it describes no evidence.
   const progress = useLearnerProgress(profile?.gradeGroup ?? "grade-6-7");
   const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
+  // The placement quiz opens straight after sign-up, and from the top of Home until it is taken.
+  const [isPlacementOpen, setIsPlacementOpen] = useState(false);
+  const learnerState = useLearnerState();
 
   useEffect(() => {
     try {
@@ -58,6 +70,7 @@ export function LearnerApp({ topics }: { topics: TopicSummary[] }) {
   function handleOnboardFinish(newProfile: LearnerProfile) {
     saveLearnerState(initialiseRecommendationEvidence(topics, newProfile, readLearnerState()));
     setProfile(newProfile);
+    setIsPlacementOpen(true);
     try {
       window.localStorage.setItem(ONBOARDING_STORAGE_KEY, JSON.stringify(newProfile));
     } catch {
@@ -73,6 +86,7 @@ export function LearnerApp({ topics }: { topics: TopicSummary[] }) {
 
   function confirmResetOnboarding() {
     clearLearnerData();
+    setIsPlacementOpen(false);
     setIsResetConfirmOpen(false);
     setProfile(null);
     setCurrentTab("home");
@@ -147,8 +161,23 @@ export function LearnerApp({ topics }: { topics: TopicSummary[] }) {
         onOpenSettings={() => router.push("/me")}
         onResetOnboarding={handleResetOnboarding}
       >
-        {currentTab === "home" && (
+        {currentTab === "home" && isPlacementOpen && (
+          <PlacementQuiz
+            profile={profile}
+            rounds={placement[profile.gradeGroup]}
+            onClose={() => {
+              setIsPlacementOpen(false);
+              window.scrollTo({ top: 0 });
+            }}
+          />
+        )}
+        {currentTab === "home" && !isPlacementOpen && (
           <HomeTab
+            placement={learnerState.placement}
+            onStartPlacement={() => {
+              setIsPlacementOpen(true);
+              window.scrollTo({ top: 0 });
+            }}
             profile={profile}
             topics={topics}
             daysPractised={progress.activeDays}

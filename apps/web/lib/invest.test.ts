@@ -14,6 +14,7 @@ const emptyState = (): LearnerState => ({
   emergencyReservePaise: 0,
   reserveTargetPaise: null,
   goals: [],
+  placement: null,
 });
 
 const tcs: InstrumentQuote = {

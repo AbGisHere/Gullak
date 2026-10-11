@@ -1,0 +1,197 @@
+{
+  "topicId": "too-good-to-be-true",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["spot-the-promise", "pressure-and-secrecy", "check-first"],
+      "markdown": "**English draft for R5 review.**\n\nA message says: \"Give ₹10 and get ₹100 tomorrow!\" Wow, right? **No.**\n\nMoney doesn't grow that fast. When something sounds **too good to be true**, it usually is a trick.\n\nOther warning signs: \"**Hurry!**\" and \"**Don't tell anyone!**\" Real, honest things can wait, and you can always tell your parents. So **check first** with a grown-up.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-promise",
+          "conceptId": "spot-the-promise",
+          "prompt": "\"Give ₹10, get ₹100 tomorrow.\" What is this most likely?",
+          "options": [
+            {
+              "id": "0",
+              "text": "A trick"
+            },
+            {
+              "id": "1",
+              "text": "A great deal"
+            },
+            {
+              "id": "2",
+              "text": "A school rule"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Money can't grow that much overnight."
+        },
+        {
+          "id": "young-secret",
+          "conceptId": "pressure-and-secrecy",
+          "prompt": "Someone says \"Don't tell your parents\". What does that tell you?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Something is wrong"
+            },
+            {
+              "id": "1",
+              "text": "It's a nice surprise"
+            },
+            {
+              "id": "2",
+              "text": "It's normal"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Honest offers never need to be secret from your parents."
+        },
+        {
+          "id": "young-check",
+          "conceptId": "check-first",
+          "prompt": "What should you do with an exciting money offer?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Check with a grown-up first"
+            },
+            {
+              "id": "1",
+              "text": "Pay quickly"
+            },
+            {
+              "id": "2",
+              "text": "Share it with friends"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Checking first keeps you safe."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["spot-the-promise", "pressure-and-secrecy", "check-first"],
+      "markdown": "**English draft for R5 review.**\n\nFraudulent schemes share a structure. **Ponzi schemes** pay early members from later members' money; **pyramid** or \"MLM-style\" schemes reward recruiting more than selling. Both collapse when new money slows, and most participants lose.\n\nRed flags to recognise:\n\n- **Guaranteed high returns**, such as \"2% a day\" or \"double in 30 days\". Compounded, 2% a day would be over 1,000× in a year, which is impossible to sustain.\n- **Fake social proof**: screenshots, luxury photos, celebrity morphs and \"testimonials\".\n- **Pressure and secrecy**: limited slots, countdown timers, \"don't tell family\".\n- **Unregulated** platforms, or apps that are not on official stores, asking for UPI transfers to personal accounts.\n- **Small early payouts** to build trust before a larger \"top-up\".\n\nVerify before acting: check whether the entity is registered with the relevant regulator, search the name with \"fraud\", and ask a trusted adult. Real growth comes with risk, and every legitimate projection says its figures are assumptions, not promises.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-ponzi",
+          "conceptId": "spot-the-promise",
+          "prompt": "How does a Ponzi scheme pay its early members?",
+          "options": [
+            {
+              "id": "0",
+              "text": "From real business profits"
+            },
+            {
+              "id": "1",
+              "text": "From new members' money"
+            },
+            {
+              "id": "2",
+              "text": "From government grants"
+            },
+            {
+              "id": "3",
+              "text": "From interest on deposits"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Returns come from newcomers, so it collapses when they stop joining."
+        },
+        {
+          "id": "deep-2pct",
+          "conceptId": "spot-the-promise",
+          "prompt": "Why is \"2% a day, guaranteed\" a red flag?",
+          "options": [
+            {
+              "id": "0",
+              "text": "2% is too low"
+            },
+            {
+              "id": "1",
+              "text": "Compounded, it would be impossibly huge over a year"
+            },
+            {
+              "id": "2",
+              "text": "Daily returns are illegal to mention"
+            },
+            {
+              "id": "3",
+              "text": "It isn't one"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Such a rate can't be sustained; only new money could pay it."
+        },
+        {
+          "id": "deep-bait",
+          "conceptId": "pressure-and-secrecy",
+          "prompt": "A scheme paid you ₹200 on a ₹1,000 deposit and now asks for ₹10,000. What is likely happening?",
+          "options": [
+            {
+              "id": "0",
+              "text": "You've found a winner"
+            },
+            {
+              "id": "1",
+              "text": "The small payout was bait to get more"
+            },
+            {
+              "id": "2",
+              "text": "The bank made an error"
+            },
+            {
+              "id": "3",
+              "text": "It's a tax refund"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Early payouts build trust before the big ask."
+        },
+        {
+          "id": "deep-verify",
+          "conceptId": "check-first",
+          "prompt": "What is a sound first check before trusting an investment offer?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Count the screenshots"
+            },
+            {
+              "id": "1",
+              "text": "Check its registration with the relevant regulator"
+            },
+            {
+              "id": "2",
+              "text": "Ask the promoter"
+            },
+            {
+              "id": "3",
+              "text": "Look at the logo"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Regulator registration is verifiable; screenshots and logos are not."
+        }
+      ]
+    }
+  ]
+}

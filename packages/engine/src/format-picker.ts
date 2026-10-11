@@ -1,4 +1,18 @@
-import { FormatPickerRequest, type FormatSelection, LearningFormat } from "@gullak/types";
+import { FormatPickerRequest, type FormatSelection, type GradeGroup, LearningFormat } from "@gullak/types";
+
+/**
+ * The variants a class group should see. A version written for this group (its `audience` names it)
+ * replaces general versions of the same format, so a quiz written for Class 6–7 is the one a Class 6–7
+ * learner takes. Authored order is kept.
+ */
+export function variantsForGrade<V extends { format: string; audience?: readonly GradeGroup[] | undefined }>(
+  variants: readonly V[],
+  gradeGroup: GradeGroup,
+): V[] {
+  const eligible = variants.filter((v) => !v.audience || v.audience.includes(gradeGroup));
+  const tailored = new Set(eligible.filter((v) => v.audience !== undefined).map((v) => v.format));
+  return eligible.filter((v) => v.audience !== undefined || !tailored.has(v.format));
+}
 
 /**
  * Select a lesson presentation from one topic in an already-resolved locale.
@@ -7,9 +21,7 @@ import { FormatPickerRequest, type FormatSelection, LearningFormat } from "@gull
  */
 export function pickLessonVariant(input: unknown): FormatSelection {
   const { gradeGroup, preferredFormats, variants, selectionIndex } = FormatPickerRequest.parse(input);
-  const eligible = variants
-    .filter((variant) => variant.format !== "quiz")
-    .filter((variant) => !variant.audience || variant.audience.includes(gradeGroup));
+  const eligible = variantsForGrade(variants, gradeGroup).filter((variant) => variant.format !== "quiz");
   const first = eligible[0];
   if (!first) return { status: "unavailable", reason: "no-eligible-variant" };
 

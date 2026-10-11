@@ -1,3 +1,4 @@
+import { variantsForGrade } from "@gullak/engine";
 import type { GradeGroup, Topic } from "@gullak/types";
 import type { TopicLessonData } from "@gullak/ui/components/topic-lesson";
 
@@ -9,7 +10,8 @@ const pillarMap = {
 } as const;
 
 export function topicToLesson(topic: Topic, gradeGroup: GradeGroup): TopicLessonData {
-  const lessonText = topic.content.variants.find((variant) => variant.format !== "quiz");
+  // The version written for this class group, else the general one.
+  const lessonText = variantsForGrade(topic.content.variants, gradeGroup).find((variant) => variant.format !== "quiz");
   const body = lessonText?.format === "transcript" ? lessonText.markdown.replaceAll("**", "") : topic.content.summary;
   return {
     id: `${topic.meta.id}-lesson`,

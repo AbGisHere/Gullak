@@ -1,6 +1,6 @@
 import { LearningFormat, type TopicVariant } from "@gullak/types";
 import { describe, expect, it } from "vitest";
-import { pickLessonVariant } from "./index";
+import { pickLessonVariant, variantsForGrade } from "./index";
 
 const story: TopicVariant = {
   id: "comic",
@@ -155,5 +155,25 @@ describe("preference-first lesson picker", () => {
     Object.freeze(input.preferredFormats);
     expect(pickLessonVariant(input)).toEqual(pickLessonVariant(input));
     expect(input).toEqual(before);
+  });
+});
+
+describe("variantsForGrade", () => {
+  const general = { id: "read", format: "transcript" };
+  const young = { id: "read-young", format: "transcript", audience: ["grade-6-7"] as const };
+  const quiz = { id: "check", format: "quiz" };
+  const youngQuiz = { id: "check-young", format: "quiz", audience: ["grade-6-7"] as const };
+  const all = [general, quiz, young, youngQuiz];
+
+  it("replaces general versions with the class group's own, format by format", () => {
+    expect(variantsForGrade(all, "grade-6-7").map((v) => v.id)).toEqual(["read-young", "check-young"]);
+  });
+
+  it("keeps general versions for groups without their own", () => {
+    expect(variantsForGrade(all, "grade-8-10").map((v) => v.id)).toEqual(["read", "check"]);
+  });
+
+  it("keeps a general format when only another format is tailored", () => {
+    expect(variantsForGrade([general, quiz, youngQuiz], "grade-6-7").map((v) => v.id)).toEqual(["read", "check-young"]);
   });
 });

@@ -1,0 +1,197 @@
+{
+  "topicId": "needs-vs-wants",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["needs", "wants", "depends-on-situation"],
+      "markdown": "**English draft for R5 review.**\n\nA **need** is something you must have: food, water, a home, school books.\n\nA **want** is something nice to have, but you are fine without it for now: a toy car, chocolate, stickers.\n\nWhen you have only a little money, buy needs first. Then, if there's money left, you can pick a want.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-need",
+          "conceptId": "needs",
+          "prompt": "Which one is a need?",
+          "options": [
+            {
+              "id": "0",
+              "text": "A water bottle for school"
+            },
+            {
+              "id": "1",
+              "text": "A toy robot"
+            },
+            {
+              "id": "2",
+              "text": "Stickers"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "You need water every school day; the robot and stickers are nice extras."
+        },
+        {
+          "id": "young-want",
+          "conceptId": "wants",
+          "prompt": "Which one is a want?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Lunch"
+            },
+            {
+              "id": "1",
+              "text": "A school bag"
+            },
+            {
+              "id": "2",
+              "text": "A new video game"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "A game is fun, but you can live and learn without it."
+        },
+        {
+          "id": "young-first",
+          "conceptId": "depends-on-situation",
+          "prompt": "You have ₹30. You need a pencil (₹10) and want a chocolate (₹30). What is smart?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Buy the chocolate"
+            },
+            {
+              "id": "1",
+              "text": "Buy the pencil first"
+            },
+            {
+              "id": "2",
+              "text": "Buy nothing ever"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Needs come first. You can save for the chocolate later."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["needs", "wants", "depends-on-situation"],
+      "markdown": "**English draft for R5 review.**\n\nEconomists separate **essential** spending (needs) from **discretionary** spending (wants). The line is not fixed: it depends on context, quality level and timing.\n\nA laptop is a need for a student who submits college applications online, but a top-end model with gaming hardware is mostly a want: the need is the function, the extra is the upgrade. This is **lifestyle creep**: as income rises, upgrades quietly turn into \"needs\".\n\nA practical test is to ask three questions. What happens if I don't buy this for a month? Is there a cheaper version that does the job? Am I buying because of a real gap or because of an ad, a sale or friends?\n\nBudgets that ignore wants usually fail. The aim is not zero wants, it is **deciding** them after needs and saving are covered.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-upgrade",
+          "conceptId": "depends-on-situation",
+          "prompt": "Nisha needs a phone for college work. Which part of buying the newest flagship is a want?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Being able to make calls"
+            },
+            {
+              "id": "1",
+              "text": "Being able to use email"
+            },
+            {
+              "id": "2",
+              "text": "The premium camera and brand upgrade"
+            },
+            {
+              "id": "3",
+              "text": "Having a working screen"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "The need is a working phone; the premium upgrade is discretionary."
+        },
+        {
+          "id": "deep-creep",
+          "conceptId": "wants",
+          "prompt": "What is lifestyle creep?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Prices rising across the economy"
+            },
+            {
+              "id": "1",
+              "text": "Upgrades turning into \"needs\" as income rises"
+            },
+            {
+              "id": "2",
+              "text": "Saving more each year"
+            },
+            {
+              "id": "3",
+              "text": "Cutting all wants"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "As income grows, spending on upgrades rises and starts to feel necessary."
+        },
+        {
+          "id": "deep-test",
+          "conceptId": "needs",
+          "prompt": "Which question best tests whether something is a need?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Is it on sale today?"
+            },
+            {
+              "id": "1",
+              "text": "Do my friends have it?"
+            },
+            {
+              "id": "2",
+              "text": "What happens if I wait a month?"
+            },
+            {
+              "id": "3",
+              "text": "Is it the newest model?"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "If waiting a month causes no real harm, it is probably a want."
+        },
+        {
+          "id": "deep-budget",
+          "conceptId": "wants",
+          "prompt": "Why do budgets with zero room for wants often fail?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Wants are always cheap"
+            },
+            {
+              "id": "1",
+              "text": "People give up on plans that feel impossible"
+            },
+            {
+              "id": "2",
+              "text": "Banks require it"
+            },
+            {
+              "id": "3",
+              "text": "Needs disappear"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A plan with no room for any enjoyment is hard to follow, so people drop it."
+        }
+      ]
+    }
+  ]
+}

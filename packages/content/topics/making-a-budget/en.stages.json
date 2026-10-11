@@ -1,0 +1,197 @@
+{
+  "topicId": "making-a-budget",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["income-and-spending", "budget-plan", "review-and-adjust"],
+      "markdown": "**English draft for R5 review.**\n\nTara gets ₹100 pocket money every week. She makes three jars:\n\n- **Spend jar:** ₹50 for snacks and small things\n- **Save jar:** ₹30 for something bigger later\n- **Share jar:** ₹20 to give or to buy a gift\n\nThat plan is called a **budget**. Every rupee has a jar!\n\nIf the spend jar is empty by Friday, Tara waits until next week. And if she sees she always needs a bit more for snacks, she changes the plan. A budget can change.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-income",
+          "conceptId": "income-and-spending",
+          "prompt": "Tara gets ₹100 every week. What is that ₹100?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Her income"
+            },
+            {
+              "id": "1",
+              "text": "Her spending"
+            },
+            {
+              "id": "2",
+              "text": "Her savings"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Money that comes in regularly is income."
+        },
+        {
+          "id": "young-jars",
+          "conceptId": "budget-plan",
+          "prompt": "What is a budget?",
+          "options": [
+            {
+              "id": "0",
+              "text": "A plan for where each rupee goes"
+            },
+            {
+              "id": "1",
+              "text": "A kind of shop"
+            },
+            {
+              "id": "2",
+              "text": "A bank card"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "A budget gives every rupee a job, like a jar."
+        },
+        {
+          "id": "young-empty",
+          "conceptId": "review-and-adjust",
+          "prompt": "Tara's spend jar is empty on Friday. What should she do?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Take from the save jar"
+            },
+            {
+              "id": "1",
+              "text": "Wait for next week's pocket money"
+            },
+            {
+              "id": "2",
+              "text": "Borrow from a friend every week"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Sticking to the plan keeps her savings safe."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["income-and-spending", "budget-plan", "review-and-adjust"],
+      "markdown": "**English draft for R5 review.**\n\nA common starting framework is **50/30/20**: about 50% of take-home income for needs, 30% for wants and 20% for saving or paying down debt. It is a rule of thumb, not a law; a student with low fixed costs might save more, and a family in a costly city might need more for needs.\n\nTwo other methods are worth knowing. **Zero-based budgeting** assigns every rupee a job until income minus planned spending equals zero (saving counts as a job). **Envelope budgeting** puts cash or digital \"envelopes\" on each category and stops spending when one is empty.\n\nWhatever the method, the cycle is the same: **plan → track → compare → adjust**. A budget that is never reviewed becomes fiction. Compare planned with actual each month, find the biggest gap, and decide whether to change behaviour or change the plan.\n\nFor irregular costs such as annual exam fees or festivals, divide the yearly amount by 12 and set it aside monthly, so it doesn't break one month's budget.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-5030",
+          "conceptId": "budget-plan",
+          "prompt": "On a take-home income of ₹40,000, what does the 50/30/20 rule suggest for saving?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹4,000"
+            },
+            {
+              "id": "1",
+              "text": "₹8,000"
+            },
+            {
+              "id": "2",
+              "text": "₹12,000"
+            },
+            {
+              "id": "3",
+              "text": "₹20,000"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "20% of ₹40,000 is ₹8,000."
+        },
+        {
+          "id": "deep-zero",
+          "conceptId": "budget-plan",
+          "prompt": "In zero-based budgeting, what does \"zero\" mean?",
+          "options": [
+            {
+              "id": "0",
+              "text": "You spend nothing"
+            },
+            {
+              "id": "1",
+              "text": "Income minus planned uses equals zero"
+            },
+            {
+              "id": "2",
+              "text": "You save zero"
+            },
+            {
+              "id": "3",
+              "text": "Your bank balance is zero"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Every rupee is given a job, including saving, so nothing is unplanned."
+        },
+        {
+          "id": "deep-annual",
+          "conceptId": "income-and-spending",
+          "prompt": "Exam fees of ₹6,000 come once a year. What is a smooth way to budget for them?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Pay with a credit card when due"
+            },
+            {
+              "id": "1",
+              "text": "Set aside ₹500 every month"
+            },
+            {
+              "id": "2",
+              "text": "Skip saving that month"
+            },
+            {
+              "id": "3",
+              "text": "Ignore them until they arrive"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "₹6,000 ÷ 12 = ₹500 a month spreads the cost."
+        },
+        {
+          "id": "deep-cycle",
+          "conceptId": "review-and-adjust",
+          "prompt": "Actual food spending was ₹1,200 above plan for three months. What is the best response?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Keep the old plan and hope"
+            },
+            {
+              "id": "1",
+              "text": "Review why, then change behaviour or the plan"
+            },
+            {
+              "id": "2",
+              "text": "Stop tracking"
+            },
+            {
+              "id": "3",
+              "text": "Cut all saving"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A repeated gap means the plan or the habit needs to change; reviewing tells you which."
+        }
+      ]
+    }
+  ]
+}

@@ -1,14 +1,15 @@
 "use client";
 
 import { topicWorlds } from "@gullak/content";
-import { gradeQuiz } from "@gullak/engine";
-import type { Topic, UnlockRule } from "@gullak/types";
+import { gradeQuiz, variantsForGrade } from "@gullak/engine";
+import type { GradeGroup, Topic, UnlockRule } from "@gullak/types";
 import { TopicLesson, type TopicLessonLabels } from "@gullak/ui/components/topic-lesson";
 import { ArrowLeft, CheckCircle2, XCircle } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { TermHelp } from "@/components/help/term-help";
+import { STAGE_TONE, StageBadge } from "@/components/stage-badge";
 import { restoreQuizDraft } from "@/lib/form-safety";
 import { readLearnerState, readProfile, saveLearnerState } from "@/lib/learner-state";
 import { DEFAULT_MASTERY_PARAMS, initialMastery, updateMastery } from "@/lib/mastery";
@@ -18,6 +19,8 @@ import { useLearnerState } from "@/lib/use-learner-state";
 export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
   const t = useTranslations("learner");
   const tQuiz = useTranslations("safety.quiz");
+  const tStage = useTranslations("stage");
+  const tGrade = useTranslations("onboarding.grade");
   const state = useLearnerState();
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [result, setResult] = useState<{ score: number; passed: boolean } | null>(null);
@@ -31,8 +34,21 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
       block: "start",
     });
   }, [result]);
-  const quiz = topic.content.variants.find((variant) => variant.format === "quiz");
-  const draftKey = `gullak-quiz-draft:${topic.meta.id}`;
+  const [profile, setProfile] = useState<ReturnType<typeof readProfile>>(null);
+  const [profileRead, setProfileRead] = useState(false);
+  useEffect(() => {
+    setProfile(readProfile());
+    setProfileRead(true);
+  }, []);
+  const gradeGroup = profile?.gradeGroup ?? "grade-8-10";
+  // Lesson and quiz are the versions written for the learner's class group.
+  const quiz = profileRead
+    ? variantsForGrade(topic.content.variants, gradeGroup).find((variant) => variant.format === "quiz")
+    : undefined;
+  // Read another class's version of the lesson (to compare depth); the quiz always stays at the learner's level.
+  const [previewGrade, setPreviewGrade] = useState<GradeGroup | null>(null);
+  const tailored = topic.content.variants.some((variant) => variant.audience !== undefined);
+  const draftKey = `gullak-quiz-draft:${topic.meta.id}:${quiz?.id ?? ""}`;
   // Keep unchecked answers for this tab session, so a reload or a stray tap on the nav loses nothing.
   useEffect(() => {
     if (!quiz) return;
@@ -55,10 +71,8 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
       return next;
     });
   }
-  const [profile, setProfile] = useState<ReturnType<typeof readProfile>>(null);
-  useEffect(() => setProfile(readProfile()), []);
-  const gradeGroup = profile?.gradeGroup ?? "grade-8-10";
-  const lesson = topicToLesson(topic, gradeGroup);
+  const shownGrade = previewGrade ?? gradeGroup;
+  const lesson = topicToLesson(topic, shownGrade);
   const world = topicWorlds.find((item) => item.topicIds.includes(rule.topicId));
   function submitQuiz() {
     if (!quiz || Object.keys(answers).length !== quiz.questions.length) return;
@@ -125,8 +139,37 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
         </p>
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{topic.content.title}</h1>
         <p className="text-lg leading-7 text-muted-foreground">{topic.content.summary}</p>
+        {profileRead ? <StageBadge gradeGroup={gradeGroup} /> : null}
       </header>
-      <section aria-label={t("lessonSection")}>
+      {profileRead && tailored && rule.gradeGroups.length > 1 ? (
+        <section aria-labelledby="class-compare" className="space-y-2 rounded-2xl border p-4">
+          <h2 id="class-compare" className="text-sm font-bold">
+            {tStage("compareLabel")}
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {rule.gradeGroups.map((grade) => (
+              <button
+                key={grade}
+                type="button"
+                aria-pressed={shownGrade === grade}
+                onClick={() => setPreviewGrade(grade === gradeGroup ? null : grade)}
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg border px-3 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring aria-pressed:border-foreground aria-pressed:bg-muted"
+              >
+                <span aria-hidden="true" className={`size-2.5 rounded-full ${STAGE_TONE[grade]}`} />
+                {grade === gradeGroup
+                  ? tStage("yours", { grade: tGrade(grade) })
+                  : tStage("option", { stage: tStage(`name.${grade}`), grade: tGrade(grade) })}
+              </button>
+            ))}
+          </div>
+          <p role="status" className="text-sm text-muted-foreground">
+            {previewGrade
+              ? tStage("previewing", { grade: tGrade(previewGrade), own: tGrade(gradeGroup) })
+              : tStage("compareHint")}
+          </p>
+        </section>
+      ) : null}
+      <section aria-label={t("lessonSection")} key={shownGrade}>
         <TopicLesson lesson={lesson} labels={lessonLabels} hideTitle />
       </section>
       {quiz ? (

@@ -1,0 +1,197 @@
+{
+  "topicId": "report-a-fraud",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["act-fast", "report-channels", "no-blame"],
+      "markdown": "**English draft for R5 review.**\n\nIf you think someone tricked you or your family into giving money, **tell a grown-up right away**. Don't hide it!\n\nThere's a special helpline number in India for this: **1930**. A grown-up can call it and also tell the bank.\n\nBeing tricked is **not your fault**. Tricksters are clever. Telling quickly is the brave and smart thing to do.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-tell",
+          "conceptId": "act-fast",
+          "prompt": "You think you were tricked online. What do you do first?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Tell a grown-up right away"
+            },
+            {
+              "id": "1",
+              "text": "Hide it"
+            },
+            {
+              "id": "2",
+              "text": "Wait a week"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Telling quickly gives the best chance of help."
+        },
+        {
+          "id": "young-1930",
+          "conceptId": "report-channels",
+          "prompt": "Which number is India's helpline for cyber fraud?",
+          "options": [
+            {
+              "id": "0",
+              "text": "1930"
+            },
+            {
+              "id": "1",
+              "text": "100100"
+            },
+            {
+              "id": "2",
+              "text": "12345"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "1930 is the national cyber-crime helpline."
+        },
+        {
+          "id": "young-blame",
+          "conceptId": "no-blame",
+          "prompt": "Is it your fault if a trickster fools you?",
+          "options": [
+            {
+              "id": "0",
+              "text": "No, tricksters are clever"
+            },
+            {
+              "id": "1",
+              "text": "Yes, always"
+            },
+            {
+              "id": "2",
+              "text": "Only if you are young"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Anyone can be tricked. Speaking up is what matters."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["act-fast", "report-channels", "no-blame"],
+      "markdown": "**English draft for R5 review.**\n\nThe first hours after a fraud matter most. Money moved through UPI or cards can often be **frozen** if reported before it is withdrawn or moved again (the \"golden hour\").\n\n**Step 1: Contain.** Call the bank's official number to block cards, UPI and net banking; change passwords and sign out of other devices.\n**Step 2: Report.** Call **1930** (national cyber-crime helpline) and file at **cybercrime.gov.in**. Note the acknowledgement number.\n**Step 3: Preserve evidence.** Keep transaction IDs, UTR numbers, times, screenshots, phone numbers and links; don't delete the chat.\n**Step 4: Follow up.** Submit a written complaint to the bank. Under RBI rules on limiting customer liability, reporting unauthorised electronic transactions quickly (within three working days) can limit what you lose. Escalate to the bank's grievance officer, and then to the RBI Ombudsman if unresolved.\n\nShame keeps many victims silent, which helps scammers repeat the trick. Reporting protects others and builds the data used to block fraud numbers.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-golden",
+          "conceptId": "act-fast",
+          "prompt": "Why does speed matter after a UPI fraud?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Fees rise daily"
+            },
+            {
+              "id": "1",
+              "text": "Funds can be frozen before they move on"
+            },
+            {
+              "id": "2",
+              "text": "The police close at night"
+            },
+            {
+              "id": "3",
+              "text": "It doesn't"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Early reports let banks trace and hold the money."
+        },
+        {
+          "id": "deep-first",
+          "conceptId": "act-fast",
+          "prompt": "What should come first after spotting an unauthorised payment?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Post about it online"
+            },
+            {
+              "id": "1",
+              "text": "Block cards and UPI through the bank's official number"
+            },
+            {
+              "id": "2",
+              "text": "Wait for a refund"
+            },
+            {
+              "id": "3",
+              "text": "Reply to the scammer"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Containing stops further losses."
+        },
+        {
+          "id": "deep-evidence",
+          "conceptId": "report-channels",
+          "prompt": "Which evidence is most useful to keep?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Only the scammer's photo"
+            },
+            {
+              "id": "1",
+              "text": "Transaction IDs, UTRs, times, screenshots and numbers"
+            },
+            {
+              "id": "2",
+              "text": "Nothing; it's upsetting"
+            },
+            {
+              "id": "3",
+              "text": "Your PIN"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "These details let banks and police trace the money."
+        },
+        {
+          "id": "deep-escalate",
+          "conceptId": "report-channels",
+          "prompt": "Your bank doesn't resolve your complaint. Where can you escalate?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The RBI Ombudsman"
+            },
+            {
+              "id": "1",
+              "text": "The scammer"
+            },
+            {
+              "id": "2",
+              "text": "A social media poll"
+            },
+            {
+              "id": "3",
+              "text": "Nowhere"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "After the bank's grievance process, the RBI Ombudsman handles complaints."
+        }
+      ]
+    }
+  ]
+}

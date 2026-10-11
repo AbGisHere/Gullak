@@ -54,6 +54,11 @@ const LearnerStateSchema = z.object({
     )
     .max(20)
     .default([]),
+  /** The sign-up placement quiz: how many rounds were passed of how many offered; null until taken or skipped. */
+  placement: z
+    .object({ at: z.string(), passed: z.number().int().min(0), rounds: z.number().int().min(0), skipped: z.boolean() })
+    .nullable()
+    .default(null),
 });
 export type LearnerState = z.infer<typeof LearnerStateSchema>;
 
@@ -68,6 +73,7 @@ export const emptyState = (): LearnerState => ({
   emergencyReservePaise: 0,
   reserveTargetPaise: null,
   goals: [],
+  placement: null,
 });
 
 export function readLearnerState(): LearnerState {

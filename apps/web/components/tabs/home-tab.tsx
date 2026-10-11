@@ -1,12 +1,16 @@
 "use client";
 
 import type { LearnerProfile } from "@gullak/types";
-import { ArrowRight, Award, BookOpen, CalendarDays, Compass, PiggyBank } from "lucide-react";
+import { ArrowRight, Award, BookOpen, CalendarDays, Compass, Gauge, PiggyBank } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { TopicSummary } from "@/components/learn-map";
 import { RecommendationCard } from "@/components/recommendation-card";
+import { StageBadge } from "@/components/stage-badge";
+import type { LearnerState } from "@/lib/learner-state";
 
 interface HomeTabProps {
+  placement: LearnerState["placement"];
+  onStartPlacement: () => void;
   onLaunchShopping: () => void;
   profile: LearnerProfile;
   topics: TopicSummary[];
@@ -16,6 +20,8 @@ interface HomeTabProps {
 }
 
 export function HomeTab({
+  placement,
+  onStartPlacement,
   profile,
   topics,
   daysPractised,
@@ -25,8 +31,39 @@ export function HomeTab({
 }: HomeTabProps) {
   const t = useTranslations("nextLearning");
   const dashboard = useTranslations("dashboard");
+  const tPlacement = useTranslations("placement");
+  const taken = placement && !placement.skipped;
   return (
     <div className="max-w-5xl space-y-8">
+      <section
+        aria-labelledby="placement-card"
+        data-testid="placement-card"
+        className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border-2 border-foreground p-5"
+      >
+        <div className="flex min-w-0 items-start gap-3">
+          <Gauge className="mt-1 size-6 shrink-0" aria-hidden="true" />
+          <div className="space-y-2">
+            <h2 id="placement-card" className="text-xl font-bold">
+              {taken
+                ? tPlacement("cardDone", { passed: placement.passed, rounds: placement.rounds })
+                : tPlacement("cardTitle")}
+            </h2>
+            <StageBadge gradeGroup={profile.gradeGroup} />
+            <p className="text-muted-foreground">{taken ? tPlacement("cardDoneBody") : tPlacement("cardBody")}</p>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={onStartPlacement}
+          className={
+            taken
+              ? "min-h-12 rounded-lg border-2 border-foreground px-5 font-bold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              : "min-h-12 rounded-lg bg-foreground px-5 font-bold text-background hover:bg-foreground/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          }
+        >
+          {taken ? tPlacement("retake") : tPlacement("start")}
+        </button>
+      </section>
       <RecommendationCard topics={topics} profile={profile} />
       <div className="flex items-start gap-3 border-b border-brand-ink/20 pb-6">
         <CalendarDays aria-hidden="true" className="mt-1 size-5 shrink-0" />

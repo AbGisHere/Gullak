@@ -1,0 +1,197 @@
+{
+  "topicId": "saving-habit",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["pay-yourself-first", "saving-streak"],
+      "markdown": "**English draft for R5 review.**\n\nHere's a trick: when you get pocket money, put some in your piggy bank **first**, before you buy anything. That's called **paying yourself first**.\n\nEven ₹5 a week is great. ₹5 every week for a year is ₹260!\n\nSaving every week, again and again, makes it a **habit**, like brushing your teeth.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-first",
+          "conceptId": "pay-yourself-first",
+          "prompt": "You get ₹50. What does \"pay yourself first\" mean?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Save some before spending"
+            },
+            {
+              "id": "1",
+              "text": "Spend it all first"
+            },
+            {
+              "id": "2",
+              "text": "Give it all away"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Put some aside as soon as you get it."
+        },
+        {
+          "id": "young-260",
+          "conceptId": "saving-streak",
+          "prompt": "₹5 every week for 52 weeks adds up to…",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹52"
+            },
+            {
+              "id": "1",
+              "text": "₹260"
+            },
+            {
+              "id": "2",
+              "text": "₹5"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "5 × 52 = 260."
+        },
+        {
+          "id": "young-habit",
+          "conceptId": "saving-streak",
+          "prompt": "Why save a little every week?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It becomes a habit"
+            },
+            {
+              "id": "1",
+              "text": "Big amounts are bad"
+            },
+            {
+              "id": "2",
+              "text": "Banks need it"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Doing it again and again turns saving into a habit."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["pay-yourself-first", "saving-streak"],
+      "markdown": "**English draft for R5 review.**\n\n**Pay yourself first** turns saving from a leftover into a fixed expense: the transfer happens on payday, before discretionary spending. Behavioural research shows that **automation** (a standing instruction or an auto-debit) beats willpower because it removes a monthly decision.\n\nThe **savings rate** (saved ÷ income) is a better measure than the amount. Saving ₹3,000 of ₹15,000 is a 20% rate; saving ₹5,000 of ₹1,00,000 is just 5%.\n\nSmall regular amounts compound into large ones. ₹1,000 a month for 10 years is ₹1.2 lakh of your own money before any growth. With growth the total is higher, but the rate is an **assumption, not a promise**.\n\nWhen income rises, raise the savings rate before lifestyle catches up: a simple rule is to save half of every raise. Track streaks, but don't punish a missed month; restarting quickly matters more than a perfect record.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-rate",
+          "conceptId": "pay-yourself-first",
+          "prompt": "Mira earns ₹15,000 and saves ₹3,000. What is her savings rate?",
+          "options": [
+            {
+              "id": "0",
+              "text": "5%"
+            },
+            {
+              "id": "1",
+              "text": "15%"
+            },
+            {
+              "id": "2",
+              "text": "20%"
+            },
+            {
+              "id": "3",
+              "text": "30%"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "₹3,000 ÷ ₹15,000 = 20%."
+        },
+        {
+          "id": "deep-auto",
+          "conceptId": "pay-yourself-first",
+          "prompt": "Why does automating savings on payday tend to work?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Banks pay a bonus"
+            },
+            {
+              "id": "1",
+              "text": "It removes a monthly decision that willpower can lose"
+            },
+            {
+              "id": "2",
+              "text": "It hides money from tax"
+            },
+            {
+              "id": "3",
+              "text": "It guarantees returns"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Automation makes saving the default, so it doesn't depend on willpower."
+        },
+        {
+          "id": "deep-total",
+          "conceptId": "saving-streak",
+          "prompt": "₹1,000 a month for 10 years, before any growth, adds up to…",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹12,000"
+            },
+            {
+              "id": "1",
+              "text": "₹1,20,000"
+            },
+            {
+              "id": "2",
+              "text": "₹10,000"
+            },
+            {
+              "id": "3",
+              "text": "₹1,00,000"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "₹1,000 × 120 months = ₹1,20,000."
+        },
+        {
+          "id": "deep-raise",
+          "conceptId": "saving-streak",
+          "prompt": "You get a raise. Which habit protects your saving?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Spend all of it first"
+            },
+            {
+              "id": "1",
+              "text": "Save half of every raise"
+            },
+            {
+              "id": "2",
+              "text": "Stop saving to celebrate"
+            },
+            {
+              "id": "3",
+              "text": "Borrow more"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Raising the savings rate with income stops lifestyle creep from eating the raise."
+        }
+      ]
+    }
+  ]
+}

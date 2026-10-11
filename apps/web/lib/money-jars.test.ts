@@ -23,6 +23,7 @@ const state = (): LearnerState => ({
   emergencyReservePaise: 0,
   reserveTargetPaise: null,
   goals: [],
+  placement: null,
 });
 const now = new Date("2026-10-11T10:00:00Z");
 

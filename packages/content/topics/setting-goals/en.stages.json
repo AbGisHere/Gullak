@@ -1,0 +1,197 @@
+{
+  "topicId": "setting-goals",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["clear-goal", "saving-steps", "staying-on-track"],
+      "markdown": "**English draft for R5 review.**\n\nAman wants a football that costs ₹200.\n\n\"I want a football\" is a wish. \"I will save ₹200 in 10 weeks\" is a **goal**. It says **how much** and **by when**.\n\n₹200 in 10 weeks means ₹20 every week. Small steps!\n\nAman draws 10 boxes on paper and colours one each week he saves. Watching the boxes fill up keeps him going.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-goal",
+          "conceptId": "clear-goal",
+          "prompt": "Which one is a goal, not just a wish?",
+          "options": [
+            {
+              "id": "0",
+              "text": "I want a football"
+            },
+            {
+              "id": "1",
+              "text": "I will save ₹200 in 10 weeks for a football"
+            },
+            {
+              "id": "2",
+              "text": "Footballs are fun"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A goal says how much and by when."
+        },
+        {
+          "id": "young-steps",
+          "conceptId": "saving-steps",
+          "prompt": "₹200 in 10 weeks. How much each week?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹10"
+            },
+            {
+              "id": "1",
+              "text": "₹20"
+            },
+            {
+              "id": "2",
+              "text": "₹50"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "₹200 ÷ 10 = ₹20 each week."
+        },
+        {
+          "id": "young-boxes",
+          "conceptId": "staying-on-track",
+          "prompt": "Why does Aman colour a box each week?",
+          "options": [
+            {
+              "id": "0",
+              "text": "To see his progress"
+            },
+            {
+              "id": "1",
+              "text": "Because colouring is homework"
+            },
+            {
+              "id": "2",
+              "text": "To spend faster"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Seeing progress helps you keep going."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["clear-goal", "saving-steps", "staying-on-track"],
+      "markdown": "**English draft for R5 review.**\n\nA useful test for goals is **SMART**: Specific, Measurable, Achievable, Relevant and Time-bound. \"Save for college\" fails most of these; \"save ₹60,000 for first-year hostel fees by June 2028\" passes.\n\nGoals also differ by **horizon**. Short-term goals (under a year) belong in safe, easy-to-reach places. Long-term goals (five years or more) can consider options that may grow more but also swing in value, because there is time to recover from bad years.\n\nTo work out the monthly amount, divide what is left by the months remaining. If growth is involved, the required amount falls, but any rate used is an **assumption, not a promise**. For example, ₹60,000 in 30 months with no growth is ₹2,000 a month.\n\nWhen goals compete, rank them. An emergency fund usually comes before a new bike. And review quarterly: if income or prices change, update the amount or the date rather than quietly abandoning the goal.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-smart",
+          "conceptId": "clear-goal",
+          "prompt": "Which goal is SMART?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Save more money"
+            },
+            {
+              "id": "1",
+              "text": "Save for later"
+            },
+            {
+              "id": "2",
+              "text": "Save ₹60,000 for hostel fees by June 2028"
+            },
+            {
+              "id": "3",
+              "text": "Be rich someday"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "It is specific, measurable and has a deadline."
+        },
+        {
+          "id": "deep-monthly",
+          "conceptId": "saving-steps",
+          "prompt": "You need ₹60,000 in 30 months, assuming no growth. How much a month?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹1,500"
+            },
+            {
+              "id": "1",
+              "text": "₹2,000"
+            },
+            {
+              "id": "2",
+              "text": "₹3,000"
+            },
+            {
+              "id": "3",
+              "text": "₹6,000"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "₹60,000 ÷ 30 = ₹2,000."
+        },
+        {
+          "id": "deep-horizon",
+          "conceptId": "clear-goal",
+          "prompt": "A goal is only 8 months away. Where should that money usually sit?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Somewhere safe and easy to reach"
+            },
+            {
+              "id": "1",
+              "text": "In the riskiest option available"
+            },
+            {
+              "id": "2",
+              "text": "In a 5-year lock-in"
+            },
+            {
+              "id": "3",
+              "text": "Under the mattress"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Short horizons leave no time to recover from a fall, so safety and access matter most."
+        },
+        {
+          "id": "deep-review",
+          "conceptId": "staying-on-track",
+          "prompt": "Prices rise and your goal now costs more. What is the best move?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Quietly give up"
+            },
+            {
+              "id": "1",
+              "text": "Update the amount or the date and keep going"
+            },
+            {
+              "id": "2",
+              "text": "Borrow the gap at once"
+            },
+            {
+              "id": "3",
+              "text": "Ignore it"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Revising the plan keeps the goal alive."
+        }
+      ]
+    }
+  ]
+}

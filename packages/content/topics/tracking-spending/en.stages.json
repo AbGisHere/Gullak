@@ -1,0 +1,197 @@
+{
+  "topicId": "tracking-spending",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["recording-spending", "spotting-patterns"],
+      "markdown": "**English draft for R5 review.**\n\nKavi wonders where his pocket money goes. So he writes each spend in a little notebook:\n\n- Toffee ₹5\n- Toffee ₹5\n- Pencil ₹10\n- Toffee ₹5\n\nAt the end of the week he counts: toffees were ₹15! More than the pencil.\n\nWriting down every spend is called **tracking**. It shows you where your money really goes.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-write",
+          "conceptId": "recording-spending",
+          "prompt": "What is the easiest way to track spending?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Write down every spend"
+            },
+            {
+              "id": "1",
+              "text": "Guess at the end of the month"
+            },
+            {
+              "id": "2",
+              "text": "Never look"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Writing every spend shows the true picture."
+        },
+        {
+          "id": "young-toffee",
+          "conceptId": "spotting-patterns",
+          "prompt": "Kavi spent ₹5 + ₹5 + ₹5 on toffees. How much is that?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹5"
+            },
+            {
+              "id": "1",
+              "text": "₹10"
+            },
+            {
+              "id": "2",
+              "text": "₹15"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Three toffees at ₹5 each is ₹15."
+        },
+        {
+          "id": "young-learn",
+          "conceptId": "spotting-patterns",
+          "prompt": "What did Kavi learn from his notebook?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Toffees cost him more than he thought"
+            },
+            {
+              "id": "1",
+              "text": "Pencils are free"
+            },
+            {
+              "id": "2",
+              "text": "Notebooks are expensive"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Tracking showed a pattern he hadn't noticed."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["recording-spending", "spotting-patterns"],
+      "markdown": "**English draft for R5 review.**\n\nTracking turns impressions into data. Record every transaction with the **date, amount, category and payment method**. UPI and card statements help, but cash and small UPI payments are easy to miss, which is exactly where leaks hide.\n\nOnce a month, group spending into categories and look for three patterns. **Small frequent spends** (₹40 coffees) that add up to large monthly totals. **Spikes** around events such as exams, festivals or sales. And **subscriptions** that renew quietly.\n\nA quick calculation makes leaks concrete: ₹40 a day is about ₹1,200 a month and ₹14,600 a year. The point is not to cut every small joy, it is to choose which ones are worth their yearly cost.\n\nCompare tracked spending with your budget (plan vs actual). The gap tells you where to act. Keep categories few, around 6–8, so tracking stays quick enough to continue.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-fields",
+          "conceptId": "recording-spending",
+          "prompt": "Which record is most useful for tracking?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Amount only"
+            },
+            {
+              "id": "1",
+              "text": "Date, amount, category and payment method"
+            },
+            {
+              "id": "2",
+              "text": "Shop name only"
+            },
+            {
+              "id": "3",
+              "text": "The total at month end"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Those four fields let you group and compare spending later."
+        },
+        {
+          "id": "deep-daily",
+          "conceptId": "spotting-patterns",
+          "prompt": "₹40 a day on snacks is about how much a year?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹1,460"
+            },
+            {
+              "id": "1",
+              "text": "₹4,800"
+            },
+            {
+              "id": "2",
+              "text": "₹14,600"
+            },
+            {
+              "id": "3",
+              "text": "₹40,000"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "₹40 × 365 = ₹14,600."
+        },
+        {
+          "id": "deep-miss",
+          "conceptId": "recording-spending",
+          "prompt": "Which spends are easiest to miss when tracking?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Rent"
+            },
+            {
+              "id": "1",
+              "text": "School fees"
+            },
+            {
+              "id": "2",
+              "text": "Small cash and UPI payments"
+            },
+            {
+              "id": "3",
+              "text": "Annual insurance"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Small, frequent payments slip through unless you record them right away."
+        },
+        {
+          "id": "deep-action",
+          "conceptId": "spotting-patterns",
+          "prompt": "Tracking shows three unused subscriptions. What is the sensible step?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Keep them in case"
+            },
+            {
+              "id": "1",
+              "text": "Cancel the ones you don't use"
+            },
+            {
+              "id": "2",
+              "text": "Add a fourth"
+            },
+            {
+              "id": "3",
+              "text": "Stop tracking"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Tracking is useful when it leads to a decision."
+        }
+      ]
+    }
+  ]
+}

@@ -8,6 +8,16 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+
+- Lessons change with age: each of the 14 lessons open to every class now has a simpler Class 6–7 version (small numbers, everyday examples, easier quiz) and a deeper Class 11–12 version (formulas, tax, regulators, harder quiz), beside the existing Class 8–10 one. They live in `topics/<id>/en.stages.json`, so the pinned `en.json` bytes are unchanged.
+- Stages: Explorer (Class 6–7), Navigator (Class 8–10) and Strategist (Class 11–12), each with its own colour, shown on Home, the learning path and every lesson. A lesson can be read in another class's version to compare depth; the quiz stays at the learner's level.
+- Placement quiz right after sign-up and pinned to the top of Home: up to 2, 3 or 5 rounds (by the knowledge level chosen at sign-up), each one a real lesson check for the learner's class. Passing a round passes that lesson, so learners skip what they already know; it stops at the first round not passed.
+
+### Changed
+
+- The topic loader merges an optional `<locale>.stages.json`, and grading versions cover both files. `variantsForGrade` in `@gullak/engine` picks a class group's own version of a format over the general one, for lessons, quizzes and the lesson API.
+
 ## [0.2.31] - 2026-10-11
 
 ### Fixed

@@ -29,6 +29,7 @@ const empty: LearnerState = {
   emergencyReservePaise: 0,
   reserveTargetPaise: null,
   goals: [],
+  placement: null,
 };
 
 describe("learningRecommendation", () => {

@@ -927,5 +927,52 @@
       "too-many-goals": "You can have up to 20 goals.",
       "name": "Give your goal a name."
     }
+  },
+  "stage": {
+    "name": {
+      "grade-6-7": "Explorer",
+      "grade-8-10": "Navigator",
+      "grade-11-12": "Strategist"
+    },
+    "badge": "{stage} · {grade}",
+    "tagline": {
+      "grade-6-7": "Short lessons, small numbers and everyday examples.",
+      "grade-8-10": "Real situations: budgets, deposits and first investments.",
+      "grade-11-12": "Deeper lessons: formulas, tax, regulators and real rules."
+    },
+    "lessonCount": "{count} lessons in your path.",
+    "compareLabel": "See this lesson for another class",
+    "compareHint": "Each class reads a version written for its age. Your quiz stays at your level.",
+    "yours": "{grade} (you)",
+    "option": "{stage} · {grade}",
+    "previewing": "Showing the {grade} version. The quiz below is still the one for {own}."
+  },
+  "placement": {
+    "title": "Find your level",
+    "intro": "Answer up to {rounds} quick rounds. Each round is a real lesson check written for your class. Pass one and that lesson counts as done, so you can skip what you already know. It stops at the first round you don't pass, so there's no pressure.",
+    "roundsByLevel": "How many rounds you get depends on what you told us: new to money 2, know a few basics 3, use money often 5.",
+    "start": "Start the level check",
+    "skip": "Skip for now",
+    "roundOf": "Round {round} of {rounds}",
+    "checkRound": "Check this round",
+    "answerAll": "{remaining, plural, one {# question} other {# questions}} left",
+    "roundPassed": "Passed: {title}",
+    "scoreLine": "You scored {score}%.",
+    "nextUp": "Next up: {title}.",
+    "nextRound": "Next round",
+    "stopHere": "Stop here",
+    "resultFresh": "You start at the beginning",
+    "resultSome": "You tested out of {passed, plural, one {# lesson} other {# lessons}}",
+    "resultAll": "You cleared every round!",
+    "resultFreshBody": "That's perfect: your path begins with the first lesson, and the quiz showed us where to help.",
+    "resultBody": "You passed {passed} of {rounds} rounds. Those lessons are marked passed.",
+    "startsAt": "Your path continues at “{title}”.",
+    "toPath": "Go to my path",
+    "toHome": "Back to Home",
+    "cardTitle": "Find your level: a quick quiz",
+    "cardBody": "A few rounds from your own class's lessons. Pass a round and skip that lesson.",
+    "cardDone": "Level check: {passed} of {rounds} rounds passed",
+    "cardDoneBody": "Your path starts after the lessons you tested out of. Retake it any time.",
+    "retake": "Retake"
   }
 }

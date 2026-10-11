@@ -1,0 +1,222 @@
+{
+  "topicId": "compounding",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["growth-on-growth", "start-early", "rate-and-time"],
+      "markdown": "**English draft for R5 review.**\n\nImagine a magic seed. You plant **10 seeds**. Each year, every seed makes **1 new seed**. After one year you have 20. Then those 20 each make one more: 40!\n\nMoney can work a bit like that. When money earns a little extra, and then that extra earns extra too, it's called **compounding**. (Real money grows much more slowly than seeds, and the growth isn't promised.)\n\nThe secret? **Start early**. The longer the seeds grow, the bigger the pile.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-seeds",
+          "conceptId": "growth-on-growth",
+          "prompt": "10 seeds each make 1 new seed. How many seeds after one year?",
+          "options": [
+            {
+              "id": "0",
+              "text": "10"
+            },
+            {
+              "id": "1",
+              "text": "11"
+            },
+            {
+              "id": "2",
+              "text": "20"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Each of the 10 makes one more, so 10 + 10 = 20."
+        },
+        {
+          "id": "young-early",
+          "conceptId": "start-early",
+          "prompt": "Riya starts saving at 8, Raj at 14. Who gives their money more time to grow?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Riya"
+            },
+            {
+              "id": "1",
+              "text": "Raj"
+            },
+            {
+              "id": "2",
+              "text": "Both the same"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Starting earlier gives more time to grow."
+        },
+        {
+          "id": "young-extra",
+          "conceptId": "growth-on-growth",
+          "prompt": "What is compounding?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The extra also earns extra"
+            },
+            {
+              "id": "1",
+              "text": "Losing money"
+            },
+            {
+              "id": "2",
+              "text": "Spending fast"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Growth on growth is compounding."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["growth-on-growth", "start-early", "rate-and-time"],
+      "markdown": "**English draft for R5 review.**\n\nCompound growth follows **A = P × (1 + r)ⁿ**, where P is the starting amount, r the rate per period and n the number of periods. At an assumed 8% a year (an assumption, not a promise), ₹10,000 becomes about ₹21,600 in 10 years and about ₹46,600 in 20 years. Doubling the time more than doubles the gain.\n\nThe **Rule of 72** gives a quick estimate: years to double ≈ 72 ÷ rate. At 8%, about 9 years; at 6%, about 12.\n\n**Compounding frequency** matters a little: monthly compounding beats yearly at the same quoted rate. Compare products using the effective annual rate.\n\nCompounding works against you too. Credit-card debt at 36% a year doubles in about 2 years. And **inflation** compounds: at 6% a year, prices roughly double in 12 years, so what matters is the **real** return (return minus inflation).\n\nTime is the strongest lever. Someone who invests from 22 to 32 and stops can end up with more than someone who starts at 32 and continues to 60, at the same assumed rate.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-72",
+          "conceptId": "rate-and-time",
+          "prompt": "Using the Rule of 72, how long does money take to double at an assumed 9% a year?",
+          "options": [
+            {
+              "id": "0",
+              "text": "4 years"
+            },
+            {
+              "id": "1",
+              "text": "8 years"
+            },
+            {
+              "id": "2",
+              "text": "12 years"
+            },
+            {
+              "id": "3",
+              "text": "72 years"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "72 ÷ 9 = 8 years."
+        },
+        {
+          "id": "deep-formula",
+          "conceptId": "growth-on-growth",
+          "prompt": "₹10,000 grows at an assumed 10% a year, compounded. What is it after 2 years?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹12,000"
+            },
+            {
+              "id": "1",
+              "text": "₹12,100"
+            },
+            {
+              "id": "2",
+              "text": "₹11,000"
+            },
+            {
+              "id": "3",
+              "text": "₹20,000"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "10,000 × 1.1 × 1.1 = 12,100."
+        },
+        {
+          "id": "deep-debt",
+          "conceptId": "rate-and-time",
+          "prompt": "Card debt grows at 36% a year. Roughly how long until it doubles if unpaid?",
+          "options": [
+            {
+              "id": "0",
+              "text": "About 2 years"
+            },
+            {
+              "id": "1",
+              "text": "About 7 years"
+            },
+            {
+              "id": "2",
+              "text": "About 12 years"
+            },
+            {
+              "id": "3",
+              "text": "It never doubles"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "72 ÷ 36 = 2 years. Compounding works against borrowers too."
+        },
+        {
+          "id": "deep-real",
+          "conceptId": "rate-and-time",
+          "prompt": "A deposit returns 7% while inflation is 6%. What is the approximate real return?",
+          "options": [
+            {
+              "id": "0",
+              "text": "13%"
+            },
+            {
+              "id": "1",
+              "text": "7%"
+            },
+            {
+              "id": "2",
+              "text": "1%"
+            },
+            {
+              "id": "3",
+              "text": "-1%"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Real return ≈ 7% − 6% = 1%."
+        },
+        {
+          "id": "deep-early",
+          "conceptId": "start-early",
+          "prompt": "Why can investing for 10 early years beat 28 later years at the same rate?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Early money gets more years to compound"
+            },
+            {
+              "id": "1",
+              "text": "Banks pay young people more"
+            },
+            {
+              "id": "2",
+              "text": "Later money is taxed"
+            },
+            {
+              "id": "3",
+              "text": "It can't"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Money added early has decades of growth on growth."
+        }
+      ]
+    }
+  ]
+}

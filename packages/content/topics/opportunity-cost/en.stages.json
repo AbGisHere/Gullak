@@ -1,0 +1,172 @@
+{
+  "topicId": "opportunity-cost",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["trade-offs", "next-best-choice"],
+      "markdown": "**English draft for R5 review.**\n\nZoya has ₹20. She can buy **a kite** or **an ice cream**. Not both!\n\nShe picks the kite. The ice cream she didn't get is what she **gave up**. That's called the **opportunity cost**.\n\nEvery time we choose one thing, we give up another. So it helps to ask: what will I miss if I pick this?\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-gave-up",
+          "conceptId": "next-best-choice",
+          "prompt": "Zoya picks the kite instead of the ice cream. What did she give up?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The kite"
+            },
+            {
+              "id": "1",
+              "text": "The ice cream"
+            },
+            {
+              "id": "2",
+              "text": "Nothing"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "The thing you don't pick is what you give up."
+        },
+        {
+          "id": "young-both",
+          "conceptId": "trade-offs",
+          "prompt": "Why can't Zoya have both?",
+          "options": [
+            {
+              "id": "0",
+              "text": "She has only ₹20"
+            },
+            {
+              "id": "1",
+              "text": "Kites are bad"
+            },
+            {
+              "id": "2",
+              "text": "Shops don't allow it"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Limited money means we must choose."
+        },
+        {
+          "id": "young-time",
+          "conceptId": "trade-offs",
+          "prompt": "If you play games all evening, what might you give up?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Time for homework or sleep"
+            },
+            {
+              "id": "1",
+              "text": "Nothing at all"
+            },
+            {
+              "id": "2",
+              "text": "More time"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Time is limited too, so choosing one thing uses up time for another."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["trade-offs", "next-best-choice"],
+      "markdown": "**English draft for R5 review.**\n\n**Opportunity cost** is the value of the best alternative you give up. It includes money, time and future options, and it is the cost people most often forget because it never shows up on a bill.\n\nConsider Rohan, who could take a summer internship paying ₹15,000 or a free coding course that he believes could raise his future earnings. Taking the course has an explicit cost of zero but an opportunity cost of ₹15,000 plus whatever experience the internship would have given.\n\nTwo traps distort these decisions. **Sunk costs** are money or time already spent that cannot be recovered; they should not drive the next choice (\"I paid for the gym, so I must keep going\" is only valid if going is still worth it). And **comparing to nothing**: every choice should be compared with the next best option, not with doing nothing.\n\nIn money terms, keeping ₹10,000 idle in cash has an opportunity cost too: whatever it could have earned elsewhere, adjusted for risk.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-intern",
+          "conceptId": "next-best-choice",
+          "prompt": "Rohan picks the free course over a ₹15,000 internship. What is the opportunity cost?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹0, the course is free"
+            },
+            {
+              "id": "1",
+              "text": "₹15,000 plus the internship experience"
+            },
+            {
+              "id": "2",
+              "text": "The course fee"
+            },
+            {
+              "id": "3",
+              "text": "Nothing, since he chose freely"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "The best alternative given up is the internship pay and experience."
+        },
+        {
+          "id": "deep-sunk",
+          "conceptId": "trade-offs",
+          "prompt": "Asha paid ₹2,000 for a concert, then falls ill. How should the ₹2,000 affect her choice to go?",
+          "options": [
+            {
+              "id": "0",
+              "text": "She must go, or the money is wasted"
+            },
+            {
+              "id": "1",
+              "text": "It shouldn't; it's spent either way"
+            },
+            {
+              "id": "2",
+              "text": "She should buy another ticket"
+            },
+            {
+              "id": "3",
+              "text": "She should ask for a loan"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "The ₹2,000 is a sunk cost; the choice should depend only on whether going is still worth it."
+        },
+        {
+          "id": "deep-idle",
+          "conceptId": "next-best-choice",
+          "prompt": "What is the opportunity cost of keeping money idle in cash for years?",
+          "options": [
+            {
+              "id": "0",
+              "text": "None"
+            },
+            {
+              "id": "1",
+              "text": "What it could have earned in a safe alternative"
+            },
+            {
+              "id": "2",
+              "text": "The bank's fees only"
+            },
+            {
+              "id": "3",
+              "text": "The price of a wallet"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Idle money gives up what it could have earned elsewhere, adjusted for risk."
+        }
+      ]
+    }
+  ]
+}

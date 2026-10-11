@@ -1,0 +1,193 @@
+{
+  "topicId": "money-basics",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["money-in", "money-out"],
+      "markdown": "**English draft for R5 review.**\n\nThink of a piggy bank. Coins **go in** when you get pocket money or a gift from Nani. Coins **come out** when you buy a pencil or a samosa.\n\nMoney coming in is called **income**. Money going out is called **spending**. If more goes out than comes in, the piggy bank gets empty!\n\nSo before you buy something, peek inside: how much came in, and how much is left?\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "coins-in",
+          "conceptId": "money-in",
+          "prompt": "Nani gives you ₹50 on your birthday. Is that money coming in or going out?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Coming in"
+            },
+            {
+              "id": "1",
+              "text": "Going out"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "A gift adds money to your piggy bank, so it is coming in."
+        },
+        {
+          "id": "coins-out",
+          "conceptId": "money-out",
+          "prompt": "You buy a ₹10 eraser. What happens to your money?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It goes up"
+            },
+            {
+              "id": "1",
+              "text": "It goes out"
+            },
+            {
+              "id": "2",
+              "text": "Nothing changes"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Buying something means money goes out."
+        },
+        {
+          "id": "empty-bank",
+          "conceptId": "money-out",
+          "prompt": "What happens if more money goes out than comes in?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The piggy bank fills up"
+            },
+            {
+              "id": "1",
+              "text": "The piggy bank gets empty"
+            },
+            {
+              "id": "2",
+              "text": "Money grows by itself"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Spending more than you get leaves nothing behind."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["money-in", "money-out"],
+      "markdown": "**English draft for R5 review.**\n\nEvery household runs on **cash flow**: money in minus money out over a period.\n\n**Inflows** can be active income (a salary, a part-time job, tuition fees you earn), passive income (interest, rent) or one-off receipts (gifts, a scholarship). **Outflows** split into **fixed** costs that barely change month to month (rent, school fees, an EMI) and **variable** costs that do (food, travel, fun).\n\nIf inflows are greater than outflows, you have a **surplus** you can save or invest. If outflows are greater, you run a **deficit**, which is covered by savings or borrowing. Neither can last forever: a long deficit drains savings and builds debt.\n\nA useful habit is to look at the **net** figure every month, not just the income. A high earner with higher spending is worse off than a modest earner with a steady surplus.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "net-flow",
+          "conceptId": "money-in",
+          "prompt": "Kiran earns ₹18,000 a month from a part-time job and spends ₹15,500. What is the monthly cash flow?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹15,500 deficit"
+            },
+            {
+              "id": "1",
+              "text": "₹2,500 surplus"
+            },
+            {
+              "id": "2",
+              "text": "₹33,500 surplus"
+            },
+            {
+              "id": "3",
+              "text": "₹2,500 deficit"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "₹18,000 in minus ₹15,500 out leaves a ₹2,500 surplus."
+        },
+        {
+          "id": "fixed-or-variable",
+          "conceptId": "money-out",
+          "prompt": "Which of these is usually a fixed cost?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Eating out"
+            },
+            {
+              "id": "1",
+              "text": "Monthly rent"
+            },
+            {
+              "id": "2",
+              "text": "Movie tickets"
+            },
+            {
+              "id": "3",
+              "text": "Shopping"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Rent stays the same each month; the others change with choices."
+        },
+        {
+          "id": "passive-income",
+          "conceptId": "money-in",
+          "prompt": "Which is an example of passive income?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Wages for a weekend shift"
+            },
+            {
+              "id": "1",
+              "text": "Interest earned on savings"
+            },
+            {
+              "id": "2",
+              "text": "Fees for tutoring a neighbour"
+            },
+            {
+              "id": "3",
+              "text": "Prize money from a quiz"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Interest arrives without extra work each month; the others pay for work or are one-offs."
+        },
+        {
+          "id": "long-deficit",
+          "conceptId": "money-out",
+          "prompt": "What happens if a household runs a deficit for many months?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Savings grow"
+            },
+            {
+              "id": "1",
+              "text": "Savings shrink or debt builds"
+            },
+            {
+              "id": "2",
+              "text": "Nothing, as long as income is high"
+            },
+            {
+              "id": "3",
+              "text": "Prices fall"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A deficit has to be paid from savings or borrowing, so one or both suffer."
+        }
+      ]
+    }
+  ]
+}

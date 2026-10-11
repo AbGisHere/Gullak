@@ -30,3 +30,43 @@ describe("server topic loader", () => {
     await expect(loadTopic(directory, "fixed-deposit", "hi")).rejects.toMatchObject({ code: "ENOENT" });
   });
 });
+
+describe("class-group versions", () => {
+  const topicIds = readdirSync(directory, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name);
+  it.each(topicIds)("%s has a lesson and a quiz for every class group it is open to", async (id) => {
+    const topic = await loadTopic(directory, id, "en");
+    const rule = allUnlockRules.find((r) => r.topicId === id);
+    for (const grade of rule?.gradeGroups ?? []) {
+      const visible = topic.content.variants.filter((v) => !v.audience || v.audience.includes(grade));
+      expect(
+        visible.some((v) => v.format === "quiz"),
+        `${id} quiz for ${grade}`,
+      ).toBe(true);
+      expect(
+        visible.some((v) => v.format !== "quiz"),
+        `${id} lesson for ${grade}`,
+      ).toBe(true);
+    }
+  });
+
+  it("writes a Class 6–7 and a Class 11–12 version of every lesson open to all classes", async () => {
+    const shared = allUnlockRules.filter((r) => r.gradeGroups.length === 3);
+    expect(shared.length).toBeGreaterThan(0);
+    for (const rule of shared) {
+      const topic = await loadTopic(directory, rule.topicId, "en");
+      for (const grade of ["grade-6-7", "grade-11-12"] as const) {
+        const own = topic.content.variants.filter((v) => v.audience?.includes(grade));
+        expect(own.map((v) => v.format).sort(), `${rule.topicId} ${grade}`).toEqual(["quiz", "transcript"]);
+      }
+    }
+  });
+
+  it("versions grading by the stages file too, and leaves topics without one unchanged", async () => {
+    const { contentVersion } = await loadVersionedTopic(directory, "compounding", "en");
+    const base = readFileSync(resolve(directory, "compounding/en.json"), "utf8");
+    const stages = readFileSync(resolve(directory, "compounding/en.stages.json"), "utf8");
+    expect(contentVersion).toBe(createHash("sha256").update(base).update("\u0000").update(stages).digest("hex"));
+  });
+});

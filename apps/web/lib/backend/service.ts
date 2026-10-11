@@ -10,6 +10,7 @@ import {
   startingCash,
   unlockedInstruments,
   valuePortfolio,
+  variantsForGrade,
 } from "@gullak/engine";
 import {
   DepositHolding,
@@ -50,16 +51,14 @@ export function publicLesson(topic: Topic, state: LearnerState) {
     }),
     content: {
       ...topic.content,
-      variants: topic.content.variants
-        .filter((v) => !v.audience || v.audience.includes(state.profile.gradeGroup))
-        .map((v) =>
-          v.format !== "quiz"
-            ? v
-            : {
-                ...v,
-                questions: v.questions.map(({ correctOptionId: _answer, explanation: _explanation, ...q }) => q),
-              },
-        ),
+      variants: variantsForGrade(topic.content.variants, state.profile.gradeGroup).map((v) =>
+        v.format !== "quiz"
+          ? v
+          : {
+              ...v,
+              questions: v.questions.map(({ correctOptionId: _answer, explanation: _explanation, ...q }) => q),
+            },
+      ),
     },
   };
 }

@@ -10,6 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FirstRunHint } from "@/components/help/first-run-hint";
 import { TermHelp } from "@/components/help/term-help";
 import { RecommendationCard } from "@/components/recommendation-card";
+import { StageBadge } from "@/components/stage-badge";
 import { readProfile } from "@/lib/learner-state";
 import { useLearnerState } from "@/lib/use-learner-state";
 
@@ -32,6 +33,7 @@ type LearnMapProps = {
 export function LearnMap({ topics, profile: suppliedProfile, gradeGroup, onLaunchLesson }: LearnMapProps) {
   const t = useTranslations("lane");
   const learner = useTranslations("learner");
+  const tStage = useTranslations("stage");
   const state = useLearnerState();
   const [storedProfile, setStoredProfile] = useState<ReturnType<typeof readProfile>>(null);
   useEffect(() => setStoredProfile(readProfile()), []);
@@ -71,6 +73,14 @@ export function LearnMap({ topics, profile: suppliedProfile, gradeGroup, onLaunc
           <p className="text-base leading-7 text-muted-foreground">
             {t("description")} <TermHelp term="mastery" />
           </p>
+          {profile ? (
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2" data-testid="stage-path">
+              <StageBadge gradeGroup={profile.gradeGroup} />
+              <p className="text-sm text-muted-foreground">
+                {tStage(`tagline.${profile.gradeGroup}`)} {tStage("lessonCount", { count: rules.length })}
+              </p>
+            </div>
+          ) : null}
         </header>
         <FirstRunHint className="max-w-3xl" />
         <ol className="relative space-y-7 before:absolute before:bottom-8 before:left-1 before:top-8 before:w-6 before:rounded-full before:bg-muted after:absolute after:bottom-8 after:left-4 after:top-8 after:border-l after:border-dashed after:border-border sm:before:left-3 sm:after:left-6">

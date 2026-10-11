@@ -1,0 +1,197 @@
+{
+  "topicId": "upi-and-phishing-scams",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["pin-only-to-pay", "fake-links-and-calls", "pause-and-check"],
+      "markdown": "**English draft for R5 review.**\n\nGrown-ups use **UPI** to pay with a phone. Here's the big rule: the secret **PIN** is used only to **send** money, never to get money.\n\nSo if someone says \"Type your PIN to get ₹500\", it's a **trick**.\n\nScammers also send messages like \"You won a prize! Click here!\" Don't click. **Stop**, and show a grown-up first.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-pin",
+          "conceptId": "pin-only-to-pay",
+          "prompt": "Someone says: type your PIN to GET money. Is that true?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Yes"
+            },
+            {
+              "id": "1",
+              "text": "No, it's a trick"
+            },
+            {
+              "id": "2",
+              "text": "Only on Sundays"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "The PIN is only for sending money, never for receiving."
+        },
+        {
+          "id": "young-prize",
+          "conceptId": "fake-links-and-calls",
+          "prompt": "A message says you won a big prize. Click the link! What do you do?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Click fast"
+            },
+            {
+              "id": "1",
+              "text": "Don't click; show a grown-up"
+            },
+            {
+              "id": "2",
+              "text": "Share it with friends"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Surprise prize links are a common trick."
+        },
+        {
+          "id": "young-stop",
+          "conceptId": "pause-and-check",
+          "prompt": "What's the first thing to do when a message feels scary or exciting?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Stop and ask a grown-up"
+            },
+            {
+              "id": "1",
+              "text": "Do what it says"
+            },
+            {
+              "id": "2",
+              "text": "Reply quickly"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Stopping gives you time to check."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["pin-only-to-pay", "fake-links-and-calls", "pause-and-check"],
+      "markdown": "**English draft for R5 review.**\n\nUPI fraud mostly exploits **how people think**, not the system. Know the mechanics:\n\n- A **collect request** asks you to *pay*. Entering your PIN on one approves a debit. Receiving money never needs a PIN, a QR scan or an OTP.\n- **QR codes** are for paying. \"Scan to receive\" is always a scam.\n- **Screen-sharing apps** let a remote \"support agent\" watch you type your PIN and OTPs.\n- **Phishing links** imitate banks, couriers or electricity boards (\"power will be cut tonight\") and capture your login.\n\nHabits that defeat these: check the **payee name** shown before you enter the PIN; never install apps at a caller's request; reach banks only through the number on the card or the official app; set a **daily UPI limit** that matches your needs.\n\nIf money is lost, speed matters: call **1930** and report at **cybercrime.gov.in**, then inform your bank. Early reports improve the chance of freezing the money.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-collect",
+          "conceptId": "pin-only-to-pay",
+          "prompt": "You get a UPI collect request for ₹3,000 marked \"refund\". What happens if you enter your PIN?",
+          "options": [
+            {
+              "id": "0",
+              "text": "You receive ₹3,000"
+            },
+            {
+              "id": "1",
+              "text": "₹3,000 leaves your account"
+            },
+            {
+              "id": "2",
+              "text": "Nothing"
+            },
+            {
+              "id": "3",
+              "text": "Your PIN resets"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A collect request is a request for you to pay; the PIN approves the debit."
+        },
+        {
+          "id": "deep-qr",
+          "conceptId": "pin-only-to-pay",
+          "prompt": "A buyer sends a QR code and says \"scan to receive payment\". This is…",
+          "options": [
+            {
+              "id": "0",
+              "text": "Normal for UPI"
+            },
+            {
+              "id": "1",
+              "text": "A scam: QR scans are for paying"
+            },
+            {
+              "id": "2",
+              "text": "A bank update"
+            },
+            {
+              "id": "3",
+              "text": "Safe if the amount is small"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Scanning a QR starts a payment from you."
+        },
+        {
+          "id": "deep-screen",
+          "conceptId": "fake-links-and-calls",
+          "prompt": "A \"support agent\" asks you to install a screen-sharing app to fix your KYC. Why is this dangerous?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It slows the phone"
+            },
+            {
+              "id": "1",
+              "text": "They can watch your PIN and OTPs"
+            },
+            {
+              "id": "2",
+              "text": "It costs money"
+            },
+            {
+              "id": "3",
+              "text": "It's not dangerous"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Screen sharing exposes everything you type."
+        },
+        {
+          "id": "deep-limit",
+          "conceptId": "pause-and-check",
+          "prompt": "Which habit limits damage if you are tricked?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Removing the screen lock"
+            },
+            {
+              "id": "1",
+              "text": "Setting a daily UPI limit that fits your needs"
+            },
+            {
+              "id": "2",
+              "text": "Sharing PINs with family"
+            },
+            {
+              "id": "3",
+              "text": "Clicking links to check them"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A sensible limit caps how much can be taken."
+        }
+      ]
+    }
+  ]
+}

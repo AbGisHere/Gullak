@@ -1,0 +1,197 @@
+{
+  "topicId": "emergency-fund",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["why-emergency-fund", "how-much", "easy-to-reach"],
+      "markdown": "**English draft for R5 review.**\n\nSometimes surprises happen. Your slipper breaks. Your water bottle gets lost. You need money **now**.\n\nAn **emergency fund** is a little money you keep aside **only for surprises**. Not for toys. Not for snacks.\n\nKeep it somewhere easy to reach, like a separate box at home that a grown-up knows about. Then a surprise won't make you sad or make you borrow.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-why",
+          "conceptId": "why-emergency-fund",
+          "prompt": "What is an emergency fund for?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Surprises, like a broken slipper"
+            },
+            {
+              "id": "1",
+              "text": "Buying toys"
+            },
+            {
+              "id": "2",
+              "text": "Snacks every day"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "It is only for unexpected needs."
+        },
+        {
+          "id": "young-where",
+          "conceptId": "easy-to-reach",
+          "prompt": "Where should your emergency money be?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Somewhere you can reach quickly"
+            },
+            {
+              "id": "1",
+              "text": "Buried far away"
+            },
+            {
+              "id": "2",
+              "text": "Spent already"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "In a surprise, you need it fast."
+        },
+        {
+          "id": "young-how-much",
+          "conceptId": "how-much",
+          "prompt": "How should you start your emergency fund?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Put in a little from each pocket money"
+            },
+            {
+              "id": "1",
+              "text": "Wait until you have ₹10,000"
+            },
+            {
+              "id": "2",
+              "text": "Never start"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Small amounts add up over time."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["why-emergency-fund", "how-much", "easy-to-reach"],
+      "markdown": "**English draft for R5 review.**\n\nAn emergency fund protects your other plans. Without one, a medical bill or a job loss forces you to borrow at high interest or sell investments at a bad time, often right after markets fall.\n\n**How much:** a common guideline is **3–6 months of essential expenses** (rent, food, bills, EMIs), not of total income. Single earners, irregular incomes and families with dependants lean towards 6 months or more.\n\n**Where:** the fund's job is **liquidity and safety**, not return. Typical homes are a savings account, a sweep-in deposit or other low-risk places you can reach within a day or two. Money that can lose value when you need it, or is locked in, defeats the purpose.\n\n**Order:** build the fund before taking investment risk. Refill it after use, and resize it when expenses change. Insurance and the fund work together: insurance handles large rare costs, the fund handles the rest.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-size",
+          "conceptId": "how-much",
+          "prompt": "Essential expenses are ₹25,000 a month. What range fits the 3–6 month guideline?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹25,000–₹50,000"
+            },
+            {
+              "id": "1",
+              "text": "₹75,000–₹1,50,000"
+            },
+            {
+              "id": "2",
+              "text": "₹2,50,000–₹5,00,000"
+            },
+            {
+              "id": "3",
+              "text": "₹10,000–₹20,000"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "3 × ₹25,000 = ₹75,000 and 6 × ₹25,000 = ₹1,50,000."
+        },
+        {
+          "id": "deep-where",
+          "conceptId": "easy-to-reach",
+          "prompt": "What matters most for where an emergency fund is kept?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Highest possible return"
+            },
+            {
+              "id": "1",
+              "text": "Safety and quick access"
+            },
+            {
+              "id": "2",
+              "text": "A long lock-in"
+            },
+            {
+              "id": "3",
+              "text": "Tax-free growth"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "It must be there, at full value, when the emergency comes."
+        },
+        {
+          "id": "deep-order",
+          "conceptId": "why-emergency-fund",
+          "prompt": "Why build the emergency fund before investing in riskier options?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Risky investments are banned"
+            },
+            {
+              "id": "1",
+              "text": "So a surprise doesn't force you to sell at a bad time"
+            },
+            {
+              "id": "2",
+              "text": "Banks require it"
+            },
+            {
+              "id": "3",
+              "text": "It earns more"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A cushion means investments can stay put through a crisis."
+        },
+        {
+          "id": "deep-basis",
+          "conceptId": "how-much",
+          "prompt": "The 3–6 month guideline is usually based on…",
+          "options": [
+            {
+              "id": "0",
+              "text": "Total income"
+            },
+            {
+              "id": "1",
+              "text": "Essential monthly expenses"
+            },
+            {
+              "id": "2",
+              "text": "Your savings goal"
+            },
+            {
+              "id": "3",
+              "text": "Your age"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "It covers what you must pay even if income stops."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "topicId": "protect-your-info",
+  "locale": "en",
+  "variants": [
+    {
+      "id": "read-young",
+      "format": "transcript",
+      "audience": ["grade-6-7"],
+      "conceptIds": ["private-codes", "ask-before-sharing", "strong-passwords"],
+      "markdown": "**English draft for R5 review.**\n\nSome numbers are **secret**, like the key to your house. An **OTP** (a code that comes on the phone), a **PIN** and a **password** are secret keys.\n\nNever tell them to anyone. Not to a caller, not to a friend, not even to someone who says they are from a bank.\n\nIf someone asks, say **\"No\"** and tell a grown-up you trust. A good password is long and not your name or birthday.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-young",
+      "format": "quiz",
+      "audience": ["grade-6-7"],
+      "questions": [
+        {
+          "id": "young-otp",
+          "conceptId": "private-codes",
+          "prompt": "Someone on the phone asks for the code that came on Mummy's phone. What do you do?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Tell them quickly"
+            },
+            {
+              "id": "1",
+              "text": "Say no and tell a grown-up"
+            },
+            {
+              "id": "2",
+              "text": "Send it by message"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Secret codes are never shared. Tell a trusted adult."
+        },
+        {
+          "id": "young-ask",
+          "conceptId": "ask-before-sharing",
+          "prompt": "A game asks for your home address. What should you do first?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Type it in"
+            },
+            {
+              "id": "1",
+              "text": "Ask a parent first"
+            },
+            {
+              "id": "2",
+              "text": "Make one up and share"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Always ask a grown-up before sharing personal details."
+        },
+        {
+          "id": "young-pass",
+          "conceptId": "strong-passwords",
+          "prompt": "Which password is safest?",
+          "options": [
+            {
+              "id": "0",
+              "text": "your name"
+            },
+            {
+              "id": "1",
+              "text": "123456"
+            },
+            {
+              "id": "2",
+              "text": "MangoKiteRiverSunny"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Long passwords that aren't about you are hardest to guess."
+        }
+      ]
+    },
+    {
+      "id": "read-deep",
+      "format": "transcript",
+      "audience": ["grade-11-12"],
+      "conceptIds": ["private-codes", "ask-before-sharing", "strong-passwords"],
+      "markdown": "**English draft for R5 review.**\n\nMost account takeovers in India don't break encryption; they trick people into handing over a **second factor**. An OTP is a one-time key for one action. A caller who asks for it is trying to complete a payment, login or SIM swap in your name. **No bank, wallet or government office ever asks for OTPs, PINs, CVVs or passwords.**\n\nYour **identity data** also has value. A photo of an Aadhaar or PAN card can be misused to open loans or SIMs. When sharing ID, use a masked Aadhaar where possible and write the purpose on the copy (\"for hostel admission only\").\n\nFor passwords, length beats complexity: a **passphrase** of four unrelated words is stronger and easier to remember than a short mix of symbols. Use a **different password for every important account**, because one leaked site otherwise unlocks the rest. Turn on **two-factor authentication** and, ideally, use a password manager.\n\nWatch the warning signs of **social engineering**: urgency, authority (\"I'm from the bank/police\"), secrecy and a request for a code.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check-deep",
+      "format": "quiz",
+      "audience": ["grade-11-12"],
+      "questions": [
+        {
+          "id": "deep-otp-why",
+          "conceptId": "private-codes",
+          "prompt": "Why does a scammer want an OTP you just received?",
+          "options": [
+            {
+              "id": "0",
+              "text": "To verify your age"
+            },
+            {
+              "id": "1",
+              "text": "To complete a payment or login in your name"
+            },
+            {
+              "id": "2",
+              "text": "To send you a reward"
+            },
+            {
+              "id": "3",
+              "text": "To update the bank's records"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "The OTP authorises an action; giving it hands that action to them."
+        },
+        {
+          "id": "deep-reuse",
+          "conceptId": "strong-passwords",
+          "prompt": "Why use a different password for each important account?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It is required by law"
+            },
+            {
+              "id": "1",
+              "text": "One leaked site shouldn't unlock the others"
+            },
+            {
+              "id": "2",
+              "text": "Shorter passwords are better"
+            },
+            {
+              "id": "3",
+              "text": "Banks reject reused ones"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Password reuse lets one breach spread to every account."
+        },
+        {
+          "id": "deep-id",
+          "conceptId": "ask-before-sharing",
+          "prompt": "You must share an ID copy for hostel admission. What reduces misuse?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Send the full Aadhaar on social media"
+            },
+            {
+              "id": "1",
+              "text": "Use a masked Aadhaar and write the purpose on the copy"
+            },
+            {
+              "id": "2",
+              "text": "Share your OTP too"
+            },
+            {
+              "id": "3",
+              "text": "Send it to anyone who asks"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Masking and purpose-marking limit what a stolen copy can do."
+        },
+        {
+          "id": "deep-signs",
+          "conceptId": "private-codes",
+          "prompt": "Which mix is a classic social-engineering pattern?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Slow, public and optional"
+            },
+            {
+              "id": "1",
+              "text": "Urgent, authoritative, secret and asking for a code"
+            },
+            {
+              "id": "2",
+              "text": "Written, signed and delayed"
+            },
+            {
+              "id": "3",
+              "text": "Friendly and asking nothing"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Urgency, authority, secrecy and a code request together signal a scam."
+        }
+      ]
+    }
+  ]
+}
