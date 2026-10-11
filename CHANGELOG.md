@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Sarvam plain-text English-to-Hindi/Telugu draft translation with strict input/output validation, bounded response and timeout handling, redacted English fallback reasons and zero automatic retries; no app activation or publication.
+
 ## [0.3.1] - 2026-10-11
 
 ### Fixed

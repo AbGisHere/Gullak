@@ -9,4 +9,5 @@ export * from "./lesson-runner";
 export * from "./prompts/lesson-draft";
 export * from "./prompts/tutor";
 export * from "./provider";
+export * from "./sarvam-translation";
 export * from "./tutor";
