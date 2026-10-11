@@ -6083,8 +6083,18 @@
     card.id = PREFIX + '-mount-error';
 
     const head = el('div', { display: 'flex', alignItems: 'center', gap: '8px' });
-    const glyph = el('span', { fontSize: '13px', lineHeight: '1', color: 'oklch(62% 0.19 30)', flexShrink: '0' });
-    glyph.textContent = '⚠';
+    const glyph = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    glyph.setAttribute('viewBox', '0 0 24 24');
+    glyph.setAttribute('width', '16');
+    glyph.setAttribute('height', '16');
+    glyph.setAttribute('fill', 'none');
+    glyph.setAttribute('stroke', 'currentColor');
+    glyph.setAttribute('stroke-width', '2');
+    glyph.setAttribute('stroke-linecap', 'round');
+    glyph.setAttribute('stroke-linejoin', 'round');
+    glyph.setAttribute('aria-hidden', 'true');
+    Object.assign(glyph.style, { color: 'oklch(62% 0.19 30)', flexShrink: '0' });
+    glyph.innerHTML = '<path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4m0 4h.01"/>';
     head.appendChild(glyph);
     const title = el('span', { fontWeight: '600', flex: '1' });
     title.textContent = mountErrorState.variant > 0

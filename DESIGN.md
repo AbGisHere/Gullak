@@ -66,7 +66,7 @@ Motion is purposeful and restrained: reveal a consequence, connect a choice with
 
 Use substantial cards and confidently bounded controls. Modest corner rounding can make surfaces approachable; do not turn every element into a pill. Reserve pill-like shapes for small labels where useful, not long explanations or entire navigation systems.
 
-Use selective graphic or sticker-like elements as accents. They can punctuate a lesson or a meaningful moment, but must not cover content, mimic required controls or compete with the scenario. Avoid mascot clutter, excessive emoji and decoration on every component.
+Use selective graphic or sticker-like elements as accents. They can punctuate a lesson or a meaningful moment, but must not cover content, mimic required controls or compete with the scenario. Use consistent Lucide icons for interface cues and proper image assets for imagery; never use emoji. Avoid mascot clutter and decoration on every component.
 
 Shape and layout should reinforce meaning: a choice looks selectable, an explanation reads as content, and a counterfactual remains distinguishable from the learner's actual decision.
 

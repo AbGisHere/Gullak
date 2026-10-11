@@ -8,6 +8,10 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Fixed
+
+- Replace emoji in browser tools, documentation and CLI output with icons or plain text; document the no-emoji rule.
+
 ## [0.2.21] - 2026-10-11
 
 ### Added

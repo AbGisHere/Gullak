@@ -4,7 +4,7 @@ import type { Database, Tables, TablesInsert } from "./database.types";
 
 /**
  * Worked example of the data-access pattern (AGENTS.md › Scalability rules):
- * a repository interface, pure row ↔ schema mappers validated by Zod both
+ * a repository interface, pure row to/from schema mappers validated by Zod both
  * ways, and one implementation per store. Copy this shape for progress and
  * portfolios. Components never import a DB client; they call a repository.
  */

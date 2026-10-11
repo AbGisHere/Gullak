@@ -30,7 +30,7 @@ for (const code of codes) {
   const res = await fetch(`https://api.mfapi.in/mf/${code}`);
   const body = res.ok ? await res.json() : undefined;
   if (body?.status !== "SUCCESS" || !Array.isArray(body.data) || !body.data.length) {
-    console.error(`✖ ${code}: no NAV history (HTTP ${res.status})`);
+    console.error(`ERROR: ${code}: no NAV history (HTTP ${res.status})`);
     process.exitCode = 1;
     continue;
   }
@@ -40,7 +40,7 @@ for (const code of codes) {
     .sort((a, b) => a.t.localeCompare(b.t));
   const last = series.at(-1);
   if (!last) {
-    console.error(`✖ ${code}: no NAVs since ${from}`);
+    console.error(`ERROR: ${code}: no NAVs since ${from}`);
     process.exitCode = 1;
     continue;
   }
@@ -54,5 +54,5 @@ for (const code of codes) {
   };
   const out = `data/snapshots/amfi-${code}.json`;
   writeFileSync(out, `${JSON.stringify(file)}\n`);
-  console.log(`✔ ${out}: ${series.length} NAVs, ${series[0].t.slice(0, 10)} → ${last.t.slice(0, 10)}`);
+  console.log(`OK: ${out}: ${series.length} NAVs, ${series[0].t.slice(0, 10)} → ${last.t.slice(0, 10)}`);
 }

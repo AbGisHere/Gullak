@@ -21,7 +21,7 @@ Priority: **P1** is needed for the demo topics and the market sim (Phase 1–2);
 
 | Data | Priority | Status | Script | Source | Symbol |
 |---|---|---|---|---|---|
-| Mutual fund NAV history, every category (liquid, overnight, money market, debt, index, equity, ETF) | P1 | ✅ script; one example committed | `pnpm snapshots:mf <code>... [--from YYYY-MM-DD]` | AMFI, via mfapi.in | AMFI scheme code, e.g. `120716` |
+| Mutual fund NAV history, every category (liquid, overnight, money market, debt, index, equity, ETF) | P1 | Complete: script; one example committed | `pnpm snapshots:mf <code>... [--from YYYY-MM-DD]` | AMFI, via mfapi.in | AMFI scheme code, e.g. `120716` |
 | NIFTY 50 and NIFTY 50 TRI history (incl. 2008, 2016, Feb–Apr 2020) | P1 | PRICE index 2019-10-01 through 2020-06-30 implemented; TRI and other episodes pending | `pnpm snapshots:nifty` | niftyindices.com historical data (NSE Indices) | `NIFTY-50`; TRI symbol pending |
 | CPI inflation, headline and by group (food, fuel, education, health) | P1 | TODO(R3) | `scripts/snapshots/cpi.mjs` | MOSPI CPI (Combined), base 2012=100 | `CPI-IN`, `CPI-IN-FOOD`, … |
 | Gold price (₹/gram, 24K) | P1 | TODO(R3) | `scripts/snapshots/gold.mjs` | IBJA published rates, or RBI DBIE | `XAU-INR` |

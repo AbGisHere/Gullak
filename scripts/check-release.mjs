@@ -32,8 +32,8 @@ if (process.argv.includes("--tag")) {
 }
 
 if (errors.length) {
-  console.error("✖ Release check failed (AGENTS.md › Git rules › 3):");
+  console.error("ERROR: Release check failed (AGENTS.md › Git rules › 3):");
   for (const e of errors) console.error(`  - ${e}`);
   process.exit(1);
 }
-console.log(`✔ release metadata consistent at v${version}`);
+console.log(`OK: release metadata consistent at v${version}`);

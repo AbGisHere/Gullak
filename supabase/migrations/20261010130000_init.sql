@@ -1,6 +1,6 @@
 -- Gullak · first migration: learners, topic progress, paper portfolios.
 -- Mirrors the Zod schemas in @gullak/types; the data-access layer in
--- apps/web/lib/data maps rows ↔ schemas and validates both ways.
+-- apps/web/lib/data maps rows to/from schemas and validates both ways.
 --
 -- Conventions (AGENTS.md › Scalability rules):
 --   * every per-learner row carries learner_id, so tables can shard by it later

@@ -1,7 +1,7 @@
 Start your response with:
 
 ```
-──────────── ⚡ OVERDRIVE ─────────────
+────────────  OVERDRIVE ─────────────
 》》》 Entering overdrive mode...
 ```
 

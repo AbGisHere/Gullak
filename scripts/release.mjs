@@ -11,7 +11,7 @@ if (!["patch", "minor", "major"].includes(level)) {
 // Check before writing anything, so a refused release leaves no files half-bumped.
 const changelog = readFileSync("CHANGELOG.md", "utf8");
 if (!/## \[Unreleased\]\n+### /.test(changelog)) {
-  console.error("✖ [Unreleased] is empty: add changelog entries before releasing.");
+  console.error("ERROR: [Unreleased] is empty: add changelog entries before releasing.");
   process.exit(1);
 }
 const manifests = ["package.json"];

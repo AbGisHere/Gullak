@@ -14,7 +14,7 @@ const staged = execFileSync("git", ["diff", "--cached", "--name-only"], { encodi
   .filter(Boolean);
 if (!staged.includes("CHANGELOG.md")) {
   console.error(
-    `✖ "${type}" commits must add an entry under [Unreleased] in CHANGELOG.md (AGENTS.md › Git rules › 2).`,
+    `ERROR: "${type}" commits must add an entry under [Unreleased] in CHANGELOG.md (AGENTS.md › Git rules › 2).`,
   );
   console.error("  Stage CHANGELOG.md with this commit.");
   process.exit(1);

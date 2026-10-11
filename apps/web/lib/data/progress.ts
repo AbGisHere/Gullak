@@ -10,7 +10,7 @@ export interface ProgressRepository {
 }
 
 // TODO(R3): implement following learners.ts: progressFromRow / progressToRow
-// (camelCase ↔ snake_case, validated with TopicProgress), then the Supabase and
+// (camelCase to/from snake_case, validated with TopicProgress), then the Supabase and
 // memory repositories, with tests beside them like learners.test.ts.
 export function supabaseProgress(_db: SupabaseClient<Database>): ProgressRepository {
   const todo = (): never => {
