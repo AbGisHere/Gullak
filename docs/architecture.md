@@ -286,6 +286,49 @@ const draft = await generateLessonDraft({ brief, context, format: "transcript" }
 pnpm --filter @gullak/ai exec vitest run src/lesson-provider.test.ts
 ```
 
+## Lesson-draft cache-key preparation
+
+`buildLessonDraftCacheKey({ request, model, contentVersion })` prepares a key only.
+Use a validated `buildLessonGenerationRequest` result, `{ provider, modelId }`
+from the explicitly selected model, and the SHA-256 hex of the exact source
+topic-content bytes (`learning_runs.content_hash` format). The helper validates
+the hash's shape, not its correspondence to source files; callers must pin those
+bytes and verify that correspondence. This is not the hash of the generated draft.
+
+Input envelopes, request fields and model identity objects are strict; extra
+fields such as credentials or learner IDs reject. No coercion or trimming is
+performed. Supported request formats remain transcript/story/audio/quiz.
+Prompt versions are positive safe integers, including future versions.
+
+The async, stateless helper uses Web Crypto SHA-256 over a fixed-order JSON tuple:
+`["lesson-draft-cache", 1, contentVersion, provider, modelId, promptId, promptVersion,
+topicId, gradeGroup, locale, format, system, prompt]`. It returns
+`lesson-draft:v1:<64 lowercase hex characters>`. Object insertion order has no
+effect; exact system/user prompt bytes do. The request includes its normalized
+brief and generation requirements, so changes to those affect the key. Inputs
+are captured before awaiting the hash. The key exposes neither teaching text nor
+model/topic identifiers as plaintext; it is not an encryption/privacy mechanism.
+
+There is no cache read/write, TTL, storage adapter, provider request, approval or
+publication workflow in this increment. Future cache hits must still pass the
+runner's semantic checks against pinned content, and remain drafts until R5 reviews.
+Use pinned model IDs for reproducibility: an alias such as `latest` may change
+behind an unchanged identifier. Changed generation settings/schema/validation
+policy also require future cache invalidation; this v1 key is for the current adapter.
+
+```ts
+const request = buildLessonGenerationRequest({ brief, context, format: "transcript" });
+const key = await buildLessonDraftCacheKey({
+  request,
+  model: { provider: model.provider, modelId: model.modelId },
+  contentVersion, // verified exact-byte SHA-256 of the pinned topic content
+});
+```
+
+```powershell
+pnpm --filter @gullak/ai exec vitest run src/lesson-cache-key.test.ts
+```
+
 ## Provider eligibility
 
 `resolveProviderOrder(env)` in `@gullak/ai` uses the explicit `AI_PROVIDER_ORDER`
