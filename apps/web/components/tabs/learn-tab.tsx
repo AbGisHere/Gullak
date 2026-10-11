@@ -32,11 +32,22 @@ interface TopicCard {
   isUnlocked: boolean;
   isCompleted?: boolean;
   durationMinutes: number;
-  activityType?: "lesson" | "spot-and-sort" | "sim";
+  activityType?: "lesson" | "spot-and-sort" | "sim" | "coin-shop";
 }
 
 const curriculumTopics: TopicCard[] = [
   // Plan & Budget
+  {
+    id: "candy-coin-shop",
+    title: "Candyville Market Stall",
+    pillar: "plan-budget",
+    description: "Shop with limited Candy Coins, manage scarce till change, and save what remains in your Gullak.",
+    gradeGroup: ["grade-6-7", "grade-8-10", "grade-11-12"],
+    formats: ["simulation", "shop"],
+    isUnlocked: true,
+    durationMinutes: 3,
+    activityType: "coin-shop",
+  },
   {
     id: "needs-vs-wants",
     title: "Needs vs Wants",
@@ -372,7 +383,13 @@ export function LearnTab({ gradeGroup, onLaunchLesson, onLaunchSpotAndSort }: Le
                     }}
                     className="flex items-center gap-1.5 rounded-xl bg-brand-ink px-3.5 py-2 text-xs font-bold text-brand-paper hover:bg-brand-ink/90 transition-transform active:scale-95 shadow-2xs"
                   >
-                    <span>{topic.activityType === "spot-and-sort" ? "Play Activity" : "Start Lesson"}</span>
+                    <span>
+                      {topic.activityType === "spot-and-sort"
+                        ? "Play Activity"
+                        : topic.activityType === "coin-shop"
+                          ? "Enter Shop"
+                          : "Start Lesson"}
+                    </span>
                     <ArrowRight className="size-3 text-brand-lime" />
                   </button>
                 ) : (

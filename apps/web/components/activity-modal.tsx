@@ -1,6 +1,8 @@
 "use client";
 
+import type { GradeGroup } from "@gullak/types";
 import { Character } from "@gullak/ui/components/character";
+import { CoinShopSimulation } from "@gullak/ui/components/coin-shop-simulation";
 import { FinancialRewind } from "@gullak/ui/components/financial-rewind";
 import { PracticeSimulation, type SimulationState } from "@gullak/ui/components/practice-simulation";
 import { SpotAndSort } from "@gullak/ui/components/spot-and-sort";
@@ -14,16 +16,19 @@ import {
 import { exampleNeedVsWantActivity } from "@gullak/ui/fixtures/spot-and-sort-fixtures";
 import { ArrowLeft, CheckCircle2, Sparkles, X } from "lucide-react";
 import { useState } from "react";
+import { getCandyEconomyLesson1 } from "@/lib/candy-economy-lesson";
 
-export type ActivityType = "lesson" | "spot-and-sort" | "simulation" | "rewind";
+export type ActivityType = "lesson" | "spot-and-sort" | "simulation" | "rewind" | "coin-shop";
 
 interface ActivityModalProps {
   activityType: ActivityType;
+  topicId?: string | null;
+  gradeGroup?: GradeGroup;
   onClose: () => void;
   onActivitySuccess?: () => void;
 }
 
-export function ActivityModal({ activityType, onClose, onActivitySuccess }: ActivityModalProps) {
+export function ActivityModal({ activityType, topicId, gradeGroup, onClose, onActivitySuccess }: ActivityModalProps) {
   const [completed, setCompleted] = useState(false);
   const [simState, setSimState] = useState<SimulationState>(initialPracticeSimulationState);
 
@@ -49,6 +54,7 @@ export function ActivityModal({ activityType, onClose, onActivitySuccess }: Acti
           <span className="rounded-full bg-brand-lime text-brand-ink px-3 py-0.5 text-xs font-black uppercase tracking-wider">
             {activityType === "lesson" && "Interactive Lesson"}
             {activityType === "spot-and-sort" && "Spot & Sort Activity"}
+            {activityType === "coin-shop" && "Candyville Coin Shop"}
             {activityType === "simulation" && "Practice Simulation"}
             {activityType === "rewind" && "Money Multiverse Rewind"}
           </span>
@@ -67,8 +73,17 @@ export function ActivityModal({ activityType, onClose, onActivitySuccess }: Acti
         {!completed ? (
           <div className="rounded-2xl border border-border bg-brand-paper p-3 sm:p-5">
             {activityType === "lesson" && (
-              <TopicLesson lesson={exampleEmergencyFundLesson} onLessonComplete={handleComplete} />
+              <TopicLesson
+                lesson={
+                  topicId === "money-basics"
+                    ? getCandyEconomyLesson1(gradeGroup ?? "grade-6-7")
+                    : exampleEmergencyFundLesson
+                }
+                onLessonComplete={handleComplete}
+              />
             )}
+
+            {activityType === "coin-shop" && <CoinShopSimulation onComplete={handleComplete} />}
 
             {activityType === "spot-and-sort" && (
               <SpotAndSort activity={exampleNeedVsWantActivity} onComplete={handleComplete} />
