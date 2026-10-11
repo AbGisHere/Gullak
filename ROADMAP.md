@@ -19,6 +19,11 @@ These ship today and carry over to the eight worlds; the content model and grade
 
 ## Phase 0 · Align the foundation
 
+Current-model bridge: an injectable draft-generation runner is implemented on
+`feat/lesson-generation-runner`, pending review/merge. It connects the existing
+topic brief/request/validation flow; it does not generate or publish world
+lessons, add live providers/caching, or migrate stage and unlock contracts.
+
 - [x] Monorepo, strict TypeScript, Biome, Husky, CI, PWA, i18n and Supabase helpers
 - [ ] Replace the old four-pillar topic model with the eight-world curriculum and three learner stages (R1, R5)
 - [ ] Update schemas: `world`, `lesson`, stage variants, mechanic, decision/outcome, XP, mastery and unlocks (R1, R4)

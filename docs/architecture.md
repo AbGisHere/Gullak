@@ -198,3 +198,32 @@ translation quality or implement the Sarvam translation pipeline.
 ```powershell
 pnpm --filter @gullak/ai exec vitest run src/lesson-generation.test.ts
 ```
+
+## Current-topic draft-generation runner
+
+`generateLessonDraft(input, generate)` in `@gullak/ai` connects the existing
+request builder to draft validation. `input` is the same strict
+`{ brief, context, format }` envelope. `generate` is a caller-supplied async
+function receiving a `LessonGenerationRequest` and returning unknown structured
+output, not a raw JSON string. The runner itself contains no provider selection,
+credentials, network client, retry, timeout, cache, storage or publication code.
+
+The runner parses a detached snapshot before awaiting generation, builds the
+request, invokes the supplied function exactly once, validates the output against
+the original brief/context and checks its format matches the request. Invalid
+inputs never call the generator. Malformed outputs, mismatched identity/format,
+non-draft status, invalid quizzes and screened advice reject with `ZodError`;
+provider failures propagate without retry. Never log raw provider responses or
+errors without checking for sensitive data. A successful result remains an
+unreviewed draft; it is not a publication permission or safety guarantee.
+
+This is a bridge for the **currently implemented topic model**, not the new
+eight-world lesson/stage schema. World generation must wait for R1/R4's agreed
+contracts and R5-authored world briefs. Do not substitute the new class groups
+into old `GradeGroup` values or automatically migrate authored content.
+Future provider wiring must use bounded calls and hash-aware caching and preserve
+all identity checks. Tests inject deterministic generators, never real APIs.
+
+```powershell
+pnpm --filter @gullak/ai exec vitest run src/lesson-runner.test.ts
+```
