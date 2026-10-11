@@ -5,7 +5,7 @@ import type { LanguageModel } from "ai";
 /**
  * Provider-agnostic model selection. Order of preference comes from
  * AI_PROVIDER_ORDER (default "google,groq"); a provider is used only if its
- * key is set. Returns null when no key is configured, and callers then fall
+ * key is nonblank. Returns no candidates when no key is configured; callers then fall
  * back to answering from topic content (no LLM).
  */
 export type ProviderId = "google" | "groq";
@@ -27,7 +27,9 @@ export function resolveProviderOrder(env: AiEnv): ProviderId[] {
     .split(",")
     .map((s) => s.trim())
     .filter((s): s is ProviderId => s === "google" || s === "groq");
-  return order.filter((id) => (id === "google" ? env.GOOGLE_GENERATIVE_AI_API_KEY : env.GROQ_API_KEY));
+  return [...new Set(order)].filter((id) =>
+    Boolean((id === "google" ? env.GOOGLE_GENERATIVE_AI_API_KEY : env.GROQ_API_KEY)?.trim()),
+  );
 }
 
 export function createModel(id: ProviderId, env: AiEnv): LanguageModel {

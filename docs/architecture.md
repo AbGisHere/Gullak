@@ -253,6 +253,26 @@ reliability or R5 approval. Candy Economy Lesson 1 remains excluded.
 pnpm --filter @gullak/ai exec vitest run src/lesson-runner.integration.test.ts
 ```
 
+## Provider eligibility
+
+`resolveProviderOrder(env)` in `@gullak/ai` uses the explicit `AI_PROVIDER_ORDER`
+or defaults to `google,groq`. Supported IDs are case-sensitive; unknown/empty
+tokens are ignored. Each eligible provider appears once in its first configured
+position and requires a key containing non-whitespace characters. An explicitly
+empty/unsupported order remains empty; it does not silently enable defaults.
+`availableModels(env)` constructs candidates only for that resolved list.
+
+This is eligibility, not authentication or live fallback execution: nonblank
+keys are not rewritten or verified, models are not called, and model defaults,
+retry behavior and provider quota handling are unchanged. An empty result lets
+the caller choose a no-LLM content fallback; this function does not itself load
+or generate fallback content. Tests instantiate real provider models without
+network requests or real credentials.
+
+```powershell
+pnpm --filter @gullak/ai exec vitest run src/provider.test.ts src/ai.test.ts
+```
+
 ## Versioned quiz-answer boundary
 
 `QuizAnswerEvent` in `@gullak/types` validates the nine R3-approved row fields:
