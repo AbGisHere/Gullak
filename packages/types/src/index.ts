@@ -1,5 +1,6 @@
 export * from "./activity";
 export * from "./api";
+export * from "./bkt";
 export * from "./common";
 export * from "./curriculum-brief";
 export * from "./episode";

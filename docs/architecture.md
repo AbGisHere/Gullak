@@ -112,6 +112,23 @@ pnpm --filter @gullak/types typecheck
 pnpm --filter @gullak/engine typecheck
 ```
 
+## Offline BKT contracts
+
+`BktParameters`, `BktStepInput` and `BktSequenceInput` in `@gullak/types`
+define an inert, per-concept inference boundary. All five parameters (`pInit`,
+`pLearn`, `pForget`, `pSlip`, `pGuess`) are explicit finite probabilities in
+[0, 1]. The emission constraint `pGuess < 1 - pSlip` keeps the known and
+unknown states distinguishable, as in the notebook. Unknown fields, coercion,
+missing parameters and nonboolean observations are rejected.
+
+A step supplies `{ parameters, pKnown, correct }`; a sequence supplies
+`{ parameters, observations }` and starts at the supplied `pInit`. Observations
+are already-ordered correct/incorrect quiz results for one concept; these
+contracts do not import events, group learners or infer order. `pForget` means
+forgetting in the transition after each observation, with no elapsed-time unit.
+There are no defaults, artifact loaders or production-readiness flags. These
+contracts do not activate BKT, replace stored mastery or change quiz unlocks.
+
 ## Offline lesson draft validation
 
 `validateLessonDraft(input, brief, context)` in `@gullak/ai` returns a
