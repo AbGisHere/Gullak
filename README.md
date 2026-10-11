@@ -5,113 +5,142 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Node](https://img.shields.io/badge/node-24_LTS-339933?logo=nodedotjs&logoColor=white)](.nvmrc)
 [![pnpm](https://img.shields.io/badge/pnpm-12.10.1-F69220?logo=pnpm&logoColor=white)](package.json)
-[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](apps/web)
-[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](packages/typescript-config)
-[![PWA](https://img.shields.io/badge/PWA-phone_%2B_desktop-5A0FC8?logo=pwa&logoColor=white)](apps/web)
 
-**Learn money. Practise with play money on real markets.** Try it at **[gullak.abgupta.me](https://gullak.abgupta.me)** (installable on phone and desktop).
+Team 268 · Megathon X. Setup and run instructions only. The solution is described in [`deliverables/final_report.pdf`](deliverables/final_report.pdf).
 
-Gullak (गुल्लक, "piggy bank") is a gamified, adaptive financial-literacy platform built by team **Claude2Create** for Megathon X. Students in Classes 6–12 learn through eight connected worlds: Candy Economy, Savings Quest, Bankopolis, Market Mayhem, Grow Your Money, Stock Street, Life Simulator and Finance Tycoon ([curriculum](docs/curriculum.md)). Each 3–5 minute lesson starts with a familiar situation, asks for a decision, shows its consequence, explains the idea, and gives the learner a new chance to apply it. The same worlds adapt in depth for Classes 6–7, 8–9 and 10–12, in English, Hindi and Telugu, through stories, simulations, quizzes and play-money practice.
+**Hosted app (no setup needed):** [gullak.abgupta.me](https://gullak.abgupta.me). It is installable as a PWA on phone and desktop.
 
-> **Guardrail:** Gullak educates; it never recommends real products or tells anyone to buy or sell. All projections are assumptions, not promises. **All money is virtual.**
+## Requirements
 
-## Run it locally
+- Node.js 24 LTS (see `.nvmrc`)
+- pnpm 12.10.1 (`corepack enable` picks it up from `packageManager`)
+- Optional: a Supabase project for the persistent backend API, and free Gemini / Groq keys for the AI tutor
 
-Requirements: Node 24+ and pnpm (the pinned version, 12.10.1, is picked up from `packageManager`).
+## Set up and run
 
 ```bash
-git clone https://github.com/<you>/Claude2Create_MegathonX.git
-cd Claude2Create_MegathonX
-pnpm install                      # also installs the git hooks
-cp -n apps/web/.env.example apps/web/.env.local   # preserve existing local credentials
-pnpm dev                          # http://localhost:3000
+git clone https://github.com/IIIT-ECell/megathon26-claude2create.git
+cd megathon26-claude2create
+corepack enable
+pnpm install
+cp -n apps/web/.env.example apps/web/.env.local
+pnpm dev                      # http://localhost:3000
 ```
 
-Open `/` for onboarding, which leads into the learner app (Home, Story & Twin, Learn, Portfolio, Missions). The routed learning map, lessons and quizzes are at `/learn`, `/practice`, `/portfolio` and `/me`. Open `/r2-preview` for the learning components (lesson, spot & sort, story choices, money decoder, paper portfolio, Practice simulation and the rewind comparison) running on sample data.
+The learner app runs without any keys. Progress is stored on the device, and market data comes from the committed snapshots in `data/snapshots`.
 
-## What works today
+## Using the app: every page
 
-- **Onboarding** in English, Hindi and Telugu: language, grade group, experience, learning formats and an optional goal. The profile is saved on the device.
-- **Learning components** in `@gullak/ui`, shown on sample data at `/r2-preview`. They are not yet connected to the backend or the content files.
-- **Backend API** (Supabase, sign-in required): profile, onboarding, lessons, quiz grading and unlocks, progress, portfolio and fixed deposits, goal planning, market quotes, activity and episode runs with resumable bookmarks, a Time Machine replay and a facilitator cohort view. See [the backend guide](docs/backend-setup.md).
-- **Content as data:** all 33 topics, each with a reading lesson and a quiz (English), the topic prerequisite graph, one spot & sort round, one branching story and the March 2020 Practice episode.
-- **Knowledge tracing (Colab notebook):** BKT fitted on synthetic learners, plus a benchmark of BKT, BKT with forgetting, PFA and DKT on 283,105 real student answers from ASSISTments 2009–10 (AUC: DKT 0.739, BKT with forgetting 0.727, BKT 0.722, PFA 0.710). See [notebooks](notebooks/README.md#results-colab-t4-run-2026-10-11). Not yet used in the app.
-- **Engine:** interest (FD, RD, SIP, compounding), valuation, quiz grading, unlock rules, starting capital and the lesson format picker, all unit-tested.
-- **Learner app** on phone and desktop: a grade-filtered learning map, content-backed lessons, quizzes that unlock the next topics, an on-device mastery meter, the March 2020 Practice episode and the paper portfolio. Progress stays on the device; Practice decisions use bundled sample outcomes.
+Open [gullak.abgupta.me](https://gullak.abgupta.me) or `http://localhost:3000`. Everything uses **play money only**. Progress is saved on the device for each learner profile, so several learners can share one phone.
 
-Not built yet: syncing progress to the backend, the AI tutor, translated topic content, Live mode and the facilitator dashboard UI. The plan is in [ROADMAP.md](ROADMAP.md).
+### First run
 
-## Scripts
+1. Open `/`. Onboarding asks for a **language** (English, हिन्दी, తెలుగు), a **class group** (6–7, 8–10, 11–12), the learner's **experience** with money and their preferred **learning formats** ("Mix it up" picks for them).
+2. Finish onboarding to reach the learner app. To start again or add another learner, use **Me → Switch learner**. Onboarding then runs for the new profile.
 
-| Command | What it does |
+### Learner app (opens at `/` after onboarding)
+
+Phones show these as a bottom tab bar; desktops show a sidebar.
+
+| Tab | How to reach it | What you can do |
+|---|---|---|
+| **Home** | `/` | See the world map of the eight worlds. It scrolls to your current world; **Play** opens the next activity. The **Candy Economy** shop mission and the **Life Simulator** mission open from the map, and the other worlds show "Coming soon". A "Recommended next, because…" card suggests what to do. |
+| **Learn** | `/learn` | The learning map, grouped by world and filtered to your class group, with a recommended-next card. Tap a topic to open it. |
+| **Portfolio** | Portfolio tab on Home | A wallet-and-savings-jars game with play money: move money between jars, see spending trade-offs, undo or reset. Older class groups also get a two-business risk comparison. Gullu tips and "What's this?" term help are on this tab. |
+| **Rewards** | Rewards tab on Home | Take-home quests (needs or wants, a suspicious UPI request, a ₹100 budget, a unit-price comparison) and the XP and badges you have earned. |
+| **Me** | Me tab, or `/me` | Your profile, level, XP and day streak. Switch learner and get help. |
+
+### Other pages
+
+| Page | What it is |
 |---|---|
-| `pnpm dev` | Run the web app |
-| `pnpm lint` / `pnpm lint:fix` | Biome lint + format check / auto-fix |
+| `/learn/<topic-id>` | One topic: a short lesson, then a quiz. Passing the quiz unlocks the topics that depend on it. Example: `/learn/needs-vs-wants`. |
+| `/practice` | The **Practice episode**: the March 2020 market fall plus a hospital bill, replayed on real NIFTY 50 index-fund prices. Decide whether to hold or sell, then use **rewind** to compare the outcome with an emergency fund. |
+| [`/portfolio`](https://gullak.abgupta.me/portfolio) | **Paper trading portfolio**: play-money cash and holdings, including what the Practice episode left you. Valuation and virtual FDs come from `/api/portfolio` and `/api/portfolio/fd`, which need the Supabase variables. |
+| `/help` | Help and a glossary of terms (XP, mastery, play money, portfolio, interest, inflation, SIP, NAV), in all three languages. |
+| `/r2-preview` | A preview of the lesson components on sample data: lesson renderer, spot & sort, story choices, money decoder, paper portfolio, Practice simulation and the rewind comparison. |
+| `/~offline` | Shown when you are offline and a page is not cached. Lessons you have opened before keep working offline. |
+
+**Install as an app:** in Chrome on Android or desktop use *Install app*; in Safari on iOS use *Share → Add to Home Screen*.
+
+**Language:** chosen during onboarding and stored in a cookie, so the URL stays the same.
+
+### Backend API (needs the Supabase variables below)
+
+All routes are under `/api`, need a signed-in session and return JSON validated with Zod. Try them with the [Postman collection](docs/gullak-backend.postman.json), which walks through the core loop.
+
+| Route | Purpose |
+|---|---|
+| `GET /api/profile`, `POST /api/onboarding` | Learner profile and onboarding |
+| `GET /api/lessons/:topicId`, `POST /api/lessons/:topicId/quiz`, `POST /api/lessons/:topicId/progress` | Lesson content (with format selection), server-graded quizzes and unlocks, lesson progress |
+| `GET /api/progress` | Progress and mastery summary |
+| `GET /api/portfolio`, `POST /api/portfolio/fd` | Virtual portfolio valuation; open a virtual fixed deposit |
+| `GET /api/market/:symbol` | Market quote and history with source and as-of date (snapshot fallback) |
+| `POST /api/goals/plan` | Goal planner: monthly saving needed for a goal |
+| `/api/activities/:contentId/runs`, `/api/episodes/:contentId/runs`, `/api/learning-runs/...` | Activity and Practice-episode runs with answers and resumable bookmarks |
+| `POST /api/missions/complete` | Record a take-home mission |
+| `POST /api/time-machine` | Historical replay data |
+| `GET /api/facilitator/cohorts/:cohortId/progress` | Facilitator view of a cohort's progress |
+
+## What is in the repository
+
+| Folder | Contents |
+|---|---|
+| `apps/web` | The Next.js PWA: pages, API routes and messages in `messages/en.json`, `hi.json` and `te.json` |
+| `packages/engine` | Finance maths (interest, FD, RD, SIP, compounding, goal planning, valuation, unit prices), unlock rules, the lesson-format picker, the recommendation ranker and knowledge tracing |
+| `packages/content` | 33 topics with lessons and quizzes, the topic prerequisite graph, topic-to-world mapping, 61 mutual-fund categories, activities, the Practice episode and curriculum briefs |
+| `packages/market-data` | AMFI, NSE and FD-rate adapters with caching and snapshot fallback |
+| `packages/ai` | LLM client (Gemini → Groq), prompts, advice guardrails and the offline lesson-draft tools |
+| `packages/ui` | Design system and learning components |
+| `packages/types` | Zod schemas for every boundary |
+| `data/snapshots`, `data/models` | Committed real-data snapshots and model outputs |
+| `supabase/migrations` | Database schema with row-level security |
+| `notebooks` | The Colab knowledge-tracing notebook and its tests |
+| `docs` | Curriculum (`curriculum.md`), the 111-term company metrics catalogue (`company-metrics.md`), architecture and backend guides |
+
+## Environment variables (optional)
+
+Fill in `apps/web/.env.local` using the names in [`apps/web/.env.example`](apps/web/.env.example):
+
+- **Supabase** (URL, publishable key, server-only secret key): needed only for the `/api/*` backend routes. Without them, those routes return a clear configuration error. To set up the database, apply `supabase/migrations/*.sql` in filename order and follow [`docs/backend-setup.md`](docs/backend-setup.md). A Postman collection is in [`docs/gullak-backend.postman.json`](docs/gullak-backend.postman.json).
+- **AI tutor:** a Gemini key ([Google AI Studio](https://aistudio.google.com/apikey)) and/or a Groq key ([console.groq.com](https://console.groq.com/keys)). Both have free tiers. Without them, the tutor answers from topic content.
+
+Never commit real keys.
+
+## Production build
+
+```bash
+pnpm build
+pnpm --filter @gullak/web start   # http://localhost:3000
+```
+
+## Tests and checks
+
+| Command | What it runs |
+|---|---|
+| `pnpm lint` | Biome lint and format check |
 | `pnpm typecheck` | Strict TypeScript across all packages |
 | `pnpm test` | Vitest unit tests in every package |
-| `pnpm test:e2e` | Playwright on phone + desktop viewports (run `pnpm --filter @gullak/web exec playwright install chromium` once) |
-| `pnpm build` | Production build |
+| `pnpm test:e2e` | Playwright on phone and desktop viewports (run `pnpm --filter @gullak/web exec playwright install chromium` once) |
 | `pnpm verify` | lint + typecheck + test + build |
-| `pnpm release patch\|minor` | Bump every package version and date the changelog (main only) |
+| `pnpm test:db` | Backend tests against a local PostgreSQL (see `docs/backend-setup.md`) |
 
-## Environment variables
+## Notebook (knowledge tracing)
 
-See [`apps/web/.env.example`](apps/web/.env.example). The UI skeleton starts without keys; persistent backend routes require the Supabase URL, public publishable key and server-only secret key. They return an explicit configuration error when unavailable. Without AI keys the tutor answers from topic content. AI keys are free: Gemini from [Google AI Studio](https://aistudio.google.com/apikey) and Groq from [console.groq.com/keys](https://console.groq.com/keys).
+[`notebooks/gullak-knowledge-tracing-bkt.ipynb`](notebooks/gullak-knowledge-tracing-bkt.ipynb) runs on Google Colab (a T4 GPU is enough). Open it in Colab and choose *Runtime → Run all*. The notebook's own tests are run with:
 
-For R3 setup, migration order and a Postman core-loop walkthrough, see [the backend guide](docs/backend-setup.md) and [Postman collection](docs/gullak-backend.postman.json). Never share or commit real secrets.
-
-## Working on it (team)
-
-R1 works on branches in this repo. Everyone else:
-
-1. **Fork** this repo, then enable Actions in your fork once (Actions tab → *I understand my workflows, go ahead and enable them*), so CI runs on your pushes.
-2. `git remote add upstream https://github.com/AbGisHere/Claude2Create_MegathonX.git`
-3. Branch `feat/<area>`, commit with [Conventional Commits](https://www.conventionalcommits.org/), and add a `CHANGELOG.md` entry under `[Unreleased]` for every `feat`/`fix`.
-4. `git pull --rebase upstream main`, push, then open a PR into `main`. Merge only when CI is green.
-
-The full rules are in **[AGENTS.md](AGENTS.md)**. Hooks and CI enforce them for every human and AI agent.
-
-## Architecture
-
-```
-apps/web               Next.js PWA (UI + thin route handlers)
-packages/types         Zod schemas for every boundary
-packages/engine        Pure TS finance maths, unlock rules, goal planner
-packages/content       Worlds, lessons, stage variants and translations as data
-packages/market-data   Adapters with cache + snapshot fallback
-packages/ai            Provider-agnostic LLM client, prompts, guardrails
-packages/ui            Design system (shadcn/ui + tokens)
-data/snapshots         Committed real-data snapshots (demo never depends on live APIs)
-notebooks              Colab notebooks (knowledge-tracing model)
+```bash
+pip install -r notebooks/requirements-test.txt
+pytest notebooks
 ```
 
-## Data sources
+## Datasets and model weights
 
-Gullak is designed to run every topic and simulation on real Indian data, with each value showing its source and as-of date, and committed snapshots behind every source so the demo works offline. **Committed so far:** AMFI NAV history for a NIFTY 50 index fund (daily since 2019, including the March 2020 crash) and SBI's published one-year FD rate. The sources below are planned; status per source is in [data/snapshots](data/snapshots/README.md), and the map from data to topic is in [docs/curriculum.md](docs/curriculum.md#real-data-behind-every-topic).
+All model outputs are small JSON files committed in [`data/models`](data/models), so no external weights are needed. Real-data snapshots are committed in [`data/snapshots`](data/snapshots/README.md), with their sources listed there.
 
-- **Prices and spending:** MoSPI CPI (headline and by group) and the Household Consumption Expenditure Survey
-- **Saving and borrowing:** bank savings, FD, RD and loan rates (dated); small-savings rates (PPF, SSY, NSC) from the Ministry of Finance; RBI repo rate; NPCI UPI statistics
-- **Investing:** AMFI NAVs for every fund category (liquid, money market, debt, index, equity, ETFs); NSE index history (NIFTY 50, Next 50, Midcap, sectors) and example stock prices; IBJA gold prices; RBI T-bill and G-sec yields; NPS Trust NAVs
-- **Staying safe:** real scam patterns from RBI, I4C/cybercrime.gov.in and NPCI
-- **Practice episodes:** 2008, demonetisation (2016), March 2020, gold in 2020 and the 2022 rate rises, each replayed on real series
+External dataset (downloaded by the notebook at run time and **not** committed, per its terms):
 
-**Knowledge-tracing benchmark:** [ASSISTments 2009–2010 skill builder data](https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010) (Feng, Heffernan & Koedinger, 2009), downloaded at run time by the notebook and never committed.
-
-## Stack
-
-Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS 4 · shadcn/ui · Motion · lightweight-charts · KaTeX · Zustand · TanStack Query · Zod 4 · Supabase · Vercel AI SDK (Gemini, Groq) · next-intl · Serwist · Vitest · Playwright · Biome · Turborepo · pnpm. Reasons for each choice are in the AGENTS.md Decisions log.
-
-## Team
-
-**Claude2Create** · Megathon X: Abhinav Gupta, Ishita Anmol, Parthvi Mishra, Mayank Suman and Vansh Goel. Ownership details are in [AGENTS.md › Ownership map](AGENTS.md#ownership-map).
-
-| Role | Who | Focus |
-|---|---|---|
-| **R1** Lead · frontend core | Abhinav Gupta ([@AbGisHere](https://github.com/AbGisHere)) | App shell, routing, learner profile, world map, releases. Also helps across frontend, backend and ML. |
-| **R2** Frontend · game | Mayank Suman ([@mayankSuman404](https://github.com/mayankSuman404)), Parthvi Mishra ([@Parthvi1707](https://github.com/Parthvi1707)) | Game UI, reusable lesson renderer, world maps, mechanics, Practice/Live simulation and portfolio UI, charts and motion |
-| **R3** Backend · data | Ishita Anmol ([@ishitaanmol975](https://github.com/ishitaanmol975)) | Supabase, data-access layer, market data and snapshots, route handlers |
-| **R4** AI · adaptive engine (ML) | Vansh Goel ([@VanshGoel-01](https://github.com/VanshGoel-01)) | AI tutor, guardrails, knowledge tracing on Colab, format bandit |
-| **R5** Product · content · QA | Shared, led by R1 | World/lesson content, translations, decision feedback, quiz quality, guardrail review, e2e and demo script |
+- [ASSISTments 2009–2010 skill builder data](https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010). Feng, M., Heffernan, N. T., & Koedinger, K. R. (2009). *Addressing the assessment challenge with an online system that tutors as it assesses.* User Modeling and User-Adapted Interaction, 19(3), 243–266.
 
 ## License
 
