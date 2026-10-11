@@ -1,9 +1,11 @@
+import { BookOpen, Candy, Cookie, CupSoda, type LucideIcon, Origami, Pencil, Star } from "lucide-react";
+
 export interface ShoppingItem {
   id: string;
   name: string;
   pricePaise: number; // e.g. 2000 for ₹20
   category: "need" | "want";
-  icon: string;
+  icon: LucideIcon;
   description: string;
   temptationBadge?: string;
   gulluReaction: {
@@ -22,7 +24,7 @@ export const KIRANA_ITEMS: ShoppingItem[] = [
     name: "Class Notebook",
     pricePaise: 2000, // ₹20
     category: "need",
-    icon: "📓",
+    icon: BookOpen,
     description: "Required for tomorrow's math & science homework.",
     gulluReaction: {
       state: "happy",
@@ -34,7 +36,7 @@ export const KIRANA_ITEMS: ShoppingItem[] = [
     name: "Pencil & Eraser",
     pricePaise: 500, // ₹5
     category: "need",
-    icon: "✏️",
+    icon: Pencil,
     description: "Essential for writing notes and homework.",
     gulluReaction: {
       state: "happy",
@@ -46,7 +48,7 @@ export const KIRANA_ITEMS: ShoppingItem[] = [
     name: "Special Paper Kite",
     pricePaise: 1500, // ₹15
     category: "want",
-    icon: "🪁",
+    icon: Origami,
     description: "Colourful fighter kite with glass manja spool.",
     temptationBadge: "Last one before festival!",
     gulluReaction: {
@@ -59,7 +61,7 @@ export const KIRANA_ITEMS: ShoppingItem[] = [
     name: "Cream Chocolate",
     pricePaise: 1000, // ₹10
     category: "want",
-    icon: "🍫",
+    icon: Candy,
     description: "Sweet cocoa treat on the front counter.",
     gulluReaction: {
       state: "thinking",
@@ -71,7 +73,7 @@ export const KIRANA_ITEMS: ShoppingItem[] = [
     name: "Crispy Masala Chips",
     pricePaise: 1000, // ₹10
     category: "want",
-    icon: "🍟",
+    icon: Cookie,
     description: "Spicy crunch snack hanging on the wire rack.",
     gulluReaction: {
       state: "curious",
@@ -83,7 +85,7 @@ export const KIRANA_ITEMS: ShoppingItem[] = [
     name: "Chilled Soda Bottle",
     pricePaise: 2000, // ₹20
     category: "want",
-    icon: "🥤",
+    icon: CupSoda,
     description: "Cold fizz drink in the glass cooler.",
     gulluReaction: {
       state: "concerned",
@@ -95,7 +97,7 @@ export const KIRANA_ITEMS: ShoppingItem[] = [
     name: "Cricket Stars Stickers",
     pricePaise: 1000, // ₹10
     category: "want",
-    icon: "⭐",
+    icon: Star,
     description: "Glossy sticker pack for school geometry box.",
     gulluReaction: {
       state: "thinking",

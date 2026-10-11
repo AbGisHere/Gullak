@@ -8,6 +8,13 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.22] - 2026-10-11
+
+### Changed
+
+- Open Home with engine-ranked lesson recommendations and translated reasons. Replace the island map and hardcoded lesson statuses with Nani’s lane and quiz-based shop access.
+- Count cumulative days practised from saved learning evidence, with no streak to lose after a break.
+
 ### Fixed
 
 - Replace emoji in browser tools, documentation and CLI output with icons or plain text; document the no-emoji rule.

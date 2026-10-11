@@ -154,7 +154,6 @@
     "settings": "Settings"
   },
   "dashboard": {
-    "streakDays": "{days} Day Streak",
     "habitScore": "Habit Score: {score}/100",
     "welcomeTwin": "Meet your Financial Twin",
     "activeDilemmaTitle": "Active Dilemma · The ₹15,000 Hospital Bill",
@@ -166,7 +165,9 @@
     "kitnaDropTitle": "2-Minute Daily Truth",
     "dailyDrop": "Daily Drop",
     "practiceSim": "Practice Sim",
-    "liveTrading": "Live Mode"
+    "liveTrading": "Live Mode",
+    "daysPractisedDays": "{days} days practised",
+    "daysPractised": "{days} days practised"
   },
   "twin": {
     "title": "Nani's Gullak & The Multiverse",
@@ -330,15 +331,10 @@
   },
   "progressData": {
     "xpShort": "{xp} XP",
-    "streakShort": "{days}d",
-    "streakAria": "{days, plural, one {# day} other {# days}} of learning in a row",
     "levelSummary": "Level {level} · {xp} XP",
     "livingGullak": "Living Gullak · Level {level}",
-    "streakChip": "{days, plural, one {# day} other {# days}} in a row",
     "xpLabel": "Learning XP",
-    "streakLabel": "Learning streak",
     "topicsPassedLabel": "Topics passed",
-    "streakValue": "{days, plural, =0 {Not started} one {# day} other {# days}}",
     "xpToNext": "{remaining} XP to level {next}",
     "emptyTitle": "Your Gullak is ready to fill",
     "emptyBody": "Pass your first quiz or finish an activity to earn XP. Every number here comes from what you actually do.",
@@ -346,7 +342,13 @@
     "activityDoneTitle": "Saved to your progress",
     "activityDoneBody": "This activity is recorded on this device. Each activity earns XP once, so replaying it is just for practice.",
     "activityXp": "+{xp} XP the first time you finish it",
-    "activityUnlockNote": "Pass a topic's quiz to unlock what comes next."
+    "activityUnlockNote": "Pass a topic's quiz to unlock what comes next.",
+    "daysPractisedShort": "{days} days practised",
+    "daysPractised": "{days, plural, one {# day practised} other {# days practised}}",
+    "daysPractisedLabel": "Days practised",
+    "daysPractisedValue": "{days} days practised",
+    "daysPractisedAria": "Days practised",
+    "daysPractisedChip": "Days practised"
   },
   "look": {
     "formatOrPick": "Or pick a few you like"
@@ -360,12 +362,12 @@
       "learnerMenu": "Learner menu",
       "closeLearnerMenu": "Close learner menu",
       "currentProfile": "Current profile",
-      "streakShort": "{days}d",
-      "streakLabel": "{days}-day streak",
       "scoreShort": "Score {score}",
       "habitScore": "Habit score: {score}/100",
       "changeClass": "Change class and goals",
-      "resetOnboarding": "Reset and replay onboarding"
+      "resetOnboarding": "Reset and replay onboarding",
+      "daysPractisedShort": "{days} days practised",
+      "daysPractisedLabel": "{days} days practised"
     },
     "map": {
       "currentDestination": "Current destination",
@@ -387,9 +389,18 @@
       "soonNext": "For now, keep the story moving in {current}.",
       "backToMap": "Back to the map",
       "worlds": {
-        "candy-economy": { "tagline": "Ravi uncle's kirana shop", "mission": "Gullu goes shopping" },
-        "savings-quest": { "tagline": "Nani's courtyard", "mission": "The leaky pocket mystery" },
-        "bankopolis": { "tagline": "The bank branch and UPI stall", "mission": "Nani's first bank passbook" },
+        "candy-economy": {
+          "tagline": "Ravi uncle's kirana shop",
+          "mission": "Gullu goes shopping"
+        },
+        "savings-quest": {
+          "tagline": "Nani's courtyard",
+          "mission": "The leaky pocket mystery"
+        },
+        "bankopolis": {
+          "tagline": "The bank branch and UPI stall",
+          "mission": "Nani's first bank passbook"
+        },
         "market-mayhem": {
           "tagline": "The Sunday street bazaar",
           "mission": "Lucky Bhai's scheme",
@@ -405,7 +416,10 @@
           "mission": "The index rollercoaster",
           "unlock": "Learn compounding and the emergency fund first."
         },
-        "life-simulator": { "tagline": "The ₹15,000 hospital bill", "mission": "The financial twin dilemma" },
+        "life-simulator": {
+          "tagline": "The ₹15,000 hospital bill",
+          "mission": "The financial twin dilemma"
+        },
         "finance-tycoon": {
           "tagline": "Planning a future for Nani and family",
           "mission": "Building security for the family",
@@ -425,21 +439,21 @@
         "kintsugi": "I broke once, and Nani mended me with gold lacquer (kintsugi)!"
       },
       "level": "Living Gullak · Level {level}",
-      "streak": "{days}-day streak",
       "score": "Score {score}/100",
       "habitNote": "Your Gullak grows with steady habits (saving, emergency funds, scam drills), never with lucky gambles.",
       "insideTitle": "What's inside your Gullak",
-      "insideDescription": "A paper portfolio of virtual instruments you unlock across lessons."
+      "insideDescription": "A paper portfolio of virtual instruments you unlock across lessons.",
+      "daysPractised": "{days} days practised"
     },
     "rewards": {
       "title": "Rewards and achievements",
       "description": "Earn XP and badges by protecting your family and finishing take-home missions.",
       "xp": "Learning XP",
       "xpValue": "{xp} XP",
-      "streak": "Daily streak",
-      "streakValue": "{days} days",
       "habit": "Habit score",
-      "habitValue": "{score}/100"
+      "habitValue": "{score}/100",
+      "daysPractised": "Days practised",
+      "daysPractisedValue": "{days} days practised"
     },
     "profile": {
       "title": "Learner profile",
@@ -451,7 +465,11 @@
       "save": "Save",
       "appearance": "Appearance",
       "appearanceDescription": "Choose warm paper, deep midnight navy, or match your device.",
-      "theme": { "light": "Light", "dark": "Dark", "system": "System" },
+      "theme": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+      },
       "classGroup": "Change class group",
       "active": "Active",
       "gradeTopics": {
@@ -554,10 +572,6 @@
         "name": "Mastery",
         "definition": "Gullak's estimate of how well you know an idea, based on your quiz answers. It rises and falls as you learn; it is not a mark."
       },
-      "streak": {
-        "name": "Streak",
-        "definition": "How many days in a row you have practised. Missing a day never costs you anything."
-      },
       "habitScore": {
         "name": "Habit score",
         "definition": "How regularly you practise good money habits, like saving and spotting scams. It never measures how much money you made."
@@ -585,6 +599,10 @@
       "nav": {
         "name": "NAV",
         "definition": "Net asset value: the price of one unit of a mutual fund, worked out once a day from everything the fund holds."
+      },
+      "daysPractised": {
+        "name": "Days practised",
+        "definition": "Every distinct day you practise counts. Breaks never reduce this total."
       }
     },
     "hint": {
@@ -594,11 +612,11 @@
     },
     "gulluTab": {
       "level": "Living Gullak · Level {level}",
-      "streak": "{days}-day streak",
       "score": "Habit score {score}/100",
       "growNote": "Your Gullak grows with steady habits like saving, keeping money aside for emergencies and spotting scams, never with lucky bets.",
       "insideTitle": "What's inside your Gullak",
-      "insideBody": "A paper portfolio of pretend instruments you unlock as you learn."
+      "insideBody": "A paper portfolio of pretend instruments you unlock as you learn.",
+      "daysPractised": "{days} days practised"
     },
     "page": {
       "title": "How Gullak works",
@@ -624,5 +642,40 @@
       "glossaryIntro": "Look for the small question mark next to these words anywhere in Gullak.",
       "backToMap": "Back to my learning map"
     }
+  },
+  "nextLearning": {
+    "title": "Recommended next, because…",
+    "start": "Start lesson",
+    "review": "Review lesson",
+    "empty": "More lessons are being prepared. Explore Nani’s lane to see what is available.",
+    "practiceCount": "Every day you practise counts. Take a break whenever you need; your count stays with you.",
+    "explore": "Around Nani’s lane",
+    "lane": "Visit Nani’s lane",
+    "laneDescription": "See the shops you can enter and what opens next.",
+    "story": "Continue Nani’s story",
+    "storyDescription": "Explore a family decision using virtual money.",
+    "drill": "Try a sorting round",
+    "drillDescription": "Practise spotting needs and wants, at your own pace.",
+    "reason": {
+      "foundation-topic": "This is a starting lesson for your class group. No earlier quiz is needed.",
+      "prerequisite-readiness": "You have passed the required quizzes. Your understanding of those concepts makes this a useful next step.",
+      "weak-concept": "Your quiz evidence suggests a concept here could use another look. Reviewing it will not take away your progress.",
+      "all-open-topics-passed": "You have passed every available lesson. This review revisits the concepts that could benefit most from practice.",
+      "missing-evidence": "There is not enough saved concept evidence to personalise a recommendation yet. This lesson is available for your class group."
+    },
+    "initialise": "Use my onboarding starting point for concepts without saved evidence",
+    "shopping": "Gullu goes shopping",
+    "shoppingDescription": "Practise a shopping decision with fictional coins."
+  },
+  "lane": {
+    "title": "Nani’s lane",
+    "description": "A neighbourhood of money lessons. Visit an open shop, practise its lessons, and pass the quiz to open the next stop.",
+    "shopOpen": "Open for learning",
+    "shopLater": "Opens as you learn",
+    "shopVisited": "Lessons passed",
+    "opensAfter": "Opens after you pass: {topics}",
+    "coming": "Coming soon",
+    "enter": "Step inside",
+    "review": "Visit again"
   }
 }

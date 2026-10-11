@@ -3,7 +3,21 @@
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
 import { cn } from "@gullak/ui/lib/utils";
-import { Bus, RotateCcw, ShoppingBag, Sparkles, X } from "lucide-react";
+import {
+  Bus,
+  Coins,
+  FileText,
+  Footprints,
+  Lightbulb,
+  NotebookPen,
+  RotateCcw,
+  School,
+  ShoppingBag,
+  Sparkles,
+  Sprout,
+  Star,
+  X,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { ConfirmDialog } from "../../confirm-dialog";
@@ -119,7 +133,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Wallet Coins Counter */}
           <div className="flex items-center gap-1.5 rounded-xl border border-border bg-brand-lime text-brand-ink dark:text-background px-2.5 sm:px-3 py-1 text-sm sm:text-base font-bold">
-            <span className="text-base sm:text-lg">🪙</span>
+            <Coins aria-hidden="true" className="size-5" />
             <span className="tabular">{formatInr(remainingPaise)}</span>
           </div>
 
@@ -246,7 +260,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                   Ravi Uncle&apos;s Shelf · Tap to add
                 </span>
                 <span className="text-xs font-bold text-brand-coral-ink">
-                  {remainingPaise < BUS_FARE_PAISE ? "⚠️ Bus fare at risk!" : "✓ Bus fare safe"}
+                  {remainingPaise < BUS_FARE_PAISE ? "Bus fare at risk!" : "Bus fare safe"}
                 </span>
               </div>
 
@@ -275,7 +289,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                       )}
 
                       <div className="flex items-start justify-between">
-                        <span className="text-2xl sm:text-3xl">{item.icon}</span>
+                        <item.icon aria-hidden="true" className="size-7 sm:size-8" />
                         <span className="rounded-lg border border-border bg-brand-yellow text-brand-ink dark:text-background px-1.5 py-0.5 text-xs sm:text-sm font-extrabold shadow-xs">
                           {formatInr(item.pricePaise)}
                         </span>
@@ -337,7 +351,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                       title="Tap to remove"
                       className="inline-flex items-center gap-1.5 rounded-xl border border-foreground dark:border-[#334155] bg-[#ECE8DF] dark:bg-[#162032] text-foreground px-2.5 py-1 text-xs font-bold hover:bg-[#FF6847] hover:text-foreground transition-colors"
                     >
-                      <span>{item.icon}</span>
+                      <item.icon aria-hidden="true" className="size-4" />
                       <span>{item.name}</span>
                       <span className="text-xs opacity-70">({formatInr(item.pricePaise)})</span>
                       <X className="size-3 ml-0.5" />
@@ -400,7 +414,11 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                 <span>Scene 1 · 4:00 PM: The Red Bus Stop</span>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-3xl">{hasBusFare ? "🚌" : "🚶‍♂️"}</span>
+                {hasBusFare ? (
+                  <Bus aria-hidden="true" className="size-8" />
+                ) : (
+                  <Footprints aria-hidden="true" className="size-8" />
+                )}
                 <div className="text-xs sm:text-sm leading-relaxed">
                   {hasBusFare ? (
                     <p className="text-success-ink font-semibold">
@@ -421,11 +439,15 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             {/* Scene 2: School the Next Day */}
             <div className="rounded-2xl border border-border bg-card p-4 space-y-3">
               <div className="flex items-center gap-2 text-base font-extrabold">
-                <span>🏫</span>
+                <School aria-hidden="true" className="size-4" />
                 <span>Scene 2 · Next Morning in Class</span>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-3xl">{hasNotebook ? "✍️" : "📄"}</span>
+                {hasNotebook ? (
+                  <NotebookPen aria-hidden="true" className="size-8" />
+                ) : (
+                  <FileText aria-hidden="true" className="size-8" />
+                )}
                 <div className="text-xs sm:text-sm leading-relaxed">
                   {hasNotebook ? (
                     <p className="text-success-ink font-semibold">
@@ -482,7 +504,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               <div className="rounded-2xl border border-border bg-brand-lime/30 p-3 sm:p-4 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-1.5 text-sm sm:text-base font-bold text-foreground">
-                    <span>🌱</span>
+                    <Sprout aria-hidden="true" className="size-4" />
                     <span>NEEDS</span>
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
@@ -491,9 +513,9 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                 </div>
 
                 <div className="mt-3 pt-2 border-t border-foreground/20 dark:border-[#334155] space-y-1 text-xs font-bold text-success-ink">
-                  <p>✓ Notebook (School)</p>
-                  <p>✓ ₹10 Bus Fare</p>
-                  <p>✓ Pencil / Medicine</p>
+                  <p>Notebook (School)</p>
+                  <p>₹10 Bus Fare</p>
+                  <p>Pencil / Medicine</p>
                 </div>
               </div>
 
@@ -501,7 +523,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
               <div className="rounded-2xl border border-border bg-brand-lilac/30 p-3 sm:p-4 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-1.5 text-sm sm:text-base font-bold text-foreground">
-                    <span>⭐</span>
+                    <Star aria-hidden="true" className="size-4" />
                     <span>WANTS</span>
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
@@ -519,7 +541,8 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
 
             <div className="rounded-2xl border border-border bg-card p-4 text-xs sm:text-sm leading-relaxed space-y-2">
               <p className="font-bold text-foreground">
-                💡 <strong>Important Truth:</strong> Wants are NOT bad!
+                <Lightbulb aria-hidden="true" className="mr-1 inline size-4" /> <strong>Important Truth:</strong> Wants
+                are NOT bad!
               </p>
               <p className="text-muted-foreground">
                 Everyone enjoys treats! But smart money managers always fund their{" "}
@@ -575,7 +598,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                             : "bg-muted text-foreground",
                         )}
                       >
-                        Essential Need 🌱
+                        Essential Need
                       </button>
 
                       <button
@@ -588,7 +611,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                             : "bg-muted text-foreground",
                         )}
                       >
-                        Fun Want ⭐
+                        Fun Want
                       </button>
                     </div>
 
@@ -601,7 +624,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                             : "bg-amber-50 dark:bg-amber-950/40 border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200",
                         )}
                       >
-                        <p className="font-bold">{isCorrect ? "✓ Spot on!" : "💡 Think about this:"}</p>
+                        <p className="font-bold">{isCorrect ? "Spot on!" : "Think about this:"}</p>
                         <p>{q.explanation}</p>
                       </div>
                     )}
@@ -639,23 +662,23 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             <div className="w-full rounded-2xl border border-border bg-card p-4 text-left space-y-3">
               <div className="flex items-center justify-between border-b border-foreground/10 dark:border-[#334155] pb-2">
                 <span className="text-xs font-extrabold uppercase text-muted-foreground">Learning XP Earned</span>
-                <span className="text-lg font-bold text-success-ink">+35 XP ⚡</span>
+                <span className="text-lg font-bold text-success-ink">+35 XP</span>
               </div>
 
               <div className="flex items-center justify-between border-b border-foreground/10 dark:border-[#334155] pb-2">
                 <span className="text-xs font-extrabold uppercase text-muted-foreground">Habit Score Boost</span>
-                <span className="text-lg font-bold text-brand-coral-ink">+5 Score 🔥</span>
+                <span className="text-lg font-bold text-brand-coral-ink">+5 Score</span>
               </div>
 
               <div className="flex items-center justify-between">
                 <span className="text-xs font-extrabold uppercase text-muted-foreground">Coins saved into Gullak</span>
-                <span className="text-lg font-bold text-foreground">🪙 {formatInr(remainingPaise)}</span>
+                <span className="text-lg font-bold text-foreground">{formatInr(remainingPaise)}</span>
               </div>
             </div>
 
             {/* Take-Home Mission Callout */}
             <div className="w-full rounded-2xl border border-border bg-brand-lime/40 p-3.5 text-left space-y-1">
-              <p className="text-xs font-bold uppercase text-foreground">🏡 Take-Home Mission</p>
+              <p className="text-xs font-bold uppercase text-foreground">Take-Home Mission</p>
               <p className="text-xs text-foreground leading-snug">
                 Ask someone at home today:{" "}
                 <em>&quot;What was one Need and one Want from this week&apos;s grocery shopping?&quot;</em>

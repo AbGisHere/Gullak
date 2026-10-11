@@ -58,7 +58,7 @@ storage or app activation; catalog expansion needs reviewed approval.
 ## Phase 1 · First-time learner journey
 
 - [ ] Onboarding: class group, experience, preferred format and optional placement challenge (R1, R4); pure draft `stageForClass` selector implemented in `@gullak/engine`; class-based app onboarding and placement remain pending
-- [ ] Responsive app shell: phone navigation, desktop layout, XP/streak/play-money indicators (R1, R2); shell, navigation and Play Money badge built, XP and streak not yet
+- [x] Responsive app shell: phone navigation, desktop layout, evidence-derived XP, cumulative days practised and Play Money indicators (R1, R2). Home explains the next lesson; Nani’s lane shows quiz-based topic access.
 - [ ] World map with locked, open and completed lesson states (R2)
 - [ ] Progress persistence for profile, XP, lesson attempts, mastery and unlocks (R3)
 - [ ] Reusable lesson renderer: hook → decision → consequence → concept → application → review → completion (R2)
@@ -75,7 +75,7 @@ storage or app activation; catalog expansion needs reviewed approval.
 
 ## Phase 3 · Worlds 2–5
 
-- [ ] Savings Quest: budget, goal, streak and emergency-event mechanics (R2, R5)
+- [ ] Savings Quest: budget, goal, cumulative practice and emergency-event mechanics (R2, R5)
 - [ ] Bankopolis: virtual account, UPI, statement and scam-safety activities (R2, R3, R5)
 - [ ] Market Mayhem: shop, inventory, demand, pricing and profit/loss simulation (R2, R4, R5)
 - [ ] Grow Your Money: interest, inflation, goal-horizon and risk-awareness activities (R2, R4, R5)

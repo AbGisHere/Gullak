@@ -109,3 +109,9 @@ These are design responsibilities for existing or future components, not an inst
 - Hide important data behind hover, colour alone, tiny text, motion or inaccessible gestures.
 - Add hindsight reveals to Live or make a historical counterfactual a market-timing recommendation.
 - Treat this seed as proof that current code implements the agreed design or as permission to change application files.
+
+## Home and Nani’s lane
+
+Home opens with “Recommended next, because…” and one lesson action. Translate engine reason codes; incomplete saved mastery is explicit and never silently reset. Count unique local calendar days practised without a consecutive-day requirement or loss after a break.
+
+The learning map is Nani’s lane: shops arranged along a straight neighbourhood road, with restrained geometric awnings and clear open, visited or opens-later signs. Topics remain data from the current graph; quiz pass marks alone open shops. Show prerequisite lesson titles instead of padlock grids or zig-zag islands. Preserve warm paper, ink and selective lime, responsive reading order and keyboard access.

@@ -3,30 +3,34 @@
 import { startingCapital } from "@gullak/content";
 import { startingCash } from "@gullak/engine";
 import { type GradeGroup, LearnerProfile } from "@gullak/types";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { clearLearnerData, recordActivity } from "@/lib/learner-state";
+import { clearLearnerData, readLearnerState, recordActivity, saveLearnerState } from "@/lib/learner-state";
+import { initialiseRecommendationEvidence } from "@/lib/learning-recommendation";
 import { useLearnerProgress } from "@/lib/use-progress-summary";
 import { ActivityModal, type ActivityType } from "./activity-modal";
 import { AppShell, type NavTab } from "./app-shell";
 import { ConfirmDialog } from "./confirm-dialog";
 import { ShoppingMission } from "./game/shopping/shopping-mission";
-import { WorldMap } from "./game/world-map";
-import { CURRICULUM_WORLDS } from "./game/worlds";
+import type { TopicSummary } from "./learn-map";
+import { LearnMap } from "./learn-map";
 import { Onboarding } from "./onboarding";
 import { SettingsDialog } from "./settings-dialog";
 import { FinancialTwinTab } from "./tabs/financial-twin-tab";
 import { GulluTab } from "./tabs/gullu-tab";
+import { HomeTab } from "./tabs/home-tab";
 import { ProfileTab } from "./tabs/profile-tab";
 import { RewardsTab } from "./tabs/rewards-tab";
 
 const ONBOARDING_STORAGE_KEY = "gullak-onboarding-profile";
 
-export function LearnerApp() {
+export function LearnerApp({ topics }: { topics: TopicSummary[] }) {
+  const router = useRouter();
   const tSafety = useTranslations("safety");
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentTab, setCurrentTab] = useState<NavTab>("world");
+  const [currentTab, setCurrentTab] = useState<NavTab>("home");
   const [activeActivity, setActiveActivity] = useState<ActivityType | null>(null);
   const [activeTopicId, setActiveTopicId] = useState<string | null>(null);
   const [isShoppingMissionOpen, setIsShoppingMissionOpen] = useState(false);
@@ -52,6 +56,7 @@ export function LearnerApp() {
   }, []);
 
   function handleOnboardFinish(newProfile: LearnerProfile) {
+    saveLearnerState(initialiseRecommendationEvidence(topics, newProfile, readLearnerState()));
     setProfile(newProfile);
     try {
       window.localStorage.setItem(ONBOARDING_STORAGE_KEY, JSON.stringify(newProfile));
@@ -123,10 +128,6 @@ export function LearnerApp() {
     recordActivity("mission:candy-economy-shopping", xpEarned);
   }
 
-  const completedWorlds = CURRICULUM_WORLDS.filter((world) => progress.completedWorlds.includes(world.slug)).map(
-    (world) => world.id,
-  );
-
   const virtualCash = startingCash(startingCapital, profile.gradeGroup, profile.experience);
 
   return (
@@ -135,24 +136,26 @@ export function LearnerApp() {
         currentTab={currentTab}
         onSelectTab={setCurrentTab}
         gradeGroup={profile.gradeGroup}
-        streakDays={progress.streakDays}
+        daysPractised={progress.activeDays}
         xp={progress.xp}
         level={progress.level}
         onOpenSettings={() => setCurrentTab("profile")}
         onResetOnboarding={handleResetOnboarding}
       >
-        {(currentTab === "world" || currentTab === "home") && (
-          <WorldMap
-            onLaunchWorldMission={(w) => {
-              if (w.slug === "candy-economy") {
-                setIsShoppingMissionOpen(true);
-              }
-            }}
-            onLaunchTwin={() => setCurrentTab("twin")}
-            learnerGradeGroup={profile.gradeGroup}
-            completedWorlds={completedWorlds}
-            learnerXp={progress.xp}
+        {currentTab === "home" && (
+          <HomeTab
+            profile={profile}
+            topics={topics}
+            daysPractised={progress.activeDays}
+            onNavigateToTab={(tab) => (tab === "learn" ? router.push("/learn") : setCurrentTab(tab))}
+            onLaunchActivity={setActiveActivity}
+            onLaunchShopping={() => setIsShoppingMissionOpen(true)}
           />
+        )}
+        {currentTab === "world" && (
+          <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6">
+            <LearnMap topics={topics} profile={profile} />
+          </div>
         )}
 
         {currentTab === "twin" && <FinancialTwinTab />}

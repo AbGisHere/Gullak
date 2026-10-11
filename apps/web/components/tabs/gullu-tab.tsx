@@ -40,10 +40,10 @@ export function GulluTab({ gradeGroup, virtualCashPaise, progress }: GulluTabPro
             <span className="rounded-full bg-primary text-primary-foreground px-3 py-1 text-xs font-bold uppercase">
               {tProgress("livingGullak", { level: progress.level })}
             </span>
-            {progress.streakDays > 0 ? (
+            {progress.activeDays > 0 ? (
               <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted py-0.5 pl-2.5 pr-1 text-xs font-bold text-foreground">
-                {tProgress("streakChip", { days: progress.streakDays })}
-                <TermHelp term="streak" />
+                {tProgress("daysPractised", { days: progress.activeDays })}
+                <TermHelp term="daysPractised" />
               </span>
             ) : null}
             <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted py-0.5 pl-2.5 pr-1 text-xs font-bold tabular-nums text-foreground">

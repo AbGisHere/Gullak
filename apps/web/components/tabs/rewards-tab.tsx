@@ -40,9 +40,9 @@ export function RewardsTab({ gradeGroup, progress }: RewardsTabProps) {
           </div>
 
           <div className="rounded-2xl bg-muted p-3">
-            <span className="text-xs font-bold uppercase text-muted-foreground">{tProgress("streakLabel")}</span>
+            <span className="text-xs font-bold uppercase text-muted-foreground">{tProgress("daysPractisedLabel")}</span>
             <p className="text-lg font-bold text-foreground">
-              {tProgress("streakValue", { days: progress.streakDays })}
+              {tProgress("daysPractisedValue", { days: progress.activeDays })}
             </p>
           </div>
 

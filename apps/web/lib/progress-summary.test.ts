@@ -7,7 +7,6 @@ import {
   localDayKey,
   mergeEvidence,
   ProgressResponse,
-  streakDays,
   summarizeProgress,
   XP_PER_ACTIVITY,
   XP_PER_LEVEL,
@@ -16,15 +15,13 @@ import {
 
 // Local-time instants keep the tests independent of the machine's time zone.
 const at = (day: number, hour = 10) => new Date(2026, 9, day, hour).toISOString();
-const now = new Date(2026, 9, 11, 18);
 
 describe("summarizeProgress", () => {
   it("gives a brand-new learner honest zeros", () => {
-    expect(summarizeProgress(emptyEvidence, now)).toEqual({
+    expect(summarizeProgress(emptyEvidence)).toEqual({
       xp: 0,
       level: 1,
       xpIntoLevel: 0,
-      streakDays: 0,
       activeDays: 0,
       topicsPassed: 0,
       activitiesCompleted: 0,
@@ -33,14 +30,11 @@ describe("summarizeProgress", () => {
   });
 
   it("derives XP and level from distinct passes and activities only", () => {
-    const summary = summarizeProgress(
-      {
-        passedTopicIds: ["money-basics", "needs-vs-wants", "money-basics"],
-        activities: [{ id: "lesson:money-basics" }, { id: "lesson:money-basics" }, { id: "coin-shop" }],
-        evidenceAt: [at(11)],
-      },
-      now,
-    );
+    const summary = summarizeProgress({
+      passedTopicIds: ["money-basics", "needs-vs-wants", "money-basics"],
+      activities: [{ id: "lesson:money-basics" }, { id: "lesson:money-basics" }, { id: "coin-shop" }],
+      evidenceAt: [at(11)],
+    });
     const xp = 2 * XP_PER_TOPIC_PASSED + 2 * XP_PER_ACTIVITY;
     expect(summary.xp).toBe(xp);
     expect(summary.level).toBe(Math.floor(xp / XP_PER_LEVEL) + 1);
@@ -51,57 +45,47 @@ describe("summarizeProgress", () => {
   });
 
   it("uses an authored activity reward once and ignores invalid rewards", () => {
-    const summary = summarizeProgress(
-      {
-        passedTopicIds: [],
-        activities: [
-          { id: "mission", xp: 35 },
-          { id: "mission", xp: 35 },
-          { id: "broken", xp: -5 },
-          { id: "fractional", xp: 1.5 },
-        ],
-        evidenceAt: [],
-      },
-      now,
-    );
+    const summary = summarizeProgress({
+      passedTopicIds: [],
+      activities: [
+        { id: "mission", xp: 35 },
+        { id: "mission", xp: 35 },
+        { id: "broken", xp: -5 },
+        { id: "fractional", xp: 1.5 },
+      ],
+      evidenceAt: [],
+    });
     expect(summary.xp).toBe(35 + 2 * XP_PER_ACTIVITY);
     expect(summary.activitiesCompleted).toBe(3);
   });
 
   it("counts a failed attempt as activity but not as XP", () => {
-    const summary = summarizeProgress({ passedTopicIds: [], activities: [], evidenceAt: [at(11)] }, now);
+    const summary = summarizeProgress({ passedTopicIds: [], activities: [], evidenceAt: [at(11)] });
     expect(summary.xp).toBe(0);
-    expect(summary.streakDays).toBe(1);
+    expect(summary.activeDays).toBe(1);
     expect(summary.hasProgress).toBe(true);
   });
 });
 
-describe("streakDays", () => {
-  it("counts distinct days, not actions", () => {
-    expect(streakDays([at(11, 8), at(11, 9), at(11, 20)], now)).toBe(1);
+describe("days practised", () => {
+  const count = (evidenceAt: string[]) => summarizeProgress({ ...emptyEvidence, evidenceAt }).activeDays;
+
+  it("counts repeated actions on the same local calendar day once", () => {
+    expect(count([at(11, 0), at(11, 9), at(11, 23)])).toBe(1);
   });
 
-  it("counts consecutive days ending today", () => {
-    expect(streakDays([at(9), at(10), at(11)], now)).toBe(3);
-  });
-
-  it("keeps a streak that reached yesterday", () => {
-    expect(streakDays([at(9), at(10)], now)).toBe(2);
-  });
-
-  it("resets after a missed day and ignores gaps further back", () => {
-    expect(streakDays([at(7), at(8)], now)).toBe(0);
-    expect(streakDays([at(5), at(6), at(10), at(11)], now)).toBe(2);
+  it("preserves all accumulated days after missed days", () => {
+    expect(count([at(1), at(2), at(8)])).toBe(3);
+    expect(count([at(1), at(2), at(8), at(11)])).toBe(4);
   });
 
   it("ignores invalid timestamps", () => {
-    expect(streakDays(["not-a-date", ""], now)).toBe(0);
+    expect(count(["not-a-date", ""])).toBe(0);
     expect(localDayKey("nope")).toBeNull();
   });
 
   it("crosses month boundaries", () => {
-    const first = new Date(2026, 10, 1, 12);
-    expect(streakDays([new Date(2026, 9, 31, 12).toISOString(), first.toISOString()], first)).toBe(2);
+    expect(count([new Date(2026, 9, 31, 12).toISOString(), new Date(2026, 10, 1, 12).toISOString()])).toBe(2);
   });
 });
 
@@ -135,9 +119,9 @@ describe("evidence sources", () => {
       { passedTopicIds: ["money-basics"], activities: [{ id: "coin-shop" }], evidenceAt: [at(11)] },
       server,
     );
-    const summary = summarizeProgress(merged, now);
+    const summary = summarizeProgress(merged);
     expect(summary.topicsPassed).toBe(1);
-    expect(summary.streakDays).toBe(2);
+    expect(summary.activeDays).toBe(2);
   });
 
   it("rejects a malformed server response", () => {

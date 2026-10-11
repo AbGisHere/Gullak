@@ -2,7 +2,7 @@
 export const HELP_TERMS = [
   "xp",
   "mastery",
-  "streak",
+  "daysPractised",
   "habitScore",
   "playMoney",
   "portfolio",

@@ -159,9 +159,7 @@ export function WorldMap({
                 )}
 
                 {/* Node Icon */}
-                <span aria-hidden="true" className="text-2xl sm:text-3xl select-none mb-0.5">
-                  {world.icon}
-                </span>
+                <world.icon aria-hidden="true" className="mb-0.5 size-7 sm:size-8" />
 
                 {/* Node Number Badge */}
                 <span
@@ -313,9 +311,7 @@ function WorldDialog({
       >
         <div className="flex items-center justify-between border-b border-foreground/10 dark:border-[#334155] pb-3">
           <div className="flex items-center gap-2">
-            <span aria-hidden="true" className="text-2xl">
-              {world.icon}
-            </span>
+            <world.icon aria-hidden="true" className="size-6" />
             <div>
               <h2 id={titleId} className="text-base font-bold leading-tight text-foreground">
                 {title}

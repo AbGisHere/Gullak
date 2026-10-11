@@ -2,7 +2,7 @@ import { TopicProgress } from "@gullak/types";
 import { z } from "zod";
 
 /**
- * Learner-facing progress numbers (XP, level, streak) derived only from recorded evidence:
+ * Learner-facing progress numbers (XP, level, days practised) derived only from recorded evidence:
  * passed quizzes and completed activities. Nothing here is a mastery model or an unlock rule;
  * quiz pass marks stay the only unlock rule. Replaying the same activity never earns XP twice.
  */
@@ -20,7 +20,7 @@ export interface ProgressEvidence {
   passedTopicIds: readonly string[];
   /** Completed activities (lessons, sorts, missions). `xp` is the authored reward, else XP_PER_ACTIVITY. */
   activities: readonly ActivityEvidence[];
-  /** ISO timestamps of every recorded learning action; used for the day streak. */
+  /** ISO timestamps of every recorded learning action; used for cumulative days practised. */
   evidenceAt: readonly string[];
 }
 
@@ -29,8 +29,6 @@ export interface ProgressSummary {
   level: number;
   /** XP earned inside the current level, 0 to XP_PER_LEVEL - 1. */
   xpIntoLevel: number;
-  /** Consecutive calendar days with learning, ending today or yesterday. */
-  streakDays: number;
   /** Distinct calendar days with any recorded learning. */
   activeDays: number;
   topicsPassed: number;
@@ -49,24 +47,7 @@ export function localDayKey(value: string | Date): string | null {
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
-/**
- * Counts distinct days, never actions: five quizzes on one day is a one-day streak.
- * A streak that reached yesterday still counts today, so missing "today so far" never reads as a loss.
- */
-export function streakDays(evidenceAt: readonly string[], now: Date = new Date()): number {
-  const days = new Set(evidenceAt.map((value) => localDayKey(value)).filter((key): key is string => key !== null));
-  if (days.size === 0) return 0;
-  const cursor = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  if (!days.has(localDayKey(cursor) ?? "")) cursor.setDate(cursor.getDate() - 1);
-  let count = 0;
-  while (days.has(localDayKey(cursor) ?? "")) {
-    count++;
-    cursor.setDate(cursor.getDate() - 1);
-  }
-  return count;
-}
-
-export function summarizeProgress(evidence: ProgressEvidence, now: Date = new Date()): ProgressSummary {
+export function summarizeProgress(evidence: ProgressEvidence): ProgressSummary {
   const topicsPassed = new Set(evidence.passedTopicIds).size;
   // Each activity id earns once, at the highest valid reward recorded for it.
   const activityXp = new Map<string, number>();
@@ -87,7 +68,6 @@ export function summarizeProgress(evidence: ProgressEvidence, now: Date = new Da
     xp,
     level: Math.floor(xp / XP_PER_LEVEL) + 1,
     xpIntoLevel: xp % XP_PER_LEVEL,
-    streakDays: streakDays(evidence.evidenceAt, now),
     activeDays,
     topicsPassed,
     activitiesCompleted,

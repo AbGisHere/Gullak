@@ -1,10 +1,22 @@
+import {
+  Candy,
+  Compass,
+  Hourglass,
+  Landmark,
+  type LucideIcon,
+  PiggyBank,
+  Sprout,
+  Store,
+  TrendingUp,
+} from "lucide-react";
+
 export interface WorldDef {
   id: number;
   slug: string;
   title: string;
   tagline: string;
   setting: string;
-  icon: string;
+  icon: LucideIcon;
   season: 1 | 2 | 3;
   seasonLabel: string;
   topics: string[];
@@ -24,7 +36,7 @@ export const CURRICULUM_WORLDS: WorldDef[] = [
     title: "Candy Economy",
     tagline: "Ravi uncle's kirana shop",
     setting: "Local Kirana & Street Corner",
-    icon: "🍬",
+    icon: Candy,
     season: 1,
     seasonLabel: "Season 1 · Class 6–7",
     topics: ["money-basics", "needs-vs-wants", "opportunity-cost"],
@@ -40,7 +52,7 @@ export const CURRICULUM_WORLDS: WorldDef[] = [
     title: "Savings Quest",
     tagline: "Nani's household courtyard",
     setting: "Old Hyderabad Courtyard",
-    icon: "🏺",
+    icon: PiggyBank,
     season: 1,
     seasonLabel: "Season 1 · Class 6–7",
     topics: ["saving-habit", "tracking-spending", "setting-goals", "making-a-budget"],
@@ -55,7 +67,7 @@ export const CURRICULUM_WORLDS: WorldDef[] = [
     title: "Bankopolis",
     tagline: "The Bank Branch & UPI Stall",
     setting: "Neighborhood Bank & Post Office",
-    icon: "🏦",
+    icon: Landmark,
     season: 1,
     seasonLabel: "Season 1 · Class 6–7",
     topics: ["bank-accounts-upi", "recurring-deposit", "protect-your-info", "upi-and-phishing-scams"],
@@ -70,7 +82,7 @@ export const CURRICULUM_WORLDS: WorldDef[] = [
     title: "Market Mayhem",
     tagline: "Sunday street bazaar",
     setting: "Sultan Bazaar",
-    icon: "🎪",
+    icon: Store,
     season: 2,
     seasonLabel: "Season 2 · Class 8–10",
     topics: ["prices-and-inflation", "too-good-to-be-true", "fake-apps-and-loans", "report-a-fraud"],
@@ -86,7 +98,7 @@ export const CURRICULUM_WORLDS: WorldDef[] = [
     title: "Grow Your Money",
     tagline: "Rooftop plant nursery",
     setting: "Terrace Garden",
-    icon: "🌱",
+    icon: Sprout,
     season: 2,
     seasonLabel: "Season 2 · Class 8–10",
     topics: ["emergency-fund", "fixed-deposit", "ppf-small-savings", "compounding"],
@@ -102,7 +114,7 @@ export const CURRICULUM_WORLDS: WorldDef[] = [
     title: "Stock Street",
     tagline: "The busy commercial road",
     setting: "Financial District Junction",
-    icon: "📈",
+    icon: TrendingUp,
     season: 2,
     seasonLabel: "Season 2 · Class 8–10",
     topics: [
@@ -125,7 +137,7 @@ export const CURRICULUM_WORLDS: WorldDef[] = [
     title: "Life Simulator",
     tagline: "The ₹15,000 Hospital Bill & Crash",
     setting: "Nani's Living Room",
-    icon: "⏳",
+    icon: Hourglass,
     season: 2,
     seasonLabel: "Season 2 · Class 8–10",
     topics: ["borrowing-and-credit", "insurance-basics"],
@@ -141,7 +153,7 @@ export const CURRICULUM_WORLDS: WorldDef[] = [
     title: "Finance Tycoon",
     tagline: "Family Future · Planning for Nani & Parents",
     setting: "Clock Tower Terrace",
-    icon: "🧭",
+    icon: Compass,
     season: 3,
     seasonLabel: "Season 3 · Class 11–12",
     topics: ["gold", "bonds", "debt-funds", "money-market", "future-goals", "retirement-nps"],

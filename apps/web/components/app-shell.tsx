@@ -6,14 +6,13 @@ import { cn } from "@gullak/ui/lib/utils";
 import {
   Award,
   BookOpen,
+  CalendarDays,
   CircleHelp,
   CircleUserRound,
   Compass,
-  Flame,
   Layers3,
   RotateCcw,
   Settings,
-  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -28,8 +27,8 @@ interface AppShellProps {
   currentTab: NavTab;
   onSelectTab: (tab: NavTab) => void;
   gradeGroup: string;
-  /** Real consecutive learning days (0 for a new learner). */
-  streakDays: number;
+  /** Distinct days practised, accumulated without resets (0 for a new learner). */
+  daysPractised: number;
   /** XP derived from passed quizzes and completed activities. */
   xp: number;
   level: number;
@@ -42,7 +41,7 @@ export function AppShell({
   currentTab,
   onSelectTab,
   gradeGroup,
-  streakDays,
+  daysPractised,
   xp,
   level,
   onOpenSettings,
@@ -69,7 +68,7 @@ export function AppShell({
   // The 5 primary bottom/sidebar destinations. Labels match the routed learner shell; "Learn" opens
   // the one learning map at /learn instead of a second, parallel topic list.
   const navItems: { id: NavTab; label: string; icon: typeof Compass; href?: string }[] = [
-    { id: "world", label: tNav("world"), icon: Compass },
+    { id: "home", label: tNav("home"), icon: Compass },
     { id: "learn", label: tLearner("learn"), icon: BookOpen, href: "/learn" },
     { id: "gullu", label: tLearner("portfolio"), icon: Layers3 },
     { id: "rewards", label: tNav("rewards"), icon: Award },
@@ -79,7 +78,7 @@ export function AppShell({
   // Helper to determine if an item is active
   function isTabActive(itemId: NavTab): boolean {
     if (currentTab === itemId) return true;
-    if (itemId === "world" && (currentTab === "home" || currentTab === "twin")) return true;
+    if (itemId === "home" && (currentTab === "world" || currentTab === "twin")) return true;
     if (itemId === "gullu" && currentTab === "portfolio") return true;
     if (itemId === "rewards" && currentTab === "missions") return true;
     return false;
@@ -92,7 +91,7 @@ export function AppShell({
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
-            onClick={() => onSelectTab("world")}
+            onClick={() => onSelectTab("home")}
             className="flex items-center gap-2 text-left focus-visible:outline-2 focus-visible:outline-ring"
           >
             <Gullu state="wave" size={32} />
@@ -135,14 +134,14 @@ export function AppShell({
               aria-expanded={showProfileMenu}
               className="flex h-8 sm:h-9 items-center gap-1 sm:gap-2 rounded-xl border border-border bg-card px-2 sm:px-3 text-xs sm:text-sm font-semibold hover:border-foreground/40 transition-colors"
             >
-              {streakDays > 0 ? (
+              {daysPractised > 0 ? (
                 <>
                   <span className="flex items-center gap-1 text-foreground">
-                    <Flame className="size-3.5" aria-hidden="true" />
+                    <CalendarDays className="size-3.5" aria-hidden="true" />
                     <span className="font-bold" aria-hidden="true">
-                      {tProgress("streakShort", { days: streakDays })}
+                      {t("daysPractisedShort", { days: daysPractised })}
                     </span>
-                    <span className="sr-only">{tProgress("streakAria", { days: streakDays })}</span>
+                    <span className="sr-only">{t("daysPractisedLabel", { days: daysPractised })}</span>
                   </span>
                   <span className="hidden md:inline-block text-muted-foreground font-normal">|</span>
                 </>
