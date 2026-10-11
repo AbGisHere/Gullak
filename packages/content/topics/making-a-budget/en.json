@@ -1,0 +1,83 @@
+{
+  "topicId": "making-a-budget",
+  "locale": "en",
+  "title": "Make a plan for your money",
+  "summary": "A budget is a simple plan that decides where your money goes before you spend it.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["income-and-spending", "budget-plan", "review-and-adjust"],
+      "markdown": "**English draft for R5 review.**\n\nRiya gets ₹500 pocket money every month. By the 20th, it is gone, and she cannot remember where it went. Her cousin Kabir suggests a **budget**.\n\nA **budget** is a plan for your money. First, write down your **income**, the money coming in. For Riya it is ₹500. Then decide how much goes to each use: ₹150 for snacks, ₹100 for stationery and small needs, ₹150 to save, and ₹100 for fun.\n\nNow every rupee has a job. When the snack money runs out, Riya knows it is time to wait until next month, not to dip into her savings.\n\nAt the end of the month, she looks at what happened. Maybe snacks needed ₹180. She does not feel bad about it. She simply adjusts next month's plan. A budget is not a strict rule. It is a plan you can change when you learn something new.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "income-first",
+          "conceptId": "income-and-spending",
+          "prompt": "Riya gets ₹500 a month. What is her income?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹150, the snack money"
+            },
+            {
+              "id": "1",
+              "text": "₹500, the money coming in"
+            },
+            {
+              "id": "2",
+              "text": "₹100, the fun money"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Income is the money that comes in. Riya's ₹500 is her income; the other amounts are ways she plans to use it."
+        },
+        {
+          "id": "budget-job",
+          "conceptId": "budget-plan",
+          "prompt": "What is the main idea of a budget?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Giving every rupee a job before you spend it"
+            },
+            {
+              "id": "1",
+              "text": "Spending only on things you need"
+            },
+            {
+              "id": "2",
+              "text": "Saving all the money and spending none"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "A budget is a plan that decides where your money goes. It can include fun spending and saving, not only needs."
+        },
+        {
+          "id": "after-month",
+          "conceptId": "review-and-adjust",
+          "prompt": "Riya's snacks cost ₹180, not ₹150. What is a helpful next step?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Stop making budgets"
+            },
+            {
+              "id": "1",
+              "text": "Adjust next month's plan using what she learned"
+            },
+            {
+              "id": "2",
+              "text": "Hide the numbers so she feels better"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Reviewing what really happened and adjusting the plan is how a budget gets better each month."
+        }
+      ]
+    }
+  ]
+}

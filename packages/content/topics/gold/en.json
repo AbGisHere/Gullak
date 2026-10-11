@@ -1,0 +1,83 @@
+{
+  "topicId": "gold",
+  "locale": "en",
+  "title": "Gold: more than Diwali shine",
+  "summary": "Learn why families keep gold and why its price still moves.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["gold-as-store-of-value", "gold-price-moves"],
+      "markdown": "**English draft for R5 review.**\n\nEvery Diwali, Nisha's grandmother adds a small gold coin to the family box. For many Indian families, **gold** is a way to keep value over many years, not just a gift or decoration.\n\nThe idea is **store of value**: gold has been wanted for a long time, so people trust it to hold worth when other things lose value, such as when prices rise across the economy.\n\nBut gold is not a sure-profit idea. Its **price moves up and down** with world events, demand and the rupee's value. For example, if 10 grams cost ₹60,000 and the price rose 10%, it would be ₹66,000; if it fell 10%, it would be ₹54,000. These numbers are **an assumption for this example, not a promise**.\n\nGold also gives no regular interest, and buying jewellery adds making charges. Gold can be one part of a mix, and like every choice, it carries risk.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "gold-store-value",
+          "conceptId": "gold-as-store-of-value",
+          "prompt": "Why do many families keep gold?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It always rises in price"
+            },
+            {
+              "id": "1",
+              "text": "It has long been seen as holding value"
+            },
+            {
+              "id": "2",
+              "text": "It pays monthly interest"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Gold is trusted as a store of value over long periods, though its price can change."
+        },
+        {
+          "id": "gold-price-change",
+          "conceptId": "gold-price-moves",
+          "prompt": "If gold costs ₹60,000 and falls 10%, what is the new price?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹54,000"
+            },
+            {
+              "id": "1",
+              "text": "₹66,000"
+            },
+            {
+              "id": "2",
+              "text": "₹50,000"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "10% of ₹60,000 is ₹6,000, so the price becomes ₹54,000."
+        },
+        {
+          "id": "gold-risk-note",
+          "conceptId": "gold-price-moves",
+          "prompt": "Which statement about gold is correct?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Its price never falls"
+            },
+            {
+              "id": "1",
+              "text": "Its price can rise or fall"
+            },
+            {
+              "id": "2",
+              "text": "It always pays interest"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Gold prices move with demand and world events, so it carries risk."
+        }
+      ]
+    }
+  ]
+}

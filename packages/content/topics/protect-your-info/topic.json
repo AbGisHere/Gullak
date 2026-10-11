@@ -1,0 +1,20 @@
+{
+  "id": "protect-your-info",
+  "pillar": "stay-safe",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "private-codes",
+      "label": "private-codes"
+    },
+    {
+      "id": "ask-before-sharing",
+      "label": "ask-before-sharing"
+    },
+    {
+      "id": "strong-passwords",
+      "label": "strong-passwords"
+    }
+  ],
+  "estimatedMinutes": 3
+}

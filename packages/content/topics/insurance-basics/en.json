@@ -1,0 +1,83 @@
+{
+  "topicId": "insurance-basics",
+  "locale": "en",
+  "title": "Insurance: sharing big risks",
+  "summary": "Learn how many people paying a little can protect each other from a big loss.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["insurance-pooling", "premium-and-cover"],
+      "markdown": "**English draft for R5 review.**\n\nWhen Sunita's father had a hospital stay, the family worried about a ₹80,000 bill. Their neighbour's family had **insurance**, and most of the bill was handled for them.\n\nHere is the idea. Many people each pay a small amount called a **premium**. This money forms a shared pool. Only a few people face a big loss in a given year, and the pool helps pay for them. That is **risk pooling**.\n\nThe promised amount the insurer pays is the **cover**. For example, a plan might offer ₹5,00,000 cover for a yearly premium of ₹8,000. These numbers are **an assumption for this example, not a promise**.\n\nInsurance does not earn you a profit. If nothing bad happens, the premium is not returned. You pay for **protection and peace of mind**, so a big event does not wipe out savings.\n\nIt is wise to read what is covered and what is not before choosing any plan.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "insurance-premium",
+          "conceptId": "premium-and-cover",
+          "prompt": "What is a premium?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The amount the insurer pays out"
+            },
+            {
+              "id": "1",
+              "text": "The small regular amount you pay for cover"
+            },
+            {
+              "id": "2",
+              "text": "A bank loan"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A premium is what you pay to keep the protection active."
+        },
+        {
+          "id": "insurance-pooling-idea",
+          "conceptId": "insurance-pooling",
+          "prompt": "How does insurance help when a big loss happens?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The shared pool of premiums pays for the few who face loss"
+            },
+            {
+              "id": "1",
+              "text": "Everyone earns a profit"
+            },
+            {
+              "id": "2",
+              "text": "The loss disappears"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Many people pay a little, and the pool supports those who face a large loss."
+        },
+        {
+          "id": "insurance-purpose",
+          "conceptId": "premium-and-cover",
+          "prompt": "What is insurance mainly for?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Making quick profit"
+            },
+            {
+              "id": "1",
+              "text": "Protection from large unexpected costs"
+            },
+            {
+              "id": "2",
+              "text": "Replacing all savings"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Insurance is about protection from big costs, not about earning returns."
+        }
+      ]
+    }
+  ]
+}

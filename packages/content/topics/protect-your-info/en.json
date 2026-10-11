@@ -1,0 +1,83 @@
+{
+  "topicId": "protect-your-info",
+  "locale": "en",
+  "title": "Keep your secrets secret",
+  "summary": "OTPs, PINs and passwords are private; no real bank or school will ask for them.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["private-codes", "ask-before-sharing", "strong-passwords"],
+      "markdown": "**English draft for R5 review.**\n\nRiya gets a call: \"I am from your bank. Your KYC will expire today. Tell me the OTP that just came on your phone.\" Her heart beats faster, but Riya remembers what she learned.\n\nAn **OTP**, a **PIN** and a **password** are private codes. They are like the key to your home. No real bank, shop or teacher will ever ask you for them, so never share them, even with a friendly voice.\n\nAlso **ask before sharing** other details, such as your Aadhaar number, address or photo of a card. Ask a parent or trusted adult first.\n\nFor a **strong password**, use a long phrase that only you know, and use a different one for each account. Avoid your name or birthday.\n\nRiya ends the call, tells her mother and checks with the bank's official number printed on its card.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "share-otp",
+          "conceptId": "private-codes",
+          "prompt": "A caller asks for the OTP that just reached your phone. What do you do?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Share it if they sound polite"
+            },
+            {
+              "id": "1",
+              "text": "Share it only for small amounts"
+            },
+            {
+              "id": "2",
+              "text": "Not share it and end the call"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "An OTP is private; genuine organisations never ask for it."
+        },
+        {
+          "id": "ask-first",
+          "conceptId": "ask-before-sharing",
+          "prompt": "Someone online asks for a photo of a card. What is wise?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Ask a trusted adult before sharing anything"
+            },
+            {
+              "id": "1",
+              "text": "Send it quickly"
+            },
+            {
+              "id": "2",
+              "text": "Post it publicly"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Pause and check with a trusted adult before sharing personal details."
+        },
+        {
+          "id": "strong-pass",
+          "conceptId": "strong-passwords",
+          "prompt": "Which password is strongest?",
+          "options": [
+            {
+              "id": "0",
+              "text": "riya2012"
+            },
+            {
+              "id": "1",
+              "text": "A long phrase only you know"
+            },
+            {
+              "id": "2",
+              "text": "123456"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Longer, unique phrases are harder to guess than names, dates or simple numbers."
+        }
+      ]
+    }
+  ]
+}

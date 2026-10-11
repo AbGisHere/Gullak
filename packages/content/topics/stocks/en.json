@@ -1,0 +1,83 @@
+{
+  "topicId": "stocks",
+  "locale": "en",
+  "title": "A tiny slice of a business",
+  "summary": "A stock is a small ownership share in a company, whose price moves with its business and with market mood.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["ownership-share", "why-prices-move", "risk-and-patience"],
+      "markdown": "**English draft for R5 review.**\n\nArjun, a Class 9 student, imagines owning 10 shares of a fictional company, Sunrise Snacks Ltd, each priced at ₹100, a total of ₹1,000 of play money. A **stock** is a small slice of **ownership**. If the company makes profit, it may share some as a **dividend**, but it does not have to.\n\nThe **share price** moves up and down because of **demand and supply**. News, profits, competition and plain mood all matter. Prices can drop below what you paid, and you can lose part or all of your money.\n\nOver many years, a business can grow and the shares may rise, say 12% a year, but that is an assumption for this example, not a promise. Past returns do not guarantee future ones.\n\nHigher potential return comes with higher risk. Stocks are for money you will not need soon, and quick trading can add cost and stress.\n\nWhat to check: what the company does, how it earns, its debts and the **report card** numbers. Never rely on tips. Gullak teaches how; it never says what to buy or sell. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "own-slice",
+          "conceptId": "ownership-share",
+          "prompt": "What does owning a stock mean?",
+          "options": [
+            {
+              "id": "0",
+              "text": "You have lent money to the company"
+            },
+            {
+              "id": "1",
+              "text": "You own a small share of the company"
+            },
+            {
+              "id": "2",
+              "text": "You are guaranteed a dividend"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A stock is a part-ownership; a loan would be a bond."
+        },
+        {
+          "id": "price-moves",
+          "conceptId": "why-prices-move",
+          "prompt": "Why does a share price change from day to day?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Demand and supply, shaped by news and results"
+            },
+            {
+              "id": "1",
+              "text": "A fixed schedule set by the company"
+            },
+            {
+              "id": "2",
+              "text": "Only the company's logo"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Prices move as buyers and sellers react to news, results and mood."
+        },
+        {
+          "id": "stock-risk",
+          "conceptId": "risk-and-patience",
+          "prompt": "Arjun's shares were priced at ₹100. What could happen?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The price can fall below ₹100 and he could lose money"
+            },
+            {
+              "id": "1",
+              "text": "The price can never fall below ₹100"
+            },
+            {
+              "id": "2",
+              "text": "The price must rise every year"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Stocks carry risk; price can fall, and any assumed growth is not a promise."
+        }
+      ]
+    }
+  ]
+}

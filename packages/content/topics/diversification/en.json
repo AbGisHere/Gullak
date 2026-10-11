@@ -1,0 +1,83 @@
+{
+  "topicId": "diversification",
+  "locale": "en",
+  "title": "Don't keep all eggs together",
+  "summary": "Spreading money across different kinds of things means one bad result hurts less.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["spread-the-risk", "different-baskets", "balance-not-guarantee"],
+      "markdown": "**English draft for R5 review.**\n\nMeera's family has ₹10,000 of virtual play money for a school fair stall. Her cousin says, \"Put it all into one thing, mangoes!\" Then a hailstorm spoils the mango crop and the whole stall is empty.\n\n**Diversification** means spreading money across different things, so one bad result does not sink everything. Meera splits it: ₹4,000 on mangoes, ₹3,000 on lemonade and ₹3,000 on paper fans. If mangoes fail, lemonade and fans may still sell.\n\nThe things should be **different baskets**. Three kinds of mangoes all fall to the same hailstorm, so that is not much spreading.\n\nDiversification **reduces risk, but it does not remove it**, and it does not promise a profit. Any growth figure in an example is an assumption for this example, not a promise.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "why-spread",
+          "conceptId": "spread-the-risk",
+          "prompt": "Why did Meera split her ₹10,000 across three things?",
+          "options": [
+            {
+              "id": "0",
+              "text": "So she is guaranteed a profit"
+            },
+            {
+              "id": "1",
+              "text": "So one bad result hurts less"
+            },
+            {
+              "id": "2",
+              "text": "So she pays less tax"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Spreading money means a single failure does not wipe out everything."
+        },
+        {
+          "id": "same-basket",
+          "conceptId": "different-baskets",
+          "prompt": "Which is the most diversified choice for the stall?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Mango, lemonade and paper fans"
+            },
+            {
+              "id": "1",
+              "text": "Three kinds of mangoes"
+            },
+            {
+              "id": "2",
+              "text": "Only the item her cousin likes"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Different baskets react differently to the same event; three mangoes share one risk."
+        },
+        {
+          "id": "promise",
+          "conceptId": "balance-not-guarantee",
+          "prompt": "What does diversification do?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Removes all risk"
+            },
+            {
+              "id": "1",
+              "text": "Guarantees returns"
+            },
+            {
+              "id": "2",
+              "text": "Reduces risk but does not remove it"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "It can soften a bad outcome, but it makes no promise of profit."
+        }
+      ]
+    }
+  ]
+}

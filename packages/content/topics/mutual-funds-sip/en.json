@@ -1,0 +1,83 @@
+{
+  "topicId": "mutual-funds-sip",
+  "locale": "en",
+  "title": "Small steps, every month",
+  "summary": "A SIP invests a fixed amount at regular intervals into a mutual fund, spreading out when you buy.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["sip-habit", "nav-and-units", "fund-risk"],
+      "markdown": "**English draft for R5 review.**\n\nKabir has ₹500 of play money every month. He runs a **SIP**, a systematic investment plan, into a fictional mutual fund called Banyan Growth Fund. A **mutual fund** pools money from many people to buy a mix of assets.\n\nEach month ₹500 buys **units** at that day's **NAV**, the value of one unit. When NAV is ₹25, he gets 20 units. When NAV falls to ₹20, the same ₹500 buys 25 units. So a SIP buys more units when prices are low and fewer when high, averaging the cost over time.\n\nThis builds a steady **habit**, but it does not remove risk. The fund can still fall, and units can be worth less than you put in. If a stock fund grows 12% a year, that is an assumption for this example, not a promise.\n\nPast returns do not guarantee future ones, and higher return usually means higher risk.\n\nWhat to check: the fund's type, fees, how long you can stay invested, and whether the amount suits your budget. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "sip-meaning",
+          "conceptId": "sip-habit",
+          "prompt": "What does a SIP do?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Guarantees a monthly profit"
+            },
+            {
+              "id": "1",
+              "text": "Invests a fixed amount at regular intervals"
+            },
+            {
+              "id": "2",
+              "text": "Sells units when prices rise"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "SIP means investing a set amount on a schedule, which builds a habit."
+        },
+        {
+          "id": "more-units",
+          "conceptId": "nav-and-units",
+          "prompt": "Kabir invests ₹500. NAV drops from ₹25 to ₹20. How many units does he get at ₹20?",
+          "options": [
+            {
+              "id": "0",
+              "text": "20 units"
+            },
+            {
+              "id": "1",
+              "text": "25 units"
+            },
+            {
+              "id": "2",
+              "text": "15 units"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "₹500 divided by ₹20 is 25 units; lower NAV buys more units."
+        },
+        {
+          "id": "sip-risk",
+          "conceptId": "fund-risk",
+          "prompt": "Which statement about a SIP in a mutual fund is true?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It cannot lose value"
+            },
+            {
+              "id": "1",
+              "text": "It cannot lose value if you start early"
+            },
+            {
+              "id": "2",
+              "text": "The value can fall below what you invested"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "A SIP spreads purchases but does not remove market risk."
+        }
+      ]
+    }
+  ]
+}

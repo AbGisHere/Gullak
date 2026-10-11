@@ -1,0 +1,20 @@
+{
+  "id": "stocks",
+  "pillar": "understand-investing",
+  "instrument": "stock",
+  "concepts": [
+    {
+      "id": "ownership-share",
+      "label": "ownership-share"
+    },
+    {
+      "id": "why-prices-move",
+      "label": "why-prices-move"
+    },
+    {
+      "id": "risk-and-patience",
+      "label": "risk-and-patience"
+    }
+  ],
+  "estimatedMinutes": 3
+}

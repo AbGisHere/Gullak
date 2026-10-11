@@ -1,0 +1,20 @@
+{
+  "id": "index-funds-etfs",
+  "pillar": "understand-investing",
+  "instrument": "index-fund",
+  "concepts": [
+    {
+      "id": "what-is-index",
+      "label": "what-is-index"
+    },
+    {
+      "id": "passive-tracking",
+      "label": "passive-tracking"
+    },
+    {
+      "id": "tracking-and-costs",
+      "label": "tracking-and-costs"
+    }
+  ],
+  "estimatedMinutes": 3
+}

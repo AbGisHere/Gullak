@@ -1,0 +1,83 @@
+{
+  "topicId": "fake-apps-and-loans",
+  "locale": "en",
+  "title": "Fake apps and instant loans",
+  "summary": "Fake loan and money apps ask for too many permissions and charge hidden costs.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["fake-app-signs", "permissions-and-contacts", "safe-borrowing"],
+      "markdown": "**English draft for R5 review.**\n\nFarhan sees an ad on a video site: \"Instant ₹5,000 loan, no papers, 2 minutes!\" The app is called QuickCashPlus, a made-up name for this example. It asks for access to his contacts, photos and messages.\n\nA **fake or unsafe app** often has few reviews, a new publisher, vague terms and big promises. It may also ask for more **permissions** than it needs. A loan app that wants your contacts can later use them to pressure you or your friends.\n\nSome also charge hidden fees. A ₹5,000 loan might arrive as only ₹4,000 but must be repaid in full within days.\n\nFor **safe borrowing**, talk to a trusted adult first. Use only lenders your family can verify through official, registered sources. Read the cost of the loan before saying yes.\n\nFarhan closes the ad and tells his father.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "app-signs",
+          "conceptId": "fake-app-signs",
+          "prompt": "Which is a sign of an unsafe loan app?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Clear terms and a known publisher"
+            },
+            {
+              "id": "1",
+              "text": "Promises of instant money with no checks"
+            },
+            {
+              "id": "2",
+              "text": "A long review history"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Big promises with vague terms and no checks are classic warning signs."
+        },
+        {
+          "id": "permissions",
+          "conceptId": "permissions-and-contacts",
+          "prompt": "Why is a loan app asking for your contacts risky?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It may use them to pressure you or your friends"
+            },
+            {
+              "id": "1",
+              "text": "It needs them to send money"
+            },
+            {
+              "id": "2",
+              "text": "It makes the loan cheaper"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Unneeded permissions can be misused to pressure people; deny what is not needed."
+        },
+        {
+          "id": "borrow-safe",
+          "conceptId": "safe-borrowing",
+          "prompt": "What should come before any borrowing?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Clicking the first ad"
+            },
+            {
+              "id": "1",
+              "text": "Reading the full cost and asking a trusted adult"
+            },
+            {
+              "id": "2",
+              "text": "Sharing your OTP to speed it up"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Know the total cost and get an adult's help; never share codes to hurry things."
+        }
+      ]
+    }
+  ]
+}

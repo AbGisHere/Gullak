@@ -1,0 +1,83 @@
+{
+  "topicId": "retirement-nps",
+  "locale": "en",
+  "title": "Saving today for later years",
+  "summary": "Retirement savings like NPS are for long-term goals, with rules about when you can use them.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["retirement-goal", "start-early", "lock-in-rules"],
+      "markdown": "**English draft for R5 review.**\n\nAnil is 25 and his father, Mr Rao, retired last year. Mr Rao says, \"I wish I had started saving for these years earlier.\"\n\n**Retirement** is the stage of life when you stop working for income, so savings must cover your needs. The **National Pension System (NPS)** is a government-backed scheme where people put money in regularly until they are older.\n\nStarting early helps because money has more years to grow. In this example, assume ₹2,000 a month at an assumed 8% a year for 35 years. That is an assumption for this example, not a promise, as real results differ.\n\nNPS has **lock-in rules**: most of the money cannot be taken out until a set age, with limited early exits. That protects the goal but means it is not for everyday spending.\n\nGullak teaches how it works. It does not tell anyone what to choose.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "what-retire",
+          "conceptId": "retirement-goal",
+          "prompt": "What is retirement savings meant for?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Buying a phone next month"
+            },
+            {
+              "id": "1",
+              "text": "Meeting your needs after you stop earning"
+            },
+            {
+              "id": "2",
+              "text": "Winning a school prize"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Retirement savings are for the years when regular income stops."
+        },
+        {
+          "id": "early",
+          "conceptId": "start-early",
+          "prompt": "Why does starting early usually help?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Money has more years to grow"
+            },
+            {
+              "id": "1",
+              "text": "The return is guaranteed"
+            },
+            {
+              "id": "2",
+              "text": "You pay fewer fees"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "More time lets growth build on itself, though any rate in an example is only an assumption."
+        },
+        {
+          "id": "lockin",
+          "conceptId": "lock-in-rules",
+          "prompt": "What does a lock-in rule in NPS mean?",
+          "options": [
+            {
+              "id": "0",
+              "text": "You can withdraw anything any day"
+            },
+            {
+              "id": "1",
+              "text": "Money is only for people under 18"
+            },
+            {
+              "id": "2",
+              "text": "Most money cannot be taken out until a set age"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Lock-in rules protect the long-term goal by limiting early withdrawals."
+        }
+      ]
+    }
+  ]
+}

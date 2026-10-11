@@ -1,0 +1,16 @@
+{
+  "id": "risk-and-return",
+  "pillar": "understand-investing",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "risk-return-tradeoff",
+      "label": "risk-return-tradeoff"
+    },
+    {
+      "id": "risk-diversification",
+      "label": "risk-diversification"
+    }
+  ],
+  "estimatedMinutes": 3
+}

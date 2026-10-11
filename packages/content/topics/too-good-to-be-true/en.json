@@ -1,0 +1,83 @@
+{
+  "topicId": "too-good-to-be-true",
+  "locale": "en",
+  "title": "If it sounds too good",
+  "summary": "Promises of doubled money, quick riches or free prizes are warning signs to pause.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["spot-the-promise", "pressure-and-secrecy", "check-first"],
+      "markdown": "**English draft for R5 review.**\n\nA WhatsApp forward reaches Arjun: \"Put in ₹1,000 and get ₹2,000 in one week! Only 10 spots left! Don't tell anyone.\" It shows screenshots of happy people.\n\nThis is a typical **too-good-to-be-true** offer. Real money grows slowly and no honest offer can **promise** a sure, huge gain in days. Any growth figure in a genuine example is an assumption, not a promise.\n\nWatch for two more signs. First, **pressure**: \"hurry, only today\". Second, **secrecy**: \"don't tell your parents\". Honest offers can wait and can be discussed.\n\nThe screenshots can be faked, and early \"payments\" are often a bait to get bigger amounts.\n\nSo **check first**: show it to a trusted adult, and do not send money or forward it. Stopping costs nothing.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "sure-gain",
+          "conceptId": "spot-the-promise",
+          "prompt": "A forward promises ₹1,000 will become ₹2,000 in a week. What is the sensible view?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It's safe because there are screenshots"
+            },
+            {
+              "id": "1",
+              "text": "Honest offers cannot promise a sure huge gain so fast"
+            },
+            {
+              "id": "2",
+              "text": "It's fine if you invest a small amount"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "No genuine offer can guarantee fast, large gains; screenshots can be faked."
+        },
+        {
+          "id": "pressure",
+          "conceptId": "pressure-and-secrecy",
+          "prompt": "\"Hurry, only today, and don't tell your parents.\" What does that suggest?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It is a warning sign"
+            },
+            {
+              "id": "1",
+              "text": "It is a special favour"
+            },
+            {
+              "id": "2",
+              "text": "It means the offer is trustworthy"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Pressure and secrecy are tricks to stop you from thinking or asking for help."
+        },
+        {
+          "id": "what-to-do",
+          "conceptId": "check-first",
+          "prompt": "What is the best first step with such a message?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Forward it to friends"
+            },
+            {
+              "id": "1",
+              "text": "Send ₹100 to test it"
+            },
+            {
+              "id": "2",
+              "text": "Show it to a trusted adult before doing anything"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Pausing and asking costs nothing and can prevent a loss."
+        }
+      ]
+    }
+  ]
+}

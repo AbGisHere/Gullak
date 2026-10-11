@@ -1,0 +1,16 @@
+{
+  "id": "opportunity-cost",
+  "pillar": "plan-and-budget",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "trade-offs",
+      "label": "trade-offs"
+    },
+    {
+      "id": "next-best-choice",
+      "label": "next-best-choice"
+    }
+  ],
+  "estimatedMinutes": 3
+}

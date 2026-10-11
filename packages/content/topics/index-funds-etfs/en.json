@@ -1,0 +1,83 @@
+{
+  "topicId": "index-funds-etfs",
+  "locale": "en",
+  "title": "Following the market list",
+  "summary": "An index fund or ETF tries to copy an index, holding the same companies with low fees and no guessing.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["what-is-index", "passive-tracking", "tracking-and-costs"],
+      "markdown": "**English draft for R5 review.**\n\nAn **index** is a list of companies used to measure a market, such as NIFTY 50 as a neutral example. Nisha explores a fictional **index fund**, Compass 30 Index Fund, built to copy a fictional index of 30 companies.\n\nThe fund does not pick winners. It simply holds the same companies in the same weights, called **passive** investing. When the index rises or falls, the fund aims to move almost the same way. An **ETF** works like this too, but it is bought and sold during market hours like a share.\n\nCosts are usually lower because no one is choosing stocks. Say the fee is 0.2% a year in this example. The fund's result can still differ slightly from the index; this gap is **tracking error**.\n\nAn index fund is not safe. If the index falls 20%, the fund falls about 20%. If it grows 10% a year, that is an assumption for this example, not a promise. Past returns do not guarantee future ones.\n\nWhat to check: the index tracked, the fees and the tracking error. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "index-def",
+          "conceptId": "what-is-index",
+          "prompt": "What is an index?",
+          "options": [
+            {
+              "id": "0",
+              "text": "A bank guarantee"
+            },
+            {
+              "id": "1",
+              "text": "A list of companies used to measure a market"
+            },
+            {
+              "id": "2",
+              "text": "A single company's profit"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "An index tracks a group of companies, like NIFTY 50, to show how a market is doing."
+        },
+        {
+          "id": "passive-meaning",
+          "conceptId": "passive-tracking",
+          "prompt": "How does a passive index fund work?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It copies the index's companies instead of picking winners"
+            },
+            {
+              "id": "1",
+              "text": "It buys whatever is cheapest each day"
+            },
+            {
+              "id": "2",
+              "text": "It guarantees to beat the index"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Passive funds copy an index and do not try to beat it."
+        },
+        {
+          "id": "tracking-gap",
+          "conceptId": "tracking-and-costs",
+          "prompt": "Compass 30 Index Fund returns slightly less than its index. What explains this?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The index is always wrong"
+            },
+            {
+              "id": "1",
+              "text": "Fees and tracking error"
+            },
+            {
+              "id": "2",
+              "text": "Index funds never fall"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Costs and tracking error cause small gaps from the index."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "topicId": "borrowing-and-credit",
+  "locale": "en",
+  "title": "Borrowing and what it costs",
+  "summary": "Learn that borrowing has a cost and how to think before you borrow.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["interest-on-loans", "borrow-wisely"],
+      "markdown": "**English draft for R5 review.**\n\nRavi's friend lends him ₹1,000 for a school trip kit. Ravi agrees to return ₹1,100 next month. That extra ₹100 is the **cost of borrowing**, and in loans it is called **interest**.\n\nBanks and lenders work the same way, only with bigger amounts and a written agreement. If a family borrows ₹10,000 at an assumed 12% a year, then after one year the interest is about ₹1,200. This rate is **an assumption for this example, not a promise**; real rates differ a lot.\n\nA smart borrower asks three questions:\n\n- **Need or want?** Is this essential?\n- **Total cost:** how much will I repay in all?\n- **Can I repay?** Do I have a steady way to pay back on time?\n\nBorrowing is not wrong. A loan for study can help. But it must be repaid, so it pays to borrow only what you need and compare the total cost first.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "loan-extra-100",
+          "conceptId": "interest-on-loans",
+          "prompt": "Ravi borrows ₹1,000 and returns ₹1,100. What is the extra ₹100?",
+          "options": [
+            {
+              "id": "0",
+              "text": "A gift"
+            },
+            {
+              "id": "1",
+              "text": "Interest, the cost of borrowing"
+            },
+            {
+              "id": "2",
+              "text": "Savings"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "The extra amount paid for using someone's money is called interest."
+        },
+        {
+          "id": "borrow-total-cost",
+          "conceptId": "borrow-wisely",
+          "prompt": "Which question helps before taking a loan?",
+          "options": [
+            {
+              "id": "0",
+              "text": "How much will I repay in total?"
+            },
+            {
+              "id": "1",
+              "text": "Which friend has the most money?"
+            },
+            {
+              "id": "2",
+              "text": "Can I skip repaying?"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Knowing the total repayment shows the real cost of the loan."
+        },
+        {
+          "id": "borrow-need-want",
+          "conceptId": "borrow-wisely",
+          "prompt": "Which is the wisest approach to borrowing?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Borrow as much as offered"
+            },
+            {
+              "id": "1",
+              "text": "Borrow only what you need and can repay"
+            },
+            {
+              "id": "2",
+              "text": "Never think about repayment"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Borrowing only what is needed, and planning to repay, keeps the cost under control."
+        }
+      ]
+    }
+  ]
+}

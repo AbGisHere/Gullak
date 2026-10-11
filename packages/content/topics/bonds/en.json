@@ -1,0 +1,83 @@
+{
+  "topicId": "bonds",
+  "locale": "en",
+  "title": "Lending to a company",
+  "summary": "A bond is a loan you give to a borrower who promises regular interest and your money back later.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["coupon-and-maturity", "bond-prices", "credit-risk"],
+      "markdown": "**English draft for R5 review.**\n\nImran lends ₹10,000 of play money by buying a **bond** from a fictional company, Sunrise Snacks Ltd. A bond is a loan. The company promises to pay a fixed yearly interest, called the **coupon**, and to return the **face value** on a set date, the **maturity**.\n\nSay the coupon is 8% a year, an assumption for this example, not a promise. That means ₹800 interest each year for 5 years, then ₹10,000 back.\n\nBond prices can move before maturity. When market interest rates rise, older bonds with lower coupons usually become less valuable, and the reverse is also true.\n\nThe big risk is **credit risk**: the borrower might pay late or fail to pay. A higher coupon often signals a riskier borrower. Ratings from credit agencies help you judge this, but they are opinions, not guarantees.\n\nWhat to check: the coupon, maturity date, the borrower's rating and how long you must wait. Past returns do not guarantee future ones. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "coupon-meaning",
+          "conceptId": "coupon-and-maturity",
+          "prompt": "In a bond, what does 'maturity' mean?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The date the borrower returns the face value"
+            },
+            {
+              "id": "1",
+              "text": "The yearly interest rate"
+            },
+            {
+              "id": "2",
+              "text": "The bond's colour rating"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Maturity is the date the loan ends and the face value is repaid; the coupon is the interest."
+        },
+        {
+          "id": "price-move",
+          "conceptId": "bond-prices",
+          "prompt": "Market interest rates rise. What usually happens to an older, lower-coupon bond's price?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It rises"
+            },
+            {
+              "id": "1",
+              "text": "It stays exactly the same"
+            },
+            {
+              "id": "2",
+              "text": "It tends to fall"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "New bonds pay more, so older lower-coupon bonds usually become less valuable."
+        },
+        {
+          "id": "high-coupon",
+          "conceptId": "credit-risk",
+          "prompt": "Sunrise Snacks Ltd offers a much higher coupon than other borrowers. What may that signal?",
+          "options": [
+            {
+              "id": "0",
+              "text": "A higher chance the borrower may not repay"
+            },
+            {
+              "id": "1",
+              "text": "A guaranteed safe bond"
+            },
+            {
+              "id": "2",
+              "text": "The bond has no maturity"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Higher return usually comes with higher risk; check the rating and borrower."
+        }
+      ]
+    }
+  ]
+}

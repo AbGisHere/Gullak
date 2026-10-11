@@ -1,0 +1,20 @@
+{
+  "id": "bonds",
+  "pillar": "understand-investing",
+  "instrument": "bond",
+  "concepts": [
+    {
+      "id": "coupon-and-maturity",
+      "label": "coupon-and-maturity"
+    },
+    {
+      "id": "bond-prices",
+      "label": "bond-prices"
+    },
+    {
+      "id": "credit-risk",
+      "label": "credit-risk"
+    }
+  ],
+  "estimatedMinutes": 3
+}

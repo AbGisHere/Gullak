@@ -1,0 +1,83 @@
+{
+  "topicId": "ppf-small-savings",
+  "locale": "en",
+  "title": "Patience with small savings schemes",
+  "summary": "Understand how a long-term government savings scheme rewards patience.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["ppf-long-term", "ppf-lock-in", "ppf-assumptions"],
+      "markdown": "**English draft for R5 review.**\n\nArjun's cousin just started her first job and wants a safe place for long-term savings. A relative mentions the **Public Provident Fund (PPF)**, a government small-savings scheme meant for patient, long-term saving.\n\nThe key idea is the **lock-in**. PPF money is kept for many years, with only limited early withdrawal. That is a **trade-off**: you give up easy access in return for steady, compounding growth.\n\nSuppose a saver adds ₹5,000 a month. Over a long period, interest is added to earlier interest, so growth speeds up. This is **compounding**.\n\nAny rate we use here is **an assumption for this example, not a promise**. The government can revisit rates, so a projection is only a guide. Rules and tax treatment are also set by law, so always read the official details.\n\nA long-term scheme suits goals that are far away. For money you may need soon, easy access matters more.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "ppf-purpose",
+          "conceptId": "ppf-long-term",
+          "prompt": "What is PPF mainly designed for?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Patient, long-term saving"
+            },
+            {
+              "id": "1",
+              "text": "Quick daily spending"
+            },
+            {
+              "id": "2",
+              "text": "Short-term trading"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "PPF rewards people who save steadily for many years."
+        },
+        {
+          "id": "ppf-lock-in-trade",
+          "conceptId": "ppf-lock-in",
+          "prompt": "What do you give up in return for a lock-in?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The interest on your money"
+            },
+            {
+              "id": "1",
+              "text": "Easy access to the money"
+            },
+            {
+              "id": "2",
+              "text": "Ownership of the money"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A lock-in limits early withdrawals. That is the trade-off for steady long-term growth."
+        },
+        {
+          "id": "ppf-rate-note",
+          "conceptId": "ppf-assumptions",
+          "prompt": "Why do we call a PPF projection an assumption?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Rates and rules can change in future"
+            },
+            {
+              "id": "1",
+              "text": "Projections are always exact"
+            },
+            {
+              "id": "2",
+              "text": "Interest is never added"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Future rates are not fixed forever, so a projection is a guide and not a promise."
+        }
+      ]
+    }
+  ]
+}

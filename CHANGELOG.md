@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- English lesson and 3-question check for the 25 remaining topics in the topic graph (budgeting, goals, inflation, deposits, credit, insurance, investing basics, fictional-company stocks, NPS and fraud safety), so all 33 topics are playable. Unreviewed R5 drafts; fictional names only, every rate labelled as an assumption.
+
 ## [0.2.5] - 2026-10-11
 
 ### Added

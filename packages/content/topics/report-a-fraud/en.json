@@ -1,0 +1,83 @@
+{
+  "topicId": "report-a-fraud",
+  "locale": "en",
+  "title": "What to do if scammed",
+  "summary": "Tell a trusted adult and the bank at once, and report on 1930 or cybercrime.gov.in.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["act-fast", "report-channels", "no-blame"],
+      "markdown": "**English draft for R5 review.**\n\nNeha's uncle clicked a link in a fake KYC SMS and ₹8,000 left his account. He feels embarrassed and wants to keep quiet. Neha knows silence only makes it harder.\n\n**Act fast.** Tell a trusted adult at once and call the bank's official number to block the card or account. The earlier the bank knows, the better the chance of stopping a transfer.\n\nNext, **report**. In India, call the national cyber-crime helpline **1930** or file a complaint at **cybercrime.gov.in**. Keep screenshots, phone numbers, transaction details and times. Do not delete the messages.\n\nThere should be **no blame**. Scammers are skilled and anyone can be fooled. Reporting also helps protect others.\n\nDo not pay anyone who promises to \"recover\" your money for a fee. That is often another scam.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "first-step",
+          "conceptId": "act-fast",
+          "prompt": "After noticing a fraud payment, what comes first?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Wait a week"
+            },
+            {
+              "id": "1",
+              "text": "Tell a trusted adult and the bank right away"
+            },
+            {
+              "id": "2",
+              "text": "Delete the messages"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Speed matters; the bank can act sooner if told immediately."
+        },
+        {
+          "id": "helpline",
+          "conceptId": "report-channels",
+          "prompt": "Which is a national channel for reporting cyber fraud in India?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Helpline 1930 or cybercrime.gov.in"
+            },
+            {
+              "id": "1",
+              "text": "A random number in an SMS"
+            },
+            {
+              "id": "2",
+              "text": "A stranger offering recovery for a fee"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "1930 and cybercrime.gov.in are the national reporting routes."
+        },
+        {
+          "id": "blame",
+          "conceptId": "no-blame",
+          "prompt": "Neha's uncle feels ashamed. What is the right view?",
+          "options": [
+            {
+              "id": "0",
+              "text": "He should hide it"
+            },
+            {
+              "id": "1",
+              "text": "Only careless people are scammed"
+            },
+            {
+              "id": "2",
+              "text": "Anyone can be fooled, and reporting helps others"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Scammers are skilled; reporting quickly helps both you and others."
+        }
+      ]
+    }
+  ]
+}

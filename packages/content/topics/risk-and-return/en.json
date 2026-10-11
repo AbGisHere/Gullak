@@ -1,0 +1,83 @@
+{
+  "topicId": "risk-and-return",
+  "locale": "en",
+  "title": "Risk and return go together",
+  "summary": "See why higher possible gains come with higher chance of loss.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["risk-return-tradeoff", "risk-diversification"],
+      "markdown": "**English draft for R5 review.**\n\nKabir and Tara each have ₹1,000 of play money. Kabir keeps his in a steady savings idea that grows slowly, around an assumed 5% a year. Tara tries a risky idea that might give 15% in a good year, or lose 10% in a bad one. These numbers are **an assumption for this example, not a promise**.\n\nThat is the **risk-return trade-off**. Choices with a higher chance of big gains also have a higher chance of losses. **Risk** means the outcome can vary, and the result may be less than you hoped.\n\nNo one can tell the future, so a high past return never guarantees a high future one.\n\nOne way to handle risk is **diversification**: not putting all your money in one place. If one part falls, others may hold up. It lowers the damage of any single bad outcome, but it cannot remove risk completely.\n\nAsk: how much loss could I accept, and for how long?\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "risk-return-link",
+          "conceptId": "risk-return-tradeoff",
+          "prompt": "What usually comes with a chance of higher returns?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Higher chance of loss too"
+            },
+            {
+              "id": "1",
+              "text": "Guaranteed safety"
+            },
+            {
+              "id": "2",
+              "text": "No change at all"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Higher possible returns generally come with higher risk."
+        },
+        {
+          "id": "risk-diversify-meaning",
+          "conceptId": "risk-diversification",
+          "prompt": "What does diversification mean?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Putting all money in one choice"
+            },
+            {
+              "id": "1",
+              "text": "Spreading money across different choices"
+            },
+            {
+              "id": "2",
+              "text": "Never saving"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Spreading money helps reduce the damage from any one bad outcome."
+        },
+        {
+          "id": "risk-past-return",
+          "conceptId": "risk-return-tradeoff",
+          "prompt": "A choice gave 15% last year. What does this tell us?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It will give 15% again"
+            },
+            {
+              "id": "1",
+              "text": "It will never fall"
+            },
+            {
+              "id": "2",
+              "text": "It does not guarantee the future"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Past returns do not promise future ones; every choice carries uncertainty."
+        }
+      ]
+    }
+  ]
+}

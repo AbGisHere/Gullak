@@ -1,0 +1,20 @@
+{
+  "id": "market-ups-and-downs",
+  "pillar": "understand-investing",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "prices-move",
+      "label": "prices-move"
+    },
+    {
+      "id": "time-and-patience",
+      "label": "time-and-patience"
+    },
+    {
+      "id": "emergency-fund-first",
+      "label": "emergency-fund-first"
+    }
+  ],
+  "estimatedMinutes": 3
+}

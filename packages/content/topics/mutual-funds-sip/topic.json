@@ -1,0 +1,20 @@
+{
+  "id": "mutual-funds-sip",
+  "pillar": "understand-investing",
+  "instrument": "mutual-fund",
+  "concepts": [
+    {
+      "id": "sip-habit",
+      "label": "sip-habit"
+    },
+    {
+      "id": "nav-and-units",
+      "label": "nav-and-units"
+    },
+    {
+      "id": "fund-risk",
+      "label": "fund-risk"
+    }
+  ],
+  "estimatedMinutes": 3
+}

@@ -1,0 +1,20 @@
+{
+  "id": "report-a-fraud",
+  "pillar": "stay-safe",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "act-fast",
+      "label": "act-fast"
+    },
+    {
+      "id": "report-channels",
+      "label": "report-channels"
+    },
+    {
+      "id": "no-blame",
+      "label": "no-blame"
+    }
+  ],
+  "estimatedMinutes": 3
+}

@@ -1,0 +1,83 @@
+{
+  "topicId": "setting-goals",
+  "locale": "en",
+  "title": "Turn a wish into a goal",
+  "summary": "A clear goal has an amount, a deadline and small steps you can follow.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["clear-goal", "saving-steps", "staying-on-track"],
+      "markdown": "**English draft for R5 review.**\n\nSana wants a new cycle that costs ₹3,000. Saying \"I want a cycle\" is a wish. A **goal** is clearer: \"I will save ₹3,000 in 10 months.\"\n\nA good goal has an amount, a deadline and steps. Sana divides ₹3,000 by 10 months. That is ₹300 a month, or about ₹75 a week. Now the big target feels like small **saving steps**.\n\nHer grandfather gives ₹500 on her birthday. She adds it to her savings, and she can reach her goal a little sooner.\n\nTo **stay on track**, Sana marks her progress on a chart on the wall. After three months she has ₹900. Seeing the bar fill up keeps her going. If a month is tight and she saves less, she does not give up. She adjusts the deadline or saves a bit more later.\n\nGoals work best when they are specific, small to start and checked often.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "wish-or-goal",
+          "conceptId": "clear-goal",
+          "prompt": "Which one is a clear goal?",
+          "options": [
+            {
+              "id": "0",
+              "text": "I will save ₹3,000 in 10 months for a cycle"
+            },
+            {
+              "id": "1",
+              "text": "I want a cycle someday"
+            },
+            {
+              "id": "2",
+              "text": "I hope to get a lot of money"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "A clear goal has an amount and a deadline. The second statement has both."
+        },
+        {
+          "id": "monthly-amount",
+          "conceptId": "saving-steps",
+          "prompt": "Sana wants ₹3,000 in 10 months. How much should she save each month?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹100"
+            },
+            {
+              "id": "1",
+              "text": "₹300"
+            },
+            {
+              "id": "2",
+              "text": "₹3,000"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "₹3,000 divided by 10 months is ₹300 a month."
+        },
+        {
+          "id": "tight-month",
+          "conceptId": "staying-on-track",
+          "prompt": "Sana saves less in one tight month. What is a good response?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Give up on the goal"
+            },
+            {
+              "id": "1",
+              "text": "Pretend it never happened"
+            },
+            {
+              "id": "2",
+              "text": "Adjust the plan and keep going"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Goals can be adjusted. Checking progress and changing the plan helps you stay on track."
+        }
+      ]
+    }
+  ]
+}

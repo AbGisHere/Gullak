@@ -1,0 +1,20 @@
+{
+  "id": "diversification",
+  "pillar": "understand-investing",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "spread-the-risk",
+      "label": "spread-the-risk"
+    },
+    {
+      "id": "different-baskets",
+      "label": "different-baskets"
+    },
+    {
+      "id": "balance-not-guarantee",
+      "label": "balance-not-guarantee"
+    }
+  ],
+  "estimatedMinutes": 3
+}

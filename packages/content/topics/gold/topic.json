@@ -1,0 +1,16 @@
+{
+  "id": "gold",
+  "pillar": "understand-investing",
+  "instrument": "gold",
+  "concepts": [
+    {
+      "id": "gold-as-store-of-value",
+      "label": "gold-as-store-of-value"
+    },
+    {
+      "id": "gold-price-moves",
+      "label": "gold-price-moves"
+    }
+  ],
+  "estimatedMinutes": 3
+}

@@ -1,0 +1,16 @@
+{
+  "id": "borrowing-and-credit",
+  "pillar": "save-and-manage",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "interest-on-loans",
+      "label": "interest-on-loans"
+    },
+    {
+      "id": "borrow-wisely",
+      "label": "borrow-wisely"
+    }
+  ],
+  "estimatedMinutes": 3
+}

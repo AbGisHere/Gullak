@@ -1,0 +1,83 @@
+{
+  "topicId": "prices-and-inflation",
+  "locale": "en",
+  "title": "Why prices creep up",
+  "summary": "Inflation means prices rise over time, so the same money buys a little less.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["rising-prices", "buying-power", "inflation-and-saving"],
+      "markdown": "**English draft for R5 review.**\n\nAsk your grandparents what a samosa cost when they were young. They may say a few paise. Today it is ₹15 or more. Prices go up over time. This is called **inflation**.\n\nLet us use a round number as an assumption for this example, not a promise: prices rise 5% every year. Mehul's family buys groceries worth ₹1,000 this month. At 5% inflation, the same groceries would cost about ₹1,050 next year.\n\nThat means ₹1,000 buys a little less next year. This is **buying power**, how much your money can buy. When prices rise, buying power falls.\n\nSo what happens to savings kept as cash at home? The amount stays ₹1,000, but its buying power slowly shrinks. That is why people compare how fast their savings grow with how fast prices rise.\n\nReal inflation changes from year to year. Understanding it helps you plan, not worry.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "samosa",
+          "conceptId": "rising-prices",
+          "prompt": "What do we call it when prices of things rise over time?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Inflation"
+            },
+            {
+              "id": "1",
+              "text": "Discount"
+            },
+            {
+              "id": "2",
+              "text": "Budgeting"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Inflation is the general rise in prices over time."
+        },
+        {
+          "id": "groceries",
+          "conceptId": "buying-power",
+          "prompt": "Assume 5% inflation (an assumption, not a promise). Groceries cost ₹1,000 now. About how much next year?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹950"
+            },
+            {
+              "id": "1",
+              "text": "₹1,000"
+            },
+            {
+              "id": "2",
+              "text": "₹1,050"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "5% of ₹1,000 is ₹50, so the same groceries cost about ₹1,050."
+        },
+        {
+          "id": "cash-at-home",
+          "conceptId": "inflation-and-saving",
+          "prompt": "Cash stays ₹1,000 while prices rise. What happens to its buying power?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It slowly falls"
+            },
+            {
+              "id": "1",
+              "text": "It rises"
+            },
+            {
+              "id": "2",
+              "text": "It stays exactly the same"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "The amount is the same, but each rupee buys less when prices rise."
+        }
+      ]
+    }
+  ]
+}

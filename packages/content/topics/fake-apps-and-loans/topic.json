@@ -1,0 +1,20 @@
+{
+  "id": "fake-apps-and-loans",
+  "pillar": "stay-safe",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "fake-app-signs",
+      "label": "fake-app-signs"
+    },
+    {
+      "id": "permissions-and-contacts",
+      "label": "permissions-and-contacts"
+    },
+    {
+      "id": "safe-borrowing",
+      "label": "safe-borrowing"
+    }
+  ],
+  "estimatedMinutes": 3
+}

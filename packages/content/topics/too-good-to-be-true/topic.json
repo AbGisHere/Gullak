@@ -1,0 +1,20 @@
+{
+  "id": "too-good-to-be-true",
+  "pillar": "stay-safe",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "spot-the-promise",
+      "label": "spot-the-promise"
+    },
+    {
+      "id": "pressure-and-secrecy",
+      "label": "pressure-and-secrecy"
+    },
+    {
+      "id": "check-first",
+      "label": "check-first"
+    }
+  ],
+  "estimatedMinutes": 3
+}

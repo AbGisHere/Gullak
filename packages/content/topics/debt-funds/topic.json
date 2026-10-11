@@ -1,0 +1,20 @@
+{
+  "id": "debt-funds",
+  "pillar": "understand-investing",
+  "instrument": "debt-fund",
+  "concepts": [
+    {
+      "id": "pooled-lending",
+      "label": "pooled-lending"
+    },
+    {
+      "id": "duration-risk",
+      "label": "duration-risk"
+    },
+    {
+      "id": "expense-ratio",
+      "label": "expense-ratio"
+    }
+  ],
+  "estimatedMinutes": 3
+}

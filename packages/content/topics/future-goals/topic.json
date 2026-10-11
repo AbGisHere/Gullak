@@ -1,0 +1,20 @@
+{
+  "id": "future-goals",
+  "pillar": "plan-and-budget",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "long-term-goals",
+      "label": "long-term-goals"
+    },
+    {
+      "id": "future-cost",
+      "label": "future-cost"
+    },
+    {
+      "id": "planning-ahead",
+      "label": "planning-ahead"
+    }
+  ],
+  "estimatedMinutes": 3
+}

@@ -1,0 +1,83 @@
+{
+  "topicId": "money-market",
+  "locale": "en",
+  "title": "Parking cash for days",
+  "summary": "Money market tools lend for very short periods, so cash stays easy to reach with modest, not zero, risk.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["short-term-lending", "liquidity", "rate-risk"],
+      "markdown": "**English draft for R5 review.**\n\nMeera has ₹20,000 of virtual play money she may need within a few weeks. A **money market** fund in this example lends to borrowers for very short periods, from one day up to about a year, such as a fictional lender called Lotus Credit Ltd.\n\nBecause loans end quickly, the money comes back soon. This gives high **liquidity**: you can usually get your cash out in a day or two. It is not instant for every product, so check the **exit time** and any **exit charge**.\n\nReturns here are assumed at 6% a year, an assumption for this example, not a promise. Short loans still carry some risk. If a borrower is late in paying, the value can dip, and when interest rates change, the return changes too. Past returns do not guarantee future ones.\n\nWhat to check: how long the loans last, who the borrowers are, and how fast you can withdraw. Higher return usually means higher risk. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "short-loans",
+          "conceptId": "short-term-lending",
+          "prompt": "A money market fund mostly lends money for:",
+          "options": [
+            {
+              "id": "0",
+              "text": "Many years, like a 20-year loan"
+            },
+            {
+              "id": "1",
+              "text": "Very short periods, up to about a year"
+            },
+            {
+              "id": "2",
+              "text": "Only one day, never longer"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Money market instruments are short-term loans, from a day up to about a year."
+        },
+        {
+          "id": "quick-cash",
+          "conceptId": "liquidity",
+          "prompt": "Why is a money market fund called highly liquid?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Its value never changes"
+            },
+            {
+              "id": "1",
+              "text": "Loans end soon, so cash usually comes back quickly"
+            },
+            {
+              "id": "2",
+              "text": "It guarantees a fixed profit"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Liquidity means how quickly you can turn money back into cash; short loans help, but check exit time."
+        },
+        {
+          "id": "still-risky",
+          "conceptId": "rate-risk",
+          "prompt": "Meera's fund assumed 6% a year. What is true about that number?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It is an assumption, and a late-paying borrower or rate change can alter results"
+            },
+            {
+              "id": "1",
+              "text": "It is a promise from the fund"
+            },
+            {
+              "id": "2",
+              "text": "It can never fall below 6%"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Rates in examples are assumptions; short-term funds carry lower but real risk."
+        }
+      ]
+    }
+  ]
+}

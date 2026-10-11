@@ -1,0 +1,83 @@
+{
+  "topicId": "recurring-deposit",
+  "locale": "en",
+  "title": "Saving a little every month",
+  "summary": "See how small monthly deposits grow into a bigger sum over time.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["rd-monthly-habit", "rd-maturity"],
+      "markdown": "**English draft for R5 review.**\n\nMeera wants a new cycle that costs ₹6,000. She cannot save that much at once, so her uncle shows her a **recurring deposit** (RD) idea: put away a fixed amount every month for a set period.\n\nSuppose Meera deposits **₹500 every month for 12 months**. That is ₹6,000 of her own money. An RD also pays **interest**, so the **maturity amount** at the end is a little more than ₹6,000.\n\nFor this example we assume a yearly rate of 6%. This is **an assumption for this example, not a promise**. Real rates change, and the interest earned depends on the rate and the time each deposit stays in.\n\nThe early deposits stay longer, so they earn more interest than the last one. The biggest strength of an RD is the **habit**: a small, fixed amount, saved on time, every month.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "rd-habit",
+          "conceptId": "rd-monthly-habit",
+          "prompt": "What makes a recurring deposit work for someone with little money at once?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Saving a fixed small amount every month"
+            },
+            {
+              "id": "1",
+              "text": "Paying the whole sum on day one"
+            },
+            {
+              "id": "2",
+              "text": "Withdrawing every month"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "An RD builds a sum through regular small deposits, so you do not need a large amount at the start."
+        },
+        {
+          "id": "rd-total-deposited",
+          "conceptId": "rd-maturity",
+          "prompt": "Meera deposits ₹500 a month for 12 months. How much of her own money goes in?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹500"
+            },
+            {
+              "id": "1",
+              "text": "₹6,000"
+            },
+            {
+              "id": "2",
+              "text": "₹12,000"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "12 deposits of ₹500 make ₹6,000. Interest is added on top, giving the maturity amount."
+        },
+        {
+          "id": "rd-rate-assumption",
+          "conceptId": "rd-maturity",
+          "prompt": "The 6% rate in the example is best described as what?",
+          "options": [
+            {
+              "id": "0",
+              "text": "A promise from Gullak"
+            },
+            {
+              "id": "1",
+              "text": "A rate that never changes"
+            },
+            {
+              "id": "2",
+              "text": "An assumption for this example"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Rates are assumptions in examples and can change. The real maturity depends on the rate and time."
+        }
+      ]
+    }
+  ]
+}

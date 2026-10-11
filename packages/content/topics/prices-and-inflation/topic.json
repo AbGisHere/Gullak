@@ -1,0 +1,20 @@
+{
+  "id": "prices-and-inflation",
+  "pillar": "plan-and-budget",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "rising-prices",
+      "label": "rising-prices"
+    },
+    {
+      "id": "buying-power",
+      "label": "buying-power"
+    },
+    {
+      "id": "inflation-and-saving",
+      "label": "inflation-and-saving"
+    }
+  ],
+  "estimatedMinutes": 3
+}

@@ -1,0 +1,20 @@
+{
+  "id": "making-a-budget",
+  "pillar": "plan-and-budget",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "income-and-spending",
+      "label": "income-and-spending"
+    },
+    {
+      "id": "budget-plan",
+      "label": "budget-plan"
+    },
+    {
+      "id": "review-and-adjust",
+      "label": "review-and-adjust"
+    }
+  ],
+  "estimatedMinutes": 3
+}

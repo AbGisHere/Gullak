@@ -1,0 +1,16 @@
+{
+  "id": "insurance-basics",
+  "pillar": "save-and-manage",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "insurance-pooling",
+      "label": "insurance-pooling"
+    },
+    {
+      "id": "premium-and-cover",
+      "label": "premium-and-cover"
+    }
+  ],
+  "estimatedMinutes": 3
+}

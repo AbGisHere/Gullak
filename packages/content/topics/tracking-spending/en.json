@@ -1,0 +1,83 @@
+{
+  "topicId": "tracking-spending",
+  "locale": "en",
+  "title": "Know where your money goes",
+  "summary": "Writing down what you spend shows patterns that help you make better choices.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["recording-spending", "spotting-patterns"],
+      "markdown": "**English draft for R5 review.**\n\nDev gets ₹300 a month and feels it vanishes. His teacher suggests a simple habit: write down every spend in a small notebook.\n\nFor one month, Dev notes each item. Canteen snacks ₹20, ₹30, ₹20. Notebook ₹40. Birthday gift ₹100. Online game top-up ₹50. This is **recording spending**: capturing every rupee, even tiny ones.\n\nAt month end he adds it up by type. Snacks come to ₹120, which is far more than he expected. That is **spotting patterns**: seeing where money keeps going.\n\nNow Dev has real facts, not guesses. He decides to bring snacks from home twice a week. He is not punishing himself. He is choosing with clear information.\n\nYou can also track using a phone note or a family diary. What matters is doing it regularly, in a place you can find again.\n\nTracking is the first step. Once you can see your spending, you can plan it.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "write-it-down",
+          "conceptId": "recording-spending",
+          "prompt": "What is the best way to start tracking spending?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Write down each spend, even small ones"
+            },
+            {
+              "id": "1",
+              "text": "Only note the big purchases"
+            },
+            {
+              "id": "2",
+              "text": "Guess at the end of the month"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Small spends add up, so noting every one gives the full picture."
+        },
+        {
+          "id": "snack-total",
+          "conceptId": "spotting-patterns",
+          "prompt": "Dev's snacks were ₹20 + ₹30 + ₹20 and more, totalling ₹120. What did tracking help him see?",
+          "options": [
+            {
+              "id": "0",
+              "text": "He should stop spending completely"
+            },
+            {
+              "id": "1",
+              "text": "Snacks were a big share of his spending"
+            },
+            {
+              "id": "2",
+              "text": "Notebooks cost too much"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Adding up by type shows where money keeps going, a pattern he can act on."
+        },
+        {
+          "id": "use-the-info",
+          "conceptId": "spotting-patterns",
+          "prompt": "After seeing a pattern, what is a helpful step?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Feel bad and stop tracking"
+            },
+            {
+              "id": "1",
+              "text": "Ignore the numbers"
+            },
+            {
+              "id": "2",
+              "text": "Choose what to change using the facts"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "Tracking gives clear information so you can make choices without guilt."
+        }
+      ]
+    }
+  ]
+}

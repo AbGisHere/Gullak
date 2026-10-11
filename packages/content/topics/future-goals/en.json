@@ -1,0 +1,83 @@
+{
+  "topicId": "future-goals",
+  "locale": "en",
+  "title": "Plan for goals far away",
+  "summary": "Big goals in the future cost more later, so planning means adjusting for time and rising prices.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["long-term-goals", "future-cost", "planning-ahead"],
+      "markdown": "**English draft for R5 review.**\n\nTanvi is in Class 9 and dreams of a laptop for college. Today it costs ₹40,000, and she will need it in 4 years. That is a **long-term goal**, one that is years away.\n\nPrices tend to rise over time. As an assumption for this example, not a promise, say 5% a year. Then the laptop could cost about ₹48,000 in 4 years. This is the **future cost**, what something may cost later, not today.\n\nSo Tanvi plans ahead. ₹48,000 over 48 months is ₹1,000 a month. She talks to her parents, and they agree to help with part of it. She splits the goal into yearly check-ins: ₹12,000 by the end of each year.\n\n**Planning ahead** means three things: know the goal, estimate the future cost, and break it into regular steps. Then she reviews the plan every year, because prices and needs can change.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "college-laptop",
+          "conceptId": "long-term-goals",
+          "prompt": "Which is a long-term goal for a Class 9 student?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Buying a snack today"
+            },
+            {
+              "id": "1",
+              "text": "Saving for a laptop needed in 4 years"
+            },
+            {
+              "id": "2",
+              "text": "Paying for tomorrow's bus ride"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "A long-term goal is something years away, like the laptop for college."
+        },
+        {
+          "id": "laptop-future",
+          "conceptId": "future-cost",
+          "prompt": "The laptop is ₹40,000 now. With 5% yearly inflation (an assumption), why should Tanvi plan for more than ₹40,000?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Prices may rise over 4 years"
+            },
+            {
+              "id": "1",
+              "text": "Laptops always get cheaper"
+            },
+            {
+              "id": "2",
+              "text": "Shops charge extra for savers"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Because prices tend to rise, the future cost is usually higher than today's price."
+        },
+        {
+          "id": "monthly-plan",
+          "conceptId": "planning-ahead",
+          "prompt": "Tanvi needs ₹48,000 in 48 months. How much per month?",
+          "options": [
+            {
+              "id": "0",
+              "text": "₹500"
+            },
+            {
+              "id": "1",
+              "text": "₹1,000"
+            },
+            {
+              "id": "2",
+              "text": "₹2,000"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "₹48,000 divided by 48 months is ₹1,000 a month."
+        }
+      ]
+    }
+  ]
+}

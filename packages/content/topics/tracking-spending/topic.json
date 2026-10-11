@@ -1,0 +1,16 @@
+{
+  "id": "tracking-spending",
+  "pillar": "save-and-manage",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "recording-spending",
+      "label": "recording-spending"
+    },
+    {
+      "id": "spotting-patterns",
+      "label": "spotting-patterns"
+    }
+  ],
+  "estimatedMinutes": 3
+}

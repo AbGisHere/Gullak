@@ -1,0 +1,16 @@
+{
+  "id": "recurring-deposit",
+  "pillar": "save-and-manage",
+  "instrument": "recurring-deposit",
+  "concepts": [
+    {
+      "id": "rd-monthly-habit",
+      "label": "rd-monthly-habit"
+    },
+    {
+      "id": "rd-maturity",
+      "label": "rd-maturity"
+    }
+  ],
+  "estimatedMinutes": 3
+}

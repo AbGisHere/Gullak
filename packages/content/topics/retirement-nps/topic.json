@@ -1,0 +1,20 @@
+{
+  "id": "retirement-nps",
+  "pillar": "understand-investing",
+  "instrument": "nps",
+  "concepts": [
+    {
+      "id": "retirement-goal",
+      "label": "retirement-goal"
+    },
+    {
+      "id": "start-early",
+      "label": "start-early"
+    },
+    {
+      "id": "lock-in-rules",
+      "label": "lock-in-rules"
+    }
+  ],
+  "estimatedMinutes": 3
+}

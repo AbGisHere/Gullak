@@ -1,0 +1,20 @@
+{
+  "id": "ppf-small-savings",
+  "pillar": "save-and-manage",
+  "instrument": "ppf",
+  "concepts": [
+    {
+      "id": "ppf-long-term",
+      "label": "ppf-long-term"
+    },
+    {
+      "id": "ppf-lock-in",
+      "label": "ppf-lock-in"
+    },
+    {
+      "id": "ppf-assumptions",
+      "label": "ppf-assumptions"
+    }
+  ],
+  "estimatedMinutes": 3
+}

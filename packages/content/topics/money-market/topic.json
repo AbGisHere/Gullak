@@ -1,0 +1,20 @@
+{
+  "id": "money-market",
+  "pillar": "understand-investing",
+  "instrument": "liquid-fund",
+  "concepts": [
+    {
+      "id": "short-term-lending",
+      "label": "short-term-lending"
+    },
+    {
+      "id": "liquidity",
+      "label": "liquidity"
+    },
+    {
+      "id": "rate-risk",
+      "label": "rate-risk"
+    }
+  ],
+  "estimatedMinutes": 3
+}

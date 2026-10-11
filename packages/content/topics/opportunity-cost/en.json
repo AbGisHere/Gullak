@@ -1,0 +1,83 @@
+{
+  "topicId": "opportunity-cost",
+  "locale": "en",
+  "title": "What you give up",
+  "summary": "Every choice has a cost: the next best thing you could have done with your money or time.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["trade-offs", "next-best-choice"],
+      "markdown": "**English draft for R5 review.**\n\nAt the school mela, Arjun has ₹100. He can play the ring-toss game for ₹100, or he can buy a set of sketch pens for ₹100. He cannot do both.\n\nArjun picks the pens. What did he give up? The ring-toss game. That is called the **opportunity cost**: the next best option you give up when you make a choice.\n\nOpportunity cost is not about the price tag. The pens cost ₹100, but the real cost of choosing them is the fun he did not have at the game stall. If he had chosen the game, the opportunity cost would be the pens.\n\nThis works for time too. If Meera spends Sunday afternoon watching videos, the opportunity cost might be finishing her science project or playing cricket outside.\n\nSince we have limited money and time, we always make **trade-offs**. Thinking about opportunity cost helps us choose what matters most to us.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "mela-choice",
+          "conceptId": "next-best-choice",
+          "prompt": "Arjun chooses sketch pens over the ring-toss game. What is his opportunity cost?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The ₹100 he spent"
+            },
+            {
+              "id": "1",
+              "text": "The ring-toss game he gave up"
+            },
+            {
+              "id": "2",
+              "text": "Nothing, because he got the pens"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Opportunity cost is the next best option you give up, here the ring-toss game."
+        },
+        {
+          "id": "limited-money",
+          "conceptId": "trade-offs",
+          "prompt": "Why do we face trade-offs?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Because money and time are limited"
+            },
+            {
+              "id": "1",
+              "text": "Because shops raise prices"
+            },
+            {
+              "id": "2",
+              "text": "Because choosing is always a mistake"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "When money or time is limited, choosing one thing means not choosing another."
+        },
+        {
+          "id": "sunday-time",
+          "conceptId": "next-best-choice",
+          "prompt": "Meera spends Sunday afternoon on videos instead of her science project. What is the opportunity cost?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The project time she gave up"
+            },
+            {
+              "id": "1",
+              "text": "The electricity used"
+            },
+            {
+              "id": "2",
+              "text": "There is no cost because videos are free"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Time has opportunity cost too. The next best use of her afternoon, the project, is what she gave up."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "topicId": "debt-funds",
+  "locale": "en",
+  "title": "A basket of loans",
+  "summary": "A debt fund pools many people's money to lend to many borrowers, spreading risk but not removing it.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["pooled-lending", "duration-risk", "expense-ratio"],
+      "markdown": "**English draft for R5 review.**\n\nTanvi puts ₹5,000 of play money into a **debt fund** called Riverbank Debt Fund, which is fictional. The fund collects money from many people and lends it to many borrowers by holding bonds and other loans. This **pooling** spreads the risk, so one late payment hurts less.\n\nEach unit has a **NAV**, the fund's value per unit, which changes daily. A fund holding longer loans has higher **duration risk**: when market interest rates rise, its NAV usually falls more.\n\nThe fund charges a yearly fee called the **expense ratio**, say 0.5% in this example. That is ₹25 on ₹5,000, taken from the fund's value, so it quietly reduces your return.\n\nSuppose it earns 7% a year before fees, an assumption for this example, not a promise. Past returns do not guarantee future ones, and higher return usually means higher risk.\n\nWhat to check: the fund's average loan length, the quality of its borrowers and its expense ratio. Gullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "why-pool",
+          "conceptId": "pooled-lending",
+          "prompt": "What is the main benefit of a debt fund pooling money?",
+          "options": [
+            {
+              "id": "0",
+              "text": "It lends to many borrowers, spreading risk"
+            },
+            {
+              "id": "1",
+              "text": "It guarantees profit"
+            },
+            {
+              "id": "2",
+              "text": "It removes all risk"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Pooling spreads risk across many loans, but it does not remove risk."
+        },
+        {
+          "id": "longer-loans",
+          "conceptId": "duration-risk",
+          "prompt": "Interest rates rise. Which fund's NAV usually falls more?",
+          "options": [
+            {
+              "id": "0",
+              "text": "One holding short loans"
+            },
+            {
+              "id": "1",
+              "text": "One holding longer loans"
+            },
+            {
+              "id": "2",
+              "text": "Both fall exactly the same"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Longer duration means higher sensitivity to rate changes."
+        },
+        {
+          "id": "fee-effect",
+          "conceptId": "expense-ratio",
+          "prompt": "Riverbank charges 0.5% a year on ₹5,000. What does the fee do?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Adds ₹25 to your money"
+            },
+            {
+              "id": "1",
+              "text": "Is taken from the fund and lowers returns by about ₹25"
+            },
+            {
+              "id": "2",
+              "text": "Has no effect on returns"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "The expense ratio is deducted from the fund's value, reducing your return."
+        }
+      ]
+    }
+  ]
+}

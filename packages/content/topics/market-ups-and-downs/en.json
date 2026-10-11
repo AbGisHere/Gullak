@@ -1,0 +1,83 @@
+{
+  "topicId": "market-ups-and-downs",
+  "locale": "en",
+  "title": "When prices go up and down",
+  "summary": "Prices rise and fall over time; an emergency fund helps you avoid being forced to sell.",
+  "variants": [
+    {
+      "id": "read",
+      "format": "transcript",
+      "conceptIds": ["prices-move", "time-and-patience", "emergency-fund-first"],
+      "markdown": "**English draft for R5 review.**\n\nKabir's uncle watches the prices of a fictional company, Sundar Foods, in a virtual play portfolio. One week the price drops from ₹100 to ₹80, and the family group chat panics.\n\nPrices **move up and down** over time because many people change their minds about what something is worth. A fall on paper is not a loss until it is sold.\n\nThen Kabir's aunt needs ₹20,000 for a hospital bill. With no savings, the family must sell during the fall. That is a **forced sale**, and it locks in the drop.\n\nAn **emergency fund** is cash kept aside for surprises. With one, the family never has to sell at a bad moment, and can decide calmly with **time on their side**.\n\nNo one can reliably guess the highs and lows. Any example number here is an assumption, not a promise.\n\nGullak uses virtual play money only."
+    },
+    {
+      "id": "check",
+      "format": "quiz",
+      "questions": [
+        {
+          "id": "why-move",
+          "conceptId": "prices-move",
+          "prompt": "Why do prices go up and down?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Because people's views of value keep changing"
+            },
+            {
+              "id": "1",
+              "text": "Because a bank sets them each day"
+            },
+            {
+              "id": "2",
+              "text": "Because they always follow a fixed pattern"
+            }
+          ],
+          "correctOptionId": "0",
+          "explanation": "Prices shift as many people change their view of what something is worth."
+        },
+        {
+          "id": "forced-sale",
+          "conceptId": "emergency-fund-first",
+          "prompt": "What does an emergency fund help the family avoid?",
+          "options": [
+            {
+              "id": "0",
+              "text": "Paying any bills"
+            },
+            {
+              "id": "1",
+              "text": "Being forced to sell during a fall"
+            },
+            {
+              "id": "2",
+              "text": "Seeing prices change"
+            }
+          ],
+          "correctOptionId": "1",
+          "explanation": "Cash set aside means urgent needs do not force a sale at a bad time."
+        },
+        {
+          "id": "paper-loss",
+          "conceptId": "time-and-patience",
+          "prompt": "Sundar Foods fell from ₹100 to ₹80. What is true?",
+          "options": [
+            {
+              "id": "0",
+              "text": "The money is gone forever"
+            },
+            {
+              "id": "1",
+              "text": "Everyone must sell at once"
+            },
+            {
+              "id": "2",
+              "text": "The fall is on paper until something is actually sold"
+            }
+          ],
+          "correctOptionId": "2",
+          "explanation": "A price fall is only realised as a loss if you sell; time lets you decide calmly."
+        }
+      ]
+    }
+  ]
+}

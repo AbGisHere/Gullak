@@ -1,0 +1,20 @@
+{
+  "id": "setting-goals",
+  "pillar": "plan-and-budget",
+  "instrument": null,
+  "concepts": [
+    {
+      "id": "clear-goal",
+      "label": "clear-goal"
+    },
+    {
+      "id": "saving-steps",
+      "label": "saving-steps"
+    },
+    {
+      "id": "staying-on-track",
+      "label": "staying-on-track"
+    }
+  ],
+  "estimatedMinutes": 3
+}
