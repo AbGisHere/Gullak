@@ -691,3 +691,112 @@ The pending Lesson 1 content, three-question check, pass mark and once-only XP
 proposal remain unapproved. This handoff implements none of them. Await R5's
 sign-off and reviewed lesson/quiz JSON; coordinate persistence and any eventual
 reward evaluator separately with R1/R3 rather than trusting client callbacks.
+
+## Disabled ML fixture integration
+
+Goal: exercise backend-shaped quiz evidence through the existing BKT predictor
+and recommendation ranker into a frontend-consumable result, using labelled
+synthetic fixtures only. This is integration preparation, not production model
+activation, a new training run or evidence of accuracy on Gullak learners.
+
+The first increment uses the current topic model. Existing quiz routes, database
+transactions, local mastery updates, learning-map rendering and unlocks remain
+unchanged. There is no public endpoint, environment toggle, migration, model-file
+loader, hosted query, real learner export or write to browser/database storage.
+No component imports the new experimental consumer until separately approved.
+
+### Inputs and ownership
+
+- An explicit synthetic experiment envelope identifies one learner, the legacy
+  grade group and onboarding experience. Its events use the exact strict nine-field
+  `QuizAnswerEvent` schema, not client choices or story verdicts.
+- A caller-supplied synthetic registry identifies topic, exact content-version
+  hash, question, concept and question position. It contains no answer key and
+  makes no claim to be R3's immutable production registry. Unknown versions,
+  mismatched concepts and ambiguous question positions fail closed.
+- Explicit topic-scoped BKT parameters accompany a model version and synthetic
+  provenance. No parameters are loaded from the committed synthetic draft or
+  ASSISTments benchmark. Replay initializes each concept using the approved
+  experience prior (none 0.1, some 0.3, regular 0.5); fitting-derived pInit must
+  not silently override onboarding. The remaining four probabilities are explicit.
+- Graph-ordered canonical topic rules/concepts and trusted best quiz scores are
+  separate recommendation inputs. Replaying answers never fabricates progress,
+  rescales quiz pass marks or makes mastery an unlock rule.
+- R3 owns the future authenticated data-access implementation, immutable registry
+  and persistence contract. The first backend adapter accepts injected fixture
+  input only; it must not add a guessed method to `DataAccess` or bypass RLS.
+
+### Deterministic replay and result
+
+1. Validate and snapshot the complete envelope before processing any event.
+   Reject mixed learners, duplicate event IDs, duplicate questions within an
+   attempt, mixed versions in a submission, unknown graph/concept IDs and missing
+   model parameters. Return no partial mastery on failure.
+2. For each topic, order submissions by `attempt_no`, then questions by their
+   positions in that pinned registry version, never event UUID or input-array
+   order. Validate chronological submission order using `answered_at`; timestamp
+   ties between attempts are resolved by attempt number. Do not assume attempt
+   numbers are globally comparable across different topics.
+3. Replay correct/incorrect quiz observations through `bktStep`, maintaining
+   separate topic/concept state. Forgetting remains per observation, not elapsed
+   time. Concepts without evidence retain their onboarding prior. Full replay
+   from the same validated fixture is deterministic and does not double-count
+   events on retries; this is not an incremental persistence/idempotency protocol.
+4. Build the complete topic-scoped `RecommendationRequest`, preserving the
+   separately supplied best scores, and call `recommendNext`. Locked topics
+   remain excluded regardless of estimated mastery.
+5. Return a strict versioned synthetic-only result with model version,
+   per-topic/concept mastery, evidence counts and `NextRecommendation`. Do not
+   return event rows, question answers or learner identifiers to the frontend.
+   The frontend experiment consumer validates the result and retains its
+   synthetic/not-active status; no raw reason code is displayed to learners.
+
+The implemented code boundaries are a shared experimental input/output schema in
+`packages/types`, pure fixture replay in `packages/engine`, an inactive injected
+backend adapter in `apps/web/lib/backend`, and an inactive consumer in
+`apps/web/lib`. These modules may share types but packages never import app code.
+There is no new UI, live DB access or production feature switch in this increment.
+
+### Verification and delivery
+
+Test each boundary before implementation, then use one end-to-end unit integration
+test with real schemas, BKT functions and ranker (no mocked model). Cover shuffled
+events, multiple questions/attempts, separate concepts, empty evidence and all
+three priors; independently calculate small posterior expectations. Exercise
+cross-learner rejection, edited/unknown versions, ambiguous ordering, duplicates,
+malformed probabilities, impossible observations and malformed frontend output.
+Prove changed mastery can change a suggestion without opening a locked topic,
+and prove inputs, existing progress and learner storage are not mutated.
+
+Run affected tests plus the workspace lint/typecheck/unit/build suite and existing
+phone/desktop browser flow before handoff. Logical implementation increments get
+separate meaningful commits, with this design and other existing-document updates
+bundled alongside code/tests; no standalone Markdown or padding commit. Ask before
+each commit/push under the repository rules.
+
+Production activation requires a separate reviewed design covering R1's demo
+gate, R3's authenticated complete evidence/registry contract, privacy and retention,
+approved model provenance/parameters, historical replay and persistence concurrency,
+and R1/R2's frontend integration. Real-data fitting still requires authorised
+export and a separately notified Colab run. None is implied by this fixture design.
+
+Entry points: `MlFixtureInput` / `MlFixtureResult` in `@gullak/types`,
+`replayQuizFixture(input)` in `@gullak/engine`,
+`runMlFixture(input, expectedLearnerId)` in `apps/web/lib/backend/ml-fixture.ts`,
+and `consumeMlFixtureResult(input, expectedContext)` in `apps/web/lib/ml-fixture.ts`.
+The expected learner UUID is a fixture scope check, not authentication. A production
+caller would require R3's independently verified identity and RLS-aware data layer.
+Frontend context supplies the synthetic mode, model version, grade, canonical
+graph and trusted best quiz scores; the consumer checks complete count/mastery
+keys and recomputes the recommendation, but cannot establish authenticity of
+untrusted model estimates without a trusted transport. Neither adapter is imported
+by live routes/components. Inputs are bounded to 200 topics, 1,000 registry
+definitions, 100 questions per definition and 10,000 events. Transition parameters
+exclude `pInit`; onboarding sets it. Shared graph defaults are not inherited here.
+
+This fixture protocol supports explicitly supplied partial histories; it does not
+claim to detect missing submissions or prove an export is complete. Each present
+submission must use one version and one timestamp instant; timestamps with different
+offsets may represent that same instant. Every registry question position is unique.
+Production registry variants, export completeness and incremental checkpointing
+must be agreed with R3 separately rather than inferred from these fixtures.
