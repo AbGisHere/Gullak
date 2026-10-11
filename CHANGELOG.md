@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.20] - 2026-10-11
+
 ### Added
 - Error prevention and recovery: switching learner, leaving an activity mid-way and resetting quests ask
   first; onboarding explains why it cannot continue and validates the goal; quiz answers survive a reload and
