@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.24] - 2026-10-11
+
 ### Fixed
 - One navigation model on every screen: Home, Learn, Practice, Portfolio and Me, with the same destinations, labels and sidebar breakpoint on Home and inside lessons. Portfolio now opens the paper portfolio instead of a different savings screen.
 - Switching between Home's views starts at the top instead of keeping the previous scroll position, so a tap no longer looks like it did nothing.
