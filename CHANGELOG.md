@@ -18,6 +18,11 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ### Fixed
 - Require the caller's explicit graph pass mark during offline lesson-batch preparation instead of silently inserting the shared unlock-rule default; omitted or undefined nested graph metadata rejects without changing shared graph behavior.
+- Gullu, the mascot, is now the favicon, the Apple touch icon and the installable app icon
+  (SVG, 192/512 PNG and a maskable tile), and sits beside the wordmark in the learner shell header.
+- Every page has its own localized tab title ("Learn · Gullak", topic titles with summaries),
+  plus Open Graph/Twitter cards with a Gullu social image, `robots.txt` and `sitemap.xml`
+  (every topic page listed; API, preview and offline pages kept out of search).
 
 ## [0.2.16] - 2026-10-11
 

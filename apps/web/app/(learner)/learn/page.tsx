@@ -1,8 +1,14 @@
 import { resolve } from "node:path";
 import { allUnlockRules } from "@gullak/content";
 import { loadTopic } from "@gullak/content/server";
-import { getLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
 import { LearnMap, type TopicSummary } from "@/components/learn-map";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("learner");
+  return { title: t("learn"), alternates: { canonical: "/learn" } };
+}
 
 export default async function LearnPage() {
   const locale = await getLocale();

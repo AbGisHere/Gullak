@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { Gullu } from "@/components/game/gullu";
 import { readProfile } from "@/components/onboarding";
 import { LOCALE_COOKIE } from "@/i18n/locale";
 
@@ -48,7 +49,8 @@ export function LearnerShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-svh bg-background text-foreground">
       <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b bg-background px-4 md:px-6 lg:pl-64">
-        <Link href="/learn" className="text-lg font-extrabold tracking-tight lg:hidden">
+        <Link href="/learn" className="flex items-center gap-2 text-lg font-extrabold tracking-tight lg:hidden">
+          <Gullu state="wave" size={32} />
           Gullak
         </Link>
         <div className="flex items-center gap-2">
@@ -71,7 +73,8 @@ export function LearnerShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 border-r bg-background px-4 py-5 pt-6 lg:block">
-        <Link href="/learn" className="mb-10 block px-3 text-xl font-extrabold tracking-tight">
+        <Link href="/learn" className="mb-10 flex items-center gap-2 px-3 text-xl font-extrabold tracking-tight">
+          <Gullu state="wave" size={36} />
           Gullak
         </Link>
         <nav aria-label={t("navigation")} className="space-y-2">

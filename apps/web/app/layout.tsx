@@ -5,8 +5,9 @@ import { SerwistProvider } from "@serwist/turbopack/react";
 import type { Metadata, Viewport } from "next";
 import { Baloo_2, Baloo_Tammudu_2, Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Providers } from "@/components/providers";
+import { SITE_URL } from "@/lib/site";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 const fontMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -20,12 +21,29 @@ const balooTelugu = Baloo_Tammudu_2({
   preload: false,
 });
 
-export const metadata: Metadata = {
-  title: "Gullak",
-  description: "Learn money. Practise with play money on real markets.",
-  applicationName: "Gullak",
-  appleWebApp: { capable: true, title: "Gullak", statusBarStyle: "default" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("app");
+  const name = t("name");
+  const tagline = t("tagline");
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: `${name}: ${tagline}`, template: `%s · ${name}` },
+    description: tagline,
+    applicationName: "Gullak",
+    keywords: ["financial literacy", "money", "students", "India", "play money", "Gullak"],
+    authors: [{ name: "Team Claude2Create" }],
+    appleWebApp: { capable: true, title: "Gullak", statusBarStyle: "default" },
+    formatDetection: { telephone: false },
+    openGraph: {
+      type: "website",
+      siteName: "Gullak",
+      url: SITE_URL,
+      title: `${name}: ${tagline}`,
+      description: t("playMoneyNote"),
+    },
+    twitter: { card: "summary_large_image", title: `${name}: ${tagline}`, description: t("playMoneyNote") },
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",
