@@ -3,6 +3,7 @@
   "locale": "en",
   "title": "March 2020: the hospital bill",
   "intro": "It's October 2019. You're Asha, in Class 12, and you help your family manage its money. Each month, after the household needs are paid, you decide how much to keep aside, save or invest. Prices are real; nobody in the story knows what comes next.",
+  "learningGoals": ["Notice how accessible savings can change the choices available when an urgent bill arrives."],
   "topicIds": ["market-ups-and-downs", "emergency-fund", "fixed-deposit", "index-funds-etfs"],
   "gradeGroups": ["grade-8-10", "grade-11-12"],
   "startDate": "2019-10-01",

@@ -9,6 +9,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Added
+- Add Practice and paper portfolio demo screens, local profile controls, component adapters and phone/desktop learner-flow coverage. Practice decisions currently use bundled sample outcomes.
 - Add the grade-filtered learning map, content-backed lessons, quiz unlocks and on-device mastery tracking.
 - Responsive learner app shell with locale switching, Play Money badge and onboarding handoff to Learn.
 

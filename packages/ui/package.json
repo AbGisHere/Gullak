@@ -9,6 +9,7 @@
     "./postcss.config": "./postcss.config.mjs",
     "./lib/*": "./src/lib/*.ts",
     "./components/*": "./src/components/*.tsx",
+    "./fixtures/*": "./src/fixtures/*.ts",
     "./hooks/*": "./src/hooks/*.ts"
   },
   "scripts": {
