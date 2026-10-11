@@ -11,6 +11,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ### Added
 - Controlled Financial Twin story presentation components for compact progress, household dialogue, supplied money state, decisions, consequence feedback, reflection and correctly paired rewind alternatives.
 - Complete learner-facing frontend experience in `apps/web`: connected learner dashboard with habit streak, adaptive recommendations ("Why Gullu picked this for you"), daily 2-minute drop, and quick portfolio glance.
+- Gullu's Interactive World (Direction C): 8-world illustrated map with canonical curriculum naming (Candy Economy through Finance Tycoon), 9 expressive emotional states for animated Gullu, and playable "Gullu Goes Shopping" vertical slice mission with consequence rewind and 2-jars rule.
+- Complete persistent light/dark/system appearance system with warm paper (`#F7F3E8`) and deep midnight navy (`#0B1120`) palettes, semantic theme tokens, and appearance switcher in Profile tab.
+- Learner onboarding audit and refinement with immediate Gullu greeting, optional name/nickname collection, and shared-device profile switching.
 - Persistent Financial Twin narrative journey (*Nani's Gullak*): 7-step connected flow spanning Hyderabad lane context, March 2020 emergency dilemma, branching choices, Practice simulation, Multiverse Counterfactual Rewind, and "FYI, This Really Happened" historical reveal.
 - Mobile-first app shell (`AppShell`) with accessible 44px+ touch bottom navigation bar, companion Gullu avatar status, and full responsive desktop sidebar layout.
 - Four-pillar curriculum explorer (`LearnTab`) categorized by Plan & Budget, Save & Manage, Understand Investing, and Stay Financially Safe, with format badges and full modal activity runners.

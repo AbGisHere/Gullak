@@ -1,16 +1,16 @@
 "use client";
 
 import { locales } from "@gullak/content";
-import { Character } from "@gullak/ui/components/character";
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { cn } from "@gullak/ui/lib/utils";
-import { Award, BookOpen, Briefcase, Compass, Home, RotateCcw, Settings, Sparkles } from "lucide-react";
+import { Award, BookOpen, Compass, RotateCcw, Settings, Sparkles, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { type ReactNode, useState } from "react";
 import { LOCALE_COOKIE } from "@/i18n/locale";
+import { Gullu } from "./game/gullu";
 
-export type NavTab = "home" | "twin" | "learn" | "portfolio" | "missions";
+export type NavTab = "world" | "learn" | "gullu" | "rewards" | "profile" | "home" | "twin" | "portfolio" | "missions";
 
 interface AppShellProps {
   currentTab: NavTab;
@@ -46,13 +46,23 @@ export function AppShell({
   const gradeDisplay =
     gradeGroup === "grade-6-7" ? "Class 6–7" : gradeGroup === "grade-11-12" ? "Class 11–12" : "Class 8–10";
 
-  const navItems: { id: NavTab; label: string; icon: typeof Home }[] = [
-    { id: "home", label: tNav("home"), icon: Home },
-    { id: "twin", label: tNav("twin"), icon: Compass },
+  // The 5 primary bottom/sidebar navigation destinations of Gullu's Interactive World
+  const navItems: { id: NavTab; label: string; icon: typeof Compass }[] = [
+    { id: "world", label: tNav("world"), icon: Compass },
     { id: "learn", label: tNav("learn"), icon: BookOpen },
-    { id: "portfolio", label: tNav("portfolio"), icon: Briefcase },
-    { id: "missions", label: tNav("missions"), icon: Award },
+    { id: "gullu", label: tNav("gullu"), icon: Sparkles },
+    { id: "rewards", label: tNav("rewards"), icon: Award },
+    { id: "profile", label: tNav("profile"), icon: User },
   ];
+
+  // Helper to determine if an item is active
+  function isTabActive(itemId: NavTab): boolean {
+    if (currentTab === itemId) return true;
+    if (itemId === "world" && (currentTab === "home" || currentTab === "twin")) return true;
+    if (itemId === "gullu" && currentTab === "portfolio") return true;
+    if (itemId === "rewards" && currentTab === "missions") return true;
+    return false;
+  }
 
   return (
     <div className="flex min-h-svh w-full flex-col bg-brand-paper text-brand-ink selection:bg-brand-lime selection:text-brand-ink">
@@ -61,14 +71,16 @@ export function AppShell({
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
-            onClick={() => onSelectTab("home")}
+            onClick={() => onSelectTab("world")}
             className="flex items-center gap-2 text-left focus-visible:outline-2 focus-visible:outline-ring"
           >
-            <div className="grid size-9 sm:size-10 place-items-center rounded-xl bg-brand-ink text-brand-paper shadow-sm">
-              <Character variant="blob" pose="saving" accent="lime" size="sm" />
+            <div className="grid size-9 sm:size-10 place-items-center rounded-xl bg-brand-ink text-brand-paper shadow-sm overflow-hidden p-0.5">
+              <Gullu state="wave" size={34} />
             </div>
             <div>
-              <span className="block text-base sm:text-lg font-black tracking-tight leading-none">Gullak</span>
+              <span className="block text-base sm:text-lg font-black tracking-tight leading-none font-display">
+                Gullak
+              </span>
               <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Vanguard</span>
             </div>
           </button>
@@ -163,23 +175,23 @@ export function AppShell({
       <div className="mx-auto flex w-full max-w-7xl flex-1 items-start">
         {/* Desktop Sidebar (hidden on phone, visible md+) */}
         <aside className="sticky top-16 hidden md:flex w-64 shrink-0 flex-col gap-6 border-r border-border/80 p-5 self-stretch">
-          <div className="rounded-2xl bg-brand-muted p-4 border border-border">
+          <div className="rounded-2xl bg-[#FFFDF7] p-4 border-2 border-[#171717] shadow-[3px_3px_0_#171717]">
             <div className="flex items-center gap-3 mb-2">
-              <Character variant="blob" pose="explaining" accent="lime" size="md" />
+              <Gullu state="wave" size={54} />
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Companion</p>
-                <p className="text-base font-black text-brand-ink">Gullu</p>
+                <p className="text-[10px] font-black uppercase tracking-wider text-muted-foreground">Companion</p>
+                <p className="text-base font-black text-brand-ink font-display">Gullu</p>
               </div>
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              &quot;Never break an FD early if your emergency cache can cover the bill!&quot;
+              &quot;Namaste! Choose a world from the map to play our next money challenge!&quot;
             </p>
           </div>
 
-          <nav className="flex flex-col gap-1.5" aria-label="Desktop navigation">
+          <nav className="flex flex-col gap-2" aria-label="Desktop navigation">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = currentTab === item.id;
+              const isActive = isTabActive(item.id);
               return (
                 <button
                   key={item.id}
@@ -187,36 +199,28 @@ export function AppShell({
                   onClick={() => onSelectTab(item.id)}
                   data-active={isActive}
                   className={cn(
-                    "flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-bold transition-all text-left",
+                    "flex h-11 items-center gap-3 rounded-2xl px-3.5 text-sm font-extrabold transition-all text-left font-display border-2",
                     isActive
-                      ? "bg-brand-ink text-brand-paper shadow-sm"
-                      : "text-brand-ink hover:bg-brand-muted hover:text-brand-ink",
+                      ? "bg-[#171717] dark:bg-[#DFFF3F] text-[#FFFDF7] dark:text-[#0B1120] border-[#171717] dark:border-[#DFFF3F] shadow-[2px_2px_0_#171717] dark:shadow-[2px_2px_0_#000000]"
+                      : "border-transparent text-brand-ink dark:text-[#F8FAFC] hover:bg-brand-muted dark:hover:bg-[#162032] hover:border-[#171717]/20 dark:hover:border-[#334155]",
                   )}
                 >
-                  <Icon className={cn("size-5", isActive ? "text-brand-lime" : "text-muted-foreground")} />
+                  <Icon
+                    className={cn("size-5", isActive ? "text-[#DFFF3F] dark:text-[#0B1120]" : "text-muted-foreground")}
+                  />
                   <span>{item.label}</span>
-                  {item.id === "twin" && (
-                    <span
-                      className={cn(
-                        "ml-auto rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-wider",
-                        isActive ? "bg-brand-lime text-brand-ink" : "bg-brand-coral text-white",
-                      )}
-                    >
-                      Active
-                    </span>
-                  )}
                 </button>
               );
             })}
           </nav>
 
-          <div className="mt-auto rounded-2xl border border-dashed border-border p-4 bg-card/60">
+          <div className="mt-auto rounded-2xl border-2 border-dashed border-[#171717]/30 dark:border-[#334155] p-4 bg-[#FFFDF7]/60 dark:bg-[#162032]/60">
             <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground mb-1">
               <Sparkles className="size-3.5 text-brand-coral" />
-              <span>Adaptive Loop</span>
+              <span>Gullu&apos;s World</span>
             </div>
-            <p className="text-xs text-brand-ink/80 leading-snug">
-              Every quiz and simulation decision updates your knowledge profile and unlocks new paper assets.
+            <p className="text-xs text-brand-ink/80 dark:text-[#94A3B8] leading-snug">
+              Every decision you make shapes your financial story and evolves your living Gullak!
             </p>
           </div>
         </aside>
@@ -225,14 +229,14 @@ export function AppShell({
         <main className="flex-1 min-w-0 pb-20 md:pb-10">{children}</main>
       </div>
 
-      {/* Mobile Bottom Navigation Bar (Phone only, fixed at bottom) */}
+      {/* Mobile Bottom Navigation Bar (Phone only, fixed at bottom, thumb-friendly 48px+ targets) */}
       <nav
         aria-label="Mobile navigation"
-        className="fixed bottom-0 left-0 right-0 z-30 flex md:hidden h-16 items-center justify-around border-t border-border bg-brand-paper/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur-md shadow-lg"
+        className="fixed bottom-0 left-0 right-0 z-30 flex md:hidden h-16 items-center justify-around border-t-2 border-[#171717] dark:border-[#334155] bg-[#FFFDF7] dark:bg-[#1E293B] px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur-md shadow-lg"
       >
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = currentTab === item.id;
+          const isActive = isTabActive(item.id);
           return (
             <button
               key={item.id}
@@ -240,19 +244,25 @@ export function AppShell({
               onClick={() => onSelectTab(item.id)}
               data-active={isActive}
               className={cn(
-                "flex flex-1 flex-col items-center justify-center gap-1 py-1 text-[11px] font-bold transition-transform active:scale-95",
-                isActive ? "text-brand-ink" : "text-muted-foreground hover:text-brand-ink",
+                "flex flex-1 min-h-[48px] min-w-[48px] flex-col items-center justify-center gap-1 py-1 text-[11px] font-bold transition-transform active:scale-95 font-display",
+                isActive
+                  ? "text-[#171717] dark:text-[#DFFF3F]"
+                  : "text-[#171717]/60 dark:text-[#94A3B8] hover:text-[#171717] dark:hover:text-[#F8FAFC]",
               )}
             >
               <div
                 className={cn(
-                  "grid size-8 place-items-center rounded-xl transition-colors",
-                  isActive ? "bg-brand-ink text-brand-lime shadow-sm" : "bg-transparent text-muted-foreground",
+                  "grid size-8 place-items-center rounded-xl transition-all",
+                  isActive
+                    ? "bg-[#171717] dark:bg-[#DFFF3F] text-[#DFFF3F] dark:text-[#0B1120] shadow-[1px_1px_0_#171717] dark:shadow-[1px_1px_0_#000000]"
+                    : "bg-transparent text-[#171717]/60 dark:text-[#94A3B8]",
                 )}
               >
                 <Icon className="size-4" />
               </div>
-              <span className={cn("leading-none", isActive && "font-black text-brand-ink")}>{item.label}</span>
+              <span className={cn("leading-none", isActive && "font-black text-[#171717] dark:text-[#DFFF3F]")}>
+                {item.label}
+              </span>
             </button>
           );
         })}
