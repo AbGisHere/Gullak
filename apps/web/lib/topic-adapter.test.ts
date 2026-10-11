@@ -5,7 +5,7 @@ import { topicToLesson } from "./topic-adapter";
 describe("topicToLesson", () => {
   it("maps authored content into the existing lesson component contract", async () => {
     const topic = await loadTopic(
-      new URL("../../../packages/content/topics", import.meta.url).pathname,
+      fileURLToPath(new URL("../../../packages/content/topics", import.meta.url)),
       "money-basics",
       "en",
     );
@@ -15,3 +15,5 @@ describe("topicToLesson", () => {
     expect(lesson.steps).toHaveLength(3);
   });
 });
+
+import { fileURLToPath } from "node:url";
