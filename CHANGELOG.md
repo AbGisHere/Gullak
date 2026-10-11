@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Strict educational recommendation input/output contracts with validated topic graphs, quiz scores and complete topic-scoped concept mastery.
+
 ## [0.1.4] - 2026-10-11
 
 ### Added
