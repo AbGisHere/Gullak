@@ -15,5 +15,6 @@ export * from "./profile";
 export * from "./progress";
 export * from "./recommendation";
 export * from "./topic";
+export * from "./unit-price";
 export * from "./unlock";
 export * from "./world";

@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Strict virtual unit-price comparison input contracts: safe integer paise, positive whole quantities and matching piece/gram/millilitre units; ambiguous units, real-money flags and extra fields are rejected.
+
 ## [0.2.7] - 2026-10-11
 
 ### Changed
