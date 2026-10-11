@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.29] - 2026-10-11
+
 ### Added
 
 - Invest: a price chart on every listing page, with 1D, 1W, 1M and 52W periods. Hover or drag to read the price at any point; the line is green or red by the change over the period. Served from Yahoo Finance by a new public `/api/market/live/[symbol]/chart?range=` route (today cached for 60 s, longer periods for 30 min).
