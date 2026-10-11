@@ -32,7 +32,7 @@ export function StoryDecision({ episode, state, onDecision, heading, selectedDec
               }}
               className={`flex min-h-14 w-full items-start gap-4 rounded-xl border p-5 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-50 ${
                 selected
-                  ? "border-foreground bg-brand-lime text-brand-ink"
+                  ? "border-foreground bg-brand-lime text-brand-ink dark:text-brand-on-accent"
                   : "border-border bg-card text-card-foreground hover:border-foreground"
               }`}
               data-testid={`twin-decision-${option.id}`}

@@ -220,7 +220,7 @@ export function SpotAndSort({ activity, labels, onComplete, onItemSelect, classN
         data-testid="spot-and-sort-finished"
       >
         <div className="flex items-center gap-3 border-b border-border pb-4">
-          <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-brand-lime text-brand-ink">
+          <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-brand-lime text-brand-ink dark:text-brand-on-accent">
             <CheckCircle2 aria-hidden="true" className="size-6" />
           </div>
           <div>
@@ -406,7 +406,9 @@ export function SpotAndSort({ activity, labels, onComplete, onItemSelect, classN
             <span
               className={cn(
                 "inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-bold",
-                isMatch ? "bg-brand-lime text-brand-ink" : "bg-brand-coral/15 text-brand-coral",
+                isMatch
+                  ? "bg-brand-lime text-brand-ink dark:text-brand-on-accent"
+                  : "bg-brand-coral/15 text-brand-coral",
               )}
             >
               {isMatch ? (

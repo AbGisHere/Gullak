@@ -23,7 +23,7 @@ export function StoryScene({ title, setting, speaker, dialogue, character, child
         </h2>
         <p className="text-base leading-relaxed text-muted-foreground">{setting}</p>
       </header>
-      <div className="grid min-w-0 items-center gap-5 rounded-2xl bg-brand-lilac p-5 text-brand-ink sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-8">
+      <div className="grid min-w-0 items-center gap-5 rounded-2xl bg-brand-lilac p-5 text-brand-ink dark:text-brand-on-accent sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-8">
         <div className="flex justify-center sm:self-end" aria-hidden="true">
           <Character {...character} size="md" />
         </div>

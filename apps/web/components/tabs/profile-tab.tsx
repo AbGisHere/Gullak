@@ -47,7 +47,7 @@ export function ProfileTab({
       <section className="rounded-2xl border border-border bg-card p-5 sm:p-6 space-y-4">
         <div className="flex items-center gap-3">
           <div className="grid size-12 place-items-center rounded-2xl border border-border bg-brand-lime">
-            <User className="size-6 text-foreground" aria-hidden="true" />
+            <User className="size-6 text-foreground dark:text-brand-on-accent" aria-hidden="true" />
           </div>
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground">

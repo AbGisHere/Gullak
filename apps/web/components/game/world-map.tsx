@@ -145,9 +145,9 @@ export function WorldMap({
                   world.isLocked
                     ? "border-transparent bg-muted text-muted-foreground"
                     : isCurrent
-                      ? "bg-brand-lime text-foreground scale-105"
+                      ? "bg-brand-lime text-foreground dark:text-brand-on-accent scale-105"
                       : isTwin
-                        ? "bg-brand-coral text-foreground"
+                        ? "bg-brand-coral text-foreground dark:text-brand-on-accent"
                         : isSoon
                           ? "border-dashed bg-card text-foreground"
                           : "bg-card text-foreground hover:bg-brand-lime/40",
@@ -166,7 +166,9 @@ export function WorldMap({
                   aria-hidden="true"
                   className={cn(
                     "text-xs font-bold leading-none",
-                    isTwin || isCurrent ? "text-foreground" : "text-foreground/80 dark:text-[#F8FAFC]/80",
+                    isTwin || isCurrent
+                      ? "text-foreground dark:text-brand-on-accent"
+                      : "text-foreground/80 dark:text-[#F8FAFC]/80",
                   )}
                 >
                   {t("worldNumber", { number: world.id })}
@@ -174,21 +176,21 @@ export function WorldMap({
 
                 {/* Padlock sticker if locked */}
                 {world.isLocked && (
-                  <span className="absolute -top-2 -right-2 rounded-full border border-border bg-brand-coral p-1 text-foreground shadow-xs">
+                  <span className="absolute -top-2 -right-2 rounded-full border border-border bg-brand-coral p-1 text-foreground dark:text-brand-on-accent shadow-xs">
                     <Lock className="size-3" aria-hidden="true" />
                   </span>
                 )}
 
                 {/* Clock sticker if open but its mission is not written yet */}
                 {isSoon && (
-                  <span className="absolute -top-2 -right-2 rounded-full border border-border bg-[#FFD84D] p-1 text-foreground shadow-xs">
+                  <span className="absolute -top-2 -right-2 rounded-full border border-border bg-[#FFD84D] p-1 text-foreground dark:text-brand-on-accent shadow-xs">
                     <Clock className="size-3" aria-hidden="true" />
                   </span>
                 )}
 
                 {/* Completed checkmark if passed */}
                 {isCompleted && (
-                  <span className="absolute -top-2 -right-2 rounded-full border-2 border-foreground bg-brand-lime p-1 text-foreground shadow-xs">
+                  <span className="absolute -top-2 -right-2 rounded-full border-2 border-foreground bg-brand-lime p-1 text-foreground dark:text-brand-on-accent shadow-xs">
                     <Check className="size-3" aria-hidden="true" />
                   </span>
                 )}
@@ -324,7 +326,7 @@ function WorldDialog({
             type="button"
             onClick={onClose}
             aria-label={t("close")}
-            className="size-11 rounded-xl border border-foreground dark:border-[#334155] grid place-items-center bg-[#ECE8DF] dark:bg-[#162032] text-foreground hover:bg-brand-lime hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            className="size-11 rounded-xl border border-foreground dark:border-[#334155] grid place-items-center bg-[#ECE8DF] dark:bg-[#162032] text-foreground hover:bg-brand-lime hover:text-foreground dark:hover:text-brand-on-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             <X className="size-4" aria-hidden="true" />
           </button>

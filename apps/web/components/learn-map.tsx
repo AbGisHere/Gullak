@@ -96,18 +96,18 @@ export function LearnMap({ topics, profile: suppliedProfile, gradeGroup, onLaunc
                   <header
                     className={
                       open || visited
-                        ? "border-b border-border bg-brand-lime px-4 py-5 sm:px-6"
+                        ? "border-b border-border bg-brand-lime dark:text-brand-on-accent px-4 py-5 sm:px-6"
                         : "border-b border-border bg-muted px-4 py-5 sm:px-6"
                     }
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <h2
                         id={`world-${world.id}`}
-                        className="text-xl font-extrabold tracking-tight text-brand-ink sm:text-2xl"
+                        className="text-xl font-extrabold tracking-tight text-brand-ink dark:text-inherit sm:text-2xl"
                       >
                         {learner(`world.${world.id}`)}
                       </h2>
-                      <p className="text-sm font-semibold text-brand-ink">
+                      <p className="text-sm font-semibold text-brand-ink dark:text-inherit">
                         {t(visited ? "shopVisited" : open ? "shopOpen" : group.length ? "shopLater" : "coming")}
                       </p>
                     </div>

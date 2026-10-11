@@ -176,7 +176,7 @@ export function MoneyDecoder({
             <div className="flex items-start justify-between gap-4 border-b border-border p-5 pb-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1 rounded bg-brand-lime px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-ink">
+                  <span className="inline-flex items-center gap-1 rounded bg-brand-lime px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-ink dark:text-brand-on-accent">
                     <BookOpen aria-hidden="true" className="size-3" />
                     {l.badgeTitle}
                   </span>
@@ -311,7 +311,7 @@ export function MoneyDecoderCard({
       data-testid="money-decoder-card"
     >
       <div className="flex items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1 rounded bg-brand-lime px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-ink">
+        <span className="inline-flex items-center gap-1 rounded bg-brand-lime px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-ink dark:text-brand-on-accent">
           <BookOpen aria-hidden="true" className="size-3" />
           {l.badgeTitle}
         </span>

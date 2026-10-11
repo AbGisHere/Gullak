@@ -120,7 +120,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             type="button"
             onClick={() => (step === "intro" || step === "complete" ? onClose() : setConfirmingExit(true))}
             aria-label="Exit shopping mission"
-            className="flex size-9 sm:size-10 items-center justify-center rounded-xl border border-border bg-muted hover:bg-brand-lime transition-colors"
+            className="flex size-9 sm:size-10 items-center justify-center rounded-xl border border-border bg-muted hover:bg-brand-lime dark:hover:text-brand-on-accent transition-colors"
           >
             <X className="size-5" />
           </button>
@@ -283,7 +283,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                       )}
                     >
                       {item.temptationBadge && (
-                        <span className="absolute -top-2 -right-1 rounded-full bg-[#FF6847] text-foreground px-2 py-0.5 text-xs font-bold border border-foreground dark:border-[#334155] shadow-xs">
+                        <span className="absolute -top-2 -right-1 rounded-full bg-[#FF6847] text-foreground dark:text-brand-on-accent px-2 py-0.5 text-xs font-bold border border-foreground dark:border-[#334155] shadow-xs">
                           {item.temptationBadge}
                         </span>
                       )}
@@ -305,7 +305,7 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
                           {item.category === "need" ? "Essential" : "Treat"}
                         </span>
                         {inBasketCount > 0 && (
-                          <span className="rounded-full bg-[#171717] dark:bg-brand-lime text-white dark:text-foreground size-5 grid place-items-center text-xs font-bold">
+                          <span className="rounded-full bg-[#171717] dark:bg-brand-lime text-white dark:text-brand-on-accent size-5 grid place-items-center text-xs font-bold">
                             {inBasketCount}
                           </span>
                         )}

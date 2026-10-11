@@ -44,6 +44,7 @@
   --color-brand-paper: var(--brand-paper);
   --color-brand-ink: var(--brand-ink);
   --color-brand-lime: var(--brand-lime);
+  --color-brand-on-accent: var(--brand-on-accent);
   --color-brand-lilac: var(--brand-lilac);
   --color-brand-coral: var(--brand-coral);
   --color-brand-yellow: var(--brand-yellow);
@@ -100,6 +101,8 @@
   --brand-paper: #f7f3e8;
   --brand-ink: #171717;
   --brand-lime: #dfff3f;
+  /* Fixed foreground for solid brand accents; independent of the page theme. */
+  --brand-on-accent: #171717;
   --brand-lilac: #cbb5ff;
   --brand-coral: #ff6847;
   --brand-coral-ink: #b3361b;

@@ -245,7 +245,7 @@ export function StoryChoices({ scenario, labels, onComplete, onChoiceSelect, cla
         data-testid="story-choices-finished"
       >
         <div className="flex items-center gap-3">
-          <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-brand-lime text-brand-ink">
+          <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-brand-lime text-brand-ink dark:text-brand-on-accent">
             <CheckCircle2 aria-hidden="true" className="size-6" />
           </div>
           <div>
@@ -390,7 +390,7 @@ export function StoryChoices({ scenario, labels, onComplete, onChoiceSelect, cla
                   )}
                   data-testid={`story-choice-${choice.id}`}
                 >
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-muted text-xs font-bold text-foreground group-hover:bg-brand-lime group-hover:text-brand-ink">
+                  <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-muted text-xs font-bold text-foreground group-hover:bg-brand-lime group-hover:text-brand-ink dark:group-hover:text-brand-on-accent">
                     {letter}
                   </span>
                   <span className="text-sm font-medium text-foreground leading-snug">{choice.text}</span>

@@ -63,7 +63,7 @@ export function ActivityModal({ activityType, topicId, gradeGroup, onClose, onAc
             <span>Back to App</span>
           </button>
 
-          <span className="rounded-full bg-brand-lime text-brand-ink px-3 py-0.5 text-xs font-black uppercase tracking-wider">
+          <span className="rounded-full bg-brand-lime text-brand-ink dark:text-brand-on-accent px-3 py-0.5 text-xs font-black uppercase tracking-wider">
             {activityType === "lesson" && "Interactive Lesson"}
             {activityType === "spot-and-sort" && "Spot & Sort Activity"}
             {activityType === "coin-shop" && "Candyville Coin Shop"}

@@ -287,7 +287,7 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
               onClick={() => setChosenFormats(null)}
               aria-pressed={chosenFormats === null}
               data-selected={chosenFormats === null}
-              className="flex min-h-16 w-full items-center justify-between gap-3 rounded-xl border px-5 py-4 text-left text-base font-semibold transition-colors hover:border-foreground/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring data-[selected=true]:border-foreground data-[selected=true]:bg-brand-lime data-[selected=true]:text-brand-ink"
+              className="flex min-h-16 w-full items-center justify-between gap-3 rounded-xl border px-5 py-4 text-left text-base font-semibold transition-colors hover:border-foreground/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring data-[selected=true]:border-foreground data-[selected=true]:bg-brand-lime data-[selected=true]:text-brand-ink dark:data-[selected=true]:text-brand-on-accent"
             >
               <span>{t("mixItUp")}</span>
               {chosenFormats === null ? <Check className="size-5" aria-hidden="true" /> : null}
@@ -419,7 +419,7 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
             {t("reviewProfile")}
           </Button>
           <Button
-            className="bg-brand-lime text-brand-ink hover:bg-brand-lime/90 font-semibold"
+            className="bg-brand-lime text-brand-ink dark:text-brand-on-accent hover:bg-brand-lime/90 font-semibold"
             onClick={() => {
               if (!onFinish) {
                 router.push("/learn");

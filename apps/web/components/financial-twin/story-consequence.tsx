@@ -24,7 +24,7 @@ export function StoryConsequence({ outcome, labels }: StoryConsequenceProps) {
       aria-labelledby="twin-consequence-heading"
       role="status"
     >
-      <div className="space-y-3 rounded-2xl bg-brand-lime p-5 text-brand-ink sm:p-8">
+      <div className="space-y-3 rounded-2xl bg-brand-lime p-5 text-brand-ink dark:text-brand-on-accent sm:p-8">
         <CheckCircle2 className="size-8" aria-hidden="true" />
         <h3 id="twin-consequence-heading" className="text-2xl font-bold sm:text-3xl">
           {labels.heading}

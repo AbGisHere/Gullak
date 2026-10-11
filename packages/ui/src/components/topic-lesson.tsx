@@ -325,7 +325,7 @@ export function TopicLesson({
         data-testid="topic-lesson-finished"
       >
         <div className="flex items-center gap-3 border-b border-border pb-4">
-          <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-brand-lime text-brand-ink">
+          <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-brand-lime text-brand-ink dark:text-brand-on-accent">
             <CheckCircle2 aria-hidden="true" className="size-6" />
           </div>
           <div>
@@ -541,7 +541,7 @@ export function TopicLesson({
             <ul className="space-y-1.5 text-xs sm:text-sm text-foreground">
               {step.learningPointers.map((p, _idx) => (
                 <li key={p} className="flex items-start gap-2">
-                  <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-brand-lime text-[10px] font-bold text-brand-ink">
+                  <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-brand-lime text-[10px] font-bold text-brand-ink dark:text-brand-on-accent">
                     ✓
                   </span>
                   <span>{p}</span>
@@ -857,7 +857,7 @@ export function TopicLesson({
             <div className="space-y-1.5">
               {step.keyPrinciples.map((principle, _idx) => (
                 <div key={principle} className="flex items-start gap-2 text-xs sm:text-sm text-foreground">
-                  <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-brand-lime text-[10px] font-bold text-brand-ink">
+                  <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-brand-lime text-[10px] font-bold text-brand-ink dark:text-brand-on-accent">
                     ✓
                   </span>
                   <span>{principle}</span>

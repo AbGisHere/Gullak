@@ -35,7 +35,10 @@ export function FirstRunHint({ className }: { className?: string }) {
   return (
     <aside
       aria-labelledby={titleId}
-      className={cn("w-full rounded-2xl border-2 border-brand-ink bg-brand-yellow p-4 text-brand-ink", className)}
+      className={cn(
+        "w-full rounded-2xl border-2 border-brand-ink bg-brand-yellow p-4 text-brand-ink dark:text-brand-on-accent",
+        className,
+      )}
     >
       <h2 id={titleId} className="font-display text-base font-black leading-tight">
         {t("hint.title")}
@@ -45,13 +48,13 @@ export function FirstRunHint({ className }: { className?: string }) {
         <button
           type="button"
           onClick={dismiss}
-          className="min-h-11 rounded-xl bg-brand-ink px-4 text-sm font-bold text-brand-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink"
+          className="min-h-11 rounded-xl bg-brand-ink px-4 text-sm font-bold text-brand-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink dark:focus-visible:outline-brand-on-accent"
         >
           {t("hint.dismiss")}
         </button>
         <Link
           href="/help"
-          className="inline-flex min-h-11 items-center text-sm font-bold underline decoration-2 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink"
+          className="inline-flex min-h-11 items-center text-sm font-bold underline decoration-2 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink dark:focus-visible:outline-brand-on-accent"
         >
           {t("link")}
         </Link>

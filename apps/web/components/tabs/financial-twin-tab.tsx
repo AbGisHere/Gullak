@@ -257,7 +257,10 @@ export function FinancialTwinTab() {
                 acknowledgement={reflection ? t(`reflections.${reflection}.feedback`) : undefined}
               />
               {reflection && (
-                <p className="rounded-xl bg-brand-lime p-5 text-base leading-relaxed text-brand-ink" role="status">
+                <p
+                  className="rounded-xl bg-brand-lime p-5 text-base leading-relaxed text-brand-ink dark:text-brand-on-accent"
+                  role="status"
+                >
                   {t("takeHome")}
                 </p>
               )}
