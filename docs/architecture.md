@@ -335,6 +335,36 @@ const key = await buildLessonDraftCacheKey({
 pnpm --filter @gullak/ai exec vitest run src/lesson-cache-key.test.ts
 ```
 
+## Pinned English tutor preparation (inactive, post-demo)
+
+`prepareTutorRequest(input)` in `@gullak/ai` is an offline approval boundary.
+It accepts only `{ topicId, locale, gradeGroup, question, contentVersion,
+sourceBytes }`: existing topic-model grade groups, a nonblank question of at most
+600 UTF-16 code units before trimming, a lowercase SHA-256 and 1–262,144 exact
+UTF-8 source bytes as `Uint8Array`. Extra fields and invalid input return an
+`unavailable` status with a reason code. Advice questions are screened before
+grounding preparation. Caller bytes and values are captured before hashing.
+
+`packages/ai/src/tutor-approved-english.json` fixes the 33 English topic sources
+at `v0.2.12` (`fddbdeb6464576d5e207f47c1f098827a1dc75ef`), with source paths and
+exact-byte SHA-256s. This is the human-authorized editorial grounding allowlist,
+not a real-learner historical registry or fabricated review record. Any byte
+change requires fresh editorial permission and a future allowlist revision.
+Hindi, Telugu, Candy Economy gameplay and arbitrary caller approvals are excluded.
+
+The helper validates the pinned JSON using `TopicContent`, filters variant
+audiences and screens output using existing guardrails. Only transcript markdown,
+story panel text and audio narration text become sources; quizzes, answer keys,
+assets, formulas and simulations are omitted. Each text field has a citation
+with topic, locale, variant, field, path, hash, release and Git ref. It returns
+either a prepared request or an unavailable reason, never invokes a model.
+
+The explicit offline `TUTOR_PROMPT_V3` uses fixed system instructions. Learner
+question, grade, language and teaching sources are a JSON user payload, never
+interpolated into system instructions. Existing `TUTOR_PROMPT` remains v2.
+No route, provider invocation, API key read, persistent cache, rate-limit storage,
+learner record, mastery update or app activation is part of this helper.
+
 ## Provider eligibility
 
 `resolveProviderOrder(env)` in `@gullak/ai` uses the explicit `AI_PROVIDER_ORDER`

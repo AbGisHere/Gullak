@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "purpose": "editorial-tutor-grounding-allowlist",
+  "release": "v0.2.12",
+  "gitRef": "fddbdeb6464576d5e207f47c1f098827a1dc75ef",
+  "sources": [
+    {
+      "topicId": "bank-accounts-upi",
+      "locale": "en",
+      "path": "packages/content/topics/bank-accounts-upi/en.json",
+      "sha256": "f09d979bfbad37c4b85d82ed8472ed343e3a88ed4e77a4867bb21dee49fdb9e6"
+    },
+    {
+      "topicId": "bonds",
+      "locale": "en",
+      "path": "packages/content/topics/bonds/en.json",
+      "sha256": "dd8ab51d1613b19b068f10ec6596186055d04593b3177a80692ba015d4082c93"
+    },
+    {
+      "topicId": "borrowing-and-credit",
+      "locale": "en",
+      "path": "packages/content/topics/borrowing-and-credit/en.json",
+      "sha256": "cbf949686fcc10d93daab024a1bbb77553ad246fa976857a18b7e851fc9825cf"
+    },
+    {
+      "topicId": "compounding",
+      "locale": "en",
+      "path": "packages/content/topics/compounding/en.json",
+      "sha256": "31f7ad8216a8fad958c7130671c6d2b889307de7e355f6940dedd4877356ec7c"
+    },
+    {
+      "topicId": "debt-funds",
+      "locale": "en",
+      "path": "packages/content/topics/debt-funds/en.json",
+      "sha256": "e3ca5549af15f6130709822138e0b831834c39769c27b56b32cecac562ae87da"
+    },
+    {
+      "topicId": "diversification",
+      "locale": "en",
+      "path": "packages/content/topics/diversification/en.json",
+      "sha256": "b998bb18fac82fb7a954167740d479f322de018ce34fe642acb4919505ef4caa"
+    },
+    {
+      "topicId": "emergency-fund",
+      "locale": "en",
+      "path": "packages/content/topics/emergency-fund/en.json",
+      "sha256": "6caca82c5965456e0b78e6273fb46e1c8b92b101d732baee7cc527f0466e3fc8"
+    },
+    {
+      "topicId": "fake-apps-and-loans",
+      "locale": "en",
+      "path": "packages/content/topics/fake-apps-and-loans/en.json",
+      "sha256": "0b91a9c72a52941949015c9836b4b351cc00222a95566d9bdad5e85864053b0c"
+    },
+    {
+      "topicId": "fixed-deposit",
+      "locale": "en",
+      "path": "packages/content/topics/fixed-deposit/en.json",
+      "sha256": "b0270a935fd369a9052c74eb9a6da73fc0b4127ddf6878bc631b2cbab5e7ed1d"
+    },
+    {
+      "topicId": "future-goals",
+      "locale": "en",
+      "path": "packages/content/topics/future-goals/en.json",
+      "sha256": "719ffb07831b6a47a86269d41c5f8ea22b48f18b38daa9658ea10417a4e6fe4f"
+    },
+    {
+      "topicId": "gold",
+      "locale": "en",
+      "path": "packages/content/topics/gold/en.json",
+      "sha256": "a5820c720a6d4e6911a3944223af373b4cacca2032038ff1a5c7d956f8423ca9"
+    },
+    {
+      "topicId": "index-funds-etfs",
+      "locale": "en",
+      "path": "packages/content/topics/index-funds-etfs/en.json",
+      "sha256": "a933238cdfc8dd2691124cd556b89d94cc55bf324feb77f88ae22e76e8f8580f"
+    },
+    {
+      "topicId": "insurance-basics",
+      "locale": "en",
+      "path": "packages/content/topics/insurance-basics/en.json",
+      "sha256": "2c151cd0e5370e2a56cca1e3a5dbb2063911208bf47b1c41974b3cf683528b68"
+    },
+    {
+      "topicId": "making-a-budget",
+      "locale": "en",
+      "path": "packages/content/topics/making-a-budget/en.json",
+      "sha256": "04ae4e08e652beb5d1137309bd91fde8eb5bc5defd5977ea14922444c021d342"
+    },
+    {
+      "topicId": "market-ups-and-downs",
+      "locale": "en",
+      "path": "packages/content/topics/market-ups-and-downs/en.json",
+      "sha256": "6d78a01ae489d3a6d7072b2c11d55710bc42fc116619b375ac832ac867c6599c"
+    },
+    {
+      "topicId": "money-basics",
+      "locale": "en",
+      "path": "packages/content/topics/money-basics/en.json",
+      "sha256": "5ddcb2e9de08c1e20e08117628c8802c45f12b40a326c2e7922f55286900c8d2"
+    },
+    {
+      "topicId": "money-market",
+      "locale": "en",
+      "path": "packages/content/topics/money-market/en.json",
+      "sha256": "a55273f40c7fa683553b6c56ad1784c8758123c9651b196f76e00f193697e978"
+    },
+    {
+      "topicId": "mutual-funds-sip",
+      "locale": "en",
+      "path": "packages/content/topics/mutual-funds-sip/en.json",
+      "sha256": "b9910e48851c21fbe438197de3e74b697c89f33e9dc53eb1b776a67b5a271c50"
+    },
+    {
+      "topicId": "needs-vs-wants",
+      "locale": "en",
+      "path": "packages/content/topics/needs-vs-wants/en.json",
+      "sha256": "2278d69571d05b554df08822081bab8ce6029ded80340e1aaa2b42e3c552ca64"
+    },
+    {
+      "topicId": "opportunity-cost",
+      "locale": "en",
+      "path": "packages/content/topics/opportunity-cost/en.json",
+      "sha256": "7e4c4e99c57ab8fbd97901308d00708841cf403aada657396920e4ff7e1a8596"
+    },
+    {
+      "topicId": "ppf-small-savings",
+      "locale": "en",
+      "path": "packages/content/topics/ppf-small-savings/en.json",
+      "sha256": "5690bb62a45f8a22865d95cf668dad851f61d76a7bb9ae7697c740cab56d0965"
+    },
+    {
+      "topicId": "prices-and-inflation",
+      "locale": "en",
+      "path": "packages/content/topics/prices-and-inflation/en.json",
+      "sha256": "3cfb57cb90addac407d22f83a11bbc2ad9b4c6ab99f7a3e4530b9c47c58265e5"
+    },
+    {
+      "topicId": "protect-your-info",
+      "locale": "en",
+      "path": "packages/content/topics/protect-your-info/en.json",
+      "sha256": "c09ad0396b6663d3a7c902591ef22a7ad3588020d76f3740bce0407c6e94bd38"
+    },
+    {
+      "topicId": "recurring-deposit",
+      "locale": "en",
+      "path": "packages/content/topics/recurring-deposit/en.json",
+      "sha256": "ff03e63c1e35aaa485bd277637a293e47e9a9739b462fede3f64de715fd08c99"
+    },
+    {
+      "topicId": "report-a-fraud",
+      "locale": "en",
+      "path": "packages/content/topics/report-a-fraud/en.json",
+      "sha256": "a5b32492c70e3a11bb378e9bc085000bfe8294e65613cb22897b2d5ddf2844cf"
+    },
+    {
+      "topicId": "retirement-nps",
+      "locale": "en",
+      "path": "packages/content/topics/retirement-nps/en.json",
+      "sha256": "bcc8380ca8a62fe31240b5ad89220923143e56257bf774a92a0f01fcc74a4e51"
+    },
+    {
+      "topicId": "risk-and-return",
+      "locale": "en",
+      "path": "packages/content/topics/risk-and-return/en.json",
+      "sha256": "15800a38a28625e74fedc65c120be8e5248d1c159a9cbf50aff62573b96a510e"
+    },
+    {
+      "topicId": "saving-habit",
+      "locale": "en",
+      "path": "packages/content/topics/saving-habit/en.json",
+      "sha256": "60c85458fa1a682d3405571aa49c0d70dba9ea8170539255c1eb1f210b094364"
+    },
+    {
+      "topicId": "setting-goals",
+      "locale": "en",
+      "path": "packages/content/topics/setting-goals/en.json",
+      "sha256": "060931d1604f93eeebb60977a68c53cee6f24582facc5280e1b83868cf123c70"
+    },
+    {
+      "topicId": "stocks",
+      "locale": "en",
+      "path": "packages/content/topics/stocks/en.json",
+      "sha256": "f1c059879a620d9bac752febe98b3f1f96bd2a7a27f251a57718dc453f732fbe"
+    },
+    {
+      "topicId": "too-good-to-be-true",
+      "locale": "en",
+      "path": "packages/content/topics/too-good-to-be-true/en.json",
+      "sha256": "32fdb2ba09d0604c0b5c337d7a37c3d88c7fe70785f39361cd7f0c18379268ad"
+    },
+    {
+      "topicId": "tracking-spending",
+      "locale": "en",
+      "path": "packages/content/topics/tracking-spending/en.json",
+      "sha256": "65440078131c843d6feff9995ddc6af4844dafeafdc15001027d67547ee0570e"
+    },
+    {
+      "topicId": "upi-and-phishing-scams",
+      "locale": "en",
+      "path": "packages/content/topics/upi-and-phishing-scams/en.json",
+      "sha256": "9773dcdd8250399373bb8f099e2baaea2fec18564b55706796a749731432b56c"
+    }
+  ]
+}

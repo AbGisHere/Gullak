@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Inactive offline English tutor request preparation with exact-byte v0.2.12 editorial grounding allowlist, grade filtering, teaching-only source citations and learner-question guardrails; no provider calls or app activation.
+
 ## [0.2.16] - 2026-10-11
 
 ### Changed
