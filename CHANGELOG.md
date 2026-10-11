@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-10-11
+
 ### Changed
 - Product documentation now uses the eight-world adaptive learning workflow: Candy Economy, Savings Quest, Bankopolis, Market Mayhem, Grow Your Money, Stock Street, Life Simulator and Finance Tycoon. Lessons use the decision-led cycle: experience → decide → consequences → understand → apply → review.
 
