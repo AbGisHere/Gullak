@@ -19,7 +19,7 @@ async function openLearner(page: import("@playwright/test").Page, gradeGroup = "
 
 test("savings respond to keyboard, repeated deposits, goals, undo and reset", async ({ page }) => {
   await openLearner(page);
-  await page.getByRole("button", { name: "Portfolio", exact: true }).click();
+  await page.getByRole("button", { name: "Gullu", exact: true }).click();
   const save = page.getByRole("button", { name: "Save ₹100", exact: true });
   await save.focus();
   await page.keyboard.press("Enter");
@@ -48,7 +48,7 @@ test("savings respond to keyboard, repeated deposits, goals, undo and reset", as
 
 test("older learners can explore losses without changing jar balances", async ({ page }) => {
   await openLearner(page);
-  await page.getByRole("button", { name: "Portfolio", exact: true }).click();
+  await page.getByRole("button", { name: "Gullu", exact: true }).click();
   await page.getByRole("button", { name: "50 in each business" }).click();
   await expect(page.getByText("After this event: 90 fictional tokens (started with 100).")).toBeVisible();
   await page.getByLabel("Choose a hypothetical event").selectOption("bothDown");
@@ -58,7 +58,7 @@ test("older learners can explore losses without changing jar balances", async ({
 
 test("quest retries, locks, one-time rewards, focus recovery and reset", async ({ page }) => {
   await openLearner(page);
-  await page.getByRole("button", { name: "Gullak & Missions", exact: true }).click();
+  await page.getByRole("button", { name: "Rewards", exact: true }).click();
   const sort = page
     .getByRole("article")
     .filter({ has: page.getByRole("heading", { name: "Needs or wants?", exact: true }) });
@@ -102,9 +102,9 @@ for (const [locale, portfolioTitle, missionsTitle] of [
     await openLearner(page);
     // Shared navigation belongs to the shell agent; select stable button positions by title translations.
     const nav = page.locator("nav:visible");
-    await nav.getByRole("button").nth(3).click();
+    await nav.getByRole("button").nth(2).click();
     await expect(page.getByRole("heading", { name: portfolioTitle })).toBeVisible();
-    await nav.getByRole("button").nth(4).click();
+    await nav.getByRole("button").nth(3).click();
     await expect(page.getByRole("heading", { name: missionsTitle })).toBeVisible();
   });
 }
@@ -112,7 +112,7 @@ for (const [locale, portfolioTitle, missionsTitle] of [
 test("all quests teach their reasoning and unlock an earned cosmetic", async ({ page }) => {
   await openLearner(page);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.getByRole("button", { name: "Gullak & Missions", exact: true }).click();
+  await page.getByRole("button", { name: "Rewards", exact: true }).click();
   for (const [title, answers] of [
     ["Needs or wants?", ["Need", "Want"]],
     ["Spot the payment trap", ["Decline and verify with a trusted adult"]],
@@ -139,7 +139,7 @@ test("all quests teach their reasoning and unlock an earned cosmetic", async ({ 
 test("younger learner gets touch-friendly saving without the older portfolio scenario", async ({ page, isMobile }) => {
   await openLearner(page, "grade-6-7");
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.getByRole("button", { name: "Portfolio", exact: true }).click();
+  await page.getByRole("button", { name: "Gullu", exact: true }).click();
   await expect(page.getByRole("heading", { name: "One basket or several?" })).toHaveCount(0);
   const deposit = page.getByRole("button", { name: "Save ₹50", exact: true });
   if (isMobile) await deposit.tap();
