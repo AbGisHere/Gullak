@@ -43,3 +43,6 @@ export function topicToLesson(topic: Topic, gradeGroup: GradeGroup): TopicLesson
     ],
   };
 }
+
+export { normalizeSpotSortActivity, normalizeStoryActivity } from "./activity-adapter";
+export { getCandyEconomyLesson1 } from "./candy-economy-lesson";

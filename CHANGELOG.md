@@ -16,6 +16,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - Paper portfolio tab with interactive virtual piggy-bank deposits, emergency buffer check, and `MoneyDecoder` sheet.
 - Family Take-Home Missions & Living Gullak evolution tracker (`MissionsTab`) with interactive household reach counters and scam defense drills.
 - Synchronized Hindi (`hi.json`) and Telugu (`te.json`) localization strings matching English keys across all learner tabs.
+- Activity normalizers mapping content activity JSON schema to UI contracts (`normalizeSpotSortActivity`, `normalizeStoryActivity`).
+- World 1 Candy Economy Lesson 1 data conforming to the 9-step pedagogical sequence (`intro` → `experience` → `story-choice` → `notice` → `explanation` → `spot-and-sort` → `transfer` → `reflection` → `recap`).
+- Limited-Coin Shop prototype component in `@gullak/ui` with wallet, till, insufficient funds, and unavailable change checks.
 
 ## [0.2.8] - 2026-10-11
 
