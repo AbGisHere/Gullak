@@ -20,13 +20,12 @@ test("onboarding to passed quiz opens the next topic", async ({ page }, testInfo
   await expect(page.getByRole("button", { name: "Start learning" })).toBeHidden();
   await page.goto("/learn");
 
-  await expect(page.getByRole("heading", { name: "Your learning map" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Recommended next, because…", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Nani’s lane", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Where money comes from and goes" }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Step inside: Needs and wants", exact: true })).toHaveCount(0);
   await auditScreen("learn");
-  await page
-    .getByRole("link", { name: /Continue/ })
-    .first()
-    .click();
+  await page.getByRole("link", { name: "Start lesson", exact: true }).first().click();
   await expect(page.getByRole("heading", { name: "Quick check" })).toBeVisible();
   await auditScreen("lesson-quiz");
 
@@ -35,8 +34,8 @@ test("onboarding to passed quiz opens the next topic", async ({ page }, testInfo
   await page.getByRole("button", { name: "Check answers" }).click();
   await expect(page.getByText("Passed · 100%")).toBeVisible();
   await page.getByRole("link", { name: "See your updated learning map" }).click();
-  await expect(page.getByRole("heading", { name: "Needs and wants" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Open topic Needs and wants" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Needs and wants" }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Step inside: Needs and wants", exact: true })).toBeVisible();
   await page.getByRole("link", { name: "Practice" }).click();
   await expect(page.getByRole("heading", { name: "Practice with a real moment" })).toBeVisible();
   await expect(page.getByText("March 2020: the hospital bill")).toBeVisible();
