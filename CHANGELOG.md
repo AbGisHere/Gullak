@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.26] - 2026-10-11
+
 ### Added
 - Live paper trading on Portfolio. **Buy** opens an Invest page where learners search any stock, ETF, mutual fund or index listed on NSE or BSE and see its live (possibly delayed) Yahoo Finance price. They can trade with play money only after passing the lesson that teaches that kind of instrument; the lesson is read from the topic graph. Otherwise the page says "Not unlocked yet" and links to the lesson. Indices are view-only.
 - A **Sell** button beside every holding, on Portfolio and on the Invest page.
