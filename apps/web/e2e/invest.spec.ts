@@ -11,6 +11,12 @@ const quote = {
   kind: "stock",
   price: 3000.5,
   previousClose: 2990,
+  dayLow: 2980,
+  dayHigh: 3010,
+  week52Low: 2500,
+  week52High: 4000,
+  volume: 1234567,
+  yearAgoPrice: 4000,
   currency: "INR",
   asOf: "2026-10-09T09:45:00.000Z",
   source: "yahoo-finance",
@@ -37,7 +43,13 @@ async function openLearner(page: Page, passedTopics: string[]) {
   }, passedTopics);
   await page.route("**/api/market/search?*", (route) =>
     route.fulfill({
-      json: { data: { results: [{ symbol: quote.symbol, name: quote.name, exchange: "NSE", kind: "stock" }] } },
+      json: {
+        data: {
+          results: new URL(route.request().url()).searchParams.get("category")
+            ? [{ symbol: "0P0000XVLA.BO", name: "Example Liquid Dir Gr", exchange: "BSE", kind: "mutual-fund" }]
+            : [{ symbol: quote.symbol, name: quote.name, exchange: "NSE", kind: "stock" }],
+        },
+      },
     }),
   );
   await page.route("**/api/market/live/*", (route) => route.fulfill({ json: { data: { quote } } }));
@@ -54,6 +66,19 @@ test("a locked stock explains which lesson opens it", async ({ page }) => {
   await expect(page.getByText("₹3,000.50")).toBeVisible();
   await expect(page.getByRole("link", { name: "Go to the lesson" })).toHaveAttribute("href", "/learn/stocks");
   await expect(page.getByRole("button", { name: "Buy with play money" })).toHaveCount(0);
+  // Locked listings still show their numbers, each with a plain-language explanation.
+  await expect(page.getByText("₹2,500.00 – ₹4,000.00")).toBeVisible();
+  await expect(page.getByText("-25%")).toBeVisible();
+  await page.getByRole("button", { name: "What is 52-week range?" }).click();
+  await expect(page.getByText("The lowest and highest prices in the past year.", { exact: false })).toBeVisible();
+});
+
+test("a fund category lists its funds without typing", async ({ page, isMobile }) => {
+  await openLearner(page, []);
+  await page.goto("/portfolio/invest");
+  if (isMobile) await page.getByRole("combobox", { name: "Fund category" }).selectOption("liquid");
+  else await page.getByRole("button", { name: "Liquid fund", exact: true }).click();
+  await expect(page.getByRole("link", { name: /Example Liquid Dir Gr/ })).toBeVisible();
 });
 
 test("after the lesson, buy with play money and sell from the holding", async ({ page }) => {

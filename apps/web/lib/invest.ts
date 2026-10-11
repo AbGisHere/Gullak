@@ -119,9 +119,14 @@ export async function fetchQuote(symbol: string, signal?: AbortSignal): Promise<
   }
 }
 
-export async function searchListings(query: string, signal?: AbortSignal): Promise<InstrumentSearchResult[] | null> {
+export async function searchListings(
+  query: string,
+  signal?: AbortSignal,
+  category?: string,
+): Promise<InstrumentSearchResult[] | null> {
   try {
-    const response = await fetch(`/api/market/search?q=${encodeURIComponent(query)}`, { signal });
+    const params = new URLSearchParams({ q: query, ...(category ? { category } : {}) });
+    const response = await fetch(`/api/market/search?${params}`, { signal });
     if (!response.ok) return null;
     return ApiSearch.parse(await response.json()).data.results;
   } catch (error) {

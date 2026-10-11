@@ -8,6 +8,13 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Fund-category filter on the Invest page. All 61 SEBI categories, grouped, sit in a side list on desktop and a dropdown on phones. Picking one lists its funds and ETFs from Yahoo Finance without typing; typing then narrows the list. Low-duration funds and SIFs currently return no Yahoo listings, and the page says so.
+- Key numbers on every listing page, including locked ones: previous close, day's range, 52-week range, volume and 1-year change. Each has a (?) explanation that opens on hover or tap, and the same terms appear in the help glossary.
+
+### Fixed
+- Hover-then-click on a (?) explanation no longer closes it straight away.
+
 ## [0.2.26] - 2026-10-11
 
 ### Added

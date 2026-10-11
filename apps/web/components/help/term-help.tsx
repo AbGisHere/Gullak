@@ -17,6 +17,8 @@ export function TermHelp({ term, className }: { term: HelpTerm; className?: stri
   const wrapperRef = useRef<HTMLSpanElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
+  // A click right after hover-open should keep the definition open, not toggle it shut.
+  const openedByHover = useRef(false);
   const [alignEnd, setAlignEnd] = useState(false);
   const name = t(`terms.${term}.name`);
 
@@ -39,13 +41,34 @@ export function TermHelp({ term, className }: { term: HelpTerm; className?: stri
   }, [open]);
 
   function toggle() {
+    if (openedByHover.current) {
+      openedByHover.current = false;
+      setOpen(true);
+      return;
+    }
     const rect = buttonRef.current?.getBoundingClientRect();
     if (!open && rect) setAlignEnd(rect.left > window.innerWidth / 2);
     setOpen((value) => !value);
   }
 
   return (
-    <span ref={wrapperRef} className={cn("relative inline-flex align-middle", className)}>
+    <span
+      ref={wrapperRef}
+      className={cn("relative inline-flex align-middle", className)}
+      // Mouse users can hover; touch and keyboard users tap or press the button.
+      onPointerEnter={(event) => {
+        if (event.pointerType !== "mouse" || open) return;
+        const rect = buttonRef.current?.getBoundingClientRect();
+        if (rect) setAlignEnd(rect.left > window.innerWidth / 2);
+        openedByHover.current = true;
+        setOpen(true);
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType !== "mouse") return;
+        openedByHover.current = false;
+        setOpen(false);
+      }}
+    >
       <button
         ref={buttonRef}
         type="button"

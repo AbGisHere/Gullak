@@ -603,6 +603,46 @@
       "daysPractised": {
         "name": "Days practised",
         "definition": "Every distinct day you practise counts. Breaks never reduce this total."
+      },
+      "previousClose": {
+        "name": "Previous close",
+        "definition": "The last price when the market closed on the previous trading day. Today's change is measured from it."
+      },
+      "dayRange": {
+        "name": "Day's range",
+        "definition": "The lowest and highest prices traded today. A wide range means the price moved a lot in one day."
+      },
+      "week52Range": {
+        "name": "52-week range",
+        "definition": "The lowest and highest prices in the past year. It shows how far the price can swing, not where it will go next."
+      },
+      "volume": {
+        "name": "Volume",
+        "definition": "How many shares or units changed hands today. High volume means many people were buying and selling."
+      },
+      "oneYearChange": {
+        "name": "1-year change",
+        "definition": "How much the price moved since about a year ago. Past moves never promise future ones."
+      },
+      "indexPoints": {
+        "name": "Index points",
+        "definition": "An index is measured in points, not rupees. It tracks a group of companies, so it rises when most of them rise."
+      },
+      "stock": {
+        "name": "Stock",
+        "definition": "A tiny slice of one company. Its price moves with how people judge that company's future."
+      },
+      "etf": {
+        "name": "ETF",
+        "definition": "Exchange-traded fund: a basket, often copying an index, that trades on the stock exchange like a share."
+      },
+      "mutualFund": {
+        "name": "Mutual fund",
+        "definition": "A pool of many people's money that a fund manager invests. You own units, priced once a day by NAV."
+      },
+      "fundCategory": {
+        "name": "Fund category",
+        "definition": "SEBI sorts every mutual fund into a category, such as large cap or liquid, so funds of one kind can be compared."
       }
     },
     "hint": {
@@ -754,6 +794,24 @@
     "habit": "Gullak scores habits, never returns: keep an emergency buffer, spread your money and stick to your plan.",
     "guardrail": "Practice only. Gullak never tells you what to buy or sell in real life.",
     "holdingLine": "{units} units · you paid {cost}",
-    "sellHolding": "Sell {name}"
+    "sellHolding": "Sell {name}",
+    "categoryLabel": "Fund category",
+    "allListings": "All listings",
+    "categoryHint": "Pick a category to see its funds, or type to search everything.",
+    "categoryEmpty": "Yahoo Finance has no listings for this category right now.",
+    "filterResults": "Narrow these results",
+    "statsTitle": "Key numbers",
+    "lowHigh": "{low} – {high}",
+    "noStats": "Yahoo Finance doesn't publish more numbers for this listing.",
+    "groups": {
+      "debt": "Debt",
+      "hybrid": "Hybrid",
+      "equity": "Equity",
+      "sector-and-thematic": "Sector and thematic",
+      "index-and-etf": "Index funds and ETFs",
+      "fund-of-funds": "Funds of funds",
+      "solution-oriented": "Solution oriented",
+      "specialised": "Specialised"
+    }
   }
 }

@@ -3,6 +3,7 @@ import { createYahooAdapter, MarketDataError } from "@gullak/market-data";
 import { IndianSymbol, type InstrumentQuote, type InstrumentSearchResult } from "@gullak/types";
 import { unstable_cache } from "next/cache";
 import { z } from "zod";
+import { CATEGORY_IDS, categoryQueries } from "../category-search";
 import { ApiError } from "./errors";
 
 // Live paper trading looks up real Indian listings on Yahoo Finance. Results sit in Next's
@@ -11,7 +12,7 @@ const yahoo = createYahooAdapter({
   fetch: (url, init) => fetch(url, { ...init, signal: AbortSignal.timeout(5000), cache: "no-store" }),
 });
 
-const cachedQuote = unstable_cache((symbol: string) => yahoo.getInstrumentQuote(symbol), ["gullak-live-quote-v1"], {
+const cachedQuote = unstable_cache((symbol: string) => yahoo.getInstrumentQuote(symbol), ["gullak-live-quote-v2"], {
   revalidate: 60,
 });
 const cachedSearch = unstable_cache((query: string) => yahoo.search(query, 12), ["gullak-live-search-v1"], {
@@ -19,6 +20,28 @@ const cachedSearch = unstable_cache((query: string) => yahoo.search(query, 12), 
 });
 
 export const SearchQuery = z.string().trim().min(2).max(60);
+
+// A category runs several fixed searches (see category-search.ts) and keeps funds and ETFs.
+const cachedCategory = unstable_cache(
+  async (categoryId: string) => {
+    const settled = await Promise.allSettled(categoryQueries(categoryId).map((q) => yahoo.search(q, 20)));
+    const seen = new Map<string, InstrumentSearchResult>();
+    for (const outcome of settled)
+      if (outcome.status === "fulfilled")
+        for (const result of outcome.value)
+          if ((result.kind === "mutual-fund" || result.kind === "etf") && !seen.has(result.symbol))
+            seen.set(result.symbol, result);
+    if (seen.size === 0 && settled.every((o) => o.status === "rejected"))
+      throw new MarketDataError("Every category search failed", "yahoo-finance");
+    // Growth plans first; payout (IDCW) variants of the same fund add noise for learners.
+    const ranked = [...seen.values()].sort(
+      (a, b) => Number(/IDCW/i.test(a.name)) - Number(/IDCW/i.test(b.name)) || a.name.localeCompare(b.name),
+    );
+    return ranked.slice(0, 40);
+  },
+  ["gullak-live-category-v1"],
+  { revalidate: 3600 },
+);
 
 function unavailable(error: unknown): never {
   if (error instanceof MarketDataError) throw new ApiError(503, "live_price_unavailable");
@@ -35,12 +58,20 @@ export async function liveQuote(symbol: string): Promise<InstrumentQuote> {
   }
 }
 
-/** Search results; mutual funds come back named by code, so their names are filled from the quote. */
-export async function searchInstruments(query: string): Promise<InstrumentSearchResult[]> {
-  const q = SearchQuery.parse(query).toLowerCase();
+/**
+ * Free-text search, or a fund category's listings optionally narrowed by text.
+ * Mutual funds can come back named by code, so missing names are filled from the quote.
+ */
+export async function searchInstruments(query: string, category?: string | null): Promise<InstrumentSearchResult[]> {
   let results: InstrumentSearchResult[];
   try {
-    results = await cachedSearch(q);
+    if (category) {
+      if (!CATEGORY_IDS.has(category)) throw new ApiError(400, "invalid_category");
+      const text = query.trim().toLowerCase().slice(0, 60);
+      results = (await cachedCategory(category)).filter((r) => !text || r.name.toLowerCase().includes(text));
+    } else {
+      results = await cachedSearch(SearchQuery.parse(query).toLowerCase());
+    }
   } catch (error) {
     unavailable(error);
   }

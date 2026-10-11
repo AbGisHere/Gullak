@@ -56,6 +56,14 @@ export const InstrumentQuote = z.object({
   kind: ListedKind,
   price: z.number().finite().positive(),
   previousClose: z.number().finite().positive().optional(),
+  dayHigh: z.number().finite().positive().optional(),
+  dayLow: z.number().finite().positive().optional(),
+  week52High: z.number().finite().positive().optional(),
+  week52Low: z.number().finite().positive().optional(),
+  /** Units traded today; Yahoo reports 0 for funds and indices, which is left out. */
+  volume: z.number().int().positive().optional(),
+  /** First monthly close in the past year, for a 1-year change. */
+  yearAgoPrice: z.number().finite().positive().optional(),
   currency: z.literal("INR"),
   asOf: IsoDateTime,
   source: z.string().min(1),

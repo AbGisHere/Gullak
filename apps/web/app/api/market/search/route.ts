@@ -4,5 +4,6 @@ import { searchInstruments } from "@/lib/backend/live-market";
 export const runtime = "nodejs";
 // Public and read-only: learners keep progress on their device, so market lookups need no identity.
 export async function GET(request: Request) {
-  return api(async () => ({ results: await searchInstruments(new URL(request.url).searchParams.get("q") ?? "") }));
+  const params = new URL(request.url).searchParams;
+  return api(async () => ({ results: await searchInstruments(params.get("q") ?? "", params.get("category")) }));
 }

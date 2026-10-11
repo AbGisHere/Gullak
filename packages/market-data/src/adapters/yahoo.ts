@@ -40,6 +40,11 @@ const ChartMeta = z.object({
   regularMarketPrice: z.number().finite().positive(),
   chartPreviousClose: z.number().finite().positive().optional(),
   regularMarketTime: z.number().int().positive(),
+  regularMarketDayHigh: z.number().finite().positive().optional(),
+  regularMarketDayLow: z.number().finite().positive().optional(),
+  fiftyTwoWeekHigh: z.number().finite().positive().optional(),
+  fiftyTwoWeekLow: z.number().finite().positive().optional(),
+  regularMarketVolume: z.number().int().nonnegative().optional(),
 });
 const ChartResponse = z.object({
   chart: z.object({
@@ -109,7 +114,22 @@ export function createYahooAdapter(deps: { fetch: typeof fetch }): YahooAdapter 
   }
 
   async function getInstrumentQuote(symbol: string): Promise<InstrumentQuote> {
-    const { meta } = await chart(symbol, "1d", "1d");
+    // Today's figures come from a one-day chart (its previous close is yesterday's); a year of
+    // monthly closes gives the 1-year change and is optional.
+    const [{ meta }, year] = await Promise.all([
+      chart(symbol, "1d", "1d"),
+      chart(symbol, "1y", "1mo").catch(() => undefined),
+    ]);
+    const yearAgoPrice = year?.indicators?.quote[0]?.close?.find((c): c is number => typeof c === "number" && c > 0);
+    const optional = (value: number | undefined) => (value && value > 0 ? value : undefined);
+    const stats = {
+      dayHigh: optional(meta.regularMarketDayHigh),
+      dayLow: optional(meta.regularMarketDayLow),
+      week52High: optional(meta.fiftyTwoWeekHigh),
+      week52Low: optional(meta.fiftyTwoWeekLow),
+      volume: optional(meta.regularMarketVolume),
+      yearAgoPrice,
+    };
     const name = (meta.longName ?? meta.shortName ?? symbol).slice(0, 120);
     return InstrumentQuote.parse({
       symbol,
@@ -118,6 +138,7 @@ export function createYahooAdapter(deps: { fetch: typeof fetch }): YahooAdapter 
       kind: kindOf(symbol, meta.instrumentType, name),
       price: meta.regularMarketPrice,
       ...(meta.chartPreviousClose ? { previousClose: meta.chartPreviousClose } : {}),
+      ...Object.fromEntries(Object.entries(stats).filter(([, v]) => v !== undefined)),
       currency: "INR",
       asOf: isoFromUnix(meta.regularMarketTime),
       source: SOURCE,

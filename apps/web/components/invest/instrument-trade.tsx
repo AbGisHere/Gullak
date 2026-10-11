@@ -8,7 +8,9 @@ import { ArrowLeft, Eye, Lock, Minus, TrendingDown, TrendingUp } from "lucide-re
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { type FormEvent, useEffect, useId, useState } from "react";
+import { TermHelp } from "@/components/help/term-help";
 import { AccessLabel, useLearner } from "@/components/invest/invest-search";
+import type { HelpTerm } from "@/lib/help-terms";
 import { applyTrade, availableCashPaise, fetchQuote, formatUnits, tradeAccess } from "@/lib/invest";
 import { saveLearnerState } from "@/lib/learner-state";
 
@@ -37,6 +39,7 @@ export function InstrumentTrade({
 }) {
   const t = useTranslations("invest");
   const tLearner = useTranslations("learner");
+  const tHelp = useTranslations("help");
   const locale = useLocale();
   const learner = useLearner();
   const inputId = useId();
@@ -99,6 +102,33 @@ export function InstrumentTrade({
     timeZone: "Asia/Kolkata",
   }).format(new Date(quote.asOf));
   const lesson = quote.kind === "index" ? undefined : lessons[quote.kind];
+  const show = (n: number) =>
+    isIndex
+      ? new Intl.NumberFormat(locale, { maximumFractionDigits: 2 }).format(n)
+      : formatInr(pricePaiseFromRupees(n), { decimals: 2 });
+  const range = (low?: number, high?: number) =>
+    low && high ? t("lowHigh", { low: show(low), high: show(high) }) : null;
+  const yearChange = quote.yearAgoPrice ? (quote.price - quote.yearAgoPrice) / quote.yearAgoPrice : null;
+  const rows: { term: HelpTerm; value: string | null }[] = [
+    { term: "previousClose", value: quote.previousClose ? show(quote.previousClose) : null },
+    { term: "dayRange", value: range(quote.dayLow, quote.dayHigh) },
+    { term: "week52Range", value: range(quote.week52Low, quote.week52High) },
+    { term: "volume", value: quote.volume ? new Intl.NumberFormat(locale).format(quote.volume) : null },
+    {
+      term: "oneYearChange",
+      value:
+        yearChange === null
+          ? null
+          : new Intl.NumberFormat(locale, {
+              style: "percent",
+              maximumFractionDigits: 1,
+              signDisplay: "exceptZero",
+            }).format(yearChange),
+    },
+  ];
+  const stats = rows.filter((row): row is { term: HelpTerm; value: string } => row.value !== null);
+  const kindTerm: HelpTerm =
+    quote.kind === "index" ? "indexPoints" : quote.kind === "mutual-fund" ? "mutualFund" : quote.kind;
   const kindPlural = quote.kind === "index" ? "" : t(`kindPlural.${quote.kind}`);
 
   // Buying shares/ETFs takes a whole-unit count; funds take a rupee amount. Selling always takes units.
@@ -143,8 +173,8 @@ export function InstrumentTrade({
           <h1 className="text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">{quote.name}</h1>
           <AccessLabel access={access} />
         </div>
-        <p className="text-sm text-muted-foreground">
-          {quote.symbol} · {quote.exchange} · {t(`kind.${quote.kind}`)}
+        <p className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
+          {quote.symbol} · {quote.exchange} · {t(`kind.${quote.kind}`)} <TermHelp term={kindTerm} />
         </p>
       </header>
 
@@ -157,6 +187,26 @@ export function InstrumentTrade({
         </p>
         <p className="text-sm text-muted-foreground">{t("asOf", { time: asOf })}</p>
       </div>
+
+      <section aria-labelledby="stats-title" className="space-y-3">
+        <h2 id="stats-title" className="text-xl font-bold">
+          {t("statsTitle")}
+        </h2>
+        {stats.length > 0 ? (
+          <dl className="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+            {stats.map(({ term, value }) => (
+              <div key={term} className="flex items-center justify-between gap-3 border-b border-border py-3">
+                <dt className="flex items-center gap-1 text-muted-foreground">
+                  {tHelp(`terms.${term}.name`)} <TermHelp term={term} />
+                </dt>
+                <dd className="font-semibold tabular-nums">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : (
+          <p className="text-muted-foreground">{t("noStats")}</p>
+        )}
+      </section>
 
       {access.status === "view-only" ? (
         <div className="flex gap-3 rounded-2xl bg-muted p-5">

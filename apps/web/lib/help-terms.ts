@@ -10,5 +10,15 @@ export const HELP_TERMS = [
   "inflation",
   "sip",
   "nav",
+  "previousClose",
+  "dayRange",
+  "week52Range",
+  "volume",
+  "oneYearChange",
+  "indexPoints",
+  "stock",
+  "etf",
+  "mutualFund",
+  "fundCategory",
 ] as const;
 export type HelpTerm = (typeof HELP_TERMS)[number];
