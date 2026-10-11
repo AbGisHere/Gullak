@@ -4,7 +4,6 @@ import { locales, startingCapital } from "@gullak/content";
 import { inrToPaise, startingCash } from "@gullak/engine";
 import { Experience, GradeGroup, LearnerProfile, LearningFormat } from "@gullak/types";
 import { Button } from "@gullak/ui/components/button";
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -199,7 +198,6 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
               </option>
             ))}
           </select>
-          <PlayMoneyBadge label={t("playMoney")} />
         </div>
       </header>
 

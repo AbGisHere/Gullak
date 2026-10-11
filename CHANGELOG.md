@@ -8,6 +8,12 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-11
+
+### Fixed
+
+- Remove the Play money badge from the onboarding/account-setup header.
+
 ## [0.3.0] - 2026-10-11
 
 ### Added
