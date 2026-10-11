@@ -335,5 +335,25 @@
     "householdsTitle": "सुरक्षित परिवार",
     "missionsTitle": "पारिवारिक टेक-होम मिशन",
     "badgesTitle": "स्कैम हंटर बैज"
+  },
+  "progressData": {
+    "xpShort": "{xp} XP",
+    "streakShort": "{days} दिन",
+    "streakAria": "{days, plural, one {# दिन} other {# दिन}} लगातार सीखना",
+    "levelSummary": "लेवल {level} · {xp} XP",
+    "livingGullak": "जीवित गुल्लक · लेवल {level}",
+    "streakChip": "{days, plural, one {# दिन} other {# दिन}} लगातार",
+    "xpLabel": "सीखने के XP",
+    "streakLabel": "सीखने का सिलसिला",
+    "topicsPassedLabel": "पास किए गए विषय",
+    "streakValue": "{days, plural, =0 {अभी शुरू नहीं} one {# दिन} other {# दिन}}",
+    "xpToNext": "लेवल {next} तक {remaining} XP",
+    "emptyTitle": "आपकी गुल्लक भरने के लिए तैयार है",
+    "emptyBody": "XP पाने के लिए पहला क्विज़ पास करें या कोई गतिविधि पूरी करें। यहाँ हर संख्या आपके असली काम से आती है।",
+    "activityDoneBadge": "गतिविधि पूरी हुई",
+    "activityDoneTitle": "आपकी प्रगति में सहेजा गया",
+    "activityDoneBody": "यह गतिविधि इस डिवाइस पर दर्ज है। हर गतिविधि पर XP एक ही बार मिलता है, दोबारा खेलना सिर्फ़ अभ्यास है।",
+    "activityXp": "पहली बार पूरा करने पर +{xp} XP",
+    "activityUnlockNote": "आगे का हिस्सा खोलने के लिए विषय का क्विज़ पास करें।"
   }
 }

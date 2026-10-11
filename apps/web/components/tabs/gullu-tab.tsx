@@ -1,7 +1,9 @@
 "use client";
 
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
+import type { LearnerProgress } from "@/lib/use-progress-summary";
 import { Gullu } from "../game/gullu";
 import { SpeechBubble } from "../game/speech-bubble";
 import { PortfolioTab } from "./portfolio-tab";
@@ -9,11 +11,11 @@ import { PortfolioTab } from "./portfolio-tab";
 interface GulluTabProps {
   gradeGroup: string;
   virtualCashPaise: number;
-  habitScore: number;
-  streakDays: number;
+  progress: LearnerProgress;
 }
 
-export function GulluTab({ gradeGroup, virtualCashPaise: _virtualCashPaise, habitScore, streakDays }: GulluTabProps) {
+export function GulluTab({ gradeGroup, virtualCashPaise, progress }: GulluTabProps) {
+  const t = useTranslations("progressData");
   const [tapCount, setTapCount] = useState(0);
   const [gulluSpeech, setGulluSpeech] = useState(
     "Namaste! I am your living Gullak. When you save consistently and protect against scams, I grow stronger!",
@@ -50,15 +52,21 @@ export function GulluTab({ gradeGroup, virtualCashPaise: _virtualCashPaise, habi
         <div className="flex-1 text-center sm:text-left space-y-3">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
             <span className="rounded-full bg-[#171717] dark:bg-[#0B1120] text-[#DFFF3F] px-3 py-1 font-display text-xs font-black uppercase">
-              Living Gullak · Level 2
+              {t("livingGullak", { level: progress.level })}
             </span>
-            <span className="rounded-full border border-[#171717] dark:border-[#334155] bg-[#DFFF3F] px-2.5 py-0.5 text-xs font-bold text-[#171717]">
-              🔥 {streakDays} Day Streak
-            </span>
-            <span className="rounded-full border border-[#171717] dark:border-[#334155] bg-[#FFD84D] px-2.5 py-0.5 text-xs font-bold text-[#171717]">
-              Score {habitScore}/100
+            {progress.streakDays > 0 ? (
+              <span className="rounded-full border border-[#171717] dark:border-[#334155] bg-[#DFFF3F] px-2.5 py-0.5 text-xs font-bold text-[#171717]">
+                {t("streakChip", { days: progress.streakDays })}
+              </span>
+            ) : null}
+            <span className="rounded-full border border-[#171717] dark:border-[#334155] bg-[#FFD84D] px-2.5 py-0.5 text-xs font-bold tabular-nums text-[#171717]">
+              {t("xpShort", { xp: progress.xp })}
             </span>
           </div>
+
+          {progress.hasProgress ? null : (
+            <p className="text-xs font-semibold text-[#171717]/80 dark:text-[#94A3B8]">{t("emptyBody")}</p>
+          )}
 
           <SpeechBubble speakerName="Gullu" variant="paper" tailPosition="left" className="text-left">
             {gulluSpeech}
@@ -86,7 +94,7 @@ export function GulluTab({ gradeGroup, virtualCashPaise: _virtualCashPaise, habi
         </div>
 
         {/* Mount existing PortfolioTab */}
-        <PortfolioTab gradeGroup={gradeGroup} />
+        <PortfolioTab gradeGroup={gradeGroup} startingPaise={virtualCashPaise} />
       </section>
     </div>
   );

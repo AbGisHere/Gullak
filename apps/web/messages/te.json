@@ -335,5 +335,25 @@
     "householdsTitle": "రక్షించబడిన కుటుంబాలు",
     "missionsTitle": "కుటుంబ టేక్-హోమ్ మిషన్లు",
     "badgesTitle": "స్కామ్ హంటర్ బ్యాడ్జ్‌లు"
+  },
+  "progressData": {
+    "xpShort": "{xp} XP",
+    "streakShort": "{days} రోజులు",
+    "streakAria": "{days, plural, one {# రోజు} other {# రోజులు}} వరుసగా నేర్చుకోవడం",
+    "levelSummary": "లెవల్ {level} · {xp} XP",
+    "livingGullak": "జీవించే గుల్లక్ · లెవల్ {level}",
+    "streakChip": "{days, plural, one {# రోజు} other {# రోజులు}} వరుసగా",
+    "xpLabel": "నేర్చుకున్న XP",
+    "streakLabel": "నేర్చుకునే వరుస",
+    "topicsPassedLabel": "పాసైన అంశాలు",
+    "streakValue": "{days, plural, =0 {ఇంకా మొదలవలేదు} one {# రోజు} other {# రోజులు}}",
+    "xpToNext": "లెవల్ {next} కి {remaining} XP",
+    "emptyTitle": "మీ గుల్లక్ నింపడానికి సిద్ధంగా ఉంది",
+    "emptyBody": "XP పొందడానికి మొదటి క్విజ్ పాస్ అవ్వండి లేదా ఒక కార్యకలాపం పూర్తి చేయండి. ఇక్కడ ప్రతి సంఖ్య మీరు నిజంగా చేసిన దాని నుంచే వస్తుంది.",
+    "activityDoneBadge": "కార్యకలాపం పూర్తయింది",
+    "activityDoneTitle": "మీ ప్రగతిలో సేవ్ అయింది",
+    "activityDoneBody": "ఈ కార్యకలాపం ఈ పరికరంలో నమోదైంది. ప్రతి కార్యకలాపానికి XP ఒక్కసారే వస్తుంది, మళ్లీ ఆడటం కేవలం సాధన కోసం.",
+    "activityXp": "మొదటిసారి పూర్తి చేస్తే +{xp} XP",
+    "activityUnlockNote": "తర్వాతి భాగాన్ని తెరవడానికి అంశం క్విజ్ పాస్ అవ్వండి."
   }
 }

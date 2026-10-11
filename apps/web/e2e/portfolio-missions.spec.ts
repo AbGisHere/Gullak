@@ -18,7 +18,8 @@ async function openLearner(page: import("@playwright/test").Page, gradeGroup = "
 }
 
 test("savings respond to keyboard, repeated deposits, goals, undo and reset", async ({ page }) => {
-  await openLearner(page);
+  // Class 6–7 with some experience starts with ₹3,000 (starting-capital.json), the amount onboarding shows.
+  await openLearner(page, "grade-6-7");
   await page.getByRole("button", { name: "Gullu", exact: true }).click();
   const save = page.getByRole("button", { name: "Save ₹100", exact: true });
   await save.focus();
@@ -30,10 +31,10 @@ test("savings respond to keyboard, repeated deposits, goals, undo and reset", as
   await page.getByRole("button", { name: "Bicycle · ₹1,000" }).click();
   await expect(page.getByTestId("goal-progress")).toContainText("20% saved");
   await page.getByRole("button", { name: "Spend ₹50 on a treat" }).click();
-  await expect(page.getByTestId("wallet-balance")).toHaveText("Wallet: ₹750");
+  await expect(page.getByTestId("wallet-balance")).toHaveText("Wallet: ₹2,750");
   await page.getByRole("button", { name: "Undo last choice" }).click();
-  await expect(page.getByTestId("wallet-balance")).toHaveText("Wallet: ₹800");
-  for (let index = 0; index < 9; index++) await save.click();
+  await expect(page.getByTestId("wallet-balance")).toHaveText("Wallet: ₹2,800");
+  for (let index = 0; index < 28; index++) await save.click();
   await expect(page.getByTestId("wallet-balance")).toHaveText("Wallet: ₹0");
   await expect(page.getByRole("status").filter({ hasText: "Your wallet cannot cover" })).toBeVisible();
   await page.getByRole("button", { name: "Reset playground" }).click();

@@ -3,7 +3,7 @@
 import { locales } from "@gullak/content";
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { cn } from "@gullak/ui/lib/utils";
-import { Award, BookOpen, Compass, RotateCcw, Settings, Sparkles, User } from "lucide-react";
+import { Award, BookOpen, Compass, Flame, RotateCcw, Settings, Sparkles, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { type ReactNode, useState } from "react";
@@ -16,8 +16,11 @@ interface AppShellProps {
   currentTab: NavTab;
   onSelectTab: (tab: NavTab) => void;
   gradeGroup: string;
-  streakDays?: number;
-  habitScore?: number;
+  /** Real consecutive learning days (0 for a new learner). */
+  streakDays: number;
+  /** XP derived from passed quizzes and completed activities. */
+  xp: number;
+  level: number;
   onOpenSettings: () => void;
   onResetOnboarding: () => void;
   children: ReactNode;
@@ -27,13 +30,15 @@ export function AppShell({
   currentTab,
   onSelectTab,
   gradeGroup,
-  streakDays = 3,
-  habitScore = 88,
+  streakDays,
+  xp,
+  level,
   onOpenSettings,
   onResetOnboarding,
   children,
 }: AppShellProps) {
   const tNav = useTranslations("nav");
+  const tProgress = useTranslations("progressData");
   const locale = useLocale();
   const router = useRouter();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -121,11 +126,19 @@ export function AppShell({
               aria-expanded={showProfileMenu}
               className="flex h-8 sm:h-9 items-center gap-1 sm:gap-2 rounded-xl border border-border bg-card px-2 sm:px-3 text-xs sm:text-sm font-semibold hover:border-brand-ink/40 transition-colors"
             >
-              <span className="flex items-center gap-1 text-brand-coral">
-                🔥 <span className="font-bold">{streakDays}d</span>
-              </span>
-              <span className="hidden md:inline-block text-muted-foreground font-normal">|</span>
-              <span className="hidden md:inline-block text-xs text-muted-foreground">Score {habitScore}</span>
+              {streakDays > 0 ? (
+                <>
+                  <span className="flex items-center gap-1 text-brand-coral">
+                    <Flame className="size-3.5" aria-hidden="true" />
+                    <span className="font-bold" aria-hidden="true">
+                      {tProgress("streakShort", { days: streakDays })}
+                    </span>
+                    <span className="sr-only">{tProgress("streakAria", { days: streakDays })}</span>
+                  </span>
+                  <span className="hidden md:inline-block text-muted-foreground font-normal">|</span>
+                </>
+              ) : null}
+              <span className="tabular-nums">{tProgress("xpShort", { xp })}</span>
             </button>
 
             {showProfileMenu && (
@@ -140,7 +153,9 @@ export function AppShell({
                   <div className="px-3 py-2 border-b border-border/60">
                     <p className="text-xs text-muted-foreground">Current Profile</p>
                     <p className="text-sm font-bold text-brand-ink">{gradeDisplay}</p>
-                    <p className="text-[11px] text-brand-coral font-medium">Habit score: {habitScore}/100</p>
+                    <p className="text-[11px] text-muted-foreground font-medium tabular-nums">
+                      {tProgress("levelSummary", { level, xp })}
+                    </p>
                   </div>
                   <button
                     type="button"

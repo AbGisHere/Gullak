@@ -335,5 +335,25 @@
     "householdsTitle": "Households Protected",
     "missionsTitle": "Family Take-Home Missions",
     "badgesTitle": "Scam Hunter Badges"
+  },
+  "progressData": {
+    "xpShort": "{xp} XP",
+    "streakShort": "{days}d",
+    "streakAria": "{days, plural, one {# day} other {# days}} of learning in a row",
+    "levelSummary": "Level {level} · {xp} XP",
+    "livingGullak": "Living Gullak · Level {level}",
+    "streakChip": "{days, plural, one {# day} other {# days}} in a row",
+    "xpLabel": "Learning XP",
+    "streakLabel": "Learning streak",
+    "topicsPassedLabel": "Topics passed",
+    "streakValue": "{days, plural, =0 {Not started} one {# day} other {# days}}",
+    "xpToNext": "{remaining} XP to level {next}",
+    "emptyTitle": "Your Gullak is ready to fill",
+    "emptyBody": "Pass your first quiz or finish an activity to earn XP. Every number here comes from what you actually do.",
+    "activityDoneBadge": "Activity complete",
+    "activityDoneTitle": "Saved to your progress",
+    "activityDoneBody": "This activity is recorded on this device. Each activity earns XP once, so replaying it is just for practice.",
+    "activityXp": "+{xp} XP the first time you finish it",
+    "activityUnlockNote": "Pass a topic's quiz to unlock what comes next."
   }
 }

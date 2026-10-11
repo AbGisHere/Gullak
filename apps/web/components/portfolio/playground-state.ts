@@ -1,5 +1,12 @@
-/** Local practice ledger, in integer paise; never the learner's paper portfolio. */
-export const STARTING_WALLET = 100_000;
+import { startingCapital } from "@gullak/content";
+import { inrToPaise } from "@gullak/engine";
+
+/**
+ * Local practice ledger, in integer paise; never the learner's paper portfolio.
+ * The wallet starts with the learner's configured starting cash (`starting-capital.json`, the same
+ * value onboarding shows); this default is only used when no profile is available.
+ */
+export const STARTING_WALLET = inrToPaise(startingCapital.defaultInr);
 export const GOALS = [
   { id: "supplies", targetPaise: 20_000 },
   { id: "football", targetPaise: 50_000 },
@@ -8,6 +15,7 @@ export const GOALS = [
 export type GoalId = (typeof GOALS)[number]["id"];
 export type LedgerMove = { kind: "save" | "spend"; amountPaise: number };
 export interface PlaygroundState {
+  startingPaise: number;
   walletPaise: number;
   savedPaise: number;
   spentPaise: number;
@@ -18,9 +26,11 @@ export interface PlaygroundState {
   lastDepositPaise: number;
 }
 export type PlaygroundAction = LedgerMove | { kind: "goal"; goalId: GoalId } | { kind: "undo" } | { kind: "reset" };
-export function initialPlayground(): PlaygroundState {
+export function initialPlayground(startingPaise: number = STARTING_WALLET): PlaygroundState {
+  const start = Number.isSafeInteger(startingPaise) && startingPaise >= 0 ? startingPaise : STARTING_WALLET;
   return {
-    walletPaise: STARTING_WALLET,
+    startingPaise: start,
+    walletPaise: start,
     savedPaise: 0,
     spentPaise: 0,
     goalId: "supplies",
@@ -31,7 +41,7 @@ export function initialPlayground(): PlaygroundState {
   };
 }
 export function playgroundReducer(state: PlaygroundState, action: PlaygroundAction): PlaygroundState {
-  if (action.kind === "reset") return { ...initialPlayground(), feedback: "reset" };
+  if (action.kind === "reset") return { ...initialPlayground(state.startingPaise), feedback: "reset" };
   if (action.kind === "goal") return { ...state, goalId: action.goalId };
   if (action.kind === "undo") {
     const last = state.history.at(-1);

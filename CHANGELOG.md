@@ -8,6 +8,12 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Fixed
+- The home app shows real learner progress instead of invented numbers: XP, level, a day-based streak,
+  passed topics and completed worlds come from quiz passes and completed activities (with an optional
+  `/api/progress` merge), a new learner starts at zero, and the savings wallet starts with the same
+  starting cash onboarding shows.
+
 ## [0.2.17] - 2026-10-11
 
 ### Added

@@ -21,22 +21,22 @@ const outcomes = {
   spread: { oneDown: 90, bothDown: 80, oneUp: 110 },
 };
 
-export function PortfolioPlayground({ gradeGroup }: { gradeGroup?: string }) {
+export function PortfolioPlayground({ gradeGroup, startingPaise }: { gradeGroup?: string; startingPaise?: number }) {
   const locale = useLocale();
   return (
     <NextIntlClientProvider
       locale={locale}
       messages={{ portfolioGame: messages[locale as keyof typeof messages] ?? en }}
     >
-      <Playground gradeGroup={gradeGroup} />
+      <Playground gradeGroup={gradeGroup} startingPaise={startingPaise} />
     </NextIntlClientProvider>
   );
 }
 
-function Playground({ gradeGroup }: { gradeGroup?: string }) {
+function Playground({ gradeGroup, startingPaise }: { gradeGroup?: string; startingPaise?: number }) {
   const t = useTranslations("portfolioGame");
   const locale = useLocale();
-  const [state, dispatch] = useReducer(playgroundReducer, undefined, initialPlayground);
+  const [state, dispatch] = useReducer(playgroundReducer, startingPaise, initialPlayground);
   const [allocation, setAllocation] = useState<"concentrated" | "spread">("concentrated");
   const [event, setEvent] = useState<(typeof events)[number]>("oneDown");
   const reducedMotion = useReducedMotion();

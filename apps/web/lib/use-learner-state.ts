@@ -1,15 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { type LearnerState, readLearnerState } from "./learner-state";
+import { emptyState, type LearnerState, readLearnerState } from "./learner-state";
 
 export function useLearnerState(): LearnerState {
-  const [state, setState] = useState<LearnerState>({
-    passedTopics: [],
-    quizAttempts: [],
-    mastery: {},
-    practiceCashPaise: 0,
-  });
+  const [state, setState] = useState<LearnerState>(emptyState);
   useEffect(() => {
     const sync = () => setState(readLearnerState());
     sync();

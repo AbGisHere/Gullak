@@ -4,10 +4,13 @@ import { startingCapital } from "@gullak/content";
 import { startingCash } from "@gullak/engine";
 import { type GradeGroup, LearnerProfile } from "@gullak/types";
 import { useEffect, useState } from "react";
+import { clearLearnerState, recordActivity } from "@/lib/learner-state";
+import { useLearnerProgress } from "@/lib/use-progress-summary";
 import { ActivityModal, type ActivityType } from "./activity-modal";
 import { AppShell, type NavTab } from "./app-shell";
 import { ShoppingMission } from "./game/shopping/shopping-mission";
 import { WorldMap } from "./game/world-map";
+import { CURRICULUM_WORLDS } from "./game/worlds";
 import { Onboarding } from "./onboarding";
 import { SettingsDialog } from "./settings-dialog";
 import { FinancialTwinTab } from "./tabs/financial-twin-tab";
@@ -25,11 +28,9 @@ export function LearnerApp() {
   const [activeActivity, setActiveActivity] = useState<ActivityType | null>(null);
   const [activeTopicId, setActiveTopicId] = useState<string | null>(null);
   const [isShoppingMissionOpen, setIsShoppingMissionOpen] = useState(false);
-  const [completedWorlds, setCompletedWorlds] = useState<number[]>([]);
-  const [learnerXp, setLearnerXp] = useState(120);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [streakDays, setStreakDays] = useState(3);
-  const [habitScore, setHabitScore] = useState(88);
+  // Every tab reads this one derived summary; until onboarding finishes it describes no evidence.
+  const progress = useLearnerProgress(profile?.gradeGroup ?? "grade-6-7");
 
   useEffect(() => {
     try {
@@ -62,6 +63,8 @@ export function LearnerApp() {
     } catch {
       // Ignore
     }
+    // A shared phone's next learner must not inherit this learner's progress.
+    clearLearnerState();
     setProfile(null);
     setCurrentTab("home");
   }
@@ -93,8 +96,7 @@ export function LearnerApp() {
   }
 
   function handleActivitySuccess() {
-    setHabitScore((prev) => Math.min(100, prev + 5));
-    setStreakDays((prev) => prev + 1);
+    if (activeActivity) recordActivity(`${activeActivity}:${activeTopicId ?? "default"}`);
   }
 
   if (isLoading) {
@@ -114,10 +116,12 @@ export function LearnerApp() {
   }
 
   function handleMissionComplete(xpEarned: number) {
-    setLearnerXp((prev) => prev + xpEarned);
-    setHabitScore((prev) => Math.min(100, prev + 5));
-    setCompletedWorlds((prev) => Array.from(new Set([...prev, 1])));
+    recordActivity("mission:candy-economy-shopping", xpEarned);
   }
+
+  const completedWorlds = CURRICULUM_WORLDS.filter((world) => progress.completedWorlds.includes(world.slug)).map(
+    (world) => world.id,
+  );
 
   const virtualCash = startingCash(startingCapital, profile.gradeGroup, profile.experience);
 
@@ -127,8 +131,9 @@ export function LearnerApp() {
         currentTab={currentTab}
         onSelectTab={setCurrentTab}
         gradeGroup={profile.gradeGroup}
-        streakDays={streakDays}
-        habitScore={habitScore}
+        streakDays={progress.streakDays}
+        xp={progress.xp}
+        level={progress.level}
         onOpenSettings={() => setCurrentTab("profile")}
         onResetOnboarding={handleResetOnboarding}
       >
@@ -142,7 +147,7 @@ export function LearnerApp() {
             onLaunchTwin={() => setCurrentTab("twin")}
             learnerGradeGroup={profile.gradeGroup}
             completedWorlds={completedWorlds}
-            learnerXp={learnerXp}
+            learnerXp={progress.xp}
           />
         )}
 
@@ -163,16 +168,11 @@ export function LearnerApp() {
         )}
 
         {(currentTab === "gullu" || currentTab === "portfolio") && (
-          <GulluTab
-            gradeGroup={profile.gradeGroup}
-            virtualCashPaise={virtualCash}
-            habitScore={habitScore}
-            streakDays={streakDays}
-          />
+          <GulluTab gradeGroup={profile.gradeGroup} virtualCashPaise={virtualCash} progress={progress} />
         )}
 
         {(currentTab === "rewards" || currentTab === "missions") && (
-          <RewardsTab gradeGroup={profile.gradeGroup} habitScore={habitScore} streakDays={streakDays} />
+          <RewardsTab gradeGroup={profile.gradeGroup} progress={progress} />
         )}
 
         {currentTab === "profile" && (
@@ -182,8 +182,6 @@ export function LearnerApp() {
             onUpdateGrade={handleUpdateGrade}
             onUpdateDisplayName={handleUpdateDisplayName}
             onResetOnboarding={handleResetOnboarding}
-            habitScore={habitScore}
-            streakDays={streakDays}
           />
         )}
       </AppShell>

@@ -20,7 +20,7 @@ export function WorldMap({
   onLaunchTwin,
   learnerGradeGroup: _learnerGradeGroup = "grade-6-7",
   completedWorlds = [],
-  learnerXp: _learnerXp = 120,
+  learnerXp: _learnerXp = 0,
 }: WorldMapProps) {
   const [selectedWorld, setSelectedWorld] = useState<WorldDef | null>(null);
   const [gulluReaction, setGulluReaction] = useState(0);

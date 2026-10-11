@@ -15,8 +15,6 @@ interface ProfileTabProps {
   gradeGroup: string;
   onUpdateGrade: (grade: GradeGroup) => void;
   onResetOnboarding: () => void;
-  habitScore?: number;
-  streakDays?: number;
   displayName?: string;
   onUpdateDisplayName?: (name: string) => void;
 }
@@ -25,8 +23,6 @@ export function ProfileTab({
   gradeGroup,
   onUpdateGrade,
   onResetOnboarding,
-  habitScore: _habitScore = 88,
-  streakDays: _streakDays = 3,
   displayName = "",
   onUpdateDisplayName,
 }: ProfileTabProps) {

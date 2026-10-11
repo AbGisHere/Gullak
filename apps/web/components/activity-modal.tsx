@@ -15,8 +15,10 @@ import {
 } from "@gullak/ui/fixtures/simulation-fixtures";
 import { exampleNeedVsWantActivity } from "@gullak/ui/fixtures/spot-and-sort-fixtures";
 import { ArrowLeft, CheckCircle2, Sparkles, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { getCandyEconomyLesson1 } from "@/lib/candy-economy-lesson";
+import { XP_PER_ACTIVITY } from "@/lib/progress-summary";
 
 export type ActivityType = "lesson" | "spot-and-sort" | "simulation" | "rewind" | "coin-shop";
 
@@ -29,6 +31,7 @@ interface ActivityModalProps {
 }
 
 export function ActivityModal({ activityType, topicId, gradeGroup, onClose, onActivitySuccess }: ActivityModalProps) {
+  const tProgress = useTranslations("progressData");
   const [completed, setCompleted] = useState(false);
   const [simState, setSimState] = useState<SimulationState>(initialPracticeSimulationState);
 
@@ -148,22 +151,22 @@ export function ActivityModal({ activityType, topicId, gradeGroup, onClose, onAc
 
             <div className="space-y-2">
               <span className="rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 px-3 py-1 text-xs font-black uppercase">
-                Activity Completed!
+                {tProgress("activityDoneBadge")}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-brand-ink">Great Job! Mastery Score Updated</h2>
+              <h2 className="text-2xl sm:text-3xl font-black text-brand-ink">{tProgress("activityDoneTitle")}</h2>
               <p className="text-xs sm:text-sm text-muted-foreground max-w-md mx-auto">
-                Your decision has been recorded into the knowledge profile. Gullu is proud of your financial discipline!
+                {tProgress("activityDoneBody")}
               </p>
             </div>
 
             <div className="rounded-2xl border border-border bg-brand-paper p-4 text-left max-w-md mx-auto space-y-2 text-xs font-semibold">
               <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300">
                 <CheckCircle2 className="size-4 shrink-0" />
-                <span>+10 Habit Points added to Living Gullak</span>
+                <span>{tProgress("activityXp", { xp: XP_PER_ACTIVITY })}</span>
               </div>
               <div className="flex items-center gap-2 text-brand-ink">
                 <Sparkles className="size-4 text-brand-coral shrink-0" />
-                <span>Prerequisite unlocked for next topic in graph</span>
+                <span>{tProgress("activityUnlockNote")}</span>
               </div>
             </div>
 

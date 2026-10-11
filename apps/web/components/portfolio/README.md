@@ -4,7 +4,7 @@
 They use the shell's next-intl locale and the shared UI tokens. Neither module
 calls a backend, changes curriculum mastery/unlocks, nor modifies profile XP.
 
-Portfolio has a separate ₹1,000 fictional wallet, integer-paise transfers,
+Portfolio has a fictional wallet that starts with the learner's configured starting cash (`starting-capital.json`, the amount onboarding shows), integer-paise transfers,
 three shared-jar goals, spending trade-offs, undo/reset and deposit animation.
 Grades `grade-8-10` and `grade-11-12` (and legacy unprefixed variants) also see
 a two-business risk comparison using explicitly authored hypothetical outcomes.
