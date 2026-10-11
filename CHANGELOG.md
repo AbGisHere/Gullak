@@ -9,6 +9,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Added
+- Centralized onboarding mastery initialization in `@gullak/engine` with the approved exact priors (none 0.1, some 0.3, regular 0.5); the web helper reuses it without resetting saved evidence or changing unlocks.
 - Injectable draft-generation runner for the current topic schemas: validate inputs before generation, pin validation context across async calls, reject mismatched identity/format and validate returned teaching drafts without retries, caching or publication.
 
 ## [0.2.4] - 2026-10-11
