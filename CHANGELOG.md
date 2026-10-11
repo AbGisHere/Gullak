@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Changed
+- Docs now match the code's unlock policy: passing a lesson's check (today: quiz pass marks) is the only unlock rule; mastery ranks recommendations and reviews but never gates progress.
+
 ## [0.2.3] - 2026-10-11
 
 ### Added

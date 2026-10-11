@@ -284,7 +284,7 @@ Lead with **Nani's Gullak**: the opening scene (the OTP scam) and a Candy Econom
 The demo story is the adaptive loop: **evidence → recommendation → activity → simulation → mastery update → changed recommendation.**
 
 - **Current experience** (onboarding) only sets the starting prior. Skill level comes from evidence: quizzes, activities and simulation decisions (did they keep an emergency fund, did they panic sell) all report to knowledge tracing.
-- Mastery, not quiz score alone, drives unlocks and recommendations.
+- Mastery drives recommendations and reviews; it never gates progress. Passing a lesson's check unlocks the next lesson (today: quiz pass marks). Mastery-based unlocks wait for parameters fitted on real Gullak answers.
 - The format bandit learns which formats work for each learner from what they finish and how they do. Facilitators can assign any activity to a class.
 
 ## Real data behind every topic
