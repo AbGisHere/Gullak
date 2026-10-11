@@ -36,7 +36,10 @@ test("savings respond to keyboard, repeated deposits, goals, undo and reset", as
   await expect(page.getByTestId("wallet-balance")).toHaveText("Wallet: ₹2,800");
   for (let index = 0; index < 28; index++) await save.click();
   await expect(page.getByTestId("wallet-balance")).toHaveText("Wallet: ₹0");
+  // A fully spent wallet is valid; attempt one more deposit to exercise rejection.
+  await save.click();
   await expect(page.getByRole("status").filter({ hasText: "Your wallet cannot cover" })).toBeVisible();
+  await expect(page.getByTestId("wallet-balance")).toHaveText("Wallet: ₹0");
   await page.getByRole("button", { name: "Reset playground" }).click();
   await expect(page.getByTestId("jar-balance")).toHaveText("In the jar: ₹0");
   await expect(page.getByRole("button", { name: "Undo last choice" })).toBeDisabled();
@@ -89,23 +92,32 @@ test("quest retries, locks, one-time rewards, focus recovery and reset", async (
   await expect(page.getByTestId("practice-xp")).toHaveText("30 practice XP");
   await expect(page.getByRole("button", { name: "Conversation checked in" })).toBeDisabled();
   await page.getByRole("button", { name: "Reset all practice" }).click();
+  const resetDialog = page.getByRole("dialog", { name: "Start every mission again?" });
+  await expect(resetDialog).toBeVisible();
+  await expect(page.getByTestId("practice-xp")).toHaveText("30 practice XP");
+  await resetDialog.getByRole("button", { name: "Keep my progress", exact: true }).click();
+  await expect(resetDialog).toHaveCount(0);
+  await expect(page.getByTestId("practice-xp")).toHaveText("30 practice XP");
+  await page.getByRole("button", { name: "Reset all practice" }).click();
+  await resetDialog.getByRole("button", { name: "Clear missions", exact: true }).click();
+  await expect(resetDialog).toHaveCount(0);
   await expect(page.getByTestId("practice-xp")).toHaveText("0 practice XP");
   await expect(sort.getByRole("button")).toBeEnabled();
   await expect(budget.getByRole("button")).toBeDisabled();
 });
 
-for (const [locale, portfolioTitle, missionsTitle] of [
-  ["hi", "गुल्लू का बचत खेल", "गुल्लू का खोज बोर्ड"],
-  ["te", "గుల్లు పొదుపు ఆట", "గుల్లు అన్వేషణ బోర్డు"],
+for (const [locale, portfolioTitle, missionsTitle, portfolioNav, rewardsNav] of [
+  ["hi", "गुल्लू का बचत खेल", "गुल्लू का खोज बोर्ड", "पोर्टफोलियो", "पुरस्कार"],
+  ["te", "గుల్లు పొదుపు ఆట", "గుల్లు అన్వేషణ బోర్డు", "పోర్ట్‌ఫోలియో", "రివార్డులు"],
 ]) {
   test(`module translations render in ${locale}`, async ({ page }) => {
     await page.context().addCookies([{ name: "GULLAK_LOCALE", value: locale ?? "en", url: "http://localhost:3000" }]);
     await openLearner(page);
-    // Shared navigation belongs to the shell agent; select stable button positions by title translations.
+    // Learn is now a link; select translated destinations rather than button positions.
     const nav = page.locator("nav:visible");
-    await nav.getByRole("button").nth(2).click();
+    await nav.getByRole("button", { name: portfolioNav, exact: true }).click();
     await expect(page.getByRole("heading", { name: portfolioTitle })).toBeVisible();
-    await nav.getByRole("button").nth(3).click();
+    await nav.getByRole("button", { name: rewardsNav, exact: true }).click();
     await expect(page.getByRole("heading", { name: missionsTitle })).toBeVisible();
   });
 }

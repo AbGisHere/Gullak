@@ -12,6 +12,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - Strict synthetic-only ML fixture input/output boundaries with explicit transition parameters and graph fields, disabled status and identity-free frontend results.
 - Deterministic version-pinned synthetic quiz replay through BKT and educational recommendations, retaining onboarding priors and quiz-only unlocks without production model activation.
 - Inactive backend/frontend ML fixture adapters with learner-scope and context checks, end-to-end adaptive recommendation tests and no database, route, component or storage wiring.
+- Browser regression checks follow the current learning lane and translated navigation, exercise rejected deposits on an empty wallet, and verify mission-reset cancellation and confirmation without changing production UI.
 
 ## [0.2.22] - 2026-10-11
 
