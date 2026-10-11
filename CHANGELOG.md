@@ -11,6 +11,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ### Added
 - Strict nine-field `QuizAnswerEvent` contract for version-pinned quiz evidence, preserving false answers and explicit timestamp offsets while rejecting missing/extra fields and malformed IDs, attempts or hashes; no persistence or mastery changes.
 
+### Fixed
+- Provider eligibility ignores whitespace-only API keys and duplicate provider IDs while preserving first-occurrence order and the default Gemini → Groq selection; no calls, credential rewrites, retry policy or model-default changes.
+
 ## [0.2.11] - 2026-10-11
 
 ### Changed
