@@ -1,7 +1,7 @@
 # Gullak
 
 [![Live demo](https://img.shields.io/badge/demo-gullak.abgupta.me-ea580c?logo=vercel&logoColor=white)](https://gullak.abgupta.me)
-[![Version](https://img.shields.io/badge/version-0.2.17-0f766e)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.2.18-0f766e)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Node](https://img.shields.io/badge/node-24_LTS-339933?logo=nodedotjs&logoColor=white)](.nvmrc)
 [![pnpm](https://img.shields.io/badge/pnpm-12.10.1-F69220?logo=pnpm&logoColor=white)](package.json)

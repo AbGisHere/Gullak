@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.18] - 2026-10-11
+
 ### Fixed
 - The learner app looks like one product: the tab shell, world map, Gullu, rewards, quest board and
   portfolio use the design tokens and the /learn map's calmer style (no blur, glow or offset shadows,
