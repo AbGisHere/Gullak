@@ -144,7 +144,7 @@ R5 review is mandatory; no validated draft can become published in this step.
 Future generator handoff: supply the validated brief and canonical context,
 generate one variant per topic × format × grade group × locale, wrap the
 result as a draft, and run this validator before caching it for human review.
-Provider execution, versioned prompts, content-hash-aware cache keys, retry
+Provider execution, content-hash-aware cache keys, retry
 policy and a draft review queue are subsequent increments. Never overwrite
 authored topic JSON or change quiz unlock rules automatically.
 
@@ -153,4 +153,40 @@ Focused checks (no API keys):
 ```powershell
 pnpm --filter @gullak/types exec vitest run src/lesson-draft.test.ts
 pnpm --filter @gullak/ai exec vitest run src/lesson-draft.test.ts
+```
+
+## Offline lesson-generation requests
+
+`buildLessonGenerationRequest({ brief, context, format })` in `@gullak/ai`
+prepares one provider-independent request for `transcript`, `story`, `audio`
+or `quiz`. It validates the strict caller envelope and revalidates the brief
+against canonical metadata, graph rule and supported locales. It returns
+`promptId`, `promptVersion`, topic/grade/locale/format identity, a `system`
+instruction string and a JSON `prompt` string. No credentials, learner records,
+network calls, cache access, files or published lessons are involved.
+
+`LESSON_DRAFT_PROMPT_V1` is versioned like the tutor prompts: never edit a
+published version in place; add a new version and change the active pointer.
+Teaching text is serialized as lower-trust JSON data, not interpolated into
+system instructions. This separation is not a guarantee against prompt injection;
+future model outputs still require structural validation and human review.
+
+The payload includes canonical concept IDs, the normalized brief, a draft-only
+output envelope, format-specific field instructions and the same editorial limits
+as `LessonDraft`. Required variant concepts are the key-idea concepts plus,
+for quizzes, all quiz-objective concepts. Requests exceeding the draft concept
+limit are rejected before a future provider could be called. Quiz objective
+coverage remains a concept-level check, not factual or pedagogical approval.
+The five Grade 8–10 English briefs are exercised in tests for all four formats.
+
+Future provider wiring must check that returned topic/grade/locale **and format**
+match the request, then call `validateLessonDraft(result, brief, context)`.
+Do not treat prompt metadata as a cache key: a future cache must also include
+source content/brief hashes, model identity and prompt version. Generation,
+fallback/retry policy, caching and the R5 review queue are not implemented here.
+Locale selection instructs the model to use that language; it does not certify
+translation quality or implement the Sarvam translation pipeline.
+
+```powershell
+pnpm --filter @gullak/ai exec vitest run src/lesson-generation.test.ts
 ```

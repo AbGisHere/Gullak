@@ -116,6 +116,8 @@ Callers supply canonical `meta`, graph `rule` and `supportedLocales`. Topic IDs 
 
 `LessonDraft` in `@gullak/types` wraps one existing-renderer-compatible transcript, text-only story, device narration or quiz variant with topic, grade, locale and draft-only status. `validateLessonDraft(input, brief, context)` in `@gullak/ai` revalidates the brief, checks canonical concept coverage and quiz integrity, and screens teaching text with existing output guardrails. Structural success is not factual, safety or R5 approval. No provider calls, assets, publication, persistence or unlock changes. Editorial limits and future generation handoff are in [`docs/architecture.md`](docs/architecture.md#offline-lesson-draft-validation).
 
+`buildLessonGenerationRequest({ brief, context, format })` prepares offline, versioned requests for the same four draft formats. Keep teaching data out of system instructions; add new prompt versions instead of editing a published one. A prepared request is not generated or approved content. Provider execution, hash-aware caching and output/request identity validation remain future work. Contract: [`docs/architecture.md`](docs/architecture.md#offline-lesson-generation-requests).
+
 ### How to add a market-data adapter
 
 1. In `packages/market-data/src/adapters/<source>.ts`, implement `MarketDataAdapter` (`getQuote`, `getSeries`). Validate the source's raw response with Zod and map it to `MarketQuote` / `SeriesPoint`, setting `asOf` from the source.
