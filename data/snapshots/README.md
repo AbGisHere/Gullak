@@ -10,7 +10,7 @@ Snapshots are optional illustrative inputs for later-world historical simulation
 
 Rules (owner: R3):
 - **Real data only.** Never invent or smooth values. Every file has an `attribution` naming the source.
-- `asOf` and series `t` come from the source, as ISO date-times in India time (`T00:00:00+05:30` for end-of-day values).
+- `asOf` and series `t` come from the source, as ISO date-times; NIFTY uses explicitly labelled UTC-midnight source-date markers, not observed trade timestamps. Other end-of-day snapshots use India time (`T00:00:00+05:30` for end-of-day values).
 - `quote` equals the last series point. The series is sorted, with no duplicates.
 - Files are written by scripts in `scripts/snapshots/`, never edited by hand. Biome skips these files; `packages/market-data/src/snapshot-files.test.ts` validates every one in CI.
 - Units: rupees per unit for NAVs and prices, % p.a. for rates, points for index levels (see `MarketQuote`).
@@ -22,7 +22,7 @@ Priority: **P1** is needed for the demo topics and the market sim (Phase 1–2);
 | Data | Priority | Status | Script | Source | Symbol |
 |---|---|---|---|---|---|
 | Mutual fund NAV history, every category (liquid, overnight, money market, debt, index, equity, ETF) | P1 | ✅ script; one example committed | `pnpm snapshots:mf <code>... [--from YYYY-MM-DD]` | AMFI, via mfapi.in | AMFI scheme code, e.g. `120716` |
-| NIFTY 50 and NIFTY 50 TRI history (incl. 2008, 2016, Feb–Apr 2020) | P1 | TODO(R3) | `scripts/snapshots/nse-index.mjs` | niftyindices.com historical data (NSE Indices) | `NIFTY50`, `NIFTY50-TRI` |
+| NIFTY 50 and NIFTY 50 TRI history (incl. 2008, 2016, Feb–Apr 2020) | P1 | PRICE index 2019-10-01 through 2020-06-30 implemented; TRI and other episodes pending | `pnpm snapshots:nifty` | niftyindices.com historical data (NSE Indices) | `NIFTY-50`; TRI symbol pending |
 | CPI inflation, headline and by group (food, fuel, education, health) | P1 | TODO(R3) | `scripts/snapshots/cpi.mjs` | MOSPI CPI (Combined), base 2012=100 | `CPI-IN`, `CPI-IN-FOOD`, … |
 | Gold price (₹/gram, 24K) | P1 | TODO(R3) | `scripts/snapshots/gold.mjs` | IBJA published rates, or RBI DBIE | `XAU-INR` |
 | Savings account, FD and RD rates | P1 | Partial: SBI 1-year FD rate committed | `scripts/snapshots/bank-rates.mjs` (from a hand-checked CSV with source URLs) | Banks' published rate pages, with the date checked | e.g. `FD-SBI-1Y`, `RD-SBI-1Y`, `SB-SBI` |
@@ -49,4 +49,6 @@ Committed so far: `amfi-120716.json` (UTI Nifty 50 Index Fund, Direct, Growth), 
 
 Sample funds are only examples for practising with play money. Content never calls a fund "good", "best" or "recommended" (AGENTS.md › Hard guardrail).
 
-`sbi-published-card-rate-fd-1y.json` is an educational snapshot, regenerated from `scripts/snapshots/fd-rates.csv`. Its one-year simulation assumes quarterly compounding and excludes taxes/penalties. It is never labelled live. Real NIFTY, stock, gold and CPI snapshots remain pending; the first Time Machine uses the existing mutual-fund NAV history and identifies that dataset explicitly.
+`sbi-published-card-rate-fd-1y.json` is an educational snapshot, regenerated from `scripts/snapshots/fd-rates.csv`. Its one-year simulation assumes quarterly compounding and excludes taxes/penalties. It is never labelled live. NIFTY price-index demo history is available below; TRI, stock, gold and CPI snapshots remain pending; the first Time Machine uses the existing mutual-fund NAV history and identifies that dataset explicitly.
+
+R3 demo addition: `nse-indices-nifty-50.json` holds 184 official NIFTY 50 daily closing PRICE-index observations, 2019-10-01 through 2020-06-30. It is not a total-return series or fund NAV. Source: https://www.niftyindices.com/reports/historical-data. Regenerate with `node scripts/snapshots/nifty-50.mjs`; missing dates stay absent. Dates use UTC-midnight markers. Gold/CPI remain follow-up R3 work.

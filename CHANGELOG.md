@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Add attributed NIFTY 50 historical price-index snapshots with dated provenance, reproducible acquisition and explicit snapshot API metadata.
+
 ## [0.2.12] - 2026-10-11
 
 ### Added

@@ -23,5 +23,8 @@ export async function marketQuote(symbol: string) {
       ? snapshot.attribution
       : "AMFI daily NAV file: https://portal.amfiindia.com/spages/NAVAll.txt",
     snapshotAttribution: snapshot.attribution,
+    sourceUrl: snapshot.sourceUrl,
+    seriesType: snapshot.seriesType,
+    retrievedAt: snapshot.retrievedAt,
   };
 }

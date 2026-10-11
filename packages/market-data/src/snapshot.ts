@@ -10,6 +10,9 @@ export const SnapshotFile = z.object({
   source: z.string().min(1),
   /** Where the data came from, for attribution in the UI and README. */
   attribution: z.string().min(1),
+  sourceUrl: z.url().optional(),
+  retrievedAt: z.iso.datetime().optional(),
+  seriesType: z.enum(["price-index", "total-return-index"]).optional(),
   quote: MarketQuoteSchema.omit({ isSnapshot: true, symbol: true }),
   series: z.array(SeriesPoint).default([]),
 });

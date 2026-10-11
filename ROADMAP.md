@@ -10,6 +10,8 @@ Activity answers are prepared locally against v0.2.8; migration review, hosted a
 
 Mission persistence is prepared locally; reviewed mission definitions, production migration application and hosted acceptance remain pending. Family-confirmed reach counts each learner once overall and may include siblings.
 
+NIFTY 50 PRICE-index history for 2019-10-01 through 2020-06-30 is prepared locally. TRI, gold/CPI, historical episodes beyond this range and reviewed Practice mapping remain pending.
+
 ## Built so far (v0.0.1–v0.2.1, on the earlier topic model)
 
 These ship today and carry over to the eight worlds; the content model and grade groups still need migrating.

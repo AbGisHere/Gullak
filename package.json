@@ -24,6 +24,7 @@
     "check:attribution": "node scripts/check-attribution.mjs",
     "snapshots:mf": "node scripts/snapshots/mf-nav.mjs",
     "snapshots:fd": "node scripts/snapshots/fd-rates.mjs",
+    "snapshots:nifty": "node scripts/snapshots/nifty-50.mjs",
     "test:db": "node scripts/test-database.mjs",
     "prepare": "husky"
   },

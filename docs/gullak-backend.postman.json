@@ -728,6 +728,14 @@
           }
         }
       ]
+    },
+    {
+      "name": "Historical NIFTY price-index snapshot",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/market/NIFTY-50",
+        "description": "After deployment: expect quote.kind index-level, quote.isSnapshot true and quote.asOf 2020-06-30; sourceUrl, seriesType price-index and retrievedAt distinguish index points from fund NAV and total-return data. This is historical simulation data, never live."
+      }
     }
   ]
 }
