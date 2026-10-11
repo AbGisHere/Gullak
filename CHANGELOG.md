@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.30] - 2026-10-11
+
 ### Added
 
 - Portfolio: your play money is split into four buckets (free cash, emergency reserve, goals and investments) with one total and a bar showing the split. Investments are grouped by type (stocks, mutual funds, ETFs) with today's value and a Sell link.
