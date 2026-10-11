@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.25] - 2026-10-11
+
 ### Fixed
 - Restore readable dark-mode text, icons and focus indicators on solid brand-accent panels, selections and game badges without changing light mode.
 
