@@ -3,8 +3,9 @@ import { DEFAULT_MASTERY_PARAMS, initialMastery, updateMastery } from "./mastery
 
 describe("temporary mastery model", () => {
   it("uses experience only for the starting prior", () => {
-    expect(initialMastery("none")).toBeLessThan(initialMastery("some"));
-    expect(initialMastery("some")).toBeLessThan(initialMastery("regular"));
+    expect(initialMastery("none")).toBe(0.1);
+    expect(initialMastery("some")).toBe(0.3);
+    expect(initialMastery("regular")).toBe(0.5);
   });
 
   it("moves belief with answer evidence", () => {

@@ -6,9 +6,7 @@ export type MasteryParams = Readonly<{
 
 export const DEFAULT_MASTERY_PARAMS: MasteryParams = { pLearn: 0.18, pGuess: 0.2, pSlip: 0.1 };
 
-export function initialMastery(experience: "none" | "some" | "regular"): number {
-  return experience === "regular" ? 0.55 : experience === "some" ? 0.35 : 0.2;
-}
+export { initialMastery } from "@gullak/engine";
 
 /** TODO: Temporary local BKT update; replace with the exported @gullak/engine function when it lands. */
 export function updateMastery(
