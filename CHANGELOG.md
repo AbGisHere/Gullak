@@ -12,6 +12,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - Add repeatable QA-only hosted acceptance for quiz evidence, FD investment, activity completion, retries and learner isolation; record cleanup instructions and the post-demo RPC revision guard.
 - Add attributed NIFTY 50 historical price-index snapshots with dated provenance, reproducible acquisition and explicit snapshot API metadata.
 
+### Changed
+- Refresh backend handoff and Postman examples, distinguish hosted acceptance from historical review notes, and extend read-only schema review to quiz/activity evidence and export security.
+
 ## [0.2.12] - 2026-10-11
 
 ### Added

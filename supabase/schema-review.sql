@@ -13,7 +13,8 @@ select table_name, column_name, data_type, is_nullable, column_default
 from information_schema.columns
 where table_schema = 'public'
   and table_name in ('learners','topic_progress','portfolios','holdings',
-    'backend_commands','cohorts','cohort_learners','cohort_facilitators','learning_runs')
+    'backend_commands','cohorts','cohort_learners','cohort_facilitators','learning_runs',
+    'quiz_answers','quiz_answers_export','mission_completions','activity_answers')
 order by table_name, ordinal_position;
 
 select c.relname as table_name, c.relrowsecurity as rls_enabled,
@@ -46,7 +47,13 @@ select p.proname as function_name,
 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
 where n.nspname = 'public'
   and p.proname in ('onboard_learner','record_lesson','record_quiz',
-    'invest_fd','facilitator_progress','learner_state','read_learning_run','start_learning_run','save_learning_bookmark')
+    'invest_fd','facilitator_progress','learner_state','read_learning_run','start_learning_run','save_learning_bookmark',
+    'record_mission','record_activity_answer','activity_answer_state')
 order by p.proname;
+
+-- A security-definer view can bypass RLS; verify export settings and grants too.
+select c.relname as view_name,c.reloptions,c.relacl,pg_get_viewdef(c.oid,true) as definition
+from pg_class c join pg_namespace n on n.oid=c.relnamespace
+where n.nspname='public' and c.relkind='v' and c.relname='quiz_answers_export';
 
 rollback;

@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "Gullak R3 backend",
-    "description": "Local manual tests. Set public project URL/key and obtain a learner access token. Never add the Supabase server secret. Run core loop requests in order; retain keys and token for idempotency and persistence tests. Current graph requires money-basics and saving-habit before bank-accounts-upi and FD. New run routes persist navigation only, not scores/completion. Keep learner A/B tokens separate; never seed shared Auth rows. Activity answers persist server-graded evidence and run completion only; never send scores, correctness, money or mastery.",
+    "description": "Local manual tests. Set public project URL/key and obtain a learner access token. Never add the Supabase server secret. Run core loop requests in order; retain keys and token for idempotency and persistence tests. Current graph requires money-basics and saving-habit before bank-accounts-upi and FD. New run routes persist navigation only, not scores/completion. Keep learner A/B tokens separate; never seed shared Auth rows. Quiz answers are saved atomically from server grading. Clients never supply correctness, concepts or content versions. After R1 deploys the quiz_answers migration, learner-only REST reads verify evidence; export access must fail for learners.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "auth": {
@@ -81,8 +81,8 @@
       "type": "string"
     },
     {
-      "key": "activityAnswerKey",
-      "value": "90000000-0000-4000-8000-000000000001",
+      "key": "learnerId",
+      "value": "",
       "type": "string"
     },
     {
@@ -93,6 +93,11 @@
     {
       "key": "missionKey",
       "value": "30000000-0000-4000-8000-000000000001",
+      "type": "string"
+    },
+    {
+      "key": "activityAnswerKey",
+      "value": "90000000-0000-4000-8000-000000000001",
       "type": "string"
     }
   ],
@@ -153,7 +158,8 @@
               "language": "json"
             }
           }
-        }
+        },
+        "description": " For the two-learner acceptance run, use grade-8-10 then grade-11-12 with experience none and en. New starting cash: 500000 / 1000000 paise; after investing 100000: 400000 / 900000. Existing cash is preserved."
       }
     },
     {
@@ -481,7 +487,7 @@
       }
     },
     {
-      "name": "Learning runs (navigation only; required topic drafts may be unavailable)",
+      "name": "Learning runs (navigation only; Practice prerequisites may be unavailable)",
       "item": [
         {
           "name": "Start activity (requires needs-vs-wants completion)",
@@ -597,6 +603,194 @@
       ]
     },
     {
+      "name": "Quiz evidence acceptance (after approved migration)",
+      "item": [
+        {
+          "name": "Read own quiz answers (repeat quiz first: row count must not increase)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{publishableKey}}"
+              }
+            ],
+            "url": "{{supabaseUrl}}/rest/v1/quiz_answers?select=event_id,learner_id,topic_id,concept_id,question_id,correct,answered_at,attempt_no,content_version&order=answered_at.asc",
+            "description": "Bearer current learner token and public key only. Expect 200. Each submitted question has one row; each answer has its own event_id; same submission shares attempt_no. Versions start sha256:. Legacy attempts have no fabricated rows."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"own evidence only\", function () { pm.response.to.have.status(200); const rows=pm.response.json(); const id=pm.collectionVariables.get(\"learnerId\"); pm.expect(id,\"set learnerId to current session user id\").to.be.a(\"string\").and.not.empty; rows.forEach(row => { pm.expect(row.learner_id).to.eql(id); pm.expect(row.content_version).to.match(/^sha256:[a-f0-9]{64}$/); }); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cross-learner quiz answers (B token, A learnerId)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{publishableKey}}"
+              }
+            ],
+            "url": "{{supabaseUrl}}/rest/v1/quiz_answers?select=event_id&learner_id=eq.{{learnerId}}",
+            "description": "Set learnerId=A UUID, accessToken=B token. Expect 200 empty array."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"cross-learner evidence hidden\", function () { pm.response.to.have.status(200); pm.expect(pm.response.json()).to.eql([]); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Export denied to learner",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{publishableKey}}"
+              }
+            ],
+            "url": "{{supabaseUrl}}/rest/v1/quiz_answers_export?select=event_id",
+            "description": "Expect permission denial. Never paste service-role credentials into this collection."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"export forbidden\", function () { pm.expect(pm.response.code).to.be.oneOf([401,403]); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reject client answer mutation",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{publishableKey}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{supabaseUrl}}/rest/v1/quiz_answers?learner_id=eq.{{learnerId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"correct\":true}"
+            },
+            "description": "Run only with the approved disposable learner. Expect denial; follow with read to verify unchanged evidence."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"direct writes forbidden\", function () { pm.expect(pm.response.code).to.be.oneOf([401,403]); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Missions (requires reviewed published mission content)",
+      "item": [
+        {
+          "name": "Complete family-confirmed mission; repeat unchanged",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{missionKey}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/missions/complete",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"missionId\":\"{{missionId}}\",\"confirmation\":\"family\"}"
+            },
+            "description": "Both learner Done and family We did this together UI actions precede this attestation. Missing published content gives 503; do not bypass it. First learner mission returns missionsCompleted=1, householdsReached=1. Same key/body repeats return saved result. New key, same mission never adds counts; first confirmation wins."
+          }
+        },
+        {
+          "name": "Reject client mission count",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{missionKey}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/missions/complete",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"missionId\":\"{{missionId}}\",\"confirmation\":\"family\",\"householdsReached\":100}"
+            },
+            "description": "Expect 400; no client counts, identity or mastery accepted."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reject client quiz correctness",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{fdQuizKey}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/lessons/fixed-deposit/quiz",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"variantId\":\"check\",\"answers\":[{\"questionId\":\"fd-rate\",\"optionId\":\"0\"},{\"questionId\":\"fd-assumptions\",\"optionId\":\"0\"}],\"correct\":true}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
       "name": "Approved activity answers (requires legitimate run)",
       "item": [
         {
@@ -677,65 +871,16 @@
             "url": "{{supabaseUrl}}/rest/v1/activity_answers?select=*&run_id=eq.{{runId}}",
             "description": "A reads own rows. With B token and A runId expect empty array. Never include server credentials."
           }
-        }
-      ]
-    },
-    {
-      "name": "Mission completion (published definitions required)",
-      "item": [
-        {
-          "name": "Complete family-confirmed mission; repeat unchanged",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Idempotency-Key",
-                "value": "{{missionKey}}"
-              }
-            ],
-            "url": "{{baseUrl}}/api/missions/complete",
-            "body": {
-              "mode": "raw",
-              "raw": "{\"missionId\":\"{{missionId}}\",\"confirmation\":\"family\"}"
-            },
-            "description": "Both learner Done and family We did this together UI actions precede this attestation. Missing published content gives 503; do not bypass it. First learner mission returns missionsCompleted=1, householdsReached=1. Same key/body repeats return saved result. New key, same mission never adds counts; first confirmation wins."
-          }
         },
         {
-          "name": "Reject client mission count",
+          "name": "Historical NIFTY price-index snapshot",
           "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Idempotency-Key",
-                "value": "{{missionKey}}"
-              }
-            ],
-            "url": "{{baseUrl}}/api/missions/complete",
-            "body": {
-              "mode": "raw",
-              "raw": "{\"missionId\":\"{{missionId}}\",\"confirmation\":\"family\",\"householdsReached\":100}"
-            },
-            "description": "Expect 400; no client counts, identity or mastery accepted."
+            "method": "GET",
+            "url": "{{baseUrl}}/api/market/NIFTY-50",
+            "description": "Expect index-level, isSnapshot true, asOf 2020-06-30; price-index points, not fund NAV or total-return data."
           }
         }
       ]
-    },
-    {
-      "name": "Historical NIFTY price-index snapshot",
-      "request": {
-        "method": "GET",
-        "url": "{{baseUrl}}/api/market/NIFTY-50",
-        "description": "After deployment: expect quote.kind index-level, quote.isSnapshot true and quote.asOf 2020-06-30; sourceUrl, seriesType price-index and retrievedAt distinguish index points from fund NAV and total-return data. This is historical simulation data, never live."
-      }
     }
   ]
 }

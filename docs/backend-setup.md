@@ -128,3 +128,5 @@ pnpm.cmd exec biome format --write apps/web/lib/data/database.types.ts
 ```
 
 This command creates and removes an isolated temporary database and writes only the local type file. It does not access shared Supabase. Compare hosted type output in a temporary file after approved migration application.
+
+R1 has applied learning_runs and quiz/activity migrations; both synthetic learners passed [hosted HTTP acceptance](hosted-acceptance-2026-10-11.md). Do not rerun those migrations. Mission migration review/application and published content remain pending. Compare actual schema metadata before any proposed shared change; SQL Editor application may not populate CLI migration history.

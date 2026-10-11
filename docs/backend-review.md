@@ -1,12 +1,14 @@
+Current status: PR #22 landed in v0.2.10 and R1 applied quiz/activity migrations after learning_runs. Both authorized synthetic learners passed [hosted HTTP acceptance](hosted-acceptance-2026-10-11.md). Mission deployment and browser acceptance remain pending. The older review below is historical context; never reapply migrations based on its earlier status.
+
 # R3 backend review
 
-Review base: `feat/ishita-backend`, rebased onto team main v0.0.7 (`13ffcbb`). Backend work is uncommitted. No shared database changes have been applied by this agent.
+Current status: backend commit `ea529c0` is pushed in PR #8 against main v0.0.12. No shared database changes have been applied by this agent. The sections below preserve earlier review context; use [the current demo handoff](backend-demo-handoff.md) for agreed scope and current gates.
 
 ## Shared Supabase: inspect first
 
 Ask R1 for the existing project name/reference and access through your own Supabase account. Confirm the project in the dashboard before opening SQL Editor. Do not create a second project or send secret keys in chat.
 
-Run [`supabase/schema-review.sql`](../supabase/schema-review.sql) in SQL Editor. It is a read-only transaction returning columns, constraints, RLS, grants and relevant function definitions. It reads no learner records. If its first result reports an existing migration-history table, also run the commented migration-history query separately. Share the metadata output for review, excluding any unexpected sensitive information in custom function definitions. No local credentials or project link currently exist, so remote state remains unverified.
+Run [`supabase/schema-review.sql`](../supabase/schema-review.sql) in SQL Editor. It is a read-only transaction returning columns, constraints, RLS, grants and relevant function definitions. It reads no learner records. If its first result reports an existing migration-history table, also run the commented migration-history query separately. Share the metadata output for review, excluding any unexpected sensitive information in custom function definitions. Local server configuration now supports read-only hosted checks. Connectivity and exposed core schema passed; full metadata and migration-history review remain pending.
 
 Compare the results with these local migrations:
 
@@ -43,10 +45,10 @@ Hosted errors: 503 configuration errors mean check the three local Supabase vari
 Use the importable [`gullak-backend.postman.json`](gullak-backend.postman.json) and exact request bodies in [`backend-setup.md`](backend-setup.md). Set `supabaseUrl` to the shared project and `baseUrl` to your local Next.js app configured against that project. The currently deployed team app may not contain this uncommitted backend. Only the public publishable key and learner access token go into Postman, never the server secret.
 
 1. Create session A through the project's Auth API; save the token as `accessTokenA` and copy it to `accessToken`.
-2. Onboard A, read profile/portfolio, record starting cash. The current example uses `grade-8-10` / `none`, giving 1,000,000 paise. Grade-group onboarding is implemented locally; shared schema verification remains pending.
+2. Onboard A, read profile/portfolio, record starting cash. The current example uses `grade-8-10` / `none`, giving 500,000 paise. Grade-group onboarding is implemented locally; shared schema verification remains pending.
 3. Read savings lesson, record its `read` variant, submit the server-graded `check` quiz with a fresh UUID key.
 4. Read FD lesson, record `read`, submit its quiz with another key. Read progress and confirm the FD instrument is unlocked.
-5. Invest 100,000 paise for 12 months with a fresh UUID. Save the returned holding ID. Portfolio should show one holding and 900,000 paise cash for this fresh example learner.
+5. Invest 100,000 paise for 12 months with a fresh UUID. Save the returned holding ID. Portfolio should show one holding and 400,000 paise cash for this fresh example learner.
 6. Repeat the investment with the same key/body: same holding, same balance. Change the amount with that key: 409 conflict. Try a new-key amount exceeding cash: 409 insufficient cash, unchanged state.
 7. Restart Next.js and read portfolio using the same valid token: balance and holding persist. Retry onboarding and confirm cash is not reset.
 8. Create session B, save `accessTokenB`; retain A's token separately. Onboard B, switch collection `accessToken` to B, and confirm B has its own starting balance and no A holding. Switch back to A and verify A's portfolio is unchanged.
