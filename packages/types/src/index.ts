@@ -12,6 +12,7 @@ export * from "./learning-run";
 export * from "./lesson-draft";
 export * from "./market";
 export * from "./mission";
+export * from "./ml-fixture";
 export * from "./portfolio";
 export * from "./profile";
 export * from "./progress";
