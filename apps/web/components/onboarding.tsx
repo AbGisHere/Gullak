@@ -12,7 +12,18 @@ import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { LOCALE_COOKIE } from "@/i18n/locale";
 
-const ONBOARDING_STORAGE_KEY = "gullak-onboarding-profile";
+export const ONBOARDING_STORAGE_KEY = "gullak-onboarding-profile";
+export function readProfile(): LearnerProfile | null {
+  try {
+    const value = window.localStorage.getItem(ONBOARDING_STORAGE_KEY);
+    if (!value) return null;
+    const result = LearnerProfile.safeParse(JSON.parse(value));
+    return result.success ? result.data : null;
+  } catch {
+    return null;
+  }
+}
+
 const TOTAL_STEPS = 4;
 
 const choiceClass =
@@ -339,7 +350,7 @@ export function Onboarding() {
         </footer>
       ) : (
         <footer className="mx-auto flex w-full max-w-2xl border-t pt-5">
-          <Button onClick={() => setStep(1)}>{t("reviewProfile")}</Button>
+          <Button onClick={() => router.push("/learn")}>{t("startLearning")}</Button>
         </footer>
       )}
     </main>
