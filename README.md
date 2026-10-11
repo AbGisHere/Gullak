@@ -27,7 +27,7 @@ cp .env.example apps/web/.env.local   # optional: everything works without keys
 pnpm dev                          # http://localhost:3000
 ```
 
-Open `/` for onboarding, which leads into the learner app (Learn, Practice, Portfolio, Me), and `/r2-preview` for the learning components (lesson, spot & sort, story choices, money decoder, paper portfolio, Practice simulation and the rewind comparison) running on sample data.
+Open `/` for onboarding, which leads into the learner app (Home, Story & Twin, Learn, Portfolio, Missions). The routed learning map, lessons and quizzes are at `/learn`, `/practice`, `/portfolio` and `/me`. Open `/r2-preview` for the learning components (lesson, spot & sort, story choices, money decoder, paper portfolio, Practice simulation and the rewind comparison) running on sample data.
 
 ## What works today
 

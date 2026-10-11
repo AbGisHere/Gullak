@@ -16,6 +16,9 @@ test("onboarding to passed quiz opens the next topic", async ({ page }, testInfo
   await page.getByRole("button", { name: "Skip" }).click();
   await page.getByRole("button", { name: "Skip" }).click();
   await page.getByRole("button", { name: "Start learning" }).click();
+  // "/" opens the tabbed learner app; the routed learning map stays at /learn.
+  await expect(page.getByRole("button", { name: "Start learning" })).toBeHidden();
+  await page.goto("/learn");
 
   await expect(page.getByRole("heading", { name: "Your learning map" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Where money comes from and goes" }).first()).toBeVisible();
