@@ -1,5 +1,6 @@
 import "server-only";
 import {
+  ActivityAnswerResult,
   CohortAggregate,
   DepositHolding,
   LearnerProfile,
@@ -29,11 +30,47 @@ function validatedResult<T>(schema: z.ZodType<T>, data: unknown): T {
 /** All app database operations pass through this layer. User client enforces RLS; admin performs validated writes. */
 export function createDataAccess(user: SupabaseClient<Database>, admin: SupabaseClient<Database>, learnerId: string) {
   return {
+    async activityState(runId: string, key: string, request: Json) {
+      const { data, error } = await user.rpc("activity_answer_state", { p_run: runId, p_key: key, p_request: request });
+      if (error) databaseError(error);
+      return validatedResult(
+        z.object({
+          answeredIds: z.array(z.string()),
+          currentNodeId: z.string().nullable(),
+          cached: z.unknown().nullable(),
+        }),
+        data,
+      );
+    },
+    async answerActivity(
+      runId: string,
+      key: string,
+      request: Json,
+      hash: string,
+      evidence: Json,
+      transition: Json,
+      result: Json,
+    ) {
+      const { data, error } = await admin.rpc("record_activity_answer", {
+        p_learner: learnerId,
+        p_run: runId,
+        p_key: key,
+        p_request: request,
+        p_hash: hash,
+        p_evidence: evidence,
+        p_transition: transition,
+        p_result: result,
+      });
+      if (error) databaseError(error);
+      const response = validatedResult(ActivityAnswerResult, data);
+      if (response.run.learnerId !== learnerId) throw new ApiError(403, "ownership_mismatch");
+      return response;
+    },
     async runs() {
       const { data, error } = await user
         .from("learning_runs")
         .select(
-          "id,learnerId:learner_id,kind,contentId:content_id,locale,contentHash:content_hash,status,revision,bookmark,createdAt:created_at,updatedAt:updated_at",
+          "id,learnerId:learner_id,kind,contentId:content_id,locale,contentHash:content_hash,status,revision,bookmark,completedAt:completed_at,createdAt:created_at,updatedAt:updated_at",
         )
         .eq("learner_id", learnerId)
         .order("updated_at", { ascending: false })

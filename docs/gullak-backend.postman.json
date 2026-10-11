@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "Gullak R3 backend",
-    "description": "Local manual tests. Set public project URL/key and obtain a learner access token. Never add the Supabase server secret. Run core loop requests in order; retain keys and token for idempotency and persistence tests. Current graph requires money-basics and saving-habit before bank-accounts-upi and FD. New run routes persist navigation only, not scores/completion. Keep learner A/B tokens separate; never seed shared Auth rows.",
+    "description": "Local manual tests. Set public project URL/key and obtain a learner access token. Never add the Supabase server secret. Run core loop requests in order; retain keys and token for idempotency and persistence tests. Current graph requires money-basics and saving-habit before bank-accounts-upi and FD. New run routes persist navigation only, not scores/completion. Keep learner A/B tokens separate; never seed shared Auth rows. Activity answers persist server-graded evidence and run completion only; never send scores, correctness, money or mastery.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "auth": {
@@ -78,6 +78,11 @@
     {
       "key": "accessTokenB",
       "value": "",
+      "type": "string"
+    },
+    {
+      "key": "activityAnswerKey",
+      "value": "90000000-0000-4000-8000-000000000001",
       "type": "string"
     }
   ],
@@ -577,6 +582,90 @@
               "mode": "raw",
               "raw": "{}"
             }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Approved activity answers (requires legitimate run)",
+      "item": [
+        {
+          "name": "Answer sort item; repeat unchanged to test idempotency",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{activityAnswerKey}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/learning-runs/{{runId}}/answers",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"expectedRevision\":0,\"itemId\":\"rice-and-dal\",\"categoryId\":\"need\"}"
+            },
+            "description": "Set expectedRevision to the run revision. Confirm one evidence row/revision; same key/body returns original. A new key for this item at current revision gives 409 already_answered. Changed source hash gives 409 content_changed."
+          }
+        },
+        {
+          "name": "Answer story current node",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{activityAnswerKey}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/learning-runs/{{runId}}/answers",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"expectedRevision\":0,\"nodeId\":\"the-offer\",\"choiceId\":\"replace-with-authored-choice-id\"}"
+            },
+            "description": "Use a story run and actual authored choice; bad or non-current choices give 422. Preserve verdict and cashDeltaPaise; portfolio cash must not change. Reaching ending completes only this run."
+          }
+        },
+        {
+          "name": "Reject client activity correctness",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{activityAnswerKey}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/learning-runs/{{runId}}/answers",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"expectedRevision\":0,\"itemId\":\"rice-and-dal\",\"categoryId\":\"need\",\"correct\":true}"
+            }
+          }
+        },
+        {
+          "name": "Read own activity evidence",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{publishableKey}}"
+              }
+            ],
+            "url": "{{supabaseUrl}}/rest/v1/activity_answers?select=*&run_id=eq.{{runId}}",
+            "description": "A reads own rows. With B token and A runId expect empty array. Never include server credentials."
           }
         }
       ]

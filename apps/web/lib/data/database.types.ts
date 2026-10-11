@@ -5,6 +5,63 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      activity_answers: {
+        Row: {
+          event_id: string;
+          learner_id: string;
+          run_id: string;
+          content_id: string;
+          content_hash: string;
+          item_or_node_id: string;
+          choice_or_category_id: string;
+          correct: boolean | null;
+          verdict: string | null;
+          concept_id: string | null;
+          answered_at: string;
+        };
+        Insert: {
+          event_id?: string;
+          learner_id: string;
+          run_id: string;
+          content_id: string;
+          content_hash: string;
+          item_or_node_id: string;
+          choice_or_category_id: string;
+          correct?: boolean | null;
+          verdict?: string | null;
+          concept_id?: string | null;
+          answered_at?: string;
+        };
+        Update: {
+          event_id?: string;
+          learner_id?: string;
+          run_id?: string;
+          content_id?: string;
+          content_hash?: string;
+          item_or_node_id?: string;
+          choice_or_category_id?: string;
+          correct?: boolean | null;
+          verdict?: string | null;
+          concept_id?: string | null;
+          answered_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "activity_answers_learner_id_fkey";
+            columns: ["learner_id"];
+            isOneToOne: false;
+            referencedRelation: "learners";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "activity_answers_run_id_fkey";
+            columns: ["run_id"];
+            isOneToOne: false;
+            referencedRelation: "learning_runs";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       backend_commands: {
         Row: {
           learner_id: string;
@@ -201,6 +258,8 @@ export type Database = {
           bookmark: Json | null;
           created_at: string;
           updated_at: string;
+          completed_at: string | null;
+          activity_state: Json;
         };
         Insert: {
           id: string;
@@ -214,6 +273,8 @@ export type Database = {
           bookmark?: Json | null;
           created_at?: string;
           updated_at?: string;
+          completed_at?: string | null;
+          activity_state?: Json;
         };
         Update: {
           id?: string;
@@ -227,6 +288,8 @@ export type Database = {
           bookmark?: Json | null;
           created_at?: string;
           updated_at?: string;
+          completed_at?: string | null;
+          activity_state?: Json;
         };
         Relationships: [
           {
@@ -379,6 +442,7 @@ export type Database = {
       };
     };
     Functions: {
+      activity_answer_state: { Args: { p_run: string; p_key: string; p_request: Json }; Returns: Json };
       facilitator_progress: { Args: { p_facilitator: string; p_cohort: string }; Returns: Json };
       invest_fd: {
         Args: { p_learner: string; p_key: string; p_request: Json; p_holding: Json; p_requires: string[] };
@@ -387,6 +451,19 @@ export type Database = {
       learner_state: { Args: Record<string, never>; Returns: Json };
       onboard_learner: { Args: { p_learner: string; p_profile: Json; p_cash: number }; Returns: Json };
       read_learning_run: { Args: { p_run: string }; Returns: Json };
+      record_activity_answer: {
+        Args: {
+          p_learner: string;
+          p_run: string;
+          p_key: string;
+          p_request: Json;
+          p_hash: string;
+          p_evidence: Json;
+          p_transition: Json;
+          p_result: Json;
+        };
+        Returns: Json;
+      };
       record_lesson: { Args: { p_learner: string; p_topic: string }; Returns: undefined };
       record_quiz: {
         Args: {

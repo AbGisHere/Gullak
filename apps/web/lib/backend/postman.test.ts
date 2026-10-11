@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import {
+  ActivityAnswerRequest,
   FdInvestmentRequest,
   GoalPlanRequest,
   LessonProgressRequest,
@@ -29,23 +30,25 @@ describe("Postman request compatibility", () => {
         if (item.item) visit(item.item);
         if (!item.request?.body) continue;
         const url = item.request.url;
-        const schema = url.endsWith("/onboarding")
-          ? OnboardingRequest
-          : url.endsWith("/quiz")
-            ? QuizSubmission
-            : url.endsWith("/progress")
-              ? LessonProgressRequest
-              : url.endsWith("/portfolio/fd")
-                ? FdInvestmentRequest
-                : url.endsWith("/goals/plan")
-                  ? GoalPlanRequest
-                  : url.endsWith("/time-machine")
-                    ? ReplayRequest
-                    : url.endsWith("/bookmark")
-                      ? SaveLearningBookmarkRequest
-                      : url.endsWith("/runs")
-                        ? StartLearningRunRequest
-                        : null;
+        const schema = url.endsWith("/answers")
+          ? ActivityAnswerRequest
+          : url.endsWith("/onboarding")
+            ? OnboardingRequest
+            : url.endsWith("/quiz")
+              ? QuizSubmission
+              : url.endsWith("/progress")
+                ? LessonProgressRequest
+                : url.endsWith("/portfolio/fd")
+                  ? FdInvestmentRequest
+                  : url.endsWith("/goals/plan")
+                    ? GoalPlanRequest
+                    : url.endsWith("/time-machine")
+                      ? ReplayRequest
+                      : url.endsWith("/bookmark")
+                        ? SaveLearningBookmarkRequest
+                        : url.endsWith("/runs")
+                          ? StartLearningRunRequest
+                          : null;
         if (!schema) continue;
         const body: unknown = JSON.parse(item.request.body.raw);
         expect(schema.safeParse(body).success, item.name).toBe(!item.name.startsWith("Reject"));

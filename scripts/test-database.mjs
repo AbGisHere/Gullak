@@ -46,6 +46,7 @@ try {
     "20261010150000_grade_group_onboarding.sql",
     "20261011090000_learning_runs.sql",
     "20261011100000_quiz_answers.sql",
+    "20261011120000_activity_answers.sql",
   ]) {
     if (file === "20261010150000_grade_group_onboarding.sql") {
       sql(`insert into auth.users values ('66666666-6666-4666-8666-666666666666');
@@ -62,6 +63,7 @@ try {
   sql(
     "select public.test_assert((select cash_paise=499900 from public.portfolios where learner_id='a1111111-1111-4111-8111-111111111111'), 'seed preserves existing cash');",
   );
+  sql(readFileSync(new URL("../supabase/tests/activity-answers.sql", import.meta.url), "utf8"));
   if (process.argv.includes("--generate-types")) {
     generateDatabaseTypes((text) => run("psql", [...args, "-t", "-A"], text).trim());
     console.log("Generated database types from migrated local schema.");
@@ -133,8 +135,41 @@ try {
   sql(
     "select public.test_assert((select count(*)=3 and count(distinct event_id)=3 and count(distinct attempt_no)=3 from public.quiz_answers where topic_id='concurrent-quiz'), 'concurrent attempts have distinct events and sequential attempt numbers');",
   );
+  sql(
+    "insert into public.learning_runs(id,learner_id,kind,content_id,locale,content_hash) values('70000000-0000-4000-8000-000000000001','11111111-1111-4111-8111-111111111111','activity','concurrent-sort','en',repeat('a',64));",
+  );
+  const activity = (key, item, revision) =>
+    new Promise((resolve) => {
+      const child = spawn(join(bin, `psql${suffix}`), args, { windowsHide: true });
+      let stderr = "";
+      child.stderr.on("data", (chunk) => {
+        stderr += chunk;
+      });
+      child.stdout.resume();
+      child.on("error", (error) => resolve({ status: -1, stderr: error.message }));
+      child.on("close", (status) => resolve({ status, stderr }));
+      child.stdin.end(`set role service_role; select public.record_activity_answer('11111111-1111-4111-8111-111111111111',
+      '70000000-0000-4000-8000-000000000001','${key}','{"expectedRevision":${revision},"itemId":"${item}","categoryId":"need"}',repeat('a',64),
+      '{"itemOrNodeId":"${item}","choiceOrCategoryId":"need","correct":true,"verdict":null}',
+      '{"kind":"spot-sort","total":3}','{"itemId":"${item}","correct":true,"correctCategoryId":"need","explanation":"Fixture"}');`);
+    });
+  const activityKey = "80000000-0000-4000-8000-000000000001";
+  const activityRetries = await Promise.all([activity(activityKey, "one", 0), activity(activityKey, "one", 0)]);
+  if (activityRetries.some((result) => result.status !== 0)) throw new Error("Concurrent activity retries failed");
+  const competing = await Promise.all([
+    activity("80000000-0000-4000-8000-000000000002", "two", 1),
+    activity("80000000-0000-4000-8000-000000000003", "three", 1),
+  ]);
+  if (
+    competing.filter((result) => result.status === 0).length !== 1 ||
+    !competing.some((result) => result.stderr.includes("revision_conflict"))
+  )
+    throw new Error("Concurrent activity revisions were not enforced");
+  sql(
+    "select public.test_assert((select count(*)=2 from public.activity_answers where run_id='70000000-0000-4000-8000-000000000001'), 'concurrent answer retries and stale request add no duplicates');",
+  );
   console.log(
-    "Database tests passed: migrations, RLS, restricted writes, quiz grading gates, retries, rollback, facilitator scope and concurrent investments/quiz requests.",
+    "Database tests passed: migrations, RLS, restricted writes, quiz/activity grading gates, retries, rollback, completion, facilitator scope and concurrent investments/quiz/activity requests.",
   );
 } finally {
   if (started) run("pg_ctl", ["-D", data, "-m", "fast", "-w", "stop"]);

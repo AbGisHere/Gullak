@@ -41,6 +41,8 @@ describe("learning content and gates", () => {
       updatedAt: at,
     };
     const db: DataAccess = {
+      activityState: vi.fn(),
+      answerActivity: vi.fn(),
       state: vi.fn(async () => state("grade-8-10", ["money-basics", "needs-vs-wants"])),
       run: vi.fn(async () => run),
       runs: vi.fn(),
