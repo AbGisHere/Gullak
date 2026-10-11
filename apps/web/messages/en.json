@@ -63,5 +63,62 @@
     },
     "mixItUp": "Mix it up",
     "notSaved": "We couldn't save your setup on this device, so you may be asked again next time."
+  },
+  "nav": {
+    "home": "Home",
+    "twin": "Story & Twin",
+    "learn": "Learn",
+    "portfolio": "Portfolio",
+    "missions": "Gullak & Missions",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "streakDays": "{days} Day Streak",
+    "habitScore": "Habit Score: {score}/100",
+    "welcomeTwin": "Meet your Financial Twin",
+    "activeDilemmaTitle": "Active Dilemma · The ₹15,000 Hospital Bill",
+    "activeDilemmaDesc": "The markets crashed and a sudden medical emergency arrived. Do you break Nani's FD, sell index funds at bottom, or use the emergency fund?",
+    "startDilemma": "Resolve Dilemma",
+    "nextLesson": "Recommended Next Step",
+    "whyThisTitle": "Why Gullu picked this for you",
+    "quickPortfolio": "Virtual Wealth",
+    "kitnaDropTitle": "2-Minute Daily Truth",
+    "dailyDrop": "Daily Drop",
+    "practiceSim": "Practice Sim",
+    "liveTrading": "Live Mode"
+  },
+  "twin": {
+    "title": "Nani's Gullak & The Multiverse",
+    "subtitle": "One storyline that remembers your choices from Class 6 to 12.",
+    "season1": "Season 1 (Class 6–7)",
+    "season2": "Season 2 (Class 8–10)",
+    "season3": "Season 3 (Class 11–12)",
+    "fyiTitle": "FYI, This Really Happened",
+    "counterfactual": "The Other You (Multiverse)",
+    "castTitle": "The Cast in the Hyderabad Lane"
+  },
+  "learn": {
+    "title": "Learning Map",
+    "subtitle": "Master financial concepts through four Vanguard pillars.",
+    "planBudget": "Plan & Budget",
+    "saveManage": "Save & Manage",
+    "investing": "Understand Investing",
+    "staySafe": "Stay Financially Safe",
+    "locked": "Locked",
+    "unlocked": "Unlocked",
+    "startLesson": "Start Lesson",
+    "startActivity": "Play Activity"
+  },
+  "portfolio": {
+    "title": "Paper Portfolio",
+    "subtitle": "Your virtual holdings on real market prices.",
+    "virtualBadge": "100% Virtual Play Money"
+  },
+  "missions": {
+    "title": "Living Gullak & Missions",
+    "subtitle": "Your Gullak evolves with consistent habits, not return chasing.",
+    "householdsTitle": "Households Protected",
+    "missionsTitle": "Family Take-Home Missions",
+    "badgesTitle": "Scam Hunter Badges"
   }
 }

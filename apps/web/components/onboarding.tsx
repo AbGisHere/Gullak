@@ -64,7 +64,7 @@ function saveLocally(profile: LearnerProfile): boolean {
   }
 }
 
-export function Onboarding() {
+export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) => void } = {}) {
   const t = useTranslations("onboarding");
   const locale = useLocale();
   const router = useRouter();
@@ -77,6 +77,7 @@ export function Onboarding() {
   const [targetInr, setTargetInr] = useState("");
   const [targetDate, setTargetDate] = useState("");
   const [savedLocally, setSavedLocally] = useState(true);
+  const [createdProfile, setCreatedProfile] = useState<LearnerProfile | null>(null);
 
   const goalStarted = Boolean(goalLabel || targetInr || targetDate);
   const goalComplete = Boolean(goalLabel.trim() && Number(targetInr) > 0 && targetDate);
@@ -122,6 +123,7 @@ export function Onboarding() {
         : {}),
     });
     if (!parsed.success) return;
+    setCreatedProfile(parsed.data);
     setSavedLocally(saveLocally(parsed.data));
     setStep(TOTAL_STEPS);
   }
@@ -338,8 +340,30 @@ export function Onboarding() {
           </div>
         </footer>
       ) : (
-        <footer className="mx-auto flex w-full max-w-2xl border-t pt-5">
-          <Button onClick={() => setStep(1)}>{t("reviewProfile")}</Button>
+        <footer className="mx-auto flex w-full max-w-2xl flex-wrap items-center justify-between gap-3 border-t pt-5">
+          <Button variant="ghost" onClick={() => setStep(1)}>
+            {t("reviewProfile")}
+          </Button>
+          {onFinish ? (
+            <Button
+              className="bg-brand-lime text-brand-ink hover:bg-brand-lime/90 font-semibold"
+              onClick={() => {
+                if (createdProfile) {
+                  onFinish(createdProfile);
+                } else {
+                  try {
+                    const raw = window.localStorage.getItem(ONBOARDING_STORAGE_KEY);
+                    if (raw) onFinish(JSON.parse(raw));
+                  } catch {
+                    // ignore
+                  }
+                }
+              }}
+            >
+              Start learning with Gullu
+              <ArrowRight aria-hidden="true" />
+            </Button>
+          ) : null}
         </footer>
       )}
     </main>
