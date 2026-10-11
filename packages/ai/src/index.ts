@@ -1,5 +1,7 @@
 export * from "./curriculum-brief";
 export * from "./guardrails";
 export * from "./lesson-draft";
+export * from "./lesson-generation";
+export * from "./prompts/lesson-draft";
 export * from "./prompts/tutor";
 export * from "./provider";

@@ -9,6 +9,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Added
+- Offline, versioned four-format lesson-generation request preparation from validated curriculum briefs; teaching data stays separate from system instructions and all requested output remains draft-only.
 - Draft-only lesson contracts for transcript, text-only story, device narration and quiz, with strict fields and bounded editorial text limits compatible with existing renderers.
 - Offline lesson-draft validation against curriculum briefs and canonical concepts, with audience checks, unique panel/question/option IDs, quiz answer-key and objective coverage checks, and existing investment-advice screening. Validation never approves or publishes content.
 
