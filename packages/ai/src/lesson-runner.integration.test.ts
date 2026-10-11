@@ -1,9 +1,16 @@
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { CurriculumBrief, TopicMeta, UnlockRule } from "@gullak/types";
 import { MockLanguageModelV3 } from "ai/test";
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
-import { createLessonDraftGenerator, generateLessonDraft } from "./index";
+import {
+  buildLessonDraftCacheKey,
+  buildLessonGenerationRequest,
+  createLessonDraftGenerator,
+  createModel,
+  generateLessonDraft,
+} from "./index";
 
 // Literal expectations independent of the prompt builder and validator.
 const topics = [
@@ -117,6 +124,39 @@ describe("approved-brief draft pipeline (offline synthetic outputs)", () => {
       z.ZodError,
     );
   });
+});
+
+describe("cache-key integration with approved briefs (offline)", () => {
+  it.each(cases)(
+    "prepares and invalidates $topicId / $format keys from pinned source bytes",
+    async ({ topicId, format }) => {
+      const caller = input(topicId, format);
+      const before = structuredClone(caller);
+      const bytes = readFileSync(new URL(`../../content/topics/${topicId}/en.json`, import.meta.url));
+      const contentVersion = createHash("sha256").update(bytes).digest("hex");
+      // Constructing the provider object never calls the network; no credentials are read.
+      const model = createModel("google", { GOOGLE_GENERATIVE_AI_API_KEY: "synthetic-test-key" });
+      const modelIdentity = { provider: model.provider, modelId: model.modelId };
+      const request = buildLessonGenerationRequest(caller);
+      const key = await buildLessonDraftCacheKey({ request, model: modelIdentity, contentVersion });
+      expect(key).toMatch(/^lesson-draft:v1:[a-f0-9]{64}$/);
+      expect(caller).toEqual(before);
+
+      const changedBrief = buildLessonGenerationRequest({
+        ...caller,
+        brief: { ...caller.brief, learningGoals: [...caller.brief.learningGoals, "Synthetic extra learning goal."] },
+      });
+      expect(await buildLessonDraftCacheKey({ request: changedBrief, model: modelIdentity, contentVersion })).not.toBe(
+        key,
+      );
+
+      // Whitespace-only source edits must invalidate exact-byte versions too.
+      const changedContentVersion = createHash("sha256").update(bytes).update("\n").digest("hex");
+      expect(
+        await buildLessonDraftCacheKey({ request, model: modelIdentity, contentVersion: changedContentVersion }),
+      ).not.toBe(key);
+    },
+  );
 });
 
 function sdkGenerator(fixture: unknown) {

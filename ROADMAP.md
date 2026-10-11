@@ -20,7 +20,7 @@ These ship today and carry over to the eight worlds; the content model and grade
 - [x] Learner app on phone and desktop: shell with bottom tabs and sidebar, locale switcher, Play Money badge, grade-filtered learning map, lessons, quiz unlocks and on-device mastery, the March 2020 Practice episode and the paper portfolio (R1, R2)
 - [x] Offline curriculum briefs, lesson-draft validation and versioned lesson-generation requests (R4)
 - [x] Knowledge-tracing notebook: synthetic BKT fitting and a real-data benchmark on ASSISTments 2009–10 (R4)
-- [ ] Versioned real quiz-evidence integration (R3, R4); strict nine-field `QuizAnswerEvent` row schema implemented on the R4 feature branch, DB persistence, immutable content registry and real-data integration remain pending
+- [ ] Versioned real quiz-evidence integration (R3, R4); strict nine-field `QuizAnswerEvent` row schema implemented on the R4 feature branch. R3's server grading, transactional persistence and migrations are on main in v0.2.10; hosted migration/acceptance, immutable content registry and R4 real-data integration remain pending.
 
 ## Phase 0 · Align the foundation
 
