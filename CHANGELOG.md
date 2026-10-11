@@ -8,6 +8,11 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.15] - 2026-10-11
+
+### Added
+- Interactive local Portfolio savings playground and Missions quest board with
+
 ## [0.2.14] - 2026-10-11
 
 ### Added
@@ -53,7 +58,6 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [0.2.9] - 2026-10-11
 
 ### Added
-- Interactive local Portfolio savings playground and Missions quest board with
   fictional coins and XP, retries/reset, English/Hindi/Telugu copy, and phone,
   desktop and keyboard interaction tests.
 - Controlled Financial Twin story presentation components for compact progress, household dialogue, supplied money state, decisions, consequence feedback, reflection and correctly paired rewind alternatives.
