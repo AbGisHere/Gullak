@@ -316,6 +316,12 @@ Use pinned model IDs for reproducibility: an alias such as `latest` may change
 behind an unchanged identifier. Changed generation settings/schema/validation
 policy also require future cache invalidation; this v1 key is for the current adapter.
 
+Offline integration tests combine all five approved briefs and four formats with
+actual generation requests and explicit provider model identities. They verify
+that normalized brief edits and exact-byte source edits invalidate the key,
+without invoking providers or writing caches. Teaching changes in these tests
+are synthetic fixtures, not reviewed content edits.
+
 ```ts
 const request = buildLessonGenerationRequest({ brief, context, format: "transcript" });
 const key = await buildLessonDraftCacheKey({
@@ -368,6 +374,12 @@ checks. Do not score older answers against current content. This increment adds
 no DB table, import pipeline, BKT updates, real learner export, or unlock changes.
 Synthetic provenance belongs in dataset metadata, never extra row columns;
 story verdicts remain excluded.
+
+R3's v0.2.10 work supplies `QuizEvidence` (server-graded submission payload),
+the `quiz_answers` table and transactional persistence; it does not replace this
+nine-field row/import contract. Hosted migration and acceptance still require
+R1/R3 review; the immutable content registry and R4 real-data import/runtime
+remain separate work. See [quiz API integration](quiz-api-integration.md).
 
 ```powershell
 pnpm --filter @gullak/types exec vitest run src/quiz-answer.test.ts
