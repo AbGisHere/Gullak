@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.10] - 2026-10-11
+
 ### Added
 - Persist server-graded activity evidence and run completion atomically with pinned hashes, revisions, idempotent retries and learner isolation.
 - Connect quiz API grading and exact-byte content versions to typed transactional answer persistence, with local schema generation and retry/isolation acceptance instructions.
