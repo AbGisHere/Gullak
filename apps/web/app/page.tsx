@@ -1,5 +1,5 @@
-import { HomeEntry } from "@/components/home-entry";
+import { LearnerApp } from "@/components/learner-app";
 
 export default function Home() {
-  return <HomeEntry />;
+  return <LearnerApp />;
 }

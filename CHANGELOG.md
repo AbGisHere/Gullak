@@ -8,6 +8,15 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Complete learner-facing frontend experience in `apps/web`: connected learner dashboard with habit streak, adaptive recommendations ("Why Gullu picked this for you"), daily 2-minute drop, and quick portfolio glance.
+- Persistent Financial Twin narrative journey (*Nani's Gullak*): 7-step connected flow spanning Hyderabad lane context, March 2020 emergency dilemma, branching choices, Practice simulation, Multiverse Counterfactual Rewind, and "FYI, This Really Happened" historical reveal.
+- Mobile-first app shell (`AppShell`) with accessible 44px+ touch bottom navigation bar, companion Gullu avatar status, and full responsive desktop sidebar layout.
+- Four-pillar curriculum explorer (`LearnTab`) categorized by Plan & Budget, Save & Manage, Understand Investing, and Stay Financially Safe, with format badges and full modal activity runners.
+- Paper portfolio tab with interactive virtual piggy-bank deposits, emergency buffer check, and `MoneyDecoder` sheet.
+- Family Take-Home Missions & Living Gullak evolution tracker (`MissionsTab`) with interactive household reach counters and scam defense drills.
+- Synchronized Hindi (`hi.json`) and Telugu (`te.json`) localization strings matching English keys across all learner tabs.
+
 ## [0.2.8] - 2026-10-11
 
 ### Added
