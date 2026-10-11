@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.28] - 2026-10-11
+
 ### Added
 
 - Invest: a **Stocks** entry above the fund categories lists large NSE companies (A–Z, not a ranking) without typing.
