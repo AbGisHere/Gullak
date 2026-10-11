@@ -4,9 +4,11 @@
 
 The product is an eight-world, decision-led learning journey. Each completed item should land through a small PR and be checked on phone and desktop.
 
-Quiz evidence API integration is prepared locally against v0.2.8, including typed transactional writes and exact-byte content versions; hosted migration and acceptance remain pending. See [quiz integration](docs/quiz-api-integration.md).
+R1 reports PR #22 deployed as v0.2.10 and the quiz/activity migrations applied in order. Hosted HTTP acceptance passes for two authorized synthetic learners (Grades 8–10 and 11–12): onboarding, prerequisite quizzes, FD unlock/investment, quiz evidence, activity answers/completion, retries, persistence and learner isolation. Phone/desktop browser acceptance remains pending. Mission persistence is local only and awaits published definitions and its own deployment; Practice episode outcomes await R4 contracts. R3 owns datasets: official NIFTY demo snapshot is local pending review; gold/CPI remain pending. See [hosted acceptance](docs/hosted-acceptance-2026-10-11.md).
 
-Activity answers are prepared locally against v0.2.8; migration review, hosted acceptance and phone/desktop integration remain pending. See [activity integration](docs/activity-api-integration.md).
+Quiz evidence API integration is hosted and verified on the two QA learners, including exact-byte content versions, attempt counts, retries, learner-only reads and denied client export/write access. No historical answers were fabricated. See [quiz integration](docs/quiz-api-integration.md).
+
+Generic activity answers and run-only completion are hosted and verified for spot-and-sort and the authored doubling-scheme story. Phone/desktop integration and Practice outcome persistence remain pending. See [activity integration](docs/activity-api-integration.md).
 
 Mission persistence is prepared locally; reviewed mission definitions, production migration application and hosted acceptance remain pending. Family-confirmed reach counts each learner once overall and may include siblings.
 
@@ -24,7 +26,7 @@ These ship today and carry over to the eight worlds; the content model and grade
 - [x] Learner app on phone and desktop: shell with bottom tabs and sidebar, locale switcher, Play Money badge, grade-filtered learning map, lessons, quiz unlocks and on-device mastery, the March 2020 Practice episode and the paper portfolio (R1, R2)
 - [x] Offline curriculum briefs, lesson-draft validation and versioned lesson-generation requests (R4)
 - [x] Knowledge-tracing notebook: synthetic BKT fitting and a real-data benchmark on ASSISTments 2009–10 (R4)
-- [ ] Versioned real quiz-evidence integration (R3, R4); strict nine-field `QuizAnswerEvent` row schema implemented on the R4 feature branch. R3's server grading, transactional persistence and migrations are on main in v0.2.10; hosted migration/acceptance, immutable content registry and R4 real-data integration remain pending.
+- [ ] Versioned real quiz-evidence integration (R3, R4); strict nine-field `QuizAnswerEvent` row schema is on main. R3's server grading, transactional persistence and migrations landed in v0.2.10; hosted HTTP acceptance passed for both authorized QA learners. Immutable content registry and R4 real-data integration remain pending; no production learner data was exported for model training.
 
 ## Phase 0 · Align the foundation
 
@@ -86,6 +88,7 @@ outputs only; live generation and human review remain pending.
 
 ## Phase 5 · Quality and demo
 
+- [ ] After the demo, add a new migration guarding missing/null/invalid `expectedRevision` in `record_activity_answer`; preserve idempotent retries and prove invalid RPC requests leave all writes unchanged (R3). The public route already rejects missing revisions. See [hosted acceptance](docs/hosted-acceptance-2026-10-11.md).
 - [ ] Content and guardrail review for every decision, consequence and reward (R5)
 - [ ] Phone + desktop E2E for onboarding → World 1 → unlock → review (R5)
 - [ ] Offline lesson verification, accessibility, performance audit and Impeccable polish (R1, R2)

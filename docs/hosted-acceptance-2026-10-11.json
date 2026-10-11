@@ -1,0 +1,143 @@
+{
+  "origin": "https://gullak.abgupta.me",
+  "checkedAt": "2026-10-11T03:05:59.254Z",
+  "checks": [
+    {
+      "name": "qa-learner-a: anonymous identity/onboarding/grade-specific starting cash",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: money-basics grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: saving-habit grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: bank-accounts-upi grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: fixed-deposit grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: needs-vs-wants grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: protect-your-info grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: too-good-to-be-true grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: FD unlock, cash deduction, retry, persistence, insufficient-cash rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: needs-or-wants authored results, retries, duplicates, completion/persistence",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: the-doubling-scheme authored results, retries, duplicates, completion/persistence",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: activities do not change cash, topic progress or unlocks",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: export and direct evidence writes denied",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: anonymous identity/onboarding/grade-specific starting cash",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: money-basics grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: saving-habit grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: bank-accounts-upi grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: fixed-deposit grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: needs-vs-wants grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: protect-your-info grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: too-good-to-be-true grading/evidence/retry/client-outcome rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: FD unlock, cash deduction, retry, persistence, insufficient-cash rejection",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: needs-or-wants authored results, retries, duplicates, completion/persistence",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: the-doubling-scheme authored results, retries, duplicates, completion/persistence",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: activities do not change cash, topic progress or unlocks",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: export and direct evidence writes denied",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: cross-learner evidence/portfolio/run isolation",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: cross-learner evidence/portfolio/run isolation",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-a: missing revision, invalid choice, stale revision, concurrent retry and revision race",
+      "status": "passed"
+    },
+    {
+      "name": "qa-learner-b: missing revision, invalid choice, stale revision, concurrent retry and revision race",
+      "status": "passed"
+    },
+    {
+      "name": "anonymous export access denied",
+      "status": "passed"
+    }
+  ],
+  "testLearners": [
+    {
+      "label": "qa-learner-a",
+      "id": "e344562a-76c4-45a8-931b-1168d2a46701",
+      "gradeGroup": "grade-8-10"
+    },
+    {
+      "label": "qa-learner-b",
+      "id": "140c75fb-e5db-454b-8395-6a4d58727012",
+      "gradeGroup": "grade-11-12"
+    }
+  ],
+  "cleanup": "Retained for demo; delete only these verified synthetic Auth users after the demo. Session/cleanup manifest is Git-ignored."
+}
