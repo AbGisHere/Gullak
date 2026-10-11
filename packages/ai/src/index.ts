@@ -1,5 +1,6 @@
 export * from "./curriculum-brief";
 export * from "./guardrails";
+export * from "./lesson-batch";
 export * from "./lesson-cache-key";
 export * from "./lesson-draft";
 export * from "./lesson-generation";

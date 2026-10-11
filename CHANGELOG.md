@@ -14,6 +14,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - Offline tutor integration coverage for all 33 approved English source hashes and all existing grades, including edited-source and unapproved Candy rejection, guardrail behavior and verbatim excerpt provenance.
 - Strict offline BKT parameter and step/sequence contracts with explicit caller-supplied probabilities, boolean quiz observations and distinguishable emissions; no defaults, artifact loading or app activation.
 - Pure inert BKT-with-forgetting step and ordered-sequence inference with observation-then-transition semantics, fail-closed impossible observations and synthetic notebook parity tests; no mastery, persistence or unlock wiring.
+- Bounded offline lesson-batch preparation for the five pinned English Grade 8–10 briefs, validating exact source bytes, approved brief/context fingerprints and duplicate identities before returning deterministic prepared-only requests and cache keys; no generation or storage is activated.
 
 ## [0.2.16] - 2026-10-11
 
