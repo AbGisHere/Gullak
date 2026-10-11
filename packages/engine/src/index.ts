@@ -3,6 +3,7 @@ export * from "./capital";
 export * from "./format-picker";
 export * from "./interest";
 export * from "./mastery-prior";
+export * from "./ml-fixture";
 export * from "./money";
 export * from "./quiz";
 export * from "./recommend-next";
