@@ -5,6 +5,7 @@ export * from "./mastery-prior";
 export * from "./money";
 export * from "./quiz";
 export * from "./recommend-next";
+export * from "./stage";
 export * from "./unit-price";
 export * from "./unlock";
 export * from "./valuation";

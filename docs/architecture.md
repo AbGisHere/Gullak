@@ -260,8 +260,16 @@ R1/R5 should supply world IDs as `candy-economy`, `savings-quest`, `bankopolis`,
 `market-mayhem`, `grow-your-money`, `stock-street`, `life-simulator`,
 `finance-tycoon`. R5/R2 still need to agree on localized hook, mechanic,
 decisions/outcomes, recovery feedback, reveal, application, review and XP data.
-Those payloads, stage selection/placement and migration of profile/content/
+Those payloads, placement and migration of profile/content/
 progress are not implemented here. Do not load draft metadata into the demo app.
+
+`stageForClass(classNumber)` in `@gullak/engine` is an offline, pure selector for
+the draft stage IDs: 6–7 → `foundation-explorers`, 8–9 → `money-navigators`,
+10–12 → `financial-strategists`. It accepts only integer numbers from 6 through
+12 and throws `ZodError` for anything else; it never coerces a string, guesses a
+class from the old grade group, or falls back to a beginner stage. This helper
+does not change onboarding, select lesson content, implement placement or grant
+XP/unlocks. R1/R2 can call it when the post-demo class-based flow is approved.
 
 R2 has confirmed the current topic renderer mapping below. This clarification
 does not approve or activate Candy Economy Lesson 1; its R5 draft must not be
@@ -271,6 +279,7 @@ JSON. Do not add gameplay, XP or mastery-unlock fields to `Lesson` metadata.
 ```powershell
 pnpm --filter @gullak/engine exec vitest run src/mastery-prior.test.ts
 pnpm --filter @gullak/types exec vitest run src/world.test.ts
+pnpm --filter @gullak/engine exec vitest run src/stage.test.ts
 pnpm --filter @gullak/web exec vitest run lib/mastery.test.ts lib/topic-adapter.test.ts
 ```
 

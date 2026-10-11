@@ -32,7 +32,7 @@ lessons, add live providers/caching, or migrate stage and unlock contracts.
 
 ## Phase 1 · First-time learner journey
 
-- [ ] Onboarding: class group, experience, preferred format and optional placement challenge (R1, R4)
+- [ ] Onboarding: class group, experience, preferred format and optional placement challenge (R1, R4); pure draft `stageForClass` selector implemented on the R4 feature branch, class-based app onboarding and placement remain pending
 - [ ] Responsive app shell: phone navigation, desktop layout, XP/streak/play-money indicators (R1, R2); shell, navigation and Play Money badge built, XP and streak not yet
 - [ ] World map with locked, open and completed lesson states (R2)
 - [ ] Progress persistence for profile, XP, lesson attempts, mastery and unlocks (R3)

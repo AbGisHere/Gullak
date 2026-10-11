@@ -9,6 +9,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Added
+- Pure draft-stage selection by school class in `@gullak/engine`, with exact Classes 6–7 / 8–9 / 10–12 boundaries and rejection of invalid or coerced values; existing onboarding, placement and unlocks remain unchanged.
 - Strict virtual unit-price comparison input contracts: safe integer paise, positive whole quantities and matching piece/gram/millilitre units; ambiguous units, real-money flags and extra fields are rejected.
 - Pure exact unit-price comparison in `@gullak/engine`, using integer cross products without rounding or unsafe intermediate numbers; returns only left/right/equal and does not change lessons, purchases, rewards or unlocks.
 
