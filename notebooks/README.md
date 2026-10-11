@@ -20,6 +20,13 @@ The latest R3 input contract has exactly nine columns: `event_id`, `learner_id`,
 positive `attempt_no`, equal to the topic's quiz-attempt count after submission.
 Its questions are ordered by their positions in the pinned content version.
 
+`QuizAnswerEvent` in `@gullak/types` mirrors this nine-field boundary for future
+TypeScript consumers (ISO timestamps with explicit offsets, no coercion or
+extra fields). It validates individual row shape only, not the immutable
+registry, batch ordering, correctness or production readiness; those checks
+remain below and in the notebook. No real learner export or BKT activation is
+implemented by that schema.
+
 `content_version` is lowercase SHA-256 hex of the exact UTF-8 topic-content bytes.
 The synthetic fixture has its own hash, never the published lesson's hash. Real
 imports must supply a trusted immutable content registry keyed by topic, hash and

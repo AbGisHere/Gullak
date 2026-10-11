@@ -13,6 +13,7 @@ export * from "./market";
 export * from "./portfolio";
 export * from "./profile";
 export * from "./progress";
+export * from "./quiz-answer";
 export * from "./quiz-evidence";
 export * from "./recommendation";
 export * from "./topic";

@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Strict nine-field `QuizAnswerEvent` contract for version-pinned quiz evidence, preserving false answers and explicit timestamp offsets while rejecting missing/extra fields and malformed IDs, attempts or hashes; no persistence or mastery changes.
+
 ## [0.2.11] - 2026-10-11
 
 ### Changed
