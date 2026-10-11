@@ -131,6 +131,10 @@ Callers supply canonical `meta`, graph `rule` and `supportedLocales`. Topic IDs 
 
 `Stage`, `World` and `Lesson` in `@gullak/types` are metadata-only Phase 0 drafts. Stage IDs are foundation-explorers (Classes 6–7), money-navigators (8–9), financial-strategists (10–12). Worlds and lessons use kebab-case slugs. Lesson metadata carries stages/concepts, predecessor and its own explicit quiz pass mark; it carries no mastery gate. Existing topic types, loaders, routes and onboarding remain unchanged. Full localized gameplay, rewards, catalog links/cycles and migration are separate work. Contract and examples: [`docs/architecture.md`](docs/architecture.md#draft-world-metadata).
 
+### Virtual unit-price comparisons
+
+`compareUnitPrices(input)` in `@gullak/engine` validates `UnitPriceComparison` from `@gullak/types`: explicit virtual-only input, nonnegative safe integer paise, positive whole quantities and matching piece/gram/millilitre units. Exact internal integer cross-products return left/right/equal cost per unit, not affordability or purchase advice. No shop actions, XP, mastery or unlock changes. R2 owns later UI integration and result-label translations. Contract, tests and confirmed current renderer constraints: [`docs/architecture.md`](docs/architecture.md#exact-virtual-unit-price-comparison). Candy Economy Lesson 1 remains unapproved; no generation or gameplay implementation until R5 signs off and supplies JSON. Do not extend the draft `Lesson` metadata with gameplay, XP or mastery gates.
+
 ### How to add a market-data adapter
 
 1. In `packages/market-data/src/adapters/<source>.ts`, implement `MarketDataAdapter` (`getQuote`, `getSeries`). Validate the source's raw response with Zod and map it to `MarketQuote` / `SeriesPoint`, setting `asOf` from the source.
@@ -163,6 +167,7 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
 5. **Never** force-push to main (on either remote), commit secrets, or commit generated build output.
 6. **After every successful push:** stop and tell me: "Pushed vX.Y.Z — good time to run /compact." Wait for me before continuing.
 7. **AI agents ask before every commit and every push.** Show the human the message and what's staged, and wait for an explicit yes. Approval for one commit or push doesn't carry over to the next. *Enforced:* `.claude/settings.json` sets `git commit`, `git push`, `git tag` and PR create/merge to "ask", and denies `--no-verify` and force-push.
+   **R4 fork exception — standing user authorization, 2026-10-11:** @VanshGoel-01 has explicitly authorized agents working on his fork to automatically commit and push changes within work he has requested, without asking again for each commit/push. Use separate meaningful Conventional Commits for logical increments, include tests and required changelog entries, and never create padding commits. Sync from `upstream main` before a work batch and every push, preserve local work, and verify the resulting tree before pushing. This is not permission for unrelated work, unapproved content, force-pushes, skipped checks, releases, merges or submission-repo pushes. Other teammates retain the default approval rule. PR creation still requires a user request/approval. Tool-level approval prompts remain in effect; do not weaken shared security settings to bypass them.
 
 ## Decisions
 

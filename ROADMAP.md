@@ -43,6 +43,8 @@ lessons, add live providers/caching, or migrate stage and unlock contracts.
 - [ ] Candyville visual direction, recurring guide and World 1 map (R2)
 - [ ] Candy Economy lessons: money, barter, currency, prices, needs/wants, scarcity, opportunity cost, earning, spending and saving (R5)
 - [ ] Barter, limited-coin shop, sorting, price-comparison and earning mechanics (R2, R4)
+  - R4's exact virtual unit-price input contracts and engine helper are implemented on `feat/unit-price-comparison` with tests; UI integration and approved activity content remain pending.
+  - Current R2 renderer mapping and evidence-integration gaps are recorded in [architecture](docs/architecture.md#confirmed-current-renderer-handoff). Lesson 1 is still an unapproved R5 draft; generation, XP and gameplay are on hold until sign-off and reviewed JSON.
 - [ ] Shopping-day final challenge, XP/retry/unlock behaviour and E2E core loop (R2, R5)
 - [ ] English, Hindi and Telugu review for the complete World 1 slice (R5)
 

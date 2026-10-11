@@ -263,8 +263,109 @@ decisions/outcomes, recovery feedback, reveal, application, review and XP data.
 Those payloads, stage selection/placement and migration of profile/content/
 progress are not implemented here. Do not load draft metadata into the demo app.
 
+R2 has confirmed the current topic renderer mapping below. This clarification
+does not approve or activate Candy Economy Lesson 1; its R5 draft must not be
+used for generation or implementation until R5 signs off and supplies reviewed
+JSON. Do not add gameplay, XP or mastery-unlock fields to `Lesson` metadata.
+
 ```powershell
 pnpm --filter @gullak/engine exec vitest run src/mastery-prior.test.ts
 pnpm --filter @gullak/types exec vitest run src/world.test.ts
 pnpm --filter @gullak/web exec vitest run lib/mastery.test.ts lib/topic-adapter.test.ts
 ```
+
+## Exact virtual unit-price comparison
+
+`compareUnitPrices(input)` in `@gullak/engine` accepts the strict
+`UnitPriceComparison` contract from `@gullak/types`:
+
+```typescript
+compareUnitPrices({
+  isVirtual: true,
+  left: { pricePaise: 1000, quantity: 5, unit: "piece" },
+  right: { pricePaise: 1800, quantity: 10, unit: "piece" },
+}); // "right": 180 paise/piece versus 200 paise/piece
+```
+
+Each pack's price is nonnegative safe integer paise; quantity is a positive
+safe integer. Both units must match: `piece`, `gram` or `millilitre`.
+Normalize kilograms/litres to the same base unit before calling; this helper
+does not guess conversions, handle fractional quantities, discounts or taxes.
+Malformed inputs, real-money flags, missing fields and unknown fields throw
+`ZodError`. Inputs are not mutated.
+
+The comparison cross-multiplies with internal `BigInt`, so intermediate
+products remain exact even at the safe-integer input boundary. It never divides
+or rounds a per-unit amount. The JSON-serializable result is only `"left"`,
+`"right"` or `"equal"`, meaning lower or equal price per unit, not a purchase
+recommendation. It does not say which pack is affordable, needed or suitable;
+budget/needs checks are separate. There are no currency balances, transactions,
+XP, mastery updates, network requests or unlock changes.
+
+R2 can use this for fictional pack comparisons once the activity content and
+renderer integration are approved. It is not a limited-coin shop schema or a
+shop purchase evaluator. The existing app is not wired to it yet. Translate
+result labels in the UI; do not show raw return codes to learners.
+
+```powershell
+pnpm --filter @gullak/types exec vitest run src/unit-price.test.ts
+pnpm --filter @gullak/engine exec vitest run src/unit-price.test.ts
+```
+
+## Confirmed current renderer handoff
+
+`TopicLessonData` and `LessonResult` currently live as TypeScript interfaces in
+`packages/ui/src/components/topic-lesson.tsx`, not external JSON validators in
+`@gullak/types`. Do not treat an arbitrary JSON file or completion callback as
+validated backend evidence. The existing generation runner returns a single
+`TopicVariant` draft, not a multi-step `TopicLessonData` lesson.
+
+| Learner loop | Current renderer mapping |
+| --- | --- |
+| Hook and experience | `intro` (its `hook` field), then `experience` |
+| Decision, consequence and recovery | `story-choice` choices/consequences with `nextNodeId`; `spot-and-sort` retries and explanations |
+| Concept reveal | `notice`, `explanation` or `worked-example`; `decoder` is also supported |
+| Application | `transfer` |
+| Review | `reflection` plus `recap` |
+
+There are no standalone decision, outcome, XP or quiz step types. R2 requests
+2–4 choices per decision; the renderer does not enforce that recommendation
+or editorial text limits. Existing `LessonDraft` validation limits still apply
+to generated `TopicVariant` drafts, not to arbitrary renderer step payloads.
+The limited-coin shop has no content schema yet and stays an R2-owned dedicated
+World 1 component. Do not invent its contract here.
+
+Each renderer lesson has one legacy `gradeGroup`: `grade-6-7`, `grade-8-10` or
+`grade-11-12`. The caller selects the appropriate version; new Stage IDs must
+not be passed in their place. The app remains topic-based through the demo.
+
+`onLessonComplete` emits `lessonId`, `topicId`, `gradeGroup`, `completedSteps`,
+`activityResults`, `decoderTermsOpened`, `retryCounts`, `startedAt` and
+`completedAt`. It assigns neither XP nor unlocks. `activityResults` is currently
+`Record<string, unknown>`; story results carry choice paths and tags, while
+sort results carry item responses and attempt counts. Story verdicts must not
+be fed into BKT under the current approval. Completing a lesson is not the
+same as passing its quiz; quiz pass marks remain the only unlock rule.
+
+Integration gaps to resolve with R1/R2/R3 after reviewed content arrives:
+
+- `apps/web/lib/topic-adapter.ts` currently creates only intro, explanation and
+  recap; it does not load authored multi-step world lesson JSON.
+- `apps/web/components/topic-page.tsx` does not currently attach
+  `onLessonComplete`; lesson-completion evidence is not persisted by this path.
+- The renderer's aggregate `retryCounts` is currently hard-coded to zero.
+  R2 should confirm/correct its semantics before analytics rely on it; nested
+  activity results contain their own attempt/retry information.
+- If a story/sort activity is the final step, its callback schedules an
+  `activityResults` update and immediately advances; completion reads the
+  previous state and can omit that final activity result. R2 should correct
+  this before completion evidence is consumed. This is an existing renderer
+  issue, not a unit-price helper change.
+- Completion is not yet the agreed nine-field, content-version-pinned answer
+  stream. R3 must persist validated evidence with canonical concept/question
+  IDs and immutable content versions before it can drive real tracing.
+
+The pending Lesson 1 content, three-question check, pass mark and once-only XP
+proposal remain unapproved. This handoff implements none of them. Await R5's
+sign-off and reviewed lesson/quiz JSON; coordinate persistence and any eventual
+reward evaluator separately with R1/R3 rather than trusting client callbacks.
