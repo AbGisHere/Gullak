@@ -4,6 +4,14 @@
   "agentGuidance": false,
   "globalDependencies": [".env*"],
   "tasks": {
+    "@gullak/ai#translate": {
+      "cache": false,
+      "passThroughEnv": ["SARVAM_API_KEY"]
+    },
+    "@gullak/ai#test": {
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/scripts/translate-text.mjs"],
+      "outputs": []
+    },
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
