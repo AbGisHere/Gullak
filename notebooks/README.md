@@ -48,9 +48,14 @@ P(slip) and P(guess) per concept by EM in pure Python, and reports recovery
 constant training-rate baseline. It writes and, on Colab, downloads
 `knowledge-tracing-params.synthetic-draft.json`, labelled synthetic and not
 production-approved. The app does not load it: priors and unlock rules are
-unchanged. Fitting on real quiz answers (exported by R3, never uploaded to this
-shared notebook) and porting the predictor to `packages/engine` come next;
-notify R1 before a Colab training run.
+unchanged. An inert pure predictor is implemented on the R4 feature branch in
+`packages/engine`; see [offline BKT inference](../docs/architecture.md#offline-bkt-inference).
+Its strict parameters are supplied by callers, and its observation-then-transition
+semantics match `predict_sequence` when forgetting is zero and `predict_bkt_batch`
+with forgetting. Synthetic fixtures check parity, not real-student accuracy.
+Fitting on real quiz answers (exported by R3, never uploaded to this shared
+notebook), reviewed parameters and app integration remain post-demo work;
+notify R1 before a Colab training run. No artifact is loaded by the predictor.
 
 ## Real-data benchmark on ASSISTments 2009–10 (increment 3)
 

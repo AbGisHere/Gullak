@@ -84,6 +84,7 @@ outputs only; live generation and human review remain pending.
 - [ ] Finance Tycoon: cash flow, inventory, business decisions, break-even and responsible growth (R2, R4, R5)
 - [ ] Placement/challenge scoring, spaced review and adaptive next-lesson selection (R4)
 - [x] Align onboarding priors with the approved 0.1/0.3/0.5 values (R4); centralized engine function, exact-value tests and web re-export; saved mastery and quiz unlocks unchanged
+- [x] Inert BKT-with-forgetting runtime on the R4 feature branch (R4): strict explicit parameters, pure step/ordered-sequence inference and synthetic notebook parity tests; real-data fitting/export, reviewed parameters, persistence and activation remain post-demo
 - [ ] Tutor grounded only in approved lesson content and learner language (R4, R5)
 - [x] Inactive post-demo English tutor preparation: exact v0.2.12 editorial hashes, grade-eligible teaching-only citations and JSON question isolation; app wiring and multilingual review remain separate (R4)
 - [x] Inactive verbatim English tutor excerpt fallback with conservative term matching, source provenance and all 33 pinned topic-source integration checks; no model or app activation (R4)

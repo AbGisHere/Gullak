@@ -13,6 +13,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - Deterministic approved-content tutor excerpt fallback with complete verbatim fields, lexical provenance and conservative no-excerpt reason codes; never fabricates an answer or truncates assumptions.
 - Offline tutor integration coverage for all 33 approved English source hashes and all existing grades, including edited-source and unapproved Candy rejection, guardrail behavior and verbatim excerpt provenance.
 - Strict offline BKT parameter and step/sequence contracts with explicit caller-supplied probabilities, boolean quiz observations and distinguishable emissions; no defaults, artifact loading or app activation.
+- Pure inert BKT-with-forgetting step and ordered-sequence inference with observation-then-transition semantics, fail-closed impossible observations and synthetic notebook parity tests; no mastery, persistence or unlock wiring.
 
 ## [0.2.16] - 2026-10-11
 
