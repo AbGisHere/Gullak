@@ -16,6 +16,9 @@
     "time": "About 2 minutes",
     "welcomeTitle": "Learn money by doing, with play money.",
     "welcomeDescription": "Tell us a little about yourself. We'll pick your first lessons and give you virtual cash to practise with safely.",
+    "nameLabel": "What should Gullu call you? (Name or nickname)",
+    "namePlaceholder": "e.g. Aarav, Priya, or Bunty",
+    "nameHint": "Optional. No email, password, or phone number needed.",
     "guardrail": "Everything here is play money. We explain choices; we never tell you what to buy or sell.",
     "aboutTitle": "Let's start where you are.",
     "aboutDescription": "This only sets a starting point. What you do in lessons and activities shapes what comes next.",
@@ -135,11 +138,15 @@
     "resetProfile": "Reset this device's learner data"
   },
   "nav": {
+    "world": "World",
     "home": "Home",
     "twin": "Story & Twin",
     "learn": "Learn",
+    "gullu": "Gullu",
     "portfolio": "Portfolio",
+    "rewards": "Rewards",
     "missions": "Gullak & Missions",
+    "profile": "Profile",
     "settings": "Settings"
   },
   "dashboard": {

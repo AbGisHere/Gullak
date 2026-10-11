@@ -79,7 +79,7 @@ export function HomeTab({
       {/* 2. THE VISUAL CENTERPIECE: Today's Featured Financial Story Challenge */}
       <section className="relative overflow-hidden rounded-3xl border-2 border-brand-ink bg-card shadow-[6px_6px_0px_#171717] transition-all hover:shadow-[8px_8px_0px_#171717]">
         {/* Large Story Illustration Banner */}
-        <div className="relative aspect-[16/7] sm:aspect-[21/9] w-full overflow-hidden border-b-2 border-brand-ink bg-muted">
+        <div className="relative aspect-[16/7] sm:aspect-[24/8] max-h-64 sm:max-h-72 w-full overflow-hidden border-b-2 border-brand-ink bg-muted">
           <Image
             src="/assets/crisis-scene.jpg"
             alt="Nani worried about a medical clinic bill in her Hyderabad home with student and Gullu"

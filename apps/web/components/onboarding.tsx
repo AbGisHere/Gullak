@@ -6,11 +6,12 @@ import { Experience, GradeGroup, LearnerProfile, LearningFormat } from "@gullak/
 import { Button } from "@gullak/ui/components/button";
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
-import { ArrowLeft, ArrowRight, Check, Sprout } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { LOCALE_COOKIE } from "@/i18n/locale";
+import { Gullu } from "./game/gullu";
 
 export const ONBOARDING_STORAGE_KEY = "gullak-onboarding-profile";
 export function readProfile(): LearnerProfile | null {
@@ -80,6 +81,7 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
   const locale = useLocale();
   const router = useRouter();
   const [step, setStep] = useState(0);
+  const [displayName, setDisplayName] = useState("");
   const [gradeGroup, setGradeGroup] = useState<GradeGroup | null>(null);
   const [experience, setExperience] = useState<Experience>("none");
   // null = "Mix it up": every format, and the format bandit learns from use.
@@ -115,6 +117,7 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
     const now = new Date().toISOString();
     const parsed = LearnerProfile.safeParse({
       id: crypto.randomUUID(),
+      ...(displayName.trim() ? { displayName: displayName.trim() } : {}),
       gradeGroup,
       experience,
       locale,
@@ -156,9 +159,9 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
     <main className="mx-auto flex min-h-svh w-full max-w-5xl flex-col px-4 py-5 sm:px-6 sm:py-8 lg:px-10">
       <header className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="grid size-9 place-items-center rounded-xl bg-foreground text-background">
-            <Sprout className="size-5" aria-hidden="true" />
-          </span>
+          <div className="size-9 rounded-xl border border-border bg-card grid place-items-center overflow-hidden p-0.5">
+            <Gullu state="wave" size={32} />
+          </div>
           {t("brand")}
         </div>
         <div className="flex items-center gap-2">
@@ -199,9 +202,31 @@ export function Onboarding({ onFinish }: { onFinish?: (profile: LearnerProfile) 
 
         {step === 0 ? (
           <div className="max-w-xl space-y-6">
+            <div className="flex items-center gap-4">
+              <Gullu state="wave" size={88} label="Gullu greeting you" />
+              <div className="rounded-2xl border-2 border-foreground bg-card p-3 text-xs sm:text-sm font-medium shadow-[2px_2px_0_#171717]">
+                &quot;Namaste! I&apos;m Gullu, your companion. Let&apos;s set up your journey!&quot;
+              </div>
+            </div>
             <p className="text-sm font-medium text-muted-foreground">{t("time")}</p>
             <h1 className="text-4xl font-semibold tracking-[-0.03em] text-balance sm:text-5xl">{t("welcomeTitle")}</h1>
             <p className="max-w-lg text-lg leading-8 text-muted-foreground">{t("welcomeDescription")}</p>
+
+            <div className="space-y-2 pt-1 text-left">
+              <label htmlFor="learner-name" className="text-sm font-semibold tracking-tight text-foreground block">
+                {t("nameLabel")}
+              </label>
+              <input
+                id="learner-name"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                maxLength={60}
+                placeholder={t("namePlaceholder")}
+                className={inputClass}
+              />
+              <p className="text-xs text-muted-foreground">{t("nameHint")}</p>
+            </div>
+
             <div className="rounded-xl bg-muted px-4 py-3 text-sm text-muted-foreground">{t("guardrail")}</div>
           </div>
         ) : null}

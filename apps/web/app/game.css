@@ -1,0 +1,462 @@
+/*
+ * Game surfaces (Direction C: Gullu's Interactive World).
+ * Plain CSS on purpose: keyframes and the tactile button live here so
+ * packages/ui/globals.css (the shared design system) stays untouched.
+ * Illustration colours are fixed so drawn scenes read the same in light
+ * and dark themes; chrome keeps using the theme-aware brand tokens.
+ */
+
+:root {
+  --g-ink: #171717;
+  --g-paper: #f7f3e8;
+  --g-card: #fffdf7;
+  --g-lime: #dfff3f;
+  --g-lilac: #cbb5ff;
+  --g-coral: #ff6847;
+  --g-clay: #e9572f;
+  --g-yellow: #ffd84d;
+  --g-muted: #ece8df;
+  --g-soft-ink: #4a463f;
+  --g-border: #171717;
+  --font-display: var(--font-baloo), var(--font-baloo-telugu), var(--font-sans), system-ui, sans-serif;
+}
+
+.dark {
+  --g-ink: #f8fafc;
+  --g-paper: #0b1120;
+  --g-card: #1e293b;
+  --g-lime: #dfff3f;
+  --g-lilac: #cbb5ff;
+  --g-coral: #ff6847;
+  --g-clay: #e9572f;
+  --g-yellow: #ffd84d;
+  --g-muted: #162032;
+  --g-soft-ink: #94a3b8;
+  --g-border: #334155;
+}
+
+/* Browser surfaces carry the palette too. */
+::selection {
+  background: var(--g-lime);
+  color: var(--g-ink);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Tactile game button: a shadow means "you can press this" ---------- */
+.g-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  padding: 0.5rem 1.25rem;
+  border: 2.5px solid var(--g-ink);
+  border-radius: 1rem;
+  background: var(--g-lime);
+  color: var(--g-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.15;
+  text-align: center;
+  box-shadow: 0 4px 0 var(--g-ink);
+  transition:
+    transform 120ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 120ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 150ms ease-out;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.g-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 var(--g-ink);
+}
+.g-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--g-ink);
+}
+.g-btn:focus-visible,
+.g-tap:focus-visible {
+  outline: 3px solid var(--g-ink);
+  outline-offset: 3px;
+}
+.g-btn:disabled {
+  background: var(--g-muted);
+  color: #5d5950;
+  box-shadow: 0 2px 0 #b9b3a6;
+  border-color: #b9b3a6;
+  transform: none;
+  cursor: not-allowed;
+}
+.g-btn--paper {
+  background: var(--g-card);
+}
+.g-btn--ink {
+  background: var(--g-ink);
+  color: var(--g-paper);
+  box-shadow: 0 4px 0 #000;
+}
+.g-btn--sm {
+  min-height: 2.75rem;
+  font-size: 1rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 0.875rem;
+}
+
+/* Tappable illustrated objects share the same affordance. */
+.g-tap {
+  border: 2.5px solid var(--g-ink);
+  background: var(--g-card);
+  box-shadow: 0 4px 0 var(--g-ink);
+  transition:
+    transform 140ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 140ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 160ms ease-out;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.g-tap:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--g-ink);
+}
+.g-tap:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--g-ink);
+}
+.g-tap[aria-pressed="true"] {
+  background: var(--g-lime);
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--g-ink);
+}
+
+/* Dark mode button & tap overrides */
+.dark .g-btn {
+  border-color: #000000;
+  box-shadow: 0 4px 0 #000000;
+  color: #171717;
+}
+.dark .g-btn:hover {
+  box-shadow: 0 5px 0 #000000;
+}
+.dark .g-btn:active {
+  box-shadow: 0 0 0 #000000;
+}
+.dark .g-btn--paper {
+  background: var(--g-card);
+  color: var(--g-ink);
+  border-color: #334155;
+  box-shadow: 0 4px 0 #000000;
+}
+.dark .g-btn--paper:hover {
+  border-color: #475569;
+}
+.dark .g-tap {
+  border-color: #334155;
+  background: var(--g-card);
+  box-shadow: 0 4px 0 #000000;
+}
+.dark .g-tap:hover {
+  border-color: var(--g-lime);
+  box-shadow: 0 5px 0 #000000;
+}
+.dark .g-tap[aria-pressed="true"] {
+  border-color: var(--g-lime);
+  box-shadow: 0 2px 0 #000000;
+}
+
+/* ---------- Gullu ---------- */
+.gullu {
+  overflow: visible;
+}
+.gullu .gullu-body {
+  transform-box: view-box;
+  transform-origin: 60px 112px;
+}
+.gullu[data-motion="idle"] .gullu-body,
+.gullu[data-motion="thinking"] .gullu-body {
+  animation: gullu-bob 2.6s ease-in-out infinite;
+}
+.gullu[data-motion="hop"] .gullu-body {
+  animation: gullu-hop 620ms cubic-bezier(0.22, 1, 0.36, 1) 1;
+}
+.gullu[data-motion="jump"] .gullu-body {
+  animation: gullu-jump 900ms cubic-bezier(0.22, 1, 0.36, 1) 2;
+}
+.gullu[data-motion="sway"] .gullu-body {
+  animation: gullu-sway 2.2s ease-in-out infinite;
+}
+.gullu[data-motion="pop"] .gullu-body {
+  animation: gullu-pop 420ms cubic-bezier(0.22, 1, 0.36, 1) 1;
+}
+.gullu[data-motion="tilt"] .gullu-body {
+  animation: gullu-tilt 520ms cubic-bezier(0.22, 1, 0.36, 1) 1 forwards;
+}
+.gullu .gullu-shadow {
+  transform-box: view-box;
+  transform-origin: 60px 114px;
+}
+.gullu[data-motion="hop"] .gullu-shadow {
+  animation: gullu-shadow 620ms cubic-bezier(0.22, 1, 0.36, 1) 1;
+}
+.gullu[data-motion="jump"] .gullu-shadow {
+  animation: gullu-shadow 900ms cubic-bezier(0.22, 1, 0.36, 1) 2;
+}
+.gullu .gullu-eyes {
+  transform-box: view-box;
+  transform-origin: 60px 62px;
+  animation: gullu-blink 4.6s ease-in-out infinite;
+}
+.gullu .gullu-arm-r {
+  transform-box: view-box;
+  transform-origin: 97px 72px;
+}
+.gullu .gullu-arm-l {
+  transform-box: view-box;
+  transform-origin: 23px 72px;
+}
+.gullu[data-arms="wave"] .gullu-arm-r {
+  animation: gullu-wave 900ms ease-in-out 3;
+}
+.gullu[data-arms="cheer"] .gullu-arm-r,
+.gullu[data-arms="cheer"] .gullu-arm-l {
+  animation: gullu-cheer 450ms ease-in-out infinite alternate;
+}
+.gullu .gullu-coin {
+  transform-box: view-box;
+  transform-origin: 60px 30px;
+  animation: gullu-coin 700ms cubic-bezier(0.22, 1, 0.36, 1) 1 forwards;
+}
+
+@keyframes gullu-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes gullu-hop {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  20% {
+    transform: translateY(0) scale(1.06, 0.92);
+  }
+  50% {
+    transform: translateY(-14px) scale(0.97, 1.04);
+  }
+  80% {
+    transform: translateY(0) scale(1.04, 0.95);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+@keyframes gullu-jump {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  15% {
+    transform: translateY(0) scale(1.08, 0.9);
+  }
+  45% {
+    transform: translateY(-22px) rotate(-6deg);
+  }
+  70% {
+    transform: translateY(-6px) rotate(4deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+@keyframes gullu-shadow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.18;
+  }
+  50% {
+    transform: scale(0.7);
+    opacity: 0.1;
+  }
+}
+@keyframes gullu-sway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+@keyframes gullu-pop {
+  0% {
+    transform: scale(0.92);
+  }
+  55% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes gullu-tilt {
+  to {
+    transform: rotate(-8deg);
+  }
+}
+@keyframes gullu-blink {
+  0%,
+  90%,
+  100% {
+    transform: scaleY(1);
+  }
+  94% {
+    transform: scaleY(0.08);
+  }
+}
+@keyframes gullu-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  30% {
+    transform: rotate(-22deg);
+  }
+  70% {
+    transform: rotate(14deg);
+  }
+}
+@keyframes gullu-cheer {
+  from {
+    transform: rotate(-6deg);
+  }
+  to {
+    transform: rotate(8deg);
+  }
+}
+@keyframes gullu-coin {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(-12px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+/* ---------- Speech bubble ---------- */
+.g-bubble {
+  animation: g-bubble-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes g-bubble-in {
+  from {
+    transform: translateY(6px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* ---------- World map ---------- */
+.g-node-current .g-node-ring {
+  animation: g-ring 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+@keyframes g-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+.g-float {
+  animation: g-float 6s ease-in-out infinite;
+}
+@keyframes g-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.g-drift {
+  animation: g-drift 38s linear infinite;
+}
+@keyframes g-drift {
+  from {
+    transform: translateX(-8%);
+  }
+  to {
+    transform: translateX(8%);
+  }
+}
+
+/* Unaffordable item: a gentle "not yet", never a shake of shame. */
+.g-nudge {
+  animation: g-nudge 360ms ease-in-out 1;
+}
+@keyframes g-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-4px) rotate(-1.5deg);
+  }
+  65% {
+    transform: translateX(3px) rotate(1deg);
+  }
+}
+
+.g-rise {
+  animation: g-rise 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes g-rise {
+  from {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gullu *,
+  .g-bubble,
+  .g-node-ring,
+  .g-float,
+  .g-drift,
+  .g-nudge,
+  .g-rise {
+    animation: none !important;
+  }
+  .g-btn,
+  .g-tap {
+    transition: none;
+  }
+}
