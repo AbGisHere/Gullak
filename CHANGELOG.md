@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-10-11
+
 ### Added
 - Company metrics catalogue (`docs/company-metrics.md`): every number stock-research sites show for a company, grouped, with what it tells you, how it is worked out and the learner stage, plus the time windows behind the variants. Planned as Stock Street's company report card on fictional companies.
 
