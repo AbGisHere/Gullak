@@ -107,3 +107,5 @@ loads the notebook definitions directly; `test_bkt_fit.py` and
 implementation. The benchmark tests use a small fake CSV in the ASSISTments
 layout and check that the vectorised BKT matches the reviewed Python version;
 the DKT smoke test runs only where PyTorch is installed.
+
+Adaptive artifacts may model lesson mastery, spaced review and stage-appropriate next-lesson selection across the eight-world curriculum. They must not optimise investment returns or make recommendations.

@@ -2,6 +2,8 @@
 
 Committed, real market data so the demo never depends on live APIs. One JSON file per symbol, named `<source>-<symbol>.json` and validated by `SnapshotFile` in `@gullak/market-data`:
 
+Snapshots are optional illustrative inputs for later-world historical simulations; every core world must remain playable using fictional scenarios and virtual money.
+
 ```json
 { "symbol": "120716", "name": "…", "source": "amfi", "attribution": "…", "quote": { "kind": "nav", "value": 158.5759, "currency": "INR", "asOf": "2026-10-09T00:00:00+05:30", "source": "amfi" }, "series": [{ "t": "…", "value": … }] }
 ```

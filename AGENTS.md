@@ -4,14 +4,14 @@ The single source of truth for every AI agent (Claude Code, Codex, Gemini, OpenC
 
 ## Product
 
-**Gullak** is an adaptive financial-literacy platform (Megathon X · Vanguard problem statement) for school students in Grades 6–12, especially from underserved communities in Hyderabad. Core loop: **learn → unlock → learn by doing with play money.** The full learning map is in [`docs/curriculum.md`](docs/curriculum.md).
+**Gullak** is a gamified financial-literacy platform for Indian students in Classes 6–12. Core loop: **experience → decide → observe consequences → understand → apply → review → unlock.** The full learning map is in [`docs/curriculum.md`](docs/curriculum.md).
 
-1. Onboarding (after picking a language, en / hi / te): grade group (6–7 / 8–10 / 11–12), current experience (none / some / regular), how they like to learn (optional; default "Mix it up"). Experience only sets a starting prior; evidence from quizzes, activities and simulation decisions drives mastery and unlocks.
-2. Virtual starting cash from `packages/content/config/starting-capital.json`.
-3. Four pillars from the problem statement: **Plan & budget** (needs vs wants, budgeting, goals, inflation), **Save & manage** (habits, emergency fund, bank accounts/UPI, FD, RD, PPF, borrowing, insurance), **Understand investing** (risk, compounding, gold, money market, bonds, debt funds, MF/SIP, index funds/ETFs, stocks, diversification, retirement) and **Stay financially safe** (protecting information, scams, fake apps, reporting fraud). Topics form a prerequisite graph tagged by grade group, all as data in `packages/content`.
-4. Every topic is stored once and rendered as video, story/comic, visual, formula + calculator, transcript, simulation, quiz and audio.
-5. Passing a topic's quiz unlocks instruments in the paper portfolio, simulations or the next topics.
-6. Learn by doing through three data-driven engines: **life + market sim** (month-by-month budgeting and investing with life events, in two play-money modes: **Practice** replays real history as episodes, e.g. March 2020 + a hospital bill, with a reveal of the alternatives; **Live** is paper trading on current prices, scored on habits, never returns), **story choices** (branching consequences) and **spot & sort** (need or want, scam or real), plus a what-if sandbox over engine formulas. The demo story is the adaptive loop: evidence → recommendation → activity → simulation → mastery update → changed recommendation.
+1. Onboarding records language (en / hi / te), class group (6–7 / 8–9 / 10–12), current experience and preferred formats. Older learners may take a placement challenge.
+2. The eight shared worlds are **Candy Economy**, **Savings Quest**, **Bankopolis**, **Market Mayhem**, **Grow Your Money**, **Stock Street**, **Life Simulator** and **Finance Tycoon**. Class group changes depth, vocabulary and scenario realism; it does not create separate courses.
+3. Each 3–5 minute lesson is data: narrative hook, mechanic, decisions, outcomes, recovery feedback, concept reveal, application, review, XP, mastery and unlocks.
+4. Reusable mechanics include budgeting, branching stories, virtual shops, money-growth tools, fictional paper portfolios, life-event cards and spot-and-sort rounds.
+5. Progress unlocks the next lesson/world and can award only virtual XP, badges or fictional coins. Never reward the biggest short-term investment return.
+6. Learn by doing through life + market simulation (Practice replays history with life events; Live uses paper trading on current prices and scores habits, never returns), story choices and spot-and-sort rounds. Evidence from quizzes, activities and decisions drives mastery and unlocks.
 7. Goal engine, mock Account Aggregator insights → learning nudges, facilitator/NGO dashboard, multilingual AI tutor.
 8. **Differentiators** (games are table stakes): **one storyline that remembers every choice** (*Nani's Gullak*: three seasons, one per grade group, Gullu as companion and tutor voice, a recurring cast and villain; no fixed years in the story, then an "FYI, this really happened" reveal with real data); one continuous money life with learn → unlock → invest; **take-home missions** that make the learner the family's money teacher (reach counted in households); built for shared phones and no data; a **habit loop, never addictive** (living Gullak, daily real-price moment, 2-minute drop). Play layer: Money Multiverse and the class market. More ways to learn: Teach the AI, Kitna? lens, pocket-money diary, real documents explained, debate cards, spaced recall. Full design: [`docs/curriculum.md`](docs/curriculum.md).
 
@@ -50,16 +50,16 @@ Dependency direction: `web → (ui, ai, market-data, content, engine, types)`; `
 
 | Role | Who | Owns |
 |---|---|---|
-| **R1** Lead / frontend core | @AbGisHere | `apps/web` shell, routing, layouts (phone + desktop), onboarding, design system (`packages/ui`), release management. Also helps on R2–R4 work. |
-| **R2** Frontend / game | @mayankSuman404, @Parthvi1707 | Website flow (with R1), design direction + tokens (Impeccable init), lesson renderers (all formats), sim + portfolio UI (Practice and Live), charts, animations |
+| **R1** Lead / frontend core | @AbGisHere | `apps/web` shell, routing, layouts, learner profile, world map, design system and release management. Also helps on R2–R4 work. |
+| **R2** Frontend / game | @mayankSuman404, @Parthvi1707 | Game UI, design direction + tokens, lesson renderer, world maps, mechanics, Practice/Live simulation and portfolio UI, motion and charts |
 | **R3** Backend / data | @ishitaanmol975 | `packages/market-data`, `data/snapshots`, Supabase schema + migrations, data-access layer, route handlers |
 | **R4** AI / adaptive engine | @VanshGoel-01 | `packages/ai`, `packages/engine` (adaptive parts), `notebooks/` (knowledge tracing on Colab), format bandit, tutor, lesson pre-generation |
-| **R5** Product / content / QA | shared, led by R1 | `packages/content` (topics, translations), quiz quality, guardrail review, Playwright e2e, demo script |
+| **R5** Product / content / QA | shared, led by R1 | `packages/content` (worlds, lessons, translations), decision/quiz quality, guardrail review, Playwright e2e and demo script |
 
 ## Scalability rules
 
-- **Content is data, not code.** A new topic or language never needs a code change.
-- **LLM output for lessons is generated once per topic × format × grade group × language and cached.** Live LLM calls are only for the tutor, and those are rate-limited and cached.
+- **Content is data, not code.** A new world, lesson, scenario, stage variant or language never needs a renderer code change.
+- **LLM output for lessons is generated once per lesson × stage × format × language and cached.** Live LLM calls are only for the tutor, and those are rate-limited and cached.
 - **Every market data source sits behind an adapter with caching and a snapshot fallback,** so no screen breaks if an API is down.
 - **Domain logic lives in `/packages/engine`,** which is pure functions, fully unit-tested and free of any framework imports.
 - **Stateless server code,** ready for edge/CDN deployment; no in-memory session state. (`MemoryCache` is for tests/local only.)
@@ -84,12 +84,15 @@ We don't fine-tune LLMs. Small adaptive models (e.g. knowledge tracing) are trai
 - **Tests:** every package has Vitest unit tests beside the code (`*.test.ts`). Engine functions need tests for normal, edge and invalid input. E2E in `apps/web/e2e` (Playwright, phone + desktop).
 - **Scratch files:** agents put temporary work (throwaway scripts, intermediate output, downloads, test commit messages) in their own scratchpad or temp directory, never in the repo. Clear it whenever it's no longer needed: when the task that used it is done, before a push, and before `/compact`. Look before deleting, and move anything worth keeping into the repo first.
 
-### How to add a topic
+### How to add a lesson
 
-1. Add a node to `packages/content/config/topic-graph.json`: pillar, grade groups, prerequisites, pass mark, and the instruments and activities it unlocks. Loading rejects unknown prerequisites, cycles and prerequisites not taught to the same grade groups.
-2. Create `packages/content/topics/<topic-id>/topic.json` (`TopicMeta`) and `<locale>.json` per locale (`TopicContent`, must include a quiz variant).
-3. Formula variants reference an `@gullak/engine` function by name in `calculator`.
-4. Run `pnpm test`: content is validated against the schemas. No code changes needed.
+1. Add the lesson to its world and define its previous-lesson/mastery unlock.
+2. Create `packages/content/worlds/<world-id>/<lesson-id>/lesson.json` with stage variants, mechanic, decisions, outcomes, review and XP.
+3. Create `<locale>.json` for every supported language; each one needs the same decision ids and review structure.
+4. Reference an `@gullak/engine` function only for deterministic calculations or simulations.
+5. Run `pnpm test`: content is validated against the schemas. No renderer code change is required.
+
+Until the content schema migrates, mirror this structure in `packages/content/config/topic-graph.json` and its topic files so the existing renderer keeps working.
 
 ### How to add a language
 
@@ -174,8 +177,8 @@ These rules apply to every human and agent, in this repo and in every fork. Hook
 | 2026-10-11 | **Small, frequent commits on fork branches; PRs merged by rebase/fast-forward, never squashed;** versions bump only on merge | A history of small, reviewable steps shows how the product was built and keeps each change easy to review and revert; tags stay one per release. |
 | 2026-10-10 | **Graded submission repo `IIIT-ECell/megathon26-claude2create`** (remote `submission`), pushed only when R1 says so | It's what gets graded and teammates have no access. R1 picks which released, green versions graders see. |
 | 2026-10-10 | **Vercel hosting at `gullak.abgupta.me`** (CNAME on Namecheap); production from `main` only, no branch or PR previews (2026-10-11: fork PRs failed the Vercel check and previews duplicated CI); functions in Mumbai (`bom1`) | Zero-config Next/Turborepo deploys; a stable custom URL for judges and the installed PWA; Mumbai is closest to learners and to Supabase. |
-| 2026-10-10 | **Four-pillar curriculum for Grades 6–12** (grade groups 6–7 / 8–10 / 11–12) instead of an instrument ladder for adults; **learn-by-doing engines** with every scenario as data | Matches the problem statement (school students, four pillars, learn by doing). Engines are coded once; topics, personas, events, stories and languages are added without code changes. |
-| 2026-10-10 | **Life sim and market sim merged into one engine with Practice (replayed history + life events + reveal) and Live (paper trading on current prices)**; the Time Machine becomes Practice episodes; Live scores habits, not returns | Forced selling during a life event teaches liquidity and why an emergency fund matters, across three pillars and every grade group. One shared portfolio and engine instead of two builds. Scoring habits keeps Live educational rather than a trading game. |
+| 2026-10-11 | **Eight-world adaptive curriculum** for Classes 6–12 (6–7 / 8–9 / 10–12), built from short decision-led lessons | The journey starts with candies and pocket money, then reaches banking, markets, investing, life finance and entrepreneurship. Worlds share mechanics and adapt depth; lesson data carries decisions, outcomes, XP and unlocks. |
+| 2026-10-10 | **Life sim and market sim merged into one engine with Practice (replayed history + life events + reveal) and Live (paper trading on current prices)**; the Time Machine becomes Practice episodes; Live scores habits, not returns | Forced selling during a life event teaches liquidity and why an emergency fund matters, across the eight worlds and every grade group. One shared portfolio and engine instead of two builds. Scoring habits keeps Live educational rather than a trading game. |
 | 2026-10-10 | **Sarvam** for en → hi / te translation (UI messages and topic content), LLM fallback, human review before shipping; replaces Bhashini | Built for Indian languages; one provider for every locale. Hindi and Telugu strings written before it lands are unreviewed drafts. |
 | 2026-10-10 | **USP is reach and habit, not games:** one continuous money life, take-home missions (households reached), built for shared phones and no data, a 2-minute daily habit loop | The problem statement asks for games, so every team will have them; NGPF Arcade already offers a dozen. Few will design for the family and the shared phone. |
 | 2026-10-10 | **The storyline *Nani's Gullak* is the spine of the product;** no fixed years inside the story, real events revealed only after an arc ("FYI, this really happened") | A story that carries over for years gives learners a reason to care and come back; keeping years out stops it feeling like a history lesson, while the reveal still ties it to real Indian data. |
