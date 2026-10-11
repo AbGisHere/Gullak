@@ -24,6 +24,7 @@ These ship today and carry over to the eight worlds; the content model and grade
 - [x] Design direction and tokens via Impeccable ([DESIGN.md](DESIGN.md), [PRODUCT.md](PRODUCT.md)) (R2)
 - [x] Onboarding in en/hi/te: grade group (6–7 / 8–10 / 11–12), experience, formats, goal (R1)
 - [x] Learner app on phone and desktop: shell with bottom tabs and sidebar, locale switcher, Play Money badge, grade-filtered learning map, lessons, quiz unlocks and on-device mastery, the March 2020 Practice episode and the paper portfolio (R1, R2)
+- [x] Checked quizzes show correctness, authored reasoning for every question and automatic score focus/scroll; phone/desktop browser acceptance remains pending.
 - [x] Live paper trading, first slice: search any NSE/BSE stock, ETF, mutual fund or index on Yahoo Finance, buy and sell with play money once the lesson that teaches it is passed, holdings saved on the device. Habit review, life events and Supabase persistence remain pending (R1)
 - [x] Offline curriculum briefs, lesson-draft validation and versioned lesson-generation requests (R4)
 - [x] Knowledge-tracing notebook: synthetic BKT fitting and a real-data benchmark on ASSISTments 2009–10 (R4)

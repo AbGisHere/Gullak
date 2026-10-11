@@ -8,6 +8,12 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.31] - 2026-10-11
+
+### Fixed
+
+- Show checked quiz answers with color, correctness labels and authored explanations; move focus and scroll to the final score, respecting reduced motion.
+
 ## [0.2.30] - 2026-10-11
 
 ### Added

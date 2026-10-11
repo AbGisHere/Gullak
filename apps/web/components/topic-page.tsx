@@ -4,10 +4,10 @@ import { topicWorlds } from "@gullak/content";
 import { gradeQuiz } from "@gullak/engine";
 import type { Topic, UnlockRule } from "@gullak/types";
 import { TopicLesson, type TopicLessonLabels } from "@gullak/ui/components/topic-lesson";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2, XCircle } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TermHelp } from "@/components/help/term-help";
 import { restoreQuizDraft } from "@/lib/form-safety";
 import { readLearnerState, readProfile, saveLearnerState } from "@/lib/learner-state";
@@ -22,6 +22,15 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [result, setResult] = useState<{ score: number; passed: boolean } | null>(null);
   const [saveFailed, setSaveFailed] = useState(false);
+  const resultRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!result) return;
+    resultRef.current?.focus({ preventScroll: true });
+    resultRef.current?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+      block: "start",
+    });
+  }, [result]);
   const quiz = topic.content.variants.find((variant) => variant.format === "quiz");
   const draftKey = `gullak-quiz-draft:${topic.meta.id}`;
   // Keep unchecked answers for this tab session, so a reload or a stray tap on the nav loses nothing.
@@ -34,6 +43,8 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
     }
   }, [draftKey, quiz]);
   function chooseAnswer(questionId: string, optionId: string) {
+    setResult(null);
+    setSaveFailed(false);
     setAnswers((current) => {
       const next = { ...current, [questionId]: optionId };
       try {
@@ -134,29 +145,65 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
                 {index + 1}. {question.prompt}
               </legend>
               <div className="grid gap-2">
-                {question.options.map((option) => (
-                  <label
-                    key={option.id}
-                    className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 has-[:checked]:border-foreground has-[:checked]:bg-muted"
-                  >
-                    <input
-                      type="radio"
-                      name={question.id}
-                      value={option.id}
-                      checked={answers[question.id] === option.id}
-                      onChange={() => chooseAnswer(question.id, option.id)}
-                      className="size-4 accent-foreground"
-                    />
-                    <span>{option.text}</span>
-                  </label>
-                ))}
+                {question.options.map((option) => {
+                  const correct = result && option.id === question.correctOptionId;
+                  const incorrect = result && answers[question.id] === option.id && !correct;
+                  return (
+                    <label
+                      key={option.id}
+                      className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 ${
+                        correct
+                          ? "border-brand-ink bg-brand-lime text-brand-ink dark:text-brand-on-accent"
+                          : incorrect
+                            ? "border-brand-ink bg-brand-coral text-brand-ink dark:text-brand-on-accent"
+                            : "has-[:checked]:border-foreground has-[:checked]:bg-muted"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name={question.id}
+                        value={option.id}
+                        checked={answers[question.id] === option.id}
+                        onChange={() => chooseAnswer(question.id, option.id)}
+                        aria-describedby={result ? `quiz-feedback-${question.id}` : undefined}
+                        className="size-4 accent-current"
+                      />
+                      <span className="flex-1">{option.text}</span>
+                      {correct ? <CheckCircle2 aria-hidden="true" className="size-5 shrink-0" /> : null}
+                      {incorrect ? <XCircle aria-hidden="true" className="size-5 shrink-0" /> : null}
+                    </label>
+                  );
+                })}
               </div>
+              {result ? (
+                <div id={`quiz-feedback-${question.id}`} className="space-y-2 rounded-xl bg-muted p-4">
+                  <p className="flex items-center gap-2 font-semibold">
+                    {answers[question.id] === question.correctOptionId ? (
+                      <CheckCircle2 aria-hidden="true" className="size-5 shrink-0" />
+                    ) : (
+                      <XCircle aria-hidden="true" className="size-5 shrink-0" />
+                    )}
+                    {t(answers[question.id] === question.correctOptionId ? "answerCorrect" : "answerIncorrect")}
+                  </p>
+                  {answers[question.id] !== question.correctOptionId ? (
+                    <p>
+                      {t("correctAnswer", {
+                        answer: question.options.find((option) => option.id === question.correctOptionId)?.text ?? "",
+                      })}
+                    </p>
+                  ) : null}
+                  <p className="text-base leading-7">
+                    <span className="font-semibold">{t("answerReason")} </span>
+                    {question.explanation}
+                  </p>
+                </div>
+              ) : null}
             </fieldset>
           ))}
           <button
             type="button"
             onClick={submitQuiz}
-            disabled={remaining > 0}
+            disabled={remaining > 0 || result !== null}
             aria-describedby={remaining > 0 ? "quiz-remaining" : undefined}
             className="min-h-12 rounded-lg bg-foreground px-5 font-bold text-background disabled:cursor-not-allowed disabled:opacity-50"
           >
@@ -180,7 +227,13 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
             </div>
           ) : null}
           {result ? (
-            <div role="status" className="space-y-4 rounded-xl bg-muted p-4">
+            <div
+              ref={resultRef}
+              role="status"
+              tabIndex={-1}
+              aria-label={t("quizResults")}
+              className="scroll-mt-24 space-y-4 rounded-xl bg-muted p-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+            >
               <p className="flex items-center gap-2 font-bold">
                 {result.passed ? <CheckCircle2 className="size-5" aria-hidden="true" /> : null}
                 {result.passed
