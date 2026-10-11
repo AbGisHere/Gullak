@@ -103,3 +103,54 @@ pnpm --filter @gullak/engine exec vitest run src/recommend-next.test.ts
 pnpm --filter @gullak/types typecheck
 pnpm --filter @gullak/engine typecheck
 ```
+
+## Offline lesson draft validation
+
+`validateLessonDraft(input, brief, context)` in `@gullak/ai` returns a
+`LessonDraft` from `@gullak/types` or throws a Zod validation error. This
+offline step checks a future generation result; it does not generate lessons,
+call providers, cache outputs, write content, or publish anything.
+
+The strict envelope contains `schemaVersion: 1`, `reviewStatus: "draft"`,
+`topicId`, `gradeGroup`, `locale`, and one `variant`. Its identity must match
+the supplied brief, which is revalidated against canonical metadata, graph
+rule and supported locales using the existing brief validator. The variant
+must declare exactly that grade group and unique canonical concept IDs,
+including every concept in the brief's key ideas.
+
+Only the four agreed formats are accepted, using narrower versions of existing
+renderer schemas, without changing `TopicVariant`:
+
+- `transcript`: plain markdown, at most 6,000 characters.
+- `story`: 1–12 text-only panels, unique panel IDs, text at most 300 characters,
+  optional speaker at most 80 characters; no image fields.
+- `audio`: narration `ttsText` at most 4,000 characters; no URL or audio file.
+- `quiz`: 1–12 questions, prompts at most 300 characters, explanations at most
+  600, 2–6 options per question, option text at most 120. Question IDs and each
+  question's option IDs must be unique; the answer key must name an option.
+  Question concepts must be declared and canonical, and every quiz-objective
+  concept must be assessed. This checks concept coverage, not semantic fulfilment
+  of each objective or the factual correctness of the answer key.
+
+Text is trimmed and nonempty; HTML tags and markdown image syntax are rejected.
+Unknown fields at every draft boundary are rejected rather than silently
+stripped. Editorial limits are initial engineering defaults for phone-readable
+drafts, not R2-approved visual layout limits. R2/R5 should review them before
+generation is wired. Existing output guardrails screen narration, markdown,
+panel/speaker text and quiz prompts/options/explanations. Regex screening is not
+complete advice, privacy or factual verification, particularly across languages.
+R5 review is mandatory; no validated draft can become published in this step.
+
+Future generator handoff: supply the validated brief and canonical context,
+generate one variant per topic × format × grade group × locale, wrap the
+result as a draft, and run this validator before caching it for human review.
+Provider execution, versioned prompts, content-hash-aware cache keys, retry
+policy and a draft review queue are subsequent increments. Never overwrite
+authored topic JSON or change quiz unlock rules automatically.
+
+Focused checks (no API keys):
+
+```powershell
+pnpm --filter @gullak/types exec vitest run src/lesson-draft.test.ts
+pnpm --filter @gullak/ai exec vitest run src/lesson-draft.test.ts
+```

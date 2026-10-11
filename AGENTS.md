@@ -112,6 +112,10 @@ We don't fine-tune LLMs. Small adaptive models (e.g. knowledge tracing) are trai
 
 Callers supply canonical `meta`, graph `rule` and `supportedLocales`. Topic IDs and pillars must agree, the grade/locale must be supported, and referenced concepts must exist; duplicate canonical concept IDs are rejected. A successful result is still an **unreviewed draft**, not factual/safety/privacy approval or permission to generate/publish. Real briefs live in `packages/content/briefs/<topic-id>/<grade-group>.<locale>.json` (validated by that package's tests); keep engineering fixtures in tests, not published topic files. This step adds no provider calls, assets, translations or publication workflow. Usage/testing notes: [`docs/architecture.md`](docs/architecture.md#offline-curriculum-preparation).
 
+### Offline lesson drafts
+
+`LessonDraft` in `@gullak/types` wraps one existing-renderer-compatible transcript, text-only story, device narration or quiz variant with topic, grade, locale and draft-only status. `validateLessonDraft(input, brief, context)` in `@gullak/ai` revalidates the brief, checks canonical concept coverage and quiz integrity, and screens teaching text with existing output guardrails. Structural success is not factual, safety or R5 approval. No provider calls, assets, publication, persistence or unlock changes. Editorial limits and future generation handoff are in [`docs/architecture.md`](docs/architecture.md#offline-lesson-draft-validation).
+
 ### How to add a market-data adapter
 
 1. In `packages/market-data/src/adapters/<source>.ts`, implement `MarketDataAdapter` (`getQuote`, `getSeries`). Validate the source's raw response with Zod and map it to `MarketQuote` / `SeriesPoint`, setting `asOf` from the source.
