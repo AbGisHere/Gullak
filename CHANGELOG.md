@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Responsive learner app shell with locale switching, Play Money badge and onboarding handoff to Learn.
+
 ## [0.1.5] - 2026-10-11
 
 ### Added
