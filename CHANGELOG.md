@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.8] - 2026-10-11
+
 ### Added
 - Shared `SchoolClass` boundary schema in `@gullak/types`; draft stage selection validates through the engine's declared types dependency rather than an undeclared direct Zod import.
 - Offline draft-pipeline regression tests for the five approved English briefs across four formats, including canonical-concept and quiz-objective rejection; provider outputs are synthetic fixtures, not generated or approved learner content.
