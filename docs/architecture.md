@@ -236,6 +236,23 @@ drifting priors. This is initialization only: no database writes, model training
 saved-state reset, or changes to the temporary web evidence updater. Quiz pass
 marks remain the sole progress gate; mastery ranks recommendations and reviews.
 
+## Offline draft-pipeline regression coverage
+
+`packages/ai/src/lesson-runner.integration.test.ts` exercises the complete
+current-topic request-builder → injected generator → draft-validator path for
+all five approved Grade 8–10 English briefs and transcript, text-only story,
+device narration and quiz. Inputs come from the committed brief, topic, graph
+and locale JSON. Provider outputs are explicitly synthetic test fixtures, never
+learner content or approved assessments; no credentials, network or publication
+are involved. Tests cover preserved draft identity, canonical concepts,
+non-mutation, foreign-concept rejection and missing quiz-objective rejection.
+They prove pipeline compatibility, not factual teaching quality, live-provider
+reliability or R5 approval. Candy Economy Lesson 1 remains excluded.
+
+```powershell
+pnpm --filter @gullak/ai exec vitest run src/lesson-runner.integration.test.ts
+```
+
 ## Draft world metadata
 
 These inactive Phase 0 contracts in `@gullak/types` do not replace the topic

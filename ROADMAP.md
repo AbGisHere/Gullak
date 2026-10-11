@@ -23,6 +23,9 @@ Current-model bridge: an injectable draft-generation runner is implemented in
 `@gullak/ai` (`generateLessonDraft`). It connects the existing
 topic brief/request/validation flow; it does not generate or publish world
 lessons, add live providers/caching, or migrate stage and unlock contracts.
+Offline integration tests cover all five approved Grade 8–10 English briefs
+across four draft formats on the R4 feature branch, using synthetic provider
+outputs only; live generation and human review remain pending.
 
 - [x] Monorepo, strict TypeScript, Biome, Husky, CI, PWA, i18n and Supabase helpers
 - [ ] Replace the old four-pillar topic model with the eight-world curriculum and three learner stages (R1, R5)
