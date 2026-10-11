@@ -51,6 +51,8 @@ These ship today and carry over to the eight worlds; the content model and grade
 ## Phase 4 · Worlds 6–8 and adaptive learning
 
 - [ ] Stock Street: fictional-company research, paper portfolio and diversification reasoning (R2, R3, R5)
+- [ ] Stock Street company report card: every metric in [docs/company-metrics.md](docs/company-metrics.md) as data, computed by `@gullak/engine` from fictional companies' statements, with en/hi/te explanations; Finance Tycoon reuses it for the learner's own business (R5, R4, R2)
+- [ ] Fund categories (all 61, already data in `packages/content`) taught in Grow Your Money, Stock Street and Life Simulator ([curriculum](docs/curriculum.md#fund-categories)) (R5)
 - [ ] Life Simulator: salary, bills, emergency, loan/EMI, insurance and scam-event loop (R2, R4, R5)
 - [ ] Finance Tycoon: cash flow, inventory, business decisions, break-even and responsible growth (R2, R4, R5)
 - [ ] Placement/challenge scoring, spaced review and adaptive next-lesson selection (R4)

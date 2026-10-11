@@ -48,7 +48,7 @@ Organise around a meaningful task: understand the recommendation, make a choice,
 
 Use substantial surfaces and clear grouping. Occasional asymmetry can add expression, but reading order, focus order and touch access remain predictable. No horizontal page scrolling. Keep controls and explanations within comfortable reach and leave room for persistent navigation.
 
-Onboarding remains language first, grade group, current experience, and optional format preference. “Mix it up” is the default and Skip stays visible. Do not visually turn a prior into an ability judgement or a permanent learning-style identity.
+Onboarding remains language first, class group, current experience, and optional format preference. “Mix it up” is the default and Skip stays visible. Do not visually turn a prior into an ability judgement or a permanent learning-style identity.
 
 Within the life + market sim, keep the current mode, fictional-money label, clock, available cash, commitments and relevant consequences visible. Practice uses a historical episode and reveals alternatives afterwards. Live uses current/as-of prices and reviews habits without a hindsight panel. Never blur these distinctions in a single generic trading screen.
 
@@ -77,7 +77,7 @@ These are design responsibilities for existing or future components, not an inst
 - **Actions:** clear verbs, touch-friendly targets, visible keyboard focus and distinct primary/secondary hierarchy. Include hover, pressed, disabled, loading and failure feedback. Do not rely on colour alone or silent disabled controls.
 - **Choice surfaces:** one meaningful decision per surface; selected state is explicit and reversible where the activity allows. Large, labelled targets work without hover.
 - **Recommendations:** show the next topic/activity, the evidence-informed reason and a clear way to continue. “Why this?” must explain the signal rather than merely saying “AI recommended”. Do not invent evidence or certainty when it is absent.
-- **Learning and mastery:** use the curriculum's pillar/topic/activity hierarchy and existing mastery terminology. Explain unlock requirements using learning evidence. Do not substitute a wealth score or return rank for understanding.
+- **Learning and mastery:** use the curriculum's world/lesson/activity hierarchy and existing mastery terminology. Explain unlock requirements using learning evidence. Do not substitute a wealth score or return rank for understanding.
 - **Formats:** use the team's existing format names and an understandable choice, including Mix it up/Skip during onboarding. Preferences remain revisable and the format bandit adapts from evidence.
 - **Scenario surfaces:** consistently show Practice or Live, play money, scenario clock and relevant sources/assumptions. Scheduled and random life events have readable consequences and choices; prevent decorative motion from obscuring them.
 - **Story choices and spot & sort:** show consequences/explanations, support retry, and offer keyboard/tap alternatives to swiping or dragging. Feedback should teach why, not only mark correct/incorrect.

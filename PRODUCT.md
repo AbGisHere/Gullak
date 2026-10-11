@@ -10,17 +10,13 @@ One responsive PWA for phone and desktop. Preserve the repository's existing Nex
 
 ## Users
 
-Primary learners are students in Grades 6–12, especially underserved schools and communities in Hyderabad. The curriculum describes an initial audience of approximately 1,500 learners; this is planning context, not a claim of current adoption.
+Primary learners are students in Classes 6–12, especially underserved schools and communities in Hyderabad. The curriculum describes an initial audience of approximately 1,500 learners; this is planning context, not a claim of current adoption.
 
-The final grade-group identifiers are:
+Learners are in three stages (see `docs/curriculum.md`): **Foundation Explorers** (Classes 6–7), **Money Navigators** (Classes 8–9) and **Financial Strategists** (Classes 10–12). The app still uses the earlier identifiers `grade-6-7`, `grade-8-10` and `grade-11-12` until the eight-world migration (ROADMAP Phase 0).
 
-- `grade-6-7`
-- `grade-8-10`
-- `grade-11-12`
+Stage variants and depth belong to curriculum content. Examples, language, scaffolding and number complexity should suit the stage without turning school stage into a fixed ability label. Current experience is only a starting prior. Evidence determines mastery, recommendations and unlocks.
 
-Grade tags and depth belong to curriculum content. Examples, language, scaffolding and number complexity should suit the grade group without turning school stage into a fixed ability label. Current experience is only a starting prior. Evidence determines mastery, recommendations and unlocks.
-
-Facilitators support classroom learning and can assign topics and activities. Their experience supports the learner journey rather than replacing it as the product's centre.
+Facilitators support classroom learning and can assign worlds, lessons and activities. Their experience supports the learner journey rather than replacing it as the product's centre.
 
 ## Product Purpose
 
@@ -34,12 +30,12 @@ Success means the learner can apply a concept and understand why their next acti
 
 ## Positioning
 
-Gullak combines a four-pillar curriculum, multiple presentation formats and learn-by-doing engines. Quizzes, activities and simulation decisions supply evidence to knowledge tracing. The format bandit learns from what a learner completes and how they do; it does not declare a permanent learning style.
+Gullak combines an eight-world curriculum, multiple presentation formats and learn-by-doing engines. Quizzes, activities and simulation decisions supply evidence to knowledge tracing. The format bandit learns from what a learner completes and how they do; it does not declare a permanent learning style.
 
 Games are in the problem statement, so every team will have them; ours are how learners learn, not the differentiator. Gullak stands apart in five ways (detail in `docs/curriculum.md`, "The storyline" and "What makes Gullak different"):
 
-1. **One story that remembers every choice:** *Nani's Gullak*, three seasons from Class 6 to 12, with Gullu (the revived gullak) as companion and tutor voice. No fixed years in the story; after each arc, an "FYI, this really happened" reveal with real data.
-2. **One continuous money life** from Class 6 to 12 on real Indian prices, where every topic unlocks the next instrument, instead of separate mini-games that each start from zero.
+1. **One story that remembers every choice:** *Nani's Gullak*, one arc per world from Class 6 to 12, with Gullu (the revived gullak) as companion, world guide and tutor voice. No fixed years in the story; after each arc, an "FYI, this really happened" reveal with real data.
+2. **One continuous money life** from Class 6 to 12 on real Indian prices, where every lesson unlocks the next instrument, instead of separate mini-games that each start from zero.
 3. **The student becomes the family's money teacher:** take-home missions reach a parent, and reach is measured in households.
 4. **Built for real conditions:** shared phones, little or no data, Telugu and Hindi.
 5. **A habit, not an addiction:** a 2-minute daily loop on real prices, with a living Gullak that grows only with good habits.
@@ -59,7 +55,7 @@ Learners may use inexpensive Android phones, slow networks, shared devices and s
 Preserve this order:
 
 1. Language first.
-2. Grade group: `grade-6-7`, `grade-8-10`, `grade-11-12`.
+2. Class group: 6–7, 8–9 or 10–12 (today's identifiers: `grade-6-7`, `grade-8-10`, `grade-11-12`).
 3. Current experience: none / some / regular.
 4. Optional format preference: **Mix it up** is the default; **Skip** is available.
 
@@ -67,24 +63,24 @@ A short placement/diagnostic can be investigated as a product opportunity. It is
 
 ## Capabilities and Constraints
 
-### Curriculum hierarchy and pillars
+### Curriculum hierarchy: worlds
 
-Use the team's terminology: **Pillar → topics → activities**. Topics form a prerequisite graph, not a single instrument ladder. Preserve the topic identifiers and grade tags in `docs/curriculum.md`; do not create a competing objective taxonomy.
+Use the team's terminology: **World → lessons → activities**. The eight worlds are Candy Economy, Savings Quest, Bankopolis, Market Mayhem, Grow Your Money, Stock Street, Life Simulator and Finance Tycoon; `docs/curriculum.md` holds their themes, mechanics and the map from today's topic ids to worlds. Do not create a competing objective taxonomy.
 
-The four Vanguard pillars are:
+The four Vanguard pillars are all covered across the worlds:
 
-- **Plan & budget:** needs vs wants, choices, budgeting, goals, prices and inflation.
-- **Save & manage:** saving habits, spending, emergency funds, bank accounts/UPI, FD, RD, small savings, borrowing and insurance.
-- **Understand investing:** time, risk, compounding, gold, funds, bonds, stocks, diversification and retirement.
-- **Stay financially safe:** protecting information, suspicious offers, scams, fake apps and reporting fraud.
+- **Plan & budget:** Candy Economy, Savings Quest, Market Mayhem.
+- **Save & manage:** Savings Quest, Bankopolis, Grow Your Money, Life Simulator.
+- **Understand investing:** Grow Your Money, Stock Street (including every fund category and company metric).
+- **Stay financially safe:** Bankopolis, plus scam decisions in every world.
 
-Plan & budget and Stay financially safe are open from day one. Save & manage opens after money basics; Understand investing opens after the basics of the first two pillars. Mastery drives progression. Quiz results contribute evidence and can support unlocks of topics, simulations and portfolio instruments; a quiz score alone is not the whole mastery model.
+Lessons unlock the next lesson and world. Mastery drives progression. Quiz and decision results contribute evidence and can support unlocks of lessons, simulations and portfolio instruments; a quiz score alone is not the whole mastery model.
 
 ### Curriculum as data
 
-Pillars, topics, prerequisites, grade tags, unlocks, activities, episodes, personas, story nodes, event decks and translations are data. The engines are implemented once; adding a scenario or language must not require a new engine or duplicated application.
+Worlds, lessons, stage variants, unlocks, activities, episodes, personas, story nodes, event decks and translations are data. The engines are implemented once; adding a scenario or language must not require a new engine or duplicated application.
 
-Topics support the existing formats: video, story/comic, visual, formula + calculator, transcript, simulation, quiz and audio. Curriculum entries define learning goals, key ideas, misconceptions, scenarios and quiz goals. Lesson variants are generated once by format × grade group × language, cached and reviewed before shipping. Live LLM calls are for the tutor, not repeated lesson generation.
+Lessons support the existing formats: video, story/comic, visual, formula + calculator, transcript, simulation, quiz and audio. Curriculum entries define learning goals, key ideas, misconceptions, scenarios and quiz goals. Lesson variants are generated once by lesson × stage × format × language, cached and reviewed before shipping. Live LLM calls are for the tutor, not repeated lesson generation.
 
 ### Three learn-by-doing engines
 
@@ -110,7 +106,7 @@ The Time Machine has evolved into **Practice episodes**. It is not a separate pr
 
 The flagship is **March 2020 + a hospital bill**: a fictional learner must raise ₹15,000, comparing emergency savings, an FD exit penalty and selling index-fund units at the historical price. The reveal can compare later outcomes, but its conclusion is **resilience, liquidity and emergency-fund reasoning**, never “you should have timed the market.” Nobody knew tomorrow; an emergency reserve can reduce the need for forced choices.
 
-Every grade group participates through appropriate content and unlocks. Younger learners can explore a piggy bank and RD; more advanced learners can encounter funds and gold. Preserve the curriculum's instrument and episode rules.
+Every stage participates through appropriate content and unlocks. Younger learners can explore a piggy bank and RD; more advanced learners can encounter funds and gold. Preserve the curriculum's instrument and episode rules.
 
 Live opens per instrument after a Practice episode with that instrument. It evaluates habits: emergency reserves, diversification, following a plan and avoiding panic decisions. **No return leaderboard, hindsight reveal, broker links or real-product buy prompts.** Example funds and stocks are educational examples only.
 

@@ -8,6 +8,12 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Company metrics catalogue (`docs/company-metrics.md`): every number stock-research sites show for a company, grouped, with what it tells you, how it is worked out and the learner stage, plus the time windows behind the variants. Planned as Stock Street's company report card on fictional companies.
+
+### Changed
+- The eight-world curriculum now keeps the product design the rewrite had dropped: Practice and Live, *Nani's Gullak* as one arc per world, differentiators, Money Multiverse, class market, more ways to learn, habit design, shared phones and the real-data map, plus where each current topic and all 61 fund categories sit among the worlds. AGENTS.md, PRODUCT.md and DESIGN.md use worlds and stages.
+
 ## [0.2.2] - 2026-10-11
 
 ### Changed
