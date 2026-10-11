@@ -34,13 +34,19 @@ export function tradeAccess(kind: ListedKind, gradeGroup: GradeGroup, passedTopi
   return { status: "locked", topicId };
 }
 
-/** Play money available for Live trades: starting cash, plus Practice results, plus trade cash flows. */
-export function availableCashPaise(profile: LearnerProfile, state: LearnerState): number {
+/** All play money not in holdings: starting cash, plus Practice results, plus trade cash flows. */
+export function totalCashPaise(profile: LearnerProfile, state: LearnerState): number {
   return (
     startingCash(startingCapital, profile.gradeGroup, profile.experience) +
     state.practiceCashPaise +
     state.liveCashDeltaPaise
   );
+}
+
+/** Free play money for trades: total cash minus what sits in the emergency reserve and goals. */
+export function availableCashPaise(profile: LearnerProfile, state: LearnerState): number {
+  const setAside = state.emergencyReservePaise + state.goals.reduce((sum, goal) => sum + goal.savedPaise, 0);
+  return totalCashPaise(profile, state) - setAside;
 }
 
 export type TradeOrder =

@@ -163,3 +163,46 @@ test("after the lesson, buy with play money and sell from the holding", async ({
   await page.goto("/portfolio/invest");
   await expect(page.getByText("You don't hold anything yet.")).toBeVisible();
 });
+
+test("play money moves into the emergency reserve and a saving goal, and XP sits in the header", async ({ page }) => {
+  await openLearner(page, []);
+  await page.goto("/portfolio");
+  await expect(page.locator("header").getByRole("link", { name: "Your progress: 0 XP" })).toBeVisible();
+  await expect(page.locator("header").getByText("Play money", { exact: true })).toHaveCount(0);
+  const freeCash = page.getByTestId("bucket-cash");
+  const before = await freeCash.textContent();
+
+  await page.getByRole("button", { name: "Emergency reserve" }).click();
+  await expect(page.getByText("How do you invest in an emergency reserve?", { exact: false })).toBeVisible();
+  const reserve = page.getByTestId("reserve-form");
+  await reserve.getByLabel("Amount (₹)").fill("1000");
+  await reserve.getByRole("button", { name: "Set aside" }).click();
+  await expect(page.getByTestId("reserve-amount")).toHaveText("₹1,000");
+  await expect(page.getByTestId("bucket-reserve")).toHaveText("₹1,000");
+  await expect(freeCash).not.toHaveText(before ?? "");
+  await reserve.getByLabel("Amount (₹)").fill("99999999");
+  await reserve.getByRole("button", { name: "Set aside" }).click();
+  await expect(reserve.getByRole("status")).toHaveText("Not enough free cash for that.");
+  await page.getByTestId("reserve-target-form").getByLabel("Your target (₹)").fill("4000");
+  await page.getByRole("button", { name: "Set target" }).click();
+  await expect(page.getByText("25% of your ₹4,000 target")).toBeVisible();
+
+  await page.getByRole("button", { name: /^Goals/ }).click();
+  await page.getByLabel("What for?").fill("New cycle");
+  await page.getByLabel("Cost (₹)").fill("5000");
+  await page.getByRole("button", { name: "Add goal" }).click();
+  const goal = page.getByTestId("goal").filter({ hasText: "New cycle" });
+  await goal.getByLabel("Amount (₹)").fill("2000");
+  await goal.getByRole("button", { name: "Add money" }).click();
+  await expect(goal.getByText("saved of ₹5,000 (40%)")).toBeVisible();
+  await expect(page.getByTestId("bucket-goals")).toHaveText("₹2,000");
+
+  // Money set aside is not free to invest, and it survives a reload.
+  await page.reload();
+  await expect(page.getByTestId("bucket-reserve")).toHaveText("₹1,000");
+  await expect(page.getByTestId("bucket-goals")).toHaveText("₹2,000");
+  await page.getByRole("button", { name: /^Goals/ }).click();
+  await page.getByRole("button", { name: "Remove New cycle" }).click();
+  await page.getByRole("button", { name: "Remove goal" }).click();
+  await expect(page.getByTestId("bucket-goals")).toHaveText("₹0");
+});

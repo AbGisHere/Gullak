@@ -11,6 +11,9 @@ const emptyState = (): LearnerState => ({
   activities: [],
   paperHoldings: [],
   liveCashDeltaPaise: 0,
+  emergencyReservePaise: 0,
+  reserveTargetPaise: null,
+  goals: [],
 });
 
 const tcs: InstrumentQuote = {

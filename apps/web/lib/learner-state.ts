@@ -32,6 +32,28 @@ const LearnerStateSchema = z.object({
     .default([]),
   /** Net play money moved by Live trades (sales minus purchases); added to starting and Practice cash. */
   liveCashDeltaPaise: z.number().int().safe().default(0),
+  /** Play money set aside for surprises; it leaves free cash and is never invested. */
+  emergencyReservePaise: z.number().int().safe().nonnegative().default(0),
+  /** The learner's own reserve target, if they set one. */
+  reserveTargetPaise: z.number().int().safe().positive().nullable().default(null),
+  /** Saving goals; each holds play money moved out of free cash. */
+  goals: z
+    .array(
+      z.object({
+        id: z.string().min(1),
+        label: z.string().trim().min(1).max(60),
+        targetPaise: z.number().int().safe().positive(),
+        /** `YYYY-MM`, the month the learner wants to reach it by. */
+        targetMonth: z
+          .string()
+          .regex(/^\d{4}-(0[1-9]|1[0-2])$/)
+          .nullable(),
+        savedPaise: z.number().int().safe().nonnegative(),
+        createdAt: z.string(),
+      }),
+    )
+    .max(20)
+    .default([]),
 });
 export type LearnerState = z.infer<typeof LearnerStateSchema>;
 
@@ -43,6 +65,9 @@ export const emptyState = (): LearnerState => ({
   activities: [],
   paperHoldings: [],
   liveCashDeltaPaise: 0,
+  emergencyReservePaise: 0,
+  reserveTargetPaise: null,
+  goals: [],
 });
 
 export function readLearnerState(): LearnerState {

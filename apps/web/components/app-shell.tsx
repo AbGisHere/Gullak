@@ -42,25 +42,25 @@ export function AppShell({
   return (
     <ShellFrame
       onHome={() => onSelectTab("home")}
-      headerExtra={
+      headerEnd={
         <div className="relative">
           <button
             type="button"
             onClick={() => setShowProfileMenu((prev) => !prev)}
             aria-label={t("learnerMenu")}
             aria-expanded={showProfileMenu}
-            className="flex min-h-11 items-center gap-1 sm:gap-2 rounded-xl border border-border bg-card px-2 sm:px-3 text-xs sm:text-sm font-semibold hover:border-foreground/40 transition-colors"
+            className="flex min-h-11 items-center gap-2 whitespace-nowrap rounded-xl border border-border bg-card px-2 sm:px-3 text-xs sm:text-sm font-semibold hover:border-foreground/40 transition-colors"
           >
             {daysPractised > 0 ? (
               <>
-                <span className="flex items-center gap-1 text-foreground">
+                <span className="hidden items-center gap-1 text-foreground sm:flex">
                   <CalendarDays className="size-3.5" aria-hidden="true" />
                   <span className="font-bold" aria-hidden="true">
                     {t("daysPractisedShort", { days: daysPractised })}
                   </span>
                   <span className="sr-only">{t("daysPractisedLabel", { days: daysPractised })}</span>
                 </span>
-                <span className="hidden md:inline-block text-muted-foreground font-normal">|</span>
+                <span className="hidden text-muted-foreground font-normal sm:inline-block">|</span>
               </>
             ) : null}
             <span className="tabular-nums">{tProgress("xpShort", { xp })}</span>
@@ -74,7 +74,7 @@ export function AppShell({
                 className="fixed inset-0 z-40 bg-transparent cursor-default border-0 p-0"
                 onClick={() => setShowProfileMenu(false)}
               />
-              <div className="absolute left-0 top-full mt-2 z-50 w-56 rounded-xl border border-border bg-card p-2 shadow-lg animate-in fade-in zoom-in-95">
+              <div className="absolute right-0 top-full mt-2 z-50 w-56 rounded-xl border border-border bg-card p-2 shadow-lg animate-in fade-in zoom-in-95">
                 <div className="px-3 py-2 border-b border-border/60">
                   <p className="text-xs text-muted-foreground">{t("currentProfile")}</p>
                   <p className="text-sm font-bold text-foreground">{gradeDisplay}</p>

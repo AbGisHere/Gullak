@@ -8,6 +8,21 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+
+- Portfolio: your play money is split into four buckets (free cash, emergency reserve, goals and investments) with one total and a bar showing the split. Investments are grouped by type (stocks, mutual funds, ETFs) with today's value and a Sell link.
+- Portfolio: an emergency reserve you can set play money aside in, take it back out of, and give your own target. It explains that a reserve is kept safe and easy to reach rather than invested, and links to the emergency fund lesson.
+- Portfolio: saving goals with a name, cost and optional month. Move play money in or take it back; each goal shows its progress and how much to set aside a month to reach it (no interest assumed). Removing a goal returns its money to free cash.
+
+### Changed
+
+- The header shows your XP on every tab instead of a "Play money" badge. Money screens still show the badge on the page itself. On phones, Home's progress button shows XP only.
+- Play money in the reserve or a goal can't be spent on Live trades until you move it back.
+
+### Fixed
+
+- "1 days practised" now reads "1 day practised" in English.
+
 ## [0.2.29] - 2026-10-11
 
 ### Added

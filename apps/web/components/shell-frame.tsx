@@ -1,28 +1,29 @@
 "use client";
 
 import { locales } from "@gullak/content";
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { CircleHelp } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import type { ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { Gullu } from "@/components/game/gullu";
 import { PrimaryNav } from "@/components/primary-nav";
 import { LOCALE_COOKIE } from "@/i18n/locale";
+import { readProfile } from "@/lib/learner-state";
+import { useLearnerProgress } from "@/lib/use-progress-summary";
 
 /**
  * The one page frame for Home and every routed learner page: header, desktop sidebar,
  * content column and phone tab bar sit in the same place on every tab, so nothing jumps.
- * `headerExtra` sits at the header's start (beside the phone logo), never shifting the controls.
+ * The header ends with the learner's XP; Home swaps in `headerEnd`, its XP button with the learner menu.
  */
 export function ShellFrame({
   children,
-  headerExtra,
+  headerEnd,
   onHome,
 }: {
   children: ReactNode;
-  headerExtra?: ReactNode;
+  headerEnd?: ReactNode;
   onHome?: () => void;
 }) {
   const t = useTranslations("learner");
@@ -46,7 +47,6 @@ export function ShellFrame({
             <Gullu state="wave" size={32} />
             <span className="max-[380px]:sr-only">Gullak</span>
           </Link>
-          {headerExtra}
         </div>
         <div className="ml-auto flex items-center gap-2">
           <Link
@@ -72,7 +72,7 @@ export function ShellFrame({
               </option>
             ))}
           </select>
-          <PlayMoneyBadge label={t("playMoney")} />
+          {headerEnd ?? <XpLink />}
         </div>
       </header>
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 border-r bg-background px-4 py-5 pt-6 lg:block">
@@ -91,5 +91,26 @@ export function ShellFrame({
       </main>
       <PrimaryNav variant="bar" onHome={onHome} />
     </div>
+  );
+}
+
+/** XP on every routed page, linking Home, where the Living Gullak shows progress. */
+function XpLink() {
+  const t = useTranslations("learner");
+  const tProgress = useTranslations("progressData");
+  const [grade, setGrade] = useState<Parameters<typeof useLearnerProgress>[0]>("grade-6-7");
+  useEffect(() => {
+    const profile = readProfile();
+    if (profile) setGrade(profile.gradeGroup);
+  }, []);
+  const { xp } = useLearnerProgress(grade);
+  return (
+    <Link
+      href="/"
+      aria-label={t("xpLink", { xp })}
+      className="flex min-h-11 items-center rounded-xl border bg-card px-3 text-sm font-semibold tabular-nums hover:border-foreground/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+    >
+      {tProgress("xpShort", { xp })}
+    </Link>
   );
 }

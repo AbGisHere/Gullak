@@ -133,13 +133,14 @@
     "seeTradeoffs": "See trade-offs",
     "finishEpisode": "Finish episode",
     "portfolioTitle": "Your paper portfolio",
-    "portfolioDescription": "Your virtual starting cash and any play money carried forward from Practice.",
+    "portfolioDescription": "All your play money in one place: free cash, your emergency reserve, saving goals and investments.",
     "paperPortfolioTitle": "Paper portfolio",
     "availableCash": "Available cash",
     "meTitle": "About this device",
     "gradeProfile": "Learning path for {grade}",
     "localProgressNote": "Your profile and learning progress are stored on this device for this demo.",
-    "resetProfile": "Reset this device's learner data"
+    "resetProfile": "Reset this device's learner data",
+    "xpLink": "Your progress: {xp} XP"
   },
   "nav": {
     "world": "World",
@@ -166,8 +167,8 @@
     "dailyDrop": "Daily Drop",
     "practiceSim": "Practice Sim",
     "liveTrading": "Live Mode",
-    "daysPractisedDays": "{days} days practised",
-    "daysPractised": "{days} days practised"
+    "daysPractisedDays": "{days, plural, one {# day} other {# days}} practised",
+    "daysPractised": "{days, plural, one {# day} other {# days}} practised"
   },
   "twin": {
     "title": "Nani's Gullak & The Multiverse",
@@ -343,10 +344,10 @@
     "activityDoneBody": "This activity is recorded on this device. Each activity earns XP once, so replaying it is just for practice.",
     "activityXp": "+{xp} XP the first time you finish it",
     "activityUnlockNote": "Pass a topic's quiz to unlock what comes next.",
-    "daysPractisedShort": "{days} days practised",
+    "daysPractisedShort": "{days, plural, one {# day} other {# days}} practised",
     "daysPractised": "{days, plural, one {# day practised} other {# days practised}}",
     "daysPractisedLabel": "Days practised",
-    "daysPractisedValue": "{days} days practised",
+    "daysPractisedValue": "{days, plural, one {# day} other {# days}} practised",
     "daysPractisedAria": "Days practised",
     "daysPractisedChip": "Days practised"
   },
@@ -366,8 +367,8 @@
       "habitScore": "Habit score: {score}/100",
       "changeClass": "Change class and goals",
       "resetOnboarding": "Reset and replay onboarding",
-      "daysPractisedShort": "{days} days practised",
-      "daysPractisedLabel": "{days} days practised"
+      "daysPractisedShort": "{days, plural, one {# day} other {# days}} practised",
+      "daysPractisedLabel": "{days, plural, one {# day} other {# days}} practised"
     },
     "map": {
       "currentDestination": "Current destination",
@@ -443,7 +444,7 @@
       "habitNote": "Your Gullak grows with steady habits (saving, emergency funds, scam drills), never with lucky gambles.",
       "insideTitle": "What's inside your Gullak",
       "insideDescription": "A paper portfolio of virtual instruments you unlock across lessons.",
-      "daysPractised": "{days} days practised"
+      "daysPractised": "{days, plural, one {# day} other {# days}} practised"
     },
     "rewards": {
       "title": "Rewards and achievements",
@@ -453,7 +454,7 @@
       "habit": "Habit score",
       "habitValue": "{score}/100",
       "daysPractised": "Days practised",
-      "daysPractisedValue": "{days} days practised"
+      "daysPractisedValue": "{days, plural, one {# day} other {# days}} practised"
     },
     "profile": {
       "title": "Learner profile",
@@ -656,7 +657,7 @@
       "growNote": "Your Gullak grows with steady habits like saving, keeping money aside for emergencies and spotting scams, never with lucky bets.",
       "insideTitle": "What's inside your Gullak",
       "insideBody": "A paper portfolio of pretend instruments you unlock as you learn.",
-      "daysPractised": "{days} days practised"
+      "daysPractised": "{days, plural, one {# day} other {# days}} practised"
     },
     "page": {
       "title": "How Gullak works",
@@ -852,6 +853,74 @@
       "lowHigh": "Low {low} · High {high}",
       "loading": "Loading the chart…",
       "unavailable": "The chart isn't available right now. Try another period or come back later."
+    }
+  },
+  "portfolioBoard": {
+    "total": "Total play money",
+    "freeCash": "Free cash",
+    "reserve": "Emergency reserve",
+    "goals": "Goals",
+    "investments": "Investments",
+    "bucketsNote": "Free cash is what you can spend or invest. Money in the reserve or a goal is set aside; move it back any time.",
+    "sectionsLabel": "Portfolio sections",
+    "tabInvestments": "Investments ({count})",
+    "tabGoals": "Goals ({count})",
+    "noInvestments": "You don't hold anything yet. Investments you buy with play money show up here, grouped by type.",
+    "browse": "Browse stocks and funds",
+    "kind": {
+      "stock": "Stocks",
+      "mutual-fund": "Mutual funds",
+      "etf": "ETFs",
+      "index": "Indices"
+    },
+    "holdingLine": "{symbol} · {units} units · paid {cost}",
+    "atCost": "Shown at cost",
+    "valuesNote": "Values use today's live prices. A holding shows what you paid until its price loads.",
+    "reserveHowTitle": "How do you invest in an emergency reserve? You don't, and that's the point.",
+    "reserveHowBody": "It's money kept somewhere safe and quick to reach, like a savings account, so a surprise bill never forces you to sell investments at a bad time. Many families aim for 3 to 6 months of spending. Here you set play money aside; it stays out of your free cash until you take it out.",
+    "reserveNow": "In your reserve",
+    "reserveProgress": "Emergency reserve progress",
+    "ofTarget": "{pct}% of your {target} target",
+    "amountLabel": "Amount (₹)",
+    "freeCashHint": "Free cash: {cash}",
+    "moveIn": "Set aside",
+    "takeOut": "Take out",
+    "targetLabel": "Your target (₹)",
+    "targetHint": "Pick your own number. There's no right answer.",
+    "setTarget": "Set target",
+    "clearTarget": "Clear target",
+    "reserveLesson": "Lesson: Emergency fund",
+    "newGoal": "New saving goal",
+    "goalsIntro": "Name something you're saving for, how much it costs and when you want it. Then move play money into it bit by bit.",
+    "goalName": "What for?",
+    "goalNamePlaceholder": "New cycle",
+    "goalTarget": "Cost (₹)",
+    "goalBy": "By (optional)",
+    "addGoal": "Add goal",
+    "noGoals": "No goals yet. Add one above.",
+    "goalByMonth": "By {month}",
+    "noDate": "No date set",
+    "removeGoal": "Remove {name}",
+    "goalProgress": "{name} progress",
+    "savedOf": "saved of {target} ({pct}%)",
+    "reached": "Goal reached!",
+    "perMonth": "Set aside about {amount} a month to reach it by {month}. No interest assumed.",
+    "addMoney": "Add money",
+    "takeBack": "Take back",
+    "goalsLesson": "Lesson: Setting goals",
+    "removeTitle": "Remove “{name}”?",
+    "removeBody": "The goal will be deleted.",
+    "removeBodySaved": "The goal will be deleted and its {amount} goes back to your free cash.",
+    "removeConfirm": "Remove goal",
+    "removeCancel": "Keep goal",
+    "saved": "Done.",
+    "errors": {
+      "invalid-amount": "Enter an amount in rupees, like 500.",
+      "not-enough-cash": "Not enough free cash for that.",
+      "not-enough-saved": "There isn't that much saved here.",
+      "unknown-goal": "That goal no longer exists.",
+      "too-many-goals": "You can have up to 20 goals.",
+      "name": "Give your goal a name."
     }
   }
 }
