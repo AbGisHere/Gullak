@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/learn`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/practice`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/portfolio`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/help`, changeFrequency: "monthly", priority: 0.5 },
   ];
   const topics = allUnlockRules.map((rule) => ({
     url: `${SITE_URL}/learn/${rule.topicId}`,

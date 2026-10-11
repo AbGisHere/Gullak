@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@gullak/ui/lib/utils";
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
 interface SpeechBubbleProps {
@@ -13,11 +14,13 @@ interface SpeechBubbleProps {
 
 export function SpeechBubble({
   children,
-  speakerName = "Gullu",
+  speakerName: speakerNameProp,
   className,
   tailPosition = "bottom-left",
   variant = "paper",
 }: SpeechBubbleProps) {
+  const t = useTranslations("help");
+  const speakerName = speakerNameProp ?? t("gullu.name");
   const bgStyles = {
     paper: "bg-card text-foreground border-border",
     lime: "bg-brand-lime text-brand-ink dark:text-background border-border",
@@ -27,7 +30,7 @@ export function SpeechBubble({
 
   return (
     <section
-      aria-label={`${speakerName} says`}
+      aria-label={t("gullu.says", { name: speakerName || t("gullu.name") })}
       aria-live="polite"
       className={cn(
         "g-bubble relative rounded-2xl border p-3 sm:p-4 text-sm sm:text-base leading-snug",

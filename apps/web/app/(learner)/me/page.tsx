@@ -2,6 +2,7 @@
 
 import type { GradeGroup } from "@gullak/types";
 import { Button } from "@gullak/ui/components/button";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -11,6 +12,7 @@ export default function MePage() {
   const t = useTranslations("learner");
   const tOnboarding = useTranslations("onboarding");
   const tSafety = useTranslations("safety");
+  const tHelp = useTranslations("help");
   const [grade, setGrade] = useState("");
   const [name, setName] = useState<string | undefined>();
   const [confirmingReset, setConfirmingReset] = useState(false);
@@ -30,6 +32,9 @@ export default function MePage() {
       <h1 className="text-4xl font-extrabold tracking-tight">{t("meTitle")}</h1>
       <p className="text-muted-foreground">{t("gradeProfile", { grade })}</p>
       <p className="rounded-xl bg-muted p-4 text-sm">{t("localProgressNote")}</p>
+      <Link href="/help" className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
+        {tHelp("link")}
+      </Link>
       <Button variant="outline" onClick={() => setConfirmingReset(true)}>
         {t("resetProfile")}
       </Button>

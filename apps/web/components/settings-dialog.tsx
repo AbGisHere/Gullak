@@ -3,9 +3,10 @@
 import { locales } from "@gullak/content";
 import type { GradeGroup } from "@gullak/types";
 import { cn } from "@gullak/ui/lib/utils";
-import { RotateCcw, Settings, X } from "lucide-react";
+import { CircleHelp, RotateCcw, Settings, X } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { LOCALE_COOKIE } from "@/i18n/locale";
 
@@ -18,6 +19,7 @@ interface SettingsDialogProps {
 
 export function SettingsDialog({ currentGrade, onUpdateGrade, onResetOnboarding, onClose }: SettingsDialogProps) {
   const locale = useLocale();
+  const tHelp = useTranslations("help");
   const router = useRouter();
   const [selectedGrade, setSelectedGrade] = useState<string>(currentGrade);
 
@@ -97,6 +99,14 @@ export function SettingsDialog({ currentGrade, onUpdateGrade, onResetOnboarding,
             ))}
           </select>
         </div>
+
+        <Link
+          href="/help"
+          className="flex items-center gap-2 text-sm font-semibold text-brand-ink underline underline-offset-4"
+        >
+          <CircleHelp className="size-4" aria-hidden="true" />
+          {tHelp("link")}
+        </Link>
 
         {/* Reset Option */}
         <div className="pt-2 border-t border-border">

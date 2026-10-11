@@ -4,6 +4,7 @@ import { PracticeSimulation } from "@gullak/ui/components/practice-simulation";
 import { precomputedMarch2020Outcomes } from "@gullak/ui/fixtures/simulation-fixtures";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { GulluTip } from "@/components/help/gullu-tip";
 import { readLearnerState, saveLearnerState } from "@/lib/learner-state";
 import { episodeToSimulation } from "@/lib/practice-adapter";
 
@@ -17,6 +18,7 @@ export function PracticePage() {
         <h1 className="text-4xl font-extrabold tracking-tight">{t("practiceTitle")}</h1>
         <p className="text-lg text-muted-foreground">{t("practiceDescription")}</p>
       </header>
+      <GulluTip place="practice" className="flex max-w-xl items-start gap-3" />
       <PracticeSimulation
         episode={model.episode}
         state={state}

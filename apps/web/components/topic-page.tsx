@@ -8,6 +8,7 @@ import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { TermHelp } from "@/components/help/term-help";
 import { restoreQuizDraft } from "@/lib/form-safety";
 import { readLearnerState, readProfile, saveLearnerState } from "@/lib/learner-state";
 import { DEFAULT_MASTERY_PARAMS, initialMastery, updateMastery } from "@/lib/mastery";
@@ -123,7 +124,9 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
             <h2 id="quiz-title" className="text-2xl font-bold">
               {t("quizTitle")}
             </h2>
-            <p className="mt-1 text-muted-foreground">{t("quizInstruction")}</p>
+            <p className="mt-1 text-muted-foreground">
+              {t("quizInstruction")} <TermHelp term="mastery" />
+            </p>
           </div>
           {quiz.questions.map((question, index) => (
             <fieldset key={question.id} className="space-y-3">

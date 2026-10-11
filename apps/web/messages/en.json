@@ -512,5 +512,117 @@
       "description": "The link may be old or typed a little wrong. Your progress is safe.",
       "home": "Back to Gullak"
     }
+  },
+  "help": {
+    "link": "How Gullak works",
+    "termButton": "What is {term}?",
+    "gullu": {
+      "name": "Gullu",
+      "says": "{name} says",
+      "tapLabel": "Tap Gullu for another tip",
+      "tapHint": "Tap me for another tip"
+    },
+    "tips": {
+      "newWelcome": "Namaste! I'm Gullu, Nani's gullak. Press Play and we'll run her first errand at the kirana together.",
+      "newPlayMoney": "Everything here is play money, so mistakes cost nothing. Try a choice, see what happens, try again.",
+      "quizPassed": "You passed your last quick check! The next step on your map is open now.",
+      "quizRetry": "Your last quick check isn't passed yet, and that's okay. Read the lesson once more and try again.",
+      "habit": "Small and regular beats big and rare. ₹10 every week fills me faster than you'd think.",
+      "gulluGrow": "I grow when you save regularly and spot scams, never when you get lucky.",
+      "gulluKintsugi": "I broke once, and Nani mended me with gold. Mistakes can be mended too.",
+      "portfolioPaper": "This portfolio is paper only. Watch how your choices change it; no real money moves.",
+      "portfolioSteady": "One lucky jump is not a plan. Spreading money out and staying steady is what we practise here.",
+      "practiceUnknown": "Back then, nobody knew what would happen next. Decide with what the family knew at that moment.",
+      "practiceReserve": "Notice how money kept aside for emergencies changes your options when a surprise bill arrives.",
+      "world": {
+        "candy-economy": "At the kirana, compare the price per toffee, not just the price on the packet.",
+        "savings-quest": "Before you spend, ask: is this a need or a want? A want can wait a week.",
+        "bankopolis": "A bank keeps money safe and pays a little interest. Never share your UPI PIN or OTP with anyone.",
+        "market-mayhem": "If someone promises to double your money in a week, it's a trick. Ask Nani before you believe it.",
+        "grow-your-money": "Money left to grow earns on what it already earned. Starting early matters more than starting big.",
+        "stock-street": "Prices go up and down every day. A company's report card tells you more than one day's price.",
+        "life-simulator": "Life brings surprise bills. Money kept aside for emergencies means you never have to sell in a hurry.",
+        "finance-tycoon": "Every plan needs a goal, a time and an amount. Write down all three before you begin."
+      }
+    },
+    "terms": {
+      "xp": {
+        "name": "XP",
+        "definition": "Experience points you earn by finishing lessons and missions. They show effort; they are not money and cannot buy anything."
+      },
+      "mastery": {
+        "name": "Mastery",
+        "definition": "Gullak's estimate of how well you know an idea, based on your quiz answers. It rises and falls as you learn; it is not a mark."
+      },
+      "streak": {
+        "name": "Streak",
+        "definition": "How many days in a row you have practised. Missing a day never costs you anything."
+      },
+      "habitScore": {
+        "name": "Habit score",
+        "definition": "How regularly you practise good money habits, like saving and spotting scams. It never measures how much money you made."
+      },
+      "playMoney": {
+        "name": "Play money",
+        "definition": "Pretend rupees and coins for practice. Nothing in Gullak can be spent, withdrawn or lost in real life."
+      },
+      "portfolio": {
+        "name": "Portfolio",
+        "definition": "Everything you own, in one place: cash, savings and investments. Yours is a paper portfolio of pretend money."
+      },
+      "interest": {
+        "name": "Interest",
+        "definition": "Money a bank pays you for keeping your savings with it, or money you pay when you borrow."
+      },
+      "inflation": {
+        "name": "Inflation",
+        "definition": "Prices slowly rising over time, so the same ₹100 buys a little less each year. A samosa that once cost ₹10 may cost ₹15 now."
+      },
+      "sip": {
+        "name": "SIP",
+        "definition": "Systematic investment plan: putting the same small amount into a mutual fund every month, like a monthly gullak habit."
+      },
+      "nav": {
+        "name": "NAV",
+        "definition": "Net asset value: the price of one unit of a mutual fund, worked out once a day from everything the fund holds."
+      }
+    },
+    "hint": {
+      "title": "New here?",
+      "body": "Each lesson takes about 3 minutes. Pass its quick check to open the next one. All money here is play money.",
+      "dismiss": "Got it"
+    },
+    "gulluTab": {
+      "level": "Living Gullak · Level {level}",
+      "streak": "{days}-day streak",
+      "score": "Habit score {score}/100",
+      "growNote": "Your Gullak grows with steady habits like saving, keeping money aside for emergencies and spotting scams, never with lucky bets.",
+      "insideTitle": "What's inside your Gullak",
+      "insideBody": "A paper portfolio of pretend instruments you unlock as you learn."
+    },
+    "page": {
+      "title": "How Gullak works",
+      "intro": "Gullak teaches money by letting you try it. Here is everything you need to know, in two minutes.",
+      "loopTitle": "Learn, check, unlock",
+      "loopLearn": "Play a short lesson",
+      "loopLearnBody": "Each lesson takes 3 to 5 minutes. You make choices and see what happens.",
+      "loopCheck": "Take the quick check",
+      "loopCheckBody": "A few questions show what stuck. You can try again as many times as you like.",
+      "loopUnlock": "Open the next step",
+      "loopUnlockBody": "Passing the quick check opens the next lesson on your map.",
+      "moneyTitle": "All money is pretend",
+      "moneyBody": "Every rupee, coin and portfolio in Gullak is play money. Nothing can be spent, withdrawn or lost. Growth numbers are assumptions for learning, not promises, and Gullak never tells anyone to buy or sell anything real.",
+      "gulluTitle": "Meet Gullu",
+      "gulluBody": "Gullu is Nani's mended clay gullak and your guide. Tap Gullu for a tip that fits where you are. Gullu explains ideas; Gullu never gives advice to buy or sell.",
+      "languageTitle": "Change the language",
+      "languageBody": "Use the language menu at the top of the screen. You can switch between English, हिन्दी and తెలుగు at any time, and your progress stays the same.",
+      "offlineTitle": "Low data or no data",
+      "offlineBody": "Install Gullak from your browser menu to open it like an app. Pages you have already opened can keep working when the internet drops.",
+      "privacyTitle": "Sharing a phone",
+      "privacyBody": "Your profile and progress are saved only on this device. If you share the phone, use “{reset}” on the Me page before handing it over.",
+      "glossaryTitle": "Words you will meet",
+      "glossaryIntro": "Look for the small question mark next to these words anywhere in Gullak.",
+      "backToMap": "Back to my learning map"
+    }
   }
 }

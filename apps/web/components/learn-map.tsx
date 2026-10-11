@@ -6,6 +6,8 @@ import { ArrowRight, Check, LockKeyhole, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
+import { FirstRunHint } from "@/components/help/first-run-hint";
+import { TermHelp } from "@/components/help/term-help";
 import { readProfile } from "@/lib/learner-state";
 import { initialMastery } from "@/lib/mastery";
 import { useLearnerState } from "@/lib/use-learner-state";
@@ -66,6 +68,7 @@ export function LearnMap({ topics }: { topics: TopicSummary[] }) {
         <h1 className="text-4xl font-extrabold tracking-[-0.03em] sm:text-5xl">{t("learnTitle")}</h1>
         <p className="max-w-prose text-lg leading-7 text-muted-foreground">{t("learnDescription")}</p>
       </header>
+      <FirstRunHint className="max-w-3xl" />
       {recommendedId ? (
         <section
           aria-label={t("recommendedNext")}
@@ -79,7 +82,9 @@ export function LearnMap({ topics }: { topics: TopicSummary[] }) {
             <h2 className="text-2xl font-extrabold">
               {topics.find((topic) => topic.id === recommendedId)?.title ?? recommendedId}
             </h2>
-            <p className="max-w-prose text-sm">{t("recommendationReason")}</p>
+            <p className="max-w-prose text-sm">
+              {t("recommendationReason")} <TermHelp term="mastery" />
+            </p>
           </div>
           <Link
             href={`/learn/${recommendedId}`}

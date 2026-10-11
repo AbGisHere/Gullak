@@ -4,8 +4,9 @@ import { cn } from "@gullak/ui/lib/utils";
 import { Check, Clock, Lock, MapPin, Play, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useId, useRef, useState } from "react";
+import { FirstRunHint } from "../help/first-run-hint";
+import { GulluTip } from "../help/gullu-tip";
 import { Gullu } from "./gullu";
-import { SpeechBubble } from "./speech-bubble";
 import { CURRICULUM_WORLDS, type WorldDef } from "./worlds";
 
 interface WorldMapProps {
@@ -30,6 +31,7 @@ export function WorldMap({
   const [dialog, setDialog] = useState<WorldDialogState | null>(null);
   const [gulluReaction, setGulluReaction] = useState(0);
   const currentNodeRef = useRef<HTMLDivElement>(null);
+  const tHelp = useTranslations("help");
 
   const activeWorld = CURRICULUM_WORLDS[0]!;
   const minutes = (world: WorldDef) => Number.parseInt(world.missionDuration, 10);
@@ -76,14 +78,16 @@ export function WorldMap({
         </div>
       </div>
 
-      {/* Floating Story Guide Speech Bubble */}
-      <div className="w-full mb-4 max-w-md">
-        <SpeechBubble speakerName="Gullu" variant="paper" tailPosition="bottom-left">
-          {t.rich("welcome", {
-            name: tWorld(activeWorld.slug),
-            world: (chunks) => <strong>{chunks}</strong>,
-          })}
-        </SpeechBubble>
+      <FirstRunHint className="mb-6 max-w-md" />
+
+      {/* Floating Story Guide Speech Bubble: contextual, translated, cycles on taps */}
+      <div className="w-full mb-6 max-w-md">
+        <GulluTip
+          place="map"
+          worldSlug={activeWorld.slug}
+          taps={gulluReaction}
+          {...(completedWorlds.length > 0 ? { isNewLearner: false } : {})}
+        />
       </div>
 
       {/* The 8 Worlds Vertical Path */}

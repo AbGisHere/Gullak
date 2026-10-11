@@ -5,7 +5,8 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import type { LearnerProgress } from "@/lib/use-progress-summary";
 import { Gullu } from "../game/gullu";
-import { SpeechBubble } from "../game/speech-bubble";
+import { GulluTip } from "../help/gullu-tip";
+import { TermHelp } from "../help/term-help";
 import { PortfolioTab } from "./portfolio-tab";
 
 interface GulluTabProps {
@@ -19,9 +20,6 @@ export function GulluTab({ gradeGroup, virtualCashPaise, progress }: GulluTabPro
   const tProgress = useTranslations("progressData");
   const tLearner = useTranslations("learner");
   const [tapCount, setTapCount] = useState(0);
-  const tipKeys = ["tickle", "basket", "small", "kintsugi"] as const;
-  // Store which line Gullu is saying, not the text, so it follows a language switch.
-  const gulluSpeech = tapCount === 0 ? t("greeting") : t(`tips.${tipKeys[(tapCount - 1) % tipKeys.length]!}`);
 
   function handleGulluTap() {
     setTapCount((c) => c + 1);
@@ -43,12 +41,14 @@ export function GulluTab({ gradeGroup, virtualCashPaise, progress }: GulluTabPro
               {tProgress("livingGullak", { level: progress.level })}
             </span>
             {progress.streakDays > 0 ? (
-              <span className="rounded-full border border-border bg-muted px-2.5 py-0.5 text-xs font-bold text-foreground">
+              <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted py-0.5 pl-2.5 pr-1 text-xs font-bold text-foreground">
                 {tProgress("streakChip", { days: progress.streakDays })}
+                <TermHelp term="streak" />
               </span>
             ) : null}
-            <span className="rounded-full border border-border bg-muted px-2.5 py-0.5 text-xs font-bold tabular-nums text-foreground">
+            <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted py-0.5 pl-2.5 pr-1 text-xs font-bold tabular-nums text-foreground">
               {tProgress("xpShort", { xp: progress.xp })}
+              <TermHelp term="xp" />
             </span>
           </div>
 
@@ -56,9 +56,7 @@ export function GulluTab({ gradeGroup, virtualCashPaise, progress }: GulluTabPro
             <p className="text-xs font-semibold text-muted-foreground">{tProgress("emptyBody")}</p>
           )}
 
-          <SpeechBubble speakerName="Gullu" variant="paper" tailPosition="left" className="text-left">
-            {gulluSpeech}
-          </SpeechBubble>
+          <GulluTip place="gullu" taps={tapCount} tailPosition="left" className="text-left" />
 
           <p className="text-xs text-muted-foreground font-medium">{t("habitNote")}</p>
         </div>
@@ -68,10 +66,16 @@ export function GulluTab({ gradeGroup, virtualCashPaise, progress }: GulluTabPro
       <section className="space-y-3">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-bold text-foreground">{t("insideTitle")}</h2>
+            <div className="flex items-center gap-1">
+              <h2 className="text-xl font-bold text-foreground">{t("insideTitle")}</h2>
+              <TermHelp term="portfolio" />
+            </div>
             <p className="text-xs text-muted-foreground font-semibold">{t("insideDescription")}</p>
           </div>
-          <PlayMoneyBadge label={tLearner("playMoney")} />
+          <span className="inline-flex items-center gap-1">
+            <PlayMoneyBadge label={tLearner("playMoney")} />
+            <TermHelp term="playMoney" />
+          </span>
         </div>
 
         {/* Mount existing PortfolioTab */}

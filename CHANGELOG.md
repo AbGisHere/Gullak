@@ -8,6 +8,11 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+- Help and documentation: Gullu's tips are translated and follow where the learner is instead of random
+  English lines, "What's this?" explanations for XP, mastery, streak, play money, SIP, NAV and other terms,
+  a `/help` page on how Gullak works (linked from both shells, settings and Me), and a one-time map hint.
+
 ## [0.2.20] - 2026-10-11
 
 ### Added

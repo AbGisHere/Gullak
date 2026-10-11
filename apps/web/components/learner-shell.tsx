@@ -2,7 +2,7 @@
 
 import { locales } from "@gullak/content";
 import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
-import { BookOpen, CircleUserRound, Compass, Layers3, Sparkles } from "lucide-react";
+import { BookOpen, CircleHelp, CircleUserRound, Compass, Layers3, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
@@ -24,6 +24,7 @@ export function LearnerShell({ children }: { children: React.ReactNode }) {
   const t = useTranslations("learner");
   const tNav = useTranslations("nav");
   const label = (key: (typeof nav)[number]["key"]) => (key === "world" ? tNav("world") : t(key));
+  const tHelp = useTranslations("help");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -58,6 +59,14 @@ export function LearnerShell({ children }: { children: React.ReactNode }) {
           Gullak
         </Link>
         <div className="flex items-center gap-2">
+          <Link
+            href="/help"
+            aria-label={tHelp("link")}
+            aria-current={pathname === "/help" ? "page" : undefined}
+            className="grid size-11 place-items-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring aria-[current=page]:text-foreground"
+          >
+            <CircleHelp className="size-5" aria-hidden="true" />
+          </Link>
           <label className="sr-only" htmlFor="shell-language">
             {t("language")}
           </label>
