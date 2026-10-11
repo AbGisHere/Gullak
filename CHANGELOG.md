@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.12] - 2026-10-11
+
 ### Added
 - Deterministic draft-cache key preparation from the pinned source-content SHA-256, complete request, prompt version and provider/model identity; validates inputs and hashes exact prompt bytes without adding cache storage or live calls.
 - Explicit AI SDK structured-output adapter for the existing lesson-draft runner, with strict draft-schema parsing and zero automatic retries; callers choose a model, and no live generation, publication or storage is activated.
