@@ -60,6 +60,9 @@ export const ReplayRequest = z
   .strict()
   .refine((r) => Date.parse(r.from) < Date.parse(r.to), { message: "from must precede to" });
 export const CohortAggregate = z.object({
+  missionsCompleted: z.number().int().nonnegative().optional(),
+  householdsReached: z.number().int().nonnegative().optional(),
+  reachDefinition: z.literal("one-per-learner-family-confirmed-may-include-siblings").optional(),
   learnerCount: z.number().int().nonnegative(),
   topics: z.array(
     z.object({ topicId: Slug, passedCount: z.number().int().nonnegative(), meanBestScore: z.number().min(0).max(1) }),

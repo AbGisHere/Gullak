@@ -301,6 +301,35 @@ export type Database = {
           },
         ];
       };
+      mission_completions: {
+        Row: {
+          learner_id: string;
+          mission_id: string;
+          confirmation: string;
+          completed_at: string;
+        };
+        Insert: {
+          learner_id: string;
+          mission_id: string;
+          confirmation: string;
+          completed_at?: string;
+        };
+        Update: {
+          learner_id?: string;
+          mission_id?: string;
+          confirmation?: string;
+          completed_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "mission_completions_learner_id_fkey";
+            columns: ["learner_id"];
+            isOneToOne: false;
+            referencedRelation: "learners";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       portfolios: {
         Row: {
           id: string;
@@ -465,6 +494,7 @@ export type Database = {
         Returns: Json;
       };
       record_lesson: { Args: { p_learner: string; p_topic: string }; Returns: undefined };
+      record_mission: { Args: { p_learner: string; p_key: string; p_request: Json }; Returns: Json };
       record_quiz: {
         Args: {
           p_learner: string;

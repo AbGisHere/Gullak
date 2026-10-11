@@ -8,6 +8,8 @@ Quiz evidence API integration is prepared locally against v0.2.8, including type
 
 Activity answers are prepared locally against v0.2.8; migration review, hosted acceptance and phone/desktop integration remain pending. See [activity integration](docs/activity-api-integration.md).
 
+Mission persistence is prepared locally; reviewed mission definitions, production migration application and hosted acceptance remain pending. Family-confirmed reach counts each learner once overall and may include siblings.
+
 ## Built so far (v0.0.1–v0.2.1, on the earlier topic model)
 
 These ship today and carry over to the eight worlds; the content model and grade groups still need migrating.

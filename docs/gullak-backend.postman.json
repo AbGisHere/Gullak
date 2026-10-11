@@ -84,6 +84,16 @@
       "key": "activityAnswerKey",
       "value": "90000000-0000-4000-8000-000000000001",
       "type": "string"
+    },
+    {
+      "key": "missionId",
+      "value": "replace-with-published-mission-id",
+      "type": "string"
+    },
+    {
+      "key": "missionKey",
+      "value": "30000000-0000-4000-8000-000000000001",
+      "type": "string"
     }
   ],
   "item": [
@@ -666,6 +676,55 @@
             ],
             "url": "{{supabaseUrl}}/rest/v1/activity_answers?select=*&run_id=eq.{{runId}}",
             "description": "A reads own rows. With B token and A runId expect empty array. Never include server credentials."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mission completion (published definitions required)",
+      "item": [
+        {
+          "name": "Complete family-confirmed mission; repeat unchanged",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{missionKey}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/missions/complete",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"missionId\":\"{{missionId}}\",\"confirmation\":\"family\"}"
+            },
+            "description": "Both learner Done and family We did this together UI actions precede this attestation. Missing published content gives 503; do not bypass it. First learner mission returns missionsCompleted=1, householdsReached=1. Same key/body repeats return saved result. New key, same mission never adds counts; first confirmation wins."
+          }
+        },
+        {
+          "name": "Reject client mission count",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{missionKey}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/missions/complete",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"missionId\":\"{{missionId}}\",\"confirmation\":\"family\",\"householdsReached\":100}"
+            },
+            "description": "Expect 400; no client counts, identity or mastery accepted."
           }
         }
       ]

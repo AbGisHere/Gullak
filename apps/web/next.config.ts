@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       "../../packages/content/topics/**/*.json",
       "../../packages/content/activities/**/*.json",
       "../../packages/content/episodes/**/*.json",
+      "../../packages/content/missions/**/*.json",
     ],
   },
   transpilePackages: [

@@ -4,6 +4,7 @@ import {
   FdInvestmentRequest,
   GoalPlanRequest,
   LessonProgressRequest,
+  MissionCompletionRequest,
   OnboardingRequest,
   QuizSubmission,
   ReplayRequest,
@@ -32,25 +33,27 @@ describe("Postman request compatibility", () => {
         const url = item.request.url;
         const schema = url.endsWith("/answers")
           ? ActivityAnswerRequest
-          : url.endsWith("/onboarding")
-            ? OnboardingRequest
-            : url.endsWith("/quiz")
-              ? QuizSubmission
-              : url.endsWith("/progress")
-                ? LessonProgressRequest
-                : url.endsWith("/portfolio/fd")
-                  ? FdInvestmentRequest
-                  : url.endsWith("/goals/plan")
-                    ? GoalPlanRequest
-                    : url.endsWith("/time-machine")
-                      ? ReplayRequest
-                      : url.endsWith("/bookmark")
-                        ? SaveLearningBookmarkRequest
-                        : url.endsWith("/runs")
-                          ? StartLearningRunRequest
-                          : null;
+          : url.endsWith("/missions/complete")
+            ? MissionCompletionRequest
+            : url.endsWith("/onboarding")
+              ? OnboardingRequest
+              : url.endsWith("/quiz")
+                ? QuizSubmission
+                : url.endsWith("/progress")
+                  ? LessonProgressRequest
+                  : url.endsWith("/portfolio/fd")
+                    ? FdInvestmentRequest
+                    : url.endsWith("/goals/plan")
+                      ? GoalPlanRequest
+                      : url.endsWith("/time-machine")
+                        ? ReplayRequest
+                        : url.endsWith("/bookmark")
+                          ? SaveLearningBookmarkRequest
+                          : url.endsWith("/runs")
+                            ? StartLearningRunRequest
+                            : null;
         if (!schema) continue;
-        const body: unknown = JSON.parse(item.request.body.raw);
+        const body: unknown = JSON.parse(item.request.body.raw.replaceAll("{{missionId}}", "fixture-mission"));
         expect(schema.safeParse(body).success, item.name).toBe(!item.name.startsWith("Reject"));
         checked++;
       }

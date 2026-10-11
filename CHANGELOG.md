@@ -26,6 +26,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [0.2.10] - 2026-10-11
 
 ### Added
+- Add idempotent mission completion and family-confirmed learner reach with restricted cohort aggregates, local rollback/concurrency tests and publication gates.
 - Persist server-graded activity evidence and run completion atomically with pinned hashes, revisions, idempotent retries and learner isolation.
 - Connect quiz API grading and exact-byte content versions to typed transactional answer persistence, with local schema generation and retry/isolation acceptance instructions.
 - Add typed per-answer quiz evidence, authoritative grading and exact-byte content versions for backend integration.

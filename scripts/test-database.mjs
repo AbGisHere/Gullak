@@ -46,6 +46,7 @@ try {
     "20261010150000_grade_group_onboarding.sql",
     "20261011090000_learning_runs.sql",
     "20261011100000_quiz_answers.sql",
+    "20261011110000_mission_completions.sql",
     "20261011120000_activity_answers.sql",
   ]) {
     if (file === "20261010150000_grade_group_onboarding.sql") {
@@ -56,6 +57,7 @@ try {
   }
   sql(readFileSync(new URL("../supabase/tests/core.sql", import.meta.url), "utf8"));
   sql(readFileSync(new URL("../supabase/tests/quiz-answers.sql", import.meta.url), "utf8"));
+  sql(readFileSync(new URL("../supabase/tests/missions.sql", import.meta.url), "utf8"));
   sql(demoSeedSql());
   sql(demoSeedSql());
   sql(readFileSync(new URL("../supabase/tests/learning-runs.sql", import.meta.url), "utf8"));
@@ -167,6 +169,29 @@ try {
     throw new Error("Concurrent activity revisions were not enforced");
   sql(
     "select public.test_assert((select count(*)=2 from public.activity_answers where run_id='70000000-0000-4000-8000-000000000001'), 'concurrent answer retries and stale request add no duplicates');",
+  );
+  const mission = (key) =>
+    new Promise((resolve) => {
+      const child = spawn(join(bin, `psql${suffix}`), args, { windowsHide: true });
+      let stderr = "";
+      child.stderr.on("data", (chunk) => {
+        stderr += chunk;
+      });
+      child.stdout.resume();
+      child.on("error", (error) => resolve({ status: -1, stderr: error.message }));
+      child.on("close", (status) => resolve({ status, stderr }));
+      child.stdin.end(`set role service_role; select public.record_mission('11111111-1111-4111-8111-111111111111',
+      '${key}','{"missionId":"concurrent-mission","confirmation":"family"}');`);
+    });
+  const missionKey = "90000000-0000-4000-8000-000000000001";
+  const missionResults = await Promise.all([
+    mission(missionKey),
+    mission(missionKey),
+    mission("90000000-0000-4000-8000-000000000002"),
+  ]);
+  if (missionResults.some((result) => result.status !== 0)) throw new Error("Concurrent mission requests failed");
+  sql(
+    "select public.test_assert((select count(*)=1 from public.mission_completions where learner_id='11111111-1111-4111-8111-111111111111' and mission_id='concurrent-mission'), 'concurrent mission submissions count once');",
   );
   console.log(
     "Database tests passed: migrations, RLS, restricted writes, quiz/activity grading gates, retries, rollback, completion, facilitator scope and concurrent investments/quiz/activity requests.",

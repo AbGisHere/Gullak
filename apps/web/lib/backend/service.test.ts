@@ -39,6 +39,7 @@ const state: LearnerState = {
 };
 function database(): DataAccess {
   return {
+    mission: vi.fn(),
     activityState: vi.fn(),
     answerActivity: vi.fn(),
     run: vi.fn(),

@@ -5,6 +5,8 @@ import {
   DepositHolding,
   LearnerProfile,
   LearningRun,
+  type MissionCompletionRequest,
+  MissionCompletionResult,
   Portfolio,
   ProgressRecord,
   QuizEvidence,
@@ -65,6 +67,15 @@ export function createDataAccess(user: SupabaseClient<Database>, admin: Supabase
       const response = validatedResult(ActivityAnswerResult, data);
       if (response.run.learnerId !== learnerId) throw new ApiError(403, "ownership_mismatch");
       return response;
+    },
+    async mission(key: string, request: MissionCompletionRequest) {
+      const { data, error } = await admin.rpc("record_mission", {
+        p_learner: learnerId,
+        p_key: key,
+        p_request: request as Json,
+      });
+      if (error) databaseError(error);
+      return validatedResult(MissionCompletionResult, data);
     },
     async runs() {
       const { data, error } = await user

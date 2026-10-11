@@ -10,6 +10,7 @@ export * from "./instrument";
 export * from "./learning-run";
 export * from "./lesson-draft";
 export * from "./market";
+export * from "./mission";
 export * from "./portfolio";
 export * from "./profile";
 export * from "./progress";
