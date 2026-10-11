@@ -1,5 +1,7 @@
 import {
+  type ChartRange,
   IndianSymbol,
+  InstrumentChart,
   InstrumentQuote,
   InstrumentSearchResult,
   type ListedKind,
@@ -20,6 +22,14 @@ export const YAHOO_CHART_URL = "https://query1.finance.yahoo.com/v8/finance/char
 export const YAHOO_SEARCH_URL = "https://query2.finance.yahoo.com/v1/finance/search";
 const SOURCE = "yahoo-finance";
 const HEADERS = { "User-Agent": "Mozilla/5.0 (compatible; Gullak learning app)", Accept: "application/json" };
+
+/** Yahoo's range and step for each chart period. */
+const CHART_PERIODS: Record<ChartRange, [range: string, interval: string]> = {
+  "1d": ["1d", "5m"],
+  "1w": ["5d", "30m"],
+  "1m": ["1mo", "1d"],
+  "1y": ["1y", "1d"],
+};
 
 const exchangeOf = (symbol: string): "NSE" | "BSE" => (symbol.endsWith(".BO") ? "BSE" : "NSE");
 
@@ -81,6 +91,8 @@ const isoFromUnix = (seconds: number) => new Date(seconds * 1000).toISOString();
 export interface YahooAdapter extends MarketDataAdapter {
   /** Live (possibly delayed) price for one Indian listing. */
   getInstrumentQuote(symbol: string): Promise<InstrumentQuote>;
+  /** Prices over one chart period: 5-minute steps for a day, 30-minute for a week, daily otherwise. */
+  getChart(symbol: string, range: ChartRange): Promise<InstrumentChart>;
   /** Indian listings matching free text, NSE before BSE, at most `limit`. */
   search(query: string, limit?: number): Promise<InstrumentSearchResult[]>;
 }
@@ -145,9 +157,27 @@ export function createYahooAdapter(deps: { fetch: typeof fetch }): YahooAdapter 
     });
   }
 
+  async function getChart(symbol: string, range: ChartRange): Promise<InstrumentChart> {
+    const [yahooRange, interval] = CHART_PERIODS[range];
+    const result = await chart(symbol, yahooRange, interval);
+    const closes = result.indicators?.quote[0]?.close ?? [];
+    const points = (result.timestamp ?? []).flatMap((t, i) => {
+      const price = closes[i];
+      return typeof price === "number" && price > 0 ? [{ t: isoFromUnix(t), price }] : [];
+    });
+    return InstrumentChart.parse({
+      symbol,
+      range,
+      points,
+      ...(result.meta.chartPreviousClose ? { previousClose: result.meta.chartPreviousClose } : {}),
+      source: SOURCE,
+    });
+  }
+
   return {
     id: SOURCE,
     getInstrumentQuote,
+    getChart,
     async getQuote(symbol): Promise<MarketQuote> {
       const quote = await getInstrumentQuote(symbol);
       return {

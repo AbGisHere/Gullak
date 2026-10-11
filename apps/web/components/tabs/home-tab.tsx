@@ -26,7 +26,7 @@ export function HomeTab({
   const t = useTranslations("nextLearning");
   const dashboard = useTranslations("dashboard");
   return (
-    <div className="mx-auto max-w-5xl space-y-8 px-4 py-6 sm:px-6 sm:py-8">
+    <div className="max-w-5xl space-y-8">
       <RecommendationCard topics={topics} profile={profile} />
       <div className="flex items-start gap-3 border-b border-brand-ink/20 pb-6">
         <CalendarDays aria-hidden="true" className="mt-1 size-5 shrink-0" />

@@ -8,6 +8,14 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Added
+
+- Invest: a price chart on every listing page, with 1D, 1W, 1M and 52W periods. Hover or drag to read the price at any point; the line is green or red by the change over the period. Served from Yahoo Finance by a new public `/api/market/live/[symbol]/chart?range=` route (today cached for 60 s, longer periods for 30 min).
+
+### Fixed
+
+- Desktop: the header and the left sidebar no longer move when switching between Home and the other tabs. Home and the routed pages now share one page frame.
+
 ## [0.2.28] - 2026-10-11
 
 ### Added

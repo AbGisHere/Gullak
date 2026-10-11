@@ -1,6 +1,12 @@
 import "server-only";
 import { createYahooAdapter, MarketDataError } from "@gullak/market-data";
-import { IndianSymbol, type InstrumentQuote, type InstrumentSearchResult } from "@gullak/types";
+import {
+  ChartRange,
+  IndianSymbol,
+  type InstrumentChart,
+  type InstrumentQuote,
+  type InstrumentSearchResult,
+} from "@gullak/types";
 import { unstable_cache } from "next/cache";
 import { z } from "zod";
 import { CATEGORY_IDS, categoryQueries, STARTER_STOCKS, STOCKS_CATEGORY } from "../category-search";
@@ -18,6 +24,16 @@ const cachedQuote = unstable_cache((symbol: string) => yahoo.getInstrumentQuote(
 const cachedSearch = unstable_cache((query: string) => yahoo.search(query, 12), ["gullak-live-search-v1"], {
   revalidate: 3600,
 });
+
+// Today's chart moves every few minutes; longer periods only gain a point a day.
+const cachedDayChart = unstable_cache((symbol: string) => yahoo.getChart(symbol, "1d"), ["gullak-live-chart-1d-v1"], {
+  revalidate: 60,
+});
+const cachedLongChart = unstable_cache(
+  (symbol: string, range: ChartRange) => yahoo.getChart(symbol, range),
+  ["gullak-live-chart-v1"],
+  { revalidate: 1800 },
+);
 
 export const SearchQuery = z.string().trim().min(2).max(60);
 
@@ -53,6 +69,20 @@ export async function liveQuote(symbol: string): Promise<InstrumentQuote> {
   if (!parsed.success) throw new ApiError(400, "invalid_symbol");
   try {
     return await cachedQuote(parsed.data);
+  } catch (error) {
+    unavailable(error);
+  }
+}
+
+export async function liveChart(symbol: string, range: string | null): Promise<InstrumentChart> {
+  const parsedSymbol = IndianSymbol.safeParse(decodeURIComponent(symbol).toUpperCase());
+  if (!parsedSymbol.success) throw new ApiError(400, "invalid_symbol");
+  const parsedRange = ChartRange.safeParse(range ?? "1d");
+  if (!parsedRange.success) throw new ApiError(400, "invalid_range");
+  try {
+    return parsedRange.data === "1d"
+      ? await cachedDayChart(parsedSymbol.data)
+      : await cachedLongChart(parsedSymbol.data, parsedRange.data);
   } catch (error) {
     unavailable(error);
   }

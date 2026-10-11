@@ -826,6 +826,32 @@
       "etf": "An ETF is a basket of many investments that trades on the exchange like a share.",
       "mutual-fund": "A mutual fund pools many people's money, and a manager invests it by a stated plan.",
       "index": "An index tracks a group of companies to show how a part of the market is doing."
+    },
+    "chart": {
+      "title": "Price chart",
+      "rangeLabel": "Chart period",
+      "range": {
+        "1d": "1D",
+        "1w": "1W",
+        "1m": "1M",
+        "1y": "52W"
+      },
+      "rangeName": {
+        "1d": "1 day",
+        "1w": "1 week",
+        "1m": "1 month",
+        "1y": "52 weeks"
+      },
+      "change": {
+        "1d": "{percent} today",
+        "1w": "{percent} this week",
+        "1m": "{percent} this month",
+        "1y": "{percent} in 52 weeks"
+      },
+      "summary": "Price over {range}: low {low}, high {high}, change {percent}.",
+      "lowHigh": "Low {low} · High {high}",
+      "loading": "Loading the chart…",
+      "unavailable": "The chart isn't available right now. Try another period or come back later."
     }
   }
 }

@@ -10,6 +10,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { type FormEvent, useEffect, useId, useState } from "react";
 import { TermHelp } from "@/components/help/term-help";
 import { AccessLabel, useLearner } from "@/components/invest/invest-search";
+import { PriceChart } from "@/components/invest/price-chart";
 import { fundCategoryInfo, guessFundCategory } from "@/lib/category-search";
 import type { HelpTerm } from "@/lib/help-terms";
 import { applyTrade, availableCashPaise, fetchQuote, formatUnits, tradeAccess, unlockTopicId } from "@/lib/invest";
@@ -197,6 +198,8 @@ export function InstrumentTrade({
         </p>
         <p className="text-sm text-muted-foreground">{t("asOf", { time: asOf })}</p>
       </div>
+
+      <PriceChart symbol={quote.symbol} format={show} />
 
       <section aria-labelledby="stats-title" className="space-y-3">
         <h2 id="stats-title" className="text-xl font-bold">

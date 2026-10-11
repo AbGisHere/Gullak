@@ -61,6 +61,23 @@ async function openLearner(page: Page, passedTopics: string[]) {
       },
     }),
   );
+  await page.route("**/api/market/live/*/chart?*", (route) => {
+    const range = new URL(route.request().url()).searchParams.get("range") ?? "1d";
+    const prices = range === "1d" ? [2990, 3010, 3000.5] : [2500, 2800, 3000.5];
+    route.fulfill({
+      json: {
+        data: {
+          chart: {
+            symbol: "TCS.NS",
+            range,
+            points: prices.map((price, i) => ({ t: `2026-10-0${i + 7}T05:00:00.000Z`, price })),
+            previousClose: 2990,
+            source: "yahoo-finance",
+          },
+        },
+      },
+    });
+  });
   await page.route("**/api/market/live/*", (route) =>
     route.fulfill({ json: { data: { quote: route.request().url().includes("0P0000XVLA") ? fundQuote : quote } } }),
   );
@@ -74,7 +91,7 @@ test("a locked stock explains which lesson opens it", async ({ page }) => {
   await page.getByLabel("Search Indian stocks, ETFs, mutual funds and indices").fill("tcs");
   await page.getByRole("link", { name: /Tata Consultancy Services Limited/ }).click();
   await expect(page.getByRole("heading", { name: "Not unlocked yet" })).toBeVisible();
-  await expect(page.getByText("₹3,000.50")).toBeVisible();
+  await expect(page.getByText("₹3,000.50").first()).toBeVisible();
   await expect(page.getByRole("link", { name: "Go to the lesson" })).toHaveAttribute("href", "/learn/stocks");
   await expect(page.getByRole("link", { name: /^Learn: / })).toHaveAttribute("href", "/learn/stocks");
   await expect(page.getByRole("button", { name: "Buy with play money" })).toHaveCount(0);
@@ -83,6 +100,17 @@ test("a locked stock explains which lesson opens it", async ({ page }) => {
   await expect(page.getByText("-25%")).toBeVisible();
   await page.getByRole("button", { name: "What is 52-week range?" }).click();
   await expect(page.getByText("The lowest and highest prices in the past year.", { exact: false })).toBeVisible();
+});
+
+test("the price chart switches between 1D, 1W, 1M and 52W", async ({ page }) => {
+  await openLearner(page, []);
+  await page.goto("/portfolio/invest/TCS.NS");
+  await expect(page.getByRole("button", { name: "1 day" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByText("+0.35% today")).toBeVisible();
+  await page.getByRole("button", { name: "52 weeks" }).click();
+  await expect(page.getByRole("button", { name: "52 weeks" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByText("+20.02% in 52 weeks")).toBeVisible();
+  await expect(page.getByRole("img", { name: /Price over 52 weeks: low ₹2,500.00, high ₹3,000.50/ })).toBeVisible();
 });
 
 test("a fund category lists its funds without typing", async ({ page, isMobile }) => {

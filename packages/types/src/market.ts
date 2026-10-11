@@ -69,3 +69,18 @@ export const InstrumentQuote = z.object({
   source: z.string().min(1),
 });
 export type InstrumentQuote = z.infer<typeof InstrumentQuote>;
+
+/** The periods a listing's price chart can show: one day, one week, one month or 52 weeks. */
+export const ChartRange = z.enum(["1d", "1w", "1m", "1y"]);
+export type ChartRange = z.infer<typeof ChartRange>;
+
+/** Prices over one chart period, oldest first, in rupees per unit or index points. */
+export const InstrumentChart = z.object({
+  symbol: IndianSymbol,
+  range: ChartRange,
+  points: z.array(z.object({ t: IsoDateTime, price: z.number().finite().positive() })),
+  /** The close before the period began, when Yahoo gives one, so the chart can show the change. */
+  previousClose: z.number().finite().positive().optional(),
+  source: z.string().min(1),
+});
+export type InstrumentChart = z.infer<typeof InstrumentChart>;

@@ -1,7 +1,9 @@
 import { allUnlockRules, startingCapital } from "@gullak/content";
 import { buyUnits, MILLI_UNITS, pricePaiseFromRupees, sellUnits, startingCash } from "@gullak/engine";
 import {
+  type ChartRange,
   type GradeGroup,
+  InstrumentChart,
   InstrumentQuote,
   InstrumentSearchResult,
   type LearnerProfile,
@@ -106,6 +108,7 @@ export function formatUnits(milliUnits: number, locale = "en-IN"): string {
 }
 
 const ApiQuote = z.object({ data: z.object({ quote: InstrumentQuote }) });
+const ApiChart = z.object({ data: z.object({ chart: InstrumentChart }) });
 const ApiSearch = z.object({ data: z.object({ results: z.array(InstrumentSearchResult) }) });
 
 /** Live price through Gullak's cached route; `null` when Yahoo or the network is unavailable. */
@@ -114,6 +117,21 @@ export async function fetchQuote(symbol: string, signal?: AbortSignal): Promise<
     const response = await fetch(`/api/market/live/${encodeURIComponent(symbol)}`, { signal });
     if (!response.ok) return null;
     return ApiQuote.parse(await response.json()).data.quote;
+  } catch {
+    return null;
+  }
+}
+
+/** A listing's prices over one chart period, or null when they can't be fetched. */
+export async function fetchChart(
+  symbol: string,
+  range: ChartRange,
+  signal?: AbortSignal,
+): Promise<InstrumentChart | null> {
+  try {
+    const response = await fetch(`/api/market/live/${encodeURIComponent(symbol)}/chart?range=${range}`, { signal });
+    if (!response.ok) return null;
+    return ApiChart.parse(await response.json()).data.chart;
   } catch {
     return null;
   }

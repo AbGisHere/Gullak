@@ -126,6 +126,31 @@ describe("createYahooAdapter", () => {
     ]);
   });
 
+  it("charts a period from Yahoo's closes, skipping gaps, with the matching range and step", async () => {
+    const gappy = structuredClone(relianceChart);
+    const [result] = gappy.chart.result;
+    if (result) {
+      result.timestamp = [1791453600, 1791453900, 1791539100];
+      result.indicators.quote = [{ close: [1178, null, 1170.3] as unknown as number[] }];
+    }
+    const fetch = json(gappy);
+    const yahoo = createYahooAdapter({ fetch });
+    await expect(yahoo.getChart("RELIANCE.NS", "1d")).resolves.toEqual({
+      symbol: "RELIANCE.NS",
+      range: "1d",
+      points: [
+        { t: "2026-10-08T10:00:00.000Z", price: 1178 },
+        { t: "2026-10-09T09:45:00.000Z", price: 1170.3 },
+      ],
+      previousClose: 1178,
+      source: "yahoo-finance",
+    });
+    expect(String(vi.mocked(fetch).mock.calls[0]?.[0])).toContain("range=1d&interval=5m");
+    await yahoo.getChart("RELIANCE.NS", "1y");
+    expect(String(vi.mocked(fetch).mock.calls[1]?.[0])).toContain("range=1y&interval=1d");
+    await expect(yahoo.getChart("AAPL", "1w")).rejects.toBeInstanceOf(MarketDataError);
+  });
+
   it("keeps only Indian listings in search, NSE first, and labels ETFs, funds and indices", async () => {
     const yahoo = createYahooAdapter({ fetch: json(search) });
     const results = await yahoo.search("reliance");
