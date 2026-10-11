@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.2.23] - 2026-10-11
+
 ### Changed
 - The app opens in light mode by default instead of following the device theme; Dark and System stay available under Me → Appearance.
 
