@@ -1,6 +1,10 @@
 import { z } from "zod";
 import { Slug } from "./common";
 
+/** Numeric class boundary for the draft curriculum; legacy grade groups stay unchanged. */
+export const SchoolClass = z.number().int().min(6).max(12);
+export type SchoolClass = z.infer<typeof SchoolClass>;
+
 /** Draft migration contract. Existing GradeGroup and topic consumers remain unchanged. */
 export const Stage = z.enum(["foundation-explorers", "money-navigators", "financial-strategists"]);
 export type Stage = z.infer<typeof Stage>;

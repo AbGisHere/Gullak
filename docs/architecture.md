@@ -284,7 +284,9 @@ progress are not implemented here. Do not load draft metadata into the demo app.
 the draft stage IDs: 6–7 → `foundation-explorers`, 8–9 → `money-navigators`,
 10–12 → `financial-strategists`. It accepts only integer numbers from 6 through
 12 and throws `ZodError` for anything else; it never coerces a string, guesses a
-class from the old grade group, or falls back to a beginner stage. This helper
+class from the old grade group, or falls back to a beginner stage. Its numeric
+boundary is the shared `SchoolClass` schema in `@gullak/types`, so the engine
+needs no direct runtime Zod dependency. This helper
 does not change onboarding, select lesson content, implement placement or grant
 XP/unlocks. R1/R2 can call it when the post-demo class-based flow is approved.
 

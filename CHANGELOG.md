@@ -9,6 +9,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Added
+- Shared `SchoolClass` boundary schema in `@gullak/types`; draft stage selection validates through the engine's declared types dependency rather than an undeclared direct Zod import.
 - Offline draft-pipeline regression tests for the five approved English briefs across four formats, including canonical-concept and quiz-objective rejection; provider outputs are synthetic fixtures, not generated or approved learner content.
 - Pure draft-stage selection by school class in `@gullak/engine`, with exact Classes 6–7 / 8–9 / 10–12 boundaries and rejection of invalid or coerced values; existing onboarding, placement and unlocks remain unchanged.
 - Strict virtual unit-price comparison input contracts: safe integer paise, positive whole quantities and matching piece/gram/millilitre units; ambiguous units, real-money flags and extra fields are rejected.
