@@ -12,6 +12,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - Strict educational recommendation input/output contracts with validated topic graphs, quiz scores and complete topic-scoped concept mastery.
 - Pure `recommendNext` educational ranking: weak-concept reviews, prerequisite-readiness ordering and completed-topic reviews. Grade filtering and quiz-only unlocks remain unchanged; no trained parameters, database writes or UI integration.
 
+### Changed
+- Vercel deploys only `main`; branch pushes and pull requests no longer create preview deployments (`vercel.json`). CI still checks every push and PR.
+
 ## [0.1.4] - 2026-10-11
 
 ### Added
