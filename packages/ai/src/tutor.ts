@@ -3,7 +3,7 @@ import { z } from "zod";
 import { checkLearnerQuestion } from "./guardrails";
 import { TUTOR_PROMPT_V3 } from "./prompts/tutor";
 import approvedEnglish from "./tutor-approved-english.json";
-import { collectTutorText } from "./tutor-grounding";
+import { collectTutorText, selectTutorExcerpt } from "./tutor-grounding";
 
 const Sha256 = z.string().regex(/^[a-f0-9]{64}$/);
 const Allowlist = z
@@ -71,10 +71,16 @@ export type TutorRequest = {
   prompt: string;
 };
 
-/** Verify immutable English release bytes and prepare data only, without a model or storage. */
-export async function prepareTutorRequest(
-  input: unknown,
-): Promise<{ status: "ready"; request: TutorRequest } | TutorUnavailable> {
+type ApprovedGrounding = {
+  status: "ready";
+  topicId: string;
+  locale: string;
+  gradeGroup: GradeGroup;
+  question: string;
+  sources: TutorSource[];
+};
+
+async function approveGrounding(input: unknown): Promise<ApprovedGrounding | TutorUnavailable> {
   const parsed = Input.safeParse(input);
   if (!parsed.success) return { status: "unavailable", reason: "invalid-request" };
   const { topicId, locale, gradeGroup, question, contentVersion } = parsed.data;
@@ -110,6 +116,16 @@ export async function prepareTutorRequest(
     text,
   }));
   if (sources.length === 0) return { status: "unavailable", reason: "no-safe-grounding" };
+  return { status: "ready", topicId, locale, gradeGroup, question, sources };
+}
+
+/** Verify immutable English release bytes and prepare data only, without a model or storage. */
+export async function prepareTutorRequest(
+  input: unknown,
+): Promise<{ status: "ready"; request: TutorRequest } | TutorUnavailable> {
+  const grounding = await approveGrounding(input);
+  if (grounding.status !== "ready") return grounding;
+  const { topicId, locale, gradeGroup, question, sources } = grounding;
   return {
     status: "ready",
     request: {
@@ -121,5 +137,39 @@ export async function prepareTutorRequest(
       system: TUTOR_PROMPT_V3.system,
       prompt: JSON.stringify({ question, locale, gradeGroup, sources }),
     },
+  };
+}
+
+export type TutorExcerpt = {
+  status: "excerpt";
+  kind: "approved-content-excerpt";
+  excerpt: string;
+  citation: TutorCitation;
+  provenance: {
+    method: "verbatim-field";
+    relevance: "all-question-terms";
+    matchedTerms: string[];
+  };
+};
+
+/** An attributed verbatim excerpt, not a generated answer or semantic-answer assertion. */
+export async function findTutorExcerpt(input: unknown): Promise<
+  | TutorExcerpt
+  | TutorUnavailable
+  | {
+      status: "unavailable";
+      reason: "insufficient-relevance" | "out-of-scope" | "no-safe-excerpt";
+    }
+> {
+  const grounding = await approveGrounding(input);
+  if (grounding.status !== "ready") return grounding;
+  const selected = selectTutorExcerpt(grounding.question, grounding.sources);
+  if (selected.status !== "selected") return selected;
+  return {
+    status: "excerpt",
+    kind: "approved-content-excerpt",
+    excerpt: selected.source.text,
+    citation: selected.source.citation,
+    provenance: { method: "verbatim-field", relevance: "all-question-terms", matchedTerms: selected.matchedTerms },
   };
 }

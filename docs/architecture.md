@@ -365,6 +365,24 @@ interpolated into system instructions. Existing `TUTOR_PROMPT` remains v2.
 No route, provider invocation, API key read, persistent cache, rate-limit storage,
 learner record, mastery update or app activation is part of this helper.
 
+`findTutorExcerpt(input)` independently crosses the same approval boundary and
+returns `{ status: "excerpt", kind: "approved-content-excerpt", excerpt,
+citation, provenance }`, or an unavailable reason code. The excerpt is one
+complete, unchanged teaching field with the same source citation, never a newly
+generated answer or a claim that it semantically answers the question. Callers
+must present it as an attributed content excerpt, translate reason codes and
+continue to display the play-money context.
+
+Relevance is deterministic and conservative: lowercase ASCII English words of
+three or more letters, distinct terms and common question stopwords removed.
+At least two terms are required, and every remaining term must occur as a whole
+word in the same eligible field. Authored source order breaks ties. Complete
+fields over 2,000 UTF-16 code units or blocked by output guardrails are skipped;
+text is never truncated, combined or calculated. `insufficient-relevance`,
+`out-of-scope` and `no-safe-excerpt` represent no-excerpt outcomes. Exact lexical
+matching may miss short questions, synonyms and inflected forms; it is not
+semantic retrieval, recommendation, tutoring assessment or learner accuracy.
+
 ## Provider eligibility
 
 `resolveProviderOrder(env)` in `@gullak/ai` uses the explicit `AI_PROVIDER_ORDER`
