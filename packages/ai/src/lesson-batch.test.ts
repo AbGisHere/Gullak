@@ -242,6 +242,56 @@ const approved = [
 const formats = ["transcript", "story", "audio", "quiz"];
 const approvedCases = approved.flatMap((topic) => formats.map((format) => ({ ...topic, format })));
 
+describe("required batch graph metadata", () => {
+  const missingPassMarks = approved.flatMap(({ topicId }) =>
+    ["omitted", "undefined"].map((mode) => ({ topicId, mode })),
+  );
+  it.each(missingPassMarks)("rejects $mode passMark for $topicId", async ({ topicId, mode }) => {
+    const job = batchJob(topicId);
+    const rule =
+      mode === "omitted"
+        ? Object.fromEntries(Object.entries(job.context.rule).filter(([key]) => key !== "passMark"))
+        : { ...job.context.rule, passMark: undefined };
+    const error = await ai.prepareLessonBatch({ jobs: [{ ...job, context: { ...job.context, rule } }] }).then(
+      () => undefined,
+      (reason: unknown) => reason,
+    );
+    expect(error).toBeInstanceOf(z.ZodError);
+    if (!(error instanceof z.ZodError)) throw new Error("expected graph-boundary validation failure");
+    expect(error.issues).toEqual(
+      expect.arrayContaining([expect.objectContaining({ path: ["jobs", 0, "context", "rule", "passMark"] })]),
+    );
+  });
+
+  const otherFields = [
+    "topicId",
+    "pillar",
+    "gradeGroups",
+    "requiresTopicIds",
+    "unlocksInstruments",
+    "unlocksActivityIds",
+  ];
+  it.each(otherFields.flatMap((field) => ["omitted", "undefined"].map((mode) => ({ field, mode }))))(
+    "rejects $mode graph field $field without inserting canonical defaults",
+    async ({ field, mode }) => {
+      const job = batchJob();
+      const rule =
+        mode === "omitted"
+          ? Object.fromEntries(Object.entries(job.context.rule).filter(([key]) => key !== field))
+          : { ...job.context.rule, [field]: undefined };
+      const error = await ai.prepareLessonBatch({ jobs: [{ ...job, context: { ...job.context, rule } }] }).then(
+        () => undefined,
+        (reason: unknown) => reason,
+      );
+      expect(error).toBeInstanceOf(z.ZodError);
+      if (!(error instanceof z.ZodError)) throw new Error("expected graph-boundary validation failure");
+      expect(error.issues).toEqual(
+        expect.arrayContaining([expect.objectContaining({ path: ["jobs", 0, "context", "rule", field] })]),
+      );
+    },
+  );
+});
+
 describe("approved five-brief batch catalog (offline, synthetic model identities)", () => {
   it.each(approvedCases)("prepares $topicId / $format with pinned evidence and concept coverage", async (testCase) => {
     const job = batchJob(testCase.topicId);

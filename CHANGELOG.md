@@ -16,6 +16,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 - Pure inert BKT-with-forgetting step and ordered-sequence inference with observation-then-transition semantics, fail-closed impossible observations and synthetic notebook parity tests; no mastery, persistence or unlock wiring.
 - Bounded offline lesson-batch preparation for the five pinned English Grade 8–10 briefs, validating exact source bytes, approved brief/context fingerprints and duplicate identities before returning deterministic prepared-only requests and cache keys; no generation or storage is activated.
 
+### Fixed
+- Require the caller's explicit graph pass mark during offline lesson-batch preparation instead of silently inserting the shared unlock-rule default; omitted or undefined nested graph metadata rejects without changing shared graph behavior.
+
 ## [0.2.16] - 2026-10-11
 
 ### Changed
