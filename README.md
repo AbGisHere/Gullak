@@ -6,7 +6,7 @@
 [![Node](https://img.shields.io/badge/node-24_LTS-339933?logo=nodedotjs&logoColor=white)](.nvmrc)
 [![pnpm](https://img.shields.io/badge/pnpm-12.10.1-F69220?logo=pnpm&logoColor=white)](package.json)
 
-Team 268 · Megathon X. Setup and run instructions only. The solution is described in [`deliverables/final_report.pdf`](deliverables/final_report.pdf).
+Gullak is a gamified financial-literacy app for Indian students in Classes 6–12. This README covers setup and running it.
 
 **Hosted app (no setup needed):** [gullak.abgupta.me](https://gullak.abgupta.me). It is installable as a PWA on phone and desktop.
 
@@ -19,8 +19,8 @@ Team 268 · Megathon X. Setup and run instructions only. The solution is describ
 ## Set up and run
 
 ```bash
-git clone https://github.com/IIIT-ECell/megathon26-claude2create.git
-cd megathon26-claude2create
+git clone https://github.com/AbGisHere/Gullak.git
+cd Gullak
 corepack enable
 pnpm install
 cp -n apps/web/.env.example apps/web/.env.local

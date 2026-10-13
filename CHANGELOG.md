@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Removed
+- The hackathon report PDFs and the team number. The README now links to this repo for cloning.
+
 ## [0.3.2] - 2026-10-13
 
 ### Fixed
@@ -196,7 +199,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [0.2.16] - 2026-10-11
 
 ### Changed
-- The MIT licence names Team 268 (our team ID) as the copyright holder, as Megathon X requires.
+- The MIT licence names the team as the copyright holder.
 
 ## [0.2.15] - 2026-10-11
 
@@ -367,7 +370,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [0.0.18] - 2026-10-11
 
 ### Added
-- M2 mid-submission progress report PDF in `deliverables/`.
+- Mid-project progress report PDF (removed in 0.3.3).
 
 ## [0.0.17] - 2026-10-11
 
@@ -420,7 +423,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [0.0.9] - 2026-10-10
 
 ### Added
-- M1 approach PDF in `deliverables/`.
+- Approach PDF (removed in 0.3.3).
 
 ## [0.0.8] - 2026-10-10
 
