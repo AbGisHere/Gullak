@@ -4,7 +4,8 @@ test("learner can complete onboarding with a local profile", async ({ page }) =>
   await page.goto("/");
 
   await expect(page.getByRole("heading", { name: "Learn money by doing, with play money." })).toBeVisible();
-  await expect(page.getByText("Play money", { exact: true })).toBeVisible();
+  // Account setup omits the badge; money screens still label virtual balances.
+  await expect(page.getByText("Play money", { exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Continue" }).click();
 
   // Grade group is required before continuing; experience only sets a starting point.
