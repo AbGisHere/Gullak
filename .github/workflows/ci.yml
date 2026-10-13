@@ -42,7 +42,8 @@ jobs:
             range="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
           else
             range="${{ github.event.before }}..${{ github.sha }}"
-            git cat-file -e "${{ github.event.before }}" 2>/dev/null || range="${{ github.sha }}"
+            # A new branch has no previous push: check only its own commits, not all of main's history.
+            git cat-file -e "${{ github.event.before }}" 2>/dev/null || range="origin/${{ github.event.repository.default_branch }}..${{ github.sha }}"
           fi
           for sha in $(git rev-list --no-merges $range); do
             git log -1 --format=%B "$sha" > /tmp/msg
