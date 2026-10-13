@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-10-13
+
 ### Removed
 - The hackathon report PDFs and the team number. The README now links to this repo for cloning.
 
