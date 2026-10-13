@@ -133,6 +133,19 @@ Callers supply canonical `meta`, graph `rule` and `supportedLocales`. Topic IDs 
 
 The fallback is an attributed `approved-content-excerpt`, never a generated answer or asserted semantic answer. It requires at least two distinct meaningful English terms, all matching one safe complete teaching field; it preserves the whole field and caveats, never joins/truncates text, and returns reason codes when no excerpt qualifies. Bounds, citations and limitations: [`docs/architecture.md`](docs/architecture.md#pinned-english-tutor-preparation-inactive-post-demo). Multilingual review, provider execution, persistent rate limits/cache and app integration remain separate post-demo work.
 
+### Sarvam translation authoring
+
+`createSarvamTranslator` in `@gullak/ai` translates only authored plain English text
+to Hindi/Telugu drafts with `mayura:v1`. It never reads keys itself or publishes
+content; callers supply the server-only key. The CLI `scripts/translate-text.mjs`
+reads `SARVAM_API_KEY`, defaults to dry-run, deduplicates/cache-reuses exact
+requests, and reserves input characters before calling. Its external local cache
+and ledger are authoring assets, not production persistence; keep them across
+runs. Never delete them as scratch or claim a character cap is an organisation-wide
+rupee balance. All translated text needs R5 review; placeholders/ICU/HTML are
+rejected in this increment. No translation calls occur in tests/builds or the app.
+See [authoring handoff](docs/architecture.md#sarvam-plain-text-translation-authoring).
+
 ### Offline lesson drafts
 
 `LessonDraft` in `@gullak/types` wraps one existing-renderer-compatible transcript, text-only story, device narration or quiz variant with topic, grade, locale and draft-only status. `validateLessonDraft(input, brief, context)` in `@gullak/ai` revalidates the brief, checks canonical concept coverage and quiz integrity, and screens teaching text with existing output guardrails. Structural success is not factual, safety or R5 approval. No provider calls, assets, publication, persistence or unlock changes. Editorial limits and future generation handoff are in [`docs/architecture.md`](docs/architecture.md#offline-lesson-draft-validation).

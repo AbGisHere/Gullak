@@ -27,6 +27,7 @@ These ship today and carry over to the eight worlds; the content model and grade
 - [x] Checked quizzes show correctness, authored reasoning for every question and automatic score focus/scroll; phone/desktop browser acceptance remains pending.
 - [x] Live paper trading, first slice: search any NSE/BSE stock, ETF, mutual fund or index on Yahoo Finance, buy and sell with play money once the lesson that teaches it is passed, holdings saved on the device. Habit review, life events and Supabase persistence remain pending (R1)
 - [x] Offline curriculum briefs, lesson-draft validation and versioned lesson-generation requests (R4)
+- [x] Sarvam Hindi/Telugu plain-text translation authoring adapter and credit-conscious cached draft CLI (R4); live smoke verified, but R5 review, ICU-aware message handling and publication remain pending. Demo screens never call this authoring API.
 - [x] Knowledge-tracing notebook: synthetic BKT fitting and a real-data benchmark on ASSISTments 2009–10 (R4)
 - [ ] Versioned real quiz-evidence integration (R3, R4); strict nine-field `QuizAnswerEvent` row schema is on main. R3's server grading, transactional persistence and migrations landed in v0.2.10; hosted HTTP acceptance passed for both authorized QA learners. Immutable content registry and R4 real-data integration remain pending; no production learner data was exported for model training.
 

@@ -800,3 +800,96 @@ submission must use one version and one timestamp instant; timestamps with diffe
 offsets may represent that same instant. Every registry question position is unique.
 Production registry variants, export completeness and incremental checkpointing
 must be agreed with R3 separately rather than inferred from these fixtures.
+
+## Sarvam plain-text translation authoring
+
+This authoring increment prepares Hindi/Telugu drafts from selected English text;
+it does not activate a live tutor, voice API, UI translation endpoint, production
+cache, translation publication or multilingual grounding approval. Existing locale
+JSON and topic content remain untouched. Review the semantic meaning with R5 before
+manually publishing a translation; a successful API response is not editorial approval.
+
+`TranslationInput`, `TranslationDraft`, `translationCacheKey` and
+`createSarvamTranslator` live in `@gullak/ai`. Input is strict
+`{ text, targetLocale: "hi" | "te" }`, with at most 1,000 Unicode codepoints.
+Empty text, markup, ICU/placeholders and advice-like source are rejected before a
+request. Do not submit learner records or personal data. The fixed HTTPS endpoint
+is `https://api.sarvam.ai/translate`, with `api-subscription-key` header,
+`mayura:v1`, `en-IN` source, `hi-IN`/`te-IN` target, classic-colloquial tone,
+spoken-form-in-native output and international numerals. Each invocation makes
+at most one request: no retries or paid provider fallback. An eight-second default
+deadline covers connection and response body, and response bytes are capped at
+64 KiB. Empty, malformed, wrong-source/script or unsafe output fails closed.
+
+Translated results are always `status: "draft"`. Missing keys, timeout, network
+failure, unauthorised key, exhausted credits, rate limiting and invalid output
+return redacted reason codes and an explicitly English source fallback, never a
+fabricated Hindi/Telugu translation. Provider bodies and keys are not logged.
+Key consumers are server/authoring-only; the adapter rejects browser invocation.
+No app route or component imports this adapter, so demo screens consume existing
+local content and spend no Sarvam credits.
+
+The command uses the existing workspace esbuild dependency to load the TypeScript
+adapter in memory, without a new SDK/dependency or generated repository files.
+Its manifest is plain text, not a whole topic/message JSON document:
+
+```json
+{
+  "schemaVersion": 1,
+  "entries": [
+    { "id": "play-money", "text": "All money here is virtual practice money.", "targetLocales": ["hi", "te"] }
+  ]
+}
+```
+
+IDs must be unique kebab-case slugs and are never translated. There are at most
+100 entries, two distinct target locales per entry, ten new requests per run and
+5,000 cumulative reserved input codepoints per cache ledger (configurable lower).
+`--budget-chars` and `--max-requests` reject an entire over-budget batch before
+any request. Equal text/language/settings reuse a SHA-256 cache key regardless of
+the manifest ID. Changed source, locale or version/settings invalidate the key.
+
+From the repository root, keep the key in Git-ignored `apps/web/.env.local`:
+
+```powershell
+# No API calls: validates and estimates a tiny two-language smoke batch.
+node --env-file=apps/web/.env.local scripts/translate-text.mjs --smoke --budget-chars 100 --max-requests 2
+# Explicit paid execution; subsequent identical runs reuse drafts without a call.
+node --env-file=apps/web/.env.local scripts/translate-text.mjs --smoke --execute --budget-chars 100 --max-requests 2
+# Prepare a reviewed selection of authored plain text, still dry-run unless --execute is added.
+node --env-file=apps/web/.env.local scripts/translate-text.mjs --input manifest.json
+```
+
+For an existing key in repo-root `.env.local`, explicitly use
+`--env-file=.env.local`; do not copy secrets into commands or commit them.
+Vercel app variables are not automatically a local CLI environment. Never prefix
+the key with `NEXT_PUBLIC_`. `apps/web/.env.example` remains a blank template.
+
+Default cache: the user's `.cache/gullak/sarvam-text` directory, outside this
+repository. `--cache-dir` may select another external authoring directory, but
+keep one directory so its cumulative ledger remains useful. An exclusive lock
+serialises writers. Each new request is atomically reserved in `journal.json`
+before network I/O and successful drafts are atomically saved immediately.
+Timeouts/errors retain reservations because Sarvam may still bill them. A restart
+returns `previous-attempt` instead of automatically retrying an uncertain request;
+it stops further new calls after a failure while still allowing existing cache hits.
+Corrupt/missing spend state with existing paid assets fails closed. Do not reset a
+ledger to bypass its budget. An orphan lock after a crash needs explicit inspection;
+the command never deletes another run's lock. `drafts.json` is the unreviewed
+handoff, not a replacement for published locale files.
+
+The advertised rate verified on 2026-10-11 is ₹20 per 10,000 characters for Mayura
+and Sarvam Translate. CLI estimates use submitted input codepoints and integer
+paise (rounded up); they are not a provider invoice or an organisation-wide cap.
+All Sarvam keys/products may share the organisation's credit pool, so other work
+can still spend the balance. No auto-recharge is enabled here. Source:
+[pricing](https://docs.sarvam.ai/api/getting-started/pricing),
+[translation API](https://docs.sarvam.ai/api-reference/text/translate-text).
+
+Live smoke: two requests, 82 source codepoints, estimated ₹0.17; exact billing
+must be checked in Sarvam's dashboard. Repeating the command planned/sent zero
+new requests. Both outputs are drafts; the Hindi phrase “बस दिखावे के लिए” needs
+R5 review against the source's “virtual practice money” meaning. No smoke output
+was published or committed. Paid drafts/cache are user assets and must not be
+removed during scratch cleanup. Unit and subprocess tests use fake keys/network
+fixtures or missing keys; builds and CI never make paid translation calls.

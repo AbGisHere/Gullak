@@ -142,6 +142,28 @@ External dataset (downloaded by the notebook at run time and **not** committed, 
 
 - [ASSISTments 2009–2010 skill builder data](https://sites.google.com/site/assistmentsdata/home/2009-2010-assistment-data/skill-builder-data-2009-2010). Feng, M., Heffernan, N. T., & Koedinger, K. R. (2009). *Addressing the assessment challenge with an online system that tutors as it assesses.* User Modeling and User-Adapted Interaction, 19(3), 243–266.
 
+## Sarvam translation authoring
+
+Keep `SARVAM_API_KEY` in the Git-ignored `apps/web/.env.local` (never a
+`NEXT_PUBLIC_` variable). From the repository root:
+
+```powershell
+# Dry-run: no credits spent.
+node --env-file=apps/web/.env.local scripts/translate-text.mjs --smoke --budget-chars 100 --max-requests 2
+# Explicit execution: saves unreviewed Hindi/Telugu drafts; identical reruns use the cache.
+node --env-file=apps/web/.env.local scripts/translate-text.mjs --smoke --execute --budget-chars 100 --max-requests 2
+```
+
+If the key is in repo-root `.env.local`, use `--env-file=.env.local` instead.
+Selected plain-text manifests use `--input manifest.json`. Default cache/drafts are
+under the user's `.cache/gullak/sarvam-text`, outside this repository. Do not delete
+the paid cache or spend journal; uncertain attempts are not automatically retried.
+The default cumulative input-character cap is 5,000 (approximately ₹10 at the
+advertised input-character rate, not a guaranteed invoice/account cap). All output
+requires R5 review before publishing; this command never rewrites app content or
+runs during demo navigation. ICU/placeholders and HTML are not supported yet.
+See the [translation handoff](docs/architecture.md#sarvam-plain-text-translation-authoring).
+
 ## License
 
 [MIT](LICENSE)

@@ -11,6 +11,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ### Added
 - Sarvam plain-text English-to-Hindi/Telugu draft translation with strict input/output validation, bounded response and timeout handling, redacted English fallback reasons and zero automatic retries; no app activation or publication.
 - Credit-conscious translation authoring command with dry-run default, request deduplication, external persistent draft cache, exclusive writer lock and cumulative pre-request character reservations that survive ambiguous failures.
+- Offline Node command regression coverage and private-key, cache and translation-review handoff; existing app locale/content files remain untouched.
 
 ## [0.3.1] - 2026-10-11
 
