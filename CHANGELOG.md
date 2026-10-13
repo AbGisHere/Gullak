@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-10-13
+
 ### Fixed
 - CI: the first push of a new branch checks only that branch's commit messages, not all of main's history, so an older main commit no longer fails a teammate's branch.
 - Align the onboarding browser check with the intentional removal of its Play money badge; money-screen assertions remain unchanged.
