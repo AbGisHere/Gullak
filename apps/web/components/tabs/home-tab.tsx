@@ -3,6 +3,8 @@
 import type { LearnerProfile } from "@gullak/types";
 import { ArrowRight, Award, BookOpen, CalendarDays, Compass, Gauge, PiggyBank } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
+import { FirstRunHint } from "@/components/help/first-run-hint";
 import type { TopicSummary } from "@/components/learn-map";
 import { RecommendationCard } from "@/components/recommendation-card";
 import { StageBadge } from "@/components/stage-badge";
@@ -33,9 +35,16 @@ export function HomeTab({
   const dashboard = useTranslations("dashboard");
   const tPlacement = useTranslations("placement");
   const taken = placement && !placement.skipped;
+  const placementCard = useRef<HTMLElement>(null);
   return (
     <div className="max-w-5xl space-y-8">
+      <FirstRunHint
+        key={profile.id}
+        learnerId={profile.id}
+        onDismiss={() => placementCard.current?.querySelector<HTMLButtonElement>("button")?.focus()}
+      />
       <section
+        ref={placementCard}
         aria-labelledby="placement-card"
         data-testid="placement-card"
         className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border-2 border-foreground p-5"

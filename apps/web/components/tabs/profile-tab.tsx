@@ -4,6 +4,7 @@ import { locales } from "@gullak/content";
 import type { GradeGroup } from "@gullak/types";
 import { cn } from "@gullak/ui/lib/utils";
 import { Globe, Laptop, Moon, RotateCcw, Sun, User } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
@@ -28,6 +29,7 @@ export function ProfileTab({
   const locale = useLocale();
   const t = useTranslations("home.profile");
   const tGrade = useTranslations("onboarding.grade");
+  const tHelp = useTranslations("help");
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [nameInput, setNameInput] = useState(displayName);
@@ -56,6 +58,9 @@ export function ProfileTab({
             <p className="text-xs text-muted-foreground font-semibold">{t("description")}</p>
           </div>
         </div>
+        <Link href="/help" className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
+          {tHelp("link")}
+        </Link>
       </section>
 
       {/* Nickname / Display Name */}

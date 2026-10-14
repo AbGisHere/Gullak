@@ -25,6 +25,7 @@ These ship today and carry over to the eight worlds; the content model and grade
 - [x] Onboarding in en/hi/te: grade group (6–7 / 8–10 / 11–12), experience, formats, goal (R1)
 - [x] Learner app on phone and desktop: shell with bottom tabs and sidebar, locale switcher, grade-filtered learning map, lessons, quiz unlocks and on-device mastery, the March 2020 Practice episode and the paper portfolio (R1, R2)
 - [x] Remove standalone Play money badges from learner screens without replacement text; preserve virtual-only money logic and existing educational explanations.
+- [x] Show the optional “New here?” guide on Home for two app visits per learner, hide it after dismissal or the visit cap, and retain a permanent Me guide link; no repeated prompt on either learning map.
 - [x] Checked quizzes show correctness, authored reasoning for every question and automatic score focus/scroll; phone/desktop browser acceptance remains pending.
 - [x] Shared learner Back control for Home sections, routed pages and inline level checks, plus standalone offline/error/404 recovery; transient history stays separate from learner progress, with a safe Home fallback and no duplicate controls inside the shell. Phone/desktop acceptance is checked before commit.
 - [x] Starting placement completion and Skip reveal Home features; preserve quiz evidence and pass-mark unlocks, with the recommended-learning card shown on Home only.

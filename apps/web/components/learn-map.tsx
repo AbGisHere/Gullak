@@ -7,7 +7,6 @@ import { ArrowRight, Check, Store } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
-import { FirstRunHint } from "@/components/help/first-run-hint";
 import { TermHelp } from "@/components/help/term-help";
 import { StageBadge } from "@/components/stage-badge";
 import { readProfile } from "@/lib/learner-state";
@@ -80,7 +79,6 @@ export function LearnMap({ topics, profile: suppliedProfile, gradeGroup, onLaunc
             </div>
           ) : null}
         </header>
-        <FirstRunHint className="max-w-3xl" />
         <ol className="relative space-y-7 before:absolute before:bottom-8 before:left-1 before:top-8 before:w-6 before:rounded-full before:bg-muted after:absolute after:bottom-8 after:left-4 after:top-8 after:border-l after:border-dashed after:border-border sm:before:left-3 sm:after:left-6">
           {topicWorlds.map((world) => {
             const group = rules.filter((rule) => world.topicIds.includes(rule.topicId));

@@ -4,31 +4,31 @@ import { cn } from "@gullak/ui/lib/utils";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useId, useState } from "react";
+import { useWelcomeHintVisits } from "./welcome-hint-provider";
 
-export const MAP_HINT_STORAGE_KEY = "gullak-map-hint-seen";
-
-/** One short, skippable orientation note on the learner's first visit to a map. Remembered per device. */
-export function FirstRunHint({ className }: { className?: string }) {
+/** Home orientation on the first two app visits, dismissible and scoped to this learner. */
+export function FirstRunHint({
+  learnerId,
+  className,
+  onDismiss,
+}: {
+  learnerId: string;
+  className?: string;
+  onDismiss?: () => void;
+}) {
   const t = useTranslations("help");
   const titleId = useId();
   const [visible, setVisible] = useState(false);
+  const visits = useWelcomeHintVisits();
 
   useEffect(() => {
-    try {
-      setVisible(window.localStorage.getItem(MAP_HINT_STORAGE_KEY) !== "1");
-    } catch {
-      // Storage blocked: still orient the learner; dismissing hides it for this visit.
-      setVisible(true);
-    }
-  }, []);
+    setVisible(visits.begin(learnerId));
+  }, [learnerId, visits]);
 
   function dismiss() {
     setVisible(false);
-    try {
-      window.localStorage.setItem(MAP_HINT_STORAGE_KEY, "1");
-    } catch {
-      // Ignore: the hint simply returns next visit.
-    }
+    visits.dismiss(learnerId);
+    onDismiss?.();
   }
 
   if (!visible) return null;

@@ -1,7 +1,6 @@
 "use client";
 
 import { type GradeGroup, LearnerProfile } from "@gullak/types";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -13,7 +12,6 @@ import { clearLearnerData, readProfile } from "@/lib/learner-state";
 export default function MePage() {
   const t = useTranslations("learner");
   const tSafety = useTranslations("safety");
-  const tHelp = useTranslations("help");
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [confirmingReset, setConfirmingReset] = useState(false);
   useEffect(() => setProfile(readProfile()), []);
@@ -45,9 +43,6 @@ export default function MePage() {
       />
       <div className="mx-auto flex max-w-xl flex-col items-start gap-2 px-3 pb-4 sm:px-6">
         <p className="text-sm text-muted-foreground">{t("localProgressNote")}</p>
-        <Link href="/help" className="inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
-          {tHelp("link")}
-        </Link>
       </div>
       {confirmingReset ? (
         <ConfirmDialog

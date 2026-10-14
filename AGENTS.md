@@ -111,6 +111,8 @@ Standalone offline and error/404 screens use `RecoveryBackButton`. It validates 
 
 Finishing or skipping the starting placement quiz closes it to reveal Home, not the learning map. Save placement and quiz evidence before closing; closing via Back alone does not mark it taken. Keep the recommended-learning card on Home only, with the learner choosing when to visit the map.
 
+The dismissible “New here?” guide lives on Home, not either learning map. Show it on the first two app visits per learner; a visit is a page load that reaches Home, not a tab switch, route change or locale refresh. The root `WelcomeHintProvider` remembers this visit across client navigation, while validated learner-scoped local storage holds the capped count and dismissal separately from progress. “Got it” hides it permanently on this device; blocked storage can only remember dismissal for the current visit. An old device-wide map dismissal migrates to the first observed learner without hiding the guide from future shared-phone learners. Me retains a permanent link to `/help` through its shared profile component.
+
 The lesson class comparison switches both teaching text and quiz questions. Answers, result feedback and session drafts are scoped to the selected class and quiz; returning to the learner's own class restores its state. Other-class quizzes are labelled practice-only and never save attempts, mastery or passes, change the profile, or award unlocks. Only the own-class quiz writes normal progress.
 
 ### Lesson presentation selection

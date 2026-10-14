@@ -4,7 +4,6 @@ import { cn } from "@gullak/ui/lib/utils";
 import { Check, Clock, Lock, MapPin, Play, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useId, useRef, useState } from "react";
-import { FirstRunHint } from "../help/first-run-hint";
 import { GulluTip } from "../help/gullu-tip";
 import { Gullu } from "./gullu";
 import { CURRICULUM_WORLDS, type WorldDef } from "./worlds";
@@ -77,8 +76,6 @@ export function WorldMap({
           <h1 className="text-sm sm:text-base font-bold leading-tight text-foreground">{tWorld(activeWorld.slug)}</h1>
         </div>
       </div>
-
-      <FirstRunHint className="mb-6 max-w-md" />
 
       {/* Floating Story Guide Speech Bubble: contextual, translated, cycles on taps */}
       <div className="w-full mb-6 max-w-md">
