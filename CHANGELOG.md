@@ -8,6 +8,8 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+## [0.3.4] - 2026-10-14
+
 ### Fixed
 - Move “New here?” from the learning maps to Home for the first two learner-scoped app visits, preserve dismissal across navigation and reloads, and keep the guide accessible from Me without changing learning progress.
 - Remove non-interactive Play money badges across learner money screens without adding replacement copy or changing virtual-money, grading, rewards or trading safeguards.
