@@ -18,6 +18,7 @@ interface AppShellProps {
   level: number;
   onOpenSettings: () => void;
   onResetOnboarding: () => void;
+  onBack?: () => void;
   children: ReactNode;
 }
 
@@ -29,6 +30,7 @@ export function AppShell({
   level,
   onOpenSettings,
   onResetOnboarding,
+  onBack,
   children,
 }: AppShellProps) {
   const tProgress = useTranslations("progressData");
@@ -41,6 +43,7 @@ export function AppShell({
 
   return (
     <ShellFrame
+      onBack={onBack}
       onHome={() => onSelectTab("home")}
       headerEnd={
         <div className="relative">

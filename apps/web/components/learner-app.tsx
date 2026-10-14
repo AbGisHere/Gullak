@@ -12,11 +12,12 @@ import type { PlacementRound } from "@/lib/placement";
 import { useLearnerState } from "@/lib/use-learner-state";
 import { useLearnerProgress } from "@/lib/use-progress-summary";
 import { ActivityModal, type ActivityType } from "./activity-modal";
-import { AppShell, type NavTab } from "./app-shell";
+import { AppShell } from "./app-shell";
 import { ConfirmDialog } from "./confirm-dialog";
 import { ShoppingMission } from "./game/shopping/shopping-mission";
 import type { TopicSummary } from "./learn-map";
 import { LearnMap } from "./learn-map";
+import { useAppNavigation } from "./navigation-provider";
 import { Onboarding } from "./onboarding";
 import { PlacementQuiz } from "./placement-quiz";
 import { SettingsDialog } from "./settings-dialog";
@@ -39,7 +40,7 @@ export function LearnerApp({
   const tSafety = useTranslations("safety");
   const [profile, setProfile] = useState<LearnerProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentTab, setCurrentTab] = useState<NavTab>("home");
+  const { currentTab, selectTab, resetNavigation } = useAppNavigation();
   const [activeActivity, setActiveActivity] = useState<ActivityType | null>(null);
   const [activeTopicId, setActiveTopicId] = useState<string | null>(null);
   const [isShoppingMissionOpen, setIsShoppingMissionOpen] = useState(false);
@@ -68,6 +69,7 @@ export function LearnerApp({
   }, []);
 
   function handleOnboardFinish(newProfile: LearnerProfile) {
+    resetNavigation();
     saveLearnerState(initialiseRecommendationEvidence(topics, newProfile, readLearnerState()));
     setProfile(newProfile);
     setIsPlacementOpen(true);
@@ -89,7 +91,7 @@ export function LearnerApp({
     setIsPlacementOpen(false);
     setIsResetConfirmOpen(false);
     setProfile(null);
-    setCurrentTab("home");
+    resetNavigation();
   }
 
   function handleUpdateGrade(grade: GradeGroup) {
@@ -118,14 +120,13 @@ export function LearnerApp({
     }
   }
 
-  // Tabs share one scroll container, so start each new tab at the top instead of mid-page.
-  function selectTab(tab: NavTab) {
-    setCurrentTab(tab);
-    window.scrollTo({ top: 0 });
-  }
-
   function handleActivitySuccess() {
     if (activeActivity) recordActivity(`${activeActivity}:${activeTopicId ?? "default"}`);
+  }
+
+  function closePlacement() {
+    setIsPlacementOpen(false);
+    window.scrollTo({ top: 0 });
   }
 
   if (isLoading) {
@@ -153,6 +154,7 @@ export function LearnerApp({
   return (
     <>
       <AppShell
+        onBack={currentTab === "home" && isPlacementOpen ? closePlacement : undefined}
         onSelectTab={selectTab}
         gradeGroup={profile.gradeGroup}
         daysPractised={progress.activeDays}
@@ -162,14 +164,7 @@ export function LearnerApp({
         onResetOnboarding={handleResetOnboarding}
       >
         {currentTab === "home" && isPlacementOpen && (
-          <PlacementQuiz
-            profile={profile}
-            rounds={placement[profile.gradeGroup]}
-            onClose={() => {
-              setIsPlacementOpen(false);
-              window.scrollTo({ top: 0 });
-            }}
-          />
+          <PlacementQuiz profile={profile} rounds={placement[profile.gradeGroup]} onClose={closePlacement} />
         )}
         {currentTab === "home" && !isPlacementOpen && (
           <HomeTab

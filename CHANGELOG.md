@@ -10,6 +10,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ### Fixed
 - Track transient in-app screen history separately from learner evidence, distinguishing deliberate navigation from browser Back and using Home when no in-app predecessor exists.
+- Add a shared, translated Back control on phone and desktop for Home sections and routed learner pages; close an opened level check without marking it taken, retain existing story-step and modal controls, and preserve the Home section across routed visits.
+- Allow the profile nickname input to shrink alongside translated Save labels, preventing horizontal overflow on 320px screens.
+- Extend Back to standalone offline and error/404 recovery screens, with same-origin Home fallback, same-route reload recovery and no duplicate control inside the learner shell; keep Home and Retry actions available.
 
 ## [0.3.3] - 2026-10-13
 

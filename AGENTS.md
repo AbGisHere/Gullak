@@ -103,6 +103,12 @@ Until the content schema migrates, mirror this structure in `packages/content/co
 3. Add `topics/*/<code>.json` content files (or generate them with the pre-generation script).
 4. Run `pnpm test`. No code changes needed.
 
+### Learner Back navigation
+
+`NavigationProvider` in the root client providers owns transient route/Home-section history; `ShellFrame` exposes one translated Back control on phone and desktop. Keep history separate from learner evidence and never clear progress during navigation. Directly opened or reloaded routes fall back to Home rather than trusting browser history outside this app session. Inline screens can supply `onBack` to close before leaving their parent; story-step Back and modal Close remain separate. Home section selection goes through `useAppNavigation`, so routed visits can return to the originating section.
+
+Standalone offline and error/404 screens use `RecoveryBackButton`. It validates same-origin destinations, falls back to Home if the navigation provider is unavailable and reloads a same-route failure instead of remaining stuck in its error boundary. `ShellBackScope` suppresses the recovery button inside the learner shell so only the header Back appears there. Preserve the independent Home and Retry actions; recovery never deletes learner data.
+
 ### Lesson presentation selection
 
 `pickLessonVariant` in `@gullak/engine` selects an eligible non-quiz variant from an already-open topic in one resolved locale. Explicit preferences are ordered; onboarding's full-format list means Mix it up, with deterministic caller-owned rotation. Authored content order breaks ties and defines fallback. It never changes mastery or unlocks; quizzes remain separate assessments. The lesson API adds `formatSelection` metadata, selecting at index 0 until per-learner rotation is integrated. Translate reason codes in the lesson UI, never display them as raw strings. Contract and teammate handoff: [`docs/format-picker.md`](docs/format-picker.md).

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Gullu } from "./game/gullu";
+import { RecoveryBackButton } from "./recovery-back-button";
 
 /**
  * Plain-language recovery screen for crashes and missing pages: Gullu, what happened,
@@ -50,6 +51,7 @@ export function ErrorScreen({
         ) : null}
       </div>
       <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+        <RecoveryBackButton />
         {onRetry ? (
           <button
             type="button"

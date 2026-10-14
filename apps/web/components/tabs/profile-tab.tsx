@@ -71,7 +71,7 @@ export function ProfileTab({
             aria-labelledby="profile-nickname"
             placeholder={t("nicknamePlaceholder")}
             maxLength={60}
-            className="flex-1 rounded-xl border border-border bg-transparent px-3 py-2 text-sm font-bold text-foreground outline-none placeholder:text-muted-foreground"
+            className="min-w-0 flex-1 rounded-xl border border-border bg-transparent px-3 py-2 text-sm font-bold text-foreground outline-none placeholder:text-muted-foreground"
           />
           <button
             type="button"

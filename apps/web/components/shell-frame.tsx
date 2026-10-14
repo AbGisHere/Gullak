@@ -1,13 +1,15 @@
 "use client";
 
 import { locales } from "@gullak/content";
-import { CircleHelp } from "lucide-react";
+import { ArrowLeft, CircleHelp } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { type ReactNode, useEffect, useState } from "react";
 import { Gullu } from "@/components/game/gullu";
+import { useAppNavigation } from "@/components/navigation-provider";
 import { PrimaryNav } from "@/components/primary-nav";
+import { ShellBackScope } from "@/components/recovery-back-button";
 import { LOCALE_COOKIE } from "@/i18n/locale";
 import { readProfile } from "@/lib/learner-state";
 import { useLearnerProgress } from "@/lib/use-progress-summary";
@@ -21,13 +23,19 @@ export function ShellFrame({
   children,
   headerEnd,
   onHome,
+  onBack,
 }: {
   children: ReactNode;
   headerEnd?: ReactNode;
   onHome?: () => void;
+  /** An inline screen (e.g. placement) closes before leaving its parent route. */
+  onBack?: () => void;
 }) {
   const t = useTranslations("learner");
   const tHelp = useTranslations("help");
+  const tCommon = useTranslations("onboarding");
+  const { canGoBack, isGoingBack, goBack } = useAppNavigation();
+  const showBack = Boolean(onBack) || canGoBack;
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -39,13 +47,25 @@ export function ShellFrame({
     <div className="min-h-svh bg-background text-foreground">
       <header className="sticky top-0 z-20 flex h-16 items-center justify-between gap-2 border-b bg-background px-4 md:px-6 lg:pl-70">
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+          {showBack && (
+            <button
+              type="button"
+              data-testid="app-back"
+              onClick={onBack ?? goBack}
+              disabled={!onBack && isGoingBack}
+              className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-lg px-2 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:opacity-50"
+            >
+              <ArrowLeft className="size-5" aria-hidden="true" />
+              {tCommon("back")}
+            </button>
+          )}
           <Link
             href="/"
             onClick={pathname === "/" ? onHome : undefined}
-            className="flex items-center gap-2 text-lg font-extrabold tracking-tight lg:hidden"
+            className={`flex items-center gap-2 text-lg font-extrabold tracking-tight lg:hidden ${showBack ? "max-[380px]:hidden" : ""}`}
           >
             <Gullu state="wave" size={32} />
-            <span className="max-[380px]:sr-only">Gullak</span>
+            <span className={showBack ? "max-sm:sr-only" : "max-[380px]:sr-only"}>Gullak</span>
           </Link>
         </div>
         <div className="ml-auto flex items-center gap-2">
@@ -87,7 +107,7 @@ export function ShellFrame({
         <PrimaryNav variant="sidebar" onHome={onHome} />
       </aside>
       <main className="mx-auto min-h-[calc(100svh-4rem)] w-full max-w-6xl px-4 pb-24 pt-6 sm:px-6 sm:pt-8 lg:ml-60 lg:w-[calc(100%-15rem)] lg:px-10 lg:pb-10">
-        {children}
+        <ShellBackScope>{children}</ShellBackScope>
       </main>
       <PrimaryNav variant="bar" onHome={onHome} />
     </div>
