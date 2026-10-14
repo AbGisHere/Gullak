@@ -8,6 +8,9 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 
 ## [Unreleased]
 
+### Fixed
+- Track transient in-app screen history separately from learner evidence, distinguishing deliberate navigation from browser Back and using Home when no in-app predecessor exists.
+
 ## [0.3.3] - 2026-10-13
 
 ### Removed
