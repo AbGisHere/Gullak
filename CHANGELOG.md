@@ -9,6 +9,7 @@ Feature branches add entries under **[Unreleased]** only; the version bump happe
 ## [Unreleased]
 
 ### Fixed
+- Remove non-interactive Play money badges across learner money screens without adding replacement copy or changing virtual-money, grading, rewards or trading safeguards.
 - Switch lesson quiz questions with the selected comparison class, isolate class-specific answers and results, and keep other-class attempts practice-only without changing saved mastery, quiz evidence or unlocks.
 - Reveal Home immediately after finishing or skipping placement, preserve scored attempts and quiz-only unlocks, and keep the recommended-learning card on Home rather than duplicating it on the learning map.
 - Track transient in-app screen history separately from learner evidence, distinguishing deliberate navigation from browser Back and using Home when no in-app predecessor exists.

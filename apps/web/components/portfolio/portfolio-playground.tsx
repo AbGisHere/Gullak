@@ -1,7 +1,6 @@
 "use client";
 
 import { MoneyDecoder, type MoneyDecoderLabels } from "@gullak/ui/components/money-decoder";
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { Coins, RotateCcw, Undo2 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { NextIntlClientProvider, useLocale, useTranslations } from "next-intl";
@@ -74,7 +73,6 @@ function Playground({ gradeGroup, startingPaise }: { gradeGroup?: string; starti
     <div className="mx-auto w-full max-w-5xl space-y-8 px-4 py-6 text-foreground sm:px-6 sm:py-8">
       <header className="space-y-3">
         <h1 className="text-3xl font-extrabold tracking-[-0.03em] sm:text-4xl">{t("title")}</h1>
-        <PlayMoneyBadge label={t("virtual")} />
         <p className="max-w-prose text-base">{t("instructions")}</p>
         <p className="max-w-prose text-sm text-muted-foreground">{t("local")}</p>
       </header>

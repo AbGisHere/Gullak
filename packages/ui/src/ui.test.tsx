@@ -468,12 +468,12 @@ describe("ui", () => {
   });
 
   describe("PaperPortfolio UI", () => {
-    it("renders total portfolio value and PlayMoneyBadge", () => {
+    it("renders portfolio values without a decorative money badge", () => {
       render(<PaperPortfolio portfolio={exampleStudentPortfolio} />);
 
       // Total value: Cash (2,500) + Holdings (5,000 + 7,000 + 3,000 + 8,000) = ₹25,500
       expect(screen.getByTestId("portfolio-total-value").textContent).toBe("₹25,500");
-      expect(screen.getByText("Play Money")).toBeDefined();
+      expect(screen.queryByText("Play Money", { exact: true })).toBeNull();
       expect(screen.getByTestId("portfolio-as-of").textContent).toContain("11 Oct 2026");
     });
 
@@ -760,7 +760,7 @@ describe("ui", () => {
       );
 
       expect(screen.getByText("పేపర్ పోర్ట్‌ఫోలియో")).toBeDefined();
-      expect(screen.getByText("ఆట డబ్బు")).toBeDefined();
+      expect(screen.queryByText("ఆట డబ్బు", { exact: true })).toBeNull();
       expect(screen.getByText("అందుబాటులో ఉన్న నగదు")).toBeDefined();
       expect(screen.getByText("అత్యవసర నిధి బఫర్")).toBeDefined();
       expect(screen.getByText("సమీక్ష")).toBeDefined();

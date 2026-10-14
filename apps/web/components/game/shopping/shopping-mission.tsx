@@ -1,6 +1,5 @@
 "use client";
 
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
 import { cn } from "@gullak/ui/lib/utils";
 import {
@@ -136,8 +135,6 @@ export function ShoppingMission({ onClose, onCompleteMission }: ShoppingMissionP
             <Coins aria-hidden="true" className="size-5" />
             <span className="tabular">{formatInr(remainingPaise)}</span>
           </div>
-
-          <PlayMoneyBadge label="Play Money" />
         </div>
       </header>
 

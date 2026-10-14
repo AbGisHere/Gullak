@@ -43,7 +43,7 @@ describe("Financial Twin story presentation", () => {
         ),
       );
       expect(html).toContain(`value="${index + 1}" max="7"`);
-      expect(html).toContain("ఆట డబ్బు");
+      expect(html).not.toContain("ఆట డబ్బు");
       expect(html.includes("వెనుకకు")).toBe(index > 0);
       expect(html.includes("కొనసాగించు")).toBe(index < 6);
       expect(html).not.toContain("<nav");

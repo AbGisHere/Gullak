@@ -1,6 +1,5 @@
 "use client";
 
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import type { LearnerProgress } from "@/lib/use-progress-summary";
@@ -18,7 +17,6 @@ interface GulluTabProps {
 export function GulluTab({ gradeGroup, virtualCashPaise, progress }: GulluTabProps) {
   const t = useTranslations("home.gullu");
   const tProgress = useTranslations("progressData");
-  const tLearner = useTranslations("learner");
   const [tapCount, setTapCount] = useState(0);
 
   function handleGulluTap() {
@@ -72,10 +70,6 @@ export function GulluTab({ gradeGroup, virtualCashPaise, progress }: GulluTabPro
             </div>
             <p className="text-xs text-muted-foreground font-semibold">{t("insideDescription")}</p>
           </div>
-          <span className="inline-flex items-center gap-1">
-            <PlayMoneyBadge label={tLearner("playMoney")} />
-            <TermHelp term="playMoney" />
-          </span>
         </div>
 
         {/* Mount existing PortfolioTab */}

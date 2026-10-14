@@ -23,7 +23,8 @@ These ship today and carry over to the eight worlds; the content model and grade
 - [x] Supabase schema, data-access layer and API: profile, onboarding, lessons, quiz grading and unlocks, progress, portfolio and FDs, goals, quotes, activity and episode runs, facilitator cohort view (R3)
 - [x] Design direction and tokens via Impeccable ([DESIGN.md](DESIGN.md), [PRODUCT.md](PRODUCT.md)) (R2)
 - [x] Onboarding in en/hi/te: grade group (6–7 / 8–10 / 11–12), experience, formats, goal (R1)
-- [x] Learner app on phone and desktop: shell with bottom tabs and sidebar, locale switcher, Play Money badge, grade-filtered learning map, lessons, quiz unlocks and on-device mastery, the March 2020 Practice episode and the paper portfolio (R1, R2)
+- [x] Learner app on phone and desktop: shell with bottom tabs and sidebar, locale switcher, grade-filtered learning map, lessons, quiz unlocks and on-device mastery, the March 2020 Practice episode and the paper portfolio (R1, R2)
+- [x] Remove standalone Play money badges from learner screens without replacement text; preserve virtual-only money logic and existing educational explanations.
 - [x] Checked quizzes show correctness, authored reasoning for every question and automatic score focus/scroll; phone/desktop browser acceptance remains pending.
 - [x] Shared learner Back control for Home sections, routed pages and inline level checks, plus standalone offline/error/404 recovery; transient history stays separate from learner progress, with a safe Home fallback and no duplicate controls inside the shell. Phone/desktop acceptance is checked before commit.
 - [x] Starting placement completion and Skip reveal Home features; preserve quiz evidence and pass-mark unlocks, with the recommended-learning card shown on Home only.

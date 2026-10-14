@@ -1,6 +1,5 @@
 "use client";
 
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { type ReactNode, useEffect, useRef } from "react";
 
@@ -28,7 +27,6 @@ export function JourneyFrame({
   stageCount,
   stageLabel,
   progressLabel,
-  playMoneyLabel,
   backLabel,
   nextLabel,
   nextDisabledReason,
@@ -57,7 +55,6 @@ export function JourneyFrame({
           <p className="text-sm font-semibold" role="status">
             {progressLabel}
           </p>
-          <PlayMoneyBadge label={playMoneyLabel} />
         </div>
         <progress
           className="block h-1.5 w-full overflow-hidden rounded-full bg-muted accent-foreground [&::-moz-progress-bar]:bg-foreground [&::-webkit-progress-bar]:bg-muted [&::-webkit-progress-value]:bg-foreground"

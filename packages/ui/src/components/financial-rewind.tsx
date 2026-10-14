@@ -5,7 +5,6 @@ import { cn } from "../lib/utils";
 import { Character } from "./character";
 import { MoneyDecoder, type MoneyTermData } from "./money-decoder";
 import { PortfolioSummary, type PortfolioViewModel } from "./paper-portfolio";
-import { PlayMoneyBadge } from "./play-money-badge";
 import type { CharacterState } from "./practice-simulation";
 
 export type { FinancialRewindLabels };
@@ -157,7 +156,6 @@ export function FinancialRewind({
           <div className="flex items-center gap-2">
             <RotateCcw className="h-4 w-4 text-brand-lilac" aria-hidden="true" />
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{l.rewindBadge}</span>
-            <PlayMoneyBadge label={l.playMoney} />
           </div>
           {onReturnToChosen && (
             <button

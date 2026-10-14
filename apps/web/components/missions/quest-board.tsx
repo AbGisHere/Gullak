@@ -1,6 +1,5 @@
 "use client";
 
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { Award, CheckCircle2, Home, Lock, ShieldCheck, ShoppingBag, Wallet } from "lucide-react";
 import { NextIntlClientProvider, useLocale, useTranslations } from "next-intl";
 import { useId, useLayoutEffect, useReducer, useRef, useState } from "react";
@@ -80,7 +79,6 @@ function Board({ resetCopy }: { resetCopy: ResetCopy }) {
         >
           {t("title")}
         </h1>
-        <PlayMoneyBadge label={t("virtual")} />
         <p className="max-w-prose">{t("instructions")}</p>
         <p className="max-w-prose text-sm text-muted-foreground">{t("local")}</p>
         <p className="text-lg font-bold tabular-nums" data-testid="practice-xp">

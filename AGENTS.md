@@ -24,7 +24,7 @@ The single source of truth for every AI agent (Claude Code, Codex, Gemini, OpenC
 Enforced in code, not just copy:
 - `Portfolio.isVirtual` is `z.literal(true)`: there is no type for real money.
 - `@gullak/ai` guardrails screen learner questions **and** model output for advice; the tutor prompt forbids recommendations.
-- Every money screen shows `<PlayMoneyBadge />`. Every projection shows its assumptions (rate, period, source, as-of date).
+- Money remains virtual-only in code and existing explanatory copy. Standalone Play money badges are omitted from learner screens at the product owner's request: non-interactive pills looked clickable. Do not replace them with extra warning text. Every projection shows its assumptions (rate, period, source, as-of date).
 - Never name a real fund/stock/bank as "good", "best" or "recommended" in content.
 
 ## Architecture

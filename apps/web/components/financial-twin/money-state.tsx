@@ -1,5 +1,4 @@
 import type { PortfolioViewModel } from "@gullak/ui/components/paper-portfolio";
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
 
 export interface MoneyStateProps {
@@ -21,7 +20,6 @@ export function MoneyState({ portfolio, locale, labels }: MoneyStateProps) {
         <h3 id="twin-money-heading" className="text-xl font-bold">
           {labels.heading}
         </h3>
-        <PlayMoneyBadge label={labels.playMoney} />
       </header>
       <dl className="divide-y divide-border border-y border-border">
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4">

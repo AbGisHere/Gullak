@@ -27,7 +27,6 @@ import {
 import { FinancialRewind } from "./financial-rewind";
 import { MoneyDecoder, type MoneyTermData } from "./money-decoder";
 import { PortfolioSummary, type PortfolioViewModel } from "./paper-portfolio";
-import { PlayMoneyBadge } from "./play-money-badge";
 
 export type { PracticeSimulationLabels };
 
@@ -210,7 +209,6 @@ function BriefingPhase({
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               {l.practiceEpisode}
             </span>
-            <PlayMoneyBadge label={l.playMoney} />
           </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
@@ -726,10 +724,6 @@ function CompletePhase({
         <h3 className="mt-4 text-lg font-bold text-foreground">{l.episodeComplete}</h3>
         <p className="mt-1 text-sm text-muted-foreground">{l.episodeCompleteSubtitle}</p>
         <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{l.episodeCompleteNote}</p>
-
-        <div className="mt-4 pt-3 border-t border-border/50">
-          <PlayMoneyBadge label={l.playMoney} />
-        </div>
       </div>
 
       <PortfolioSummary portfolio={state.portfolio} />

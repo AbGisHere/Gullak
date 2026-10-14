@@ -21,7 +21,6 @@ import { defaultPaperPortfolioLabels, type PaperPortfolioLabels } from "../lib/l
 import { cn } from "../lib/utils";
 import { Character } from "./character";
 import { MoneyDecoder, type MoneyTermData } from "./money-decoder";
-import { PlayMoneyBadge } from "./play-money-badge";
 
 export type { PaperPortfolioLabels };
 
@@ -240,7 +239,6 @@ export function PortfolioSummary({
           >
             {l.paperPortfolioTitle}
           </h2>
-          <PlayMoneyBadge label={l.playMoneyBadge} />
         </div>
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Calendar className="h-3.5 w-3.5" aria-hidden="true" />

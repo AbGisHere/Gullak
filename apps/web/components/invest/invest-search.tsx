@@ -1,7 +1,6 @@
 "use client";
 
 import type { InstrumentSearchResult, LearnerProfile } from "@gullak/types";
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
 import { ChevronDown, ChevronRight, Eye, Lock, Search, Unlock } from "lucide-react";
 import Link from "next/link";
@@ -121,7 +120,6 @@ type SearchState =
 
 export function InvestSearch() {
   const t = useTranslations("invest");
-  const tLearner = useTranslations("learner");
   const locale = useLocale();
   const learner = useLearner();
   const inputId = useId();
@@ -187,7 +185,6 @@ export function InvestSearch() {
         <header className="space-y-3">
           <div className="flex flex-wrap items-center gap-3">
             <h1 className="text-4xl font-extrabold tracking-tight text-balance">{t("title")}</h1>
-            <PlayMoneyBadge label={tLearner("playMoney")} />
           </div>
           <p className="max-w-prose text-base text-muted-foreground">{t("intro")}</p>
           <p className="text-lg font-bold tabular-nums">{t("cash", { amount: formatInr(cash) })}</p>

@@ -18,11 +18,11 @@ describe("PracticeSimulation", () => {
     expect(screen.getByTestId("sim-briefing-continue")).toBeDefined();
   });
 
-  // 2. renders current portfolio / play-money indicator
-  it("renders current portfolio and play-money indicator", () => {
+  // 2. current portfolio stays visible without decorative money labels
+  it("renders the current portfolio without decorative money badges", () => {
     render(<PracticeSimulation episode={march2020EpisodeMetadata} state={initialPracticeSimulationState} />);
 
-    expect(document.querySelector('[data-slot="play-money-badge"]')).not.toBeNull();
+    expect(document.querySelector('[data-slot="play-money-badge"]')).toBeNull();
     expect(screen.getByTestId("portfolio-summary")).toBeDefined();
   });
 

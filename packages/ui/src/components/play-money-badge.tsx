@@ -1,8 +1,8 @@
 import { cn } from "cn";
 
 /**
- * Guardrail made visible: every screen that shows money shows this badge.
- * Text is passed in so it can be translated.
+ * Legacy label primitive, still used for the Candy Coins mechanic.
+ * Learner money screens omit decorative Play money badges.
  */
 function PlayMoneyBadge({ label = "Play money", className }: { label?: string; className?: string }) {
   return (

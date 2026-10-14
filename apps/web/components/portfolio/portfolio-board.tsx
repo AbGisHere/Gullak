@@ -2,7 +2,6 @@
 
 import { holdingValuePaise, pricePaiseFromRupees } from "@gullak/engine";
 import type { LearnerProfile, ListedKind } from "@gullak/types";
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
 import { cn } from "@gullak/ui/lib/utils";
 import { BookOpen, ChartLine, ShieldCheck, Target, Trash2, Wallet } from "lucide-react";
@@ -61,7 +60,6 @@ export function PortfolioBoard({
   totalCashPaise: number;
 }) {
   const t = useTranslations("portfolioBoard");
-  const tLearner = useTranslations("learner");
   const locale = useLocale();
   const [section, setSection] = useState<Section>("investments");
   const [values, setValues] = useState<Map<string, number>>(new Map());
@@ -115,7 +113,6 @@ export function PortfolioBoard({
           <h2 id="portfolio-total" className="text-sm font-semibold text-muted-foreground">
             {t("total")}
           </h2>
-          <PlayMoneyBadge label={tLearner("playMoney")} />
         </div>
         <p className="mt-1 text-4xl font-extrabold tracking-tight tabular-nums" data-testid="portfolio-total-value">
           {money(total)}

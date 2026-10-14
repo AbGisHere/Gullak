@@ -2,7 +2,6 @@
 
 import { MILLI_UNITS, pricePaiseFromRupees } from "@gullak/engine";
 import type { InstrumentQuote } from "@gullak/types";
-import { PlayMoneyBadge } from "@gullak/ui/components/play-money-badge";
 import { formatInr } from "@gullak/ui/lib/format";
 import { ArrowLeft, ArrowRight, BookOpen, Eye, Lock, Minus, TrendingDown, TrendingUp } from "lucide-react";
 import Link from "next/link";
@@ -42,7 +41,6 @@ export function InstrumentTrade({
   initialSide?: "buy" | "sell";
 }) {
   const t = useTranslations("invest");
-  const tLearner = useTranslations("learner");
   const tHelp = useTranslations("help");
   const locale = useLocale();
   const learner = useLearner();
@@ -302,7 +300,6 @@ export function InstrumentTrade({
                 </button>
               ))}
             </fieldset>
-            <PlayMoneyBadge label={tLearner("playMoney")} />
           </div>
 
           <p className="font-semibold tabular-nums">{t("cash", { amount: formatInr(cash, { decimals: 2 }) })}</p>
