@@ -20,12 +20,11 @@ test("onboarding to passed quiz opens the next topic", async ({ page }, testInfo
   await expect(page.getByRole("button", { name: "Start learning" })).toBeHidden();
   await page.goto("/learn");
 
-  await expect(page.getByRole("heading", { name: "Recommended next, because…", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Nani’s lane", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Where money comes from and goes" }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: "Step inside: Needs and wants", exact: true })).toHaveCount(0);
   await auditScreen("learn");
-  await page.getByRole("link", { name: "Start lesson", exact: true }).first().click();
+  await page.getByRole("link", { name: "Step inside: Where money comes from and goes", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Quick check" })).toBeVisible();
   await auditScreen("lesson-quiz");
 

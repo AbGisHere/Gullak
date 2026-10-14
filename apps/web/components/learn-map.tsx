@@ -9,7 +9,6 @@ import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { FirstRunHint } from "@/components/help/first-run-hint";
 import { TermHelp } from "@/components/help/term-help";
-import { RecommendationCard } from "@/components/recommendation-card";
 import { StageBadge } from "@/components/stage-badge";
 import { readProfile } from "@/lib/learner-state";
 import { useLearnerState } from "@/lib/use-learner-state";
@@ -64,7 +63,6 @@ export function LearnMap({ topics, profile: suppliedProfile, gradeGroup, onLaunc
 
   return (
     <div className="space-y-10">
-      {profile ? <RecommendationCard topics={topics} profile={profile} /> : null}
       <section aria-labelledby="lane-title" className="space-y-7">
         <header className="max-w-2xl space-y-3">
           <h1 id="lane-title" className="text-3xl font-extrabold tracking-[-0.03em] sm:text-4xl">

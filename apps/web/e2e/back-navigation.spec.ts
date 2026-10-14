@@ -176,7 +176,7 @@ for (const [locale, label] of [
 
 test("back follows routed navigation and preserves the lesson's map link", async ({ page }) => {
   await page.goto("/learn");
-  await page.getByRole("link", { name: "Start lesson", exact: true }).first().click();
+  await page.getByRole("link", { name: "Step inside: Where money comes from and goes", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Quick check" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Back to Learn" })).toBeVisible();
   await page.getByTestId("app-back").click();

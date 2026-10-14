@@ -3,18 +3,13 @@
 import type { LearnerProfile } from "@gullak/types";
 import { cn } from "@gullak/ui/lib/utils";
 import { CheckCircle2, Gauge } from "lucide-react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { StageBadge } from "@/components/stage-badge";
 import { readLearnerState, saveLearnerState } from "@/lib/learner-state";
 import { PLACEMENT_ROUNDS, type PlacementRound, recordPlacementRound } from "@/lib/placement";
 
-type Phase =
-  | { kind: "intro" }
-  | { kind: "round"; index: number }
-  | { kind: "between"; index: number }
-  | { kind: "done" };
+type Phase = { kind: "intro" } | { kind: "round"; index: number } | { kind: "between"; index: number };
 
 /**
  * Sign-up placement: up to N real lesson checks for the learner's class, stopping at the first one not
@@ -42,6 +37,7 @@ export function PlacementQuiz({
       ...state,
       placement: { at: new Date().toISOString(), passed: passedCount, rounds: rounds.length, skipped },
     });
+    onClose();
   }
 
   function checkRound(index: number) {
@@ -60,7 +56,6 @@ export function PlacementQuiz({
     const total = outcome.passed ? index + 1 : index;
     setPassed(total);
     finish(total, false);
-    setPhase({ kind: "done" });
   }
 
   const shell = "mx-auto max-w-2xl space-y-6";
@@ -90,7 +85,6 @@ export function PlacementQuiz({
             type="button"
             onClick={() => {
               finish(0, true);
-              onClose();
             }}
             className="min-h-12 rounded-lg border-2 border-foreground px-6 font-bold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
@@ -124,42 +118,10 @@ export function PlacementQuiz({
             type="button"
             onClick={() => {
               finish(passed, false);
-              setPhase({ kind: "done" });
             }}
             className="min-h-12 rounded-lg border-2 border-foreground px-6 font-bold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             {t("stopHere")}
-          </button>
-        </div>
-      </section>
-    );
-  }
-
-  if (phase.kind === "done") {
-    const nextTitle = rounds[passed]?.title;
-    return (
-      <section aria-labelledby="placement-done" className={shell} role="status">
-        <h1 id="placement-done" className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-          {t(passed === 0 ? "resultFresh" : passed === rounds.length ? "resultAll" : "resultSome", { passed })}
-        </h1>
-        <StageBadge gradeGroup={profile.gradeGroup} />
-        <p className="text-lg leading-7 text-muted-foreground">
-          {passed === 0 ? t("resultFreshBody") : t("resultBody", { passed, rounds: rounds.length })}{" "}
-          {nextTitle ? t("startsAt", { title: nextTitle }) : null}
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/learn"
-            className="inline-flex min-h-12 items-center rounded-lg bg-foreground px-6 font-bold text-background hover:bg-foreground/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          >
-            {t("toPath")}
-          </Link>
-          <button
-            type="button"
-            onClick={onClose}
-            className="min-h-12 rounded-lg border-2 border-foreground px-6 font-bold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          >
-            {t("toHome")}
           </button>
         </div>
       </section>
