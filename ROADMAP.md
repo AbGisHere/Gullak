@@ -27,6 +27,7 @@ These ship today and carry over to the eight worlds; the content model and grade
 - [x] Checked quizzes show correctness, authored reasoning for every question and automatic score focus/scroll; phone/desktop browser acceptance remains pending.
 - [x] Shared learner Back control for Home sections, routed pages and inline level checks, plus standalone offline/error/404 recovery; transient history stays separate from learner progress, with a safe Home fallback and no duplicate controls inside the shell. Phone/desktop acceptance is checked before commit.
 - [x] Starting placement completion and Skip reveal Home features; preserve quiz evidence and pass-mark unlocks, with the recommended-learning card shown on Home only.
+- [x] Class comparison switches lesson quizzes with isolated drafts/results; other-class attempts give practice feedback without changing profile, mastery or pass-mark unlocks.
 - [x] Live paper trading, first slice: search any NSE/BSE stock, ETF, mutual fund or index on Yahoo Finance, buy and sell with play money once the lesson that teaches it is passed, holdings saved on the device. Habit review, life events and Supabase persistence remain pending (R1)
 - [x] Offline curriculum briefs, lesson-draft validation and versioned lesson-generation requests (R4)
 - [x] Sarvam Hindi/Telugu plain-text translation authoring adapter and credit-conscious cached draft CLI (R4); live smoke verified, but R5 review, ICU-aware message handling and publication remain pending. Demo screens never call this authoring API.

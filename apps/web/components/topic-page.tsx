@@ -16,15 +16,38 @@ import { DEFAULT_MASTERY_PARAMS, initialMastery, updateMastery } from "@/lib/mas
 import { topicToLesson } from "@/lib/topic-adapter";
 import { useLearnerState } from "@/lib/use-learner-state";
 
+interface QuizSession {
+  answers: Record<string, string>;
+  result: { score: number; passed: boolean } | null;
+  saveFailed: boolean;
+}
+
+const emptyQuizSession: QuizSession = { answers: {}, result: null, saveFailed: false };
+
 export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
   const t = useTranslations("learner");
   const tQuiz = useTranslations("safety.quiz");
   const tStage = useTranslations("stage");
   const tGrade = useTranslations("onboarding.grade");
   const state = useLearnerState();
-  const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [result, setResult] = useState<{ score: number; passed: boolean } | null>(null);
-  const [saveFailed, setSaveFailed] = useState(false);
+  const [quizSessions, setQuizSessions] = useState<Record<string, QuizSession>>({});
+  const [previewGrade, setPreviewGrade] = useState<GradeGroup | null>(null);
+  const [profile, setProfile] = useState<ReturnType<typeof readProfile>>(null);
+  const [profileRead, setProfileRead] = useState(false);
+  const gradeGroup = profile?.gradeGroup ?? "grade-8-10";
+  const shownGrade = previewGrade ?? gradeGroup;
+  const isPreview = shownGrade !== gradeGroup;
+  const quiz = profileRead
+    ? variantsForGrade(topic.content.variants, shownGrade).find((variant) => variant.format === "quiz")
+    : undefined;
+  const sessionKey = `${topic.meta.id}:${shownGrade}:${quiz?.id ?? ""}`;
+  const { answers, result, saveFailed } = quizSessions[sessionKey] ?? emptyQuizSession;
+  function changeQuizSession(change: (current: QuizSession) => QuizSession) {
+    setQuizSessions((current) => ({
+      ...current,
+      [sessionKey]: change(current[sessionKey] ?? emptyQuizSession),
+    }));
+  }
   const resultRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!result) return;
@@ -34,44 +57,40 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
       block: "start",
     });
   }, [result]);
-  const [profile, setProfile] = useState<ReturnType<typeof readProfile>>(null);
-  const [profileRead, setProfileRead] = useState(false);
   useEffect(() => {
     setProfile(readProfile());
     setProfileRead(true);
   }, []);
-  const gradeGroup = profile?.gradeGroup ?? "grade-8-10";
-  // Lesson and quiz are the versions written for the learner's class group.
-  const quiz = profileRead
-    ? variantsForGrade(topic.content.variants, gradeGroup).find((variant) => variant.format === "quiz")
-    : undefined;
-  // Read another class's version of the lesson (to compare depth); the quiz always stays at the learner's level.
-  const [previewGrade, setPreviewGrade] = useState<GradeGroup | null>(null);
   const tailored = topic.content.variants.some((variant) => variant.audience !== undefined);
-  const draftKey = `gullak-quiz-draft:${topic.meta.id}:${quiz?.id ?? ""}`;
+  // Preserve existing own-class drafts; comparison drafts must never share their key.
+  const draftKey = `gullak-quiz-draft:${topic.meta.id}:${quiz?.id ?? ""}${isPreview ? `:preview:${shownGrade}` : ""}`;
   // Keep unchecked answers for this tab session, so a reload or a stray tap on the nav loses nothing.
   useEffect(() => {
     if (!quiz) return;
+    let restored: Record<string, string> = {};
     try {
-      setAnswers(restoreQuizDraft(window.sessionStorage.getItem(draftKey), quiz.questions));
+      restored = restoreQuizDraft(window.sessionStorage.getItem(draftKey), quiz.questions);
     } catch {
       // Storage blocked: start with an empty quiz.
     }
-  }, [draftKey, quiz]);
+    setQuizSessions((current) =>
+      current[sessionKey]
+        ? current
+        : {
+            ...current,
+            [sessionKey]: { ...emptyQuizSession, answers: restored },
+          },
+    );
+  }, [draftKey, quiz, sessionKey]);
   function chooseAnswer(questionId: string, optionId: string) {
-    setResult(null);
-    setSaveFailed(false);
-    setAnswers((current) => {
-      const next = { ...current, [questionId]: optionId };
-      try {
-        window.sessionStorage.setItem(draftKey, JSON.stringify(next));
-      } catch {
-        // Storage blocked: answers still live in memory for this visit.
-      }
-      return next;
-    });
+    const next = { ...answers, [questionId]: optionId };
+    changeQuizSession(() => ({ answers: next, result: null, saveFailed: false }));
+    try {
+      window.sessionStorage.setItem(draftKey, JSON.stringify(next));
+    } catch {
+      // Storage blocked: answers still live in memory for this visit.
+    }
   }
-  const shownGrade = previewGrade ?? gradeGroup;
   const lesson = topicToLesson(topic, shownGrade);
   const world = topicWorlds.find((item) => item.topicIds.includes(rule.topicId));
   function submitQuiz() {
@@ -80,6 +99,11 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
       variantId: quiz.id,
       answers: quiz.questions.map((question) => ({ questionId: question.id, optionId: answers[question.id] ?? "" })),
     });
+    const passed = score >= rule.passMark;
+    if (isPreview) {
+      changeQuizSession((current) => ({ ...current, result: { score, passed }, saveFailed: false }));
+      return;
+    }
     const next = readLearnerState();
     const mastery = { ...next.mastery };
     quiz.questions.forEach((question) => {
@@ -90,15 +114,13 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
         DEFAULT_MASTERY_PARAMS,
       );
     });
-    const passed = score >= rule.passMark;
     const saved = saveLearnerState({
       ...next,
       mastery,
       passedTopics: passed ? [...new Set([...next.passedTopics, topic.meta.id])] : next.passedTopics,
       quizAttempts: [...next.quizAttempts, { topicId: topic.meta.id, score, at: new Date().toISOString() }],
     });
-    setResult({ score, passed });
-    setSaveFailed(!saved);
+    changeQuizSession((current) => ({ ...current, result: { score, passed }, saveFailed: !saved }));
     if (saved) {
       try {
         window.sessionStorage.removeItem(draftKey);
@@ -179,7 +201,13 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
               {t("quizTitle")}
             </h2>
             <p className="mt-1 text-muted-foreground">
-              {t("quizInstruction")} <TermHelp term="mastery" />
+              {isPreview ? (
+                tStage("practiceOnly")
+              ) : (
+                <>
+                  {t("quizInstruction")} <TermHelp term="mastery" />
+                </>
+              )}
             </p>
           </div>
           {quiz.questions.map((question, index) => (
@@ -278,33 +306,37 @@ export function TopicPage({ topic, rule }: { topic: Topic; rule: UnlockRule }) {
               className="scroll-mt-24 space-y-4 rounded-xl bg-muted p-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             >
               <p className="flex items-center gap-2 font-bold">
-                {result.passed ? <CheckCircle2 className="size-5" aria-hidden="true" /> : null}
-                {result.passed
-                  ? t("quizPassed", { score: Math.round(result.score * 100) })
-                  : t("quizRetry", { score: Math.round(result.score * 100), mark: Math.round(rule.passMark * 100) })}
+                {result.passed && !isPreview ? <CheckCircle2 className="size-5" aria-hidden="true" /> : null}
+                {isPreview
+                  ? tStage("practiceScore", { score: Math.round(result.score * 100) })
+                  : result.passed
+                    ? t("quizPassed", { score: Math.round(result.score * 100) })
+                    : t("quizRetry", { score: Math.round(result.score * 100), mark: Math.round(rule.passMark * 100) })}
               </p>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {topic.meta.concepts.map((concept) => {
-                  const value = state.mastery[concept.id] ?? initialMastery(profile?.experience ?? "none");
-                  return (
-                    <div key={concept.id}>
-                      <div className="mb-1 flex justify-between gap-2 text-sm">
-                        <span>
-                          {t("masteryLabel")} · {concept.label}
-                        </span>
-                        <span>{Math.round(value * 100)}%</span>
+              {!isPreview ? (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {topic.meta.concepts.map((concept) => {
+                    const value = state.mastery[concept.id] ?? initialMastery(profile?.experience ?? "none");
+                    return (
+                      <div key={concept.id}>
+                        <div className="mb-1 flex justify-between gap-2 text-sm">
+                          <span>
+                            {t("masteryLabel")} · {concept.label}
+                          </span>
+                          <span>{Math.round(value * 100)}%</span>
+                        </div>
+                        <progress
+                          className="h-2 w-full accent-foreground"
+                          value={value}
+                          max={1}
+                          aria-label={`${concept.label} ${Math.round(value * 100)}%`}
+                        />
                       </div>
-                      <progress
-                        className="h-2 w-full accent-foreground"
-                        value={value}
-                        max={1}
-                        aria-label={`${concept.label} ${Math.round(value * 100)}%`}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-              {result.passed && !saveFailed ? (
+                    );
+                  })}
+                </div>
+              ) : null}
+              {result.passed && !saveFailed && !isPreview ? (
                 <Link
                   href="/learn"
                   className="inline-flex min-h-11 items-center gap-2 font-semibold underline underline-offset-4"

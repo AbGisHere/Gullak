@@ -111,6 +111,8 @@ Standalone offline and error/404 screens use `RecoveryBackButton`. It validates 
 
 Finishing or skipping the starting placement quiz closes it to reveal Home, not the learning map. Save placement and quiz evidence before closing; closing via Back alone does not mark it taken. Keep the recommended-learning card on Home only, with the learner choosing when to visit the map.
 
+The lesson class comparison switches both teaching text and quiz questions. Answers, result feedback and session drafts are scoped to the selected class and quiz; returning to the learner's own class restores its state. Other-class quizzes are labelled practice-only and never save attempts, mastery or passes, change the profile, or award unlocks. Only the own-class quiz writes normal progress.
+
 ### Lesson presentation selection
 
 `pickLessonVariant` in `@gullak/engine` selects an eligible non-quiz variant from an already-open topic in one resolved locale. Explicit preferences are ordered; onboarding's full-format list means Mix it up, with deterministic caller-owned rotation. Authored content order breaks ties and defines fallback. It never changes mastery or unlocks; quizzes remain separate assessments. The lesson API adds `formatSelection` metadata, selecting at index 0 until per-learner rotation is integrated. Translate reason codes in the lesson UI, never display them as raw strings. Contract and teammate handoff: [`docs/format-picker.md`](docs/format-picker.md).

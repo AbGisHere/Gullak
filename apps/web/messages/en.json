@@ -941,11 +941,13 @@
       "grade-11-12": "Deeper lessons: formulas, tax, regulators and real rules."
     },
     "lessonCount": "{count} lessons in your path.",
-    "compareLabel": "See this lesson for another class",
-    "compareHint": "Each class reads a version written for its age. Your quiz stays at your level.",
+    "compareLabel": "Try this lesson and quiz for another class",
+    "compareHint": "Switch classes to compare lessons and quiz questions. Only your own class's quiz saves progress.",
     "yours": "{grade} (you)",
     "option": "{stage} · {grade}",
-    "previewing": "Showing the {grade} version. The quiz below is still the one for {own}."
+    "previewing": "Showing the lesson and quiz for {grade}. This is practice only; your saved class stays {own}.",
+    "practiceOnly": "Practice only: this quiz does not change mastery, saved attempts or unlocks.",
+    "practiceScore": "Practice score: {score}%. Your progress is unchanged."
   },
   "placement": {
     "title": "Find your level",
